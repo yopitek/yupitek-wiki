@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" font-family="'JetBrains Mono', monospace">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&amp;display=swap');</style>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+    </pattern>
+    <linearGradient id="laneGlow1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="850" fill="#0f172a"/>
+  <rect width="1200" height="850" fill="url(#grid)"/>
+
+  <!-- title -->
+  <text x="40" y="52" font-size="16" font-weight="700" fill="#f8fafc">ALFA Wi-Fi ADAPTER LINEUP</text>
+  <text x="40" y="74" font-size="9" fill="#94a3b8">NINE ADAPTERS · FOUR USE-CASE LANES · DATA FROM FULL SPEC COMPARISON</text>
+  <line x1="40" y1="88" x2="1160" y2="88" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- LANE 1 : MONITOR MODE / KALI -->
+  <rect x="40" y="104" width="1120" height="168" rx="10" fill="url(#laneGlow1)" stroke="#164e63" stroke-width="1"/>
+  <rect x="56" y="122" width="190" height="132" rx="8" fill="#0b1526" stroke="#22d3ee" stroke-width="1"/>
+  <text x="68" y="144" font-size="11" font-weight="700" fill="#22d3ee">LANE 1</text>
+  <text x="68" y="162" font-size="12" font-weight="700" fill="#e2e8f0">MONITOR MODE</text>
+  <text x="68" y="178" font-size="12" font-weight="700" fill="#e2e8f0">/ KALI LABS</text>
+  <text x="68" y="198" font-size="9" fill="#94a3b8">Packet capture +</text>
+  <text x="68" y="210" font-size="9" fill="#94a3b8">injection workflow.</text>
+  <!-- card ACM -->
+  <rect x="270" y="118" width="270" height="140" rx="8" fill="#132033" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="284" y="142" font-size="13" font-weight="700" fill="#ffffff">AWUS036ACM</text>
+  <text x="284" y="158" font-size="9" fill="#94a3b8">MediaTek MT7612U · AC1200</text>
+  <rect x="284" y="170" width="92" height="18" rx="4" fill="#0e7490"/>
+  <text x="290" y="183" font-size="9" font-weight="600" fill="#cffafe">IN-KERNEL 4.19</text>
+  <rect x="384" y="170" width="76" height="18" rx="4" fill="#1e293b"/>
+  <text x="391" y="183" font-size="9" font-weight="600" fill="#94a3b8">USB 3.0</text>
+  <rect x="468" y="170" width="58" height="18" rx="4" fill="#1e293b"/>
+  <text x="474" y="183" font-size="9" font-weight="600" fill="#94a3b8">2x5dBi</text>
+  <rect x="284" y="196" width="150" height="20" rx="4" fill="#22d3ee" fill-opacity="0.15" stroke="#22d3ee" stroke-width="1"/>
+  <text x="291" y="210" font-size="9" font-weight="700" fill="#22d3ee">★ COMMUNITY PICK</text>
+  <text x="284" y="238" font-size="9" fill="#94a3b8">Monitor mode just works · reliable injection</text>
+  <!-- card ACH -->
+  <rect x="556" y="118" width="270" height="140" rx="8" fill="#132033" stroke="#155e75" stroke-width="1"/>
+  <text x="570" y="142" font-size="13" font-weight="700" fill="#ffffff">AWUS036ACH</text>
+  <text x="570" y="158" font-size="9" fill="#94a3b8">Realtek RTL8812AU · AC1200</text>
+  <rect x="570" y="170" width="80" height="18" rx="4" fill="#164e63"/>
+  <text x="577" y="183" font-size="9" font-weight="600" fill="#a5f3fc">DKMS BUILD</text>
+  <rect x="658" y="170" width="76" height="18" rx="4" fill="#1e293b"/>
+  <text x="665" y="183" font-size="9" font-weight="600" fill="#94a3b8">USB 3.0</text>
+  <text x="570" y="212" font-size="9" fill="#94a3b8">Classic high-power alternative to ACM</text>
+
+  <!-- LANE 2 : WI-FI 6 / 6E CLIENT -->
+  <rect x="40" y="284" width="1120" height="168" rx="10" fill="#0f172a" stroke="#4c1d95" stroke-width="1"/>
+  <rect x="56" y="302" width="190" height="132" rx="8" fill="#0b1526" stroke="#a78bfa" stroke-width="1"/>
+  <text x="68" y="324" font-size="11" font-weight="700" fill="#a78bfa">LANE 2</text>
+  <text x="68" y="342" font-size="12" font-weight="700" fill="#e2e8f0">WI-FI 6 / 6E</text>
+  <text x="68" y="358" font-size="12" font-weight="700" fill="#e2e8f0">FAST CLIENT</text>
+  <text x="68" y="378" font-size="9" fill="#94a3b8">Pure speed, WPA3,</text>
+  <text x="68" y="390" font-size="9" fill="#94a3b8">no pen-test focus.</text>
+  <!-- card AXML -->
+  <rect x="270" y="298" width="270" height="140" rx="8" fill="#171430" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="284" y="322" font-size="13" font-weight="700" fill="#ffffff">AWUS036AXML</text>
+  <text x="284" y="338" font-size="9" fill="#94a3b8">MediaTek MT7921AUN · AXE3000</text>
+  <rect x="284" y="350" width="98" height="18" rx="4" fill="#6d28d9"/>
+  <text x="290" y="363" font-size="9" font-weight="600" fill="#ede9fe">TRI-BAND 6 GHz</text>
+  <rect x="390" y="350" width="64" height="18" rx="4" fill="#1e293b"/>
+  <text x="396" y="363" font-size="9" font-weight="600" fill="#94a3b8">USB-C</text>
+  <rect x="462" y="350" width="62" height="18" rx="4" fill="#1e293b"/>
+  <text x="468" y="363" font-size="9" font-weight="600" fill="#94a3b8">BT 5.2</text>
+  <rect x="284" y="376" width="170" height="20" rx="4" fill="#a78bfa" fill-opacity="0.15" stroke="#a78bfa" stroke-width="1"/>
+  <text x="291" y="390" font-size="9" font-weight="700" fill="#a78bfa">ONLY 6 GHz OPTION · Wi-Fi 6E</text>
+  <text x="284" y="418" font-size="9" fill="#94a3b8">mt7921u mainline since kernel 5.18</text>
+  <!-- card AXM -->
+  <rect x="556" y="298" width="270" height="140" rx="8" fill="#171430" stroke="#6d28d9" stroke-width="1"/>
+  <text x="570" y="322" font-size="13" font-weight="700" fill="#ffffff">AWUS036AXM</text>
+  <text x="570" y="338" font-size="9" fill="#94a3b8">MediaTek MT7921AUN · AX3000</text>
+  <rect x="570" y="350" width="86" height="18" rx="4" fill="#4c1d95"/>
+  <text x="576" y="363" font-size="9" font-weight="600" fill="#ddd6fe">IN-KERNEL 5.18</text>
+  <rect x="664" y="350" width="62" height="18" rx="4" fill="#1e293b"/>
+  <text x="670" y="363" font-size="9" font-weight="600" fill="#94a3b8">BT 5.2</text>
+  <text x="570" y="392" font-size="9" fill="#94a3b8">Fastest 5 GHz client (2402 Mbps) + WiFi/BT combo</text>
+  <!-- card AX -->
+  <rect x="842" y="298" width="270" height="140" rx="8" fill="#171430" stroke="#6d28d9" stroke-width="1"/>
+  <text x="856" y="322" font-size="13" font-weight="700" fill="#ffffff">AWUS036AX</text>
+  <text x="856" y="338" font-size="9" fill="#94a3b8">Realtek RTL8832BU · AX1800</text>
+  <rect x="856" y="350" width="80" height="18" rx="4" fill="#4c1d95"/>
+  <text x="862" y="363" font-size="9" font-weight="600" fill="#ddd6fe">DKMS BUILD</text>
+  <text x="856" y="392" font-size="9" fill="#94a3b8">Classic ALFA look, cheaper Wi-Fi 6 option</text>
+
+  <!-- LANE 3 : POCKET AND TRAVEL -->
+  <rect x="40" y="464" width="1120" height="168" rx="10" fill="#0f172a" stroke="#065f46" stroke-width="1"/>
+  <rect x="56" y="482" width="190" height="132" rx="8" fill="#0b1526" stroke="#34d399" stroke-width="1"/>
+  <text x="68" y="504" font-size="11" font-weight="700" fill="#34d399">LANE 3</text>
+  <text x="68" y="522" font-size="12" font-weight="700" fill="#e2e8f0">POCKET &amp;</text>
+  <text x="68" y="538" font-size="12" font-weight="700" fill="#e2e8f0">TRAVEL</text>
+  <text x="68" y="558" font-size="9" fill="#94a3b8">Disappears in a</text>
+  <text x="68" y="570" font-size="9" fill="#94a3b8">backpack.</text>
+  <!-- card AXER -->
+  <rect x="270" y="478" width="270" height="140" rx="8" fill="#10251e" stroke="#34d399" stroke-width="1.5"/>
+  <text x="284" y="502" font-size="13" font-weight="700" fill="#ffffff">AWUS036AXER</text>
+  <text x="284" y="518" font-size="9" fill="#94a3b8">Realtek RTL8832BU · AX1800</text>
+  <rect x="284" y="530" width="96" height="18" rx="4" fill="#065f46"/>
+  <text x="290" y="543" font-size="9" font-weight="600" fill="#d1fae5">NANO 10.5 g</text>
+  <rect x="388" y="530" width="110" height="18" rx="4" fill="#1e293b"/>
+  <text x="394" y="543" font-size="9" font-weight="600" fill="#94a3b8">INTERNAL ANT</text>
+  <text x="284" y="572" font-size="9" fill="#94a3b8">Wi-Fi 6 nano for everyday carry</text>
+  <!-- card ACS -->
+  <rect x="556" y="478" width="270" height="140" rx="8" fill="#10251e" stroke="#059669" stroke-width="1"/>
+  <text x="570" y="502" font-size="13" font-weight="700" fill="#ffffff">AWUS036ACS</text>
+  <text x="570" y="518" font-size="9" fill="#94a3b8">Realtek RTL8811AU · AC433</text>
+  <rect x="570" y="530" width="90" height="18" rx="4" fill="#065f46"/>
+  <text x="576" y="543" font-size="9" font-weight="600" fill="#d1fae5">55 mm BODY</text>
+  <rect x="668" y="530" width="106" height="18" rx="4" fill="#164e63"/>
+  <text x="674" y="543" font-size="9" font-weight="600" fill="#a5f3fc">POCKET MONITOR</text>
+  <text x="570" y="572" font-size="9" fill="#94a3b8">Budget pocket-sized monitor-mode companion</text>
+
+  <!-- LANE 4 : WINDOWS ONLY -->
+  <rect x="40" y="644" width="1120" height="150" rx="10" fill="#0f172a" stroke="#881337" stroke-width="1"/>
+  <rect x="56" y="662" width="190" height="114" rx="8" fill="#0b1526" stroke="#fb7185" stroke-width="1"/>
+  <text x="68" y="684" font-size="11" font-weight="700" fill="#fb7185">LANE 4</text>
+  <text x="68" y="702" font-size="12" font-weight="700" fill="#e2e8f0">WINDOWS ONLY</text>
+  <text x="68" y="722" font-size="9" fill="#94a3b8">WiFi + Bluetooth combo</text>
+  <text x="68" y="734" font-size="9" fill="#94a3b8">for desktop PCs.</text>
+  <!-- card EACS -->
+  <rect x="270" y="658" width="270" height="126" rx="8" fill="#251420" stroke="#fb7185" stroke-width="1.5"/>
+  <text x="284" y="682" font-size="13" font-weight="700" fill="#ffffff">AWUS036EACS</text>
+  <text x="284" y="698" font-size="9" fill="#94a3b8">Realtek RTL8821CU · AC600</text>
+  <rect x="284" y="710" width="86" height="18" rx="4" fill="#9f1239"/>
+  <text x="290" y="723" font-size="9" font-weight="600" fill="#ffe4e6">BT 4.2 ONLY</text>
+  <rect x="284" y="734" width="220" height="20" rx="4" fill="#fb7185" fill-opacity="0.15" stroke="#fb7185" stroke-width="1"/>
+  <text x="291" y="748" font-size="9" font-weight="700" fill="#fb7185">⚠ NO RELIABLE LINUX DRIVER</text>
+  <rect x="556" y="672" width="380" height="72" rx="8" fill="#0b1526" stroke="#334155" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="570" y="696" font-size="9" font-weight="600" fill="#94a3b8">HOW TO READ THIS CHART</text>
+  <text x="570" y="714" font-size="9" fill="#94a3b8">Pick your lane by primary job, then confirm chipset support</text>
+  <text x="570" y="728" font-size="9" fill="#94a3b8">on the Linux Compatibility Matrix page before buying.</text>
+  <rect x="952" y="672" width="192" height="72" rx="8" fill="#0b1526" stroke="#334155" stroke-width="1"/>
+  <text x="964" y="694" font-size="9" fill="#64748b">IN-KERNEL = plug &amp; play</text>
+  <text x="964" y="710" font-size="9" fill="#64748b">DKMS = one-time build,</text>
+  <text x="964" y="726" font-size="9" fill="#64748b">survives kernel updates</text>
+</svg>

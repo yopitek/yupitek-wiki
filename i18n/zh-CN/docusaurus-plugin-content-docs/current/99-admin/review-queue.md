@@ -1,0 +1,46 @@
+---
+slug: review-queue
+id: admin-review-queue
+title: 审核队列
+sidebar_position: 5
+description: 对新增或更新的 wiki 内容进行分类、审核与发布的工作流。
+---
+
+# 审核队列
+
+审核队列是对任何新增、编辑或翻译的 wiki 内容在视为完成之前进行分类的工作流。它与 `support-policy` 的决策流程相对应。
+
+## 工作流
+
+```mermaid
+flowchart TD
+    A[内容已提交] --> B{符合模板?}
+    B -- 否 --> C[按模板修正结构]
+    B -- 是 --> D{命令已测试?}
+    D -- 否 --> E[重新测试，补充预期输出]
+    D -- 是 --> F{链接为绝对路径且有效?}
+    F -- 否 --> G[修正内部链接]
+    F -- 是 --> H{构建通过?}
+    H -- 否 --> I[运行 build:en，修复失效链接]
+    H -- 是 --> J[发布 / 合并]
+    J --> K[更新变更日志]
+```
+
+## 检查清单
+
+页面获批之前：
+
+- [ ] Frontmatter `id` 在整个 wiki 中唯一。
+- [ ] 结构与 [`模板`](/admin/templates/) 中对应的模板一致。
+- [ ] 设置/指南/故障排查页面至少包含一个图表。
+- [ ] 每条 ```bash 命令均已测试并展示预期输出。
+- [ ] 无 `TODO` / `TBD` 占位符。
+- [ ] 所有内部链接使用绝对路由路径。
+- [ ] `npm run build:en` 通过且零失效链接。
+- [ ] 翻译的语言版本在同一次更改中更新（参见 [`翻译术语表`](/admin/translation-glossary/)）。
+
+## 获批之后
+
+在 [`变更日志`](/admin/change-log/) 中记录该更改。
+
+如果更改新增或重命名了产品，请在同一次提交中更新 [`产品注册表`](/admin/product-registry/) 与 [`驱动注册表`](/admin/driver-registry/)。

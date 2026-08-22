@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" font-family="'JetBrains Mono', monospace">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&amp;display=swap');</style>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/>
+    </marker>
+    <marker id="arrRose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fb7185"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="780" fill="#0f172a"/>
+  <rect width="1200" height="780" fill="url(#grid)"/>
+
+  <!-- title -->
+  <text x="40" y="52" font-size="16" font-weight="700" fill="#f8fafc">ALFA LINUX COMPATIBILITY MATRIX</text>
+  <text x="40" y="74" font-size="9" fill="#94a3b8">THREE DRIVER PATHS DECIDE EVERYTHING: IN-KERNEL · DKMS BUILD · NO DRIVER</text>
+  <line x1="40" y1="88" x2="1160" y2="88" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- root node -->
+  <rect x="450" y="104" width="300" height="44" rx="8" fill="#132033" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="600" y="123" font-size="11" font-weight="700" fill="#e0f2fe" text-anchor="middle">YOUR ALFA ADAPTER</text>
+  <text x="600" y="139" font-size="9" fill="#94a3b8" text-anchor="middle">check the chipset on the box / lsusb</text>
+
+  <!-- branch connectors -->
+  <path d="M 520 148 L 200 190" stroke="#22d3ee" stroke-width="1.5" fill="none" marker-end="url(#arrCyan)"/>
+  <path d="M 600 148 L 600 190" stroke="#fb923c" stroke-width="1.5" fill="none" marker-end="url(#arrOrange)"/>
+  <path d="M 680 148 L 1000 190" stroke="#fb7185" stroke-width="1.5" fill="none" marker-end="url(#arrRose)"/>
+
+  <!-- COLUMN 1 : MEDIATEK IN-KERNEL -->
+  <rect x="40" y="196" width="340" height="380" rx="10" fill="#0f172a" stroke="#22d3ee" stroke-width="1.5"/>
+  <rect x="56" y="212" width="308" height="46" rx="6" fill="#164e63"/>
+  <text x="210" y="231" font-size="12" font-weight="700" fill="#67e8f9" text-anchor="middle">MEDIATEK CHIPSETS</text>
+  <text x="210" y="248" font-size="9" font-weight="600" fill="#a5f3fc" text-anchor="middle">DRIVER SHIPS INSIDE THE KERNEL</text>
+  <text x="56" y="284" font-size="10" font-weight="700" fill="#22d3ee">✅ PLUG &amp; PLAY</text>
+  <!-- adapter rows col1 -->
+  <g font-size="10">
+    <rect x="56" y="296" width="308" height="40" rx="5" fill="#132033" stroke="#155e75" stroke-width="1"/>
+    <text x="68" y="313" font-weight="600" fill="#ffffff">AWUS036ACM</text>
+    <text x="68" y="327" fill="#94a3b8" font-size="8">MT7612U · mt76x2u · kernel 4.19+</text>
+    <text x="352" y="320" text-anchor="end" font-weight="700" fill="#34d399" font-size="9">✅✅✅</text>
+    <rect x="56" y="344" width="308" height="40" rx="5" fill="#132033" stroke="#155e75" stroke-width="1"/>
+    <text x="68" y="361" font-weight="600" fill="#ffffff">AWUS036ACHM</text>
+    <text x="68" y="375" fill="#94a3b8" font-size="8">MT7610U · mt76x0u · kernel 4.19+</text>
+    <text x="352" y="368" text-anchor="end" font-weight="700" fill="#34d399" font-size="9">✅✅✅</text>
+    <rect x="56" y="392" width="308" height="40" rx="5" fill="#132033" stroke="#155e75" stroke-width="1"/>
+    <text x="68" y="409" font-weight="600" fill="#ffffff">AWUS036AXM / AXML</text>
+    <text x="68" y="423" fill="#94a3b8" font-size="8">MT7921AUN · mt7921u · kernel 5.18+</text>
+    <text x="352" y="416" text-anchor="end" font-weight="700" fill="#34d399" font-size="9">✅✅✅</text>
+  </g>
+  <rect x="56" y="448" width="308" height="110" rx="6" fill="#0b1526" stroke="#334155" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="70" y="470" font-size="9" font-weight="600" fill="#94a3b8">KALI · UBUNTU · NETHUNTER</text>
+  <text x="70" y="490" font-size="9" fill="#94a3b8">Works out of the box on all three.</text>
+  <text x="70" y="508" font-size="9" fill="#94a3b8">No DKMS, no compilation,</text>
+  <text x="70" y="526" font-size="9" fill="#94a3b8">no kernel-update breakage.</text>
+  <text x="70" y="548" font-size="8" fill="#64748b">AXM/AXML need kernel ≥ 5.18 (Ubuntu 22.04+)</text>
+
+  <!-- COLUMN 2 : REALTEK DKMS -->
+  <rect x="430" y="196" width="340" height="380" rx="10" fill="#0f172a" stroke="#fb923c" stroke-width="1.5"/>
+  <rect x="446" y="212" width="308" height="46" rx="6" fill="#7c2d12"/>
+  <text x="600" y="231" font-size="12" font-weight="700" fill="#fdba74" text-anchor="middle">REALTEK CHIPSETS</text>
+  <text x="600" y="248" font-size="9" font-weight="600" fill="#fed7aa" text-anchor="middle">DRIVER NOT IN KERNEL — ONE-TIME DKMS BUILD</text>
+  <text x="446" y="284" font-size="10" font-weight="700" fill="#fb923c">🔧 WORKS AFTER DKMS INSTALL</text>
+  <g font-size="10">
+    <rect x="446" y="296" width="308" height="40" rx="5" fill="#201a14" stroke="#9a3412" stroke-width="1"/>
+    <text x="458" y="313" font-weight="600" fill="#ffffff">AWUS036ACH</text>
+    <text x="458" y="327" fill="#94a3b8" font-size="8">RTL8812AU · aircrack-ng/rtl8812au</text>
+    <text x="742" y="320" text-anchor="end" font-weight="700" fill="#fb923c" font-size="9">🔧🔧🔧</text>
+    <rect x="446" y="344" width="308" height="40" rx="5" fill="#201a14" stroke="#9a3412" stroke-width="1"/>
+    <text x="458" y="361" font-weight="600" fill="#ffffff">AWUS036ACS</text>
+    <text x="458" y="375" fill="#94a3b8" font-size="8">RTL8811AU · rtl8811au (DKMS)</text>
+    <text x="742" y="368" text-anchor="end" font-weight="700" fill="#fb923c" font-size="9">🔧🔧🔧</text>
+    <rect x="446" y="392" width="308" height="40" rx="5" fill="#201a14" stroke="#9a3412" stroke-width="1"/>
+    <text x="458" y="409" font-weight="600" fill="#ffffff">AWUS036AX / AXER</text>
+    <text x="458" y="423" fill="#94a3b8" font-size="8">RTL8832BU · aircrack-ng/rtl88x2bu</text>
+    <text x="742" y="416" text-anchor="end" font-weight="700" fill="#fb923c" font-size="9">🔧🔧⚠️</text>
+  </g>
+  <rect x="446" y="448" width="308" height="110" rx="6" fill="#0b1526" stroke="#334155" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="460" y="470" font-size="9" font-weight="600" fill="#94a3b8">DKMS SURVIVES KERNEL UPDATES</text>
+  <text x="460" y="490" font-size="9" fill="#94a3b8">~5-minute one-time build, then automatic</text>
+  <text x="460" y="508" font-size="9" fill="#94a3b8">rebuild after every apt upgrade.</text>
+  <text x="460" y="530" font-size="8" fill="#fbbf24">NetHunter: Realtek needs matching toolchain ⚠️</text>
+  <text x="460" y="546" font-size="8" fill="#94a3b8">Fresh Kali too new? use aircrack-ng repos.</text>
+
+  <!-- COLUMN 3 : RTL8821CU NO DRIVER -->
+  <rect x="820" y="196" width="340" height="380" rx="10" fill="#0f172a" stroke="#fb7185" stroke-width="1.5"/>
+  <rect x="836" y="212" width="308" height="46" rx="6" fill="#881337"/>
+  <text x="990" y="231" font-size="12" font-weight="700" fill="#fda4af" text-anchor="middle">RTL8821CU</text>
+  <text x="990" y="248" font-size="9" font-weight="600" fill="#fecdd3" text-anchor="middle">NO MAINTAINED OPEN-SOURCE DRIVER</text>
+  <text x="836" y="284" font-size="10" font-weight="700" fill="#fb7185">❌ NOT RECOMMENDED ON LINUX</text>
+  <rect x="836" y="296" width="308" height="64" rx="5" fill="#251420" stroke="#9f1239" stroke-width="1.5"/>
+  <text x="848" y="318" font-weight="600" fill="#ffffff" font-size="11">AWUS036EACS</text>
+  <text x="848" y="334" fill="#94a3b8" font-size="8">AC600 + BT 4.2 combo stick</text>
+  <text x="848" y="350" fill="#fb7185" font-size="8" font-weight="700">monitor mode unreliable</text>
+  <rect x="836" y="376" width="308" height="182" rx="6" fill="#0b1526" stroke="#334155" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="850" y="400" font-size="9" font-weight="600" fill="#94a3b8">WHAT TO DO INSTEAD</text>
+  <path d="M 850 416 L 1130 416" stroke="#334155" stroke-width="1"/>
+  <circle cx="858" cy="438" r="3" fill="#fb7185"/>
+  <text x="872" y="442" font-size="9" fill="#cbd5e1">Stay on Windows — plug-and-play there</text>
+  <circle cx="858" cy="462" r="3" fill="#22d3ee"/>
+  <text x="872" y="466" font-size="9" fill="#cbd5e1">Switch to AWUS036ACM for Linux labs</text>
+  <circle cx="858" cy="486" r="3" fill="#a78bfa"/>
+  <text x="872" y="490" font-size="9" fill="#cbd5e1">Need WiFi + BT? pick AXM (BT 5.2)</text>
+  <text x="850" y="522" font-size="8" fill="#64748b">Kali ❌ · Ubuntu ❌ · NetHunter ❌</text>
+
+  <!-- legend strip -->
+  <rect x="40" y="596" width="1120" height="130" rx="10" fill="#0b1526" stroke="#1e293b" stroke-width="1"/>
+  <text x="60" y="622" font-size="10" font-weight="700" fill="#94a3b8">LEGEND</text>
+  <text x="140" y="622" font-size="10" fill="#34d399">✅ works out of the box</text>
+  <text x="360" y="622" font-size="10" fill="#fb923c">🔧 works after one-time DKMS build</text>
+  <text x="650" y="622" font-size="10" fill="#fbbf24">⚠️ partial / flaky</text>
+  <text x="800" y="622" font-size="10" fill="#fb7185">❌ not recommended</text>
+  <line x1="60" y1="636" x2="1140" y2="636" stroke="#1e293b" stroke-width="1"/>
+  <text x="60" y="662" font-size="9" fill="#94a3b8">OS COLUMNS ORDER: ✅✅✅ = Kali Linux · Ubuntu LTS · NetHunter/Android</text>
+  <text x="60" y="684" font-size="9" fill="#94a3b8">CHECK YOUR KERNEL: uname -r → MediaTek models need ≥ 4.19 (AXM/AXML ≥ 5.18)</text>
+  <text x="60" y="706" font-size="9" fill="#64748b">Full table with per-OS status lives in the Linux Compatibility Matrix article.</text>
+</svg>

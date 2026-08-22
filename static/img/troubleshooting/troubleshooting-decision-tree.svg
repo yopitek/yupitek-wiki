@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 960" font-family="'JetBrains Mono', monospace">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&amp;display=swap');</style>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrSlate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrRose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fb7185"/>
+    </marker>
+    <marker id="arrOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/>
+    </marker>
+    <marker id="arrAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24"/>
+    </marker>
+    <marker id="arrEmerald" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="960" fill="#0f172a"/>
+  <rect width="1200" height="960" fill="url(#grid)"/>
+
+  <!-- title -->
+  <text x="40" y="48" font-size="16" font-weight="700" fill="#f8fafc">ALFA ADAPTER TROUBLESHOOTING DECISION TREE</text>
+  <text x="40" y="70" font-size="9" fill="#94a3b8">FOLLOW TOP-DOWN · ONE QUESTION AT A TIME · BLAME THE HARDWARE LAST</text>
+
+  <!-- iron rule banner -->
+  <rect x="40" y="86" width="1120" height="52" rx="8" fill="#132033" stroke="#22d3ee" stroke-width="1"/>
+  <rect x="40" y="86" width="6" height="52" rx="3" fill="#22d3ee"/>
+  <text x="64" y="108" font-size="11" font-weight="700" fill="#67e8f9">IRON RULE — HARDWARE FIRST → DRIVER SECOND → CONFIGURATION LAST</text>
+  <text x="64" y="126" font-size="9" fill="#94a3b8">80%+ of "my ALFA is broken" reports are a power issue, a missing DKMS rebuild, or a kernel-update side effect — not a dead adapter.</text>
+
+  <!-- ROOT -->
+  <rect x="470" y="160" width="260" height="42" rx="21" fill="#171430" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="600" y="186" font-size="12" font-weight="700" fill="#ddd6fe" text-anchor="middle">ADAPTER MISBEHAVING?</text>
+  <line x1="600" y1="202" x2="600" y2="234" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrSlate)"/>
+
+  <!-- Q1 : lsusb -->
+  <rect x="450" y="240" width="300" height="46" rx="8" fill="#0b1526" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="600" y="260" font-size="11" font-weight="700" fill="#93c5fd" text-anchor="middle">Q1 · DOES lsusb SEE IT?</text>
+  <text x="600" y="277" font-size="8" fill="#94a3b8" text-anchor="middle">$ lsusb   $ dmesg | tail -30</text>
+
+  <!-- NO branch to hardware -->
+  <path d="M 450 263 L 330 263 L 330 320" stroke="#fb7185" stroke-width="1.5" fill="none" marker-end="url(#arrRose)"/>
+  <rect x="356" y="250" width="56" height="18" rx="4" fill="#881337"/>
+  <text x="384" y="263" font-size="9" font-weight="700" fill="#ffe4e6" text-anchor="middle">NO</text>
+  <!-- YES branch down -->
+  <line x1="750" y1="263" x2="750" y2="234+0" stroke="none"/>
+  <path d="M 750 263 L 750 370" stroke="#34d399" stroke-width="1.5" fill="none" transform="translate(-150,0)" marker-end="url(#arrEmerald)"/>
+  <rect x="508" y="304" width="56" height="18" rx="4" fill="#065f46"/>
+  <text x="536" y="317" font-size="9" font-weight="700" fill="#d1fae5" text-anchor="middle">YES</text>
+
+  <!-- HARDWARE lane -->
+  <rect x="150" y="326" width="360" height="196" rx="10" fill="#0f172a" stroke="#fb7185" stroke-width="1.5"/>
+  <rect x="166" y="340" width="130" height="24" rx="5" fill="#881337"/>
+  <text x="231" y="356" font-size="10" font-weight="700" fill="#ffe4e6" text-anchor="middle">1 · HARDWARE</text>
+  <text x="166" y="384" font-size="10" font-weight="600" fill="#fda4af">POWER / CABLE / PORT PATH</text>
+  <circle cx="176" cy="404" r="3" fill="#fb7185"/><text x="188" y="408" font-size="9" fill="#cbd5e1">Rear USB port (not front panel)</text>
+  <circle cx="176" cy="424" r="3" fill="#fb7185"/><text x="188" y="428" font-size="9" fill="#cbd5e1">Different cable — charge-only cables lie</text>
+  <circle cx="176" cy="444" r="3" fill="#fb7185"/><text x="188" y="448" font-size="9" fill="#cbd5e1">Powered USB hub for high-power models</text>
+  <circle cx="176" cy="464" r="3" fill="#fb7185"/><text x="188" y="468" font-size="9" fill="#cbd5e1">dmesg: error -71 = power handshake fail</text>
+  <rect x="166" y="482" width="328" height="28" rx="5" fill="#251420" stroke="#fb7185" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="330" y="500" font-size="9" font-weight="700" fill="#fb7185" text-anchor="middle">Still invisible on 2 PCs? → RMA / return it</text>
+
+  <!-- Q2 : iw dev -->
+  <rect x="420" y="376" width="360" height="46" rx="8" fill="#0b1526" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="600" y="396" font-size="11" font-weight="700" fill="#93c5fd" text-anchor="middle">Q2 · DOES iw dev LIST AN INTERFACE?</text>
+  <text x="600" y="413" font-size="8" fill="#94a3b8" text-anchor="middle">$ iw dev   $ ip link</text>
+
+  <!-- NO branch to driver -->
+  <path d="M 420 399 L 330 399 L 330 556 L 430 556" stroke="none"/>
+  <path d="M 420 399 L 330 399 M 330 399 L 330 556 M 330 556 L 420 556" stroke="#fb923c" stroke-width="1.5" fill="none" marker-end="url(#arrOrange)"/>
+  <rect x="356" y="386" width="56" height="18" rx="4" fill="#7c2d12"/>
+  <text x="384" y="399" font-size="9" font-weight="700" fill="#fed7aa" text-anchor="middle">NO</text>
+
+  <!-- DRIVER lane -->
+  <rect x="150" y="530" width="360" height="196" rx="10" fill="#0f172a" stroke="#fb923c" stroke-width="1.5"/>
+  <rect x="166" y="544" width="130" height="24" rx="5" fill="#7c2d12"/>
+  <text x="231" y="560" font-size="10" font-weight="700" fill="#fed7aa" text-anchor="middle">2 · DRIVER</text>
+  <text x="166" y="588" font-size="10" font-weight="600" fill="#fdba74">MODULE NOT LOADED / DKMS BROKEN</text>
+  <circle cx="176" cy="608" r="3" fill="#fb923c"/><text x="188" y="612" font-size="9" fill="#cbd5e1">Realtek: sudo modprobe 8812au (+ autoload)</text>
+  <circle cx="176" cy="628" r="3" fill="#fb923c"/><text x="188" y="632" font-size="9" fill="#cbd5e1">DKMS rebuild: sudo dkms autoinstall</text>
+  <circle cx="176" cy="648" r="3" fill="#fb923c"/><text x="188" y="652" font-size="9" fill="#cbd5e1">MediaTek Wi-Fi 6E: needs kernel ≥ 5.18</text>
+  <circle cx="176" cy="668" r="3" fill="#fb923c"/><text x="188" y="672" font-size="9" fill="#cbd5e1">sudo apt install linux-firmware + reboot</text>
+  <rect x="166" y="686" width="328" height="28" rx="5" fill="#201a14" stroke="#fb923c" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="330" y="704" font-size="9" font-weight="700" fill="#fdba74" text-anchor="middle">Check: lsmod | grep -iE "mt76|8812|88x2"</text>
+
+  <!-- YES branch to Q3 -->
+  <path d="M 600 422 L 600 480" stroke="#34d399" stroke-width="1.5" fill="none" marker-end="url(#arrEmerald)"/>
+  <rect x="608" y="436" width="56" height="18" rx="4" fill="#065f46"/>
+  <text x="636" y="449" font-size="9" font-weight="700" fill="#d1fae5" text-anchor="middle">YES</text>
+
+  <!-- Q3 : managed mode -->
+  <rect x="420" y="486" width="360" height="46" rx="8" fill="#0b1526" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="600" y="506" font-size="11" font-weight="700" fill="#93c5fd" text-anchor="middle">Q3 · WORKS IN MANAGED MODE?</text>
+  <text x="600" y="523" font-size="8" fill="#94a3b8" text-anchor="middle">normal connection to an AP first</text>
+
+  <!-- NO branch to config (right) -->
+  <path d="M 780 509 L 850 509 L 850 556 L 800 556" stroke="#fbbf24" stroke-width="1.5" fill="none" marker-end="url(#arrAmber)"/>
+  <rect x="788" y="496" width="56" height="18" rx="4" fill="#78350f"/>
+  <text x="816" y="509" font-size="9" font-weight="700" fill="#fef3c7" text-anchor="middle">NO</text>
+
+  <!-- CONFIG lane -->
+  <rect x="690" y="530" width="360" height="196" rx="10" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="706" y="544" width="150" height="24" rx="5" fill="#78350f"/>
+  <text x="781" y="560" font-size="10" font-weight="700" fill="#fef3c7" text-anchor="middle">3 · CONFIGURATION</text>
+  <text x="706" y="588" font-size="10" font-weight="600" fill="#fcd34d">LAST — ONLY AFTER HW + DRIVER PASS</text>
+  <circle cx="716" cy="608" r="3" fill="#fbbf24"/><text x="728" y="612" font-size="9" fill="#cbd5e1">NetworkManager blocking the link</text>
+  <circle cx="716" cy="628" r="3" fill="#fbbf24"/><text x="728" y="632" font-size="9" fill="#cbd5e1">rfkill soft-block: rfkill unblock all</text>
+  <circle cx="716" cy="648" r="3" fill="#fbbf24"/><text x="728" y="652" font-size="9" fill="#cbd5e1">Reg domain unset: sudo iw reg set TW</text>
+  <circle cx="716" cy="668" r="3" fill="#fbbf24"/><text x="728" y="672" font-size="9" fill="#cbd5e1">country 00 caps TX power + hides 5 GHz</text>
+  <rect x="706" y="686" width="328" height="28" rx="5" fill="#1f1a0e" stroke="#fbbf24" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="870" y="704" font-size="9" font-weight="700" fill="#fcd34d" text-anchor="middle">Check: iw reg get · rfkill list</text>
+
+  <!-- YES branch to Q4 -->
+  <path d="M 600 532 L 600 590 L 600 596" stroke="#34d399" stroke-width="1.5" fill="none"/>
+  <path d="M 600 532 L 600 630" stroke="#34d399" stroke-width="1.5" fill="none" marker-end="url(#arrEmerald)"/>
+  <rect x="608" y="564" width="56" height="18" rx="4" fill="#065f46"/>
+  <text x="636" y="577" font-size="9" font-weight="700" fill="#d1fae5" text-anchor="middle">YES</text>
+
+  <!-- Q4 : monitor goal -->
+  <rect x="420" y="636" width="360" height="46" rx="8" fill="#0b1526" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="600" y="656" font-size="11" font-weight="700" fill="#93c5fd" text-anchor="middle">Q4 · MONITOR MODE IS THE GOAL?</text>
+  <text x="600" y="673" font-size="8" fill="#94a3b8" text-anchor="middle">airmon-ng start wlan0 → aireplay-ng --test</text>
+
+  <!-- fails branch -->
+  <path d="M 420 659 L 330 659 L 330 756 L 430 756" stroke="#fb7185" stroke-width="1.5" fill="none" marker-end="url(#arrRose)"/>
+  <rect x="330" y="640" width="90" height="18" rx="4" fill="#881337"/>
+  <text x="375" y="653" font-size="9" font-weight="700" fill="#ffe4e6" text-anchor="middle">YES, BUT FAILS</text>
+
+  <!-- monitor fix box -->
+  <rect x="150" y="730" width="360" height="140" rx="10" fill="#0f172a" stroke="#fb7185" stroke-width="1.5"/>
+  <text x="166" y="756" font-size="10" font-weight="600" fill="#fda4af">INJECTION FAILS (0/30)?</text>
+  <circle cx="176" cy="776" r="3" fill="#fb7185"/><text x="188" y="780" font-size="9" fill="#cbd5e1">Lock a busy channel: iw set channel 6</text>
+  <circle cx="176" cy="796" r="3" fill="#fb7185"/><text x="188" y="800" font-size="9" fill="#cbd5e1">Rebuild with aircrack-ng driver repos</text>
+  <circle cx="176" cy="816" r="3" fill="#fb7185"/><text x="188" y="820" font-size="9" fill="#cbd5e1">(monitor + VIF enabled by default)</text>
+  <circle cx="176" cy="836" r="3" fill="#fb7185"/><text x="188" y="840" font-size="9" fill="#cbd5e1">Dead RF zone? phone hotspot as target AP</text>
+  <text x="166" y="860" font-size="8" fill="#64748b">rtl8812au · rtl8811au · rtl88x2bu pages have recipes</text>
+
+  <!-- done box -->
+  <path d="M 600 682 L 600 760" stroke="#34d399" stroke-width="1.5" fill="none" marker-end="url(#arrEmerald)"/>
+  <rect x="608" y="700" width="76" height="18" rx="4" fill="#065f46"/>
+  <text x="646" y="713" font-size="9" font-weight="700" fill="#d1fae5" text-anchor="middle">ALL FINE</text>
+  <rect x="690" y="730" width="360" height="140" rx="10" fill="#10251e" stroke="#34d399" stroke-width="2"/>
+  <text x="870" y="766" font-size="14" font-weight="700" fill="#34d399" text-anchor="middle">✓ YOU ARE DONE</text>
+  <text x="870" y="790" font-size="9" fill="#a7f3d0" text-anchor="middle">Adapter healthy on every layer:</text>
+  <text x="870" y="808" font-size="9" fill="#a7f3d0" text-anchor="middle">detected · driver loaded · link up · monitor OK</text>
+  <rect x="720" y="824" width="300" height="28" rx="5" fill="#0b1526" stroke="#334155" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="870" y="842" font-size="8" fill="#94a3b8" text-anchor="middle">Still stuck? send uname -r · lsusb · dkms status · dmesg tail</text>
+
+  <!-- footer -->
+  <text x="600" y="920" font-size="9" fill="#475569" text-anchor="middle">Source: ALFA Adapters — Troubleshooting Index · chipset deep-dives live under /alfa-network/drivers/</text>
+</svg>
