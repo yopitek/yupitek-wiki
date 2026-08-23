@@ -12,8 +12,8 @@ description: 以淺白語言說明 Yupitek Wiki 中所使用的技術詞彙。
 
 | 詞彙 | 定義 |
 |------|------------|
-| **Adapter（無線網卡）** | 插入電腦以提供無線連線能力的 USB Wi-Fi 網卡。 |
-| **Access Point（AP，存取點）** | 讓無線用戶端連線到網路的裝置。啟用 AP 模式可將無線網卡變成熱點。 |
+| **Adapter（無線網絡卡）** | 插入電腦以提供無線連線能力的 USB Wi-Fi 網絡卡。 |
+| **Access Point（AP，存取點）** | 讓無線使用者端連線到網路的裝置。啟用 AP 模式可將無線網絡卡變成熱點。 |
 | **Monitor mode（監聽模式）** | 無需連線到網路即可擷取原始 802.11 訊框的無線模式 — 這是 Wi-Fi 稽核的基礎。 |
 | **Packet injection（封包注入）** | 在空中傳送自訂無線訊框，用於攻擊與測試。 |
 | **Driver（驅動程式）** | 讓作業系統與硬體溝通的核心軟體。內建核心（in-kernel）驅動程式已內建於 Linux；樹外（out-of-tree）驅動程式則需另行安裝。 |
@@ -21,7 +21,7 @@ description: 以淺白語言說明 Yupitek Wiki 中所使用的技術詞彙。
 | **Firmware（韌體）** | 儲存在裝置本身的低階軟體。 |
 | **Firmware update（韌體更新）** | 更換裝置上的韌體以新增功能或修正錯誤。 |
 | **Troubleshooting（疑難排解）** | 診斷並解決問題的過程。 |
-| **Compatibility matrix（相容性矩陣）** | 顯示哪些無線網卡可搭配哪些作業系統、晶片組與驅動程式的表格。 |
+| **Compatibility matrix（相容性矩陣）** | 顯示哪些無線網絡卡可搭配哪些作業系統、晶片組與驅動程式的表格。 |
 | **Getting started / Quick start（快速入門）** | 引導您完成首次設定的簡短指南。 |
 | **Antenna gain（天線增益）** | 以 dBi 為單位，衡量天線在特定方向上集中 RF 能量的程度。 |
 | **Sub-GHz** | 低於 1 GHz 的無線電頻率（例如 433 MHz），Flipper Zero 使用此頻段。 |
@@ -33,6 +33,6 @@ description: 以淺白語言說明 Yupitek Wiki 中所使用的技術詞彙。
 
 - **品牌與型號名稱**（例如 `AWUS036ACM`、`WiFi Pineapple`）一律不翻譯。
 - 英文技術詞彙首次出現時，會以行內方式說明。
-- 本 Wiki 的路徑使用 `/alfa-network/` 這種形式 — 完整清單請參閱 [產品登錄](/admin/product-registry/)。
+- 本 Wiki 的路徑使用 `/alfa-network/` 這種形式 — 完整清單請參閱 產品登入。
 
-如果缺少某個詞彙，或某個定義不清楚，請透過 [審查佇列](/admin/review-queue/) 回報。
+如果缺少某個詞彙，或某個定義不清楚，請透過 審查佇列 回報。

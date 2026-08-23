@@ -5,7 +5,7 @@ title: FAQ
 sidebar_position: 3
 description: 關於 Hak5 裝置的常見問題 — 該買哪個工具、DuckyScript 版本、合法性、WiFi Pineapple 與 Pager 的比較、O.MG 系列的差異等。
 tags: [hak5, faq, buying-guide, duckyscript, legality]
-keywords: [Hak5 FAQ, 該買哪台 Hak5 裝置, USB Rubber Ducky vs Bash Bunny, WiFi Pineapple vs Pager, DuckyScript 版本, Hak5 合法嗎]
+keywords: [Hak5 FAQ, 該買哪臺 Hak5 裝置, USB Rubber Ducky vs Bash Bunny, WiFi Pineapple vs Pager, DuckyScript 版本, Hak5 合法嗎]
 authors: yupitek
 date: 2026-08-21
 last_updated: 2026-08-21
@@ -47,13 +47,13 @@ flowchart TD
 ## 1. 合法性與倫理
 
 ### 擁有 Hak5 裝備合法嗎？
-**合法。** 這些是一般用途的運算裝置 — 一台插著 Wi-Fi 網卡的 Raspberry Pi 就能做到 WiFi Pineapple 大部分的事。擁有它們幾乎在所有地方都是合法的。
+**合法。** 這些是一般用途的運算裝置 — 一臺插著 Wi-Fi 網絡卡的 Raspberry Pi 就能做到 WiFi Pineapple 大部分的事。擁有它們幾乎在所有地方都是合法的。
 
 ### 那*使用*呢？
-只能用於**你擁有、或已取得書面授權測試的系統**。未授權存取在任何司法管轄區都是犯罪（在台灣，刑法妨害電腦使用罪，第 358–363 條，部分罪行最高可處五年有期徒刑）。Hak5 自家的保固條款也這麼說：這些工具「僅供授權稽核與安全分析用途」。
+只能用於**你擁有、或已取得書面授權測試的系統**。未授權存取在任何司法管轄區都是犯罪（在臺灣，刑法妨害電腦使用罪，第 358–363 條，部分罪行最高可處五年有期徒刑）。Hak5 自家的保固條款也這麼說：這些工具「僅供授權稽核與安全分析用途」。
 
 ### 我可以用 Hak5 裝備參加 CTF 或大學實驗室嗎？
-可以 — CTF 平台和大學資安課程經常使用它們。不確定時，**問實驗室主辦人或教授**你被授權測試什麼，並把所有操作留在提供的沙盒內。
+可以 — CTF 平臺和大學資安課程經常使用它們。不確定時，**問實驗室主辦人或教授**你被授權測試什麼，並把所有操作留在提供的沙盒內。
 
 ---
 
@@ -73,17 +73,17 @@ flowchart TD
 完整比較在各產品頁： [Mark VII](/hak5/products/wifi-pineapple-mark-vii/)、[Pager](/hak5/products/wifi-pineapple-pager/)、[Enterprise](/hak5/products/wifi-pineapple-enterprise/)。
 
 ### Shark Jack vs Shark Jack Cable？
-同樣的大腦，不同的電源。經典 [Shark Jack](/hak5/products/shark-jack/) 靠內建電池跑 10–15 分鐘 — 非常適合掛在鑰匙圈上攜帶。[Shark Jack Cable](/hak5/products/shark-jack-cable/) 由 USB-C 供電並多了序列主控台，所以能跑好幾個小時，而且你能拿到一個即時 shell。
+同樣的大腦，不同的電源。經典 [Shark Jack](/hak5/products/shark-jack/) 靠內建電池跑 10–15 分鐘 — 非常適合掛在鑰匙圈上攜帶。[Shark Jack Cable](/hak5/products/shark-jack-cable/) 由 USB-C 供電並多了序列主控臺，所以能跑好幾個小時，而且你能拿到一個即時 shell。
 
 ### 什麼是 Cloud C²，我需要它嗎？
-Cloud C²（https://cloudc2.io）是 Hak5 免費、可自架的**命令與控制伺服器**。它讓你能從瀏覽器管理裝置 — WiFi Pineapple、Key Croc、Packet Squirrel、Screen Crab：串流按鍵、觀看截圖、遠端部署 payload。你第一個星期不需要它；每台裝置上的 Web UI 或 SSH 就夠了。當裝置在物理上無法觸及時，它就變得不可或缺。
+Cloud C²（https://cloudc2.io）是 Hak5 免費、可自架的**命令與控制伺服器**。它讓你能從瀏覽器管理裝置 — WiFi Pineapple、Key Croc、Packet Squirrel、Screen Crab：串流按鍵、觀看截圖、遠端部署 payload。你第一個星期不需要它；每臺裝置上的 Web UI 或 SSH 就夠了。當裝置在物理上無法觸及時，它就變得不可或缺。
 
 ---
 
 ## 3. DuckyScript — payload 語言
 
 ### 什麼是 DuckyScript？
-Hak5 用於按鍵注入與裝置控制的腳本語言。你會遇到的版本：
+Hak5 用於按鍵注入與裝置控制的指令碼語言。你會遇到的版本：
 
 | 版本 | 使用者 | 備註 |
 |---|---|---|
@@ -102,7 +102,7 @@ Hak5 用於按鍵注入與裝置控制的腳本語言。你會遇到的版本：
 ## 4. 韌體與更新
 
 ### 我應該多常更新韌體？
-每當某個版本加入了你需要的新功能時。不像手機，這裡沒有攸關安全的自動更新 — Hak5 韌體出廠時已測試且穩定。[韌體與下載](/hak5/firmware-downloads/)頁面顯示每台裝置的官方更新路徑。**絕對不要刷第三方韌體**：在某些裝置上（尤其是 USB Rubber Ducky），它會讓裝置永久無法復原，並使保固失效。
+每當某個版本加入了你需要的新功能時。不像手機，這裡沒有攸關安全的自動更新 — Hak5 韌體出廠時已測試且穩定。[韌體與下載](/hak5/firmware-downloads/)頁面顯示每臺裝置的官方更新路徑。**絕對不要刷第三方韌體**：在某些裝置上（尤其是 USB Rubber Ducky），它會讓裝置永久無法復原，並使保固失效。
 
 ### O.MG 裝置需要 O.MG Programmer 嗎？
 **需要。** O.MG 裝置出廠時是停用狀態；通用的 [O.MG Programmer](/hak5/products/omg-programmer/) 負責啟用、韌體升級、自我銷毀救援與鑑識備份。一支 Programmer 涵蓋所有 O.MG 裝置（Cable、Plug、Adapter、UnBlocker）。
@@ -118,7 +118,7 @@ Hak5 用於按鍵注入與裝置控制的腳本語言。你會遇到的版本：
 任何下定決心的防禦者都能找到硬體植入裝置。[Key Croc](/hak5/products/key-croc/) 在側錄期間 LED 是關閉的，並複製鍵盤的硬體 ID 讓它看起來像一般轉接頭 — 但一次實體稽核（或 [Malicious Cable Detector](/hak5/products/malicious-cable-detector/)！）就會發現它。
 
 ### Malicious Cable Detector 偵測得到 O.MG Cable 嗎？
-**可以 — 這就是它的全部用途。** 它使用側信道電力分析（每秒 200,000 次取樣）來偵測植入晶片 — 包括完全休眠的 O.MG 裝置 — 這些晶片在資料線上完全隱形。諷刺的是，它是由製造 O.MG 線材的同一個團隊打造的。
+**可以 — 這就是它的全部用途。** 它使用側通道電力分析（每秒 200,000 次取樣）來偵測植入晶片 — 包括完全休眠的 O.MG 裝置 — 這些晶片在資料線上完全隱形。諷刺的是，它是由製造 O.MG 線材的同一個團隊打造的。
 
 ### 哪些裝置跟 ALFA 轉接器搭配得好？
 [WiFi Pineapple Mark VII](/hak5/products/wifi-pineapple-mark-vii/) 官方支援基於 MT7612U 的 ALFA 轉接器（例如 AWUS036ACM）做 5 GHz 監聽 — 完整的轉接器陣容與驅動程式指南請見 [ALFA Network 專區](/alfa-network/)。

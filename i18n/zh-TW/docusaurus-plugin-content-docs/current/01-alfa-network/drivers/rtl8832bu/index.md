@@ -13,7 +13,7 @@ keywords: [RTL8832BU 驅動程式, AWUS036AX, rtl88x2bu, Linux Wi-Fi 6, WPA3]
 
 ## 概念：Wi-Fi 6，Realtek 風格
 
-RTL8832BU 是一顆 2×2 802.11ax 無線電（AX1800：574 + 1201 Mbps）。與較舊的 AC 無線網卡相比，使用者看得見的最大勝利是 **WPA3**——只講 WPA3 的現代路由器會拒絕你的舊 AC dongle，但會欣然接受 AX。
+RTL8832BU 是一顆 2×2 802.11ax 無線電（AX1800：574 + 1201 Mbps）。與較舊的 AC 無線網絡卡相比，使用者看得見的最大勝利是 **WPA3**——只講 WPA3 的現代路由器會拒絕你的舊 AC dongle，但會欣然接受 AX。
 
 驅動程式狀況與其他 Realtek 晶片如出一轍：**沒有上游**，所以我們使用社群驅動程式。首選 repo 是 **`aircrack-ng/rtl88x2bu`**，它涵蓋 88X2BU 家族（RTL8822BU 與 RTL8832BU），支援監聽模式 + VIF。DKMS 讓它在核心更新後保持重建。
 
@@ -30,7 +30,7 @@ flowchart LR
 
 - [ ] Linux（Ubuntu 20.04+ / Kali / Debian）
 - [ ] `sudo apt install -y build-essential dkms git`
-- [ ] `sudo` 權限
+- [ ] `sudo` 許可權
 - [ ] AWUS036AX 或 AWUS036AXER
 
 ## 步驟 1：建置驅動程式
@@ -75,7 +75,7 @@ nmcli device wifi connect "MySSID" password "my-passphrase"
 iw dev wlan0 link
 ```
 
-**預期輸出**：顯示 `SSID: MySSID` 加上協商速率——在 5 GHz 上你應該看到 **1201 Mb/s** 或依距離而定的較低回落值（2×2 80 MHz）。
+**預期輸出**：顯示 `SSID: MySSID` 加上協商速率——在 5 GHz 上你應該看到 **1201 Mb/s** 或依距離而定的較低迴落值（2×2 80 MHz）。
 
 ## 步驟 4：監聽模式 + 注入
 
@@ -110,9 +110,9 @@ sudo systemctl restart NetworkManager
 |---|---|---|
 | 在非常新的核心上建置失敗 | repo 需要最新 commit | `cd /opt/rtl88x2bu && sudo git pull && sudo make dkms_install` |
 | WPA3 網路看不見 | 驅動程式或 wpa_supplicant 太舊 | 更新驅動程式；`sudo apt update && sudo apt upgrade` |
-| 無線網卡只有 managed、沒有監聽 | 核心 stub 衝突（罕見） | 用 `dmesg` 確認哪個模組綁定；把 stub 加入黑名單 |
+| 無線網絡卡只有 managed、沒有監聽 | 核心 stub 衝突（罕見） | 用 `dmesg` 確認哪個模組繫結；把 stub 加入黑名單 |
 | 注入 0/30 | 空頻道 | `sudo iw wlan0mon set channel 6`；在 AP 附近測試 |
-| 高速連結但傳輸慢 | USB 2.0 連接埠瓶頸 | 使用 USB 3.x 連接埠（AX 是 USB 3.2） |
+| 高速連結但傳輸慢 | USB 2.0 連線埠瓶頸 | 使用 USB 3.x 連線埠（AX 是 USB 3.2） |
 
 ## 參考資料
 

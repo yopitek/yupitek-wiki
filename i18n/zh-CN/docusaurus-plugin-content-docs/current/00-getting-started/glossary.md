@@ -33,6 +33,6 @@ description: 对 Yupitek Wiki 中使用的技术术语的通俗易懂的定义�
 
 - **品牌和型号名称**（例如 `AWUS036ACM`、`WiFi Pineapple`）从不翻译。
 - 英文技术术语首次出现时，会进行内联解释。
-- 本维基中的路由路径使用 `/alfa-network/` 形式 — 完整列表请参阅 [产品注册表](/admin/product-registry/)。
+- 本维基中的路由路径使用 `/alfa-network/` 形式 — 完整列表请参阅 产品注册表。
 
-如果某个术语缺失或定义不清楚，请通过 [审查队列](/admin/review-queue/) 报告。
+如果某个术语缺失或定义不清楚，请通过 审查队列 报告。

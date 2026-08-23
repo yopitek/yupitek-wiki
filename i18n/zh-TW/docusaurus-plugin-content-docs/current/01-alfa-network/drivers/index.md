@@ -9,7 +9,7 @@ keywords: [ALFA 驅動程式, AWUS036ACM 驅動程式, AWUS036ACH 驅動程式, 
 
 # ALFA 驅動程式指南——總覽
 
-> **一句話定位（One-liner）**：Linux 上的每支 ALFA 無線網卡都由**七顆晶片**之一驅動——三顆 MediaTek 晶片使用**內建於核心**的驅動程式、開箱即用，四顆 Realtek 晶片需要**樹外 DKMS** 建置。在下方找到你的晶片並跳到它的指南。
+> **一句話定位（One-liner）**：Linux 上的每支 ALFA 無線網絡卡都由**七顆晶片**之一驅動——三顆 MediaTek 晶片使用**內建於核心**的驅動程式、開箱即用，四顆 Realtek 晶片需要**樹外 DKMS** 建置。在下方找到你的晶片並跳到它的指南。
 
 ```mermaid
 flowchart LR
@@ -25,7 +25,7 @@ flowchart LR
 
 ## 晶片對照表
 
-| 晶片 | 無線網卡 | 驅動程式綁定 | 內建於核心？ | 指南 |
+| 晶片 | 無線網絡卡 | 驅動程式繫結 | 內建於核心？ | 指南 |
 |---------|----------|----------------|------------|-------|
 | MT7612U | AWUS036ACM | `mt76x2u` | ✅ 內建於核心 | [MT7612U 指南](/alfa-network/drivers/mt7612u/) |
 | MT7610U | AWUS036ACHM | `mt76x0u` | ✅ 內建於核心 | [MT7610U 指南](/alfa-network/drivers/mt7610u/) |
@@ -37,7 +37,7 @@ flowchart LR
 
 ## 如何挑選
 
-1. **確認晶片**——執行 `lsusb` 並把 `vendor:product` 配對到你的無線網卡規格表。
+1. **確認晶片**——執行 `lsusb` 並把 `vendor:product` 配對到你的無線網絡卡規格表。
 2. **MediaTek 晶片？** 你完成了——驅動程式在核心內。直接前往指南，用 `dmesg` / `iw dev` 確認並啟用監聽模式（monitor mode）。
 3. **Realtek 晶片？** 依照對應指南建置 DKMS 模組。記得：核心更新後需要 `sudo dkms autoinstall`。
 

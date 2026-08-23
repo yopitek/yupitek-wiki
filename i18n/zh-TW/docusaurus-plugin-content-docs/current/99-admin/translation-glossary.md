@@ -1,4 +1,5 @@
 ---
+draft: true
 slug: translation-glossary
 id: admin-translation-glossary
 title: 翻譯詞彙表
@@ -12,20 +13,20 @@ description: 三個 wiki 語言版本共用的標準 en / zh-CN / zh-TW 術語�
 
 ## 術語表格
 
-| English | zh-CN (简中) | zh-TW (繁中) |
+| English | zh-CN (簡中) | zh-TW (繁中) |
 |---------|--------------|--------------|
-| Access Point (AP) | 接入点 | 存取點 |
-| Monitor mode | 监听模式 | 監聽模式 |
-| Packet injection | 数据包注入 | 封包注入 |
-| Adapter (wireless) | 网卡适配器 | 無線網卡 |
-| Driver | 驱动程序 | 驅動程式 |
-| Firmware | 固件 | 韌體 |
-| Firmware update | 固件升级 | 韌體更新 |
-| Troubleshooting | 故障排查 | 疑難排解 |
-| Compatibility matrix | 兼容性矩阵 | 相容性矩陣 |
-| Getting started | 快速入门 | 快速入門 |
-| Wi-Fi adapter | 无线网卡 | Wi-Fi 無線網卡 |
-| Antenna gain | 天线增益 | 天線增益 |
+| Access Point (AP) | 存取點 | 存取點 |
+| Monitor mode | 監聽模式 | 監聽模式 |
+| Packet injection | 封包注入 | 封包注入 |
+| Adapter (wireless) | 無線網絡卡 | 無線網絡卡 |
+| Driver | 驅動程式 | 驅動程式 |
+| Firmware | 韌體 | 韌體 |
+| Firmware update | 韌體更新 | 韌體更新 |
+| Troubleshooting | 疑難排解 | 疑難排解 |
+| Compatibility matrix | 相容性矩陣 | 相容性矩陣 |
+| Getting started | 快速入門 | 快速入門 |
+| Wi-Fi adapter | Wi-Fi 無線網絡卡 | Wi-Fi 無線網絡卡 |
+| Antenna gain | 天線增益 | 天線增益 |
 
 ## 規則
 
@@ -36,4 +37,4 @@ description: 三個 wiki 語言版本共用的標準 en / zh-CN / zh-TW 術語�
 ## 相關
 
 - [`Getting Started`](/getting-started/) — 面向使用者的總覽。
-- [`Product Registry`](/admin/product-registry/) — 標準產品名稱。
+- `Product Registry` — 標準產品名稱。

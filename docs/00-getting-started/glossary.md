@@ -33,6 +33,6 @@ Plain-language definitions of terms you will encounter across this wiki. Brand a
 
 - **Brand and model names** (for example `AWUS036ACM`, `WiFi Pineapple`) are never translated.
 - The first time an English technical term appears, it is explained inline.
-- Route paths in this wiki use the form `/alfa-network/` — see the [Product Registry](/admin/product-registry/) for the full list.
+- Route paths in this wiki use the form `/alfa-network/` — see the Product Registry for the full list.
 
-If a term is missing or a definition is unclear, report it via the [Review Queue](/admin/review-queue/).
+If a term is missing or a definition is unclear, report it via the Review Queue.

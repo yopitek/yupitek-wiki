@@ -37,7 +37,7 @@ The following are **not** covered by this wiki's support:
 - Issues caused by third-party firmware forks not published by the manufacturer (for example, unofficial Flipper builds).
 - Drivers on kernels older than those listed in each chipset guide.
 - Defective hardware — please contact [Yupitek sales](https://www.yupitek.com) for RMA.
-- Products we no longer sell (see the [Product Registry](/admin/product-registry/) for current inventory).
+- Products we no longer sell (see the Product Registry for current inventory).
 
 ## How requests are triaged
 
@@ -57,6 +57,6 @@ flowchart TD
 
 ## Reporting a problem with this wiki
 
-If a guide is wrong, missing a step, or a command no longer works, please let us know. Problems are tracked in the [Review Queue](/admin/review-queue/), and fixes are recorded in the [Change Log](/admin/change-log/).
+If a guide is wrong, missing a step, or a command no longer works, please let us know. Problems are tracked in the Review Queue, and fixes are recorded in the [Change Log](/admin/change-log/).
 
 Remember the golden rule: always verify commands in a test environment before running them on a production or assessment target.

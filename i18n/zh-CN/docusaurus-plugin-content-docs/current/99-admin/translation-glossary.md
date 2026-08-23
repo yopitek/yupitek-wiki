@@ -1,4 +1,5 @@
 ---
+draft: true
 slug: translation-glossary
 id: admin-translation-glossary
 title: 翻译术语表
@@ -36,4 +37,4 @@ description: 在全部三个 wiki 语言版本中使用的规范 en / zh-CN / zh
 ## 相关
 
 - [`快速入门`](/getting-started/) — 面向用户的概览。
-- [`产品注册表`](/admin/product-registry/) — 规范的产品名称。
+- `产品注册表` — 规范的产品名称。

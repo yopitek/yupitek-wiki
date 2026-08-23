@@ -16,17 +16,17 @@ toc: true
 
 # 韌體與 qFlipper — 更新指南
 
-> **學習目標**：完成後你將了解「韌體」在 Flipper Zero 上的意義、知道更新韌體的三種方式、已用桌面版 qFlipper 更新過韌體、製作過備份，並知道如何從失敗的刷寫中復原。
+> **學習目標**：完成後你將瞭解「韌體」在 Flipper Zero 上的意義、知道更新韌體的三種方式、已用桌面版 qFlipper 更新過韌體、製作過備份，並知道如何從失敗的刷寫中復原。
 >
-> **適用對象**：擁有 Flipper Zero 的初學者。桌面方法需要一台電腦（Windows / macOS / Linux）。
+> **適用物件**：擁有 Flipper Zero 的初學者。桌面方法需要一臺電腦（Windows / macOS / Linux）。
 
 ## 什麼是韌體？
 
-Flipper Zero 是一台小型電腦：一顆 STM32WB55 微控制器，搭配 1 MB 快閃記憶體晶片，儲存作業系統與所有內建應用程式——Sub-GHz 讀取器、NFC、RFID、紅外線、Bad USB，以及你在主選單中看到的其他一切。這套軟體稱為**韌體（firmware）**（官方名稱為 **FlipperOS**）。
+Flipper Zero 是一臺小型電腦：一顆 STM32WB55 微控制器，搭配 1 MB 快閃記憶體晶片，儲存作業系統與所有內建應用程式——Sub-GHz 讀取器、NFC、RFID、紅外線、Bad USB，以及你在主選單中看到的其他一切。這套軟體稱為**韌體（firmware）**（官方名稱為 **FlipperOS**）。
 
 韌體更新會定期發布，並帶來：
 
-- 新的協定支援（新的 Sub-GHz 與 NFC 卡片類型）
+- 新的協定支援（新的 Sub-GHz 與 NFC 卡片型別）
 - 錯誤修正與安全性修補
 - 新的內建應用程式與功能
 - 更大、由社群維護的 IR 資料庫
@@ -86,7 +86,7 @@ Setting up qflipper (1.3.1) ...
 
 > **注意**：下載頁面上的確切檔名與版本會不同。請調整指令以符合你下載的檔案。
 
-### 步驟 2：連接你的 Flipper Zero
+### 步驟 2：連線你的 Flipper Zero
 
 1. 將 USB-C 傳輸線插入 Flipper Zero，再插入你的電腦。
 2. 在 Flipper Zero 上確認 USB 提示：選擇 **Connect**（預設允許 USB 連線）。
@@ -112,8 +112,8 @@ Bus 001 Device 004: ID 0483:5740 STMicroelectronics Flipper Zero
 
 ### 步驟 3：更新
 
-1. 在 qFlipper 中，點擊頂端工具列的 **Update** 按鈕（帶有向上箭頭的 Flipper 圖示）。
-2. qFlipper 會檢查發布頻道並顯示最新版本。點擊 **Update Firmware**。
+1. 在 qFlipper 中，點選頂端工具列的 **Update** 按鈕（帶有向上箭頭的 Flipper 圖示）。
+2. qFlipper 會檢查發布頻道並顯示最新版本。點選 **Update Firmware**。
 3. 等待。Flipper Zero 螢幕會顯示進度列；qFlipper 會顯示類似以下的記錄：
 
 ```text
@@ -129,7 +129,7 @@ Flashing ...
 
 ## 方法 B：使用手機應用程式更新
 
-如果你偏好用手機：安裝 [Flipper 手機應用程式](/flipper-zero/mobile-app/)，透過藍牙配對，然後 **App → Firmware Update**。應用程式會透過空中下載並刷寫新韌體。完整的配對步驟請參閱[手機應用程式指南](/flipper-zero/mobile-app/)。
+如果你偏好用手機：安裝 [Flipper 手機應用程式](/flipper-zero/mobile-app/)，透過藍芽配對，然後 **App → Firmware Update**。應用程式會透過空中下載並刷寫新韌體。完整的配對步驟請參閱[手機應用程式指南](/flipper-zero/mobile-app/)。
 
 ## 方法 C：使用 qFlipper 安裝自訂韌體（Momentum）
 
@@ -137,7 +137,7 @@ Flashing ...
 
 1. **先備份你的資料**（請參閱下一節）。
 2. 下載自訂韌體 `.dfu` 檔案（例如從 [Momentum 發布頁面](https://github.com/Next-Flip/Momentum-Firmware/releases)）。
-3. 在 qFlipper 中：**點擊 Flipper 圖示 → Install from file → 選擇 .dfu → Flash**。
+3. 在 qFlipper 中：**點選 Flipper 圖示 → Install from file → 選擇 .dfu → Flash**。
 
 **預期輸出**：
 
@@ -154,7 +154,7 @@ Flashing ...
 
 你擷取的鑰匙、IR 編碼與設定都存放在 microSD 卡上——所以**最簡單的備份就是把 microSD 內容複製到你的電腦**。但 qFlipper 也可以備份**內部記憶體**（地區、名稱、設定、Dolphin 等級）。
 
-| 備份類型 | 方式 |
+| 備份型別 | 方式 |
 |---|---|
 | 完整備份（建議） | Flipper 連線時，在 qFlipper 中：**Files 分頁 → 全選 → Copy to PC** |
 | 設定／內部資料 | **Flipper 圖示 → Backup → Save to file** |
@@ -166,7 +166,7 @@ Flashing ...
 
 1. **開機時按住 DOWN**（`LEFT + BACK`）→ 會出現開機選單。
 2. 選擇 **Firmware update mode**。
-3. 連接 USB 並使用 qFlipper 刷寫官方韌體（上述方法 A）。
+3. 連線 USB 並使用 qFlipper 刷寫官方韌體（上述方法 A）。
 
 ```mermaid
 flowchart LR
@@ -182,7 +182,7 @@ flowchart LR
 |---|---|---|
 | `Device not found` / `No device detected` | 僅充電的傳輸線，或未確認 USB 提示 | 使用資料傳輸線；在 Flipper 上確認「Connect」提示 |
 | qFlipper 無法在 Linux 上安裝 | 缺少相依套件 | `sudo apt install ./qFlipper-<ver>.deb`（會安裝相依套件）；若仍失敗，改用 AppImage |
-| 更新卡在 0% | USB 連接埠問題 | 嘗試其他 USB 連接埠／傳輸線，重新啟動 qFlipper |
+| 更新卡在 0% | USB 連線埠問題 | 嘗試其他 USB 連線埠／傳輸線，重新啟動 qFlipper |
 | `Update failed: insufficient storage` | microSD 太滿 | 釋放 microSD 空間，或使用更大的卡片 |
 | 自訂韌體更新失敗 | .dfu 檔案錯誤 | 為你的硬體下載正確的檔案；確認它是 `.dfu`，而不是原始碼壓縮檔 |
 

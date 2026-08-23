@@ -18,7 +18,7 @@ toc: true
 
 > **一句話定位**：O.MG Plug 把 O.MG 的無線植入晶片塞進一支「鑰匙圈 USB 隨身碟」外型的插頭——掛在鑰匙上完全不起眼，一旦插進目標的 USB 孔，就能透過 Wi-Fi 遠端注入按鍵、執行 DuckyScript Payload。
 
-[O.MG Cable](/hak5/products/omg-cable/) 把植入晶片藏在線材裡。**O.MG Plug** 則把完全相同的植入晶片藏在更不起眼的東西裡：一個看起來像廉價隨身碟 / 手機充電器的鑰匙圈 USB 插頭。它是「把它留在桌上，祈禱有人插上去」的社交工程工具。
+[O.MG Cable](/hak5/products/omg-cable/) 把植入晶片藏線上材裡。**O.MG Plug** 則把完全相同的植入晶片藏在更不起眼的東西裡：一個看起來像廉價隨身碟 / 手機充電器的鑰匙圈 USB 插頭。它是「把它留在桌上，祈禱有人插上去」的社交工程工具。
 
 同樣的能力，不同的偽裝。因為它是插頭而不是線材，它更容易攜帶，也更容易塞進目標的 USB 埠 — 經典的「撿到一支 USB 隨身碟，好奇心毀了安全防線」情境。
 
@@ -28,7 +28,7 @@ toc: true
 
 ## 規格一覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | 外型 | 鑰匙圈 USB 插頭（看起來像隨身碟） |
 | 植入晶片 | 支援 WiFi 的無線 HID 晶片（WebUI + 802.11 無線電） |
@@ -36,7 +36,7 @@ toc: true
 | 啟用 | 需要 [O.MG Programmer](/hak5/products/omg-programmer/) — 出廠停用 |
 | 觸發 | WiFi — 長距離 beacon 觸發、地理圍欄 |
 | 特色功能 | 自我銷毀、地理圍欄、偽造 VID/PID/MAC、WebUI 控制 |
-| 官方文件 | https://docs.hak5.org/omg-cable |
+| 官方檔案 | https://docs.hak5.org/omg-cable |
 
 > Plug 的硬體等級（Basic/Elite）與 O.MG Cable 相同 — 完整的 Basic vs Elite 表格（槽位、速度、鍵盤側錄器、隱蔽連結、加密 C²）見 [O.MG Cable 頁面](/hak5/products/omg-cable/)。
 
@@ -72,7 +72,7 @@ sequenceDiagram
 
 1. **啟用：** 把 Plug 插進 [O.MG Programmer](/hak5/products/omg-programmer/)，把 Programmer 插進 Chrome/Edge 機器，開啟 WebFlasher（https://o.mg.lol/setup/），依照 3 步驟精靈操作。
 2. **連線：** 啟用後，從瀏覽器連上 Plug 的 WiFi 並開啟它的 WebUI。
-3. **部署：** 點擊 DuckyScript payload 的 **Run** — Plug 會注入到它所插入的任何裝置。
+3. **部署：** 點選 DuckyScript payload 的 **Run** — Plug 會注入到它所插入的任何裝置。
 
 ```text
 REM Proof-of-concept — open notepad, type a message
@@ -97,7 +97,7 @@ ENTER
 | 自我銷毀 | 遠端清除 → 失效；可透過 Programmer 復原 |
 | 地理圍欄 | 依位置觸發或自我銷毀 |
 | WiFi 觸發 | 用單一 beacon 長距離觸發 payload |
-| 批次韌體（Elite） | Programmer 可大量刷寫多台裝置 |
+| 批次韌體（Elite） | Programmer 可大量刷寫多臺裝置 |
 
 ---
 

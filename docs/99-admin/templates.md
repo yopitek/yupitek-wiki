@@ -1,4 +1,5 @@
 ---
+draft: true
 slug: templates
 id: admin-templates
 title: Templates
@@ -80,5 +81,5 @@ Used for any single product.
 
 ## Related
 
-- [`Review Queue`](/admin/review-queue/) — where new content is checked before it ships.
+- `Review Queue` — where new content is checked before it ships.
 - [`Change Log`](/admin/change-log/) — records what changed and when.

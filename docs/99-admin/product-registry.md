@@ -1,4 +1,5 @@
 ---
+draft: true
 slug: product-registry
 id: admin-product-registry
 title: Product Registry

@@ -20,21 +20,21 @@ toc: true
 
 ## 規格一覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | WiFi 模組 | ESP32-C5（2.4 GHz + 5 GHz），預先燒錄 Marauder 5G 韌體 |
 | GPS | 板載 GPS 模組，自動切換電源（接上時用 Flipper 電源，分離時用電池電源） |
 | 電池 | 800 mAh，板上附充電指示燈 |
 | 保護 | 每個訊號腳位都有 TVS 二極體 |
-| 天線 | WiFi 3 dBi 雙頻（11 cm）、GPS 20 dBi、SMA 內針連接器 |
-| 燒錄 | USB-C 連接埠（左前方）；按住右後方的按鈕，再插入 USB 進入燒錄模式 |
+| 天線 | WiFi 3 dBi 雙頻（11 cm）、GPS 20 dBi、SMA 內針聯結器 |
+| 燒錄 | USB-C 連線埠（左前方）；按住右後方的按鈕，再插入 USB 進入燒錄模式 |
 | 控制 | Flipper Zero 應用程式：WiFi Marauder、GPS |
 
 ## 這塊板子要做什麼
 
-ESP32-C5 是 WiFi 主力：搭配 **Marauder 韌體**，它可以掃描存取點與用戶端、嗅探 beacon 與 probe request、執行 deauth 與 PMKID 擷取測試，並記錄 WiFi 活動——現在還包括舊款 ESP32 板子看不到的 **5 GHz** 網路。GPS 模組把你的 war driving 工作階段變成有座標的資料，而小電池讓 WiFi 那一側不必耗盡 Flipper 的電力。
+ESP32-C5 是 WiFi 主力：搭配 **Marauder 韌體**，它可以掃描存取點與使用者端、嗅探 beacon 與 probe request、執行 deauth 與 PMKID 擷取測試，並記錄 WiFi 活動——現在還包括舊款 ESP32 板子看不到的 **5 GHz** 網路。GPS 模組把你的 war driving 工作階段變成有座標的資料，而小電池讓 WiFi 那一側不必耗盡 Flipper 的電力。
 
-> **請在自己的網路與設備上使用。** Deauth 攻擊與 probe 嗅探會干擾他人，且在大多數國家受到管制——這是實驗室／教學工具。
+> **請在自己的網路與裝置上使用。** Deauth 攻擊與 probe 嗅探會干擾他人，且在大多數國家受到管制——這是實驗室／教學工具。
 
 ```mermaid
 flowchart LR

@@ -17,7 +17,7 @@ toc: true
 # SDR 軟體 — 選擇與安裝你的工具
 
 > **學習目標**：讀完後你將能為你的裝置與目標挑選正確的 SDR 應用程式，並在 Linux 或 Windows 上安裝它。
-> **適用對象**：初階到中階 ｜ **前置需求**：一台可正常運作的 SDRLAB 裝置（見[快速入門](/sdrlab/quickstart/)）。
+> **適用物件**：初階到中階 ｜ **前置需求**：一臺可正常運作的 SDRLAB 裝置（見[快速入門](/sdrlab/quickstart/)）。
 
 ## 概念：軟體堆疊
 
@@ -51,16 +51,16 @@ flowchart TD
 
 ### 快速挑選表
 
-| 工具 | 平台 | 裝置 | 最適合 |
+| 工具 | 平臺 | 裝置 | 最適合 |
 |---|---|---|---|
 | [GQRX](https://www.gqrx.dk/) | Linux / macOS / Windows | RTL-SDR V4、H4M（作為 HackRF） | 一般接收、頻譜、FM/AM 解調、Linux 上的 SDR 新手 |
 | [SDR# (SDRSharp)](https://airspy.com/download/) | Windows | RTL-SDR V4 | 經典的新手 Windows 應用程式；龐大的外掛生態系 |
-| [SDR++](https://www.sdrpp.org/) | Windows / Linux / macOS | RTL-SDR V4、HackRF | 跨平台現代 GUI、伺服器模式、出色的瀑布圖 |
+| [SDR++](https://www.sdrpp.org/) | Windows / Linux / macOS | RTL-SDR V4、HackRF | 跨平臺現代 GUI、伺服器模式、出色的瀑布圖 |
 | [SDR Console V3](https://www.sdr-radio.com/console) | Windows | RTL-SDR V4、TRX-duo | 專業接收功能、業餘無線電、遠端操作 |
 | [HDSDR](https://www.hdsdr.de/) | Windows | TRX-duo、RTL-SDR V4 | HF 收發器風格控制、IF 全景顯示、TRX-duo 支援 |
-| [CubicSDR](https://cubicsdr.com/) | Windows / Linux / macOS | RTL-SDR V4、HackRF | 簡單的跨平台瀑布圖 |
+| [CubicSDR](https://cubicsdr.com/) | Windows / Linux / macOS | RTL-SDR V4、HackRF | 簡單的跨平臺瀑布圖 |
 | [SatDump](https://github.com/SatDump/SatDump) | Windows / Linux | RTL-SDR V4 | 衛星解碼（NOAA、MetOp、LRPT、Meteor） |
-| `rtl_*` 命令列工具 | Linux / Windows / macOS | RTL-SDR V4 | 測試（`rtl_test`）、原始 IQ 擷取、腳本 |
+| `rtl_*` 命令列工具 | Linux / Windows / macOS | RTL-SDR V4 | 測試（`rtl_test`）、原始 IQ 擷取、指令碼 |
 | `hackrf_*` 工具 | Linux / Windows / macOS | H4M（作為 HackRF） | 韌體燒錄、原始 IQ TX/RX、頻譜（`hackrf_transfer`） |
 
 ## Linux：安裝 GQRX（建議的起點）
@@ -105,10 +105,10 @@ Supported sample rates: 225001-300000, 900001-3200000, ...
 ### 步驟 3 — 開啟 GQRX 並找一個訊號
 
 1. 啟動 `gqrx`（或 `gqrx-sdr`）。
-2. 第一次執行時會出現**Device configuration**（裝置設定）對話框——選取你的接收棒，I/Q 設定保持預設值，然後按**OK**。
+2. 第一次執行時會出現**Device configuration**（裝置設定）對話方塊——選取你的接收棒，I/Q 設定保持預設值，然後按**OK**。
 3. 按**▶**（播放）按鈕。瀑布圖開始串流。
-4. 在頻率欄輸入**97.3 MHz**（任何訊號強的 FM 電台都可以——查一下你當地的電台）。
-5. 按**FM**模式按鈕，然後關閉**靜音**圖示。你應該能聽到電台。
+4. 在頻率欄輸入**97.3 MHz**（任何訊號強的 FM 電臺都可以——查一下你當地的電臺）。
+5. 按**FM**模式按鈕，然後關閉**靜音**圖示。你應該能聽到電臺。
 
 ## Windows：安裝 SDR#（建議的起點）
 
@@ -116,14 +116,14 @@ Supported sample rates: 225001-300000, 900001-3200000, ...
 2. 將 zip 解壓縮到一個資料夾（例如 `C:\SDRSharp`）。
 3. 執行 `sdrsharp.exe`。它需要 **.NET**——如果缺少，Windows 會主動提供安裝。
 4. 在左上角的**Source**下拉選單中選取**RTL-SDR (RTL2832U)**，然後按播放圖示。
-5. 調諧到當地的 FM 電台（88–108 MHz），選取**WFM**解調，就可以收聽了。
+5. 調諧到當地的 FM 電臺（88–108 MHz），選取**WFM**解調，就可以收聽了。
 
 ## TRX-duo 軟體注意事項
 
-TRX-duo *不是*隨插即用的 USB 裝置——它是一台執行自有嵌入式軟體的網路儀器（官方韌體映像檔請見 [TRX-duo 頁面](/sdrlab/hardware/trx-duo/)）。在電腦端，能與它搭配的生態系是 **Red Pitaya SDR 軟體家族**：
+TRX-duo *不是*隨插即用的 USB 裝置——它是一臺執行自有嵌入式軟體的網路儀器（官方韌體映像檔請見 [TRX-duo 頁面](/sdrlab/hardware/trx-duo/)）。在電腦端，能與它搭配的生態系是 **Red Pitaya SDR 軟體家族**：
 
-- **HDSDR** — 透過 Red Pitaya 網路介面連接（依廠商文件使用 ExtIO／網路介面）。
-- **SDR Console V3** — 支援透過網路連接 Red Pitaya 相容裝置。
+- **HDSDR** — 透過 Red Pitaya 網路介面連線（依廠商檔案使用 ExtIO／網路介面）。
+- **SDR Console V3** — 支援透過網路連線 Red Pitaya 相容裝置。
 - **Red Pitaya 網頁應用程式** — 主機板本身直接從自己的網頁介面提供瀏覽器應用程式（頻譜分析儀、SDR 接收器、VNA）。
 
 由於 Red Pitaya 生態系由 [Pavel Demin 的 red-pitaya-notes](https://github.com/pavel-demin/red-pitaya-notes) 專案驅動，大多數 Red Pitaya 相容應用程式都能在搭配對應 SD 映像檔的 TRX-duo 上執行。

@@ -1,4 +1,5 @@
 ---
+draft: true
 slug: templates
 id: admin-templates
 title: 模板
@@ -80,5 +81,5 @@ description: <one-line summary shown in search and listings>
 
 ## 相关
 
-- [`审核队列`](/admin/review-queue/) — 新内容发布前的检查地点。
+- `审核队列` — 新内容发布前的检查地点。
 - [`变更日志`](/admin/change-log/) — 记录何时发生了什么更改。

@@ -1,4 +1,5 @@
 ---
+draft: true
 slug: driver-registry
 id: admin-driver-registry
 title: Driver Registry

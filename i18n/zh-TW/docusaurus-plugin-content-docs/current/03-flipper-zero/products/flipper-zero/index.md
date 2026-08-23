@@ -3,7 +3,7 @@ id: flipper-product-flipper-zero
 title: Flipper Zero — 完整指南
 description: Flipper Zero 可攜式多功能工具 — 完整規格表、GPIO 接腳定義、快速入門、Sub-GHz、NFC、RFID、紅外線、iButton、Bad USB 與 GPIO 的進階用法、韌體與疑難排解。
 sidebar_position: 1
-tags: [flipper-zero, 產品, sub-ghz, nfc, rfid, 125khz, infrared, ibutton, gpio, bad-usb, 藍牙]
+tags: [flipper-zero, 產品, sub-ghz, nfc, rfid, 125khz, infrared, ibutton, gpio, bad-usb, 藍芽]
 keywords: [Flipper Zero, Sub-GHz, CC1101, STM32WB55, NFC, RFID, 紅外線, iButton, GPIO 接腳定義, Bad USB]
 authors: yupitek
 date: 2026-08-21
@@ -16,7 +16,7 @@ toc: true
 
 # Flipper Zero — 完整指南
 
-> **一句話定位**：一台口袋大小、玩具造型的多功能工具，用於讀取、儲存、重播與模擬你周遭的無線電訊號與門禁系統——並透過 GPIO 除錯硬體。適合學生、玩家與資安研究人員。
+> **一句話定位**：一臺口袋大小、玩具造型的多功能工具，用於讀取、儲存、重播與模擬你周遭的無線電訊號與門禁系統——並透過 GPIO 除錯硬體。適合學生、玩家與資安研究人員。
 
 ```mermaid
 flowchart TD
@@ -45,7 +45,7 @@ flowchart TD
 | NFC（HF） | 13.56 MHz；讀取／寫入／模擬 MIFARE Classic、Ultralight、DESFire、FeliCa、HID iClass（PicoPass）、NFC Forum 協定 |
 | 紅外線 | RX 950 nm（38 kHz 載波）；TX 940 nm（0–2 MHz，300 mW）；NEC、Kaseikyo、RCA、RC5/RC6、Samsung、SIRC |
 | iButton | 1-Wire 讀取／寫入／模擬；DS199x、DS1971、CYFRAL、Metakom、TM2004、RW1990 |
-| 藍牙 | BLE 5.4，TX 最高 4 dBm，RX -96 dBm，2 Mbps |
+| 藍芽 | BLE 5.4，TX 最高 4 dBm，RX -96 dBm，2 Mbps |
 | USB | USB Type-C，USB 2.0（12 Mbps），充電最高 1A |
 | GPIO | 2.54 mm 排針上的 13 個使用者 I/O 接腳，3.3V CMOS，5V 容忍輸入，每腳最高 20 mA |
 | microSD | 最高 256 GB（SPI 模式）；建議 2–32 GB；FAT12/16/32、exFAT |
@@ -65,7 +65,7 @@ Flipper Zero 完全自主運作——方向鍵與單色 LCD 讓你在沒有手�
 - 透過 GPIO 除錯微控制器（SPI / UART / I2C / SWD）
 - 把 Flipper 變成 USB 鍵盤（Bad USB）來測試 HID 安全性
 
-> ⚠️ **法律聲明**：只在你擁有或已獲授權測試的裝置上測試。干擾你不擁有的系統（門、汽車、網路）在大多數司法管轄區是違法的。
+> ⚠️ **法律宣告**：只在你擁有或已獲授權測試的裝置上測試。幹擾你不擁有的系統（門、汽車、網路）在大多數司法管轄區是違法的。
 
 ## 快速入門
 
@@ -73,7 +73,7 @@ Flipper Zero 完全自主運作——方向鍵與單色 LCD 讓你在沒有手�
 
 1. 透過 USB-C 充電（約 2 小時）。
 2. 開機：**LEFT + BACK**。
-3. 完成首次開機設定（地區、藍牙）。
+3. 完成首次開機設定（地區、藍芽）。
 4. 插入 microSD 卡（建議 2–32 GB）。
 5. **主選單 → RFID → Read** → 將測試門禁卡放在頂部邊緣 → **OK → Save**。
 6. **主選單 → Sub-GHz → Read** → 按下你自己遙控器的按鈕 → **OK → Save**。
@@ -97,7 +97,7 @@ Flipper Zero 完全自主運作——方向鍵與單色 LCD 讓你在沒有手�
 
 - **Learn** 新遙控器：Infrared → Learn → 將原始遙控器對準 Flipper → 儲存。
 - 內建的 **IR 資料庫**涵蓋常見的電視／冷氣／投影機品牌，並由社群持續更新。
-- 模擬完整的遙控器（電視、冷氣、音響）——有數十個按鈕的冷氣遙控器可以儲存為多個項目。
+- 模擬完整的遙控器（電視、冷氣、音響）——有數十個按鈕的冷氣遙控器可以儲存為多個專案。
 
 ### iButton（1-Wire）
 
@@ -106,7 +106,7 @@ Flipper Zero 完全自主運作——方向鍵與單色 LCD 讓你在沒有手�
 
 ### Bad USB
 
-Flipper Zero 會以 USB HID 鍵盤的身分呈現。腳本（microSD 的 `badusb/` 資料夾中的 `.txt` 檔案）會自動輸入按鍵——適合測試 USB HID 安全性與自動化按鍵輸入。範例腳本：
+Flipper Zero 會以 USB HID 鍵盤的身分呈現。指令碼（microSD 的 `badusb/` 資料夾中的 `.txt` 檔案）會自動輸入按鍵——適合測試 USB HID 安全性與自動化按鍵輸入。範例指令碼：
 
 ```text
 REM Lock the screen test (Windows)
@@ -117,11 +117,11 @@ STRING timeout /t 5
 ENTER
 ```
 
-> 只在你擁有的機器上執行 Bad USB 腳本。會自己打字的鍵盤正是 HID 攻擊的教科書定義。
+> 只在你擁有的機器上執行 Bad USB 指令碼。會自己打字的鍵盤正是 HID 攻擊的教科書定義。
 
 ### GPIO 與硬體除錯
 
-2.54 mm 排針暴露 13 個接腳。關鍵接腳（完整接腳定義請參閱官方文件）：
+2.54 mm 排針暴露 13 個接腳。關鍵接腳（完整接腳定義請參閱官方檔案）：
 
 | 接腳 | 功能 |
 |---|---|
@@ -136,13 +136,13 @@ Flipper 可以充當 **UART/SPI/I2C 轉 USB 轉換器**、**SPI 快閃程式設�
 
 ## 韌體
 
-- 使用 [qFlipper](/flipper-zero/firmware-qflipper/)（桌面版）或[手機應用程式](/flipper-zero/mobile-app/)（透過藍牙）更新。
+- 使用 [qFlipper](/flipper-zero/firmware-qflipper/)（桌面版）或[手機應用程式](/flipper-zero/mobile-app/)（透過藍芽）更新。
 - 自訂韌體（例如 Momentum）會增加額外應用程式，但必須使用 qFlipper 從 `.dfu` 檔案刷寫。切換前請先備份。
 - 完整原始碼、發布版本與電路圖：[官方資源](/flipper-zero/official-resources/)。
 
 ## 相容性
 
-| 平台 | 支援 | 說明 |
+| 平臺 | 支援 | 說明 |
 |---|---|---|
 | 獨立使用（無電腦） | ✅ | 使用方向鍵完整控制主選單 |
 | Windows | ✅ | qFlipper 桌面應用程式 |

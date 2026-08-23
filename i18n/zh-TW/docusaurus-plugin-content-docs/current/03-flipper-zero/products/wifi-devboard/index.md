@@ -33,32 +33,32 @@ flowchart LR
 |---|---|
 | 模組 | **ESP32-S2-WROVER** |
 | CPU | Xtensa 單核心 LX7，最高 240 MHz |
-| 無線 | 2.4 GHz Wi-Fi，IEEE 802.11 b/g/n（**無 5 GHz、無藍牙**——S2 晶片） |
+| 無線 | 2.4 GHz Wi-Fi，IEEE 802.11 b/g/n（**無 5 GHz、無藍芽**——S2 晶片） |
 | 快閃／PSRAM | 4 MB 快閃 / 2 MB PSRAM |
 | SRAM | 320 KB SRAM，16 KB RTC SRAM |
 | USB | USB Type-C（USB OTG） |
 | 按鈕 | BOOT 與 RESET 輕觸開關 |
-| 介面 | UART、SPI、I2C、GPIO（透過 Flipper 連接器 + 擴充） |
+| 介面 | UART、SPI、I2C、GPIO（透過 Flipper 聯結器 + 擴充） |
 | 預載韌體 | **BlackMagic**（透過 Wi-Fi 或 USB 進行 SWD/JTAG 除錯） |
-| 相容性 | 官方 Flipper Zero GPIO 連接器（UART 連結） |
+| 相容性 | 官方 Flipper Zero GPIO 聯結器（UART 連結） |
 
 ## 總覽
 
 WiFi Devboard 是 Flipper Zero 的官方 Wi-Fi 擴充配件。有兩件事讓它特別：
 
-1. **它給 Flipper 一個 Wi-Fi 無線電** — Flipper Zero 本身沒有 Wi-Fi，只有 Sub-GHz、NFC、RFID 與 BLE。裝上開發板並刷寫 **WiFi Marauder** 後，Flipper 就變成可攜式 Wi-Fi 稽核工具：掃描網路、對用戶端解除認證、探測隱藏 SSID。
+1. **它給 Flipper 一個 Wi-Fi 無線電** — Flipper Zero 本身沒有 Wi-Fi，只有 Sub-GHz、NFC、RFID 與 BLE。裝上開發板並刷寫 **WiFi Marauder** 後，Flipper 就變成可攜式 Wi-Fi 稽核工具：掃描網路、對使用者端解除認證、探測隱藏 SSID。
 2. **它是無線除錯探針** — 它隨附 **BlackMagic** 韌體，讓你可以透過 SWD/JTAG 刷寫與除錯其他微控制器（包括 Flipper Zero 自己的 STM32），有線**或透過 Wi-Fi** 皆可。
 
-它同時也是一個完整的 ESP32-S2 開發平台：你可以撰寫自己的 ESP-IDF 或 Arduino 韌體並刷寫——這塊板子是真正的開發套件，不只是配件。
+它同時也是一個完整的 ESP32-S2 開發平臺：你可以撰寫自己的 ESP-IDF 或 Arduino 韌體並刷寫——這塊板子是真正的開發套件，不只是配件。
 
-> ⚠️ **法律聲明**：Wi-Fi 稽核工具可能干擾網路。只在你擁有或已取得明確授權的網路上測試。對他人網路發動解除認證攻擊在大多數地方是違法的。
+> ⚠️ **法律宣告**：Wi-Fi 稽核工具可能幹擾網路。只在你擁有或已取得明確授權的網路上測試。對他人網路發動解除認證攻擊在大多數地方是違法的。
 
 ## 快速入門
 
 ### 步驟 1：安裝開發板
 
 1. 關閉 Flipper Zero 電源。
-2. 將開發板的 2.54 mm 排針與 Flipper 的 GPIO 接腳對齊——**配合絲印方向**（板子插上接腳時 USB-C 連接埠朝外）。
+2. 將開發板的 2.54 mm 排針與 Flipper 的 GPIO 接腳對齊——**配合絲印方向**（板子插上接腳時 USB-C 連線埠朝外）。
 3. 用力壓下直到完全貼合。
 4. 開啟 Flipper。你應該會看到新模組被偵測（檢查 **設定 → 擴充模組**——UART 應該已啟用）。
 
@@ -79,7 +79,7 @@ flowchart TD
 1. 將 Flipper 插入你的電腦（USB-C）。
 2. 在 qFlipper 中，開啟 **Apps** 目錄（或從 Marauder 專案下載 `.fap`）並安裝 **WiFi Marauder**。
 3. 在 Flipper 上：**Apps → WiFi Marauder**。
-4. 應用程式會透過 UART 連結連接到開發板並顯示其狀態。
+4. 應用程式會透過 UART 連結連線到開發板並顯示其狀態。
 
 ### 步驟 3：將 Marauder 韌體刷寫到開發板
 
@@ -87,7 +87,7 @@ flowchart TD
 
 **選項 A — 直接從 Flipper Zero 刷寫**（官方支援的路徑）：
 
-1. 開發板已安裝且 Flipper 已開機時，透過 USB 將 Flipper 連接到你的電腦。
+1. 開發板已安裝且 Flipper 已開機時，透過 USB 將 Flipper 連線到你的電腦。
 2. 在 qFlipper 中，使用內建的 **ESP32 刷寫**選項（qFlipper ≥ 1.3）：它會下載 Marauder 韌體並透過 Flipper 的 UART 刷寫。
 3. qFlipper 記錄會顯示類似以下的內容：
 
@@ -122,11 +122,11 @@ Leaving...
 Hard resetting via RTS pin...
 ```
 
-> 連接埠名稱依作業系統而異：`/dev/ttyACM0`（Linux）、`COMx`（Windows）、`/dev/cu.usbmodem*`（macOS）。請據此調整。
+> 連線埠名稱依作業系統而異：`/dev/ttyACM0`（Linux）、`COMx`（Windows）、`/dev/cu.usbmodem*`（macOS）。請據此調整。
 
 ### 步驟 4：驗證
 
-回到 Flipper 上：**Apps → WiFi Marauder** → 應用程式應該會顯示開發板的韌體版本與偵測到的 AP 數量。將 Flipper 對準任何你擁有的附近網路並執行 **Scan**——你會在 Flipper 螢幕上看到 SSID、頻道與加密類型清單。
+回到 Flipper 上：**Apps → WiFi Marauder** → 應用程式應該會顯示開發板的韌體版本與偵測到的 AP 數量。將 Flipper 對準任何你擁有的附近網路並執行 **Scan**——你會在 Flipper 螢幕上看到 SSID、頻道與加密型別清單。
 
 ## 進階用法
 
@@ -134,11 +134,11 @@ Hard resetting via RTS pin...
 
 | 功能 | 作用 |
 |---|---|
-| Scan APs / stations | 列出附近的網路與已連線用戶端 |
+| Scan APs / stations | 列出附近的網路與已連線使用者端 |
 | Beacon spam | 廣播假 SSID（只在你自己的測試實驗室使用） |
-| Deauth | 強制用戶端離開網路（僅限測試網路！） |
+| Deauth | 強制使用者端離開網路（僅限測試網路！） |
 | Sniff | 擷取探測請求 |
-| Hidden SSID reveal | 當用戶端探測時顯示隱藏網路名稱 |
+| Hidden SSID reveal | 當使用者端探測時顯示隱藏網路名稱 |
 | Packet capture | 將原始 802.11 訊框記錄到 SD 卡 |
 
 ### Evil Portal
@@ -149,8 +149,8 @@ Hard resetting via RTS pin...
 
 保留出廠的 BlackMagic 韌體（或重新刷寫它），即可將開發板用作除錯探針：
 
-- 將開發板的 **SWDIO / SWCLK** 接腳連接到目標 MCU（例如 STM32 開發板）。
-- 透過 USB-C 除錯，或透過 `netcat` 風格的 TCP 連線經 Wi-Fi 除錯——上工作台後就不需要傳輸線。
+- 將開發板的 **SWDIO / SWCLK** 接腳連線到目標 MCU（例如 STM32 開發板）。
+- 透過 USB-C 除錯，或透過 `netcat` 風格的 TCP 連線經 Wi-Fi 除錯——上工作臺後就不需要傳輸線。
 - 適用於 GDB 與 OpenOCD 工作流程；Flipper Zero 自己的韌體復原也可以使用這條路徑。
 
 ### 你自己的 ESP32 專案
@@ -159,7 +159,7 @@ Hard resetting via RTS pin...
 
 ## 相容性
 
-| 平台 | 支援 | 說明 |
+| 平臺 | 支援 | 說明 |
 |---|---|---|
 | Flipper Zero（官方） | ✅ | 透過 GPIO 使用 UART；在擴充模組中偵測 |
 | 任何 ESP32 主機 | ✅ | 標準 ESP32-S2 開發板 |
@@ -182,4 +182,4 @@ Hard resetting via RTS pin...
 - [韌體與 qFlipper](/flipper-zero/firmware-qflipper/)
 - [Flipper Zero 疑難排解](/flipper-zero/troubleshooting/)
 - [官方資源](/flipper-zero/official-resources/)
-- [Hak5 WiFi Pineapple](/hak5/) — 專用的 Wi-Fi 稽核平台
+- [Hak5 WiFi Pineapple](/hak5/) — 專用的 Wi-Fi 稽核平臺

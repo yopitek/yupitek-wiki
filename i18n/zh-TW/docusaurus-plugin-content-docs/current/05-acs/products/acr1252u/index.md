@@ -17,7 +17,7 @@ toc: true
 
 # ACR1252U — USB NFC Reader III（NFC Forum Certified）完整說明
 
-> **一句話定位**：ACR1252U 是 ACS 第二代 NFC 讀卡機家族中最受歡迎的成員，主打 **NFC Forum 認證** + **內建 SAM（Secure Access Module）安全插槽**。它能做 NFC 的 Reader/Writer、Card Emulation、Peer-to-Peer 三種模式，適合要上正式產品、需要密鑰分散與雙向認證的開發者。
+> **一句話定位**：ACR1252U 是 ACS 第二代 NFC 讀卡機家族中最受歡迎的成員，主打 **NFC Forum 認證** + **內建 SAM（Secure Access Module）安全插槽**。它能做 NFC 的 Reader/Writer、Card Emulation、Peer-to-Peer 三種模式，適合要上正式產品、需要金鑰分散與雙向認證的開發者。
 
 如果你在 ACR122U 與 ACR1252U 之間猶豫：ACR122U 是「便宜好玩的入門」，ACR1252U 是「要上線、要安全、要 NFC Forum 相容標章」的專業選擇。
 
@@ -25,14 +25,14 @@ toc: true
 
 - **主體**：98.0 × 65.0 × 12.8 mm，霧黑（Matte Black）塑膠外殼，81 g。
 - **天線**：內建 50 × 40 mm 天線，讀距最遠 50 mm。
-- **兩個 USB 版本**：USB Type-A（`ACR1252U-M1`）與 USB Type-C（`ACR1252U-MF`）——買之前確認你電腦的連接埠。
+- **兩個 USB 版本**：USB Type-A（`ACR1252U-M1`）與 USB Type-C（`ACR1252U-MF`）——買之前確認你電腦的連線埠。
 - **SAM 插槽**：主體一個標準 SIM 尺寸插槽，用來插 SAM 卡。
 - **可程式 LED + 蜂鳴器**：LED（紅/綠）與蜂鳴器都可由軟體控制。
 - **選配底座**：可選購立架，讓讀卡機站立成最佳感應角度。
 
 ## 規格總覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |------|------|
 | 認證 | **NFC Forum Certified**、IEC/EN 62368、CE、UKCA、FCC、VCCI、TELEC、KC、BIS、RoHS、REACH、WEEE、Microsoft WHQL |
 | 支援標準/卡片 | ISO/IEC 18092 NFC、ISO 14443 Type A & B（T=CL）、MIFARE®、FeliCa |
@@ -48,13 +48,13 @@ toc: true
 | 尺寸/重量 | 98.0 × 65.0 × 12.8 mm / 81 g |
 | USB Vendor/Product ID | `072F:223B` |
 | 系統支援 | Windows、Linux、macOS、Android |
-| 官方文件 | [ACR1252U 產品頁](https://www.acs.com.hk/en/products/178/acr1252u-usb-nfc-reader-iii/)、[技術規格 (PDF)](https://www.smartcardfocus.com/files/ACR1252U-DOT/TechnicalSpecification_TSP-ACR1252U-2.02_Mar2024.pdf) |
+| 官方檔案 | [ACR1252U 產品頁](https://www.acs.com.hk/en/products/178/acr1252u-usb-nfc-reader-iii/)、[技術規格 (PDF)](https://www.smartcardfocus.com/files/ACR1252U-DOT/TechnicalSpecification_TSP-ACR1252U-2.02_Mar2024.pdf) |
 
 ## 重點特色深入
 
 ### SAM 安全插槽（這顆的殺手級功能）
 
-SAM = Secure Access Module。把一張 SAM 卡插進 slot 後，讀卡機可以把**密鑰分散（Key Diversification）**與**雙向認證（Mutual Authentication）**這些敏感運算「外包」給實體 SAM 卡執行，密鑰永遠不離開硬體。這對金融、門禁、交通等需要高安全等級的應用至關重要——就算主機被入侵，讀卡機也拿不到真正的密鑰。
+SAM = Secure Access Module。把一張 SAM 卡插進 slot 後，讀卡機可以把**金鑰分散（Key Diversification）**與**雙向認證（Mutual Authentication）**這些敏感運算「外包」給實體 SAM 卡執行，金鑰永遠不離開硬體。這對金融、門禁、交通等需要高安全等級的應用至關重要——就算主機被入侵，讀卡機也拿不到真正的金鑰。
 
 ### 三種 NFC 模式
 
@@ -69,7 +69,7 @@ flowchart LR
 
 - **Reader/Writer**：最常用，讀寫 NFC 標籤與卡片。
 - **Card Emulation**：讓讀卡機「扮演」一張感應卡，供其他讀卡機/手機讀取（例如會員卡模擬、數位門禁）。
-- **Peer-to-Peer**：與另一台支援 P2P 的 NFC 裝置交換資料（例如與手機 Android Beam 對談）。
+- **Peer-to-Peer**：與另一臺支援 P2P 的 NFC 裝置交換資料（例如與手機 Android Beam 對談）。
 
 ## 安裝與驅動（Linux）
 
@@ -136,7 +136,7 @@ pcsc_scan
 
 **Step 2（可選）：用 Python 測試**
 
-macOS 對 Python 的 PC/SC 綁定較常見的是 `pyscard`（它底層走系統 PC/SC）：
+macOS 對 Python 的 PC/SC 繫結較常見的是 `pyscard`（它底層走系統 PC/SC）：
 
 ```bash
 python3 -m pip install pyscard
@@ -150,7 +150,7 @@ EOF
 
 ## Web NFC、macOS 與瀏覽器：真相與解法 {#web-nfc-macos-browser}
 
-很多人誤以為「買一台支援 Web NFC 的讀卡機，瀏覽器就能直接讀卡」。這裡必須把真相講清楚：
+很多人誤以為「買一臺支援 Web NFC 的讀卡機，瀏覽器就能直接讀卡」。這裡必須把真相講清楚：
 
 1. **Web NFC API（`NDEFReader`）只在 Chrome 的 Android 版可用**。macOS 桌面 Chrome/Safari/Firefox **都不支援**——這是 Web NFC 目前最主要、也最常被誤解的限制。
 2. **WebUSB 也行不通**：ACR1252U 的 USB 介面是 **Smart Card class（0x0B）**，而瀏覽器的 WebUSB 明確**禁止**存取受保護的 class（含 Smart Card）。所以 `navigator.usb.requestDevice()` 會回報 blocked。
@@ -174,7 +174,7 @@ sequenceDiagram
 在 macOS 上要「瀏覽器 + ACR1252U」，別找 Web NFC——架一支本機 PC/SC bridge 就對了。若你只想在手機瀏覽器讀卡，手機本身的 NFC 天線 + Web NFC（Android Chrome）即可，與讀卡機無關。
 :::
 
-## 快速開始：pyscard 讀 UID（跨平台）
+## 快速開始：pyscard 讀 UID（跨平臺）
 
 ```bash
 pip install pyscard
@@ -197,7 +197,7 @@ print(f"SW: {sw1:02X} {sw2:02X}")
 
 ## 相容性
 
-| 平台 | 支援 | 備註 |
+| 平臺 | 支援 | 備註 |
 |------|------|------|
 | Windows 10/11 | ✅ | 內建 Microsoft CCID/PC/SC 驅動，即插即用 |
 | Linux (Kali/Ubuntu) | ✅ | 走 PC/SC（pcscd）；**無 libnfc 直連** |

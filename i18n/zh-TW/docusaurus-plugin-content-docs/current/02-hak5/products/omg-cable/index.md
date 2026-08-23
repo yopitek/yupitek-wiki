@@ -18,7 +18,7 @@ toc: true
 
 > **一句話定位**：O.MG Cable 是一條「外觀正常、內部藏了一顆無線植入晶片」的 USB 充電/傳輸線——你以為只是條線，它卻能透過 Wi-Fi 被遠端操控，隨時注入鍵盤敲擊、執行 Payload，甚至自我銷毀。紅隊的終極社交工程武器。
 
-如果你在研討會上隨手拿起的充電線，其實是一台帶 Wi-Fi 無線電的電腦呢？這就是 O.MG Cable。在這種工具出現之前，這個等級的植入裝置（想想 NSA 的 COTTONMOUTH）要價數萬美金。O.MG 把它放進了一條量產、手工製作的 USB 線材裡。
+如果你在研討會上隨手拿起的充電線，其實是一臺帶 Wi-Fi 無線電的電腦呢？這就是 O.MG Cable。在這種工具出現之前，這個等級的植入裝置（想想 NSA 的 COTTONMOUTH）要價數萬美金。O.MG 把它放進了一條量產、手工製作的 USB 線材裡。
 
 這條線看起來、用起來都像一條普通的 USB 2.0 線 — 5V 充電、480 Mbps 資料 — 但內部藏著一顆植入晶片，在你透過 Wi-Fi 觸發它之前，它一直保持**休眠**（在資料線上隱形）。然後它部署 DuckyScript payload、注入按鍵，或轉向進入目標的網路，全部都能從瀏覽器控制。
 
@@ -28,7 +28,7 @@ toc: true
 
 ## 規格一覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | 外型 | 手工製作 USB 2.0 線材（標準 1 m；可訂製 2 m） |
 | 植入晶片 | 支援 WiFi 的無線 HID 晶片（內建 WebUI + 802.11 無線電） |
@@ -38,7 +38,7 @@ toc: true
 | 特色功能 | 自我銷毀、地理圍欄、WiFi 觸發、偽造 VID/PID/MAC |
 | Elite 額外功能 | 加密 C²、HIDX StealthLink、硬體鍵盤側錄器、延伸 WiFi 範圍 |
 | 資料穿透 | 休眠期間正常 USB 2.0 充電 + 資料 |
-| 官方文件 | https://docs.hak5.org/omg-cable |
+| 官方檔案 | https://docs.hak5.org/omg-cable |
 
 ## Basic vs Elite（硬體等級）
 
@@ -80,7 +80,7 @@ O.MG 裝置出廠時**停用**（法律要求）。你必須用 Programmer 啟�
 
 ### 步驟 1 — 用 O.MG Programmer 啟用
 1. 把 O.MG Cable 的 micro USB 端插進 [O.MG Programmer](/hak5/products/omg-programmer/)。
-2. 把 Programmer 插進一台執行 **Chrome 或 Edge**（WebSerial）的電腦。
+2. 把 Programmer 插進一臺執行 **Chrome 或 Edge**（WebSerial）的電腦。
 3. 開啟 WebFlasher（https://o.mg.lol/setup/），選擇型號，依照 3 步驟精靈操作。精靈可選擇先做一次鑑識備份。
 
 ### 步驟 2 — 連上線材的 WiFi
@@ -117,7 +117,7 @@ ENTER
 | WiFi 觸發 | 用單一 beacon 遠距離觸發 payload |
 | 加密 C²（Elite） | 加密控制通道；需要時可停用內建 WebUI |
 
-> **你可能會問：** *「有什麼東西能抓到這條線嗎？」* [Malicious Cable Detector](/hak5/products/malicious-cable-detector/) 的存在正是因為這些線材用肉眼或資料線嗅探都很難抓 — 它使用**側信道電力分析**來看到植入晶片。防禦存在，但它必須是有意為之。
+> **你可能會問：** *「有什麼東西能抓到這條線嗎？」* [Malicious Cable Detector](/hak5/products/malicious-cable-detector/) 的存在正是因為這些線材用肉眼或資料線嗅探都很難抓 — 它使用**側通道電力分析**來看到植入晶片。防禦存在，但它必須是有意為之。
 
 ---
 
@@ -125,7 +125,7 @@ ENTER
 
 | 能力 | 怎麼做 |
 |---|---|
-| 滑鼠注入 | 注入游標移動/點擊（Elite+） |
+| 滑鼠注入 | 注入遊標移動/點選（Elite+） |
 | 硬體鍵盤側錄器（Elite） | FullSpeed USB 鍵盤側錄器附加元件（附額外儲存） |
 | 加密網路 C² | 透過加密隧道從任何地方觸及線材，連到你的伺服器 |
 | HIDX StealthLink（Elite） | 雙向隧道：Target ↔ O.MG ↔ 控制機器 |

@@ -18,7 +18,7 @@ toc: true
 
 > **一句話定位**：O.MG Programmer 是啟用與維護所有 O.MG 裝置（Cable、Plug、Adapter、UnBlocker）的唯一入口——一支程式設計器就能完成啟用、免費韌體升級、自我銷毀救援，以及鑑識備份。
 
-每一台 O.MG 裝置基於法律原因出廠時**停用**。在它能做任何事之前，必須先啟用 — 這就是 **O.MG Programmer** 的用途。它是一個小型 USB 轉接器，插在你的電腦與任何 O.MG 裝置之間，搭配一個瀏覽器為基礎的 **WebFlasher** 工具。一支 Programmer 服務*整個* O.MG 產品線，所以你永遠不需要為每台裝置買硬體。
+每一臺 O.MG 裝置基於法律原因出廠時**停用**。在它能做任何事之前，必須先啟用 — 這就是 **O.MG Programmer** 的用途。它是一個小型 USB 轉接器，插在你的電腦與任何 O.MG 裝置之間，搭配一個瀏覽器為基礎的 **WebFlasher** 工具。一支 Programmer 服務*整個* O.MG 產品線，所以你永遠不需要為每臺裝置買硬體。
 
 除了首次啟用，它還是你的管理工具：韌體升級、意外自我銷毀後的復原，以及在把裝置交給別人之前做鑑識備份。
 
@@ -28,14 +28,14 @@ toc: true
 
 ## 規格一覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | 外型 | USB 轉接器（電腦 ↔ O.MG 裝置） |
 | 相容性 | O.MG Cable、O.MG Plug、O.MG Adapter、O.MG UnBlocker |
-| 介面 | USB-A 到你的電腦；承載所連接的 O.MG 裝置 |
+| 介面 | USB-A 到你的電腦；承載所連線的 O.MG 裝置 |
 | 控制工具 | WebSerial 瀏覽器中的 WebFlasher（Chrome / Edge）；Python flasher 替代方案 |
 | 操作 | 啟用、韌體升級、自我銷毀復原、鑑識備份/傾印、批次安裝 |
-| 官方文件 | https://o.mg.lol/setup/ |
+| 官方檔案 | https://o.mg.lol/setup/ |
 
 ## 它能做什麼
 
@@ -45,7 +45,7 @@ toc: true
 | **韌體升級** | 免費更新；Elite 裝置無需新硬體即可獲得未來能力 |
 | **自我銷毀復原** | 還原你遠端清除的裝置（例如意外觸發的地理圍欄） |
 | **鑑識傾印/備份** | 拉取任何相容 O.MG 裝置記憶體的映像 |
-| **批次安裝** | 一次刷寫多台裝置，用於大量部署 |
+| **批次安裝** | 一次刷寫多臺裝置，用於大量部署 |
 
 ---
 
@@ -65,8 +65,8 @@ flowchart TD
 
 ### 步驟 1 — 實體設定
 1. 把 O.MG 裝置插進 Programmer。
-2. 把 Programmer 插進一台執行 **Chrome 或 Edge** 的電腦（這些支援 WebSerial；Firefox/Safari 不支援）。
-3. **在精靈要求之前，保持 O.MG 裝置未插上 Programmer。** Bootloader 偵測預期的是乾淨的連接。
+2. 把 Programmer 插進一臺執行 **Chrome 或 Edge** 的電腦（這些支援 WebSerial；Firefox/Safari 不支援）。
+3. **在精靈要求之前，保持 O.MG 裝置未插上 Programmer。** Bootloader 偵測預期的是乾淨的連線。
 
 ### 步驟 2 — 開啟 WebFlasher
 瀏覽到 **https://o.mg.lol/setup/** 並選擇你的裝置型號（Cable、Plug、Adapter 或 UnBlocker）。
@@ -88,7 +88,7 @@ flowchart TD
 ### 步驟 4 — 驗證
 連上 O.MG 裝置的 WiFi，開啟它的 WebUI，確認韌體版本。它現在可以運作了。
 
-> **Python flasher 替代方案：** O.MG 韌體倉庫附帶一個 Python flasher，給沒有 WebSerial 瀏覽器的使用者。查 O.MG 韌體文件。
+> **Python flasher 替代方案：** O.MG 韌體倉庫附帶一個 Python flasher，給沒有 WebSerial 瀏覽器的使用者。查 O.MG 韌體檔案。
 
 ---
 
@@ -96,7 +96,7 @@ flowchart TD
 
 | 能力 | 怎麼做 |
 |---|---|
-| 自我銷毀復原 | 重新連接裝置 → WebFlasher → 重新刷寫以從清除中還原 |
+| 自我銷毀復原 | 重新連線裝置 → WebFlasher → 重新刷寫以從清除中還原 |
 | 鑑識取證 | 備份任何 O.MG 裝置；用傾印做惡意軟體/訓練分析 |
 | 大量佈建 | 為紅隊實驗室或訓練班批次刷寫一整批 O.MG 裝置 |
 | Beta 韌體存取 | Elite 擁有者安裝 Beta 韌體以取得即將推出的功能 |
@@ -109,11 +109,11 @@ flowchart TD
 
 | 症狀 | 原因 | 修正 |
 |---|---|---|
-| WebFlasher 顯示「No device found」 | 裝置沒接好，或瀏覽器錯誤 | 使用 Chrome/Edge；只在提示時連接裝置 |
+| WebFlasher 顯示「No device found」 | 裝置沒接好，或瀏覽器錯誤 | 使用 Chrome/Edge；只在提示時連線裝置 |
 | 瀏覽器選錯序列埠 | 多個 USB-序列裝置 | 斷開其他裝置；選擇精靈標示的序列埠 |
-| 啟用卡在「detecting」 | 裝置不在 bootloader 模式 | 重新開機；在提示時乾淨地重新連接 |
+| 啟用卡在「detecting」 | 裝置不在 bootloader 模式 | 重新開機；在提示時乾淨地重新連線 |
 | 裝置顯示舊版本 | 韌體步驟被跳過 | 重新執行 WebFlasher 並完成韌體步驟 |
-| Python flasher 錯誤 | 驅動程式 / 權限 | 以適當權限執行；OS 注意事項見 O.MG 韌體文件 |
+| Python flasher 錯誤 | 驅動程式 / 許可權 | 以適當許可權執行；OS 注意事項見 O.MG 韌體檔案 |
 
 ---
 

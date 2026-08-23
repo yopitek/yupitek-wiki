@@ -16,19 +16,19 @@ toc: true
 
 # WiFi Pineapple Enterprise — 完整指南
 
-> **一句話定位**：WiFi Pineapple Enterprise 是 Pineapple 家族的重型砲台 — 一台 1U 機架式主機、五組雙頻無線電、雙 Gigabit 網路埠，專門做長時間、大範圍的企業無線稽核。給進階研究生、實驗室、紅隊與需要 24/7 部署的人。
+> **一句話定位**：WiFi Pineapple Enterprise 是 Pineapple 家族的重型砲臺 — 一臺 1U 機架式主機、五組雙頻無線電、雙 Gigabit 網路埠，專門做長時間、大範圍的企業無線稽核。給進階研究生、實驗室、紅隊與需要 24/7 部署的人。
 
 Mark VII 教你 rogue-AP 的基礎。**Enterprise** 是當「每個工作一組無線電」不夠用時你會得到的東西：五組雙頻無線電（2.4 + 5 GHz）讓你能*同時*執行攻擊、監聽與服務角色，不用在介面之間切來切去。它是給嚴肅實驗室、校園資安課程，或需要一次稽核整個空域的紅隊行動用的 Pineapple。
 
-如果你是學生：你*不需要*一台來學習 — 一台 [Mark VII](/hak5/products/wifi-pineapple-mark-vii/) 就能教你同樣的 PineAP 概念。但如果你的實驗室需要模擬企業部署 — 包括 **WPA2-Enterprise** rogue AP — 就是這台。
+如果你是學生：你*不需要*一臺來學習 — 一臺 [Mark VII](/hak5/products/wifi-pineapple-mark-vii/) 就能教你同樣的 PineAP 概念。但如果你的實驗室需要模擬企業部署 — 包括 **WPA2-Enterprise** rogue AP — 就是這臺。
 
-> **⚠️ 僅限授權測試。** 一台 5 無線電 rogue AP 是極其強大的工具。只在你擁有、或已取得明確書面授權測試的網路上使用。
+> **⚠️ 僅限授權測試。** 一臺 5 無線電 rogue AP 是極其強大的工具。只在你擁有、或已取得明確書面授權測試的網路上使用。
 
 ---
 
 ## 規格一覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | SoC | 四核 ARM Cortex-A7 @ 717 MHz |
 | 無線電 | 5× 雙頻：2× Qualcomm IPQ4019（2.4/5 GHz）+ 3× MediaTek MT7612U（2.4/5 GHz） |
@@ -40,7 +40,7 @@ Mark VII 教你 rogue-AP 的基礎。**Enterprise** 是當「每個工作一組�
 | 電源 | AC 100–240 V（牆壁電源，無電池） |
 | 外型 | 160 × 244 × 41 mm（1U 機架式） |
 | 工作溫度 | −25 °C 至 +50 °C |
-| 官方文件 | https://docs.hak5.org/wifi-pineapple-enterprise |
+| 官方檔案 | https://docs.hak5.org/wifi-pineapple-enterprise |
 
 ## 構造
 
@@ -48,7 +48,7 @@ Mark VII 教你 rogue-AP 的基礎。**Enterprise** 是當「每個工作一組�
 |---|---|
 | 8× RP-SMA 天線埠 | 四組 2:2 MIMO 無線電對 |
 | 2× Gigabit RJ45 | WAN/uplink + 管理或額外 LAN 網段 |
-| USB-C 3.0 埠 | 乙太網路主控台/管理介面（ASIX 晶片組） |
+| USB-C 3.0 埠 | 乙太網路主控臺/管理介面（ASIX 晶片組） |
 | 4× RGB LED | 每組無線電與狀態回饋 |
 | AC 輸入 | 100–240 V 電源 |
 
@@ -91,7 +91,7 @@ flowchart LR
 ## 快速入門 — 首次部署
 
 ### 步驟 1 — 上架、裝天線、供電
-裝進 1U 槽位（或放在架子上），鎖上 8 支天線，接上 AC 電源。開機期間 LED 會循環。
+裝進 1U 槽位（或放在架子上），鎖上 8 支天線，接上 AC 電源。開機期間 LED 會迴圈。
 
 ### 步驟 2 — 管理存取
 兩個選項：
@@ -101,7 +101,7 @@ flowchart LR
 立刻設定你的 admin 密碼（Settings → Password）。
 
 ### 步驟 3 — Uplink
-把 Gigabit 埠 1 連到你實驗室的交換器/路由器以取得網際網路。在儀表板確認 uplink（Settings → Network）。
+把 Gigabit 埠 1 連到你實驗室的交換器/路由器以取得網際網路。在儀錶板確認 uplink（Settings → Network）。
 
 ### 步驟 4 — 驗證所有無線電
 在 **Settings** 中，確認全部 5 組無線電都出現且可指派角色。預期：無線電介面 `wlan0`–`wlan4` 都存在，每組都能進入監聽模式。
@@ -125,7 +125,7 @@ Enterprise 內建一個 **Enterprise（WPA-EAP）rogue AP** 分頁 — 模擬企
 1. 開啟 **Settings → Enterprise**。
 2. 填入 RADIUS/EAP 設定；UI 會**為你產生憑證**。
 3. 把 SSID 設為看起來像企業的名稱（僅限測試實驗室！）。
-4. 廣播。連上的用戶端會把憑證交給*你的* RADIUS 伺服器 — 在 loot 中收割，供離線分析。
+4. 廣播。連上的使用者端會把憑證交給*你的* RADIUS 伺服器 — 在 loot 中收割，供離線分析。
 
 ```mermaid
 %% name: hak5-product-wifi-pineapple-enterprise-eap-flow
@@ -149,8 +149,8 @@ sequenceDiagram
 |---|---|
 | 多目標任務 | 把 MT7612U 無線電指派到不同頻道組；同時攻擊 2.4 + 5 GHz 受害者 |
 | 長期部署 | AC 電源 + 4 GB eMMC + Gigabit uplink = 數天的擷取 |
-| Cloud C² 管理 | 遠端管理、loot 卸載與排程 payload（https://cloudc2.io） |
-| 大規模封包擷取 | 擷取到 eMMC/USB；卸載 `.pcap` 檔案供 Wireshark 分析 |
+| Cloud C² 管理 | 遠端管理、loot 解除安裝與排程 payload（https://cloudc2.io） |
+| 大規模封包擷取 | 擷取到 eMMC/USB；解除安裝 `.pcap` 檔案供 Wireshark 分析 |
 | 802.11p（車載） | 標準清單包含 `p` — 研究功能，不是主要使用情境 |
 | 透過 USB 加更多無線電 | 額外 MT7612U 轉接器插進 USB 3.0 host，獲得更多涵蓋 |
 
@@ -169,7 +169,7 @@ Enterprise 的 3 組 MT7612U 無線電是內建的，所以做 5 GHz 工作不�
 | 只看到 3 組無線電 | 天線鬆脫或無線電在設定中被停用 | 重新插好全部 8 支天線；檢查 Settings → Network 的無線電啟用狀態 |
 | 透過乙太網路 UI 連不上 | 筆電拿到 APIPA 位址 | 先用 Wi-Fi 管理 AP；然後修好 DHCP |
 | Enterprise 分頁缺失 | 韌體低於 Enterprise 發行版本 | 從 Web UI 更新韌體 |
-| 用戶端連上但 loot 中沒有憑證 | EAP 設定 / 憑證步驟被跳過 | 重新執行 Enterprise 分頁精靈；確認憑證已產生 |
+| 使用者端連上但 loot 中沒有憑證 | EAP 設定 / 憑證步驟被跳過 | 重新執行 Enterprise 分頁精靈；確認憑證已產生 |
 | 高溫警告 | 機架通風 | Enterprise 額定 −25 至 +50 °C，但在機架中需要氣流 |
 
 ---

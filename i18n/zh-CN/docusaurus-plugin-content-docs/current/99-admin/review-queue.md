@@ -1,4 +1,5 @@
 ---
+draft: true
 slug: review-queue
 id: admin-review-queue
 title: 审核队列
@@ -31,16 +32,16 @@ flowchart TD
 页面获批之前：
 
 - [ ] Frontmatter `id` 在整个 wiki 中唯一。
-- [ ] 结构与 [`模板`](/admin/templates/) 中对应的模板一致。
+- [ ] 结构与 `模板` 中对应的模板一致。
 - [ ] 设置/指南/故障排查页面至少包含一个图表。
 - [ ] 每条 ```bash 命令均已测试并展示预期输出。
 - [ ] 无 `TODO` / `TBD` 占位符。
 - [ ] 所有内部链接使用绝对路由路径。
 - [ ] `npm run build:en` 通过且零失效链接。
-- [ ] 翻译的语言版本在同一次更改中更新（参见 [`翻译术语表`](/admin/translation-glossary/)）。
+- [ ] 翻译的语言版本在同一次更改中更新（参见 `翻译术语表`）。
 
 ## 获批之后
 
 在 [`变更日志`](/admin/change-log/) 中记录该更改。
 
-如果更改新增或重命名了产品，请在同一次提交中更新 [`产品注册表`](/admin/product-registry/) 与 [`驱动注册表`](/admin/driver-registry/)。
+如果更改新增或重命名了产品，请在同一次提交中更新 `产品注册表` 与 `驱动注册表`。

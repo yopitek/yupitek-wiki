@@ -1,21 +1,21 @@
 ---
 slug: linux-setup-ubuntu
 id: alfa-linux-setup-ubuntu
-title: ALFA 無線網卡在 Ubuntu 上的完整設定指南
+title: ALFA 無線網絡卡在 Ubuntu 上的完整設定指南
 sidebar_position: 4
-description: 每款 ALFA Wi-Fi 無線網卡的逐步 Ubuntu 設定——內建於核心的晶片（MT7612U、MT7610U、MT7921AUN）隨插即用，Realtek 晶片（RTL8812AU、RTL8811AU、RTL8832BU）則需 DKMS 安裝。
+description: 每款 ALFA Wi-Fi 無線網絡卡的逐步 Ubuntu 設定——內建於核心的晶片（MT7612U、MT7610U、MT7921AUN）隨插即用，Realtek 晶片（RTL8812AU、RTL8811AU、RTL8832BU）則需 DKMS 安裝。
 tags: [alfa, ubuntu, dkms, 驅動程式, 設定]
 keywords: [ALFA Ubuntu, 安裝 RTL8812AU Ubuntu, MT7612U Ubuntu, DKMS Ubuntu, AWUS036ACM Ubuntu]
 ---
 
-# ALFA 無線網卡在 Ubuntu 上的完整設定指南
+# ALFA 無線網絡卡在 Ubuntu 上的完整設定指南
 
-> **學習目標（Learning goal）**：完成本指南後，你的 ALFA 無線網卡將能在 Ubuntu 中顯示（`iw dev`）、連上 Wi-Fi，並且——針對支援的晶片——可以切換到監聽模式（monitor mode）。
-> **適用對象**：初學者–中階 ｜ **前置需求**：Ubuntu 20.04+（Wi-Fi 6E 機型需 22.04+）、網路連線（安裝套件需要它！），以及你的 ALFA 無線網卡。
+> **學習目標（Learning goal）**：完成本指南後，你的 ALFA 無線網絡卡將能在 Ubuntu 中顯示（`iw dev`）、連上 Wi-Fi，並且——針對支援的晶片——可以切換到監聽模式（monitor mode）。
+> **適用物件**：初學者–中階 ｜ **前置需求**：Ubuntu 20.04+（Wi-Fi 6E 機型需 22.04+）、網路連線（安裝套件需要它！），以及你的 ALFA 無線網絡卡。
 
 ## 概念：兩種驅動程式
 
-在碰終端機之前，先了解*為什麼*不同無線網卡的設定會不同。這裡有兩個世界：
+在碰終端機之前，先了解*為什麼*不同無線網絡卡的設定會不同。這裡有兩個世界：
 
 1. **內建於核心的晶片（MediaTek）**——驅動程式已編譯進 Ubuntu。插上 → 即可使用。這涵蓋 **MT7612U**（AWUS036ACM）、**MT7610U**（AWUS036ACHM）與 **MT7921AUN**（AWUS036AXM / AWUS036AXML，需要 Ubuntu 22.04+ / 核心 5.18+）。
 2. **DKMS 晶片（Realtek）**——驅動程式不在核心內，所以你編譯一次，之後 **DKMS** 會在每次核心更新後自動重新建置。這涵蓋 **RTL8812AU**（AWUS036ACH）、**RTL8811AU**（AWUS036ACS）與 **RTL8832BU**（AWUS036AX / AWUS036AXER）。
@@ -37,12 +37,12 @@ flowchart TD
 
 - [ ] Ubuntu 20.04 或更新版本（用 `lsb_release -a` 確認）
 - [ ] 可用的網路（Wi-Fi 或乙太網路）以下載套件
-- [ ] 你的 ALFA 無線網卡與一條 USB-A 或 USB-C 傳輸線（AXML 使用 USB-C）
-- [ ] `sudo` 權限
+- [ ] 你的 ALFA 無線網絡卡與一條 USB-A 或 USB-C 傳輸線（AXML 使用 USB-C）
+- [ ] `sudo` 許可權
 
 ## 步驟 1：確認你的晶片
 
-插上無線網卡，然後問 Ubuntu 它看到了什麼：
+插上無線網絡卡，然後問 Ubuntu 它看到了什麼：
 
 ```bash
 lsusb
@@ -61,7 +61,7 @@ Bus 001 Device 005: ID 0bda:8812 Realtek Semiconductor Corp. RTL8812AU 802.11a/b
 
 ## 步驟 2：內建於核心的路徑（MediaTek——隨插即用）
 
-如果你的無線網卡使用 MediaTek 晶片，什麼都不用安裝。驗證：
+如果你的無線網絡卡使用 MediaTek 晶片，什麼都不用安裝。驗證：
 
 ```bash
 iw dev
@@ -143,15 +143,15 @@ sudo make dkms_install
 
 ### 3.5 重新插上並檢查
 
-拔下再重新插上無線網卡（或執行 `sudo modprobe <module>`），然後驗證：
+拔下再重新插上無線網絡卡（或執行 `sudo modprobe <module>`），然後驗證：
 
 ```bash
 iw dev
 ```
 
-**預期輸出**：出現一行 `Interface wlan1`（如果它是你唯一的無線網卡則為 `wlan0`）。
+**預期輸出**：出現一行 `Interface wlan1`（如果它是你唯一的無線網絡卡則為 `wlan0`）。
 
-> **你可能會想問**——*「哪個模組名稱對應我的無線網卡？」* 對照你的晶片：`8812au` → AWUS036ACH、`8811au` → AWUS036ACS、`88x2bu` → AWUS036AX / AXER。[驅動程式頁面](/alfa-network/drivers/rtl8812au/) 有更深入的各晶片細節。
+> **你可能會想問**——*「哪個模組名稱對應我的無線網絡卡？」* 對照你的晶片：`8812au` → AWUS036ACH、`8811au` → AWUS036ACS、`88x2bu` → AWUS036AX / AXER。[驅動程式頁面](/alfa-network/drivers/rtl8812au/) 有更深入的各晶片細節。
 
 ## 步驟 4：驗證一切
 
@@ -174,11 +174,11 @@ phy#1
 		type managed
 ```
 
-三個指令都有輸出 = 你的 ALFA 無線網卡已完全正常運作。
+三個指令都有輸出 = 你的 ALFA 無線網絡卡已完全正常運作。
 
 ## 進階：監聽模式（支援的晶片）
 
-監聽模式（monitor mode）讓無線網卡擷取某個頻道上的所有封包，而不只是自己的連線。在內建於核心的晶片上，這是兩個指令的工作：
+監聽模式（monitor mode）讓無線網絡卡擷取某個頻道上的所有封包，而不只是自己的連線。在內建於核心的晶片上，這是兩個指令的工作：
 
 ```bash
 sudo ip link set wlan1 down
@@ -189,17 +189,17 @@ iw dev
 
 **預期輸出**：`type monitor` 取代 `type managed`。
 
-> ⚠️ **重要**：`type managed`（預設值）表示驅動程式會過濾掉所有不是發送給你的流量。`type monitor` 會停用該過濾器——突然之間會有大量流量變得可見。只能在你自己擁有或已明確授權測試的網路上執行。完整的封包注入工作流程請見 [Kali 指南](/alfa-network/linux-setup-kali/)。
+> ⚠️ **重要**：`type managed`（預設值）表示驅動程式會過濾掉所有不是傳送給你的流量。`type monitor` 會停用該過濾器——突然之間會有大量流量變得可見。只能在你自己擁有或已明確授權測試的網路上執行。完整的封包注入工作流程請見 [Kali 指南](/alfa-network/linux-setup-kali/)。
 
 ## 常見錯誤（FAQ）
 
 | 錯誤 / 症狀 | 原因 | 修復 |
 |---|---|---|
-| `lsusb` 顯示無線網卡但沒有 `wlanX` 介面 | DKMS 模組未載入（Realtek） | `sudo modprobe 8812au`（對應你的晶片），然後檢查 `dmesg \| tail` |
+| `lsusb` 顯示無線網絡卡但沒有 `wlanX` 介面 | DKMS 模組未載入（Realtek） | `sudo modprobe 8812au`（對應你的晶片），然後檢查 `dmesg \| tail` |
 | `make dkms_install` 失敗並顯示 "Kernel preparation unnecessary" | 缺少核心標頭檔 | `sudo apt install linux-headers-$(uname -r)` 後重試 |
-| `apt upgrade` 後無線網卡消失 | 核心更新，DKMS 重建靜默失敗 | `sudo dkms autoinstall` 然後重新開機 |
+| `apt upgrade` 後無線網絡卡消失 | 核心更新，DKMS 重建靜默失敗 | `sudo dkms autoinstall` 然後重新開機 |
 | 重新開機後 `iw dev` 什麼都沒有（Realtek） | 模組不在自動載入清單中 | `echo 8812au \| sudo tee /etc/modules-load.d/alfa.conf` |
-| Wi-Fi 6E 無線網卡（AXML）在 20.04 上偵測不到 | 核心對 `mt7921u` 來說太舊 | 升級到 Ubuntu 22.04+（核心 5.18+） |
+| Wi-Fi 6E 無線網絡卡（AXML）在 20.04 上偵測不到 | 核心對 `mt7921u` 來說太舊 | 升級到 Ubuntu 22.04+（核心 5.18+） |
 
 ## 參考資料
 

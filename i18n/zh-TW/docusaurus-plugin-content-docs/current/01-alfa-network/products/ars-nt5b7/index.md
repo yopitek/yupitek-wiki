@@ -13,9 +13,9 @@ keywords: [ARS-NT5B7, WiFi 7 天線, 三頻偶極, 工業天線, -40 85C 天線]
 
 ## 規格總覽 (Spec overview)
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
-| 類型 | 偶極天線（近似全向） |
+| 型別 | 偶極天線（近似全向） |
 | 頻段 | 2.4 / 5 / **6 GHz（Wi-Fi 6E/7）** |
 | 增益 | 最高 7 dBi（6 GHz 上最佳） |
 | 工作溫度 | **-40 °C 至 +85 °C**（工業） |
@@ -25,7 +25,7 @@ keywords: [ARS-NT5B7, WiFi 7 天線, 三頻偶極, 工業天線, -40 85C 天線]
 
 ## 總覽
 
-大多數 ALFA 天線是消費級。ARS-NT5B7 是為**嚴苛環境**打造的例外：它是一支深入 **6 GHz** 頻段的三頻偶極天線（所以 WiFi 6E 與即將到來的 **WiFi 7** 設備都能用它），額定從 **-40 °C** 冷凍庫到 **+85 °C** 機櫃都能持續運作。如果你的專案涉及機器人、戶外閘道器，或任何活在恆溫實驗室之外的東西，這就是你要選用的天線。
+大多數 ALFA 天線是消費級。ARS-NT5B7 是為**嚴苛環境**打造的例外：它是一支深入 **6 GHz** 頻段的三頻偶極天線（所以 WiFi 6E 與即將到來的 **WiFi 7** 裝置都能用它），額定從 **-40 °C** 冷凍庫到 **+85 °C** 機櫃都能持續運作。如果你的專案涉及機器人、戶外閘道器，或任何活在恆溫實驗室之外的東西，這就是你要選用的天線。
 
 **6 GHz 上的 7 dBi 數字**是重點：如果天線很弱，6 GHz 頻段會抵消它的範圍優勢，而這支偶極天線在頂端並不弱。
 
@@ -53,7 +53,7 @@ WiFi 7（802.11be）透過 MLO（multi-link operation，多連結運作）同時
 
 ### 步驟 1：對上接頭
 
-ARS-NT5B7 以接頭變體出貨（板載模組通常是 IPEX/U.FL，外接無線電連接埠是 RP-SMA）。先對上你的無線電——不要硬塞不符的接頭。
+ARS-NT5B7 以接頭變體出貨（板載模組通常是 IPEX/U.FL，外接無線電連線埠是 RP-SMA）。先對上你的無線電——不要硬塞不符的接頭。
 
 ### 步驟 2：留淨空安裝
 
@@ -67,7 +67,7 @@ iw dev wlan0 link
 iw dev wlan0 info | grep channel
 ```
 
-**預期輸出**：連結啟動並有訊號數值；在 6E/7 設備上頻道那一行顯示 **6 GHz 頻率**（例如 `channel 37 (6115 MHz)`）。檢查你的閘道器使用的每個頻段上的訊號——三個都應該維持合理數字。
+**預期輸出**：連結啟動並有訊號數值；在 6E/7 裝置上頻道那一行顯示 **6 GHz 頻率**（例如 `channel 37 (6115 MHz)`）。檢查你的閘道器使用的每個頻段上的訊號——三個都應該維持合理數字。
 
 ## 進階使用
 
@@ -80,7 +80,7 @@ iw dev wlan0 info | grep channel
 | 搭配 | 結果 |
 |---|---|
 | 板載 WLAN 模組（IPEX 變體） | ✅ 直接安裝 |
-| 配 RP-SMA 連接埠的 ALFA 無線網卡（RP-SMA 變體） | ✅ 鎖上 |
+| 配 RP-SMA 連線埠的 ALFA 無線網絡卡（RP-SMA 變體） | ✅ 鎖上 |
 | 6 GHz / WiFi 6E / WiFi 7 無線電 | ✅ 完整三頻 |
 | 熱/冷/工廠環境 | ✅ 額定 -40 至 +85 °C |
 | 聚焦的長距離連結 | ⚠️ 這裡[面板](/alfa-network/products/apa-m25-6e/)勝過偶極天線 |
@@ -98,5 +98,5 @@ iw dev wlan0 info | grep channel
 
 - [APA-M25-6E](/alfa-network/products/apa-m25-6e/)——三頻指向性面板
 - [ARS-25-57A](/alfa-network/products/ars-25-57a/)——可攜式雙頻槳形天線
-- [AWUS036AXML 產品頁面](/alfa-network/products/awus036axml/)——6 GHz USB 無線網卡
+- [AWUS036AXML 產品頁面](/alfa-network/products/awus036axml/)——6 GHz USB 無線網絡卡
 - [Unitree 指南](/alfa-network/hardware/unitree/) / [Jetson 指南](/alfa-network/hardware/jetson/)——工業/機器人主機

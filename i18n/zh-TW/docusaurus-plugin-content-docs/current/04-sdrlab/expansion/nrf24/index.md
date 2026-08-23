@@ -2,7 +2,7 @@
 id: sdrlab-expansion-nrf24
 title: Flipper Zero NRF24 模組 — 完整指南
 sidebar_position: 2
-description: Flipper Zero NRF24 模組（nRF24L01+ 2.4 GHz）— 規格、頻道掃描、嗅探、在自己的設備上做 MouseJack 測試、GPIO 設定與疑難排解。
+description: Flipper Zero NRF24 模組（nRF24L01+ 2.4 GHz）— 規格、頻道掃描、嗅探、在自己的裝置上做 MouseJack 測試、GPIO 設定與疑難排解。
 tags: [sdrlab, flipper-zero, nrf24, nrf24l01, 2.4ghz, mousejack]
 keywords: [Flipper Zero NRF24, nRF24L01+, 2.4 GHz sniffer, MouseJack, channel scanner]
 authors: yupitek
@@ -20,7 +20,7 @@ toc: true
 
 ## 規格一覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | 無線電晶片 | Nordic nRF24L01+（2.4 GHz ISM 頻段） |
 | 頻率範圍 | 2.400 – 2.525 GHz（126 個頻道，間距 1 MHz） |
@@ -45,9 +45,9 @@ flowchart LR
 
 - **頻道掃描器**：126 個頻道中有哪些在忙碌——有助於找出裝置在哪裡跳頻。
 - **嗅探器**：觀察實驗室中 2.4 GHz 裝置（無線滑鼠、鍵盤、無人機、遊戲手把）的封包突發訊號。
-- **MouseJack 測試**：知名的 nRF24「MouseJack」技術鎖定*未加密*的無線鍵盤／滑鼠。請嚴格只用在自己擁有的設備上，用來示範為什麼未加密的輸入裝置有風險。
+- **MouseJack 測試**：知名的 nRF24「MouseJack」技術鎖定*未加密*的無線鍵盤／滑鼠。請嚴格只用在自己擁有的裝置上，用來示範為什麼未加密的輸入裝置有風險。
 
-> **法律與道德注意事項**：在非你所有的裝置上嗅探與注入封包，在大多數司法管轄區是違法的。這個模組是安全教育工具——測試你自己的設備，或你獲得書面許可測試的設備。
+> **法律與道德注意事項**：在非你所有的裝置上嗅探與注入封包，在大多數司法管轄區是違法的。這個模組是安全教育工具——測試你自己的裝置，或你獲得書面許可測試的裝置。
 
 ## 設定
 

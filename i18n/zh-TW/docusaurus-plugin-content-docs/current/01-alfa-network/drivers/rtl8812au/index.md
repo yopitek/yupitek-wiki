@@ -9,7 +9,7 @@ keywords: [RTL8812AU 驅動程式, AWUS036ACH, rtl8812au-dkms, airmon-ng, 封包
 
 # RTL8812AU 驅動程式指南（AWUS036ACH）
 
-> **一句話定位（One-liner）**：**Realtek RTL8812AU** 是 **AWUS036ACH** 內部傳奇的 2×2 雙頻晶片——你曾看過的每個 Kali 教學影片裡的那支無線網卡。它**不在 Linux 核心內**，所以你用 DKMS 建置一次 `rtl8812au` 驅動程式，它就能撐過每次核心更新。
+> **一句話定位（One-liner）**：**Realtek RTL8812AU** 是 **AWUS036ACH** 內部傳奇的 2×2 雙頻晶片——你曾看過的每個 Kali 教學影片裡的那支無線網絡卡。它**不在 Linux 核心內**，所以你用 DKMS 建置一次 `rtl8812au` 驅動程式，它就能撐過每次核心更新。
 
 ## 概念：最有名的 Wi-Fi 駭客晶片
 
@@ -31,12 +31,12 @@ flowchart TD
 
 - [ ] 任何近期 Linux（Ubuntu 20.04+ / Kali / Debian）
 - [ ] 建置工具 + 網路：`sudo apt install -y build-essential dkms git`
-- [ ] `sudo` 權限
+- [ ] `sudo` 許可權
 - [ ] AWUS036ACH
 
 ## 步驟 1：移除（沒用的）核心 stub
 
-某些發行版附帶一個會搶走無線網卡並拒絕監聽模式的 Realtek stub 驅動程式。先卸載它：
+某些發行版附帶一個會搶走無線網絡卡並拒絕監聽模式的 Realtek stub 驅動程式。先解除安裝它：
 
 ```bash
 sudo modprobe -r rtl8812au 2>/dev/null
@@ -125,9 +125,9 @@ sudo systemctl restart NetworkManager
 |---|---|---|
 | `make dkms_install` 失敗並顯示 "No rule to make target" | repo 快照比你的新核心舊 | 再次 `sudo git pull && sudo make dkms_install` |
 | 建置失敗：缺少標頭檔 | 標頭檔未安裝 | `sudo apt install linux-headers-$(uname -r)` |
-| 無線網卡只在 managed 模式 | 核心 stub 先搶走了它 | 把 `rtl8812au` 加入黑名單（步驟 3）並重新開機 |
+| 無線網絡卡只在 managed 模式 | 核心 stub 先搶走了它 | 把 `rtl8812au` 加入黑名單（步驟 3）並重新開機 |
 | 注入 `0/30` | 沒有 AP 的頻道 / 驅動程式怪癖 | `sudo iw wlan0mon set channel 6`；`git pull` 驅動程式；重測 |
-| 重新開機後無線網卡消失 | 模組未自動載入 | `echo 8812au \| sudo tee /etc/modules-load.d/alfa.conf` |
+| 重新開機後無線網絡卡消失 | 模組未自動載入 | `echo 8812au \| sudo tee /etc/modules-load.d/alfa.conf` |
 | 升級後 `dkms status` 顯示 Error | 重建靜默失敗 | `sudo dkms autoinstall` |
 
 ## 參考資料

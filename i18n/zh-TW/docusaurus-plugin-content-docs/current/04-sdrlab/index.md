@@ -15,7 +15,7 @@ toc: true
 
 # SDRLAB
 
-歡迎來到本 wiki 的 **SDRLAB** 專區。本區涵蓋我們所販售的 SDR（軟體無線電）硬體——從掀起無數業餘專案的傳奇小 RTL-SDR 接收棒，到足以放進大學實驗室的專業雙通道收發器，再加上一台可塞進外套口袋、以 HackRF 驅動的手持式無線電。我們也記錄了能將 Flipper 變成口袋型無線實驗室的 **Flipper Zero 擴充模組**。
+歡迎來到本 wiki 的 **SDRLAB** 專區。本區涵蓋我們所販售的 SDR（軟體無線電）硬體——從掀起無數業餘專案的傳奇小 RTL-SDR 接收棒，到足以放進大學實驗室的專業雙通道收發器，再加上一臺可塞進外套口袋、以 HackRF 驅動的手持式無線電。我們也記錄了能將 Flipper 變成口袋型無線實驗室的 **Flipper Zero 擴充模組**。
 
 > **SDR 到底是什麼？** *軟體無線電*以寬頻數位化器取代傳統類比無線電電路（混頻器、濾波器、解調器）：硬體擷取一段無線電頻譜，再由電腦——或 FPGA——以軟體進行「無線電運算」。想聽不同的模式或頻率？換軟體就好，不用換硬體。
 
@@ -66,10 +66,10 @@ flowchart TD
 - [SDR 軟體](/sdrlab/sdr-software/) — GQRX、SDR#、SDR++、SDR Console、HDSDR 與命令列工具，以及該如何依工作需求挑選。
 - [韌體與驅動程式](/sdrlab/firmware/) — 如何讓硬體的驅動程式與韌體保持最新。
 - [疑難排解](/sdrlab/troubleshooting/) — 提供決策樹與症狀表格的問題解決中心。
-- [ALFA Linux 指南](/sdrlab/shared/alfa-linux-guide/) — 針對 Ubuntu 與 Kali 的 ALFA 網卡驅動程式（當你把 ALFA 網卡與 SDR 設備搭配使用時很有用）。
+- [ALFA Linux 指南](/sdrlab/shared/alfa-linux-guide/) — 針對 Ubuntu 與 Kali 的 ALFA 網絡卡驅動程式（當你把 ALFA 網絡卡與 SDR 裝置搭配使用時很有用）。
 
 ## 相關章節
 
 - [Flipper Zero](/flipper-zero/) — 我們大多數擴充模組所插接的基礎裝置。
-- [ALFA Network](/alfa-network/) — 高增益 Wi-Fi 網卡與天線，常與 SDR 搭配進行無線協定分析。
+- [ALFA Network](/alfa-network/) — 高增益 Wi-Fi 網絡卡與天線，常與 SDR 搭配進行無線協定分析。
 - [快速入門](/getting-started/) — 如果你是第一次造訪本 wiki，請從這裡開始。

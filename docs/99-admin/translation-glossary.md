@@ -1,4 +1,5 @@
 ---
+draft: true
 slug: translation-glossary
 id: admin-translation-glossary
 title: Translation Glossary
@@ -36,4 +37,4 @@ This glossary defines the canonical English / Simplified Chinese (zh-CN) / Tradi
 ## Related
 
 - [`Getting Started`](/getting-started/) — user-facing overview.
-- [`Product Registry`](/admin/product-registry/) — canonical product names.
+- `Product Registry` — canonical product names.

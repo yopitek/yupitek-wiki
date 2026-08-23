@@ -2,18 +2,18 @@
 id: alfa-product-awus036acm
 title: ALFA AWUS036ACM——經典全能款（MT7612U）
 sidebar_position: 8
-description: ALFA AWUS036ACM——經典 MT7612U AC1200 雙頻無線網卡，內建於核心的驅動程式、高功率與極佳的監聽模式。推薦的初學者 Kali 無線網卡。
-tags: [alfa, 無線網卡, mt7612u, ac1200, kali, 監聽模式]
-keywords: [AWUS036ACM, MT7612U, 推薦 Kali 無線網卡, AC1200 USB 無線網卡]
+description: ALFA AWUS036ACM——經典 MT7612U AC1200 雙頻無線網絡卡，內建於核心的驅動程式、高功率與極佳的監聽模式。推薦的初學者 Kali 無線網絡卡。
+tags: [alfa, 無線網絡卡, mt7612u, ac1200, kali, 監聽模式]
+keywords: [AWUS036ACM, MT7612U, 推薦 Kali 無線網絡卡, AC1200 USB 無線網絡卡]
 ---
 
 # ALFA AWUS036ACM——經典全能款（MT7612U）
 
-> **一句話定位（One-liner）**：**AWUS036ACM** 是社群的預設推薦：一支**高功率 MT7612U AC1200** 雙頻無線網卡，驅動程式**內建於 Linux 核心**。沒有 DKMS、沒有編譯——在 Kali 或 Ubuntu 上插上，監聽模式（monitor mode）就是能用。它是「我該買哪支 ALFA？」的無聊答案，而無聊代表可靠。
+> **一句話定位（One-liner）**：**AWUS036ACM** 是社群的預設推薦：一支**高功率 MT7612U AC1200** 雙頻無線網絡卡，驅動程式**內建於 Linux 核心**。沒有 DKMS、沒有編譯——在 Kali 或 Ubuntu 上插上，監聽模式（monitor mode）就是能用。它是「我該買哪支 ALFA？」的無聊答案，而無聊代表可靠。
 
 ## 規格總覽 (Spec overview)
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | 晶片 | MediaTek MT7612U |
 | Wi-Fi 等級 | AC1200（300 + 867 Mbps） |
@@ -33,7 +33,7 @@ AWUS036ACM 把 [AWUS036ACH](/alfa-network/products/awus036ach/) 出名的一切�
 - 沒有 DKMS → 核心更新時沒有東西會壞。
 - 監聽模式 + 注入 → 透過原廠 `mac80211` 工具運作。
 
-這個組合就是為什麼它是「我是學生、我想要一支無線網卡上資安課、我不想跟作業系統搏鬥」的答案——也是為什麼這本 wiki 在 [Ubuntu](/alfa-network/linux-setup-ubuntu/) 與 [Kali](/alfa-network/linux-setup-kali/) 指南中把它當成參考無線網卡。
+這個組合就是為什麼它是「我是學生、我想要一支無線網絡卡上資安課、我不想跟作業系統搏鬥」的答案——也是為什麼這本 wiki 在 [Ubuntu](/alfa-network/linux-setup-ubuntu/) 與 [Kali](/alfa-network/linux-setup-kali/) 指南中把它當成參考無線網絡卡。
 
 ## 安裝與驅動程式
 
@@ -55,7 +55,7 @@ phy#0
 		type managed
 ```
 
-（`00:c0:ca` 前綴是 ALFA 的 MAC OUI——一個方便的實驗室識別技巧。）
+（`00:c0:ca` 字首是 ALFA 的 MAC OUI——一個方便的實驗室識別技巧。）
 
 ```mermaid
 flowchart LR
@@ -78,19 +78,19 @@ sudo aireplay-ng --test wlan0mon
 
 ### 天線升級
 
-兩個 RP-SMA 連接埠代表你可以用[面板](/alfa-network/products/apa-m25/)做聚焦的長距離連結，或用雙高增益偶極天線做全向涵蓋——而且 2×2 無線電真的會用到兩個串流。
+兩個 RP-SMA 連線埠代表你可以用[面板](/alfa-network/products/apa-m25/)做聚焦的長距離連結，或用雙高增益偶極天線做全向涵蓋——而且 2×2 無線電真的會用到兩個串流。
 
-### Wireshark 擷取設備
+### Wireshark 擷取裝置
 
 搭配 [Raspberry Pi 指南](/alfa-network/hardware/raspberry-pi/) 建立無頭、常開的擷取站。
 
 ## 相容性
 
-| 平台 | 支援 | 注意事項 |
+| 平臺 | 支援 | 注意事項 |
 |---|---|---|
 | Kali Linux | ✅ | 內建於核心，零設定 |
 | Ubuntu | ✅ | 20.04+ 隨插即用 |
-| NetHunter / Android | ✅ | 標準的 NetHunter 無線網卡 |
+| NetHunter / Android | ✅ | 標準的 NetHunter 無線網絡卡 |
 | Windows | ✅ | 官方驅動程式 |
 | Raspberry Pi / Jetson | ✅ | 內建於核心，穩固的 AP + 監聽支援 |
 
@@ -98,7 +98,7 @@ sudo aireplay-ng --test wlan0mon
 
 | 症狀 | 原因 | 修復 |
 |---|---|---|
-| 不在 `lsusb` 中 | 電源 / 傳輸線 | 不同的連接埠 / 供電 hub——[疑難排解](/alfa-network/troubleshooting/) |
+| 不在 `lsusb` 中 | 電源 / 傳輸線 | 不同的連線埠 / 供電 hub——[疑難排解](/alfa-network/troubleshooting/) |
 | 沒有介面 | 驅動程式未載入（罕見） | `sudo modprobe mt76x2u`；檢查 `dmesg \| grep mt76` |
 | 注入 0/30 | 空頻道 / 無 RF 區域 | `sudo iw wlan0mon set channel 6`；在 AP 附近測試 |
 | 暫停/恢復時 WLAN 失效 | 已知的筆電 USB 怪癖 | 恢復後拔下/重新插上 |
@@ -109,5 +109,5 @@ sudo aireplay-ng --test wlan0mon
 - [Kali 設定指南](/alfa-network/linux-setup-kali/)
 - [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/)
 - [NetHunter 設定指南](/alfa-network/linux-setup-nethunter/)
-- [AWUS036AXM](/alfa-network/products/awus036axm/)——Wi-Fi 6 + 藍牙升級款
-- [無線網卡比較](/alfa-network/wifi-adapter-comparison/)
+- [AWUS036AXM](/alfa-network/products/awus036axm/)——Wi-Fi 6 + 藍芽升級款
+- [無線網絡卡比較](/alfa-network/wifi-adapter-comparison/)

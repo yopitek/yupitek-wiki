@@ -2,18 +2,18 @@
 id: alfa-product-awus036achm
 title: ALFA AWUS036ACHM——平價雙頻 AC433
 sidebar_position: 7
-description: ALFA AWUS036ACHM——平價 RTL8811AU？不——是 MT7610U AC433 雙頻無線網卡，內建於核心的驅動程式與穩固的監聽模式。絕佳的平價 Kali 入門款。
-tags: [alfa, 無線網卡, mt7610u, ac433, 平價]
-keywords: [AWUS036ACHM, MT7610U, 平價無線網卡, AC433 Kali]
+description: ALFA AWUS036ACHM——平價 RTL8811AU？不——是 MT7610U AC433 雙頻無線網絡卡，內建於核心的驅動程式與穩固的監聽模式。絕佳的平價 Kali 入門款。
+tags: [alfa, 無線網絡卡, mt7610u, ac433, 平價]
+keywords: [AWUS036ACHM, MT7610U, 平價無線網絡卡, AC433 Kali]
 ---
 
 # ALFA AWUS036ACHM——平價雙頻 AC433
 
-> **一句話定位（One-liner）**：**AWUS036ACHM** 是平價雙頻 ALFA——一支 **MT7610U AC433** 無線網卡，配兩支 5 dBi 天線，而且關鍵的是**內建於核心的驅動程式**（自 Linux 4.19 起的 `mt76x0u`）。它是進入 Linux 雙頻監聽模式（monitor mode）最便宜的方式，沒有之一。
+> **一句話定位（One-liner）**：**AWUS036ACHM** 是平價雙頻 ALFA——一支 **MT7610U AC433** 無線網絡卡，配兩支 5 dBi 天線，而且關鍵的是**內建於核心的驅動程式**（自 Linux 4.19 起的 `mt76x0u`）。它是進入 Linux 雙頻監聽模式（monitor mode）最便宜的方式，沒有之一。
 
 ## 規格總覽 (Spec overview)
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | 晶片 | MediaTek MT7610U |
 | Wi-Fi 等級 | AC433（150 + 433 Mbps） |
@@ -73,11 +73,11 @@ sudo aireplay-ng --test wlan0mon
 
 ### 天線升級
 
-如果你覺得原廠偶極天線不夠用，RP-SMA 連接埠接受 [ALFA 天線](/alfa-network/products/apa-m25/)——但要注意 1×1 無線電無法用兩支天線做 MIMO，所以要增加範圍請用單支高增益天線。
+如果你覺得原廠偶極天線不夠用，RP-SMA 連線埠接受 [ALFA 天線](/alfa-network/products/apa-m25/)——但要注意 1×1 無線電無法用兩支天線做 MIMO，所以要增加範圍請用單支高增益天線。
 
 ## 相容性
 
-| 平台 | 支援 | 注意事項 |
+| 平臺 | 支援 | 注意事項 |
 |---|---|---|
 | Kali Linux | ✅ | 內建於核心的 `mt76x0u` |
 | Ubuntu | ✅ | 20.04+ 隨插即用 |
@@ -89,7 +89,7 @@ sudo aireplay-ng --test wlan0mon
 
 | 症狀 | 原因 | 修復 |
 |---|---|---|
-| 不在 `lsusb` 中 | 電源 / 傳輸線 | 不同的連接埠 / 供電 hub——[疑難排解](/alfa-network/troubleshooting/) |
+| 不在 `lsusb` 中 | 電源 / 傳輸線 | 不同的連線埠 / 供電 hub——[疑難排解](/alfa-network/troubleshooting/) |
 | 沒有介面 | 驅動程式未載入（罕見） | `sudo modprobe mt76x0u` |
 | 吞吐量約為 ACM 的一半 | 1×1 硬體限制 | 不是 bug——AC433 等級 |
 | 注入失敗 | 空頻道 | `sudo iw wlan0mon set channel 6` |
@@ -99,4 +99,4 @@ sudo aireplay-ng --test wlan0mon
 - [MT7610U 驅動程式頁面](/alfa-network/drivers/mt7610u/)
 - [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/) 與 [Kali 設定指南](/alfa-network/linux-setup-kali/)
 - [AWUS036ACM](/alfa-network/products/awus036acm/)——更快的兄弟
-- [無線網卡比較](/alfa-network/wifi-adapter-comparison/)
+- [無線網絡卡比較](/alfa-network/wifi-adapter-comparison/)

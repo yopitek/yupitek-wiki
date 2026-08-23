@@ -2,7 +2,7 @@
 id: hak5-product-bash-bunny-mark-ii
 title: Bash Bunny Mark II
 sidebar_position: 5
-description: 多向量 USB 攻擊平台 — 同時模擬鍵盤、乙太網路、序列埠與儲存裝置；在 payload 之間切換、外洩資料。
+description: 多向量 USB 攻擊平臺 — 同時模擬鍵盤、乙太網路、序列埠與儲存裝置；在 payload 之間切換、外洩資料。
 tags: [hak5, bash-bunny, usb-attack, multi-vector, duckyscript, payloads]
 keywords: [Bash Bunny Mark II, 多向量 USB 攻擊, 開關位置, arming 模式, payload, 資料外洩, Debian Linux]
 authors: yupitek
@@ -18,7 +18,7 @@ toc: true
 
 > **一句話定位**：Bash Bunny Mark II 是 USB Rubber Ducky 的「全家桶」——同一支 USB 插進去，它同時可以是鍵盤、網路卡、序列埠和隨身碟，還能跑完整 Linux 工具。一顆四核 ARM 心臟配上 8GB 桌面級 SSD，插上後 7 秒完成滲透。
 
-如果 USB Rubber Ducky 是專才，那 Bash Bunny 就是**插進 USB 的瑞士刀**。它同時模擬*多種*受信任的裝置類型 — 這很重要，因為一台永遠不會讓可疑「鍵盤」靠近網路的機器，會樂意把 DHCP 租約交給一個「USB 乙太網路轉接器」，並把 root shell 交給一個「序列主控台」。
+如果 USB Rubber Ducky 是專才，那 Bash Bunny 就是**插進 USB 的瑞士刀**。它同時模擬*多種*受信任的裝置型別 — 這很重要，因為一臺永遠不會讓可疑「鍵盤」靠近網路的機器，會樂意把 DHCP 租約交給一個「USB 乙太網路轉接器」，並把 root shell 交給一個「序列主控臺」。
 
 Mark II 用四核 CPU、桌面級 SSD、加倍記憶體，以及用於遠端觸發與地理圍欄的 Bluetooth LE 升級了原版。它是實體社交工程任務的主力。
 
@@ -28,7 +28,7 @@ Mark II 用四核 CPU、桌面級 SSD、加倍記憶體，以及用於遠端觸�
 
 ## 規格一覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | CPU | 四核 ARM Cortex-A7 @ 最高 1.3 GHz |
 | 儲存 | 8 GB NAND SSD（桌面級，快速） |
@@ -38,12 +38,12 @@ Mark II 用四核 CPU、桌面級 SSD、加倍記憶體，以及用於遠端觸�
 | OS | Debian Linux 附 root shell（預載 nmap、responder、impacket、metasploit） |
 | 開關 | 3 段式模式選擇器 |
 | 指示燈 | 1× RGB LED |
-| 主控台 | 專屬序列主控台（root 終端機）+ Cloud C² |
-| 官方文件 | https://docs.hak5.org/bash-bunny |
+| 主控臺 | 專屬序列主控臺（root 終端機）+ Cloud C² |
+| 官方檔案 | https://docs.hak5.org/bash-bunny |
 
 ## 3 段式開關
 
-位置 3（最靠近 USB 插頭）是 **arming 模式** — Bunny 以隨身碟 + 序列主控台的形式出現，讓你能載入 payload。位置 1 和 2 會自動執行存放在各自資料夾中的 payload。
+位置 3（最靠近 USB 插頭）是 **arming 模式** — Bunny 以隨身碟 + 序列主控臺的形式出現，讓你能載入 payload。位置 1 和 2 會自動執行存放在各自資料夾中的 payload。
 
 ```
 USB plug ── switch positions ──>
@@ -69,10 +69,10 @@ flowchart LR
 ## 快速入門 — 第一個 payload
 
 ### 步驟 1 — Arm 你的 Bunny
-把開關撥到**位置 3**，插進你的電腦。會出現兩樣東西：一個**隨身碟**（payload 區域）和一個**序列主控台**。
+把開關撥到**位置 3**，插進你的電腦。會出現兩樣東西：一個**隨身碟**（payload 區域）和一個**序列主控臺**。
 
 ### 步驟 2 — 丟入 payload
-瀏覽磁碟，把你的腳本放在：
+瀏覽磁碟，把你的指令碼放在：
 
 ```
 /payloads/switch1/payload.txt
@@ -94,15 +94,15 @@ ENTER
 LED G                # green = done
 ```
 
-> Bash Bunny 的 payload 是 **Bash** 腳本（這就是名字裡的「Bash」），使用 Hak5 的 `ATTACKMODE`、`LED` 與輔助指令。你可以把純 Bash（執行 `nmap`、複製檔案）與 DuckyScript 風格的 HID 注入混在一起。
+> Bash Bunny 的 payload 是 **Bash** 指令碼（這就是名字裡的「Bash」），使用 Hak5 的 `ATTACKMODE`、`LED` 與輔助指令。你可以把純 Bash（執行 `nmap`、複製檔案）與 DuckyScript 風格的 HID 注入混在一起。
 
 ### 步驟 3 — 部署
 1. 退出，撥到**位置 1**，拔掉。
 2. 插進目標（你的實驗室機器）。看 LED 先變紅，再變綠。
 3. `cmd` 開啟並印出 `pwned by Bash Bunny`。
 
-### 步驟 4 — 序列主控台（arming 模式）
-撥到位置 3，連接序列主控台，取得 root shell 來管理檔案與 payload：
+### 步驟 4 — 序列主控臺（arming 模式）
+撥到位置 3，連線序列主控臺，取得 root shell 來管理檔案與 payload：
 
 ```text
 Username: root
@@ -121,9 +121,9 @@ Password: hak5bunny
 | 按鍵注入 | HID 模式把按鍵打進目標 |
 | 網路存取 | **USB 乙太網路**模式 — 目標給你一個 IP；你現在就*在*網路上 |
 | 資料外洩 | 切到**儲存**並複製檔案；或透過 USB-乙太網路連結推出去 |
-| 序列 | 模擬序列裝置以觸及嵌入式/主控台機器 |
+| 序列 | 模擬序列裝置以觸及嵌入式/主控臺機器 |
 | 即時工具 | 完整 Debian：`nmap`、`responder`、`impacket`、`metasploit` 直接在裝置上 |
-| 藍牙觸發 | 透過 BLE 遠端觸發或地理圍欄一個 payload |
+| 藍芽觸發 | 透過 BLE 遠端觸發或地理圍欄一個 payload |
 
 **範例 — 抓一個檔案並外洩它：**
 
@@ -161,10 +161,10 @@ LED G
 | 症狀 | 原因 | 修正 |
 |---|---|---|
 | 位置 3 沒有隨身碟 | 開關沒有完全在 arming 位置 | 把開關完全推到位置 3；拔掉再重插 |
-| LED 閃紅燈 | Payload 錯誤 | 接上序列主控台，執行 payload，讀取錯誤 |
+| LED 閃紅燈 | Payload 錯誤 | 接上序列主控臺，執行 payload，讀取錯誤 |
 | 按鍵錯誤 / 沒打字 | 配置或缺少 DELAY | 加上 `LED` + `DELAY`，並鎖定正確的鍵盤配置 |
 | 只有 HID 能用，沒有乙太網路 | ATTACKMODE 沒有包含 ETHERNET | 在 payload 中使用 `ATTACKMODE HID ETHERNET` |
-| 連不上序列 | 驅動程式/鮑率錯誤 | 使用 Hak5 USB 線與文件記載的序列設定（見產品文件） |
+| 連不上序列 | 驅動程式/鮑率錯誤 | 使用 Hak5 USB 線與檔案記載的序列設定（見產品檔案） |
 
 ---
 

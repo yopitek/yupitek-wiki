@@ -18,42 +18,42 @@ toc: true
 
 > **一句話定位**：USB Rubber Ducky 是一支「會自己打鍵盤」的隨身碟 — 插入 USB 孔後，它以每秒數百次的速度把預錄好的按鍵輸進電腦，10 秒內做完一個人工要花五分鐘的動作。這是所有 Hak5 裝置裡最適合初學者入門的機器。
 
-當你插上任何 USB 鍵盤時，電腦會立刻信任它 — 沒有密碼、沒有「你確定嗎？」的提示。USB Rubber Ducky 利用的正是這種信任。它對 OS 呈現為一般鍵盤（一個 **HID 裝置**，Human Interface Device，人機介面裝置），然後以人類永遠追不上的速度重播一串按鍵腳本。
+當你插上任何 USB 鍵盤時，電腦會立刻信任它 — 沒有密碼、沒有「你確定嗎？」的提示。USB Rubber Ducky 利用的正是這種信任。它對 OS 呈現為一般鍵盤（一個 **HID 裝置**，Human Interface Device，人機介面裝置），然後以人類永遠追不上的速度重播一串按鍵指令碼。
 
 Ducky 只做**一件事，而且做得極好**：按鍵注入。它不需要漏洞利用程式碼或弱點 — 它就只是*打字*。這使它成為學習 HID 攻擊的完美教學工具，也是其他所有 Hak5 payload 裝置的基礎。
 
-> **⚠️ 僅限授權測試。** 只在你的電腦、你實驗室裡的機器上使用 Ducky，或取得明確許可。把按鍵注入別人的電腦是違法的（台灣：刑法第 358–363 條）。
+> **⚠️ 僅限授權測試。** 只在你的電腦、你實驗室裡的機器上使用 Ducky，或取得明確許可。把按鍵注入別人的電腦是違法的（臺灣：刑法第 358–363 條）。
 
 ---
 
 ## 規格一覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | 用途 | 按鍵注入（HID 攻擊） |
 | 語言 | DuckyScript 1.0（經典）與 3.0（完整語言） |
-| 腳本儲存 | MicroSD 卡（隨附；保留小卡以獲得最快開機速度） |
+| 指令碼儲存 | MicroSD 卡（隨附；保留小卡以獲得最快開機速度） |
 | 輸出 | 編譯過的 `inject.bin`，放在 `DUCKY` 磁碟上 |
 | 注入模式 | HID、Storage、Serial、Ethernet（各種攻擊模式） |
 | 介面 | USB-A（插進任何 USB host） |
 | 回饋 | 單一按鈕（預設：退出到 arming/storage 模式） |
 | 編碼器 | PayloadStudio（官方、瀏覽器為基礎）— 唯一支援的編譯器 |
-| 官方文件 | https://docs.hak5.org/hak5-usb-rubber-ducky |
+| 官方檔案 | https://docs.hak5.org/hak5-usb-rubber-ducky |
 
 ## 構造
 
 | 零件 | 用途 |
 |---|---|
 | USB-A 插頭 | 「鍵盤」那一端 — 插進目標 |
-| MicroSD 插槽 | 存放 `inject.bin` 與 payload 腳本 |
+| MicroSD 插槽 | 存放 `inject.bin` 與 payload 指令碼 |
 | 按鈕 | 在 payload 執行期間/之後，預設回到儲存（arming）模式 |
-| 可翻轉 USB-A 頭 | 兩種方向（標準與反向連接器） |
+| 可翻轉 USB-A 頭 | 兩種方向（標準與反向聯結器） |
 
 ---
 
 ## DuckyScript — 這個語言
 
-DuckyScript 簡單得令人意外。經典腳本就只是 `STRING`（打這個）+ `DELAY`（等待）。3.0 版加入了真正的程式能力：`if`/`else`、`while` 迴圈、函式，以及 `ATTACKMODE` 控制。
+DuckyScript 簡單得令人意外。經典指令碼就只是 `STRING`（打這個）+ `DELAY`（等待）。3.0 版加入了真正的程式能力：`if`/`else`、`while` 迴圈、函式，以及 `ATTACKMODE` 控制。
 
 ### 「Hello, World!」payload
 
@@ -95,7 +95,7 @@ END_IF
 
 ### 步驟 1 — 在 PayloadStudio 寫 payload
 1. 開啟 https://payloadstudio.hak5.org（Community 版免費）。
-2. 貼上上面的 Hello World 腳本。
+2. 貼上上面的 Hello World 指令碼。
 3. 選擇你的**目標鍵盤配置**（預設 US）。**這很重要** — 用錯誤的配置注入，按鍵會變成亂碼。
 4. 點 **Generate Payload**。PayloadStudio 會把它編譯成 `inject.bin`。
 
@@ -127,7 +127,7 @@ Ducky 可以呈現為不只是鍵盤。`ATTACKMODE` 選擇裝置的角色：
 | `HID` | 鍵盤 | 按鍵注入（未指定時的預設） |
 | `HID STORAGE` | 鍵盤 + 隨身碟 | 注入*並*保持可作為儲存裝置存取 |
 | `STORAGE` | 隨身碟 | 僅 arming / 檔案傳輸 |
-| `SERIAL` | 序列裝置 | 與序列主控台通訊 |
+| `SERIAL` | 序列裝置 | 與序列主控臺通訊 |
 | `HID SERIAL` | 鍵盤 + 序列 | 注入到序列連線的機器 |
 
 一個常見模式 — 注入，然後切到 storage 以便取回 loot：
@@ -175,9 +175,9 @@ Ducky 不是打出「字母 A」— 它按下 US 鍵盤上 A 的*實體按鍵*�
 | 技巧 | 怎麼做 |
 |---|---|
 | 按鍵反射 | 讀取目標狀態/視窗標題並分支（`IF` 搭配系統查詢） |
-| 滑鼠注入 | 移動游標 / 點擊 — 對僅 GUI 的目標很有用 |
+| 滑鼠注入 | 移動遊標 / 點選 — 對僅 GUI 的目標很有用 |
 | 抖動與隨機化 | 加入擬人化延遲以躲避按鍵時序偵測 |
-| Payload 函式庫 | 從社群倉庫放入腳本（見[韌體與下載](/hak5/firmware-downloads/)） |
+| Payload 函式庫 | 從社群倉庫放入指令碼（見[韌體與下載](/hak5/firmware-downloads/)） |
 | 結合 HID+Ethernet | 在相容韌體上，同時扮演鍵盤 + 攻擊者自己的網路介面 |
 | 復原 | 從失控的 payload 中長按按鈕重新進入儲存模式 |
 
@@ -192,8 +192,8 @@ Ducky 不是打出「字母 A」— 它按下 US 鍵盤上 A 的*實體按鍵*�
 | 螢幕上什麼都沒出現 | 開頭沒有 `DELAY`；OS USB 堆疊未就緒 | 第一行加上 `DELAY 1000` |
 | 打出錯誤字元 | 鍵盤配置不符 | 在 PayloadStudio 用目標的配置重新編譯 |
 | Payload 只跑過一次就不再跑 | 舊的 `inject.bin` 覆蓋了你的 | 把你的 `.bin` 再複製到磁碟根目錄 |
-| 回不去 arming 模式 | Payload 覆寫了按鈕預設行為 | 按按鈕；如果沒有 `BUTTON_DEF`，預設行為會讓你回到儲存模式。見文件 |
-| 按鈕做出意料之外的事 | Payload 使用 `BUTTON_DEF` | 檢查你的 payload；範例腳本可能重新對應了按鈕 |
+| 回不去 arming 模式 | Payload 覆寫了按鈕預設行為 | 按按鈕；如果沒有 `BUTTON_DEF`，預設行為會讓你回到儲存模式。見檔案 |
+| 按鈕做出意料之外的事 | Payload 使用 `BUTTON_DEF` | 檢查你的 payload；範例指令碼可能重新對應了按鈕 |
 | 韌體刷寫警告 | 第三方韌體 | **絕對不要刷** — Ducky 的架構設計就是不需要刷；刷寫會使保固失效並可能搞掛裝置 |
 
 > **重大警告：** 不要刷 USB Rubber Ducky。它出廠設計就是圍繞 PayloadStudio，所以你永遠不需要刷。舊版/第三方韌體可能讓它永久無法復原。永遠只使用官方更新 — 見[韌體與下載](/hak5/firmware-downloads/)。

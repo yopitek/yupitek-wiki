@@ -16,9 +16,9 @@ toc: true
 
 # Shark Jack — 完整指南
 
-> **一句話定位**：Shark Jack 是一台口袋大小的網路偵察機——往人家的乙太網路孔一插，60 秒內告訴你這個網段有誰、開了些什麼服務。充一次電能跑 10–15 分鐘，最適合掛在鑰匙圈上的臨時稽核。
+> **一句話定位**：Shark Jack 是一臺口袋大小的網路偵察機——往人家的乙太網路孔一插，60 秒內告訴你這個網段有誰、開了些什麼服務。充一次電能跑 10–15 分鐘，最適合掛在鑰匙圈上的臨時稽核。
 
-Shark Jack 把一台完整的 Linux 電腦和一個 nmap 掃描器塞進一個能掛在鑰匙圈上的東西。它體現了 Hak5 的「熱插拔攻擊，遇見 LAN」哲學：只要對一個運作中的乙太網路埠有實體存取，就足以取得情報立足點。
+Shark Jack 把一臺完整的 Linux 電腦和一個 nmap 掃描器塞進一個能掛在鑰匙圈上的東西。它體現了 Hak5 的「熱插拔攻擊，遇見 LAN」哲學：只要對一個運作中的乙太網路埠有實體存取，就足以取得情報立足點。
 
 開箱它就很危險 — 把開關撥到**攻擊模式**，它會執行預先安裝的 nmap 掃描，把結果存進 loot。撥回**arming 模式**，你就能 SSH 進去取回發現或載入自訂 payload。
 
@@ -28,7 +28,7 @@ Shark Jack 把一台完整的 Linux 電腦和一個 nmap 掃描器塞進一個�
 
 ## 規格一覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | 攻擊介面 | Fast Ethernet（RJ45）— 直接插進網路 |
 | 電源 | 內建電池（每次充電可跑 10–15 分鐘），透過 USB |
@@ -38,7 +38,7 @@ Shark Jack 把一台完整的 Linux 電腦和一個 nmap 掃描器塞進一個�
 | 預設憑證 | `root` / `hak5shark` |
 | 回饋 | 多色 RGB LED |
 | 開關 | 撥動開關：攻擊模式 vs arming 模式 |
-| 官方文件 | https://docs.hak5.org/shark-jack |
+| 官方檔案 | https://docs.hak5.org/shark-jack |
 
 ## 構造
 
@@ -57,7 +57,7 @@ Shark Jack 把一台完整的 Linux 電腦和一個 nmap 掃描器塞進一個�
 | 模式 | 發生什麼 | 怎麼進入 |
 |---|---|---|
 | **攻擊模式** | 執行選定的 payload（預設：nmap 掃描） | 撥開關，插進乙太網路 |
-| **Arming 模式** | SSH 伺服器於 `172.16.24.1`；載入 payload、讀取 loot | 撥開關，透過 USB 連接 |
+| **Arming 模式** | SSH 伺服器於 `172.16.24.1`；載入 payload、讀取 loot | 撥開關，透過 USB 連線 |
 
 ```mermaid
 %% name: hak5-product-shark-jack-flows
@@ -109,7 +109,7 @@ PORT     STATE    SERVICE
 443/tcp  open     https
 ```
 
-這就是你的第一次偵察：主機、開放連接埠、服務 — 足以規劃後續行動（或回報給你的藍隊）。
+這就是你的第一次偵察：主機、開放連線埠、服務 — 足以規劃後續行動（或回報給你的藍隊）。
 
 ---
 
@@ -130,7 +130,7 @@ nmap -sV -p- --open ${SUBNET}.0/24 -oN /root/loot/full-scan.txt
 LED G
 ```
 
-> `${SUBNET}` 佔位符與 `NETMODE` 輔助指令來自 Hak5 的 payload 框架 — 你的 payload 決定 Shark 是 DHCP client、server 等。完整參考在 payload 文件中。
+> `${SUBNET}` 佔位符與 `NETMODE` 輔助指令來自 Hak5 的 payload 框架 — 你的 payload 決定 Shark 是 DHCP client、server 等。完整參考在 payload 檔案中。
 
 3. 或從社群倉庫拉現成的 payload（`UPDATE_PAYLOADS`，見[韌體與下載](/hak5/firmware-downloads/)）。
 
@@ -157,7 +157,7 @@ LED G
 | SMB/HTTP 外洩 | Payload 可以透過網路把 loot 推出裝置 |
 | 自動化掃描 | 排程掃描；loot 會跨部署累積 |
 | 遠端 payload 函式庫 | `UPDATE_PAYLOADS` 從社群倉庫同步 |
-| Root Linux 工具 | `nmap`、`tcpdump`、`curl`、腳本 — 完整 Bash |
+| Root Linux 工具 | `nmap`、`tcpdump`、`curl`、指令碼 — 完整 Bash |
 
 ---
 
@@ -168,14 +168,14 @@ LED G
 | 紅色閃爍 LED | 找不到 payload | 重新 arm；把 `payload.sh` 放在 `/root/payload/` |
 | 無法 SSH | 你的 NIC 不在 `172.16.24.0/24` | `ip addr add 172.16.24.2/24 dev eth0`（或等效指令） |
 | 掃描中途電池沒電 | 10–15 分鐘續航 | 先充飽；長時間執行用 Cable 版 |
-| 掃描太慢 / 輸出太大 | `-p-` 全連接埠 | 用有針對性的連接埠清單加快偵察 |
+| 掃描太慢 / 輸出太大 | `-p-` 全連線埠 | 用有針對性的連線埠清單加快偵察 |
 | DHCP 模式失敗 | 沒有上游 DHCP 伺服器 | 在有伺服器時用 `NETMODE DHCP_CLIENT`，或使用靜態 |
 
 ---
 
 ## 相關資源
 
-- [Shark Jack Cable](/hak5/products/shark-jack-cable/) — 同一台盒子，USB-C 供電 + 序列主控台，跑更久
+- [Shark Jack Cable](/hak5/products/shark-jack-cable/) — 同一臺盒子，USB-C 供電 + 序列主控臺，跑更久
 - [Packet Squirrel Mark II](/hak5/products/packet-squirrel-mark-ii/) — 內嵌式乙太網路操控
 - [Plunder Bug LAN Tap](/hak5/products/plunder-bug-lan-tap/) — 被動/主動嗅探
 - [韌體與下載](/hak5/firmware-downloads/) — shark payload 倉庫與韌體

@@ -3,14 +3,14 @@ slug: linux-compatibility-matrix
 id: alfa-linux-compatibility-matrix
 title: ALFA Linux 相容性矩陣
 sidebar_position: 3
-description: 哪款 ALFA 無線網卡能在哪個作業系統上運作——Kali Linux、Ubuntu 與 NetHunter/Android——含驅動程式、晶片與內建於核心狀態。
+description: 哪款 ALFA 無線網絡卡能在哪個作業系統上運作——Kali Linux、Ubuntu 與 NetHunter/Android——含驅動程式、晶片與內建於核心狀態。
 tags: [alfa, 相容性, kali, ubuntu, nethunter, 驅動程式]
-keywords: [ALFA 相容性, Kali Linux 無線網卡, Ubuntu Wi-Fi 無線網卡, NetHunter, MT7612U, RTL8812AU]
+keywords: [ALFA 相容性, Kali Linux 無線網絡卡, Ubuntu Wi-Fi 無線網絡卡, NetHunter, MT7612U, RTL8812AU]
 ---
 
 # ALFA Linux 相容性矩陣
 
-> **結論先行（Bottom line）**：在現代 Linux 上，**MediaTek 為基礎的無線網卡**（AWUS036ACM、AWUS036ACHM、AWUS036AXM、AWUS036AXML）開箱即用，因為它們的驅動程式內建於核心。**Realtek 為基礎的無線網卡**（AWUS036ACH、AWUS036ACS、AWUS036AX、AWUS036AXER）需要 DKMS 驅動程式建置——5 分鐘、一次性工作。**AWUS036EACS 是例外：不要期待它在任何 Linux 上運作良好**。
+> **結論先行（Bottom line）**：在現代 Linux 上，**MediaTek 為基礎的無線網絡卡**（AWUS036ACM、AWUS036ACHM、AWUS036AXM、AWUS036AXML）開箱即用，因為它們的驅動程式內建於核心。**Realtek 為基礎的無線網絡卡**（AWUS036ACH、AWUS036ACS、AWUS036AX、AWUS036AXER）需要 DKMS 驅動程式建置——5 分鐘、一次性工作。**AWUS036EACS 是例外：不要期待它在任何 Linux 上運作良好**。
 
 ```mermaid
 flowchart TD
@@ -33,7 +33,7 @@ flowchart TD
 
 圖例：✅ 開箱即用 · 🔧 DKMS 安裝後可用 · ⚠️ 部分 / 不穩定 · ❌ 不建議
 
-| 無線網卡 | 晶片 | 驅動程式 | 內建於核心？ | Kali Linux | Ubuntu | NetHunter / Android |
+| 無線網絡卡 | 晶片 | 驅動程式 | 內建於核心？ | Kali Linux | Ubuntu | NetHunter / Android |
 |---|---|---|---|---|---|---|
 | AWUS036ACM | MT7612U | `mt76x2u` | ✅ 自 4.19 起 | ✅ | ✅ | ✅ |
 | AWUS036ACHM | MT7610U | `mt76x0u` | ✅ 自 4.19 起 | ✅ | ✅ | ✅ |
@@ -47,7 +47,7 @@ flowchart TD
 
 ## 「內建於核心」對你意味著什麼
 
-當某顆晶片的驅動程式位於 Linux 核心內，你的作業系統會隨附預先安裝。插上無線網卡後 `dmesg` 會顯示它被驅動程式認領——不需要編譯、不需要 DKMS、不會因核心更新而壞掉。這是本頁 MediaTek 與 Realtek 無線網卡之間最大的可靠性差異。
+當某顆晶片的驅動程式位於 Linux 核心內，你的作業系統會隨附預先安裝。插上無線網絡卡後 `dmesg` 會顯示它被驅動程式認領——不需要編譯、不需要 DKMS、不會因核心更新而壞掉。這是本頁 MediaTek 與 Realtek 無線網絡卡之間最大的可靠性差異。
 
 對 Realtek 機型，[Kali 指南](/alfa-network/linux-setup-kali/) 與 [Ubuntu 指南](/alfa-network/linux-setup-ubuntu/) 會帶你完成 DKMS 建置。DKMS 會在每次核心更新後自動重新建置驅動程式，所以「更新後就不能用了」不應該發生——如果真的發生，請查[疑難排解索引](/alfa-network/troubleshooting/)。
 

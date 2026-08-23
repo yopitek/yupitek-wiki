@@ -2,18 +2,18 @@
 id: alfa-product-awus036acs
 title: ALFA AWUS036ACS——口袋大小雙頻 AC433
 sidebar_position: 9
-description: ALFA AWUS036ACS——小巧 55 mm RTL8811AU AC433 雙頻無線網卡，配兩支 5 dBi 天線與 DKMS 驅動的監聽模式。口袋 Kali 夥伴。
-tags: [alfa, 無線網卡, rtl8811au, ac433, 可攜式]
-keywords: [AWUS036ACS, RTL8811AU, 口袋無線網卡, 可攜式 Kali 無線網卡]
+description: ALFA AWUS036ACS——小巧 55 mm RTL8811AU AC433 雙頻無線網絡卡，配兩支 5 dBi 天線與 DKMS 驅動的監聽模式。口袋 Kali 夥伴。
+tags: [alfa, 無線網絡卡, rtl8811au, ac433, 可攜式]
+keywords: [AWUS036ACS, RTL8811AU, 口袋無線網絡卡, 可攜式 Kali 無線網絡卡]
 ---
 
 # ALFA AWUS036ACS——口袋大小雙頻 AC433
 
-> **一句話定位（One-liner）**：**AWUS036ACS** 是 55 mm 口袋 ALFA——一支 **RTL8811AU AC433** 雙頻無線網卡，配兩支可摺疊的 5 dBi 天線與 DKMS 驅動的監聽模式（monitor mode）。它是你隨身攜帶的無線網卡，因為「你永遠不知道什麼時候會想看看某些 Wi-Fi」。
+> **一句話定位（One-liner）**：**AWUS036ACS** 是 55 mm 口袋 ALFA——一支 **RTL8811AU AC433** 雙頻無線網絡卡，配兩支可摺疊的 5 dBi 天線與 DKMS 驅動的監聽模式（monitor mode）。它是你隨身攜帶的無線網絡卡，因為「你永遠不知道什麼時候會想看看某些 Wi-Fi」。
 
 ## 規格總覽 (Spec overview)
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | 晶片 | Realtek RTL8811AU |
 | Wi-Fi 等級 | AC433（150 + 433 Mbps） |
@@ -63,13 +63,13 @@ sudo aireplay-ng --test wlan0mon
 
 **預期輸出**：`wlan0mon` + `30/30: 100%`。
 
-### 旅行設備
+### 旅行裝置
 
-把可摺疊天線（運輸時保持連接）配上 [Jetson](/alfa-network/hardware/jetson/) 或筆電，組成可攜式擷取/分析站。摺起天線、放進口袋、完成。
+把可摺疊天線（運輸時保持連線）配上 [Jetson](/alfa-network/hardware/jetson/) 或筆電，組成可攜式擷取/分析站。摺起天線、放進口袋、完成。
 
 ## 相容性
 
-| 平台 | 支援 | 注意事項 |
+| 平臺 | 支援 | 注意事項 |
 |---|---|---|
 | Kali Linux | ✅ | DKMS；aircrack-ng repo |
 | Ubuntu | ✅ | DKMS |
@@ -93,4 +93,4 @@ sudo aireplay-ng --test wlan0mon
 - [Kali 設定指南](/alfa-network/linux-setup-kali/)
 - [AWUS036ACH](/alfa-network/products/awus036ach/)——全尺寸高功率兄弟
 - [AWUS036ACM](/alfa-network/products/awus036acm/)——內建於核心的替代方案
-- [無線網卡比較](/alfa-network/wifi-adapter-comparison/)
+- [無線網絡卡比較](/alfa-network/wifi-adapter-comparison/)

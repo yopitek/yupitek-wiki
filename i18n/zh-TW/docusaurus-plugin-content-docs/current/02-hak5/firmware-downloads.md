@@ -17,13 +17,13 @@ toc: true
 
 # Hak5 韌體與下載 — 完整索引
 
-> **學習目標**：讀完你將能自己找到並更新任何 Hak5 裝置的韌體、下載 PayloadStudio 編寫 Payload、並從官方 Payload 倉庫同步現成腳本。
-> **適用對象**：初學者 ｜ **前置需求**：一台 Hak5 裝置（任一型號）
+> **學習目標**：讀完你將能自己找到並更新任何 Hak5 裝置的韌體、下載 PayloadStudio 編寫 Payload、並從官方 Payload 倉庫同步現成指令碼。
+> **適用物件**：初學者 ｜ **前置需求**：一臺 Hak5 裝置（任一型號）
 
-在我們丟給你一張巨大的連結表格之前，你應該先了解一台 Hak5 裝置跑的兩種「軟體」，因為初學者老是把它們搞混：
+在我們丟給你一張巨大的連結表格之前，你應該先了解一臺 Hak5 裝置跑的兩種「軟體」，因為初學者老是把它們搞混：
 
 - **韌體** — 讓硬體運作的作業系統（底層是 Linux/OpenWrt）。你很少更新它，而且只在某個你需要的新功能或修正推出時才更新。
-- **Payload** — 告訴裝置*要做什麼*的腳本（打這些鍵、跑這個掃描、擷取那段流量）。你會一直換這些。它們不是韌體。
+- **Payload** — 告訴裝置*要做什麼*的指令碼（打這些鍵、跑這個掃描、擷取那段流量）。你會一直換這些。它們不是韌體。
 
 **PayloadStudio**（payloadstudio.hak5.org）是官方、瀏覽器為基礎的 IDE，用來撰寫與編譯 payload。它是*唯一*官方支援的 DuckyScript 編碼器 — 舊教學叫你下載 Java 或 JavaScript「編碼器」的內容都過時了。PayloadStudio 完全在你的瀏覽器裡執行，支援 Community（免費）與 Pro 兩種版本。
 
@@ -48,7 +48,7 @@ flowchart TD
 
 | 你需要什麼 | 去哪裡拿 | 備註 |
 |---|---|---|
-| **所有官方文件** | https://docs.hak5.org | 可搜尋；每個產品都有自己的文件樹 |
+| **所有官方檔案** | https://docs.hak5.org | 可搜尋；每個產品都有自己的檔案樹 |
 | **PayloadStudio** | https://payloadstudio.hak5.org | 所有 DuckyScript 裝置的瀏覽器 IDE — 免安裝 |
 | **WiFi Pineapple（所有型號）韌體** | Web UI → *Settings → Software Update* | Pineapple 透過網路自我更新；不需要手動下載 |
 | **USB Rubber Ducky / Bash Bunny / Key Croc / Shark Jack / Packet Squirrel** | SSH 或序列 → `UPDATE_FIRMWARE` 輔助指令 | 見下方 SSH 章節 |
@@ -60,7 +60,7 @@ flowchart TD
 
 ## 社群 payload 倉庫
 
-Hak5 維護官方 GitHub 倉庫存放社群 payload。這是你在自己寫之前，看到真實、可運作腳本的最快方式。
+Hak5 維護官方 GitHub 倉庫存放社群 payload。這是你在自己寫之前，看到真實、可運作指令碼的最快方式。
 
 | 裝置 | Payload 倉庫 | 裡面有什麼 |
 |---|---|---|
@@ -72,13 +72,13 @@ Hak5 維護官方 GitHub 倉庫存放社群 payload。這是你在自己寫之�
 | WiFi Pineapple | https://github.com/hak5/wifi-pineapple-modules | PineAP marketplace 的模組 |
 | **PayloadHub** | https://payloads.hak5.org | 可搜尋、社群評分的跨裝置 payload 索引 |
 
-> **不要盲目信任網路上來的 payload。** 任何你在 Hak5 裝置上執行的腳本，都會以 root 權限在一台 Linux 機器上執行 — 或把按鍵打進目標。讀過每一個你下載的 payload。這正是專業人士在部署前會做的事。
+> **不要盲目信任網路上來的 payload。** 任何你在 Hak5 裝置上執行的指令碼，都會以 root 許可權在一臺 Linux 機器上執行 — 或把按鍵打進目標。讀過每一個你下載的 payload。這正是專業人士在部署前會做的事。
 
 ---
 
 ## 方法 A：透過 SSH 更新韌體（USB payload 裝置）
 
-像 Bash Bunny、Shark Jack 和 Key Croc 這類裝置，出廠時附帶你可以在 shell 執行的輔助指令。先連線（每台裝置的產品頁會顯示確切位址 — 例如 Shark Jack 在 arming 模式下監聽 `172.16.24.1`）：
+像 Bash Bunny、Shark Jack 和 Key Croc 這類裝置，出廠時附帶你可以在 shell 執行的輔助指令。先連線（每臺裝置的產品頁會顯示確切位址 — 例如 Shark Jack 在 arming 模式下監聽 `172.16.24.1`）：
 
 ```bash
 # Example — Shark Jack in arming mode, connected via Ethernet
@@ -120,7 +120,7 @@ UPDATE_PAYLOADS     # synchronise the local payload library with the remote repo
 
 ## 方法 C：O.MG 裝置（WebFlasher）
 
-1. 把 O.MG 裝置插進一台執行 **Chrome 或 Edge** 的電腦（需要 WebSerial）。
+1. 把 O.MG 裝置插進一臺執行 **Chrome 或 Edge** 的電腦（需要 WebSerial）。
 2. 開啟 O.MG 設定頁（https://o.mg.lol/setup/）並選擇你的裝置型號。
 3. 依照 3 步驟 WebFlasher 精靈操作 — 它會啟用裝置、安裝最新韌體，並（可選）先做一次鑑識備份。
 4. 或者，O.MG 韌體倉庫裡的 Python flasher 可以在任何 OS 上執行。
@@ -132,7 +132,7 @@ UPDATE_PAYLOADS     # synchronise the local payload library with the remote repo
 | 錯誤訊息 / 症狀 | 原因 | 修正 |
 |---|---|---|
 | `ssh: Connection refused` | 裝置不在 arming 模式 | 撥開關 / 按 arming 按鈕；確認你的靜態 IP 在裝置的子網路上 |
-| `UPDATE_FIRMWARE: command not found` | Shell 輔助指令只在韌體 ≥ 1.2.0 存在 | 從 WebUI 手動更新，或查你確切型號的文件 |
+| `UPDATE_FIRMWARE: command not found` | Shell 輔助指令只在韌體 ≥ 1.2.0 存在 | 從 WebUI 手動更新，或查你確切型號的檔案 |
 | Pineapple「Check for updates」失敗 | 沒有上游連線（AP 沒有網際網路） | 先接上乙太網路 uplink 或設定 client 模式 |
 | WebFlasher 顯示「No device found」 | 瀏覽器缺少 WebSerial / 裝置不在 bootloader 模式 | 使用 Chrome 或 Edge，並在精靈要求前保持 O.MG 裝置未插上 |
 | Payload 有執行但沒作用 | 你把編譯過的 `.bin` 複製到預期原始碼的裝置，或反之 | Rubber Ducky 需要編譯過的 `inject.bin`；Key Croc 直接執行直譯式 `payload.txt` |

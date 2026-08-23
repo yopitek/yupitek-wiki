@@ -14,7 +14,7 @@ description: Yupitek Wiki 重大變更的依時間順序紀錄。
 
 - 初始化 Docusaurus monorepo。
 - 為全部 5 個品牌撰寫完整的**英文來源**內容：
-  - **ALFA Network** — 網卡比較、Linux 相容性矩陣、Ubuntu/Kali/NetHunter 設定指南、疑難排解、7 份晶片組驅動程式指南、3 份硬體指南（Jetson / Raspberry Pi / Unitree）與 14 個產品頁面。
+  - **ALFA Network** — 網絡卡比較、Linux 相容性矩陣、Ubuntu/Kali/NetHunter 設定指南、疑難排解、7 份晶片組驅動程式指南、3 份硬體指南（Jetson / Raspberry Pi / Unitree）與 14 個產品頁面。
   - **HAK5** — 韌體與下載、快速入門、FAQ、疑難排解與 17 個產品頁面。
   - **Flipper Zero** — 快速入門、韌體與 qFlipper、手機應用程式、官方資源、疑難排解與 4 個產品頁面。
   - **SDRLAB** — SDR 軟體、韌體、快速入門、疑難排解、3 個硬體頁面、4 個 Flipper 擴充頁面，以及一份共用的 ALFA Linux 指南。
@@ -28,4 +28,4 @@ description: Yupitek Wiki 重大變更的依時間順序紀錄。
 - 第二階段：把英文來源翻譯成 zh-CN。
 - 第三階段：把英文來源翻譯成 zh-TW。
 - 第四階段：新增圖表（Mermaid / SVG）。
-- 第五階段：上傳到飛書知識庫（zh-CN）並鏡像到 cnb.cool。
+- 第五階段：上傳到飛書知識庫（zh-CN）並映象到 cnb.cool。

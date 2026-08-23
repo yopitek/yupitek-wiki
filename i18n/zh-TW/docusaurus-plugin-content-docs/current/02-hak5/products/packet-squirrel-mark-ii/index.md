@@ -18,7 +18,7 @@ toc: true
 
 > **一句話定位**：Packet Squirrel Mark II 是一部「夾在網路中間的小盒子」——把目標裝置接上 Target 埠、把真正的網路接上 Network 埠，它就位於流量路徑上，能嗅探、改寫、重導甚至切斷流量。三向撥桿一掰就換一套 Payload。
 
-[Shark Jack](/hak5/products/shark-jack/) 是跳*到*網路上掃描，而 **Packet Squirrel** 則坐在*網路連結內部*，成為中間人。它是示範（與防禦）內嵌式攔截的完美方式：把它插在裝置與其網路之間，撥一下開關，它就會擷取、代理、重導或隔離那台裝置的流量。
+[Shark Jack](/hak5/products/shark-jack/) 是跳*到*網路上掃描，而 **Packet Squirrel** 則坐在*網路連結內部*，成為中間人。它是示範（與防禦）內嵌式攔截的完美方式：把它插在裝置與其網路之間，撥一下開關，它就會擷取、代理、重導或隔離那臺裝置的流量。
 
 Mark II 執行 DuckyScript、Bash 與 Python payload，並加入 VPN 支援（WireGuard）、動態代理、DNS 操控與 Cloud C²。紅隊喜歡它來悄悄放一個竊聽點，藍隊則用它來確切理解內嵌式 MITM 是怎麼運作的。
 
@@ -28,9 +28,9 @@ Mark II 執行 DuckyScript、Bash 與 Python payload，並加入 VPN 支援（Wi
 
 ## 規格一覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
-| 連接埠 | 2× 乙太網路（Target + Network）+ USB 2.0 host |
+| 連線埠 | 2× 乙太網路（Target + Network）+ USB 2.0 host |
 | 電源 | USB-C（只要 0.2 A） |
 | 介面 | 內嵌式 layer-2 / layer-3 裝置置中 |
 | Payload | DuckyScript + Bash + Python |
@@ -39,7 +39,7 @@ Mark II 執行 DuckyScript、Bash 與 Python payload，並加入 VPN 支援（Wi
 | VPN | NAT/BRIDGE 模式支援 WireGuard |
 | Arming/設定 | Web UI + SSH 於 `172.16.32.1` |
 | 尺寸 / 重量 | 50 × 40 × 15 mm，24 g |
-| 官方文件 | https://docs.hak5.org/packet-squirrel-mk-ii |
+| 官方檔案 | https://docs.hak5.org/packet-squirrel-mk-ii |
 
 ## 構造
 
@@ -116,11 +116,11 @@ tcpdump -i eth0 -w /root/loot/capture.pcap
 | 目標 | 指令 / payload |
 |---|---|
 | 嗅探到檔案 | `tcpdump -i eth0 -w /root/loot/capture.pcap` |
-| 封鎖 TCP 連接埠 | `killport 80`（TCP RST 注入） |
+| 封鎖 TCP 連線埠 | `killport 80`（TCP RST 注入） |
 | 依內容切斷 TCP 串流 | `killstream "secret"` |
 | 偽造 DNS 回應 | `spoofdns example.com 1.2.3.4` |
 | Sinkhole 所有 DNS | `DNS SINKHOLE`（重導選定的網域） |
-| 改寫流量 | `DYNAMIC PROXY`（記錄/修改用戶端-伺服器資料） |
+| 改寫流量 | `DYNAMIC PROXY`（記錄/修改使用者端-伺服器資料） |
 | 大按鈕網路開關 | `GATEKEEPER` — 按下按鈕切斷連結 |
 
 ```text
@@ -139,8 +139,8 @@ LED G
 | 能力 | 怎麼做 |
 |---|---|
 | WireGuard VPN | 在 NAT/BRIDGE 模式加密 Squirrel 的網路路徑 |
-| Cloud C² | 遠端管理 payload + 卸載 loot |
-| Python payload | 完整 Python 用於更複雜的腳本邏輯 |
+| Cloud C² | 遠端管理 payload + 解除安裝 loot |
+| Python payload | 完整 Python 用於更複雜的指令碼邏輯 |
 | 背景指令 | 執行長時間任務，再從 shell 互動 |
 | 流量偵測（藍隊） | 用 JAIL + 過濾器在任務中途隔離被入侵的裝置 |
 | USB host 擴充 | 接上儲存以擴充 loot 容量 |
@@ -154,7 +154,7 @@ LED G
 | TRANSPARENT 中 Target 沒有 IP | 由網路發放 IP — 需要真實 uplink 存在 | 確認 Network 埠連結；或改用 NAT 取得獨立 DHCP |
 | 透過 Squirrel 網際網路變慢 | NAT 模式改寫 | NAT 中屬預期；用 BRIDGE/TRANSPARENT 保留 IP |
 | Web UI 連不上 | 子網路錯誤 | NIC 設為 `172.16.32.0/24`，瀏覽 `172.16.32.1` |
-| killport/killstream 沒作用 | Target 使用不同的連接埠/模式 | 比對確切連接埠；檢查你韌體的 payload 語法 |
+| killport/killstream 沒作用 | Target 使用不同的連線埠/模式 | 比對確切連線埠；檢查你韌體的 payload 語法 |
 | Payload 沒有自動執行 | 開關位置與 payload 資料夾對應錯誤 | 確認哪個開關位置執行哪個 payload |
 
 ---

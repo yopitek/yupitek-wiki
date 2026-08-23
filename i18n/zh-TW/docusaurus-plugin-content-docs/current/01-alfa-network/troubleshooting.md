@@ -1,16 +1,16 @@
 ---
 slug: troubleshooting
 id: alfa-troubleshooting
-title: ALFA 無線網卡——疑難排解索引
+title: ALFA 無線網絡卡——疑難排解索引
 sidebar_position: 7
-description: 診斷任何 ALFA Wi-Fi 無線網卡問題——症狀、診斷指令、根本原因與修復，並附上各晶片驅動程式頁面的連結。
+description: 診斷任何 ALFA Wi-Fi 無線網絡卡問題——症狀、診斷指令、根本原因與修復，並附上各晶片驅動程式頁面的連結。
 tags: [alfa, 疑難排解, 驅動程式, 監聽模式, dkms]
-keywords: [ALFA 疑難排解, 無線網卡偵測不到, 監聽模式無法運作, DKMS 失敗, WiFi 無線網卡修復]
+keywords: [ALFA 疑難排解, 無線網絡卡偵測不到, 監聽模式無法運作, DKMS 失敗, WiFi 無線網絡卡修復]
 ---
 
-# ALFA 無線網卡——疑難排解索引
+# ALFA 無線網絡卡——疑難排解索引
 
-> **排查鐵律（Diagnosis iron rule）**：**先硬體 → 再驅動程式 → 最後設定。**超過 80% 的「我的 ALFA 壞了」回報其實是電源問題、缺少 DKMS 重建，或核心更新的副作用——而不是無線網卡壞了。在責怪硬體之前，先依照下方的決策樹。
+> **排查鐵律（Diagnosis iron rule）**：**先硬體 → 再驅動程式 → 最後設定。**超過 80% 的「我的 ALFA 壞了」回報其實是電源問題、缺少 DKMS 重建，或核心更新的副作用——而不是無線網絡卡壞了。在責怪硬體之前，先依照下方的決策樹。
 
 ```mermaid
 flowchart TD
@@ -27,21 +27,21 @@ flowchart TD
 ```
 
 
-![ALFA 網卡疑難排解決策樹——先硬體、再驅動、最後設定](/img/troubleshooting/troubleshooting-decision-tree.svg)
+![ALFA 網絡卡疑難排解決策樹——先硬體、再驅動、最後設定](/img/troubleshooting/troubleshooting-decision-tree.svg)
 ## 問題分類索引
 
 | 類別 | 典型問題 |
 |---|---|
-| **偵測** | 無線網卡不在 `lsusb` 中、沒有介面、重新開機後消失 |
+| **偵測** | 無線網絡卡不在 `lsusb` 中、沒有介面、重新開機後消失 |
 | **驅動程式** | DKMS 建置失敗、模組未載入、`dmesg` 中的韌體錯誤 |
 | **連線** | 無法關聯、持續斷線、連結緩慢 |
 | **監聽模式** | `airmon-ng` 失敗、注入測試失敗、沒有擷取到訊框 |
-| **電源** | 高負載下無線網卡失效、在一台電腦可用但另一台不行 |
+| **電源** | 高負載下無線網絡卡失效、在一臺電腦可用但另一臺不行 |
 | **法規** | 頻道設定錯誤、TX 功率被限制、「5 GHz 頻道消失」 |
 
 **每顆晶片都有自己的深入探討頁面**——把屬於你的加入書籤：
 
-| 晶片 | 無線網卡 | 驅動程式頁面 |
+| 晶片 | 無線網絡卡 | 驅動程式頁面 |
 |---|---|---|
 | MT7612U | AWUS036ACM | [mt7612u](/alfa-network/drivers/mt7612u/) |
 | MT7610U | AWUS036ACHM | [mt7610u](/alfa-network/drivers/mt7610u/) |
@@ -53,7 +53,7 @@ flowchart TD
 
 ---
 
-## 問題 1：無線網卡完全偵測不到（`lsusb` 為空）
+## 問題 1：無線網絡卡完全偵測不到（`lsusb` 為空）
 
 ### 症狀
 已插上，LED 可能亮也可能不亮，`lsusb` 沒有顯示 Realtek/MediaTek 那一行。
@@ -66,21 +66,21 @@ dmesg | tail -30
 在 `dmesg` 中尋找 `device descriptor read/64, error -71` 或 `device not accepting address`——典型的電源握手失敗。
 
 ### 根本原因
-幾乎都是 **USB 電源或傳輸線**——尤其是高功率機型（AWUS036AXM/AXML、AWUS036AX）接到前面板連接埠或未供電的 hub 時。
+幾乎都是 **USB 電源或傳輸線**——尤其是高功率機型（AWUS036AXM/AXML、AWUS036AX）接到前面板連線埠或未供電的 hub 時。
 
 ### 修復
-1. 試**後方 USB 連接埠**（或透過轉接頭使用 USB-C 連接埠）。
+1. 試**後方 USB 連線埠**（或透過轉接頭使用 USB-C 連線埠）。
 2. 試**不同的傳輸線**——某些便宜的 USB-C 傳輸線只能充電。
 3. 使用**供電的 USB hub**。
 4. 在筆電上，拔掉其他高功率 USB 裝置。
-5. 如果在*兩台不同的電腦*上仍然看不見，無線網卡有問題——請聯絡支援。
+5. 如果在*兩臺不同的電腦*上仍然看不見，無線網絡卡有問題——請聯絡支援。
 
 ---
 
 ## 問題 2：`lsusb` 看得到，但沒有 `wlanX` 介面
 
 ### 症狀
-`lsusb` 顯示無線網卡；`iw dev` / `ip link` 什麼都沒顯示。
+`lsusb` 顯示無線網絡卡；`iw dev` / `ip link` 什麼都沒顯示。
 
 ### 診斷
 ```bash
@@ -102,13 +102,13 @@ lsmod | grep -iE "mt76|8812|8811|88x2|8821"
 ## 問題 3：核心更新後 DKMS 建置失敗
 
 ### 症狀
-`apt upgrade` 後「無線網卡不能用了」；`dmesg` 顯示 `8812au: version magic ... should be ...`。
+`apt upgrade` 後「無線網絡卡不能用了」；`dmesg` 顯示 `8812au: version magic ... should be ...`。
 
 ### 診斷
 ```bash
 dkms status
 ```
-如果你的模組顯示 `Error!` 或損壞的核心版本項目，那就是問題所在。
+如果你的模組顯示 `Error!` 或損壞的核心版本專案，那就是問題所在。
 
 ### 根本原因
 驅動程式的 DKMS 配方無法針對新核心重建——通常是缺少標頭檔，或 repo 對全新核心來說太舊。
@@ -160,20 +160,20 @@ iw reg get | head -20      # regulatory domain
 ### 根本原因
 - **法規領域**：如果 `iw reg get` 顯示 `country 00`（未設定），TX 功率會被限制在預設的 20 dBm 上限。
 - **省電**：激進的 USB 電源管理會節流無線電。
-- **過熱**：高功率無線網卡持續 TX。
+- **過熱**：高功率無線網絡卡持續 TX。
 
 ### 修復
-1. 設定你的地區：`sudo iw reg set TW`（或你的國家代碼）。
+1. 設定你的地區：`sudo iw reg set TW`（或你的國家程式碼）。
 2. 設定 TX 功率：`sudo iwconfig wlan0 txpower 30`（你領域的法定上限）。
 3. 停用省電：`sudo iwconfig wlan0 power off`。
-4. AC1200+ 無線網卡優先使用 USB 3.0 連接埠——USB 2.0 會限制吞吐量。
+4. AC1200+ 無線網絡卡優先使用 USB 3.0 連線埠——USB 2.0 會限制吞吐量。
 
 ---
 
 ## 問題 6：5 GHz 頻道消失
 
 ### 症狀
-只看到 2.4 GHz 網路；`iwlist wlan0 freq` 沒有 5 GHz 項目。
+只看到 2.4 GHz 網路；`iwlist wlan0 freq` 沒有 5 GHz 專案。
 
 ### 根本原因
 法規領域未設定或被限制（全新安裝時通常是 `country 00`），所以驅動程式拒絕 5 GHz 頻道。
@@ -198,4 +198,4 @@ dmesg | tail -50
 iw dev
 ```
 
-附上以上所有內容，再加上：你的無線網卡型號、作業系統/核心，以及輸出讓你意外的確切指令。還有一件事值得檢查——如果你在跑 Jetson、Raspberry Pi 或 Unitree 機器人，請看[硬體整合指南](/alfa-network/hardware/jetson/)；嵌入式主機板有自己的電源與驅動程式怪癖。
+附上以上所有內容，再加上：你的無線網絡卡型號、作業系統/核心，以及輸出讓你意外的確切指令。還有一件事值得檢查——如果你在跑 Jetson、Raspberry Pi 或 Unitree 機器人，請看[硬體整合指南](/alfa-network/hardware/jetson/)；嵌入式主機板有自己的電源與驅動程式怪癖。

@@ -28,17 +28,17 @@ toc: true
 - **兩個 USB 版本**：USB Type-A（`ACR1552U-M1`）與 USB Type-C（`ACR1552U-MF`）。
 - **SAM 插槽**：1 × ISO 7816 Class A（5 V）/ SIM 尺寸插槽。
 - **可程式 LED + 蜂鳴器**：藍/綠雙色 LED，蜂鳴器可程式。
-- **連接線**：固定式 USB 線，長 1 m。
+- **連線線**：固定式 USB 線，長 1 m。
 
 ## 規格總覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |------|------|
 | 世代 | 第 4 代（USB NFC Reader IV） |
 | 支援標準/卡片 | **ISO 14443 Type A & B（Part 1–4）、ISO 15693、ISO 18092 NFC**、MIFARE®、FeliCa、SRI/SRIX、CTS、Innovatron、Picopass、Topaz |
 | 作業頻率 | 13.56 MHz |
 | 讀寫速度 | **106 / 212 / 424 / 848 kbps**（ISO 14443）；26 / 53 kbps（ISO 15693） |
-| 讀距 | 最遠 **70 mm**（依卡片類型） |
+| 讀距 | 最遠 **70 mm**（依卡片型別） |
 | NFC 模式 | Reader/Writer、**Keyboard Emulation**、Card Emulation |
 | SAM 插槽 | 1 × ISO 7816 Class A（5 V）/ SIM 尺寸／T=0、T=1，13.4 kbps–1,250 kbps，時脈 5 MHz（可 10 MHz） |
 | 防碰撞 | 內建 |
@@ -48,7 +48,7 @@ toc: true
 | Firmware 升級 | ✅（透過 USB） |
 | 尺寸/重量 | 98.0 × 65.0 × 12.8 mm / 約 79–89 g |
 | 系統支援 | Windows、Linux、macOS、Android、iOS/iPadOS 16+ |
-| 官方文件 | [ACR1552U 產品頁](https://www.acs.com.hk/en/products/575/acr1552u-usb-nfc-reader-iv/)、[技術規格 (PDF)](https://www.smartcardfocus.com/files/ACR1552U-M1SAM/TechnicalSpecification_TSP-ACR1552U-1.05_Jan2024.pdf) |
+| 官方檔案 | [ACR1552U 產品頁](https://www.acs.com.hk/en/products/575/acr1552u-usb-nfc-reader-iv/)、[技術規格 (PDF)](https://www.smartcardfocus.com/files/ACR1552U-M1SAM/TechnicalSpecification_TSP-ACR1552U-1.05_Jan2024.pdf) |
 
 ## 這顆與前兩顆差在哪（重點）
 
@@ -57,7 +57,7 @@ toc: true
 | ISO 15693 | ❌ | ❌ | ✅ |
 | ISO 14443 最高速度 | 424 kbps | 424 kbps | **848 kbps** |
 | 最大讀距 | 50 mm | 50 mm | **70 mm** |
-| 卡片類型數 | MIFARE/FeliCa/NFC | MIFARE/FeliCa/NFC | **+SRI/SRIX、CTS、Innovatron、Picopass、Topaz** |
+| 卡片型別數 | MIFARE/FeliCa/NFC | MIFARE/FeliCa/NFC | **+SRI/SRIX、CTS、Innovatron、Picopass、Topaz** |
 | 鍵盤模擬 | ❌ | ❌ | ✅ |
 | SAM 插槽 | ❌ | ✅ | ✅ |
 | libnfc 直連 | ✅ | ❌（走 PC/SC） | ❌（走 PC/SC） |
@@ -136,7 +136,7 @@ pcsc_scan
 
 即可列出 `ACS ACR1552U 0`。讀 ISO 15693 標籤時，`pcsc_scan` 會顯示對應的卡片狀態。
 
-## 快速開始：用 pyscard 讀卡片（跨平台）
+## 快速開始：用 pyscard 讀卡片（跨平臺）
 
 ```bash
 pip install pyscard
@@ -158,12 +158,12 @@ print("ISO 14443 UID:", data, f"SW: {sw1:02X} {sw2:02X}")
 預期 `SW: 90 00`。**若你放的是 ISO 15693 標籤**，這道 APDU 可能不適用——ISO 15693 有自己的一套指令（透過擴充 APDU 命令），建議從 ACS 的 Reference Manual 取得正確命令。
 
 :::tip 第一次用 ISO 15693？
-ISO 15693 標籤的讀法與 ISO 14443 不同，且各家標籤（NXP ICODE、ST）指令集略有差異。最直接的驗證方式是 `pcsc_scan` 看到卡片被識別為 ISO 15693 類型，之後再依參考手冊發對應命令。
+ISO 15693 標籤的讀法與 ISO 14443 不同，且各家標籤（NXP ICODE、ST）指令集略有差異。最直接的驗證方式是 `pcsc_scan` 看到卡片被識別為 ISO 15693 型別，之後再依參考手冊發對應命令。
 :::
 
 ## 相容性
 
-| 平台 | 支援 | 備註 |
+| 平臺 | 支援 | 備註 |
 |------|------|------|
 | Windows 10/11 | ✅ | 內建 Microsoft CCID/PC/SC 驅動 |
 | Linux (Kali/Ubuntu) | ✅ | 走 PC/SC（pcscd）；無 libnfc 直連 |

@@ -27,20 +27,20 @@ toc: true
 - **天線**：主體下方內建 50 × 40 mm 天線，卡片直接放上頂面即可（讀距最遠 50 mm）。
 - **LED**：1 顆雙色 LED（紅/綠），可由軟體控制。
 - **蜂鳴器**：單音，可由軟體控制。
-- **連接線**：固定式 USB Type-A 線，長 1 m，不可拆。
+- **連線線**：固定式 USB Type-A 線，長 1 m，不可拆。
 
 讀卡成功時 LED 通常會閃綠、並發出一聲嗶——這是「讀到了」最直接的訊號。
 
 ## 規格總覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |------|------|
 | 晶片/核心 | NXP PN532（13.56 MHz） |
 | 支援標準/卡片 | ISO/IEC 18092 NFC、ISO 14443 Type A & B、MIFARE Classic®、MIFARE Ultralight®、FeliCa |
 | 作業頻率 | 13.56 MHz |
 | 讀寫速度 | 106 / 212 / **424** kbps（NFC 標籤） |
 | USB 介面 | USB 2.0 Full Speed（12 Mbps）、CCID compliant |
-| 讀距 | 最遠 50 mm（依卡片類型而定） |
+| 讀距 | 最遠 50 mm（依卡片型別而定） |
 | 防碰撞 | 內建（同一時間只存取一張卡） |
 | 供電 | 由 USB 供電，典型 100 mA / 最大 200 mA，5 V |
 | 尺寸/重量 | 98.0 × 65.0 × 12.8 mm / 70 g |
@@ -48,7 +48,7 @@ toc: true
 | 認證 | ISO 14443、PC/SC、CCID、CE、FCC、KC、VCCI、RoHS、Microsoft WHQL |
 | USB Vendor/Product ID | `072F:2200` |
 | 系統支援 | Windows、Linux、macOS、Solaris、Android 3.1+ |
-| 官方文件 | [ACR122U 產品頁](https://www.acs.com.hk/en/products/3/acr122u-usb-nfc-reader/)、[API 手冊 (PDF)](https://downloads.acs.com.hk/drivers/en/API-ACR122U-2.02.pdf) |
+| 官方檔案 | [ACR122U 產品頁](https://www.acs.com.hk/en/products/3/acr122u-usb-nfc-reader/)、[API 手冊 (PDF)](https://downloads.acs.com.hk/drivers/en/API-ACR122U-2.02.pdf) |
 
 ## 這顆能做什麼、不能做什麼
 
@@ -78,8 +78,8 @@ flowchart TD
     G --> H
 ```
 
-:::caution 最重要的第一步：內核模組衝突
-Linux 內核的 `pn533` / `pn533_usb` 模組會自動認領 ACR122U（因為它內建 PN532 晶片），導致 libnfc 或 pcsc 拿不到裝置。**大多 Linux 上的 ACR122U 問題都源自這裡**。先黑名單這幾個模組再繼續。
+:::caution 最重要的第一步：核心模組衝突
+Linux 核心的 `pn533` / `pn533_usb` 模組會自動認領 ACR122U（因為它內建 PN532 晶片），導致 libnfc 或 pcsc 拿不到裝置。**大多 Linux 上的 ACR122U 問題都源自這裡**。先黑名單這幾個模組再繼續。
 :::
 
 ### 方法 A（建議先試）：標準 PC/SC — pcscd + pcsc_scan
@@ -132,7 +132,7 @@ Reader 0: ACS ACR122U PICC Interface 00 00
 看到 **"Card inserted" + ATR** 就代表整條 PC/SC 管線通了。按 `Ctrl+C` 離開。
 
 :::note ATR 是什麼？
-ATR（Answer To Reset）是卡片接上後第一個回傳的位元組串，像卡片的「自我介紹」。不同卡片會有不同 ATR，可拿來初判卡片類型。
+ATR（Answer To Reset）是卡片接上後第一個回傳的位元組串，像卡片的「自我介紹」。不同卡片會有不同 ATR，可拿來初判卡片型別。
 :::
 
 **Step 4（可選）：用 opensc-tool 發一道 APDU**
@@ -142,7 +142,7 @@ sudo apt install -y opensc
 opensc-tool -l
 ```
 
-預期列出一台讀卡機 `ACS ACR122U PICC Interface`。放上卡片後抓 UID：
+預期列出一臺讀卡機 `ACS ACR122U PICC Interface`。放上卡片後抓 UID：
 
 ```bash
 opensc-tool --atr        # 印 ATR
@@ -153,7 +153,7 @@ opensc-tool --reader 0 -s 00:A4:04:00:07:D2:76:00:00:85:01:00  # 選 AID（MIFAR
 
 ACR122U 有專屬的 libnfc 直連 driver `acr122_usb`，不需 pcscd，速度更直接，且能用大量開源工具（`mfoc`、`mfcuk`、`nfc-mfclassic`）。
 
-**Step 1：黑名單內核模組（關鍵！）**
+**Step 1：黑名單核心模組（關鍵！）**
 
 ```bash
 echo -e 'blacklist pn533\nblacklist pn533_usb\nblacklist nfc' | sudo tee /etc/modprobe.d/blacklist-libnfc.conf
@@ -161,7 +161,7 @@ sudo rmmod pn533_usb pn533 nfc 2>/dev/null   # 若已載入，卸載
 ```
 
 :::warning
-`rmmod` 只有在模組已載入時才有意義，卸載失敗的錯誤訊息可忽略。重插一次讀卡機讓黑名單生效。若已拔插仍被認領，重開機即可。
+`rmmod` 只有在模組已載入時才有意義，解除安裝失敗的錯誤訊息可忽略。重插一次讀卡機讓黑名單生效。若已拔插仍被認領，重開機即可。
 :::
 
 **Step 2：安裝 libnfc 與工具**
@@ -200,13 +200,13 @@ sudo systemctl stop pcscd
 
 | 情境 | 用哪條 |
 |------|--------|
-| 只要標準 PC/SC、跨平台、跟現有軟體相容 | 方法 A（pcscd） |
+| 只要標準 PC/SC、跨平臺、跟現有軟體相容 | 方法 A（pcscd） |
 | 要研究 MIFARE、用 mfoc/mfcuk、開發自己韌體層邏輯 | 方法 B（libnfc） |
 | 我想兩者並存 | 可以，但**同時只能一個佔用裝置**——跑 libnfc 前先停 pcscd |
 
 ## 快速開始：3 行 Python 讀卡號
 
-安裝 pyscard（PC/SC 的 Python 綁定）：
+安裝 pyscard（PC/SC 的 Python 繫結）：
 
 ```bash
 pip install pyscard
@@ -245,7 +245,7 @@ Status words: 90 00
 
 ## 相容性
 
-| 平台 | 支援 | 備註 |
+| 平臺 | 支援 | 備註 |
 |------|------|------|
 | Windows 10/11 | ✅ | 內建 Microsoft CCID/PC/SC 驅動，免裝 ACS 驅動即插即用 |
 | Linux (Kali/Ubuntu) | ✅ | 建議黑名單 `pn533` 模組；pcscd 或 libnfc 皆可 |
@@ -256,23 +256,23 @@ Status words: 90 00
 ## 疑難排解
 
 ### 1. `nfc-list` 說「No NFC device found」但有接
-- **原因**：多半是 `pn533_usb` 內核模組搶走了裝置。
+- **原因**：多半是 `pn533_usb` 核心模組搶走了裝置。
 - **解法**：執行方法 B 的 Step 1（黑名單 + `rmmod`），重插或重開機，再用 `nfc-list` 檢查。
 
 ### 2. `pcsc_scan` 列不到讀卡機
-- **原因**：`pcscd` 沒跑，或裝置權限不足（少數桌面環境）。
-- **解法**：`sudo systemctl start pcscd`；若權限問題，確認使用者身處能被 udev 允許的群組（通常 default 即可）。
+- **原因**：`pcscd` 沒跑，或裝置許可權不足（少數桌面環境）。
+- **解法**：`sudo systemctl start pcscd`；若許可權問題，確認使用者身處能被 udev 允許的群組（通常 default 即可）。
 
 ### 3. libnfc 報 `Device or resource busy`
 - **原因**：pcscd（或 pn533 模組）正佔用讀卡機。
-- **解法**：`sudo systemctl stop pcscd`（並確認模組已卸載），再跑 `nfc-list`。
+- **解法**：`sudo systemctl stop pcscd`（並確認模組已解除安裝），再跑 `nfc-list`。
 
 ### 4. LED 一直紅、讀卡不嗶
 - **原因**：卡片放歪、超過讀距，或該卡與讀卡機不相容（例如 ISO 15693 卡，ACR122U 不支援）。
 - **解法**：確認卡片平放於天線正上方、距離 ≤ 50 mm；換一張支援的卡測。
 
 ### 5. `pcsc_scan` 出現大量重複 ATR / 瞬間插拔
-- **原因**：USB 供電不穩或 udev 權限抖動。
+- **原因**：USB 供電不穩或 udev 許可權抖動。
 - **解法**：換一條原廠線、插主機板後方的 USB 埠（避免 HUB）。
 
 ## 相關資源

@@ -17,7 +17,7 @@ toc: true
 # SDRLAB 快速入門 — 你的第一個 30 分鐘
 
 > **學習目標**：讀完本頁後，你將能挑選一款產品、理解通用的「插上 → 驅動程式 → 軟體 → 訊號」流程，並驗證你的 SDR 硬體確實能運作。
-> **適用對象**：初次使用者 ｜ **前置需求**：一件 SDRLAB 產品、一台電腦（Windows/Linux/macOS），以及想聽無線電雜訊並愛上它的意願。
+> **適用物件**：初次使用者 ｜ **前置需求**：一件 SDRLAB 產品、一臺電腦（Windows/Linux/macOS），以及想聽無線電雜訊並愛上它的意願。
 
 ## 概念：通用的 SDR 流程
 
@@ -36,9 +36,9 @@ flowchart LR
 
 把它想成插上新的遊戲手把：**先硬體**（裝置必須被辨識）、**再驅動程式**（作業系統必須能與它溝通）、**最後軟體**（遊戲——其實是無線電——必須知道怎麼用它）。十次有九次，「什麼都不能用」代表這三個階段中有一個被跳過了。
 
-## 步驟 1：挑選你的產品並連接
+## 步驟 1：挑選你的產品並連線
 
-| 產品 | 連接方式 | 需要額外供電？ | 第一步 |
+| 產品 | 連線方式 | 需要額外供電？ | 第一步 |
 |---|---|---|---|
 | [RTL-SDR Blog V4](/sdrlab/hardware/rtl-sdr-v4/) | USB-A 接到電腦 | 否（USB 供電） | 插上，安裝驅動程式 |
 | [SDRLab TRX-duo](/sdrlab/hardware/trx-duo/) | Gigabit 乙太網路 + USB-C 供電 | 是，透過 USB-C 供電 | 燒錄 SD 卡、開機、瀏覽網頁介面 |
@@ -65,7 +65,7 @@ flowchart LR
 | 產品 | 測試 | 預期結果 |
 |---|---|---|
 | RTL-SDR V4 | 在終端機執行 `rtl_test` | 出現「Supported sample rates」與滾動的 `PASS` 行 |
-| TRX-duo | 瀏覽器 → `http://192.168.1.100` | Red Pitaya 風格的網頁儀表板載入 |
+| TRX-duo | 瀏覽器 → `http://192.168.1.100` | Red Pitaya 風格的網頁儀錶板載入 |
 | H4M | 螢幕上的 Spectrum 應用程式 | 瀑布圖顯示 FM 廣播頻段的雜訊／訊號 |
 | 5G board | Marauder `scanap` | 附近的 SSID 連同 RSSI 一起出現 |
 | NRF24 module | 頻道掃描器 | 頻道 1–126 出現 2.4 GHz 活動 |
@@ -76,11 +76,11 @@ flowchart LR
 
 挑一個你*知道*有訊號的頻率，不要亂挑：
 
-- **FM 廣播電台**：88–108 MHz——你的第一個 SDR 訊號，保證收得到。
+- **FM 廣播電臺**：88–108 MHz——你的第一個 SDR 訊號，保證收得到。
 - **NOAA 氣象衛星（137 MHz）**：APT 衛星影像，週末專案的熱門選擇。
 - **飛機（ADS-B，1090 MHz）**：飛機持續廣播位置資料。
 - **呼叫器（POCSAG）**：約 137 MHz 與約 466 MHz——經典的 RTL-SDR 趣味來源。
-- **飛機（HF，如果你有 TRX-duo）**：夜間 3–30 MHz 的短波廣播電台。
+- **飛機（HF，如果你有 TRX-duo）**：夜間 3–30 MHz 的短波廣播電臺。
 
 ## 步驟 5：檢查你的核對清單
 
@@ -104,4 +104,4 @@ flowchart LR
 
 - 準備深入？[SDR 軟體指南](/sdrlab/sdr-software/)說明各種工具；[韌體指南](/sdrlab/firmware/)涵蓋更新。
 - 卡在特定問題？[疑難排解中心](/sdrlab/troubleshooting/)依症狀分類整理。
-- 要把 ALFA Wi-Fi 網卡與 SDR 搭配使用？請見 [ALFA Linux 指南](/sdrlab/shared/alfa-linux-guide/)。
+- 要把 ALFA Wi-Fi 網絡卡與 SDR 搭配使用？請見 [ALFA Linux 指南](/sdrlab/shared/alfa-linux-guide/)。

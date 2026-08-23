@@ -2,10 +2,10 @@
 slug: troubleshooting
 id: flipper-troubleshooting
 title: Flipper Zero 疑難排解
-description: Flipper Zero 的系統化疑難排解 — 開機失敗、充電問題、藍牙配對、qFlipper 連線、Sub-GHz 範圍與擷取問題、NFC/RFID 讀取失敗，以及儲存空間問題。
+description: Flipper Zero 的系統化疑難排解 — 開機失敗、充電問題、藍芽配對、qFlipper 連線、Sub-GHz 範圍與擷取問題、NFC/RFID 讀取失敗，以及儲存空間問題。
 sidebar_position: 5
-tags: [flipper-zero, 疑難排解, 診斷, qflipper, 藍牙, sub-ghz, nfc, rfid]
-keywords: [Flipper Zero, 疑難排解, 無法開機, 無法充電, 藍牙無法配對, 偵測不到 qFlipper, Sub-GHz 無訊號, NFC 無法讀取]
+tags: [flipper-zero, 疑難排解, 診斷, qflipper, 藍芽, sub-ghz, nfc, rfid]
+keywords: [Flipper Zero, 疑難排解, 無法開機, 無法充電, 藍芽無法配對, 偵測不到 qFlipper, Sub-GHz 無訊號, NFC 無法讀取]
 authors: yupitek
 date: 2026-08-21
 last_updated: 2026-08-21
@@ -16,7 +16,7 @@ toc: true
 
 # Flipper Zero 疑難排解
 
-> **除錯鐵律（Rule of thumb）**：先硬體 → 再韌體／驅動程式 → 最後設定。以 Flipper Zero 來說：**電池與傳輸線 → 韌體版本 → 組態（地區、藍牙、SD 卡）**。
+> **除錯鐵律（Rule of thumb）**：先硬體 → 再韌體／驅動程式 → 最後設定。以 Flipper Zero 來說：**電池與傳輸線 → 韌體版本 → 組態（地區、藍芽、SD 卡）**。
 
 這個頁面是決策樹索引。找到你的症狀，跳到該章節，並依序遵循診斷步驟。
 
@@ -37,7 +37,7 @@ flowchart TD
 | 類別 | 症狀 | 前往 |
 |---|---|---|
 | 電源 | 無法開機、無法充電、耗電快 | [電池與電源](#battery--power) |
-| 連線 | qFlipper 找不到裝置、應用程式無法配對 | [USB 與藍牙](#usb--bluetooth) |
+| 連線 | qFlipper 找不到裝置、應用程式無法配對 | [USB 與藍芽](#usb--bluetooth) |
 | 讀取 | 無法擷取 Sub-GHz、NFC/RFID 無法讀取 | [Sub-GHz 與卡片](#sub-ghz--cards) |
 | 儲存空間 | 偵測不到 SD 卡、「no storage」 | [儲存空間與 microSD](#storage--microsd) |
 | 韌體 | 更新失敗、裝置卡在標誌畫面 | [韌體與復原](#firmware--recovery) |
@@ -48,7 +48,7 @@ flowchart TD
 
 **診斷** — 嘗試充電：
 
-1. 將 USB-C 連接到已知良好的充電器，持續 **10 分鐘以上**。
+1. 將 USB-C 連線到已知良好的充電器，持續 **10 分鐘以上**。
 2. 按下 **LEFT + BACK**。
 3. 如果螢幕仍然全黑，電池可能已完全耗盡（安全模式）——長時間存放後這是正常的。
 
@@ -66,11 +66,11 @@ Charge LED: OFF → ORANGE (charging) → GREEN (full)
 
 | 症狀 | 原因 | 修正 |
 |---|---|---|
-| 完全沒有 LED | 傳輸線／連接埠／充電器故障 | 嘗試另一條 USB-C 資料傳輸線與 5V 充電器 |
+| 完全沒有 LED | 傳輸線／連線埠／充電器故障 | 嘗試另一條 USB-C 資料傳輸線與 5V 充電器 |
 | 充電非常慢 | 設計上充電限制在約 1A 上限 | 使用任何良好的 5V/2A 充電器；充飽時間約 2 小時 |
 | 停在某個百分比 | 電芯不平衡或電池老化 | 在較涼爽的房間充電；若持續發生，聯絡支援 |
 
-## USB 與藍牙
+## USB 與藍芽
 
 ### Q3：qFlipper 顯示「no device found」
 
@@ -93,14 +93,14 @@ Bus 001 Device 004: ID 0483:5740 STMicroelectronics Flipper Zero
 | qFlipper 看得到但卡住 | qFlipper 版本過舊 | 從 [flipper.net/pages/downloads](https://flipper.net/pages/downloads) 更新 qFlipper |
 | Windows 可用、Linux 不行 | 缺少 udev 規則 | 參閱 qFlipper Linux 安裝說明／AppImage |
 
-### Q4：手機應用程式無法透過藍牙配對
+### Q4：手機應用程式無法透過藍芽配對
 
 **診斷** — 在 Flipper Zero 上：**主選單 → Bluetooth** 必須顯示 **ON**。
 
 | 症狀 | 原因 | 修正 |
 |---|---|---|
 | 應用程式找不到裝置 | BLE 關閉／距離太遠 | 在 Flipper 上啟用 BLE，讓手機保持在 1–2 公尺內 |
-| PIN 碼不符 | 過期的配對 | 在應用程式與手機藍牙設定中取消配對，重新啟動兩者，重新配對 |
+| PIN 碼不符 | 過期的配對 | 在應用程式與手機藍芽設定中取消配對，重新啟動兩者，重新配對 |
 | 配對成功但同步卡住 | 應用程式太舊，無法搭配新韌體 | 更新應用程式；參閱[手機應用程式指南](/flipper-zero/mobile-app/) |
 | 重新開機後才能連線 | BLE 堆疊卡住 | 重新啟動 Flipper（LEFT + BACK → 關機 → 開機） |
 
@@ -119,7 +119,7 @@ Bus 001 Device 004: ID 0483:5740 STMicroelectronics Flipper Zero
 | 強度計有訊號但無法解碼 | 未知協定或訊號太弱 | 靠近一點（範圍可達約 50 公尺，但近距離讀取最強）；按住遙控器按鈕再試一次 |
 | 完全沒有訊號 | 頻段不符合你的地區 | 地區必須允許遙控器的頻率（315/433/868/915 MHz）。在 **設定 → 地區** 中變更地區（在法規允許下） |
 | 擷取成功但重播沒反應 | 訊號重播的時機不對 | 有些遙控器使用滾動碼——原始訊號使用過後就無法重播。這不是故障 |
-| 只聽到雜訊 | 干擾 | 遠離 Wi-Fi 路由器／其他發射器 |
+| 只聽到雜訊 | 幹擾 | 遠離 Wi-Fi 路由器／其他發射器 |
 
 > ⚠️ 重播你不擁有的訊號可能違法。只在你自己的裝置上測試。
 
@@ -132,8 +132,8 @@ Bus 001 Device 004: ID 0483:5740 STMicroelectronics Flipper Zero
 
 | 症狀 | 原因 | 修正 |
 |---|---|---|
-| 「No card detected」 | 天線位置錯誤／卡片類型不符 | 將卡片旋轉 90°，試試兩面；有些卡片需要一點時間耦合 |
-| 有些卡片讀得到、有些不行 | 卡片類型不受支援（例如需要驗證的加密 DESFire） | 在[產品頁面](/flipper-zero/products/flipper-zero/)查看支援清單；沒有鑰匙就無法讀取加密卡片 |
+| 「No card detected」 | 天線位置錯誤／卡片型別不符 | 將卡片旋轉 90°，試試兩面；有些卡片需要一點時間耦合 |
+| 有些卡片讀得到、有些不行 | 卡片型別不受支援（例如需要驗證的加密 DESFire） | 在[產品頁面](/flipper-zero/products/flipper-zero/)檢視支援清單；沒有鑰匙就無法讀取加密卡片 |
 | 讀得到但無法模擬 | 模擬範圍設計上就很短 | 模擬天線很小——將 Flipper 緊貼讀卡機 |
 
 ## 儲存空間與 microSD

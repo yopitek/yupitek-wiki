@@ -1,4 +1,5 @@
 ---
+draft: true
 slug: templates
 id: admin-templates
 title: 範本
@@ -8,7 +9,7 @@ description: 撰寫與翻譯 wiki 內容的建議頁面範本，符合文章架�
 
 # 範本
 
-這些範本描述每種頁面類型的建議結構。它們在專案的 `article_scheme.md` 中有完整定義，這裡摘要供快速參考。
+這些範本描述每種頁面型別的建議結構。它們在專案的 `article_scheme.md` 中有完整定義，這裡摘要供快速參考。
 
 ## Frontmatter（前置資料）
 
@@ -23,7 +24,7 @@ description: <one-line summary shown in search and listings>
 ---
 ```
 
-## 頁面類型範本
+## 頁面型別範本
 
 ### 產品頁面（`products/{model}/index.md`）
 
@@ -76,9 +77,9 @@ description: <one-line summary shown in search and listings>
 - 每個 ```bash 指令都實際測試過；附上預期輸出。
 - 內部連結使用絕對路由路徑（不用 `../`）。
 - 沒有 `TODO` / `TBD` 佔位符。
-- `npm run build:en` 通過且零壞連結。
+- `npm run build:en` 透過且零壞連結。
 
 ## 相關
 
-- [`Review Queue`](/admin/review-queue/) — 新內容上線前在此檢查。
+- `Review Queue` — 新內容上線前在此檢查。
 - [`Change Log`](/admin/change-log/) — 記錄何時變更了什麼。

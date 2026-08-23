@@ -2,8 +2,8 @@
 id: alfa-driver-mt7921aun
 title: MT7921AUN 驅動程式指南（AWUS036AXM / AWUS036AXML）
 sidebar_position: 3
-description: MT7921AUN 晶片深入探討——AWUS036AXM 與 AWUS036AXML（Wi-Fi 6E）背後的內建於核心 mt7921u 驅動程式，含核心需求、監聽模式與藍牙。
-tags: [alfa, 驅動程式, mt7921aun, wifi-6e, 藍牙, 核心]
+description: MT7921AUN 晶片深入探討——AWUS036AXM 與 AWUS036AXML（Wi-Fi 6E）背後的內建於核心 mt7921u 驅動程式，含核心需求、監聽模式與藍芽。
+tags: [alfa, 驅動程式, mt7921aun, wifi-6e, 藍芽, 核心]
 keywords: [MT7921AUN 驅動程式, mt7921u, AWUS036AXML, Linux Wi-Fi 6E, AWUS036AXM]
 ---
 
@@ -13,13 +13,13 @@ keywords: [MT7921AUN 驅動程式, mt7921u, AWUS036AXML, Linux Wi-Fi 6E, AWUS036
 
 ## 概念：MT7921AUN 給你什麼
 
-這是 ALFA 產品線中 MediaTek 最新的無線電，一個 **2×2:2 802.11ax** 設計，同一個 dongle 上還包含**藍牙 5.2**。對 Linux 使用者有三件事很重要：
+這是 ALFA 產品線中 MediaTek 最新的無線電，一個 **2×2:2 802.11ax** 設計，同一個 dongle 上還包含**藍芽 5.2**。對 Linux 使用者有三件事很重要：
 
 1. **內建於核心的驅動程式**（`drivers/net/wireless/mediatek/mt76/mt7921/`）自 **Linux 5.18** 起——沒有 DKMS、沒有編譯。
 2. **Wi-Fi 6E**：AXML 版本開啟 **6 GHz 頻段**（5 GHz 以上的頻道 1–233），這是目前可用頻譜中壅塞度最低的。
 3. **需要韌體 blob**——驅動程式從 `linux-firmware` 載入 `mt7921` 韌體，所以請保持該套件更新。
 
-主要警告：因為驅動程式需要 **5.18+ 核心**，較舊的作業系統版本看不到這支無線網卡。Ubuntu 22.04+ 與近期 Kali 沒問題；Ubuntu 20.04 不行。
+主要警告：因為驅動程式需要 **5.18+ 核心**，較舊的作業系統版本看不到這支無線網絡卡。Ubuntu 22.04+ 與近期 Kali 沒問題；Ubuntu 20.04 不行。
 
 ```mermaid
 flowchart LR
@@ -35,7 +35,7 @@ flowchart LR
 
 - [ ] 核心 **5.18 或更新**的 Linux（`uname -r`）
 - [ ] 已安裝且夠新的 `linux-firmware` 套件
-- [ ] `sudo` 權限
+- [ ] `sudo` 許可權
 - [ ] AWUS036AXM 或 AWUS036AXML
 
 ## 步驟 1：核心檢查
@@ -56,7 +56,7 @@ uname -r
 
 ## 步驟 2：驗證驅動程式與韌體
 
-插上無線網卡：
+插上無線網絡卡：
 
 ```bash
 lsusb | grep -i mediatek
@@ -79,7 +79,7 @@ mt7921u                65536  0
 sudo apt install linux-firmware
 ```
 
-然後重新插上無線網卡。
+然後重新插上無線網絡卡。
 
 ## 步驟 3：確認介面與頻段
 
@@ -88,7 +88,7 @@ iw dev
 iwlist wlan0 freq | grep -E "^          Channel" | sort -u | tail -5
 ```
 
-**預期輸出**：一個介面那一行，而對 AXML 來說頻率清單應包含 **6 GHz 頻道**（「6 GHz band」下的 `Channel 1 ... Channel 233`）。如果 AXML 上只看到 2.4/5 GHz 項目，你的法規領域可能隱藏了 6 GHz——`sudo iw reg set TW`（使用你的國家代碼）並把介面 down/up。
+**預期輸出**：一個介面那一行，而對 AXML 來說頻率清單應包含 **6 GHz 頻道**（「6 GHz band」下的 `Channel 1 ... Channel 233`）。如果 AXML 上只看到 2.4/5 GHz 專案，你的法規領域可能隱藏了 6 GHz——`sudo iw reg set TW`（使用你的國家程式碼）並把介面 down/up。
 
 ## 步驟 4：連線
 
@@ -111,7 +111,7 @@ sudo aireplay-ng --test wlan0mon
 
 > **你可能會想問**——*「監聽模式在 6 GHz 上可用嗎？」* 在 AXML 上，搭配現代核心與範圍內的 6 GHz 能力 AP，6 GHz 頻段支援監聽模式。早期核心有怪癖；如果你的擷取在 6 GHz 上什麼都沒有，先在 5 GHz 上測試，把驅動程式與環境隔離開來。
 
-## 步驟 6：藍牙
+## 步驟 6：藍芽
 
 AXM/AXML 在同一個 USB 裝置上提供 BT 5.2。配對方式：
 
@@ -122,7 +122,7 @@ scan on
 pair <MAC>
 ```
 
-**預期輸出**：你的裝置顯示 `Pairing successful`。如果 `bluetoothctl` 什麼都沒看到，載入藍牙堆疊模組：`sudo modprobe btusb` 並重試。
+**預期輸出**：你的裝置顯示 `Pairing successful`。如果 `bluetoothctl` 什麼都沒看到，載入藍芽堆疊模組：`sudo modprobe btusb` 並重試。
 
 ## 疑難排解
 

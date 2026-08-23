@@ -1,10 +1,10 @@
 ---
 id: flipper-product-video-game-module
 title: Video Game Module — 完整指南
-description: Flipper Zero Video Game Module（RP2040，由 Raspberry Pi 驅動）— 完整規格、如何安裝、將螢幕鏡像到電視、玩懷舊遊戲、使用動作感測，以及刷寫你自己的 Pico 相容韌體。
+description: Flipper Zero Video Game Module（RP2040，由 Raspberry Pi 驅動）— 完整規格、如何安裝、將螢幕映象到電視、玩懷舊遊戲、使用動作感測，以及刷寫你自己的 Pico 相容韌體。
 sidebar_position: 3
 tags: [flipper-zero, video-game-module, rp2040, raspberry-pi, 懷舊遊戲, dvi, 動作追蹤]
-keywords: [Video Game Module, RP2040, Raspberry Pi, 懷舊遊戲, DVI, 螢幕鏡像, IMU, 空中滑鼠, Scoppy]
+keywords: [Video Game Module, RP2040, Raspberry Pi, 懷舊遊戲, DVI, 螢幕映象, IMU, 空中滑鼠, Scoppy]
 authors: yupitek
 date: 2026-08-21
 last_updated: 2026-08-21
@@ -16,7 +16,7 @@ toc: true
 
 # Video Game Module — 完整指南
 
-> **一句話定位**：一個由 Raspberry Pi RP2040 驅動的模組，卡入 Flipper Zero 後把它變成迷你遊戲主機——將 Flipper 的螢幕鏡像到電視（DVI 640×480）、玩懷舊遊戲，並加入 6 軸動作感測。
+> **一句話定位**：一個由 Raspberry Pi RP2040 驅動的模組，卡入 Flipper Zero 後把它變成迷你遊戲主機——將 Flipper 的螢幕映象到電視（DVI 640×480）、玩懷舊遊戲，並加入 6 軸動作感測。
 
 ```mermaid
 flowchart LR
@@ -49,7 +49,7 @@ Video Game Module 是**與 Raspberry Pi 合作開發**的，使用 RP2040——�
 
 它解鎖的功能：
 
-- **螢幕鏡像** — 在電視上顯示 Flipper Zero 的 UI（非常適合示範與教學）。
+- **螢幕映象** — 在電視上顯示 Flipper Zero 的 UI（非常適合示範與教學）。
 - **懷舊遊戲** — 從 microSD 卡載入遊戲，用 Flipper 的方向鍵在電視上遊玩。
 - **動作控制** — 6 軸 ICM-42688-P 感測器支援空中滑鼠式控制與動作遊戲。
 - **獨立開發板** — 因為它是完整的 RP2040，可以獨立執行 Raspberry Pi Pico 專案（例如 **Scoppy** 示波器應用程式）。
@@ -67,7 +67,7 @@ Video Game Module 是**與 Raspberry Pi 合作開發**的，使用 RP2040——�
 
 1. 如果裝了 Silicone Case 請先取下（模組有自己的緩衝墊）。
 2. 關閉 Flipper Zero 電源。
-3. 將模組的連接器與 Flipper 的 GPIO 排針對齊（配合方向標記），壓下直到卡入。
+3. 將模組的聯結器與 Flipper 的 GPIO 排針對齊（配合方向標記），壓下直到卡入。
 4. 開啟 Flipper Zero。它應該會自動偵測模組並進行準備。
 
 **驗證**：**主選單 → 設定 → 擴充模組** → **Listen UART** 選項必須設為 **USART**（模組透過 UART 通訊）。如果設成其他值，模組將無法被偵測。
@@ -85,17 +85,17 @@ flowchart TD
     H --> I[Flipper screen mirrors to TV ✅]
 ```
 
-### 步驟 3：連接到電視
+### 步驟 3：連線到電視
 
-1. 將影像傳輸線插入模組的 **Video Out** 連接埠（DVI-D；使用 DVI 或 DVI 轉 HDMI 傳輸線）。
-2. 在電視上，將輸入來源切換到你使用的連接埠。
+1. 將影像傳輸線插入模組的 **Video Out** 連線埠（DVI-D；使用 DVI 或 DVI 轉 HDMI 傳輸線）。
+2. 在電視上，將輸入來源切換到你使用的連線埠。
 3. Flipper Zero 的螢幕會以 640×480@60 Hz 出現在電視上。
 
 > 如果你在電視上看到 **「Video Game Module not initialized」**，表示 Flipper 韌體太舊（或模組在沒有 Flipper 的情況下供電）。更新 Flipper 韌體後重試。
 
 ### 步驟 4：玩遊戲
 
-1. 將遊戲檔案（`.fap` 應用程式 + 素材）複製到 microSD 卡——請參閱官方模組文件與 Flipper 應用程式目錄。
+1. 將遊戲檔案（`.fap` 應用程式 + 素材）複製到 microSD 卡——請參閱官方模組檔案與 Flipper 應用程式目錄。
 2. 在 Flipper 上：**Apps → Games** → 選擇你的遊戲。
 3. 用方向鍵在電視上遊玩；使用 IMU 的遊戲讓你可以傾斜／移動 Flipper 來控制動作。
 
@@ -103,7 +103,7 @@ flowchart TD
 
 ### 空中滑鼠
 
-搭配正確的應用程式，在空中揮動 Flipper Zero（已安裝模組）即可透過藍牙控制電腦游標——ICM-42688-P 會回報旋轉與加速度，Flipper 會將它轉換成滑鼠移動。
+搭配正確的應用程式，在空中揮動 Flipper Zero（已安裝模組）即可透過藍芽控制電腦遊標——ICM-42688-P 會回報旋轉與加速度，Flipper 會將它轉換成滑鼠移動。
 
 ### 使用 Game Engine 撰寫你自己的遊戲
 
@@ -138,7 +138,7 @@ cp scoppy.uf2 /media/$(whoami)/RPI-RP2/
 
 ## 相容性
 
-| 平台 | 支援 | 說明 |
+| 平臺 | 支援 | 說明 |
 |---|---|---|
 | Flipper Zero（官方） | ✅ | 需要韌體 ≥ 0.98.3 |
 | 電視／顯示器 | ✅ | DVI-D 640×480@60；透過 DVI 轉 HDMI 傳輸線使用 HDMI |

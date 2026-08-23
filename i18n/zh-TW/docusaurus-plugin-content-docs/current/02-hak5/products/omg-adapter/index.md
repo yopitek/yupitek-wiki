@@ -22,13 +22,13 @@ O.MG 家族把植入晶片藏在日常 USB 物品裡。**Adapter** 選擇了最�
 
 當它沒有傳輸 payload 時，Adapter 會穿透正常的 USB 2.0 資料，同時植入晶片保持無法偵測。這是把 O.MG 能力帶進行動優先世界的低調方式。
 
-> **⚠️ 僅限授權測試 — 出廠停用。** 只在你擁有的裝置上測試，或取得書面許可。搭配 [Malicious Cable Detector](/hak5/products/malicious-cable-detector/) 了解防禦面。
+> **⚠️ 僅限授權測試 — 出廠停用。** 只在你擁有的裝置上測試，或取得書面許可。搭配 [Malicious Cable Detector](/hak5/products/malicious-cable-detector/) 瞭解防禦面。
 
 ---
 
 ## 規格一覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | 外型 | USB-A（host）→ USB-C（主動/攻擊端）轉接頭 |
 | 植入晶片 | 支援 WiFi 的無線 HID 晶片（WebUI + 802.11 無線電） |
@@ -36,7 +36,7 @@ O.MG 家族把植入晶片藏在日常 USB 物品裡。**Adapter** 選擇了最�
 | 行動裝置 | OTG 主動 Type-C 端 — 注入手機與平板 |
 | 啟用 | 需要 [O.MG Programmer](/hak5/products/omg-programmer/) — 出廠停用 |
 | 特色功能 | 自我銷毀、地理圍欄、WiFi 觸發、偽造身分、資料穿透 |
-| 官方文件 | https://docs.hak5.org/omg-cable |
+| 官方檔案 | https://docs.hak5.org/omg-cable |
 
 ---
 

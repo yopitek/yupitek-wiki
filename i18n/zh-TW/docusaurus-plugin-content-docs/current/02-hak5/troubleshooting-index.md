@@ -43,7 +43,7 @@ flowchart TD
 | 電源與開機 | 沒有 LED、沒有 Wi-Fi、裝置無回應 | [電源與開機](#power--boot) |
 | Arming 模式 | 隨身碟 / Web UI / SSH 沒出現 | [Arming 模式問題](#arming-mode-problems) |
 | 連線 | SSH 被拒絕、Web UI 連不上、IP 錯誤 | [SSH 與 Web UI 連線](#ssh--web-ui-connection) |
-| Payload | 什麼都沒打、掃描沒產生 loot、腳本錯誤 | [Payload 問題](#payload-problems) |
+| Payload | 什麼都沒打、掃描沒產生 loot、指令碼錯誤 | [Payload 問題](#payload-problems) |
 | Wi-Fi | Pineapple AP 看不到、沒有網際網路 uplink | [Wi-Fi 問題](#wi-fi-issues) |
 
 ---
@@ -84,7 +84,7 @@ flowchart TD
 | 側錄期間關閉 | 隱蔽模式 — 這是正常的！ |
 | 恆亮（各種顏色） | 設定 / 攻擊模式活動 |
 
-> **每台裝置都不一樣 —** 上面的顏色代碼對應目前韌體。不確定時，官方各裝置文件（從每個[產品頁](/hak5/)連結）包含你韌體版本的權威圖例。
+> **每臺裝置都不一樣 —** 上面的顏色程式碼對應目前韌體。不確定時，官方各裝置檔案（從每個[產品頁](/hak5/)連結）包含你韌體版本的權威圖例。
 
 ---
 
@@ -108,7 +108,7 @@ flowchart TD
 
 ### 裝置掛載成磁碟，但沒有 `payloads` 資料夾
 **診斷**：`lsusb` 或檔案管理員看得到裝置，但目錄結構看起來不對。
-**原因：** 你看的是 *loot/設定* 分割區而不是 payload 區域，或這台裝置的配置不同。
+**原因：** 你看的是 *loot/設定* 分割區而不是 payload 區域，或這臺裝置的配置不同。
 **修正：** 在你型號的產品頁查確切的分割區配置（例如 [Bash Bunny](/hak5/products/bash-bunny-mark-ii/) 使用 `/payloads/switch1|2|3/`；[Shark Jack](/hak5/products/shark-jack/) 透過 SSH 暴露 `/root/payload/`，不是以磁碟形式）。
 
 ### Bash Bunny 開關沒有觸發 arming 模式
@@ -143,7 +143,7 @@ ping 172.16.24.1
 | Shark Jack | `172.16.24.1` | `root` / `hak5shark` |
 | Packet Squirrel | `172.16.32.1`（web UI） | `root` / `hak5squirrel` |
 | WiFi Pineapple | `172.16.42.1:1471`（web UI） | 首次開機設定的 admin 密碼 |
-| Bash Bunny | USB 序列主控台（無 IP） | `root` / `hak5bunny` |
+| Bash Bunny | USB 序列主控臺（無 IP） | `root` / `hak5bunny` |
 | Key Croc | `172.16.0.1`（web UI，arming 模式） | `root` / `hak5croc` |
 
 > **不確定你型號的位址？** 查它的產品頁 — [17 份產品指南](/hak5/)每一份都列出確切的管理位址。
@@ -164,17 +164,17 @@ ping 172.16.24.1
 | Payload 為錯誤的裝置編譯 | Key Croc 執行直譯式 `payload.txt`；Rubber Ducky 需要編譯過的 `inject.bin` |
 
 ### Payload 有執行但 loot 資料夾是空的
-**原因：** payload 的輸出路徑不存在，或 payload 寫到不同的目錄。**修正：** 從 payload 文件驗證路徑（Shark Jack 上是 `/root/loot/`；Key Croc 上是 `/root/loot/keystrokes.log`），並給腳本一點時間 — 掃描需要時間。
+**原因：** payload 的輸出路徑不存在，或 payload 寫到不同的目錄。**修正：** 從 payload 檔案驗證路徑（Shark Jack 上是 `/root/loot/`；Key Croc 上是 `/root/loot/keystrokes.log`），並給指令碼一點時間 — 掃描需要時間。
 
 ### Bash Bunny LED 閃紅燈
-**原因：** payload 回傳錯誤。**修正：** 在 arming 模式連接序列主控台並讀取輸出：
+**原因：** payload 回傳錯誤。**修正：** 在 arming 模式連線序列主控臺並讀取輸出：
 
 ```text
 LED R
 GET SWITCH_POSITION
 ```
 
-看錯誤那一行，修正腳本，重新部署。
+看錯誤那一行，修正指令碼，重新部署。
 
 ---
 
@@ -182,13 +182,13 @@ GET SWITCH_POSITION
 
 ### 看不到 Pineapple 的 AP
 1. 開機後等 60 秒（首次執行開機很慢）。
-2. 檢查 LED — 如果是紅色，透過有線連線查看 Web UI 日誌。
+2. 檢查 LED — 如果是紅色，透過有線連線檢視 Web UI 日誌。
 3. 在 [Pager](/hak5/products/wifi-pineapple-pager/) 上，螢幕會直接顯示 AP 狀態。
 
 ### Pineapple 沒有網際網路，模組無法更新
 **原因：** AP 沒有 uplink。**修正：** 把乙太網路線接到 USB-C 乙太網路埠（Mark VII），或設定 Pager 的乙太網路/USB-C，然後重試 **Settings → Software Update**。
 
-### 5 GHz 用戶端連不上 Pineapple
+### 5 GHz 使用者端連不上 Pineapple
 **原因：** Mark VII 需要 MK7AC 轉接器（MT7612U）才能用 5 GHz。**修正：** 見[相容轉接器表格](/alfa-network/) — ALFA AWUS036ACM 可用。
 
 ---

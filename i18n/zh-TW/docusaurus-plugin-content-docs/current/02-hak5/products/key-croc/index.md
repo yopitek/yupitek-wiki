@@ -16,7 +16,7 @@ toc: true
 
 # Key Croc — 完整指南
 
-> **一句話定位**：Key Croc 是一台偽裝成鍵盤轉接頭的「智慧型硬體鍵盤側錄器」——它記錄你打下的每個字，而且當你打出特定關鍵字（例如「密碼」、「password」）時，它會自動觸發預載的攻擊 Payload。
+> **一句話定位**：Key Croc 是一臺偽裝成鍵盤轉接頭的「智慧型硬體鍵盤側錄器」——它記錄你打下的每個字，而且當你打出特定關鍵字（例如「密碼」、「password」）時，它會自動觸發預載的攻擊 Payload。
 
 Key Croc 看起來像一個無害的 USB 鍵盤穿透轉接頭。夾在鍵盤和電腦之間，它會安靜地**記錄每一次按鍵**到內部儲存。但它遠不只是側錄器：使用**模式比對**，它監看按鍵串流中感興趣的字詞（一個關鍵字或正規表示式），並在比對到的瞬間觸發預載的**攻擊 payload** — 甚至複製鍵盤的硬體 ID，讓它與一般轉接頭無法區分。
 
@@ -28,18 +28,18 @@ Key Croc 看起來像一個無害的 USB 鍵盤穿透轉接頭。夾在鍵盤和
 
 ## 規格一覽
 
-| 項目 | 規格 |
+| 專案 | 規格 |
 |---|---|
 | CPU | 四核 ARM Cortex-A7 @ 1.2 GHz |
 | 儲存 | 8 GB 桌面級 SSD |
-| 介面 | USB-A（host 端）+ USB-A（鍵盤端）+ 序列主控台 |
+| 介面 | USB-A（host 端）+ USB-A（鍵盤端）+ 序列主控臺 |
 | 無線 | 內建 2.4 GHz Wi-Fi 天線（802.11 b/g/n） |
 | OS | Debian Linux，root shell + SSH |
 | Payload 語言 | DuckyScript 2.0（直譯式），外加 Bash |
 | 鍵盤側錄 | 開箱即用、零設定 — 記錄到 `/root/loot/keystrokes.log` |
 | Cloud C² | 支援 — 串流/注入按鍵、管理 payload、外洩 loot |
 | 隱蔽性 | 側錄時 LED 關閉；複製鍵盤硬體 ID |
-| 官方文件 | https://docs.hak5.org/key-croc |
+| 官方檔案 | https://docs.hak5.org/key-croc |
 
 ## 構造
 
@@ -49,7 +49,7 @@ Key Croc 看起來像一個無害的 USB 鍵盤穿透轉接頭。夾在鍵盤和
 | USB-A（鍵盤端） | 真實鍵盤插在這裡（穿透） |
 | 隱藏 arming 按鈕 | 插入時按下 → 變成隨身碟 |
 | RGB LED | 側錄期間關閉（隱蔽）；設定/攻擊期間亮起 |
-| 序列主控台 | 進階操作的完整 root shell |
+| 序列主控臺 | 進階操作的完整 root shell |
 
 ---
 
@@ -80,7 +80,7 @@ Key Croc 開箱即開始側錄。只要：
 3. 打字。每一次按鍵都會記錄到 `/root/loot/keystrokes.log`。
 
 ### 步驟 2 — 讀取 loot
-插入時長按**隱藏 arming 按鈕**（或按住後重新連接），把 Croc 變成隨身碟，然後讀取日誌：
+插入時長按**隱藏 arming 按鈕**（或按住後重新連線），把 Croc 變成隨身碟，然後讀取日誌：
 
 ```text
 2026-08-21 14:31:02  user typed: root
@@ -139,7 +139,7 @@ CLOUD_C2 "Keyword of interest typed!"
 | HID | 鍵盤 | 穿透 + 按鍵注入 |
 | Ethernet | USB 網路卡 | 取得目標的網路存取，繞過周邊防火牆 |
 | Storage | 隨身碟 | Arming、檔案傳輸 |
-| Serial | 序列裝置 | 對主控台/嵌入式系統的巧妙攻擊 |
+| Serial | 序列裝置 | 對主控臺/嵌入式系統的巧妙攻擊 |
 
 單一 payload 可以結合多種模式 — Croc 可以同時側錄*並*轉向到網路上。
 

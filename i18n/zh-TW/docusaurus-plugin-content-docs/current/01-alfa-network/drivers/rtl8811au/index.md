@@ -4,7 +4,7 @@ title: RTL8811AU 驅動程式指南（AWUS036ACS）
 sidebar_position: 5
 description: RTL8811AU 晶片深入探討——口袋大小的 AWUS036ACS、rtl8811au 驅動程式的 DKMS 安裝、監聽模式與注入驗證。
 tags: [alfa, 驅動程式, rtl8811au, dkms, 監聽模式]
-keywords: [RTL8811AU 驅動程式, AWUS036ACS, rtl8811au, 口袋無線網卡監聽模式]
+keywords: [RTL8811AU 驅動程式, AWUS036ACS, rtl8811au, 口袋無線網絡卡監聽模式]
 ---
 
 # RTL8811AU 驅動程式指南（AWUS036ACS）
@@ -30,7 +30,7 @@ flowchart LR
 
 - [ ] Linux（Ubuntu 20.04+ / Kali / Debian）
 - [ ] `sudo apt install -y build-essential dkms git`
-- [ ] `sudo` 權限
+- [ ] `sudo` 許可權
 - [ ] AWUS036ACS
 
 ## 步驟 1：複製並建置
@@ -55,7 +55,7 @@ sudo modprobe 8811au
 iw dev
 ```
 
-**預期輸出**：一行 `Interface wlan0`（或 `wlan1`）。如果無線網卡重新插上後才出現，把模組加入自動載入：
+**預期輸出**：一行 `Interface wlan0`（或 `wlan1`）。如果無線網絡卡重新插上後才出現，把模組加入自動載入：
 
 ```bash
 echo 8811au | sudo tee /etc/modules-load.d/alfa.conf

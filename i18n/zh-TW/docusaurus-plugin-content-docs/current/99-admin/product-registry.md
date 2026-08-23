@@ -1,4 +1,5 @@
 ---
+draft: true
 slug: product-registry
 id: admin-product-registry
 title: 產品登記表
@@ -20,15 +21,15 @@ description: Yupitek Wiki 中所有已記錄產品的總索引，依品牌分組
 
 | 型號 | 類別 | 頁面 |
 |-------|----------|------|
-| AWUS036ACH | Wi-Fi 網卡 | [檢視](/alfa-network/products/awus036ach/) |
-| AWUS036ACHM | Wi-Fi 網卡 | [檢視](/alfa-network/products/awus036achm/) |
-| AWUS036ACM | Wi-Fi 網卡 | [檢視](/alfa-network/products/awus036acm/) |
-| AWUS036ACS | Wi-Fi 網卡 | [檢視](/alfa-network/products/awus036acs/) |
-| AWUS036AX | Wi-Fi 網卡 | [檢視](/alfa-network/products/awus036ax/) |
-| AWUS036AXER | Wi-Fi 網卡 | [檢視](/alfa-network/products/awus036axer/) |
-| AWUS036AXM | Wi-Fi 網卡 | [檢視](/alfa-network/products/awus036axm/) |
-| AWUS036AXML | Wi-Fi 網卡 | [檢視](/alfa-network/products/awus036axml/) |
-| AWUS036EACS | Wi-Fi 網卡 | [檢視](/alfa-network/products/awus036eacs/) |
+| AWUS036ACH | Wi-Fi 網絡卡 | [檢視](/alfa-network/products/awus036ach/) |
+| AWUS036ACHM | Wi-Fi 網絡卡 | [檢視](/alfa-network/products/awus036achm/) |
+| AWUS036ACM | Wi-Fi 網絡卡 | [檢視](/alfa-network/products/awus036acm/) |
+| AWUS036ACS | Wi-Fi 網絡卡 | [檢視](/alfa-network/products/awus036acs/) |
+| AWUS036AX | Wi-Fi 網絡卡 | [檢視](/alfa-network/products/awus036ax/) |
+| AWUS036AXER | Wi-Fi 網絡卡 | [檢視](/alfa-network/products/awus036axer/) |
+| AWUS036AXM | Wi-Fi 網絡卡 | [檢視](/alfa-network/products/awus036axm/) |
+| AWUS036AXML | Wi-Fi 網絡卡 | [檢視](/alfa-network/products/awus036axml/) |
+| AWUS036EACS | Wi-Fi 網絡卡 | [檢視](/alfa-network/products/awus036eacs/) |
 | APA-M04 | 天線 | [檢視](/alfa-network/products/apa-m04/) |
 | APA-M25 | 天線 | [檢視](/alfa-network/products/apa-m25/) |
 | APA-M25-6E | 天線 | [檢視](/alfa-network/products/apa-m25-6e/) |
@@ -96,7 +97,7 @@ description: Yupitek Wiki 中所有已記錄產品的總索引，依品牌分組
 
 ## 類別定義
 
-- **Wi-Fi 網卡** — 連接 Wi-Fi 網路的 USB 網路卡。
+- **Wi-Fi 網絡卡** — 連線 Wi-Fi 網路的 USB 網路卡。
 - **天線** — 用於改善範圍或增益的外部天線配件。
 - **裝置** — 內建韌體的獨立硬體產品。
 - **擴充板** — 與主機裝置搭配使用的擴充板／開發板。
