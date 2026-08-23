@@ -1,7 +1,8 @@
 ---
+
 id: acs-index
 title: ACS Smart Card & NFC Readers
-slug: /acs
+slug: /acs/
 sidebar_position: 5
 description: ACS (Advanced Card Systems) smart card readers and NFC readers — ACR122U, ACR1252U and ACR1552U. Contactless ISO 14443, MIFARE, FeliCa, ISO 15693 and NFC.
 tags: [acs, smart-card, nfc, rfid, acr122u, acr1252u, acr1552u, pcsc]

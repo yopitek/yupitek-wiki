@@ -1,10 +1,12 @@
 ---
+
 id: alfa-index
 title: ALFA Network
 sidebar_position: 1
 description: ALFA Network Wi-Fi adapters, antennas, Linux drivers, Kali/NetHunter setup guides, hardware integrations and compatibility matrix.
 tags: [alfa, wifi, kali, monitor-mode, adapter, antenna]
 keywords: [ALFA Network, AWUS036ACM, AWUS036AXML, Wi-Fi adapter, monitor mode, Kali Linux]
+slug: /alfa-network/
 ---
 
 # ALFA Network

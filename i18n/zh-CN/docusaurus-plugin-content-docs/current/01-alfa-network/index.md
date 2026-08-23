@@ -1,10 +1,12 @@
 ---
+
 id: alfa-index
 title: ALFA Network
 sidebar_position: 1
 description: ALFA Network 无线网卡、天线、Linux 驱动程序、Kali/NetHunter 设置指南、硬件集成与兼容性矩阵。
 tags: [alfa, wifi, kali, 监听模式, 网卡适配器, 天线]
 keywords: [ALFA Network, AWUS036ACM, AWUS036AXML, 无线网卡, 监听模式, Kali Linux]
+slug: /alfa-network/
 ---
 
 # ALFA Network

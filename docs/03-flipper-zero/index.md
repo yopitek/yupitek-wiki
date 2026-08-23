@@ -1,7 +1,8 @@
 ---
+
 id: flipper-index
 title: Flipper Zero
-slug: /flipper-zero
+slug: /flipper-zero/
 sidebar_position: 3
 description: Flipper Zero multi-tool device — first-time setup, firmware updates with qFlipper, mobile app pairing, official resources, troubleshooting, and full product pages for the Flipper Zero, WiFi Devboard, Video Game Module and Silicone Case.
 tags: [flipper-zero, sub-ghz, nfc, rfid, 125khz, infrared, ibutton, gpio, qflipper, esp32-s2, rp2040]

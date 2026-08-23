@@ -1,4 +1,5 @@
 ---
+
 id: hak5-index
 title: Hak5
 sidebar_position: 2
@@ -12,6 +13,7 @@ product: hak5
 category: guide
 difficulty: beginner
 toc: true
+slug: /hak5/
 ---
 
 # Hak5 — 攻擊型安全硬體，一次講清楚

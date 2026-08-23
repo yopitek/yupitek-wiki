@@ -1,7 +1,8 @@
 ---
+
 id: flipper-index
 title: Flipper Zero
-slug: /flipper-zero
+slug: /flipper-zero/
 sidebar_position: 3
 description: Flipper Zero 多功能工具裝置 — 首次設定、使用 qFlipper 進行韌體更新、手機應用程式配對、官方資源、疑難排解，以及 Flipper Zero、WiFi Devboard、Video Game Module 與 Silicone Case 的完整產品頁面。
 tags: [flipper-zero, sub-ghz, nfc, rfid, 125khz, infrared, ibutton, gpio, qflipper, esp32-s2, rp2040]

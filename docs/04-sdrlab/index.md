@@ -1,4 +1,5 @@
 ---
+
 id: sdrlab-index
 title: SDRLAB
 sidebar_position: 4
@@ -11,6 +12,7 @@ last_updated: 2026-08-21
 category: guide
 difficulty: beginner
 toc: true
+slug: /sdrlab/
 ---
 
 # SDRLAB

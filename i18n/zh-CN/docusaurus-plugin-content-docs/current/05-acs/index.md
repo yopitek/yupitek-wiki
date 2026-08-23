@@ -1,7 +1,8 @@
 ---
+
 id: acs-index
 title: ACS 智能卡与 NFC 读卡器
-slug: /acs
+slug: /acs/
 sidebar_position: 5
 description: ACS（Advanced Card Systems）智能卡读卡器与 NFC 读卡器 — ACR122U、ACR1252U 与 ACR1552U。非接触式 ISO 14443、MIFARE、FeliCa、ISO 15693 与 NFC。
 tags: [acs, 智能卡, nfc, rfid, acr122u, acr1252u, acr1552u, pcsc]

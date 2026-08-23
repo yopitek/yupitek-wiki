@@ -710,16 +710,17 @@ body.yp-lightbox-open {
   position: fixed;
   inset: 0;
   z-index: 999999;
-  display: flex;
+  display: none !important;
   flex-direction: column;
   opacity: 0;
-  pointer-events: none;
+  pointer-events: none !important;
   transition: opacity 0.22s ease;
 }
 
 .yp-lightbox-overlay.yp-active {
+  display: flex !important;
   opacity: 1;
-  pointer-events: auto;
+  pointer-events: auto !important;
 }
 
 .yp-lightbox-backdrop {
