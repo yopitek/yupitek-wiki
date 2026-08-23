@@ -29,6 +29,8 @@ flowchart TD
 
 
 ![ALFA Linux 相容性矩陣——三條驅動路徑](/img/linux-compatibility-matrix/linux-compatibility-matrix-overview.svg)
+
+*💡 點擊上方圖片可開啟高解析度放大燈箱，清晰檢視三條驅動路徑圖解。*
 ## 矩陣
 
 圖例：✅ 開箱即用 · 🔧 DKMS 安裝後可用 · ⚠️ 部分 / 不穩定 · ❌ 不建議

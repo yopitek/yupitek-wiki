@@ -14,6 +14,8 @@ keywords: [ALFA 無線網絡卡比較, AWUS036ACM vs AWUS036ACH, Wi-Fi 6E 無線
 
 
 ![ALFA Wi-Fi 網絡卡產品線總覽——四大使用情境](/img/wifi-adapter-comparison/wifi-adapter-comparison-lineup.svg)
+
+*💡 點擊上方圖片可開啟高解析度放大燈箱，清晰檢視完整型號與晶片規格。*
 ## 完整規格比較表
 
 九款無線網絡卡，一張表。「監聽模式」代表把介面切換成 RFMON，這樣你可以擷取某個頻道上的每個封包——這是 Wireshark、Aircrack-ng、Wifite 與類似工具的基本需求。

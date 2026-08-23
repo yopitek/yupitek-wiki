@@ -680,3 +680,38 @@ kbd {
 .markdown pre.mermaid {
   background: transparent;
 }
+
+/* ==========================================================================
+   14. 圖片放大燈箱（Medium Zoom Lightbox）
+   ========================================================================== */
+
+.markdown img {
+  cursor: zoom-in;
+  border-radius: var(--yp-radius-sm);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  max-width: 100%;
+  height: auto;
+}
+
+.markdown img:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme='dark'] .markdown img:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.medium-zoom-overlay {
+  z-index: 999 !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.medium-zoom-image--opened {
+  z-index: 1000 !important;
+  border-radius: var(--yp-radius-md);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6);
+  cursor: zoom-out !important;
+}
+

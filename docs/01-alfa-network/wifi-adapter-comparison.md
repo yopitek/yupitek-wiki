@@ -14,6 +14,8 @@ keywords: [ALFA adapter comparison, AWUS036ACM vs AWUS036ACH, Wi-Fi 6E adapter, 
 
 
 ![ALFA Wi-Fi adapter lineup — four use-case lanes](/img/wifi-adapter-comparison/wifi-adapter-comparison-lineup.svg)
+
+*💡 Click image to view in high-resolution full-screen lightbox.*
 ## The full spec comparison table
 
 All nine adapters, one table. "Monitor mode" means flipping the interface into RFMON so you can capture every packet on a channel — the fundamental requirement for Wireshark, Aircrack-ng, Wifite and similar tools.

@@ -23,10 +23,11 @@ const config = {
 
   onBrokenLinks: 'throw',
 
-  // Per-page cross-domain hreflang, injected client-side (see module).
-  // Do NOT replace with static headTags: a site-wide <head> injection
-  // cannot vary per page and would point every deep page at the homepage.
-  clientModules: ['./src/clientModules/yupitekHreflang.js'],
+  // Client modules: cross-domain hreflang + click-to-zoom image lightbox.
+  clientModules: [
+    './src/clientModules/yupitekHreflang.js',
+    './src/clientModules/imageZoom.js',
+  ],
 
   // Multi-domain internationalization.
   // - en:    https://doc.yupitek.com       (source of truth, English)

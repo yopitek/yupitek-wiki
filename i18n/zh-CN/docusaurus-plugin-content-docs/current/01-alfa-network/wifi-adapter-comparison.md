@@ -14,6 +14,8 @@ keywords: [ALFA 网卡适配器对比, AWUS036ACM vs AWUS036ACH, Wi-Fi 6E 网卡
 
 
 ![ALFA Wi-Fi 适配器产品线一览——四大使用情境](/img/wifi-adapter-comparison/wifi-adapter-comparison-lineup.svg)
+
+*💡 点击上方图片可开启高分辨率放大灯箱，清晰检视完整型号与芯片规格。*
 ## 完整规格对比表
 
 九款网卡适配器，一张表。「监听模式」指把接口切换为 RFMON，以便捕获信道上的每一个数据包——这是 Wireshark、Aircrack-ng、Wifite 等工具的基本要求。

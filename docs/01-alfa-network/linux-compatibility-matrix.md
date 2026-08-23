@@ -29,6 +29,8 @@ flowchart TD
 
 
 ![ALFA Linux compatibility matrix — three driver paths](/img/linux-compatibility-matrix/linux-compatibility-matrix-overview.svg)
+
+*💡 Click image to view in high-resolution full-screen lightbox.*
 ## The matrix
 
 Legend: ✅ works out of the box · 🔧 works after a DKMS install · ⚠️ partial / flaky · ❌ not recommended
