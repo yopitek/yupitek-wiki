@@ -23,6 +23,11 @@ const config = {
 
   onBrokenLinks: 'throw',
 
+  // Per-page cross-domain hreflang, injected client-side (see module).
+  // Do NOT replace with static headTags: a site-wide <head> injection
+  // cannot vary per page and would point every deep page at the homepage.
+  clientModules: ['./src/clientModules/yupitekHreflang.js'],
+
   // Multi-domain internationalization.
   // - en:    https://doc.yupitek.com       (source of truth, English)
   // - zh-CN: https://doczhcn.yupitek.com   (Simplified Chinese mirror)
@@ -93,6 +98,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      image: 'img/favicon-512.png',
       // Documented at https://docusaurus.io/docs/markdown-features/diagrams
       mermaid: {
         theme: {light: 'neutral', dark: 'dark'},
@@ -105,7 +111,7 @@ const config = {
         title: 'Yupitek Wiki',
         logo: {
           alt: 'Yupitek',
-          src: 'img/logo.svg',
+          src: 'img/logo.png',
         },
         items: [
           {

@@ -1,30 +1,588 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Yupitek Wiki — CIS 主題（v2 tokens）
+ *
+ * 雙主題對應 yupitek_CIS 規範：
+ *   light → formal-light（方案B 白底正式）
+ *   dark  → tech-dark（方案A 黑底機甲技術文件）
+ *
+ * 色彩比例鐵律（技術文件）：黑銀 60% : 品牌藍 25% : 珊瑚橘 10% : 中性 5%
+ * 紅線：橘色不作 <14px 文字；深橘 #C04D00 僅背景/陰影；圓角 ≤16px；
+ *       禁紫漸變／霓虹青；字體全自架（無 Google Fonts CDN）。
  */
 
-/* You can override the default Infima variables here. */
-:root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+/* ==========================================================================
+   1. 自架字體 @font-face（static/fonts/）
+   ========================================================================== */
+
+/* Display EN — Outfit（CIS v3 指定）＋ Orbitron（HUD 強調備援，輕量 variable） */
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+@font-face {
+  font-family: 'Orbitron';
+  src: url('/fonts/Orbitron-Variable.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Body EN — Inter variable（latin + latin-ext 子集） */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-latin.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-latin-ext.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+
+/* Mono — JetBrains Mono variable（latin + latin-ext 子集） */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-latin.woff2') format('woff2');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-latin-ext.woff2') format('woff2');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+
+/* Display CJK — jf open 粉圓 2.1（繁中標題） */
+@font-face {
+  font-family: 'jf open 粉圓 2.1';
+  src: url('/fonts/jfOpenHuninn-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Body CJK — Alibaba PuHuiTi 3.0（普惠體：65-Medium=500 實際內文、85-Bold=700 粗體）
+   兩個 weight 掛同一 family，<strong> 走真粗體不合成。無 unicode-range，
+   由 fallback 鏈順序處理：西文先被 Inter 吃掉，CJK 落到這裡。 */
+@font-face {
+  font-family: 'Alibaba PuHuiTi 3.0';
+  src: url('/fonts/AlibabaPuHuiTi3-65-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alibaba PuHuiTi 3.0';
+  src: url('/fonts/AlibabaPuHuiTi3-85-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Handwritten — Iansui 芫荽（標註／說明卡片用） */
+@font-face {
+  font-family: 'Iansui';
+  src: url('/fonts/Iansui-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   2. CIS 設計 Token
+   ========================================================================== */
+
+:root {
+  /* 品牌藍 */
+  --yp-blue-100: #d6f0fc;
+  --yp-blue-300: #7acdf4;
+  --yp-blue-400: #33b5ee;
+  --yp-blue-500: #02a0e9;
+  --yp-blue-600: #0286c4;
+  --yp-blue-700: #0072a8;
+  --yp-blue-900: #003d5c;
+
+  /* 珊瑚橘（Power & Energy） */
+  --yp-orange-100: #ffe4d6;
+  --yp-orange-300: #ffa87a;
+  --yp-orange-500: #ff7a45;
+  --yp-orange-700: #c04d00;
+
+  /* 黑銀金屬 */
+  --yp-ink-100: #e6e9ec;
+  --yp-ink-300: #8b939b;
+  --yp-ink-500: #4a525b;
+  --yp-ink-700: #23282e;
+  --yp-ink-900: #0b0e11;
+
+  /* 語意色 */
+  --yp-success: #1fa97a;
+  --yp-warning: #ffb020;
+  --yp-danger: #e5484d;
+  --yp-info: #3b82f6;
+
+  /* 機甲細節 */
+  --yp-tech-border: rgba(51, 181, 238, 0.35);
+  --yp-glow-orange: rgba(255, 122, 69, 0.4);
+  --yp-radius-sm: 4px;
+  --yp-radius-md: 8px;
+
+  /* 字型鏈（per-glyph fallback：西文被前者吃掉，CJK 落到後者） */
+  --yp-font-body: 'Inter', 'Alibaba PuHuiTi 3.0', 'Noto Sans TC',
+    'Noto Sans SC', sans-serif;
+  --yp-font-display: 'Outfit', 'Orbitron', 'jf open 粉圓 2.1',
+    'Noto Sans TC', 'Noto Sans SC', sans-serif;
+  --yp-font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas,
+    monospace;
+}
+
+/* ==========================================================================
+   3. Infima 變數覆寫 — light＝formal-light（方案B 白底正式）
+   ========================================================================== */
+
+:root {
+  /* 主色：品牌藍 500 及其 Infima 明暗階 */
+  --ifm-color-primary: #02a0e9;
+  --ifm-color-primary-dark: #0290d2;
+  --ifm-color-primary-darker: #0288c6;
+  --ifm-color-primary-darkest: #0278af;
+  --ifm-color-primary-light: #21b2f0;
+  --ifm-color-primary-lighter: #40bef3;
+  --ifm-color-primary-lightest: #7ed5f7;
+
+  /* 底色／文字（白底正式：無 HUD、無掃描線） */
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f7f7f8;
+  --ifm-emphasized-background-color: #f7f7f8;
+  --ifm-font-color-base: #0b0e11;
+  --ifm-font-color-secondary: #4a525b;
+  --ifm-heading-color: #0b0e11;
+  --ifm-footer-link-color: #b5bcc4;
+
+  /* 邊框與分隔 */
+  --ifm-border-color: #e6e9ec;
+  --ifm-toc-border-color: #e6e9ec;
+  --ifm-sidebar-border-color: #e6e9ec;
+  --ifm-card-background-color: #ffffff;
+
+  /* 字型 */
+  --ifm-font-family-base: var(--yp-font-body);
+  --ifm-heading-font-family: var(--yp-font-display);
+  --ifm-font-family-monospace: var(--yp-font-mono);
+  --ifm-code-font-size: 92%;
+  --ifm-line-height-base: 1.7;
+
+  --docusaurus-highlighted-code-line-bg: rgba(2, 160, 233, 0.12);
+}
+
+/* ==========================================================================
+   4. Infima 變數覆寫 — dark＝tech-dark（方案A 黑底機甲）
+   ========================================================================== */
+
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  /* 主色改提亮藍 400 為基準 */
+  --ifm-color-primary: #33b5ee;
+  --ifm-color-primary-dark: #02a0e9;
+  --ifm-color-primary-darker: #0286c4;
+  --ifm-color-primary-darkest: #0072a8;
+  --ifm-color-primary-light: #7acdf4;
+  --ifm-color-primary-lighter: #a5def8;
+  --ifm-color-primary-lightest: #d6f0fc;
+
+  --ifm-background-color: #0b0e11;
+  --ifm-background-surface-color: #14181d;
+  --ifm-emphasized-background-color: #23282e;
+  --ifm-font-color-base: #edf0f3;
+  --ifm-font-color-secondary: #b5bcc4;
+  --ifm-heading-color: #ffffff;
+  --ifm-footer-link-color: #b5bcc4;
+
+  --ifm-border-color: #4a525b;
+  --ifm-toc-border-color: #2e353d;
+  --ifm-sidebar-border-color: #2e353d;
+  --ifm-card-background-color: #14181d;
+
+  --docusaurus-highlighted-code-line-bg: rgba(51, 181, 238, 0.18);
+}
+
+/* ==========================================================================
+   5. 全域排版
+   ========================================================================== */
+
+* {
+  font-synthesis: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.02em;
+}
+
+.markdown h1:first-of-type {
+  margin-top: 0;
+}
+
+/* 大寫標籤（navbar title、footer 標題）走英文大寫字距規範 */
+
+::selection {
+  background: rgba(51, 181, 238, 0.3);
+}
+
+/* ==========================================================================
+   6. Navbar — sticky、底部 hairline（dark=tech 藍線 / light=灰線）
+   ========================================================================== */
+
+.navbar {
+  background: var(--ifm-background-color);
+  box-shadow: none;
+  border-bottom: 1px solid var(--ifm-border-color);
+}
+
+[data-theme='dark'] .navbar {
+  background: rgba(11, 14, 17, 0.95);
+  border-bottom: 1px solid var(--yp-tech-border);
+}
+
+.navbar__title {
+  font-family: 'Outfit', 'Orbitron', var(--yp-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ifm-heading-color);
+}
+
+/* 深色模式換用提亮版 logo（content 換圖在現代瀏覽器可用） */
+[data-theme='dark'] .navbar__logo img {
+  content: url('/img/logo-dark.png');
+}
+
+/* 導覽連結 hover：dark 走橘（≥14px）、light 保持品牌藍加深 */
+[data-theme='dark'] .navbar__link:hover,
+[data-theme='dark'] .navbar__link--active {
+  color: var(--yp-orange-300);
+}
+
+.navbar__link:hover {
+  color: var(--yp-blue-700);
+}
+
+/* ==========================================================================
+   7. Footer — 恆常深底（兩種模式皆 tech-dark），掃描線格紋點綴
+   ========================================================================== */
+
+.footer {
+  --ifm-footer-background: #0b0e11;
+  --ifm-footer-title-color: #ffffff;
+  --ifm-footer-color: #b5bcc4;
+  background: #0b0e11;
+  border-top: 1px solid var(--yp-tech-border);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    #fff 0 1px,
+    transparent 1px 3px
+  );
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.footer > * {
+  position: relative;
+}
+
+.footer__title {
+  font-family: 'Outfit', 'Orbitron', var(--yp-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 14px;
+}
+
+.footer__link-item:hover {
+  color: var(--yp-orange-300);
+}
+
+/* ==========================================================================
+   8. 側欄與目錄
+   ========================================================================== */
+
+.theme-doc-sidebar-item-link-level-1.menu__list-item-collapsible > a,
+.menu__link--sublist-caret {
+  font-weight: 600;
+}
+
+.menu__link {
+  border-radius: var(--yp-radius-sm);
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  color: var(--ifm-color-primary);
+  background: rgba(2, 160, 233, 0.08);
+  box-shadow: inset 2px 0 0 var(--ifm-color-primary);
+}
+
+.table-of-contents__link--active {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+.table-of-contents__link:hover {
+  color: var(--ifm-color-primary);
+}
+
+/* ==========================================================================
+   9. 表格 — 表頭恆黑銀金屬、斑馬紋、等寬數字（型號/SKU 友善）
+   ========================================================================== */
+
+article table {
+  display: table;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+article table thead th {
+  background: var(--yp-ink-900);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-bottom: 1px solid var(--yp-tech-border);
+}
+
+article table tbody tr {
+  background: transparent;
+  transition: background-color 0.15s ease;
+}
+
+article table tbody tr:nth-child(even) {
+  background: rgba(250, 250, 251, 1);
+}
+
+article table tbody tr:nth-child(odd):hover,
+article table tbody tr:nth-child(even):hover {
+  background: rgba(2, 160, 233, 0.06);
+}
+
+[data-theme='dark'] article table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme='dark'] article table tbody td {
+  border-color: #2e353d;
+}
+
+article table tbody td {
+  border-color: var(--yp-ink-100);
+}
+
+/* ==========================================================================
+   10. 程式碼區塊
+   ========================================================================== */
+
+code {
+  border-radius: var(--yp-radius-sm);
+  vertical-align: baseline;
+}
+
+/* 行內 code */
+.theme-code-inline,
+.markdown code {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-border-color);
+}
+
+[data-theme='dark'] .markdown code {
+  background: #14181d;
+  border-color: #2e353d;
+}
+
+/* 程式碼容器背景對齊 token（prism theme 只換語法高亮色板） */
+div[class*='codeBlockContainer'],
+.theme-code-block {
+  border-radius: var(--yp-radius-sm);
+  overflow: hidden;
+}
+
+[data-theme='dark'] div[class*='codeBlockContent'] pre,
+[data-theme='dark'] .theme-code-block pre {
+  background: #14181d !important;
+}
+
+[data-theme='dark'] .theme-code-block {
+  background: #14181d !important;
+  border: 1px solid #2e353d;
+}
+
+/* dark 語法色板對齊 CIS code tokens（覆蓋 dracula 紫） */
+[data-theme='dark'] .theme-code-block .token.keyword,
+[data-theme='dark'] .theme-code-block .token.tag,
+[data-theme='dark'] .theme-code-block .token.selector {
+  color: #33b5ee;
+}
+
+[data-theme='dark'] .theme-code-block .token.string,
+[data-theme='dark'] .theme-code-block .token.attr-value,
+[data-theme='dark'] .theme-code-block .token.char {
+  color: #ff7a45;
+}
+
+[data-theme='dark'] .theme-code-block .token.comment,
+[data-theme='dark'] .theme-code-block .token.prolog,
+[data-theme='dark'] .theme-code-block .token.doctype,
+[data-theme='dark'] .theme-code-block .token.cdata {
+  color: #8b939b;
+  font-style: italic;
+}
+
+[data-theme='dark'] .theme-code-block .token.number,
+[data-theme='dark'] .theme-code-block .token.boolean,
+[data-theme='dark'] .theme-code-block .token.constant {
+  color: #ffa87a;
+}
+
+[data-theme='dark'] .theme-code-block .token.function {
+  color: #7acdf4;
+}
+
+/* ==========================================================================
+   11. 連結與按鈕
+   ========================================================================== */
+
+.markdown a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.markdown a:hover {
+  color: var(--yp-blue-700);
+}
+
+[data-theme='dark'] .markdown a:hover {
+  color: var(--yp-orange-300); /* 提亮橘，避免暗底低對比 */
+}
+
+.button--primary {
+  border-radius: var(--yp-radius-sm);
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.button--primary:hover {
+  box-shadow: 0 0 16px var(--yp-glow-orange);
+}
+
+.button--secondary,
+.button--outline {
+  border-radius: var(--yp-radius-sm);
+}
+
+.pagination-nav__link {
+  border-radius: var(--yp-radius-sm);
+  transition: border-color 0.15s ease;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--yp-tech-border);
+}
+
+/* ==========================================================================
+   12. Admonition — 語意色對齊 token
+   ========================================================================== */
+
+.admonition {
+  border-radius: var(--yp-radius-sm);
+  border-left-width: 4px;
+}
+
+.admonition-tip,
+.admonition-success {
+  --ifm-color-primary: var(--yp-success);
+}
+
+.admonition-warning {
+  --ifm-color-primary: var(--yp-warning);
+}
+
+.admonition-danger {
+  --ifm-color-primary: var(--yp-danger);
+}
+
+.admonition-info,
+.admonition-note {
+  --ifm-color-primary: var(--yp-info);
+}
+
+/* ==========================================================================
+   13. 分頁籤、搜尋與雜項
+   ========================================================================== */
+
+.tabs__item {
+  border-radius: var(--yp-radius-sm) var(--yp-radius-sm) 0 0;
+}
+
+.tabs__item--active {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+details {
+  border-radius: var(--yp-radius-sm);
+}
+
+kbd {
+  font-family: var(--yp-font-mono);
+  border-radius: var(--yp-radius-sm);
+}
+
+.DocSearch-Button {
+  border-radius: var(--yp-radius-sm);
+}
+
+.breadcrumbs__link {
+  border-radius: var(--yp-radius-sm);
+}
+
+/* Mermaid 圖容器微調（置中留白） */
+.markdown pre.mermaid {
+  background: transparent;
 }
