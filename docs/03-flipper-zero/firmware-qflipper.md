@@ -33,10 +33,13 @@ Firmware updates are released regularly and bring:
 
 The two main firmware families:
 
-| Firmware | Maintainer | Notes |
+| Firmware | Maintainer | Key Features & Focus |
 |---|---|---|
-| **Official FlipperOS** | Flipper Devices | Recommended default. Stable, includes all stock apps. |
-| **Custom firmware (Momentum)** | Community (Momentum team) | Adds extra apps, better UI, extra features. Needs manual flashing via qFlipper. |
+| **Official FlipperOS** | Flipper Devices | Recommended default. Rock-solid stability, regulatory compliant stock apps. |
+| **Momentum** | Momentum Community | **Top Community Recommendation!** Modular UI, full frequency unlock, custom themes, enhanced protocol decoders. |
+| **Xtreme** | Xtreme Team | Performance tuned, custom animations, extended Sub-GHz protocols. |
+| **Unleashed** | Unleashed Team | Focus on stability, raw Sub-GHz recording, rolling code experimentation. |
+| **RogueMaster** | RogueMaster Team | Largest bundled archive of third-party community `.fap` apps and plugins. |
 
 ```mermaid
 flowchart TD

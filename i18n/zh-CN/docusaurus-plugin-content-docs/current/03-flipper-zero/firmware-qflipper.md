@@ -33,10 +33,13 @@ Flipper Zero 是一台小型计算机：STM32WB55 微控制器，配有一块 1 
 
 两大固件家族：
 
-| 固件 | 维护者 | 说明 |
+| 固件名称 | 维护团队 / 社区 | 核心特色与定位 |
 |---|---|---|
-| **官方 FlipperOS** | Flipper Devices | 推荐的默认选择。稳定，包含所有内置应用。 |
-| **自定义固件（Momentum）** | 社区（Momentum 团队） | 增加额外应用、更好的界面、更多功能。需要通过 qFlipper 手动刷写。 |
+| **Official FlipperOS** | 官方 Flipper Devices | 官方默认，极致稳定，完全符合法规限制，新手开箱首选。 |
+| **Momentum（推动力）** | Momentum 社区 | **社区最推荐！** 模块化 UI、高度自定义主题、全频段解锁、完整中文支持。 |
+| **Xtreme（极限）** | Xtreme 团队 | 高性能优化、丰富过场动画、扩展 Sub-GHz 协议解码。 |
+| **Unleashed（黑脚蹼）** | Unleashed 团队 | 稳定度高、强化 Raw Sub-GHz 录制能力、滚动码实验。 |
+| **RogueMaster（流氓大师）** | RogueMaster 团队 | 收录最庞大的第三方 Apps 与插件库，功能最丰富。 |
 
 ```mermaid
 flowchart TD

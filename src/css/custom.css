@@ -155,13 +155,26 @@
   --yp-radius-sm: 4px;
   --yp-radius-md: 8px;
 
-  /* 字型鏈（per-glyph fallback：西文被前者吃掉，CJK 落到後者） */
-  --yp-font-body: 'Inter', 'Alibaba PuHuiTi 3.0', 'Noto Sans TC',
-    'Noto Sans SC', sans-serif;
-  --yp-font-display: 'Outfit', 'Orbitron', 'jf open 粉圓 2.1',
-    'Noto Sans TC', 'Noto Sans SC', sans-serif;
-  --yp-font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas,
-    monospace;
+  /* Yupitek CIS Type Scale (統一字階系統) */
+  --yp-text-xs: 0.75rem;    /* 12px - 標籤、微縮註釋 */
+  --yp-text-sm: 0.875rem;   /* 14px - Code、次要資訊、Footer */
+  --yp-text-base: 1rem;     /* 16px - 標準內文基準 */
+  --yp-text-md: 1.0625rem;  /* 17px - H4 標題、強調段落 */
+  --yp-text-lg: 1.25rem;    /* 20px - H3 標題、卡片大標 */
+  --yp-text-xl: 1.625rem;   /* 26px - H2 標題 */
+  --yp-text-2xl: 2.25rem;   /* 36px - H1 文章主標 */
+  --yp-text-3xl: 3rem;      /* 48px - 首頁 Hero 標題 */
+
+  /* 行高規範 */
+  --yp-leading-tight: 1.25;
+  --yp-leading-snug: 1.35;
+  --yp-leading-normal: 1.5;
+  --yp-leading-relaxed: 1.7;
+
+  /* 字型鏈（per-glyph fallback：西文由 Inter / Outfit 處理，CJK 由 Alibaba / 粉圓 承接） */
+  --yp-font-body: 'Inter', 'Alibaba PuHuiTi 3.0', 'PingFang SC', 'PingFang TC', 'Microsoft YaHei', 'Microsoft JhengHei', sans-serif;
+  --yp-font-display: 'Outfit', 'jf open 粉圓 2.1', 'Alibaba PuHuiTi 3.0', 'PingFang SC', 'PingFang TC', sans-serif;
+  --yp-font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, Monaco, monospace;
 }
 
 /* ==========================================================================
@@ -233,31 +246,112 @@
   --docusaurus-highlighted-code-line-bg: rgba(51, 181, 238, 0.18);
 }
 
+
 /* ==========================================================================
-   5. 全域排版
+   5. 全域排版與字體大小統一（Yupitek CIS Typography Scale）
    ========================================================================== */
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--yp-font-body);
+  font-size: var(--yp-text-base);
+  line-height: var(--yp-leading-relaxed);
+  font-weight: 400;
+}
 
 * {
   font-synthesis: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+/* 標題系統統一規範 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--yp-font-display);
+  color: var(--ifm-heading-color);
+  margin-bottom: 0.75rem;
+}
+
+h1 {
+  font-size: var(--yp-text-2xl);
+  font-weight: 700;
+  line-height: var(--yp-leading-tight);
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: var(--yp-text-xl);
+  font-weight: 600;
+  line-height: var(--yp-leading-snug);
   letter-spacing: -0.02em;
+  margin-top: 2rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--ifm-border-color);
 }
 
-.markdown h1:first-of-type {
-  margin-top: 0;
+h3 {
+  font-size: var(--yp-text-lg);
+  font-weight: 600;
+  line-height: var(--yp-leading-normal);
+  letter-spacing: -0.015em;
+  margin-top: 1.5rem;
 }
 
-/* 大寫標籤（navbar title、footer 標題）走英文大寫字距規範 */
+h4 {
+  font-size: var(--yp-text-md);
+  font-weight: 600;
+  line-height: var(--yp-leading-normal);
+  margin-top: 1.25rem;
+}
 
-::selection {
-  background: rgba(51, 181, 238, 0.3);
+h5, h6 {
+  font-size: var(--yp-text-base);
+  font-weight: 600;
+}
+
+p, ul, ol, blockquote {
+  font-size: var(--yp-text-base);
+  line-height: var(--yp-leading-relaxed);
+}
+
+/* 側邊欄與導覽字體統一 */
+.menu__link {
+  font-family: var(--yp-font-body);
+  font-size: var(--yp-text-sm);
+  line-height: 1.4;
+}
+
+.table-of-contents__link {
+  font-family: var(--yp-font-body);
+  font-size: var(--yp-text-xs);
+  line-height: 1.45;
+}
+
+/* 程式碼與等寬區塊 */
+code, kbd, samp, pre {
+  font-family: var(--yp-font-mono) !important;
+  font-size: var(--yp-text-sm);
+}
+
+.markdown code {
+  font-size: 0.875em;
+  padding: 0.15em 0.35em;
+}
+
+/* 表格內文統一 */
+article table {
+  font-size: var(--yp-text-sm);
+  line-height: 1.5;
+}
+
+article table thead th {
+  font-size: var(--yp-text-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 /* ==========================================================================
