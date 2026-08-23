@@ -682,7 +682,7 @@ kbd {
 }
 
 /* ==========================================================================
-   14. 圖片放大燈箱（Medium Zoom Lightbox）
+   14. 全站高解析圖片放大燈箱系統（Yupitek Interactive Lightbox）
    ========================================================================== */
 
 .markdown img {
@@ -694,24 +694,161 @@ kbd {
 }
 
 .markdown img:hover {
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
 }
 
 [data-theme='dark'] .markdown img:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 28px rgba(34, 211, 238, 0.15);
 }
 
-.medium-zoom-overlay {
-  z-index: 999 !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+body.yp-lightbox-open {
+  overflow: hidden !important;
 }
 
-.medium-zoom-image--opened {
-  z-index: 1000 !important;
+.yp-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.yp-lightbox-overlay.yp-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.yp-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 29, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 1;
+}
+
+.yp-lightbox-toolbar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, transparent 100%);
+  pointer-events: auto;
+}
+
+.yp-lightbox-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 50vw;
+  overflow: hidden;
+}
+
+.yp-lightbox-title {
+  color: #f1f5f9;
+  font-size: var(--yp-text-sm);
+  font-weight: 600;
+  font-family: var(--yp-font-display);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+.yp-lightbox-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(19, 32, 51, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+}
+
+.yp-lightbox-scale {
+  color: #22d3ee;
+  font-family: var(--yp-font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 48px;
+  text-align: center;
+}
+
+.yp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: #cbd5e1;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--yp-font-mono);
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.yp-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.yp-btn-close {
+  color: #f87171;
+}
+
+.yp-btn-close:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.yp-lightbox-stage {
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  padding: 16px;
+}
+
+.yp-lightbox-stage.yp-is-dragging {
+  cursor: grabbing;
+}
+
+.yp-lightbox-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.08s ease-out;
+  transform-origin: center center;
+}
+
+.yp-lightbox-img {
+  max-width: 90vw;
+  max-height: 84vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   border-radius: var(--yp-radius-md);
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6);
-  cursor: zoom-out !important;
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.7);
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: auto;
 }
+
 
