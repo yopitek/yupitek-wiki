@@ -9,9 +9,9 @@ keywords: [APA-M04, ALFA panel antenna, 2.4 GHz directional antenna, PR-SMA ante
 
 # ALFA APA-M04 — 2.4 GHz Panel Directional Antenna
 
-> **一句話定位（One-liner）**: The **APA-M04** is a flat **7 dBi directional panel antenna for the 2.4 GHz band**, terminated in a **PR-SMA** connector. It focuses your radio's energy in one direction — think "laser pointer" instead of "light bulb" — for point-to-point links, repeater hops and long-range client connections.
+> **Quick Summary**: The **APA-M04** is a flat **7 dBi directional panel antenna for the 2.4 GHz band**, terminated in a **PR-SMA** connector. It focuses your radio's energy in one direction — think "laser pointer" instead of "light bulb" — for point-to-point links, repeater hops and long-range client connections.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

@@ -51,7 +51,7 @@ flowchart TD
 | [SDRLab TRX-duo](/sdrlab/hardware/trx-duo/) | Dual-channel 16-bit transceiver (Xilinx Zynq 7010) | 10 kHz – 60 MHz | HF ham radio, lab experiments, Red Pitaya-compatible applications |
 | [SDRLab H4M](/sdrlab/hardware/h4m/) | HackRF One + PortaPack handheld transceiver | 1 MHz – 6 GHz | Field signal hunting, spectrum analysis, portable TX/RX experiments |
 
-## Flipper Zero expansion modules
+## Flipper Zero expansion modules {#flipper-zero-expansion-modules}
 
 | Module | What it does | Radio chip | Page |
 |---|---|---|---|

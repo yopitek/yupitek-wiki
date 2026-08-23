@@ -9,9 +9,9 @@ keywords: [ARS-25-57A, ALFA paddle antenna, dual band antenna, portable antenna]
 
 # ALFA ARS-25-57A — Dual-Band Paddle Antenna (5/7 dBi)
 
-> **一句話定位（One-liner）**: The **ARS-25-57A** is a compact, semi-directional **paddle** antenna for **2.4 and 5 GHz** — **5 dBi on 2.4 GHz, 7 dBi on 5 GHz**. It is the travel-friendly middle ground between a stock dipole and a full panel: more gain than the stick antenna, less bulk than the wall panel.
+> **Quick Summary**: The **ARS-25-57A** is a compact, semi-directional **paddle** antenna for **2.4 and 5 GHz** — **5 dBi on 2.4 GHz, 7 dBi on 5 GHz**. It is the travel-friendly middle ground between a stock dipole and a full panel: more gain than the stick antenna, less bulk than the wall panel.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

@@ -9,9 +9,9 @@ keywords: [AWUS036EACS, RTL8821CU, AC600 Bluetooth adapter, nano Wi-Fi adapter]
 
 # ALFA AWUS036EACS — Nano WiFi + Bluetooth Combo
 
-> **一句話定位（One-liner）**: The **AWUS036EACS** is ALFA's **nano WiFi + Bluetooth combo** — an **RTL8821CU AC600** dual-band dongle with integrated **BT 4.2** that is **plug-and-play on Windows**. Honest warning up front: its Linux driver story is weak, and it is **not** a monitor-mode adapter. Buy it for a Windows desktop, not for Kali.
+> **Quick Summary**: The **AWUS036EACS** is ALFA's **nano WiFi + Bluetooth combo** — an **RTL8821CU AC600** dual-band dongle with integrated **BT 4.2** that is **plug-and-play on Windows**. Honest warning up front: its Linux driver story is weak, and it is **not** a monitor-mode adapter. Buy it for a Windows desktop, not for Kali.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

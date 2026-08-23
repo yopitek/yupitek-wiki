@@ -9,9 +9,9 @@ keywords: [AWUS036ACHM, MT7610U, budget adapter, AC433 Kali]
 
 # ALFA AWUS036ACHM — Budget Dual-Band AC433
 
-> **一句話定位（One-liner）**: The **AWUS036ACHM** is the budget dual-band ALFA — a **MT7610U AC433** adapter with two 5 dBi antennas and, crucially, an **in-kernel driver** (`mt76x0u` since Linux 4.19). It is the cheapest way into dual-band monitor mode on Linux, full stop.
+> **Quick Summary**: The **AWUS036ACHM** is the budget dual-band ALFA — a **MT7610U AC433** adapter with two 5 dBi antennas and, crucially, an **in-kernel driver** (`mt76x0u` since Linux 4.19). It is the cheapest way into dual-band monitor mode on Linux, full stop.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

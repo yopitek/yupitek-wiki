@@ -16,13 +16,13 @@ toc: true
 
 # USB Rubber Ducky — The Complete Guide
 
-> **一句話定位**：USB Rubber Ducky 是一支「會自己打鍵盤」的隨身碟 — 插入 USB 孔後，它以每秒數百次的速度把預錄好的按鍵輸進電腦，10 秒內做完一個人工要花五分鐘的動作。這是所有 Hak5 裝置裡最適合初學者入門的機器。
+> **Quick Summary**: The USB Rubber Ducky is the definitive keystroke injection tool disguised as a standard USB flash drive. Operating at superhuman typing speeds via DuckyScript 3.0, it executes pre-programmed system commands within seconds of insertion.
 
 When you plug in any USB keyboard, the computer trusts it instantly — no password, no "are you sure?" prompt. The USB Rubber Ducky exploits exactly that trust. It presents itself to the OS as a regular keyboard (a **HID device**, Human Interface Device), then replays a script of keystrokes so fast that a human could never keep up.
 
 The Ducky does **one thing, extremely well**: keystroke injection. It doesn't need exploit code or vulnerabilities — it just *types*. That makes it the perfect teaching tool for HID attacks, and the foundation for every other Hak5 payload device.
 
-> **⚠️ Authorised testing only.** Use the Ducky on your own computer, your own machines in a lab, or with explicit permission. Injecting keystrokes into someone else's computer is illegal (Taiwan: 刑法第 358–363 條).
+> **⚠️ Authorised testing only.** Use the Ducky on your own computer, your own machines in a lab, or with explicit permission. Injecting keystrokes into someone else's computer is illegal (applicable cybercrime legislation).
 
 ---
 

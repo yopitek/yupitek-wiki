@@ -16,7 +16,7 @@ toc: true
 
 # Packet Squirrel Mark II — The Complete Guide
 
-> **一句話定位**：Packet Squirrel Mark II 是一部「夾在網路中間的小盒子」——把目標裝置接上 Target 埠、把真正的網路接上 Network 埠，它就位於流量路徑上，能嗅探、改寫、重導甚至切斷流量。三向撥桿一掰就換一套 Payload。
+> **Quick Summary**: Packet Squirrel Mark II is an inline Ethernet man-in-the-middle micro-router. Bridging target and network ports transparently, it enables packet captures, covert VPN tunnels, and DNS spoofing in a compact field form factor.
 
 While the [Shark Jack](/hak5/products/shark-jack/) jumps *onto* a network to scan it, the **Packet Squirrel** sits *inside* a network link and becomes the man-in-the-middle. It's the perfect way to demonstrate (and defend against) inline interception: plug it between a device and its network, flip a switch, and it captures, proxies, redirects, or isolates that device's traffic.
 

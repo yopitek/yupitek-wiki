@@ -75,7 +75,7 @@ flowchart LR
 
 The HackRF digitizes the spectrum; the PortaPack provides the human interface; Mayhem firmware provides the apps. No PC involved — the H4M is the whole lab.
 
-## Mayhem firmware
+## Mayhem firmware {#mayhem-firmware}
 
 The H4M runs the open-source **Mayhem firmware** ([portapack-mayhem/mayhem-firmware](https://github.com/portapack-mayhem/mayhem-firmware)), the community continuation of the PortaPack software with hundreds of apps: spectrum analyzer, audio receiver/transmitter, signal recorder and replay, ADS-B, APRS, GPS simulator, and more.
 

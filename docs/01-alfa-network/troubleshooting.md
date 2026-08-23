@@ -10,7 +10,7 @@ keywords: [ALFA troubleshooting, adapter not detected, monitor mode not working,
 
 # ALFA Adapters — Troubleshooting Index
 
-> **排查鐵律（Diagnosis iron rule）**: **Hardware first → driver second → configuration last.** More than 80 % of "my ALFA is broken" reports turn out to be a power issue, a missing DKMS rebuild, or a kernel-update side effect — not a dead adapter. Follow the tree below before you blame the hardware.
+> **Troubleshooting Golden Rules**: **Hardware first → driver second → configuration last.** More than 80 % of "my ALFA is broken" reports turn out to be a power issue, a missing DKMS rebuild, or a kernel-update side effect — not a dead adapter. Follow the tree below before you blame the hardware.
 
 ```mermaid
 flowchart TD

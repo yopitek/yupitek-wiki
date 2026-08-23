@@ -16,7 +16,7 @@ toc: true
 
 # O.MG Plug — The Complete Guide
 
-> **一句話定位**：O.MG Plug 把 O.MG 的無線植入晶片塞進一支「鑰匙圈 USB 隨身碟」外型的插頭——掛在鑰匙上完全不起眼，一旦插進目標的 USB 孔，就能透過 Wi-Fi 遠端注入按鍵、執行 DuckyScript Payload。
+> **Quick Summary**: The O.MG Plug packs the O.MG covert wireless implant into an inconspicuous keychain USB form-factor. Once plugged into a target port, operators trigger keystroke injections and DuckyScript payloads remotely over Wi-Fi.
 
 The [O.MG Cable](/hak5/products/omg-cable/) hides its implant in a cable. The **O.MG Plug** hides the exact same implant in something even more mundane: a keychain USB plug that looks like a cheap thumb drive / phone charger block. It's the "leave it on the desk and hope they plug it in" social-engineering tool.
 

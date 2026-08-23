@@ -10,7 +10,7 @@ keywords: [ALFA compatibility, Kali Linux adapter, Ubuntu Wi-Fi adapter, NetHunt
 
 # ALFA Linux Compatibility Matrix
 
-> **結論先行（Bottom line）**: On modern Linux, the **MediaTek-based adapters** (AWUS036ACM, AWUS036ACHM, AWUS036AXM, AWUS036AXML) work out of the box because their drivers ship inside the kernel. The **Realtek-based adapters** (AWUS036ACH, AWUS036ACS, AWUS036AX, AWUS036AXER) need a DKMS driver build — a 5-minute, one-time job. The **AWUS036EACS is the exception: do not expect it to work well on any Linux**.
+> **Bottom Line Up Front**:  On modern Linux, the **MediaTek-based adapters** (AWUS036ACM, AWUS036ACHM, AWUS036AXM, AWUS036AXML) work out of the box because their drivers ship inside the kernel. The **Realtek-based adapters** (AWUS036ACH, AWUS036ACS, AWUS036AX, AWUS036AXER) need a DKMS driver build — a 5-minute, one-time job. The **AWUS036EACS is the exception: do not expect it to work well on any Linux**.
 
 ```mermaid
 flowchart TD

@@ -10,8 +10,8 @@ keywords: [NetHunter ALFA, Android OTG Wi-Fi adapter, AWUS036ACM NetHunter, Kali
 
 # ALFA Adapters on NetHunter (Android) — OTG Setup Guide
 
-> **學習目標（Learning goal）**: By the end of this guide you will have your ALFA adapter connected to an Android phone running **Kali NetHunter**, visible inside the NetHunter chroot, and ready for monitor-mode tools — all powered by a USB **OTG** cable.
-> **適用對象**: Intermediate (rooting knowledge required) ｜ **前置需求**: Rooted Android phone, NetHunter installed, OTG cable, an ALFA adapter with an **in-kernel chipset** (see below).
+> **Learning Objectives**:  By the end of this guide you will have your ALFA adapter connected to an Android phone running **Kali NetHunter**, visible inside the NetHunter chroot, and ready for monitor-mode tools — all powered by a USB **OTG** cable.
+> **Target Audience**: Intermediate (rooting knowledge required)  | **Prerequisites**: Rooted Android phone, NetHunter installed, OTG cable, an ALFA adapter with an **in-kernel chipset** (see below).
 
 ## Concept: why Android is the hardest environment
 

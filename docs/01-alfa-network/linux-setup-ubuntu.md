@@ -10,8 +10,8 @@ keywords: [ALFA Ubuntu, install RTL8812AU Ubuntu, MT7612U Ubuntu, DKMS Ubuntu, A
 
 # ALFA Adapters on Ubuntu — Complete Setup Guide
 
-> **學習目標（Learning goal）**: By the end of this guide you will have your ALFA adapter visible in Ubuntu (`iw dev`), connected to Wi-Fi, and — for the supported chipsets — able to switch into monitor mode.
-> **適用對象**: Beginner–intermediate ｜ **前置需求**: Ubuntu 20.04+ (22.04+ for Wi-Fi 6E models), an internet connection (you need it to install packages!), and your ALFA adapter.
+> **Learning Objectives**:  By the end of this guide you will have your ALFA adapter visible in Ubuntu (`iw dev`), connected to Wi-Fi, and — for the supported chipsets — able to switch into monitor mode.
+> **Target Audience**: Beginner–intermediate  | **Prerequisites**: Ubuntu 20.04+ (22.04+ for Wi-Fi 6E models), an internet connection (you need it to install packages!), and your ALFA adapter.
 
 ## Concept: two kinds of drivers
 
@@ -153,7 +153,7 @@ iw dev
 
 > **You might be wondering** — *"Which module name corresponds to my adapter?"* Match your chipset: `8812au` → AWUS036ACH, `8811au` → AWUS036ACS, `88x2bu` → AWUS036AX / AXER. The [driver pages](/alfa-network/drivers/rtl8812au/) have deeper per-chipset details.
 
-## Step 4: Verify everything
+## Step 4: Verify everything {#step-4-verify-everything}
 
 A three-command health check:
 

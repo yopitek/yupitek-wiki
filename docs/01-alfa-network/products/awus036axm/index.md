@@ -9,9 +9,9 @@ keywords: [AWUS036AXM, MT7921AUN, AX3000, Bluetooth 5.2 adapter, in-kernel WiFi 
 
 # ALFA AWUS036AXM — Wi-Fi 6 AX3000 + Bluetooth 5.2
 
-> **一句話定位（One-liner）**: The **AWUS036AXM** is ALFA's flagship Wi-Fi 6 dongle — an **MT7921AUN AX3000** dual-band adapter with **Bluetooth 5.2**, USB 3.2, two antennas and, crucially, an **in-kernel driver** (`mt7921u` since Linux 5.18). One stick replaces both your Wi-Fi and your Bluetooth.
+> **Quick Summary**: The **AWUS036AXM** is ALFA's flagship Wi-Fi 6 dongle — an **MT7921AUN AX3000** dual-band adapter with **Bluetooth 5.2**, USB 3.2, two antennas and, crucially, an **in-kernel driver** (`mt7921u` since Linux 5.18). One stick replaces both your Wi-Fi and your Bluetooth.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

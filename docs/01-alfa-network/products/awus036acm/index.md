@@ -9,9 +9,9 @@ keywords: [AWUS036ACM, MT7612U, recommended Kali adapter, AC1200 USB adapter]
 
 # ALFA AWUS036ACM — The Classic All-Rounder (MT7612U)
 
-> **一句話定位（One-liner）**: The **AWUS036ACM** is the community's default recommendation: a **high-power MT7612U AC1200** dual-band adapter whose driver is **built into the Linux kernel**. No DKMS, no compilation — plug it in on Kali or Ubuntu and monitor mode just works. It is the boring-adapter answer to "which ALFA should I buy?", and boring means reliable.
+> **Quick Summary**: The **AWUS036ACM** is the community's default recommendation: a **high-power MT7612U AC1200** dual-band adapter whose driver is **built into the Linux kernel**. No DKMS, no compilation — plug it in on Kali or Ubuntu and monitor mode just works. It is the boring-adapter answer to "which ALFA should I buy?", and boring means reliable.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

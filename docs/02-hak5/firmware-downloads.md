@@ -17,8 +17,8 @@ toc: true
 
 # Hak5 Firmware & Downloads — The Complete Index
 
-> **學習目標**：讀完你將能自己找到並更新任何 Hak5 裝置的韌體、下載 PayloadStudio 編寫 Payload、並從官方 Payload 倉庫同步現成腳本。
-> **適用對象**：初學者 ｜ **前置需求**：一台 Hak5 裝置（任一型號）
+> **Learning Objectives**: After completing this guide, you will be able to find and flash the latest firmware for any Hak5 device, author payloads with PayloadStudio, and synchronize scripts from official payload repositories.
+> **Target Audience**: Beginners to physical security testing | **Prerequisites**: A Hak5 hardware device (any model)
 
 Before we give you a giant table of links, you should understand the two kinds of "software" a Hak5 device runs, because beginners mix them up all the time:
 

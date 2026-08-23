@@ -9,7 +9,7 @@ keywords: [ALFA Network, AWUS036ACM, AWUS036AXML, Wi-Fi adapter, monitor mode, K
 
 # ALFA Network
 
-> **一句話定位（One-liner）**：ALFA Network makes the external Wi-Fi adapters and antennas that penetration testers, drone pilots and robotics labs reach for — because they combine **high-gain radios**, **external antenna connectors**, and (the part students love most) **serious Linux support**.
+> **Quick Summary**: ALFA Network makes the external Wi-Fi adapters and antennas that penetration testers, drone pilots and robotics labs reach for — because they combine **high-gain radios**, **external antenna connectors**, and (the part students love most) **serious Linux support**.
 
 If you have ever watched a Kali Linux tutorial where someone plugs a black stick into a USB port, flips the interface into monitor mode and starts sniffing packets, the stick was almost certainly an ALFA. The brand has been the default choice in the security community for over a decade — from the legendary **AWUS036ACH** to the brand-new **Wi-Fi 6E AWUS036AXML**.
 

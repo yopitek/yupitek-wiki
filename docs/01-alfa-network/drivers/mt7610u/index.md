@@ -9,7 +9,7 @@ keywords: [MT7610U driver, AWUS036ACHM, mt76x0u, monitor mode Linux]
 
 # MT7610U Driver Guide (AWUS036ACHM)
 
-> **一句話定位（One-liner）**: The **MediaTek MT7610U** is the 1T1R (one stream) dual-band chipset inside the **AWUS036ACHM** — a budget-friendly AC433 adapter whose `mt76x0u` driver is **in the Linux kernel since 4.19**. Like its big brother the MT7612U, it is plug-and-play on any modern Linux.
+> **Quick Summary**: The **MediaTek MT7610U** is the 1T1R (one stream) dual-band chipset inside the **AWUS036ACHM** — a budget-friendly AC433 adapter whose `mt76x0u` driver is **in the Linux kernel since 4.19**. Like its big brother the MT7612U, it is plug-and-play on any modern Linux.
 
 ## Concept: the "little brother" chipset
 

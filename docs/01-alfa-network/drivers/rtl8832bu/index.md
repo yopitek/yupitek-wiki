@@ -9,7 +9,7 @@ keywords: [RTL8832BU driver, AWUS036AX, rtl88x2bu, Wi-Fi 6 Linux, WPA3]
 
 # RTL8832BU Driver Guide (AWUS036AX / AWUS036AXER)
 
-> **一句話定位（One-liner）**: The **Realtek RTL8832BU** is the Wi-Fi 6 (802.11ax) chipset inside the **AWUS036AX** and its nano sibling the **AWUS036AXER**. It is not in the kernel, so you build the `rtl88x2bu` DKMS driver once — then enjoy AX1800 speeds, **WPA3** support and working monitor mode.
+> **Quick Summary**: The **Realtek RTL8832BU** is the Wi-Fi 6 (802.11ax) chipset inside the **AWUS036AX** and its nano sibling the **AWUS036AXER**. It is not in the kernel, so you build the `rtl88x2bu` DKMS driver once — then enjoy AX1800 speeds, **WPA3** support and working monitor mode.
 
 ## Concept: Wi-Fi 6, the Realtek way
 

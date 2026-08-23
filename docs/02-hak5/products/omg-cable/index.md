@@ -16,7 +16,7 @@ toc: true
 
 # O.MG Cable — The Complete Guide
 
-> **一句話定位**：O.MG Cable 是一條「外觀正常、內部藏了一顆無線植入晶片」的 USB 充電/傳輸線——你以為只是條線，它卻能透過 Wi-Fi 被遠端操控，隨時注入鍵盤敲擊、執行 Payload，甚至自我銷毀。紅隊的終極社交工程武器。
+> **Quick Summary**: The O.MG Cable looks and functions identically to an OEM charging and data cable, while housing a covert wireless implant microcontroller for remote Wi-Fi payload triggering and keystroke injection.
 
 What if the charging cable you just picked up at a conference was actually a computer with a Wi-Fi radio? That's the O.MG Cable. Until tools like this existed, an implant of this class (think the NSA's COTTONMOUTH) cost tens of thousands of dollars. O.MG put it in a mass-produced, hand-made USB cable.
 

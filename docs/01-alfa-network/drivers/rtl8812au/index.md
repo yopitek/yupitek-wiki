@@ -9,7 +9,7 @@ keywords: [RTL8812AU driver, AWUS036ACH, rtl8812au-dkms, airmon-ng, packet injec
 
 # RTL8812AU Driver Guide (AWUS036ACH)
 
-> **一句話定位（One-liner）**: The **Realtek RTL8812AU** is the legendary 2×2 dual-band chipset inside the **AWUS036ACH** — the adapter from every Kali tutorial you have ever watched. It is **not in the Linux kernel**, so you build the `rtl8812au` driver once with DKMS and it survives every kernel update.
+> **Quick Summary**: The **Realtek RTL8812AU** is the legendary 2×2 dual-band chipset inside the **AWUS036ACH** — the adapter from every Kali tutorial you have ever watched. It is **not in the Linux kernel**, so you build the `rtl8812au` driver once with DKMS and it survives every kernel update.
 
 ## Concept: the most famous Wi-Fi hacking chipset
 

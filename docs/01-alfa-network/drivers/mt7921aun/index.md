@@ -9,7 +9,7 @@ keywords: [MT7921AUN driver, mt7921u, AWUS036AXML, Wi-Fi 6E Linux, AWUS036AXM]
 
 # MT7921AUN Driver Guide (AWUS036AXM / AWUS036AXML)
 
-> **一句話定位（One-liner）**: The **MediaTek MT7921AUN** powers the **AWUS036AXM** (Wi-Fi 6, AX3000) and the **AWUS036AXML** (Wi-Fi 6E, AXE3000 with the 6 GHz band). Its `mt7921u` driver has been **mainline since kernel 5.18** — the modern successor to the beloved MT7612U, and the only path to 6 GHz on Linux in this lineup.
+> **Quick Summary**: The **MediaTek MT7921AUN** powers the **AWUS036AXM** (Wi-Fi 6, AX3000) and the **AWUS036AXML** (Wi-Fi 6E, AXE3000 with the 6 GHz band). Its `mt7921u` driver has been **mainline since kernel 5.18** — the modern successor to the beloved MT7612U, and the only path to 6 GHz on Linux in this lineup.
 
 ## Concept: what you get with MT7921AUN
 

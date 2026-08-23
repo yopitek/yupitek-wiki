@@ -16,7 +16,7 @@ toc: true
 
 # WiFi Pineapple Enterprise — The Complete Guide
 
-> **一句話定位**：WiFi Pineapple Enterprise 是 Pineapple 家族的重型砲台 — 一台 1U 機架式主機、五組雙頻無線電、雙 Gigabit 網路埠，專門做長時間、大範圍的企業無線稽核。給進階研究生、實驗室、紅隊與需要 24/7 部署的人。
+> **Quick Summary**: WiFi Pineapple Enterprise is the rackmount powerhouse of wireless auditing—combining five high-power dual-band radios and dual Gigabit Ethernet ports built for continuous, large-scale enterprise airspace security monitoring.
 
 The Mark VII taught you rogue-AP basics. The **Enterprise** is what you get when "one radio per job" isn't enough: five dual-band radios (2.4 + 5 GHz) let you run attack, monitor, and serving roles *simultaneously* without juggling interfaces. It's the Pineapple for a serious lab, a campus security course, or a red-team operation that needs to audit an entire airspace at once.
 

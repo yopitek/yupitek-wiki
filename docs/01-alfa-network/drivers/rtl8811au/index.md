@@ -9,7 +9,7 @@ keywords: [RTL8811AU driver, AWUS036ACS, rtl8811au, pocket adapter monitor mode]
 
 # RTL8811AU Driver Guide (AWUS036ACS)
 
-> **一句話定位（One-liner）**: The **Realtek RTL8811AU** is the 1×1 AC433 chipset inside the 55 mm **AWUS036ACS** — the pocket-sized monitor-mode companion. Like its big brother the RTL8812AU, it needs the community `rtl8811au` driver via DKMS, but the build is identical.
+> **Quick Summary**: The **Realtek RTL8811AU** is the 1×1 AC433 chipset inside the 55 mm **AWUS036ACS** — the pocket-sized monitor-mode companion. Like its big brother the RTL8812AU, it needs the community `rtl8811au` driver via DKMS, but the build is identical.
 
 ## Concept: same family, one stream
 

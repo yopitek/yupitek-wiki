@@ -16,13 +16,13 @@ toc: true
 
 # Screen Crab — The Complete Guide
 
-> **一句話定位**：Screen Crab 是一台「藏在 HDMI 線中間的隱形監視器」——把它夾在電腦與螢幕（或遊戲機與電視）之間，它零延遲地把畫面截圖或錄影存進 MicroSD，還能透過 Wi-Fi 串流到 Cloud C²。系統管理員、滲透測試與想「看到別人看到什麼」的人最愛它。
+> **Quick Summary**: Screen Crab is an inline HDMI video grabber positioned between a computer and display. It silently captures full-resolution screenshots or video to MicroSD with zero display latency, streaming captures over Wi-Fi to Cloud C².
 
 The Screen Crab is the first HDMI **man-in-the-middle** device made for pentesters. It doesn't intercept network traffic — it intercepts the *video signal itself*. Because it splits the HDMI signal passively (no re-encoding in the data path), the output display sees **zero lag and zero interruption** while the Crab quietly captures a second copy.
 
 It's disarmingly simple: plug it inline, power it over USB, and it starts saving screenshots to the MicroSD card out of the box. Edit a `config.txt` file to change intervals, enable video, or connect it to Wi-Fi + [Cloud C²](/hak5/firmware-downloads/) to watch screens live from a browser.
 
-> **⚠️ Authorised testing only.** Capturing someone's screen without consent is illegal (Taiwan: 刑法第三一五條之一妨害秘密罪, among others). Use on your own machines/displays or with explicit authorization.
+> **⚠️ Authorised testing only.** Capturing someone's screen without consent is illegal (applicable surveillance and privacy laws). Use on your own machines/displays or with explicit authorization.
 
 ---
 

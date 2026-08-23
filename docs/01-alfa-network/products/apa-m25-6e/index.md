@@ -9,9 +9,9 @@ keywords: [APA-M25-6E, tri-band panel antenna, 6 GHz antenna, Wi-Fi 6E antenna]
 
 # ALFA APA-M25-6E — Tri-Band Panel Antenna (Wi-Fi 6E Ready)
 
-> **一句話定位（One-liner）**: The **APA-M25-6E** is a **10 dBi directional panel antenna** that covers **2.4, 5 and 6 GHz** — the Wi-Fi 6E version of the classic APA-M25. If your adapter has a 6 GHz radio (the [AWUS036AXML](/alfa-network/products/awus036axml/)), this is the antenna that lets it actually reach across a campus.
+> **Quick Summary**: The **APA-M25-6E** is a **10 dBi directional panel antenna** that covers **2.4, 5 and 6 GHz** — the Wi-Fi 6E version of the classic APA-M25. If your adapter has a 6 GHz radio (the [AWUS036AXML](/alfa-network/products/awus036axml/)), this is the antenna that lets it actually reach across a campus.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

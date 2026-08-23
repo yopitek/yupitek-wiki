@@ -17,8 +17,8 @@ toc: true
 
 # Hak5 Quickstart — Your First 15 Minutes
 
-> **學習目標**：讀完你將能為任一台 Hak5 裝置完成首次啟動 — 進入 arming mode、載入第一個 Payload、並回收第一批 loot（竊取/收集到的資料）。
-> **適用對象**：初學者（完全沒碰過 Hak5 也可以）｜ **前置需求**：一台 Hak5 裝置、一台電腦、一條 USB 線（或 Wi-Fi）。
+> **Learning Objectives**: After finishing this guide, you will be able to complete first-time setup on any Hak5 device—enter Arming Mode, load your first payload, and retrieve your first loot collection.
+> **Target Audience**: Beginners (no prior Hak5 experience required) | **Prerequisites**: A Hak5 device, computer, USB cable or Wi-Fi.
 
 Every Hak5 device speaks the same three words, so let's learn them once — they make every quickstart below trivial:
 

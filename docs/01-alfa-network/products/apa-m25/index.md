@@ -9,9 +9,9 @@ keywords: [APA-M25, ALFA panel antenna, 10 dBi dual band, RP-SMA antenna]
 
 # ALFA APA-M25 — Dual-Band Panel Antenna (2.4/5 GHz)
 
-> **一句話定位（One-liner）**: The **APA-M25** is ALFA's classic **10 dBi dual-band directional panel** for **2.4 and 5 GHz**, terminated in **RP-SMA**. It is the "point it at the AP and win" upgrade for any ALFA adapter with external antennas — the panel the campus repeater projects are built on.
+> **Quick Summary**: The **APA-M25** is ALFA's classic **10 dBi dual-band directional panel** for **2.4 and 5 GHz**, terminated in **RP-SMA**. It is the "point it at the AP and win" upgrade for any ALFA adapter with external antennas — the panel the campus repeater projects are built on.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

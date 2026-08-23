@@ -10,8 +10,8 @@ keywords: [ALFA Kali, airmon-ng, monitor mode Kali, packet injection, AWUS036ACM
 
 # ALFA Adapters on Kali Linux — Monitor Mode & Packet Injection
 
-> **學習目標（Learning goal）**: By the end of this guide you will have your ALFA adapter in **monitor mode** and **proven that packet injection works** — the two capabilities every Wi-Fi auditing tool (Aircrack-ng, Wifite, Wireshark, Bettercap) depends on.
-> **適用對象**: Beginner–intermediate, Kali users ｜ **前置需求**: Kali Linux installed (any recent version), internet access, your ALFA adapter.
+> **Learning Objectives**:  By the end of this guide you will have your ALFA adapter in **monitor mode** and **proven that packet injection works** — the two capabilities every Wi-Fi auditing tool (Aircrack-ng, Wifite, Wireshark, Bettercap) depends on.
+> **Target Audience**: Beginner–intermediate, Kali users  | **Prerequisites**: Kali Linux installed (any recent version), internet access, your ALFA adapter.
 
 ## Concept: why Kali is different
 

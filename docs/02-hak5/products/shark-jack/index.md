@@ -16,7 +16,7 @@ toc: true
 
 # Shark Jack — The Complete Guide
 
-> **一句話定位**：Shark Jack 是一台口袋大小的網路偵察機——往人家的乙太網路孔一插，60 秒內告訴你這個網段有誰、開了些什麼服務。充一次電能跑 10–15 分鐘，最適合掛在鑰匙圈上的臨時稽核。
+> **Quick Summary**: Shark Jack is a pocket-sized, battery-powered Ethernet reconnaissance device. Plugged into an active network jack, it automatically discovers hosts, scans open services, and saves results in 60 seconds.
 
 The Shark Jack packs a full Linux computer and an nmap scanner into something that hangs off a keychain. It espouses Hak5's "hotplug attack, meet LAN" philosophy: physical access to a live Ethernet port is all it takes to gain a foothold of intelligence.
 

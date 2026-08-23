@@ -16,7 +16,7 @@ toc: true
 
 # Key Croc — The Complete Guide
 
-> **一句話定位**：Key Croc 是一台偽裝成鍵盤轉接頭的「智慧型硬體鍵盤側錄器」——它記錄你打下的每個字，而且當你打出特定關鍵字（例如「密碼」、「password」）時，它會自動觸發預載的攻擊 Payload。
+> **Quick Summary**: Key Croc is an intelligent hardware keylogger disguised as a USB keyboard adapter. It captures keystrokes in real time, executing automated payloads when predefined trigger keywords are matched, and syncing logs to Cloud C² over Wi-Fi.
 
 The Key Croc looks like a harmless USB keyboard pass-through adapter. Slipped between a keyboard and a computer, it quietly **logs every keystroke** to its internal storage. But it's far more than a logger: using **pattern matching**, it watches the keystroke stream for words of interest (a keyword or a regex) and fires pre-loaded **attack payloads** the moment they match — even cloning the keyboard's hardware IDs so it's indistinguishable from a normal adapter.
 

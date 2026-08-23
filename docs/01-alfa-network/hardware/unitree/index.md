@@ -9,7 +9,7 @@ keywords: [Unitree Go2 Wi-Fi, robot dog control link, ALFA robot telemetry, long
 
 # ALFA Adapters on Unitree Robots (Go2 / B2 / A1)
 
-> **一句話定位（One-liner）**: Unitree's robot dogs (Go2, B2, A1) carry an NVIDIA Jetson and ship with a **weak built-in Wi-Fi antenna**. An ALFA adapter with external antennas turns the robot's wireless control link from "follows you around the room" into "commands it from the far end of the field".
+> **Quick Summary**: Unitree's robot dogs (Go2, B2, A1) carry an NVIDIA Jetson and ship with a **weak built-in Wi-Fi antenna**. An ALFA adapter with external antennas turns the robot's wireless control link from "follows you around the room" into "commands it from the far end of the field".
 
 ## Concept: the wireless control link problem
 

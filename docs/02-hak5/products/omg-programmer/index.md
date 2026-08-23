@@ -16,7 +16,7 @@ toc: true
 
 # O.MG Programmer — The Complete Guide
 
-> **一句話定位**：O.MG Programmer 是啟用與維護所有 O.MG 裝置（Cable、Plug、Adapter、UnBlocker）的唯一入口——一支程式設計器就能完成啟用、免費韌體升級、自我銷毀救援，以及鑑識備份。
+> **Quick Summary**: The O.MG Programmer is the dedicated interface for provisioning and maintaining all O.MG hardware—providing initial flashing, firmware updates, factory recovery, and forensic backups.
 
 Every O.MG device ships **deactivated** for legal reasons. Before it can do anything, it must be activated — and that's what the **O.MG Programmer** is for. It's a small USB dongle you plug between your computer and any O.MG device, paired with a browser-based **WebFlasher** utility. One Programmer serves the *entire* O.MG lineup, so you never buy per-device hardware.
 

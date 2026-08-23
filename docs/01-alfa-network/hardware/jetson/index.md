@@ -9,7 +9,7 @@ keywords: [Jetson Orin ALFA, Jetson Wi-Fi 6E, AWUS036AXML Jetson, robotics wirel
 
 # ALFA Adapters on NVIDIA Jetson (Orin Nano / NX)
 
-> **一句話定位（One-liner）**: Your Jetson is a vision computer, not a router — so its built-in Wi-Fi is usually weak and single-band. An ALFA adapter fixes that: **plug in the AWUS036AXML for 6 GHz Wi-Fi 6E streaming**, or any in-kernel ALFA for reliable robot telemetry and even monitor mode.
+> **Quick Summary**: Your Jetson is a vision computer, not a router — so its built-in Wi-Fi is usually weak and single-band. An ALFA adapter fixes that: **plug in the AWUS036AXML for 6 GHz Wi-Fi 6E streaming**, or any in-kernel ALFA for reliable robot telemetry and even monitor mode.
 
 ## Concept: why a Jetson needs an external adapter
 

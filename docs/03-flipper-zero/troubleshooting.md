@@ -16,7 +16,7 @@ toc: true
 
 # Flipper Zero Troubleshooting
 
-> **排查鐵律 (Rule of thumb)**: hardware first → firmware/driver second → settings last. In Flipper Zero terms: **battery & cable → firmware version → configuration (region, Bluetooth, SD card)**.
+> **Troubleshooting Golden Rules**: hardware first → firmware/driver second → settings last. In Flipper Zero terms: **battery & cable → firmware version → configuration (region, Bluetooth, SD card)**.
 
 This page is a decision-tree index. Find your symptom below, jump to that section, and follow the diagnosis steps in order.
 
@@ -42,7 +42,7 @@ flowchart TD
 | Storage | SD card not detected, "no storage" | [Storage & microSD](#storage--microsd) |
 | Firmware | Update fails, device stuck on logo | [Firmware & recovery](#firmware--recovery) |
 
-## Battery & power
+## Battery & power {#battery--power}
 
 ### Q1: Device won't power on
 
@@ -70,7 +70,7 @@ Charge LED: OFF → ORANGE (charging) → GREEN (full)
 | Charges very slowly | Charging limited to ~1A max by design | Use any decent 5V/2A charger; time to full ≈ 2 h |
 | Stops at some % | Cell imbalance or worn battery | Charge in cooler room; if persistent, contact support |
 
-## USB & Bluetooth
+## USB & Bluetooth {#usb--bluetooth}
 
 ### Q3: qFlipper says "no device found"
 
@@ -104,7 +104,7 @@ Bus 001 Device 004: ID 0483:5740 STMicroelectronics Flipper Zero
 | Pairing succeeds but sync hangs | App too old vs new firmware | Update the app; see [Mobile App guide](/flipper-zero/mobile-app/) |
 | Connects only after reboot | BLE stack stuck | Reboot Flipper (LEFT + BACK → power off → on) |
 
-## Sub-GHz & cards
+## Sub-GHz & cards {#sub-ghz--cards}
 
 ### Q5: Sub-GHz can't capture a remote
 
@@ -136,7 +136,7 @@ Bus 001 Device 004: ID 0483:5740 STMicroelectronics Flipper Zero
 | Reads some cards, not others | Card type unsupported (e.g. encrypted DESFire with auth) | Check supported list on the [product page](/flipper-zero/products/flipper-zero/); encrypted cards can't be read without keys |
 | Reads but won't emulate | Emulation range is short by design | Emulation antenna is tiny — hold the Flipper right against the reader |
 
-## Storage & microSD
+## Storage & microSD {#storage--microsd}
 
 ### Q7: "SD card: not present" or save fails
 
@@ -162,7 +162,7 @@ mkfs.fat 4.2 (2021-01-31)
 
 > ⚠️ Formatting wipes the card. Back up first. Never point `mkfs` at your OS disk — verify the device name with `lsblk` before running.
 
-## Firmware & recovery
+## Firmware & recovery {#firmware--recovery}
 
 ### Q8: Update failed, or device stuck on boot logo
 
@@ -184,7 +184,7 @@ flowchart LR
 
 If even the boot menu doesn't appear: leave it charging for 1 hour, then retry. If still nothing, the firmware storage may be corrupt — this is rare and warrants [support](#still-stuck).
 
-## Still stuck?
+## Still stuck? {#still-stuck}
 
 If none of the above fixes it, open a ticket on the [official support portal](https://support.flipper.net). To get a fast answer, prepare:
 

@@ -9,7 +9,7 @@ keywords: [MT7612U driver, AWUS036ACM, mt76x2u, monitor mode Linux]
 
 # MT7612U Driver Guide (AWUS036ACM)
 
-> **一句話定位（One-liner）**: The **MediaTek MT7612U** is the chipset inside the **AWUS036ACM** — and its `mt76x2u` driver has been **built into the Linux kernel since version 4.19**. That single fact makes the ACM the lowest-friction ALFA adapter on Linux: no installation, no DKMS, no maintenance.
+> **Quick Summary**: The **MediaTek MT7612U** is the chipset inside the **AWUS036ACM** — and its `mt76x2u` driver has been **built into the Linux kernel since version 4.19**. That single fact makes the ACM the lowest-friction ALFA adapter on Linux: no installation, no DKMS, no maintenance.
 
 ## Concept: what "in-kernel" means for MT7612U
 

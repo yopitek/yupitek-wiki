@@ -16,7 +16,7 @@ toc: true
 
 # O.MG UnBlocker — The Complete Guide
 
-> **一句話定位**：O.MG UnBlocker 把無線植入晶片藏進一顆「安全 USB 資料阻斷器（USB 保險套）」裡——那個人人都相信最安全的裝置，其實是顆隨時能被 Wi-Fi 遙控的攻擊端點。
+> **Quick Summary**: The O.MG UnBlocker conceals a covert wireless implant inside a standard-looking USB data blocker condom, illustrating critical hardware supply-chain and physical trust vulnerabilities.
 
 There is a well-known piece of defensive hardware: the **USB data blocker** ("USB condom"). It passes only power and blocks the data lines, so you can safely charge from an unknown port. It's the go-to recommendation for travellers and executives. The O.MG UnBlocker weaponises that trust: it looks and works exactly like a data blocker, but inside sits a dormant O.MG wireless implant.
 

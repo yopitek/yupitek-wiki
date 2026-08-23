@@ -9,9 +9,9 @@ keywords: [AWUS036AXER, RTL8832BU nano, 10.5g adapter, internal antenna Wi-Fi 6]
 
 # ALFA AWUS036AXER — Wi-Fi 6 Nano (Internal Antenna)
 
-> **一句話定位（One-liner）**: The **AWUS036AXER** is ALFA's **10.5 g nano** — the same **RTL8832BU AX1800** Wi-Fi 6 engine as the big AWUS036AX, but with an **internal antenna** and USB 3.2, so it sits flush in the port and disappears. Wi-Fi 6 + WPA3 for the everyday-carry crowd.
+> **Quick Summary**: The **AWUS036AXER** is ALFA's **10.5 g nano** — the same **RTL8832BU AX1800** Wi-Fi 6 engine as the big AWUS036AX, but with an **internal antenna** and USB 3.2, so it sits flush in the port and disappears. Wi-Fi 6 + WPA3 for the everyday-carry crowd.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

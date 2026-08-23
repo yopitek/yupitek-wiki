@@ -9,7 +9,7 @@ keywords: [Raspberry Pi ALFA, Pi access point hostapd, AWUS036ACM Raspberry Pi, 
 
 # ALFA Adapters on Raspberry Pi (3 / 4 / 5)
 
-> **一句話定位（One-liner）**: A Raspberry Pi + ALFA adapter is the classic budget lab station: **capture traffic** with an in-kernel-chipset ALFA, or turn the Pi into a **hostapd access point** with range that the Pi's built-in radio cannot dream of.
+> **Quick Summary**: A Raspberry Pi + ALFA adapter is the classic budget lab station: **capture traffic** with an in-kernel-chipset ALFA, or turn the Pi into a **hostapd access point** with range that the Pi's built-in radio cannot dream of.
 
 ## Concept: why the Pi is the perfect ALFA host
 

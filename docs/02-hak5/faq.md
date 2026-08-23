@@ -17,7 +17,7 @@ toc: true
 
 # Hak5 FAQ — Questions Every Beginner Asks
 
-> **結論先行**：沒有「最強」的 Hak5 工具，只有「最適合你目標」的工具。先搞清楚你要測什麼 — Wi-Fi、USB、還是網路 — 再往下選。
+> **Bottom Line Up Front**: There is no single 'best' Hak5 tool—only the right tool for your specific objective. Clarify your testing target first (Wi-Fi, USB HID, or inline Ethernet) before choosing.
 
 ```mermaid
 %% name: hak5-faq-which-device
@@ -50,7 +50,7 @@ flowchart TD
 **Yes.** These are general-purpose computing devices — a Raspberry Pi with a Wi-Fi dongle can do most of what a WiFi Pineapple does. Owning them is legal virtually everywhere.
 
 ### Is it legal to *use*?
-Only on **systems you own or have written permission to test**. Unauthorised access is a crime in every jurisdiction (in Taiwan, 刑法妨害電腦使用罪, 第 358–363 條, carries up to five years imprisonment for some offences). Hak5's own warranty language says the same: these tools are "for authorized auditing and security analysis purposes only."
+Only on **systems you own or have written permission to test**. Unauthorised access is a crime in every jurisdiction (unauthorized computer access carries severe criminal penalties in most jurisdictions). Hak5's own warranty language says the same: these tools are "for authorized auditing and security analysis purposes only."
 
 ### Can I use Hak5 gear for CTFs or university labs?
 Yes — CTF platforms and university security courses routinely use them. When in doubt, **ask the lab organiser or professor** what you are authorised to test, and keep everything inside the provided sandbox.

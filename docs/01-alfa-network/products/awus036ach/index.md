@@ -9,9 +9,9 @@ keywords: [AWUS036ACH, RTL8812AU, high power adapter, Kali Linux adapter]
 
 # ALFA AWUS036ACH — High Power AC1200
 
-> **一句話定位（One-liner）**: The **AWUS036ACH** is ALFA's most famous adapter — a **high-power RTL8812AU AC1200 dual-band** USB 3.0 dongle with two 5 dBi external antennas. If you have ever seen a black ALFA in a Kali tutorial, it is probably this one. Monitor mode and packet injection are its party tricks; a DKMS driver build is the one-time entry fee.
+> **Quick Summary**: The **AWUS036ACH** is ALFA's most famous adapter — a **high-power RTL8812AU AC1200 dual-band** USB 3.0 dongle with two 5 dBi external antennas. If you have ever seen a black ALFA in a Kali tutorial, it is probably this one. Monitor mode and packet injection are its party tricks; a DKMS driver build is the one-time entry fee.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

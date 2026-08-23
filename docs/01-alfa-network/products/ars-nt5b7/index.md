@@ -9,9 +9,9 @@ keywords: [ARS-NT5B7, WiFi 7 antenna, tri-band dipole, industrial antenna, -40 8
 
 # ALFA ARS-NT5B7 — WiFi 7 Tri-Band Industrial Dipole Antenna
 
-> **一句話定位（One-liner）**: The **ARS-NT5B7** is the **WiFi 7-ready tri-band dipole** covering **2.4, 5 and 6 GHz** with up to **7 dBi**, engineered for the **industrial -40 to +85 °C** range. It is the antenna you bolt onto an embedded gateway or robot when the stock plastic dipole is not going to survive the job.
+> **Quick Summary**: The **ARS-NT5B7** is the **WiFi 7-ready tri-band dipole** covering **2.4, 5 and 6 GHz** with up to **7 dBi**, engineered for the **industrial -40 to +85 °C** range. It is the antenna you bolt onto an embedded gateway or robot when the stock plastic dipole is not going to survive the job.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

@@ -16,13 +16,13 @@ toc: true
 
 # Hak5 — Offensive Security Hardware, Explained
 
-> **一句話定位**：Hak5 是全世界最知名的「攻擊型」安全硬體品牌 — 從替別人收發鍵盤敲擊的 USB Rubber Ducky，到假裝成咖啡店 Wi-Fi 的 WiFi Pineapple。本節用大學課程等級的詳細度，帶你一步一步認識每一台裝置、怎麼設定、怎麼寫 Payload、出了問題怎麼修。
+> **Quick Summary**: Hak5 is the world's most renowned offensive security hardware brand—from the keystroke-injecting USB Rubber Ducky to the rogue-AP WiFi Pineapple. This section provides an university-level curriculum walking you through every hardware tool, initial setup, payload authoring, and troubleshooting.
 
 Hak5 started in 2005 as a podcast about hacking and technology, and grew into the company that practically *defined* the "plug-and-pwn" category of security hardware. Their philosophy is simple: **computers trust USB and Ethernet devices implicitly — so those trust boundaries are exactly where you test them.** If you are studying cybersecurity, doing CTFs, or preparing for a red-team career, these are the tools you will see in every lab, every conference talk, and every job posting.
 
 This section of the wiki is your complete study guide: every product we carry, with official specifications, beginner-friendly quickstarts, DuckyScript examples, and a troubleshooting index — all written so that a first-year student can follow along, and detailed enough that a working pentester will still find something new.
 
-> **⚠️ Legal note — read this once.** Everything in this section is for **authorized security testing only**: your own lab, your own devices, or a network you have written permission to test. Laws about unauthorized access exist in every country (in Taiwan, see 刑法第 358–363 條 and 個資法). Hacking without permission is a crime — with these tools it is also trivially detectable by the defensive tools we cover on this very page. Play in your sandbox.
+> **⚠️ Legal note — read this once.** Everything in this section is for **authorized security testing only**: your own lab, your own devices, or a network you have written permission to test. Laws about unauthorized access exist in every country (governed by computer misuse and data protection laws). Hacking without permission is a crime — with these tools it is also trivially detectable by the defensive tools we cover on this very page. Play in your sandbox.
 
 ---
 

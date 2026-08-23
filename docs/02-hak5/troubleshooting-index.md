@@ -17,7 +17,7 @@ toc: true
 
 # Hak5 Troubleshooting Index
 
-> **排查鐵律**：先確認電源與模式 → 再查 LED 狀態 → 然後驗證連線（SSH/Web UI）→ 最後檢查 Payload 與韌體。照這個順序走，90% 的問題五分鐘內解決。
+> **Troubleshooting Golden Rules**: Verify power & mode switch first → check LED status patterns → test host connectivity (SSH/Web UI) → verify payload and firmware version. Following this exact sequence solves 90% of issues within minutes.
 
 ```mermaid
 %% name: hak5-troubleshooting-decision-tree
@@ -88,10 +88,10 @@ flowchart TD
 
 ---
 
-## Power & boot
+## Power & boot {#power--boot}
 
 ### Device shows no sign of life
-**診斷**：Is the LED completely off? Check the cable and power source.
+**Diagnosis**: Is the LED completely off? Check the cable and power source.
 
 | Cause | Fix |
 |---|---|
@@ -104,10 +104,10 @@ flowchart TD
 
 ---
 
-## Arming mode problems
+## Arming mode problems {#arming-mode-problems}
 
 ### Device mounts as a drive, but no `payloads` folder
-**診斷**: `lsusb` or the file manager shows the device, but the tree looks wrong.
+**Diagnosis**:  `lsusb` or the file manager shows the device, but the tree looks wrong.
 **Cause:** you're looking at the *loot/configuration* partition instead of the payload area, or the device is a model with a different layout.
 **Fix:** check the exact partition layout on the product page for your model (e.g. [Bash Bunny](/hak5/products/bash-bunny-mark-ii/) uses `/payloads/switch1|2|3/`; [Shark Jack](/hak5/products/shark-jack/) exposes `/root/payload/` over SSH, not as a drive).
 
@@ -119,7 +119,7 @@ flowchart TD
 
 ---
 
-## SSH & web UI connection
+## SSH & web UI connection {#ssh--web-ui-connection}
 
 ### `ssh: Connection refused` / page won't load
 **Diagnosis step 1 — are you on the right network?**
@@ -153,7 +153,7 @@ If ping fails, you are not on the device's subnet — fix your IP first.
 
 ---
 
-## Payload problems
+## Payload problems {#payload-problems}
 
 ### Keystrokes typed to the wrong app / nothing typed
 | Cause | Fix |
@@ -178,7 +178,7 @@ Look at the error line, fix the script, redeploy.
 
 ---
 
-## Wi-Fi issues
+## Wi-Fi issues {#wi-fi-issues}
 
 ### Can't see the Pineapple's AP
 1. Wait 60 s after power-on (boot is slow on first run).

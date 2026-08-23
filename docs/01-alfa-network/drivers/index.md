@@ -9,7 +9,7 @@ keywords: [ALFA drivers, AWUS036ACM driver, AWUS036ACH driver, MT7612U, RTL8812A
 
 # ALFA Driver Guides — Overview
 
-> **一句話定位（One-liner）**: Every ALFA wireless adapter on Linux is powered by one of **seven chipsets** — three MediaTek chipsets with **in-kernel** drivers that work out of the box, and four Realtek chipsets that need an **out-of-tree DKMS** build. Find your chipset below and jump to its guide.
+> **Quick Summary**: Every ALFA wireless adapter on Linux is powered by one of **seven chipsets** — three MediaTek chipsets with **in-kernel** drivers that work out of the box, and four Realtek chipsets that need an **out-of-tree DKMS** build. Find your chipset below and jump to its guide.
 
 ```mermaid
 flowchart LR

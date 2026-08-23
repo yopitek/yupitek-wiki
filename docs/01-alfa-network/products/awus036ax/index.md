@@ -9,9 +9,9 @@ keywords: [AWUS036AX, RTL8832BU, Wi-Fi 6 adapter, WPA3, AX1800]
 
 # ALFA AWUS036AX — Wi-Fi 6 Dual-Band AX1800
 
-> **一句話定位（One-liner）**: The **AWUS036AX** is ALFA's Wi-Fi 6 entry — an **RTL8832BU AX1800** dual-band adapter with **WPA3** support, **2×2 MIMO** and two external antennas. If your campus or lab routers have gone WPA3-only, this is the adapter that still gets you in.
+> **Quick Summary**: The **AWUS036AX** is ALFA's Wi-Fi 6 entry — an **RTL8832BU AX1800** dual-band adapter with **WPA3** support, **2×2 MIMO** and two external antennas. If your campus or lab routers have gone WPA3-only, this is the adapter that still gets you in.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

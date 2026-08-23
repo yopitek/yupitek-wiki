@@ -16,7 +16,7 @@ toc: true
 
 # Plunder Bug LAN Tap — The Complete Guide
 
-> **一句話定位**：Plunder Bug 是一台口袋大小的「乙太網路竊聽器」——把兩條網路線穿過它，它把流量鏡像給你的電腦，你用 Wireshark 就能看穿這條線上的所有封包。USB-C 供電，Windows / Mac / Linux / Android 都能用。
+> **Quick Summary**: Plunder Bug is a pocket-sized Ethernet TAP that mirrors bidirectional network traffic directly to a host computer over USB-C. Unpowered and passive, it is built for immediate field packet analysis with Wireshark and tcpdump.
 
 The Plunder Bug is the network side of Hak5's physical-access toolkit: a tiny LAN tap that sits on an Ethernet link and mirrors traffic to your analysis computer. It works in **two modes**:
 

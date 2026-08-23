@@ -9,9 +9,9 @@ keywords: [AWUS036AXML, Wi-Fi 6E adapter, 6 GHz, USB-C, AXE3000]
 
 # ALFA AWUS036AXML — Wi-Fi 6E USB-C (6 GHz)
 
-> **一句話定位（One-liner）**: The **AWUS036AXML** is the only **Wi-Fi 6E** adapter in the ALFA line — an **MT7921AUN AXE3000 tri-band** (2.4/5/**6 GHz**) adapter with **USB-C**, dual 5 dBi antennas and **Bluetooth 5.2**, all on an **in-kernel driver** (`mt7921u` since 5.18). This is how a student gets onto the empty 6 GHz band from a modern laptop.
+> **Quick Summary**: The **AWUS036AXML** is the only **Wi-Fi 6E** adapter in the ALFA line — an **MT7921AUN AXE3000 tri-band** (2.4/5/**6 GHz**) adapter with **USB-C**, dual 5 dBi antennas and **Bluetooth 5.2**, all on an **in-kernel driver** (`mt7921u` since 5.18). This is how a student gets onto the empty 6 GHz band from a modern laptop.
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|

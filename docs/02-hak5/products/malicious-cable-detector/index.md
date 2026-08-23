@@ -16,7 +16,7 @@ toc: true
 
 # Malicious Cable Detector — The Complete Guide
 
-> **一句話定位**：Malicious Cable Detector 是目前市面上唯一能偵測「所有已知惡意 USB 線材」的防禦型小工具——包括 O.MG Cable 家族——它用每秒 20 萬次的側信道電力分析找出藏在線材裡的植入晶片。同時它也是一顆資料阻斷器，能安全充電。
+> **Quick Summary**: The Malicious Cable Detector is the industry's premier defensive hardware verification tool engineered to identify all known malicious USB cables—including the O.MG Cable family—using high-speed power-signature analysis while functioning as a safe USB data blocker.
 
 This is the rare *defensive* tool in the Hak5 catalogue — and it's built by the same team that makes the O.MG malicious cables. That's the point: the people who build the best stealth implants know exactly how to find them.
 

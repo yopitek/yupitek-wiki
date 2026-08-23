@@ -16,7 +16,7 @@ toc: true
 
 # WiFi Pineapple Pager — The Complete Guide
 
-> **一句話定位**：WiFi Pineapple Pager 是 Hak5 二十週年的旗艦 — 把整台 Pineapple 塞進口袋，2.4 吋螢幕、三頻無線電（2.4/5/6 GHz）、還有 DuckyScript 驅動的 Payload 系統，完全不需要電腦就能出任務。
+> **Quick Summary**: The WiFi Pineapple Pager is Hak5's 20th anniversary portable flagship—fitting full Pineapple capabilities into your pocket with a 2.4-inch screen, tri-band Wi-Fi 6 (2.4/5/6 GHz), and a DuckyScript payload engine for standalone field operations.
 
 The Pager answers the question every Pineapple owner eventually asks: *"What if I didn't need a laptop to run this?"* It's a standalone Linux handheld with a full color screen, four RGB D-pad buttons, a buzzer, a vibration motor, and the 8th-generation PineAP engine — capable of tri-band recon, evil-twin attacks, and automated DuckyScript payloads, all on a 2000 mAh battery clipped to your belt.
 

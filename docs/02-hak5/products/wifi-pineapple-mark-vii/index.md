@@ -16,13 +16,13 @@ toc: true
 
 # WiFi Pineapple Mark VII — The Complete Guide
 
-> **一句話定位**：WiFi Pineapple Mark VII 是一台「會自己開 Wi-Fi 來釣魚」的無線攻擊平台 — 它假裝成你信任的無線網路，再用 PineAP 引擎接管受害者的連線。給想學 Wi-Fi 滲透測試、evil twin 攻擊的大學生與 CTF 玩家。
+> **Quick Summary**: WiFi Pineapple Mark VII is the premier portable rogue access point and wireless auditing platform. Leveraging the PineAP suite, it emulates trusted Wi-Fi networks to evaluate client behaviors and test defenses against rogue APs and evil twin attacks.
 
 If Wi-Fi pentesting has a mascot, it's the WiFi Pineapple. The Mark VII is the current generation of the device that made the **rogue access point (evil twin)** attack famous: it broadcasts its own network that *looks* like a legitimate one, lures victims in, and then gives you full visibility and control of their traffic — all from a browser interface.
 
 The Mark VII is the device to buy if you're studying wireless security: it's portable (USB-C powered), affordable, and the PineAP suite is the industry-standard way to learn Wi-Fi attack concepts that apply to any modern rogue-AP tooling.
 
-> **⚠️ Authorised testing only.** Run the Pineapple against *your own* network, your own devices, or with written permission. Broadcasting a fake "Free Wi-Fi" on someone else's network is illegal (Taiwan: 刑法第 358–363 條; see also 電信法).
+> **⚠️ Authorised testing only.** Run the Pineapple against *your own* network, your own devices, or with written permission. Broadcasting a fake "Free Wi-Fi" on someone else's network is illegal (applicable telecommunications and computer crime laws).
 
 ---
 

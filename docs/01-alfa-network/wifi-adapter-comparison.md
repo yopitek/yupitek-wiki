@@ -10,7 +10,7 @@ keywords: [ALFA adapter comparison, AWUS036ACM vs AWUS036ACH, Wi-Fi 6E adapter, 
 
 # ALFA Wi-Fi Adapter Comparison
 
-> **結論先行（Bottom line）**: If you are a university student using Kali Linux for coursework or lab exercises, buy the **AWUS036ACM** — its MediaTek MT7612U chipset is built into the Linux kernel, monitor mode just works, and it costs less than the flagship models. If your project *requires* Wi-Fi 6E speeds, the **AWUS036AXML** is the only tri-band option. If you are a Windows user who mainly needs a compact WiFi + Bluetooth combo, the **AWUS036EACS** is your (only) adapter.
+> **Bottom Line Up Front**:  If you are a university student using Kali Linux for coursework or lab exercises, buy the **AWUS036ACM** — its MediaTek MT7612U chipset is built into the Linux kernel, monitor mode just works, and it costs less than the flagship models. If your project *requires* Wi-Fi 6E speeds, the **AWUS036AXML** is the only tri-band option. If you are a Windows user who mainly needs a compact WiFi + Bluetooth combo, the **AWUS036EACS** is your (only) adapter.
 
 
 ![ALFA Wi-Fi adapter lineup — four use-case lanes](/img/wifi-adapter-comparison/wifi-adapter-comparison-lineup.svg)

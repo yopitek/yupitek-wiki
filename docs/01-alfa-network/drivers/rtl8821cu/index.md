@@ -9,7 +9,7 @@ keywords: [RTL8821CU driver, AWUS036EACS, rtl8821cu Linux, AC600 adapter]
 
 # RTL8821CU Driver Guide (AWUS036EACS)
 
-> **一句話定位（One-liner）**: The **Realtek RTL8821CU** is the WiFi 5 + Bluetooth 4.2 combo chipset inside the nano **AWUS036EACS**. Here is the honest version: on **Windows it is plug-and-play**, on **Linux the driver situation is rough**, and monitor mode / packet injection are **not reliable**. If your project needs Linux monitor mode, choose the [AWUS036ACM](/alfa-network/products/awus036acm/) or [AWUS036ACS](/alfa-network/products/awus036acs/) instead.
+> **Quick Summary**: The **Realtek RTL8821CU** is the WiFi 5 + Bluetooth 4.2 combo chipset inside the nano **AWUS036EACS**. Here is the honest version: on **Windows it is plug-and-play**, on **Linux the driver situation is rough**, and monitor mode / packet injection are **not reliable**. If your project needs Linux monitor mode, choose the [AWUS036ACM](/alfa-network/products/awus036acm/) or [AWUS036ACS](/alfa-network/products/awus036acs/) instead.
 
 ## Concept: a Windows-first chipset
 

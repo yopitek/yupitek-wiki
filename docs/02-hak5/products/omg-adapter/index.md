@@ -16,7 +16,7 @@ toc: true
 
 # O.MG Adapter — The Complete Guide
 
-> **一句話定位**：O.MG Adapter 把無線植入晶片藏在一顆「USB-A 轉 USB-C 轉接頭」裡——你今天可能剛剛用它幫平板充電，卻不知道它能透過 Wi-Fi 被控制。它特別的地方是：Type-C 這一端能對**手機與平板**執行鍵盤注入。
+> **Quick Summary**: The O.MG Adapter conceals a covert wireless implant inside a USB adapter, enabling wireless payload triggers and keystroke injections against mobile devices, tablets, and desktop hosts.
 
 The O.MG family hides implants in everyday USB objects. The **Adapter** picks the most common travel accessory there is: the USB-A-to-USB-C dongle everyone carries to charge modern devices. Because the Type-C side is the *active* side, it behaves as an **OTG adapter** — plug it into a phone or tablet's Type-C port and you can deploy payloads to mobile devices, not just computers.
 

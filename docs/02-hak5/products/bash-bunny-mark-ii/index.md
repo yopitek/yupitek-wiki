@@ -16,7 +16,7 @@ toc: true
 
 # Bash Bunny Mark II — The Complete Guide
 
-> **一句話定位**：Bash Bunny Mark II 是 USB Rubber Ducky 的「全家桶」——同一支 USB 插進去，它同時可以是鍵盤、網路卡、序列埠和隨身碟，還能跑完整 Linux 工具。一顆四核 ARM 心臟配上 8GB 桌面級 SSD，插上後 7 秒完成滲透。
+> **Quick Summary**: Bash Bunny Mark II is a multi-vector physical attack platform emulating a USB keyboard, Gigabit Ethernet adapter, serial console, and mass storage drive. Powered by a quad-core ARM SoC and 8 GB desktop-class storage, it runs full automated payloads in seconds.
 
 If the USB Rubber Ducky is a specialist, the Bash Bunny is a **swiss-army knife that plugs into USB**. It emulates *multiple* trusted device types at the same time — which matters, because a machine that would never let a rogue "keyboard" near your network will happily hand a DHCP lease to a "USB Ethernet adapter" and a root shell over a "serial console."
 

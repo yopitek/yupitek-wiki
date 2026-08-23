@@ -16,7 +16,7 @@ toc: true
 
 # Shark Jack Cable — The Complete Guide
 
-> **一句話定位**：Shark Jack Cable 是 Shark Jack 的「長時間供電版」——改用 USB-C 供電，還多了一條專屬序列埠，偵察能跑好幾小時，而且不必抽卡就能直接開一個 live shell 看結果。
+> **Quick Summary**: The Shark Jack Cable is the continuous-power edition of the Shark Jack network reconnaissance tool—powered via USB-C with dedicated serial console access for multi-hour scanning and immediate live shell debugging.
 
 The classic [Shark Jack](/hak5/products/shark-jack/) is limited by its 10–15 minute battery. The **Cable edition** fixes the one thing that limited its predecessor: power. Run it off any USB-C power source (a laptop, a power bank, a charger) and it can maintain network recon for as long as you need.
 

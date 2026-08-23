@@ -9,9 +9,9 @@ keywords: [AWUS036ACS, RTL8811AU, pocket adapter, portable Kali adapter]
 
 # ALFA AWUS036ACS — Pocket-Size Dual-Band AC433
 
-> **一句話定位（One-liner）**: The **AWUS036ACS** is the 55 mm pocket ALFA — an **RTL8811AU AC433** dual-band adapter with two fold-out 5 dBi antennas and DKMS-driven monitor mode. It is the adapter you carry because "you never know when you will want to look at some Wi-Fi."
+> **Quick Summary**: The **AWUS036ACS** is the 55 mm pocket ALFA — an **RTL8811AU AC433** dual-band adapter with two fold-out 5 dBi antennas and DKMS-driven monitor mode. It is the adapter you carry because "you never know when you will want to look at some Wi-Fi."
 
-## 規格總覽 (Spec overview)
+## Specifications Overview (Spec overview)
 
 | Item | Spec |
 |---|---|
