@@ -79,7 +79,7 @@
     U+A720-A7FF;
 }
 
-/* Display CJK — jf open 粉圓 2.1（繁中標題） */
+/* Display CJK — jf open 粉圓 2.1（繁中備用） */
 @font-face {
   font-family: 'jf open 粉圓 2.1';
   src: url('/fonts/jfOpenHuninn-Regular.woff2') format('woff2');
@@ -88,21 +88,92 @@
   font-display: swap;
 }
 
-/* Body CJK — Alibaba PuHuiTi 3.0（普惠體：65-Medium=500 實際內文、85-Bold=700 粗體）
-   兩個 weight 掛同一 family，<strong> 走真粗體不合成。無 unicode-range，
-   由 fallback 鏈順序處理：西文先被 Inter 吃掉，CJK 落到這裡。 */
+/* ==========================================================================
+   Alibaba PuHuiTi 3.0 全字庫 Level 3（涵蓋全量簡體中文、繁體中文、日韓及擴展區漢字）
+   ========================================================================== */
+
+/* Regular (300-450) - 全字庫 Level 3 基礎字集（杜絕任何簡體/繁體缺字與豆腐塊） */
+@font-face {
+  font-family: 'Alibaba PuHuiTi 3.0';
+  src: url('/fonts/AlibabaPuHuiTi3-55-RegularL3.woff2') format('woff2');
+  font-weight: 300 450;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Medium (451-550) - 標準內文字階 */
 @font-face {
   font-family: 'Alibaba PuHuiTi 3.0';
   src: url('/fonts/AlibabaPuHuiTi3-65-Medium.woff2') format('woff2');
-  font-weight: 500;
+  font-weight: 451 550;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* SemiBold (551-650) - 次標題 */
+@font-face {
+  font-family: 'Alibaba PuHuiTi 3.0';
+  src: url('/fonts/AlibabaPuHuiTi3-75-SemiBold.woff2') format('woff2');
+  font-weight: 551 650;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bold (651-750) - 標題與重點強調 */
+@font-face {
+  font-family: 'Alibaba PuHuiTi 3.0';
+  src: url('/fonts/AlibabaPuHuiTi3-85-Bold.woff2') format('woff2');
+  font-weight: 651 750;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ExtraBold (751-900) - Hero 大標題 */
+@font-face {
+  font-family: 'Alibaba PuHuiTi 3.0';
+  src: url('/fonts/AlibabaPuHuiTi3-95-ExtraBold.woff2') format('woff2');
+  font-weight: 751 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 無空格別名支援 'AlibabaPuHuiTi' */
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('/fonts/AlibabaPuHuiTi3-55-RegularL3.woff2') format('woff2');
+  font-weight: 300 450;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Alibaba PuHuiTi 3.0';
+  font-family: 'AlibabaPuHuiTi';
+  src: url('/fonts/AlibabaPuHuiTi3-65-Medium.woff2') format('woff2');
+  font-weight: 451 550;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('/fonts/AlibabaPuHuiTi3-75-SemiBold.woff2') format('woff2');
+  font-weight: 551 650;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
   src: url('/fonts/AlibabaPuHuiTi3-85-Bold.woff2') format('woff2');
-  font-weight: 700;
+  font-weight: 651 750;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('/fonts/AlibabaPuHuiTi3-95-ExtraBold.woff2') format('woff2');
+  font-weight: 751 900;
   font-style: normal;
   font-display: swap;
 }
@@ -171,9 +242,9 @@
   --yp-leading-normal: 1.5;
   --yp-leading-relaxed: 1.7;
 
-  /* 字型鏈（per-glyph fallback：西文由 Inter / Outfit 處理，CJK 由 Alibaba / 粉圓 承接） */
-  --yp-font-body: 'Inter', 'Alibaba PuHuiTi 3.0', 'PingFang SC', 'PingFang TC', 'Microsoft YaHei', 'Microsoft JhengHei', sans-serif;
-  --yp-font-display: 'Outfit', 'jf open 粉圓 2.1', 'Alibaba PuHuiTi 3.0', 'PingFang SC', 'PingFang TC', sans-serif;
+  /* 全站文字字體一律以 AlibabaPuHuiTi 為首要字型，徹底解決全語系缺字問題 */
+  --yp-font-body: 'AlibabaPuHuiTi', 'Alibaba PuHuiTi 3.0', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --yp-font-display: 'AlibabaPuHuiTi', 'Alibaba PuHuiTi 3.0', 'Outfit', 'jf open 粉圓 2.1', sans-serif;
   --yp-font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, Monaco, monospace;
 }
 
