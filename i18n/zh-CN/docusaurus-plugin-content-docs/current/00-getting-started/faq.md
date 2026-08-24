@@ -41,9 +41,9 @@ sudo modprobe <chipset-module>
 
 有关确切的模块名称，请参阅适用于您无线网卡的 [芯片组驱动程序](/alfa-network/drivers/) 指南。
 
-## HAK5 工具需要 Hak5 云（o.mg.lol）吗？
+## Hak5 工具需要 Hak5 云（o.mg.lol）吗？
 
-**不需要。** 您可以完全离线配置和运行大多数 HAK5 设备。但是，**O.MG** 产品系列与 `o.mg.lol` 云平台绑定：每台 O.MG 设备在首次使用前都必须使用 **O.MG Programmer** 激活并注册到 `o.mg.lol` 账户。设备特定的设置请参阅 [HAK5 板块](/hak5/)。
+**不需要。** 您可以完全离线配置和运行大多数 Hak5 设备。但是，**O.MG** 产品系列与 `o.mg.lol` 云平台绑定：每台 O.MG 设备在首次使用前都必须使用 **O.MG Programmer** 激活并注册到 `o.mg.lol` 账户。设备特定的设置请参阅 [Hak5 专区](/hak5/)。
 
 ## 使用 Flipper Zero 合法吗？
 

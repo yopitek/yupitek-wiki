@@ -62,6 +62,8 @@ sudo ldconfig
 
 TRX-duo 是一台嵌入式 Linux 计算机（Xilinx Zynq 7010 + ARM Cortex-A9），**从 microSD 卡启动**。卡上包含操作系统、FPGA 比特流和 Red Pitaya 兼容应用——更新"固件"实际上就是写入一份更新的官方 SD 镜像。
 
+> ℹ️ **外站资源标注**：TRX-duo 操作系统与 SD 卡镜像文件托管于原厂（`trx-duo.com`）及 Red Pitaya 开源社区存储库，非 Yupitek 本地镜像。下载时请务必从官方发布渠道获取并校验哈希值。
+>
 > ⚠️ **重要**：SD 镜像必须从**官方厂商页面**下载——**不要**使用来路不明的第三方链接。官方下载位置见 [TRX-duo 页面 → 固件与 SD 镜像](/sdrlab/hardware/trx-duo/#firmware-and-sd-image)（厂商网站，以及带固件/快速入门手册的厂商产品页）。
 
 典型的 SD 卡流程（确切官方说明见产品页面）：

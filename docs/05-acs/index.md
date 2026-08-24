@@ -81,3 +81,8 @@ PC/SC serves as the universal API for smart card hardware. Code developed agains
 
 - For other hardware categories (ALFA adapters, Hak5 tools, Flipper Zero, SDR), return to the [Yupitek Wiki Overview](/getting-started/).
 - Official ACS technical documentation and API reference manuals are available at [acs.com.hk](https://www.acs.com.hk).
+
+
+:::info Responsible Usage
+Smart card readers and NFC analysis tools must only be used with credentials, badges, and target systems you own or have authorized permission to assess (Taiwan Criminal Code Articles 358–363).
+:::

@@ -62,6 +62,8 @@ Then **reboot** and verify with `rtl_test`. On Windows, SDR#, SDR++ and SDR Cons
 
 The TRX-duo is an embedded Linux computer (Xilinx Zynq 7010 + ARM Cortex-A9) that **boots from a microSD card**. The card contains the OS, the FPGA bitstream and the Red Pitaya-compatible applications — updating the "firmware" literally means writing a newer official SD image.
 
+> ℹ️ **Hosting Note**: The TRX-duo operating system and SD images are hosted directly on upstream vendor and Red Pitaya community repositories (`trx-duo.com`), not on local Yupitek mirrors. Always verify checksums from official vendor release channels.
+>
 > ⚠️ **Important**: the SD image is downloaded from the **official vendor pages** — do **not** use random third-party links. See the [TRX-duo page → Firmware and SD image](/sdrlab/hardware/trx-duo/#firmware-and-sd-image) for the official download locations (vendor site and the vendor's product page with the firmware/quick-start manual).
 
 Typical SD-card flow (see the product page for the exact official instructions):

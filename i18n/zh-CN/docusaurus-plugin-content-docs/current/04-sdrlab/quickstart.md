@@ -105,3 +105,7 @@ flowchart LR
 - 准备好深入了？[SDR 软件指南](/sdrlab/sdr-software/) 讲解各种工具；[固件指南](/sdrlab/firmware/) 介绍更新方法。
 - 卡在某个具体问题上？[故障排查中心](/sdrlab/troubleshooting/) 按症状分类整理。
 - 要把 ALFA Wi-Fi 适配器和你的 SDR 搭配使用？请看 [ALFA Linux 指南](/sdrlab/shared/alfa-linux-guide/)。
+
+## 法律与合规操作提醒
+
+> ⚠️ **法律与合规提醒**：无线电频率传输与信号捕获受各国电信法规与信息安全法律规范（包括相关妨害计算机使用与无线电管理条例）。请务必仅在您拥有或已取得明确书面授权的频段、设备与环境中进行 SDR 实验与射频分析。

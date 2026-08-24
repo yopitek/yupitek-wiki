@@ -1,7 +1,7 @@
 ---
 
 id: acs-index
-title: ACS Smart Card & NFC Readers
+title: ACS 智慧卡與 NFC 讀卡機
 slug: /acs/
 sidebar_position: 5
 description: ACS (Advanced Card Systems) smart card readers and NFC readers — ACR122U, ACR1252U and ACR1552U. Contactless ISO 14443, MIFARE, FeliCa, ISO 15693 and NFC.
@@ -15,7 +15,7 @@ difficulty: beginner
 toc: true
 ---
 
-# ACS — Smart Card & NFC Readers
+# ACS — 智慧卡與 NFC 讀卡機
 
 > **一句話定位**：ACS (Advanced Card Systems) 的 PC/SC 智慧卡與 NFC 讀卡機，把現實世界的感應卡（門禁卡、交通卡、MIFARE、FeliCa、電子護照、ISO 15693 資產標籤）變成電腦上一個標準的 `SCard*` 介面，讓任何 PC/SC 應用程式與你寫的程式都能讀寫它們。
 
@@ -81,3 +81,8 @@ flowchart LR
 
 - 若你要找的是其他品牌（ALFA 網絡卡、Hak5 滲透工具、Flipper Zero、SDR）請回到 [Yupitek Wiki 總覽](/getting-started/)。
 - ACS 全系列完整的英文官方檔案（datasheet、SDK、API reference）可在 [acs.com.hk](https://www.acs.com.hk) 取得，每顆產品頁的「規格總覽」都有對應連結。
+
+
+:::info 合法使用提醒
+智慧卡讀卡機與 NFC 測試工具僅供教學、研究與合法授權之安全評估。請僅在您個人持有或已獲正式授權的卡片與系統上進行讀寫測試（遵守臺灣刑法第 358～363 條妨害電腦使用罪）。
+:::

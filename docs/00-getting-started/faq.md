@@ -41,9 +41,9 @@ sudo modprobe <chipset-module>
 
 See the specific [chipset driver](/alfa-network/drivers/) guide for your adapter for exact module names.
 
-## Do HAK5 tools require the Hak5 cloud (o.mg.lol)?
+## Do Hak5 tools require the Hak5 cloud (o.mg.lol)?
 
-**No.** You can configure and run most HAK5 devices fully offline. However, the **O.MG** product family is tied to the `o.mg.lol` cloud platform: every O.MG device must be activated with an **O.MG Programmer** and registered to an `o.mg.lol` account before first use. See the [HAK5 section](/hak5/) for device-specific setup.
+**No.** You can configure and run most Hak5 devices fully offline. However, the **O.MG** product family is tied to the `o.mg.lol` cloud platform: every O.MG device must be activated with an **O.MG Programmer** and registered to an `o.mg.lol` account before first use. See the [Hak5 section](/hak5/) for device-specific setup.
 
 ## Is the Flipper Zero legal to use?
 

@@ -81,3 +81,7 @@ flowchart LR
 
 - 如果你要找的是其他品牌（ALFA 网卡、Hak5 渗透工具、Flipper Zero、SDR）请回到 [Yupitek Wiki 总览](/getting-started/)。
 - ACS 全系列完整的英文官方文档（datasheet、SDK、API reference）可在 [acs.com.hk](https://www.acs.com.hk) 获取，每款产品页的「规格总览」都有对应链接。
+
+:::info 合法使用提醒
+智能卡读卡器与 NFC 测试工具仅供教学、研究与合法授权之安全评估。请仅在您个人持有或已获正式授权的卡片与系统上进行读写测试（遵守相关法律法规）。
+:::

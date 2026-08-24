@@ -105,3 +105,8 @@ Pick a frequency you *know* has signals, not a random spot:
 - Ready to go deeper? The [SDR software guide](/sdrlab/sdr-software/) explains the tools; the [firmware guide](/sdrlab/firmware/) covers updates.
 - Stuck on something specific? The [troubleshooting hub](/sdrlab/troubleshooting/) is organized by symptom.
 - Pairing an ALFA Wi-Fi adapter with your SDR work? See the [ALFA Linux guide](/sdrlab/shared/alfa-linux-guide/).
+
+
+## Legal & Responsible Operation Notice
+
+> ⚠️ **Compliance Notice**: Radio frequency transmission and signal capture are governed by telecommunications and cybersecurity regulations (including Taiwan Criminal Code Articles 358–363 on offenses against computer security). Only operate SDR transmitters and packet analyzers on frequencies and systems that you own or have explicit written authorization to evaluate.

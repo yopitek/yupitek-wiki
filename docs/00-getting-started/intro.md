@@ -24,6 +24,6 @@ This wiki covers five product families:
 
 - Each brand has a dedicated section with its own product pages.
 - Driver and firmware guides are grouped per chipset inside each brand.
-- Global admin pages (product registry, driver registry, translation glossary) live in the Admin section.
+- For complete lists of hardware models and chipset drivers, explore the dedicated product catalogs and driver directories in each brand section.
 
 Pick a brand below to get started, or use the search bar in the top navigation.
