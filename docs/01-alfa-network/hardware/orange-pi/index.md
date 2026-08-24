@@ -10,11 +10,21 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 
 # Orange Pi & Rockchip RK3588 SBC × ALFA Network Integration Guide
 
-> **Quick Summary**: High-performance single-board computers powered by the Rockchip RK3588 / RK3588S SoC (such as Orange Pi 5 / 5B / 5 Plus, Radxa ROCK 5B) provide significant edge computing power for wireless gateways and remote sensing. When integrating ALFA USB adapters, the **OS Kernel Architecture (Vendor BSP vs. Armbian Mainline)** determines whether the adapter works out-of-the-box.
+> **Quick Summary**: Single-board computers powered by the Rockchip RK3588 SoC (such as Orange Pi 5 / 5B / 5 Plus, Radxa ROCK 5B) deliver exceptional compute power for edge gateways and wireless sensing. When connecting ALFA USB adapters, the **OS Kernel Architecture (Vendor BSP vs. Armbian Mainline)** determines whether the adapter works plug-and-play.
+
+## Is This Guide for You?
+
+- **Difficulty**: Intermediate.
+- **Estimated Time**: 15–25 minutes.
+- **Skills Used**: Terminal commands, image flashing, driver verification.
+- **What You Will Achieve**:
+  1. Understand why stock Vendor BSP (Debian 5.10) fails to recognize adapters, while Armbian Mainline works out of the box.
+  2. Select the optimal ALFA adapter model and configure plug-and-play drivers on Armbian.
+  3. Manage power budgets (5V/4A) to ensure stability under heavy RF transmission.
 
 ---
 
-## 1. Kernel Architecture: Vendor BSP vs. Armbian Mainline
+## Core Difference: Vendor BSP vs. Armbian Mainline
 
 Many developers find ALFA adapters unacknowledged on stock Orange Pi Debian images. This is a software kernel packaging issue, not a hardware defect:
 
@@ -42,7 +52,7 @@ flowchart TD
 
 ---
 
-## 2. Compatibility Matrix on RK3588
+## Compatibility Matrix on RK3588
 
 | ALFA Model | Chipset | Armbian (Kernel ≥6.x) | Stock Debian (Kernel 5.10) | Engineering Notes |
 |---|---|---|---|---|
@@ -53,7 +63,7 @@ flowchart TD
 
 ---
 
-## 3. Armbian Mainline Setup (Recommended)
+## Armbian Mainline Setup (Recommended)
 
 1. Flash the latest **Armbian Linux (Kernel 6.x Mainline)** image onto your Orange Pi 5 microSD / NVMe.
 2. Plug the ALFA AWUS036AXML into a **blue USB 3.0 Type-A port**.
@@ -70,7 +80,7 @@ iw dev
 
 ---
 
-## 4. Power & Thermal Guidelines
+## Power & Thermal Guidelines
 
 - **Power Supply**: RK3588 boards draw 10W~15W under full load. Adding an ALFA high-power adapter (2W~4W) requires a dedicated **5V/4A (20W) USB-C power supply**.
 - **Port Allocation**: Connect the adapter directly to the primary USB 3.0 controller port, avoiding shared unpowered USB hubs.

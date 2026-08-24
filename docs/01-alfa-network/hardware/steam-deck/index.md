@@ -12,9 +12,19 @@ keywords: [Steam Deck, UP Squared Pro, AWUS036ACH, RTL8812AU, wfb-ng, UAS, Steam
 
 > **Quick Summary**: In 2026 Unmanned Aerial System (UAS) field research, teams deployed the **UP Squared Pro** as the airborne real-time vision computer and the **Valve Steam Deck (SteamOS)** as the handheld Ground Control Station (GCS). Both ends utilized **ALFA AWUS036ACH** adapters over `wfb-ng` (Wi-Fi Broadcast Next Generation) on 5.745 GHz to establish a long-range, low-latency unidirectional broadcast link. This guide covers setup, SteamOS immutable filesystem handling, and partition recovery.
 
+## Is This Guide for You?
+
+- **Difficulty**: Advanced (Linux terminal, kernel headers, SteamOS immutable filesystem).
+- **Estimated Time**: 25–40 minutes.
+- **Skills Used**: DKMS compilation, SteamOS system unlock, wfb-ng broadcast configuration.
+- **What You Will Achieve**:
+  1. Understand the architecture of unidirectional Wi-Fi broadcast links (`wfb-ng`).
+  2. Temporarily unlock the SteamOS read-only root filesystem and compile the injection-capable RTL8812AU DKMS driver.
+  3. Create an automated driver rebuild script to protect against SteamOS A/B partition updates.
+
 ---
 
-## 1. UAS Wireless Link Topology
+## UAS Wireless Link Architecture
 
 ```mermaid
 flowchart LR
@@ -42,7 +52,7 @@ flowchart LR
 
 ---
 
-## 2. Why Field Research Specifically Certified ALFA AWUS036ACH
+## Why Field Research Specifically Certified ALFA AWUS036ACH
 
 In `wfb-ng` long-range FPV links, the **Realtek RTL8812AU driver** supports customized frame injection parameters, disables ACK retransmissions, and enforces operation on specific 5 GHz channels (e.g. 5.745 GHz / Channel 149). The ALFA AWUS036ACH incorporates dual hardware power amplifiers (PA/LNA) and dual RP-SMA ports, representing the most thoroughly documented hardware combination for `wfb-ng`.
 
@@ -50,7 +60,7 @@ In `wfb-ng` long-range FPV links, the **Realtek RTL8812AU driver** supports cust
 
 ---
 
-## 3. Steam Deck (SteamOS) Driver Installation
+## Steam Deck (SteamOS) Driver Installation
 
 SteamOS uses an immutable (read-only) root filesystem by default. Disabling the lock is necessary before building DKMS kernel modules:
 
@@ -79,7 +89,7 @@ sudo steamos-readonly enable
 
 ---
 
-## 4. SteamOS System Update Recovery Script
+## SteamOS System Update Recovery Script
 
 - **A/B Partitioning Caveat**: SteamOS major updates overwrite the system partition, wiping kernel modules in `/usr/lib/modules/`.
 - **Recommended Practice**: Store an automated rebuild script at `/home/deck/scripts/rebuild_alfa.sh` to quickly restore driver functionality after system updates.
