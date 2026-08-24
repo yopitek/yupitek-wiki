@@ -56,7 +56,7 @@ flowchart LR
     F["2× 14-bit DACs"] --> C
 ```
 
-## 韌體與 SD 映像檔
+## 韌體與 SD 映像檔 {#firmware-and-sd-image}
 
 > ⚠️ **SD 映像檔不是我們託管的。** 請只從下方**官方廠商頁面**下載。不要使用來路不明的映象站。
 
@@ -83,7 +83,7 @@ sudo dd if=trx-duo-image.zip of=/dev/sdX bs=4M status=progress conv=fsync
 3. 把卡片插入 TRX-duo。
 4. 連線 **Gigabit 乙太網路**與 **USB-C 電源**，然後開機。
 
-## 首次開機與網路
+## 首次開機與網路 {#first-boot-and-network}
 
 ```mermaid
 flowchart TD

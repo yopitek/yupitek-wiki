@@ -118,7 +118,7 @@ Supported sample rates: 225001-300000, 900001-3200000, ...
 4. In the top-left **Source** dropdown, select **RTL-SDR (RTL2832U)** and click the play icon.
 5. Tune to a local FM station (88–108 MHz), select **WFM** demodulation, and you're listening.
 
-## TRX-duo software notes
+## TRX-duo software notes {#trx-duo-software-notes}
 
 The TRX-duo is *not* a plug-and-play USB device — it is a networked instrument running its own embedded software (see the [TRX-duo page](/sdrlab/hardware/trx-duo/) for the official firmware image). On the PC side, the ecosystem that works with it is the **Red Pitaya SDR software family**:
 

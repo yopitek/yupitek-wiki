@@ -75,7 +75,7 @@ flowchart LR
 
 HackRF 將頻譜數位化；PortaPack 提供人機介面；Mayhem 韌體提供應用程式。不需要電腦——H4M 就是完整的實驗室。
 
-## Mayhem 韌體
+## Mayhem 韌體 {#mayhem-firmware}
 
 H4M 執行開源 **Mayhem 韌體**（[portapack-mayhem/mayhem-firmware](https://github.com/portapack-mayhem/mayhem-firmware)），這是 PortaPack 軟體的社群延續，內含數百個應用程式：頻譜分析儀、音訊接收器／發射器、訊號錄音與重播、ADS-B、APRS、GPS 模擬器與更多。
 

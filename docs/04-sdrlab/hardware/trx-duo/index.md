@@ -56,7 +56,7 @@ flowchart LR
     F["2× 14-bit DACs"] --> C
 ```
 
-## Firmware and SD image
+## Firmware and SD image {#firmware-and-sd-image}
 
 > ⚠️ **The SD image is NOT hosted by us.** Download it exclusively from the **official vendor pages** below. Do not use random mirrors.
 
@@ -83,7 +83,7 @@ sudo dd if=trx-duo-image.zip of=/dev/sdX bs=4M status=progress conv=fsync
 3. Insert the card into the TRX-duo.
 4. Connect **Gigabit Ethernet** and **USB-C power**, then switch on.
 
-## First boot and network
+## First boot and network {#first-boot-and-network}
 
 ```mermaid
 flowchart TD

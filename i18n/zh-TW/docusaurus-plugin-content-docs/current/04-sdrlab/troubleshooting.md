@@ -44,7 +44,7 @@ flowchart TD
 
 ---
 
-## RTL-SDR 未被偵測
+## RTL-SDR 未被偵測 {#rtl-sdr-not-detected}
 
 ### 症狀
 `rtl_test` 印出 `No devices found.`，或 GQRX 列出不到任何裝置。
@@ -75,7 +75,7 @@ echo 'blacklist dvb_usb_rtl28xxu' | sudo tee /etc/modprobe.d/blacklist-dvb_usb_r
 
 ---
 
-## RTL-SDR 收到其他訊號的影像
+## RTL-SDR 收到其他訊號的影像 {#rtl-sdr-picks-up-images-of-other-signals}
 
 ### 症狀
 你調諧到某個頻率，卻聽到*其他*頻率的電臺混進來，尤其是在 HF。
@@ -90,7 +90,7 @@ echo 'blacklist dvb_usb_rtl28xxu' | sudo tee /etc/modprobe.d/blacklist-dvb_usb_r
 
 ---
 
-## Bias tee 無法開啟
+## Bias tee 無法開啟 {#bias-tee-wont-turn-on}
 
 ### 症狀
 需要 DC 電源的主動式天線沒有供電。
@@ -103,7 +103,7 @@ V4 的 bias tee 由軟體控制（4.5 V、180 mA）。在 SDR# / SDR++ 中它對
 
 ---
 
-## TRX-duo 網頁介面連不上
+## TRX-duo 網頁介面連不上 {#trx-duo-web-ui-unreachable}
 
 ### 症狀
 瀏覽器無法載入 TRX-duo 儀錶板；`ping` 失敗。
@@ -126,7 +126,7 @@ arp -a
 
 ---
 
-## TRX-duo 開機了但從不出現在網路上
+## TRX-duo 開機了但從不出現在網路上 {#trx-duo-boots-but-never-appears-on-the-network}
 
 ### 症狀
 電源 LED 亮著，但乙太網路插孔沒有連線燈，或連線燈亮著卻沒有位址。
@@ -145,7 +145,7 @@ arp -a
 
 ---
 
-## TRX-duo 接收端只有雜訊
+## TRX-duo 接收端只有雜訊 {#trx-duo-rx-shows-noise-only}
 
 ### 症狀
 瀑布圖有反應，但你什麼都聽不到，即使強力 HF 廣播電臺也一樣。
@@ -163,7 +163,7 @@ arp -a
 
 ---
 
-## H4M 韌體更新後應用程式消失
+## H4M 韌體更新後應用程式消失 {#h4m-apps-missing-after-firmware-update}
 
 ### 症狀
 PortaPack 開機了、選單看起來正常，但很多應用程式不見了。
@@ -179,7 +179,7 @@ PortaPack 開機了、選單看起來正常，但很多應用程式不見了。
 
 ---
 
-## H4M 無法開機
+## H4M 無法開機 {#h4m-wont-power-on}
 
 ### 症狀
 沒有顯示、沒有 LED。
@@ -198,7 +198,7 @@ PortaPack 開機了、選單看起來正常，但很多應用程式不見了。
 
 ---
 
-## H4M 喇叭或插孔沒有聲音
+## H4M 喇叭或插孔沒有聲音 {#h4m-no-audio-from-speaker-or-jack}
 
 ### 症狀
 瀑布圖有訊號，耳朵卻一片寂靜。
@@ -213,7 +213,7 @@ PortaPack 開機了、選單看起來正常，但很多應用程式不見了。
 
 ---
 
-## Flipper 應用程式顯示「no module」
+## Flipper 應用程式顯示「no module」 {#flipper-app-says-no-module}
 
 ### 症狀
 擴充應用程式（NRF24、Marauder、GPS）回報模組不存在，即使它明明插著。
@@ -230,7 +230,7 @@ GPIO 腳位沒有針對該模組設定，或 Flipper 韌體沒有內建該應用
 
 ---
 
-## NRF24 頻道掃描什麼都看不到
+## NRF24 頻道掃描什麼都看不到 {#nrf24-sees-nothing-on-channel-scan}
 
 ### 症狀
 即使附近有無線滑鼠／鍵盤，嗅探器也顯示零活動。
@@ -249,7 +249,7 @@ GPIO 腳位沒有針對該模組設定，或 Flipper 韌體沒有內建該應用
 
 ---
 
-## WiFi 板網頁介面連不上
+## WiFi 板網頁介面連不上 {#wifi-board-web-interface-unreachable}
 
 ### 症狀
 燒錄 deauther 後，你連不上 `192.168.4.1`。
@@ -265,7 +265,7 @@ GPIO 腳位沒有針對該模組設定，或 Flipper 韌體沒有內建該應用
 
 ---
 
-## Ethernet 模組沒有連線燈
+## Ethernet 模組沒有連線燈 {#ethernet-module-no-link-light}
 
 ### 症狀
 插入纜線後，RJ45 連線埠的 LED 保持熄滅。

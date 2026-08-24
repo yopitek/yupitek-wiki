@@ -88,7 +88,7 @@ flowchart TD
 
 ---
 
-## 電源與開機
+## 電源與開機 {#power--boot}
 
 ### 裝置完全沒有生命跡象
 **診斷**：LED 完全沒亮嗎？檢查線材和電源。
@@ -104,7 +104,7 @@ flowchart TD
 
 ---
 
-## Arming 模式問題
+## Arming 模式問題 {#arming-mode-problems}
 
 ### 裝置掛載成磁碟，但沒有 `payloads` 資料夾
 **診斷**：`lsusb` 或檔案管理員看得到裝置，但目錄結構看起來不對。
@@ -119,7 +119,7 @@ flowchart TD
 
 ---
 
-## SSH 與 Web UI 連線
+## SSH 與 Web UI 連線 {#ssh--web-ui-connection}
 
 ### `ssh: Connection refused` / 頁面載入不了
 **診斷步驟 1 — 你在正確的網路上嗎？**
@@ -153,7 +153,7 @@ ping 172.16.24.1
 
 ---
 
-## Payload 問題
+## Payload 問題 {#payload-problems}
 
 ### 按鍵打到錯誤的應用程式 / 什麼都沒打
 | 原因 | 修正 |
@@ -178,7 +178,7 @@ GET SWITCH_POSITION
 
 ---
 
-## Wi-Fi 問題
+## Wi-Fi 問題 {#wi-fi-issues}
 
 ### 看不到 Pineapple 的 AP
 1. 開機後等 60 秒（首次執行開機很慢）。

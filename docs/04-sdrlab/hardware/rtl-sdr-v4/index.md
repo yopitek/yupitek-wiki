@@ -44,7 +44,7 @@ Think of the V4 as the "SDR-optimized" revision. Older RTL-SDRs were DVB-T TV st
 2. **A triplexer with three switchable inputs.** The R828D tuner has three RF inputs; the V4 splits them by band (HF / VHF / UHF) so a strong broadcast FM station can't swamp your HF or UHF reception.
 3. **Switchable notch filters** for known problem bands (AM/FM broadcast, VHF pager/digital bands) — again handled automatically by current drivers.
 
-## Linux install
+## Linux install {#linux-install}
 
 The V4 needs a **current** driver: stock distro packages sometimes predate the R828D support. These steps install the current open-source Osmocom driver with udev rules (no root needed to run SDR apps afterwards).
 

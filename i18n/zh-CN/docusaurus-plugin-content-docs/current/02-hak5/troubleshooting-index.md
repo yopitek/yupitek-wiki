@@ -119,7 +119,7 @@ flowchart TD
 
 ---
 
-## SSH 与 Web UI 连接
+## SSH 与 Web UI 连接 {#ssh--web-ui-connection}
 
 ### `ssh: Connection refused` / 页面打不开
 **诊断步骤 1 — 你在正确的网络上吗？**
@@ -178,7 +178,7 @@ GET SWITCH_POSITION
 
 ---
 
-## Wi-Fi 问题
+## Wi-Fi 问题 {#wi-fi-issues}
 
 ### 看不到 Pineapple 的 AP
 1. 开机后等 60 秒（首次运行启动很慢）。

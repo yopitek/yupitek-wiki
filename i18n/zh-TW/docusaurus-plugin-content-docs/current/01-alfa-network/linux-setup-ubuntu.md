@@ -153,7 +153,7 @@ iw dev
 
 > **你可能會想問**——*「哪個模組名稱對應我的無線網絡卡？」* 對照你的晶片：`8812au` → AWUS036ACH、`8811au` → AWUS036ACS、`88x2bu` → AWUS036AX / AXER。[驅動程式頁面](/alfa-network/drivers/rtl8812au/) 有更深入的各晶片細節。
 
-## 步驟 4：驗證一切
+## 步驟 4：驗證一切 {#step-4-verify-everything}
 
 三指令健康檢查：
 

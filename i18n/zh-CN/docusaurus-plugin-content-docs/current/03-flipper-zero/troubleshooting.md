@@ -42,7 +42,7 @@ flowchart TD
 | 存储 | 检测不到 SD 卡、"无存储空间" | [存储与 microSD](#storage--microsd) |
 | 固件 | 升级失败、设备卡在标志画面 | [固件与恢复](#firmware--recovery) |
 
-## 电池与电源
+## 电池与电源 {#battery--power}
 
 ### Q1：设备无法开机
 
@@ -70,7 +70,7 @@ Charge LED: OFF → ORANGE (charging) → GREEN (full)
 | 充电非常慢 | 设计上充电电流限制在约 1A 以内 | 使用任意合格的 5V/2A 充电器；充满约需 2 小时 |
 | 充到某个百分比就停 | 电芯不平衡或电池老化 | 在较凉爽的房间充电；如果持续如此，联系支持 |
 
-## USB 与蓝牙
+## USB 与蓝牙 {#usb--bluetooth}
 
 ### Q3：qFlipper 提示"找不到设备"
 
@@ -104,7 +104,7 @@ Bus 001 Device 004: ID 0483:5740 STMicroelectronics Flipper Zero
 | 配对成功但同步卡住 | 应用版本过旧，与新固件不兼容 | 更新应用；参见[移动应用指南](/flipper-zero/mobile-app/) |
 | 只有重启后才能连接 | BLE 协议栈卡住 | 重启 Flipper（LEFT + BACK → 关机 → 开机） |
 
-## Sub-GHz 与卡片
+## Sub-GHz 与卡片 {#sub-ghz--cards}
 
 ### Q5：Sub-GHz 无法捕获遥控器
 
@@ -136,7 +136,7 @@ Bus 001 Device 004: ID 0483:5740 STMicroelectronics Flipper Zero
 | 能读一些卡，读不了另一些 | 卡类型不受支持（例如带认证的加密 DESFire） | 在[产品页面](/flipper-zero/products/flipper-zero/)查看支持列表；没有密钥无法读取加密卡 |
 | 能读取但无法模拟 | 模拟距离设计上就很短 | 模拟天线很小——把 Flipper 紧贴读卡器 |
 
-## 存储与 microSD
+## 存储与 microSD {#storage--microsd}
 
 ### Q7："SD card: not present"或保存失败
 
@@ -162,7 +162,7 @@ mkfs.fat 4.2 (2021-01-31)
 
 > ⚠️ 格式化会清空卡片。先备份。绝不要把 `mkfs` 指向你的系统盘——运行前用 `lsblk` 确认设备名。
 
-## 固件与恢复
+## 固件与恢复 {#firmware--recovery}
 
 ### Q8：升级失败，或设备卡在启动标志画面
 
@@ -184,7 +184,7 @@ flowchart LR
 
 如果连启动菜单都不出现：让它充电 1 小时，然后重试。如果仍然毫无反应，可能是固件存储损坏——这种情况很少见，需要[联系支持](#still-stuck)。
 
-## 仍然卡住？
+## 仍然卡住？ {#still-stuck}
 
 如果以上方法都无法解决，请在[官方支持门户](https://support.flipper.net)提交工单。为了快速得到答复，请准备好：
 

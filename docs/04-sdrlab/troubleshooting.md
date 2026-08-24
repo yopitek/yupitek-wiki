@@ -44,7 +44,7 @@ flowchart TD
 
 ---
 
-## RTL-SDR not detected
+## RTL-SDR not detected {#rtl-sdr-not-detected}
 
 ### Symptom
 `rtl_test` prints `No devices found.` or GQRX lists no devices.
@@ -75,7 +75,7 @@ echo 'blacklist dvb_usb_rtl28xxu' | sudo tee /etc/modprobe.d/blacklist-dvb_usb_r
 
 ---
 
-## RTL-SDR picks up images of other signals
+## RTL-SDR picks up images of other signals {#rtl-sdr-picks-up-images-of-other-signals}
 
 ### Symptom
 You tune to one frequency but hear stations from *other* frequencies mixed in, especially on HF.
@@ -90,7 +90,7 @@ Overload from strong broadcast stations, or tuning below ~24 MHz where old-style
 
 ---
 
-## Bias tee won't turn on
+## Bias tee won't turn on {#bias-tee-wont-turn-on}
 
 ### Symptom
 An active antenna that needs DC power doesn't get it.
@@ -103,7 +103,7 @@ Enable "Offset tuning" in the device config (this is the bias-tee switch on V4).
 
 ---
 
-## TRX-duo web UI unreachable
+## TRX-duo web UI unreachable {#trx-duo-web-ui-unreachable}
 
 ### Symptom
 Browser won't load the TRX-duo dashboard; `ping` fails.
@@ -126,7 +126,7 @@ Network misconfiguration: the device expects DHCP, or you are on a subnet where 
 
 ---
 
-## TRX-duo boots but never appears on the network
+## TRX-duo boots but never appears on the network {#trx-duo-boots-but-never-appears-on-the-network}
 
 ### Symptom
 Power LED on, but no link light on the Ethernet jack, or link light on but no address.
@@ -145,7 +145,7 @@ Usually one of: bad cable, card not fully seated, or an image written for the wr
 
 ---
 
-## TRX-duo RX shows noise only
+## TRX-duo RX shows noise only {#trx-duo-rx-shows-noise-only}
 
 ### Symptom
 The waterfall is alive but you hear nothing, even on strong HF broadcasters.
@@ -163,7 +163,7 @@ No antenna / wrong port, input attenuator engaged, or a receive app with gain se
 
 ---
 
-## H4M apps missing after firmware update
+## H4M apps missing after firmware update {#h4m-apps-missing-after-firmware-update}
 
 ### Symptom
 The PortaPack boots, menus look right, but many apps are gone.
@@ -179,7 +179,7 @@ Since Mayhem 1.8.0, most applications live on the **microSD card**, not in flash
 
 ---
 
-## H4M won't power on
+## H4M won't power on {#h4m-wont-power-on}
 
 ### Symptom
 No display, no LEDs.
@@ -198,7 +198,7 @@ Flat battery is the usual suspect; occasionally a stuck DFU/flash mode.
 
 ---
 
-## H4M no audio from speaker or jack
+## H4M no audio from speaker or jack {#h4m-no-audio-from-speaker-or-jack}
 
 ### Symptom
 Signal in the waterfall, silence in the ear.
@@ -213,7 +213,7 @@ Mode/gain settings, or audio routed to the wrong output (the H4M auto-switches b
 
 ---
 
-## Flipper app says "no module"
+## Flipper app says "no module" {#flipper-app-says-no-module}
 
 ### Symptom
 An expansion app (NRF24, Marauder, GPS) reports the module isn't present even though it's plugged in.
@@ -230,7 +230,7 @@ See the specific module pages: [5G board](/sdrlab/expansion/5g-board/), [NRF24](
 
 ---
 
-## NRF24 sees nothing on channel scan
+## NRF24 sees nothing on channel scan {#nrf24-sees-nothing-on-channel-scan}
 
 ### Symptom
 The sniffer shows zero activity even with a wireless mouse/keyboard nearby.
@@ -249,7 +249,7 @@ No antenna, wrong SPI pins, or simply no traffic: many 2.4 GHz devices use frequ
 
 ---
 
-## WiFi board web interface unreachable
+## WiFi board web interface unreachable {#wifi-board-web-interface-unreachable}
 
 ### Symptom
 After flashing the deauther, you can't reach `192.168.4.1`.
@@ -265,7 +265,7 @@ Your phone/PC auto-joined another network, or the board's AP didn't start.
 
 ---
 
-## Ethernet module no link light
+## Ethernet module no link light {#ethernet-module-no-link-light}
 
 ### Symptom
 The RJ45 port LEDs stay dark after plugging in a cable.

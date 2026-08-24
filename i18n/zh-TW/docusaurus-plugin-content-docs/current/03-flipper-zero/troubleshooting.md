@@ -42,7 +42,7 @@ flowchart TD
 | 儲存空間 | 偵測不到 SD 卡、「no storage」 | [儲存空間與 microSD](#storage--microsd) |
 | 韌體 | 更新失敗、裝置卡在標誌畫面 | [韌體與復原](#firmware--recovery) |
 
-## 電池與電源
+## 電池與電源 {#battery--power}
 
 ### Q1：裝置無法開機
 
@@ -104,7 +104,7 @@ Bus 001 Device 004: ID 0483:5740 STMicroelectronics Flipper Zero
 | 配對成功但同步卡住 | 應用程式太舊，無法搭配新韌體 | 更新應用程式；參閱[手機應用程式指南](/flipper-zero/mobile-app/) |
 | 重新開機後才能連線 | BLE 堆疊卡住 | 重新啟動 Flipper（LEFT + BACK → 關機 → 開機） |
 
-## Sub-GHz 與卡片
+## Sub-GHz 與卡片 {#sub-ghz--cards}
 
 ### Q5：Sub-GHz 無法擷取遙控器
 
@@ -162,7 +162,7 @@ mkfs.fat 4.2 (2021-01-31)
 
 > ⚠️ 格式化會清除卡片。請先備份。絕對不要把 `mkfs` 指向你的作業系統磁碟——執行前務必用 `lsblk` 確認裝置名稱。
 
-## 韌體與復原
+## 韌體與復原 {#firmware--recovery}
 
 ### Q8：更新失敗，或裝置卡在開機標誌
 

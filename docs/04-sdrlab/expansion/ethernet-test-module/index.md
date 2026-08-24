@@ -47,7 +47,7 @@ flowchart LR
 
 For a university networking lab this is gold: verify a wall jack before you complain to IT, prove a cable is bad in seconds, and demonstrate DHCP behavior on a real network — all from your pocket.
 
-## Wiring to the Flipper
+## Wiring to the Flipper {#wiring-to-the-flipper}
 
 Typical W5500 module (W5500 Lite) wiring:
 

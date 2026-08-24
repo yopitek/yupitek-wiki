@@ -44,7 +44,7 @@ flowchart TD
 
 ---
 
-## RTL-SDR 未被检测到
+## RTL-SDR 未被检测到 {#rtl-sdr-not-detected}
 
 ### 症状
 `rtl_test` 打印 `No devices found.`，或 GQRX 列不出任何设备。
@@ -75,7 +75,7 @@ echo 'blacklist dvb_usb_rtl28xxu' | sudo tee /etc/modprobe.d/blacklist-dvb_usb_r
 
 ---
 
-## RTL-SDR 收到其他信号的镜像
+## RTL-SDR 收到其他信号的镜像 {#rtl-sdr-picks-up-images-of-other-signals}
 
 ### 症状
 你调谐到一个频率，却听到混入了*其他*频率的电台，尤其是在 HF 上。
@@ -90,7 +90,7 @@ echo 'blacklist dvb_usb_rtl28xxu' | sudo tee /etc/modprobe.d/blacklist-dvb_usb_r
 
 ---
 
-## 偏置三通无法开启
+## 偏置三通无法开启 {#bias-tee-wont-turn-on}
 
 ### 症状
 需要直流供电的有源天线得不到供电。
@@ -103,7 +103,7 @@ V4 的偏置三通由软件控制（4.5 V，180 mA）。在 SDR# / SDR++ 中它�
 
 ---
 
-## TRX-duo Web 界面无法访问
+## TRX-duo Web 界面无法访问 {#trx-duo-web-ui-unreachable}
 
 ### 症状
 浏览器无法加载 TRX-duo 仪表盘；`ping` 失败。
@@ -126,7 +126,7 @@ arp -a
 
 ---
 
-## TRX-duo 能启动但从不出现在网络上
+## TRX-duo 能启动但从不出现在网络上 {#trx-duo-boots-but-never-appears-on-the-network}
 
 ### 症状
 电源 LED 亮，但以太网口没有链路指示灯，或链路灯亮但没有地址。
@@ -145,7 +145,7 @@ arp -a
 
 ---
 
-## TRX-duo 接收端只有噪声
+## TRX-duo 接收端只有噪声 {#trx-duo-rx-shows-noise-only}
 
 ### 症状
 瀑布图是活的，但你什么都听不到，即使面对强 HF 广播电台也一样。
@@ -179,7 +179,7 @@ PortaPack 能启动，菜单看起来正常，但很多应用不见了。
 
 ---
 
-## H4M 无法开机
+## H4M 无法开机 {#h4m-wont-power-on}
 
 ### 症状
 没有显示，没有 LED。
@@ -198,7 +198,7 @@ PortaPack 能启动，菜单看起来正常，但很多应用不见了。
 
 ---
 
-## H4M 扬声器或耳机孔没有声音
+## H4M 扬声器或耳机孔没有声音 {#h4m-no-audio-from-speaker-or-jack}
 
 ### 症状
 瀑布图里有信号，耳朵里却一片寂静。
@@ -213,7 +213,7 @@ PortaPack 能启动，菜单看起来正常，但很多应用不见了。
 
 ---
 
-## Flipper 应用提示"no module"
+## Flipper 应用提示"no module" {#flipper-app-says-no-module}
 
 ### 症状
 扩展应用（NRF24、Marauder、GPS）报告模块不存在，尽管它明明插着。
@@ -230,7 +230,7 @@ GPIO 引脚没有为模块设置，或 Flipper 固件没有捆绑该应用。大
 
 ---
 
-## NRF24 信道扫描什么都看不到
+## NRF24 信道扫描什么都看不到 {#nrf24-sees-nothing-on-channel-scan}
 
 ### 症状
 即使附近有无线鼠标/键盘，嗅探器也显示零活动。
@@ -249,7 +249,7 @@ GPIO 引脚没有为模块设置，或 Flipper 固件没有捆绑该应用。大
 
 ---
 
-## WiFi 板 Web 界面无法访问
+## WiFi 板 Web 界面无法访问 {#wifi-board-web-interface-unreachable}
 
 ### 症状
 刷完 deauther 后，你无法访问 `192.168.4.1`。
