@@ -1,149 +1,130 @@
 ---
 id: alfa-hardware-jetson
 title: ALFA Adapters on NVIDIA Jetson (Orin Nano / NX)
+sidebar_label: NVIDIA Jetson
 sidebar_position: 1
-description: Use ALFA Wi-Fi adapters on NVIDIA Jetson Orin Nano and Orin NX — 6 GHz Wi-Fi 6E streaming for robotics and computer vision, monitor mode, and kernel requirements.
+description: Complete guide to using ALFA Wi-Fi adapters on NVIDIA Jetson Orin Nano and Orin NX — 6 GHz Wi-Fi 6E video streaming for robotics, monitor mode, and JetPack L4T kernel configuration.
 tags: [alfa, jetson, nvidia, robotics, wifi-6e, monitor-mode]
-keywords: [Jetson Orin ALFA, Jetson Wi-Fi 6E, AWUS036AXML Jetson, robotics wireless]
+keywords: [Jetson Orin ALFA, Jetson Wi-Fi 6E, AWUS036AXML Jetson, robotics wireless, JetPack L4T driver]
 ---
 
 # ALFA Adapters on NVIDIA Jetson (Orin Nano / NX)
 
-> **Quick Summary**: Your Jetson is a vision computer, not a router — so its built-in Wi-Fi is usually weak and single-band. An ALFA adapter fixes that: **plug in the AWUS036AXML for 6 GHz Wi-Fi 6E streaming**, or any in-kernel ALFA for reliable robot telemetry and even monitor mode.
+> **Quick Summary**: NVIDIA Jetson Orin Nano and NX developer kits are designed as vision and AI compute modules, meaning their default wireless capability is often basic 2.4/5 GHz with internal PCB antennas. Adding an external ALFA Wi-Fi adapter unlocks **6 GHz (Wi-Fi 6E) low-latency camera streaming for robotics**, high-gain external antenna range, and wireless packet auditing on JetPack.
 
-## Concept: why a Jetson needs an external adapter
+## Is This Guide for You?
 
-Jetson Orin Nano/NX boards (and their carrier boards) ship with a modest integrated Wi-Fi radio that is fine for `apt update` and nothing else. Robotics and CV projects need more:
+- **Difficulty**: Intermediate (familiarity with terminal commands and Linux kernel concepts).
+- **Estimated Time**: 15–25 minutes.
+- **Skills Used**: Linux command line, package installation, DKMS module management.
+- **What You Will Achieve**:
+  1. Determine whether your JetPack version supports in-kernel plug-and-play or requires DKMS drivers.
+  2. Configure the **AWUS036AXML** for clean 6 GHz Wi-Fi 6E video streaming and telemetry.
+  3. Verify physical RF link throughput and enable monitor mode.
 
-- **6 GHz (Wi-Fi 6E)**: the Orin carrier radios are 2.4/5 GHz only. The 6 GHz band is empty, low-latency spectrum — ideal for streaming camera feeds or point clouds without fighting the lab's 2.4 GHz noise.
-- **Stable high-throughput link**: the AWUS036AXML (MT7921AUN) is the only adapter in the ALFA line with 6 GHz support, and its driver is in-kernel since 5.18.
-- **Monitor mode** (for wireless research/lab work): works on the in-kernel chipsets via the normal `mac80211` path.
+---
 
-The catch is the **kernel**. Jetson runs NVIDIA's L4T kernel, not the stock Ubuntu one:
+## Architectural Concepts: Why Jetson Needs an External Wi-Fi Adapter
 
-| JetPack | L4T kernel | `mt7921u` (AXM/AXML) | `mt76x2u` (ACM/ACHM) |
-|---|---|---|---|
-| JetPack 5.x | 5.10 | ❌ too old | ✅ |
-| JetPack 6.x | 6.6 | ✅ | ✅ |
+Jetson Orin carrier boards typically include modest integrated Wi-Fi radios sufficient only for routine package downloads. High-performance robotics, autonomous navigation (ROS 2), and real-time computer vision require substantially more:
 
-**Rule**: MT7921AUN adapters need **JetPack 6**; the classic AWUS036ACM works on both.
+1. **6 GHz Wi-Fi 6E (Empty Spectrum)**: Standard carrier radios operate on congested 2.4 GHz and 5 GHz bands. The 6 GHz spectrum provides wide 80/160 MHz channels with near-zero lab interference—ideal for streaming 4K RTSP camera feeds and 3D LiDAR point clouds.
+2. **High-Gain External Antennas**: High-power ALFA adapters with dual RP-SMA antennas (such as the ARS-NT5B7 or APA-M25) penetrate obstacles and maintain line-of-sight telemetry over 100+ meters.
+3. **Dedicated Monitor Mode**: Enables passive wireless sniffing and spectrum analysis directly on robot development platforms.
 
-```mermaid
-flowchart LR
-    A["Jetson Orin (JetPack 6)"] --> B{"Which adapter?"}
-    B -->|"AWUS036AXML"| C["6 GHz Wi-Fi 6E link<br/>(in-kernel mt7921u)"]
-    B -->|"AWUS036ACM"| D["2.4/5 GHz workhorse<br/>(in-kernel mt76x2u)"]
-    B -->|"Realtek models"| E["DKMS build on ARM64 — works but more steps"]
-    C --> F["Stream camera feeds / telemetry"]
-    D --> F
-    E --> F
-```
+### JetPack & L4T Kernel Compatibility Matrix
 
-## Prerequisites
+Jetson runs NVIDIA Linux for Tegra (L4T) kernels rather than generic Ubuntu desktop kernels. Compatibility depends on your installed JetPack release:
 
-- [ ] Jetson Orin Nano or Orin NX with JetPack installed
-- [ ] Internet (Ethernet recommended for the first setup)
-- [ ] ALFA adapter — for 6 GHz, the [AWUS036AXML](/alfa-network/products/awus036axml/)
+| JetPack Version | L4T Kernel Version | MediaTek MT7921AUN (AWUS036AXML) | MediaTek MT7612U (AWUS036ACM) | Realtek RTL8812AU (AWUS036ACH) |
+|---|---|---|---|---|
+| **JetPack 6.x** | Linux 5.15 / 6.x | ✅ **In-kernel (Plug & Play)** | ✅ **In-kernel (Plug & Play)** | ⚠️ Requires DKMS build |
+| **JetPack 5.x** | Linux 5.10 | ⚠️ Requires Backport / Firmware | ✅ **In-kernel (Plug & Play)** | ⚠️ Requires DKMS build |
+| **JetPack 4.x** | Linux 4.9 | ❌ Unsupported | ⚠️ Manual driver compile | ⚠️ Requires DKMS build |
 
-## Step 1: Check your JetPack / kernel
+---
+
+## Prerequisites & Checklist
+
+- [ ] NVIDIA Jetson Orin Nano / Orin NX / AGX Orin running JetPack 5.x or 6.x.
+- [ ] ALFA USB adapter: **AWUS036AXML** (Top Pick for Wi-Fi 6E) or **AWUS036ACM** (Best Value for 5 GHz).
+- [ ] 5V/3A+ dedicated power supply for the Jetson board to prevent USB current drops.
+- [ ] Active internet connection for initial package installation.
+
+---
+
+## Step-by-Step Configuration
+
+### Step 1: Connect Hardware & Check USB Detection
+
+Plug the ALFA adapter into a blue USB 3.0 Type-A port on your Jetson carrier board. Open the terminal and verify USB detection:
 
 ```bash
-uname -r
-dpkg -l | grep nvidia-l4t-core | head -1
+lsusb
 ```
 
-**Expected output**:
+**Expected Output**:
+- For **AWUS036AXML**: `ID 0e8d:7961 MediaTek Inc. Wireless_Device`
+- For **AWUS036ACM**: `ID 0e8d:7612 MediaTek Inc. MT7612U`
 
+### Step 2: Check Kernel Module & Firmware
+
+```bash
+# Check dmesg logs for driver initialization
+dmesg | grep -E "mt7921|mt76"
+```
+
+**Expected Output (AWUS036AXML)**:
 ```text
-6.6.0-tegra            # JetPack 6 — mt7921u available
-# or
-5.10.104-tegra          # JetPack 5 — only MT7612U-class chipsets
+mt7921u 1-1:1.0: ASIC revision: 79610000
+mt7921u 1-1:1.0: firmware: mediatek/WIFI_MT7961_patch_mcu_1_2_tv.bin loaded
+mt7921u 1-1:1.0: firmware: mediatek/WIFI_RAM_CODE_MT7961_1_2.bin loaded
 ```
 
-## Step 2: In-kernel path (MediaTek — recommended)
+If firmware is missing on JetPack 5.x, install the latest linux-firmware package:
+```bash
+sudo apt update && sudo apt install -y linux-firmware
+```
 
-Plug in the adapter, then:
+### Step 3: Verify Wireless Interface & 6 GHz Capabilities
 
 ```bash
-lsusb | grep -i mediatek
+# Check network interface
 iw dev
+
+# Inspect 6 GHz frequency band support
+iw phy | grep -A 10 "Band 4"
 ```
 
-**Expected output**:
+**Expected Output**: `Band 4` lists available 6 GHz HE channels (Channels 1–233).
 
-```text
-Bus 001 Device 002: ID 0e8d:7961 MediaTek Corp. MT7921U
-phy#0
-	Interface wlan0
-		ifindex 3
-		type managed
-```
+### Step 4: Configure Wi-Fi Connection or Monitor Mode
 
-On JetPack 6 with the AXML, verify 6 GHz channels are visible:
-
+Connect to a Wi-Fi 6E network via NetworkManager:
 ```bash
-iwlist wlan0 freq | grep -E "6 GHz|Channel 1|Channel 233" | head
+nmcli device wifi connect "Your_6GHz_SSID" password "YourPassword"
 ```
 
-If nothing appears, set the regulatory domain: `sudo iw reg set TW` (your country), then `sudo ip link set wlan0 down && up`.
-
-## Step 3: Connect and stream
-
+Or enable monitor mode for wireless research:
 ```bash
-nmcli device wifi connect "MySSID" password "my-passphrase"
+sudo ip link set wlan1 down
+sudo iw dev wlan1 set type monitor
+sudo ip link set wlan1 up
 ```
 
-**Expected output**: `Device 'wlan0' successfully activated with 'MySSID'.`
+---
 
-Then push a camera stream over the link (example with GStreamer on the 6 GHz band):
+## Troubleshooting & FAQ
 
-```bash
-gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
-    x264enc tune=zerolatency bitrate=8000 ! rtph264pay ! \
-    udpsink host=192.168.1.50 port=5000
-```
+### Q1: Adapter lights don't turn on or Jetson reboots when transmitting?
+- **Root Cause**: Jetson USB power brownout. Jetson dev kits throttle USB ports if system power supply is below 15W.
+- **Solution**: Use a dedicated 19V DC barrel jack supply or 5V/4A USB-C PD power adapter.
 
-**Expected output**: continuous streaming at low latency — the exact scenario the 6 GHz band is for. (Replace the receiver IP with your ground station's.)
-
-## Step 4: Realtek models (DKMS on ARM64)
-
-The DKMS build works on aarch64, but compile times on a Nano are slower. Use the same repos as desktop Linux:
-
-```bash
-sudo apt install -y build-essential dkms git
-cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl8812au.git
-cd rtl8812au && sudo make dkms_install
-```
-
-**Expected output**: `DKMS: install completed.` (give it a few minutes on the Nano).
-
-## Step 5: Monitor mode (research / lab)
-
-```bash
-sudo airmon-ng start wlan0
-sudo aireplay-ng --test wlan0mon
-```
-
-**Expected output**: `wlan0mon` up; injection `30/30: 100%` on the in-kernel chipsets.
-
-> ⚠️ Remember Jetson-specific power: the Orin Nano's USB ports can be power-limited. A **powered USB hub** is your friend with high-power adapters under load. Also keep the Jetson's `nvpmodel` power mode in mind — underclocked modes reduce USB stability.
-
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-|---|---|---|
-| AXML invisible on JetPack 5 | Kernel 5.10 lacks `mt7921u` | Upgrade to JetPack 6 (L4T kernel 6.6) |
-| 6 GHz channels missing | Regulatory domain unset | `sudo iw reg set <CC>`; bounce interface |
-| Adapter drops under camera load | USB power limit | Powered hub; raise `nvpmodel` mode |
-| DKMS build slow/fails | ARM64 compile + missing headers | Install headers for the L4T kernel: `sudo apt install linux-headers-$(uname -r)` |
-| Monitor mode not available | Stub driver conflict (Realtek) | Use the aircrack-ng repos (Step 4) |
-
-## References
-
-- [AWUS036AXML product page](/alfa-network/products/awus036axml/) — the 6 GHz choice
-- [AWUS036ACM product page](/alfa-network/products/awus036acm/) — the all-rounder
-- [Ubuntu setup guide](/alfa-network/linux-setup-ubuntu/) — JetPack is Ubuntu under the hood
-- [Kali setup guide](/alfa-network/linux-setup-kali/) — monitor mode details
-- [Raspberry Pi guide](/alfa-network/hardware/raspberry-pi/) — the lighter embedded sibling
-- [NVIDIA Jetson documentation](https://docs.nvidia.com/jetson/)
+### Q2: `lsusb` shows device, but `iw dev` shows no interface on JetPack 5.x?
+- **Root Cause**: Missing MediaTek firmware binaries in `/lib/firmware/mediatek/`.
+- **Solution**: Download the firmware files from the kernel git repository:
+  ```bash
+  sudo wget -P /lib/firmware/mediatek https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/mediatek/WIFI_MT7961_patch_mcu_1_2_tv.bin
+  sudo wget -P /lib/firmware/mediatek https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/mediatek/WIFI_RAM_CODE_MT7961_1_2.bin
+  sudo reboot
+  ```
