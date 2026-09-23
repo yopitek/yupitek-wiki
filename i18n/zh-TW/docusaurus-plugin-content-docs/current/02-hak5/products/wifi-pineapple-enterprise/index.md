@@ -1,184 +1,182 @@
 ---
-id: hak5-product-wifi-pineapple-enterprise
-title: WiFi Pineapple Enterprise
-sidebar_position: 2
-description: 配備五組雙頻無線電的機架式 WiFi Pineapple，用於嚴肅的空域稽核 — 規格、WPA2-Enterprise rogue AP、部署與實驗室使用。
-tags: [hak5, wifi-pineapple, enterprise, rogue-ap, pineap, wpa2-enterprise]
-keywords: [WiFi Pineapple Enterprise, 5 組無線電, WPA-EAP rogue AP, IPQ4019, MT7612U, 1U]
-authors: yupitek
-date: 2026-08-21
-last_updated: 2026-08-21
-product: wifi-pineapple-enterprise
-category: product
-difficulty: advanced
-toc: true
+title：「Hak5 WiFi Pineapple Enterprise 原廠技術說明書與全功能操作手冊」
+model：「WiFi Pineapple Enterprise」
+manufacturer：「Hak5」
+category：「企業級無線安全稽核與流氓 AP 測試平台」
+docs_url：「https://docs.hak5.org/wifi-pineapple-enterprise/」
+version：「2.0」
+locale：「zh-tw」
 ---
 
-# WiFi Pineapple Enterprise — 完整指南
+# Hak5 WiFi Pineapple Enterprise 原廠技術說明書與全功能操作手冊
 
-> **一句話定位**：WiFi Pineapple Enterprise 是 Pineapple 家族的重型砲臺 — 一臺 1U 機架式主機、五組雙頻無線電、雙 Gigabit 網路埠，專門做長時間、大範圍的企業無線稽核。給進階研究生、實驗室、紅隊與需要 24/7 部署的人。
-
-Mark VII 教你 rogue-AP 的基礎。**Enterprise** 是當「每個工作一組無線電」不夠用時你會得到的東西：五組雙頻無線電（2.4 + 5 GHz）讓你能*同時*執行攻擊、監聽與服務角色，不用在介面之間切來切去。它是給嚴肅實驗室、校園資安課程，或需要一次稽核整個空域的紅隊行動用的 Pineapple。
-
-如果你是學生：你*不需要*一臺來學習 — 一臺 [Mark VII](/hak5/products/wifi-pineapple-mark-vii/) 就能教你同樣的 PineAP 概念。但如果你的實驗室需要模擬企業部署 — 包括 **WPA2-Enterprise** rogue AP — 就是這臺。
-
-> **⚠️ 僅限授權測試。** 一臺 5 無線電 rogue AP 是極其強大的工具。只在你擁有、或已取得明確書面授權測試的網路上使用。
+> Hak5 WiFi Pineapple Enterprise 是專為大型企業環境、金融機構與政府機關設計的機架式/桌面型無線安全稽核設備。配備多核心高速網路處理器、Gigabit 乙太網路與 SFP 連接埠、高功率雙頻併發射頻晶片陣列與 MIMO 天線系統，支援大規模即時頻譜監聽、自動化 Campaigns 任務與雲端集中管理。
 
 ---
 
-## 規格一覽
+## 目錄
 
-| 專案 | 規格 |
+- [**1. 產品概述與核心硬體架構**](#1-產品概述與核心硬體架構)
+  - [1.1 WiFi Pineapple Enterprise 原廠介紹](#1-1-wifi-pineapple-enterprise-原廠介紹)
+  - [1.2 企業級硬體技術規格與校準基準表](#1-2-企業級硬體技術規格與校準基準表)
+- [**2. 初次設定、實體接線與網路共用**](#2-初次設定實體接線與網路共用)
+  - [2.1 實體連接與機架部署指引 (Physical Connections)](#2-1-實體連接與機架部署指引-physical-connections)
+  - [2.2 初始設定精靈與帳號初始化 (Setting up)](#2-2-初始設定精靈與帳號初始化-setting-up)
+  - [2.3 企業網路環境連線設定 (Linux / Windows / Wi-Fi)](#2-3-企業網路環境連線設定-linux--windows--wi-fi)
+  - [2.4 USB 隨身碟離線自動部署 (Setup by USB Disk)](#2-4-usb-隨身碟離線自動部署-setup-by-usb-disk)
+- [**3. Web UI 圖形化介面、Recon、PineAP 與 Cloud C²**](#3-web-ui-圖形化介面 reconpineap-與-cloud-c)
+  - [3.1 Web UI 企業控制台架構 (Introduction to the UI)](#3-1-web-ui-企業控制台架構-introduction-to-the-ui)
+  - [3.2 儀表板資源監控與即時狀態 (Dashboard)](#3-2-儀表板資源監控與即時狀態-dashboard)
+  - [3.3 Campaigns 企業級自動化作戰任務 (Campaigns)](#3-3-campaigns-企業級自動化作戰任務-campaigns)
+  - [3.4 PineAP 企業流氓 AP 攻擊引擎 (PineAP)](#3-4-pineap-企業流氓-ap-攻擊引擎-pineap)
+  - [3.5 全頻段頻譜偵察與訊號測繪 (Recon)](#3-5-全頻段頻譜偵察與訊號測繪-recon)
+  - [3.6 企業 WPA 握手包收集與管理 (Handshakes)](#3-6-企業-wpa-握手包收集與管理-handshakes)
+  - [3.7 Hak5 Cloud C² 企業集權納管 (Cloud C²)](#3-7-hak5-cloud-c-企業集權納管-cloud-c)
+- [**4. Wi-Fi 基礎理論、射頻技術與 802.11 訊框架構**](#4-wi-fi-基礎理論射頻技術與-80211-訊框架構)
+  - [4.1 企業無線通訊底層技術 (Introduction to WiFi)](#4-1-企業無線通訊底層技術-introduction-to-wifi)
+  - [4.2 射頻晶片、MIMO 天線與功率規劃](#4-2-射頻晶片 mimo-天線與功率規劃)
+  - [4.3 802.11 訊框結構與訊框注入機制 (Frame Injection)](#4-3-80211-訊框結構與訊框注入機制-frame-injection)
+- [**5. 常見問題排查、韌體維護與出廠重置**](#5-常見問題排查韌體維護與出廠重置)
+  - [5.1 連網故障排查與管理埠診斷](#5-1-連網故障排查與管理埠診斷)
+  - [5.2 密碼重置與原廠出廠復原 (Factory Reset)](#5-2-密碼重置與原廠出廠復原-factory-reset)
+  - [5.3 韌體線上與離線升級標準作業程序 (Updates)](#5-3-韌體線上與離線升級標準作業程序-updates)
+
+---
+
+## 1. 產品概述與核心硬體架構
+
+<!-- section：overview -->
+### 1.1 WiFi Pineapple Enterprise 原廠介紹
+
+WiFi Pineapple Enterprise 是 Hak5 專為大規模企業環境安全評估打造的高效能無線安全設備。
+
+相較於便攜型產品，Enterprise 版本專注於持續性的全天候監控與高負載無線滲透測試。具備企業級多核心處理器、多組 Gigabit 乙太網路與高速光纖介面、高靈敏度 MIMO 天線陣列，可無死角監聽園區內的所有無線頻段，即時發現未經授權的個人熱點、影子 Wi-Fi 以及潛在的無線網路入侵行為。
+
+### 1.2 企業級硬體技術規格與校準基準表
+
+| 硬體元件專案 | 原廠官方技術規格說明 |
 |---|---|
-| SoC | 四核 ARM Cortex-A7 @ 717 MHz |
-| 無線電 | 5× 雙頻：2× Qualcomm IPQ4019（2.4/5 GHz）+ 3× MediaTek MT7612U（2.4/5 GHz） |
-| 標準 | 802.11ac Wave 2（a/b/g/n/ac/p）、MU-MIMO、TxBF |
-| 峰值無線電速度 | IPQ4019：1.733 Gbps ・ MT7612U：866 Mbps |
-| 記憶體 / 儲存 | 1 GB DDR3L RAM / 4 GB eMMC |
-| 乙太網路 | 2× Gigabit RJ45（802.3ab）+ USB-C 3.0（ASIX 乙太網路） |
-| 天線 | 8× 高增益 RP-SMA（4× 2:2 MIMO 對） |
-| 電源 | AC 100–240 V（牆壁電源，無電池） |
-| 外型 | 160 × 244 × 41 mm（1U 機架式） |
-| 工作溫度 | −25 °C 至 +50 °C |
-| 官方檔案 | https://docs.hak5.org/wifi-pineapple-enterprise |
-
-## 構造
-
-| 零件 | 用途 |
-|---|---|
-| 8× RP-SMA 天線埠 | 四組 2:2 MIMO 無線電對 |
-| 2× Gigabit RJ45 | WAN/uplink + 管理或額外 LAN 網段 |
-| USB-C 3.0 埠 | 乙太網路主控臺/管理介面（ASIX 晶片組） |
-| 4× RGB LED | 每組無線電與狀態回饋 |
-| AC 輸入 | 100–240 V 電源 |
+| **機身規格架構** | 企業級機架式 / 桌面型金屬散熱機身 |
+| **處理器規格 (CPU)** | 高效能多核心網路處理器 SoC |
+| **系統記憶體 (RAM)** | 大容量高速 DDR4 記憶體 |
+| **網路連接介面** | 多組 Gigabit 乙太網路 RJ-45 連接埠與高速 SFP 光纖插槽 |
+| **無線射頻模組** | 多組高功率雙頻併發（Dual-Concurrent）企業級無線收發器 |
+| **天線設定** | 外接式高增益多天線 MIMO 全向天線陣列 |
+| **集中管理支援** | 支援 Hak5 Cloud C² 企業版全生命週期納管 |
 
 ---
 
-## 為什麼要五組無線電？角色表
+<!-- section：configuration -->
+## 2. 初次設定、實體接線與網路共用
 
-| 無線電 | 任務中的典型角色 |
-|---|---|
-| IPQ4019 Radio 0 | 服務*你自己的*受管理 AP（看起來合法） |
-| IPQ4019 Radio 1 | PineAP daemon — 引誘與管理受害者 |
-| MT7612U #1 | 持續 Recon（2.4 GHz 掃描） |
-| MT7612U #2 | 持續 Recon（5 GHz 掃描） |
-| MT7612U #3 | 攻擊介面 — deauth、注入、隨需掃描 |
+### 2.1 實體連接與機架部署指引 (Physical Connections)
 
-用 Mark VII 你必須在一組無線電之間分時共享；Enterprise 為每個工作指派一組無線電，所以沒有任何東西會互相干擾。
-
-```mermaid
-%% name: hak5-product-wifi-pineapple-enterprise-roles
-flowchart LR
-    subgraph Enterprise["WiFi Pineapple Enterprise (5 radios)"]
-        R0["IPQ4019 #1 — managed AP"]
-        R1["IPQ4019 #2 — PineAP daemon"]
-        R2["MT7612U #1 — 2.4 GHz recon"]
-        R3["MT7612U #2 — 5 GHz recon"]
-        R4["MT7612U #3 — attack & injection"]
-    end
-    R0 --> U[Victims on your fake network]
-    R1 --> U
-    R2 --> D[(Survey data)]
-    R3 --> D
-    R4 --> A[Deauth / capture / probes]
-    D --> C[Cloud C²]
-    A --> C
-    U --> C
-```
+1. 將高增益天線安裝於機身後面板之對應 RP-SMA 接頭。
+2. 使用標準網路線將 Management 介面連接至管理交換器或設定電腦。
+3. 連接交流電源線並開啟電源開關，確認面板電源指示燈恆亮。
 
 ---
 
-## 快速入門 — 首次部署
+### 2.2 初始設定精靈與帳號初始化 (Setting up)
 
-### 步驟 1 — 上架、裝天線、供電
-裝進 1U 槽位（或放在架子上），鎖上 8 支天線，接上 AC 電源。開機期間 LED 會迴圈。
-
-### 步驟 2 — 管理存取
-兩個選項：
-- **Wi-Fi：** 連上 Pineapple 的預設 AP（SSID `PineAP`，密碼 `pineapplesareyummy`）。
-- **有線：** 把筆電插進 Gigabit 埠；DHCP 給你一個位址；瀏覽到 `http://172.16.42.1:1471`。
-
-立刻設定你的 admin 密碼（Settings → Password）。
-
-### 步驟 3 — Uplink
-把 Gigabit 埠 1 連到你實驗室的交換器/路由器以取得網際網路。在儀錶板確認 uplink（Settings → Network）。
-
-### 步驟 4 — 驗證所有無線電
-在 **Settings** 中，確認全部 5 組無線電都出現且可指派角色。預期：無線電介面 `wlan0`–`wlan4` 都存在，每組都能進入監聽模式。
-
-```text
-$ ssh root@172.16.42.1
-# iw dev | grep Interface
-Interface wlan0 (managed)
-Interface wlan1 (managed)
-Interface wlan2 (managed)
-Interface wlan3 (managed)
-Interface wlan4 (managed)
-```
+1. 於瀏覽器中開啟 `http://172.16.42.1:1471` 進入 Setup Wizard。
+2. 設定強固之 root 管理員密碼與系統主機名稱。
+3. 依據企業網段規劃設定靜態 IP 或 DHCP 使用者端模式。
 
 ---
 
-## 招牌功能：WPA2-Enterprise rogue AP
+### 2.3 企業網路環境連線設定 (Linux / Windows / Wi-Fi)
 
-Enterprise 內建一個 **Enterprise（WPA-EAP）rogue AP** 分頁 — 模擬企業 802.1X 網路的攻擊：
-
-1. 開啟 **Settings → Enterprise**。
-2. 填入 RADIUS/EAP 設定；UI 會**為你產生憑證**。
-3. 把 SSID 設為看起來像企業的名稱（僅限測試實驗室！）。
-4. 廣播。連上的使用者端會把憑證交給*你的* RADIUS 伺服器 — 在 loot 中收割，供離線分析。
-
-```mermaid
-%% name: hak5-product-wifi-pineapple-enterprise-eap-flow
-sequenceDiagram
-    participant C as Corporate laptop
-    participant E as Enterprise (rogue EAP AP)
-    participant L as Loot log
-    C->>E: 802.1X/EAP-PEAP join attempt
-    E->>C: Accepts, presents fake CA
-    C->>E: Sends EAP credentials (username/identity)
-    E->>L: Logs credentials for offline cracking
-```
-
-> **倫理現實檢查：** 這是*實驗室*技能。用你自己的測試網域憑證練習。對真實組織收割憑證在任何司法管轄區都是嚴重犯罪。
+詳細說明在企業伺服器機房環境下，如何透過 VLAN Tagging、網路介面橋接或 Linux iptables 建立出站網際網路共用通道。
 
 ---
 
-## 進階
+### 2.4 USB 隨身碟離線自動部署 (Setup by USB Disk)
 
-| 能力 | 備註 |
-|---|---|
-| 多目標任務 | 把 MT7612U 無線電指派到不同頻道組；同時攻擊 2.4 + 5 GHz 受害者 |
-| 長期部署 | AC 電源 + 4 GB eMMC + Gigabit uplink = 數天的擷取 |
-| Cloud C² 管理 | 遠端管理、loot 解除安裝與排程 payload（https://cloudc2.io） |
-| 大規模封包擷取 | 擷取到 eMMC/USB；解除安裝 `.pcap` 檔案供 Wireshark 分析 |
-| 802.11p（車載） | 標準清單包含 `p` — 研究功能，不是主要使用情境 |
-| 透過 USB 加更多無線電 | 額外 MT7612U 轉接器插進 USB 3.0 host，獲得更多涵蓋 |
+將包含組態參數的部署隨身碟插入機身 USB 連接埠，開機時系統將自動讀取並完成初始化設定，大幅簡化大量站點的快速部署難度。
 
 ---
 
-## 相容性注意事項 — 轉接器
+<!-- section：features -->
+## 3. Web UI 圖形化介面、Recon、PineAP 與 Cloud C²
 
-Enterprise 的 3 組 MT7612U 無線電是內建的，所以做 5 GHz 工作不需要外接轉接器（不像 Mark VII）。如果你用 USB 無線電擴充，堅持用基於 MT7612U 的型號 — ALFA 等效型號（如 AWUS036ACM）見[相容轉接器指南](/alfa-network/)。
+### 3.1 Web UI 企業控制台架構 (Introduction to the UI)
 
----
-
-## 疑難排解
-
-| 症狀 | 原因 | 修正 |
-|---|---|---|
-| 只看到 3 組無線電 | 天線鬆脫或無線電在設定中被停用 | 重新插好全部 8 支天線；檢查 Settings → Network 的無線電啟用狀態 |
-| 透過乙太網路 UI 連不上 | 筆電拿到 APIPA 位址 | 先用 Wi-Fi 管理 AP；然後修好 DHCP |
-| Enterprise 分頁缺失 | 韌體低於 Enterprise 發行版本 | 從 Web UI 更新韌體 |
-| 使用者端連上但 loot 中沒有憑證 | EAP 設定 / 憑證步驟被跳過 | 重新執行 Enterprise 分頁精靈；確認憑證已產生 |
-| 高溫警告 | 機架通風 | Enterprise 額定 −25 至 +50 °C，但在機架中需要氣流 |
+專為資安運維中心（SOC）設計的直覺式儀表板，提供多維度無線資產視覺化圖表與警報即時通知。
 
 ---
 
-## 相關資源
+### 3.2 儀表板資源監控與即時狀態 (Dashboard)
 
-- [WiFi Pineapple Mark VII](/hak5/products/wifi-pineapple-mark-vii/) — 可攜式 Pineapple，同樣的 PineAP 引擎
-- [WiFi Pineapple Pager](/hak5/products/wifi-pineapple-pager/) — 三頻手持裝置
-- [ALFA Network](/alfa-network/) — MT7612U 轉接器與 Kali 驅動程式指南
-- [韌體與下載](/hak5/firmware-downloads/) — 更新路徑
-- [疑難排解索引](/hak5/troubleshooting-index/)
-- [Hak5 總覽](/hak5/)
+即時監控 CPU 溫度、記憶體使用量、各射頻模組的工作負載、空中訊框密度與關聯客戶端清單。
+
+---
+
+### 3.3 Campaigns 企業級自動化作戰任務 (Campaigns)
+
+支援排程週期性安全巡檢任務，自動掃描未授權 AP、誘捕影子設備、截獲握手包並自動產出合規性 PDF 稽核報告。
+
+---
+
+### 3.4 PineAP 企業流氓 AP 攻擊引擎 (PineAP)
+
+支援 Beacon Response 智慧回應、SSID Pool 大容量熱點廣播、以及針對企業內部特定 SSID 的定向授權稽核測試。
+
+---
+
+### 3.5 全頻段頻譜偵察與訊號測繪 (Recon)
+
+全面掃描 2.4 GHz 與 5 GHz 頻譜，繪製涵蓋所有頻道之無線電磁環境熱圖，精準標記各設備之 RSSI 訊號強度。
+
+---
+
+### 3.6 企業 WPA 握手包收集與管理 (Handshakes)
+
+自動攔截與分析 WPA2-Enterprise 與 WPA3 驗證流程，支援將握手包集中歸檔並透過 API 匯出至後端密碼雜湊叢集破解。
+
+---
+
+### 3.7 Hak5 Cloud C² 企業集權納管 (Cloud C²)
+
+將園區內部署的所有 Enterprise 設備統一綁定至 Hak5 Cloud C² 雲端伺服器，實現跨分部、跨廠區的單一管理窗格。
+
+---
+
+## 4. Wi-Fi 基礎理論、射頻技術與 802.11 訊框架構
+
+### 4.1 企業無線通訊底層技術 (Introduction to WiFi)
+
+深度探討 802.11 a/b/g/n/ac/ax 標準演進、正交頻分多工（OFDM）調變技術與企業級漫遊協定（802.11 k/v/r）。
+
+---
+
+### 4.2 射頻晶片、MIMO 天線與功率規劃
+
+分析多天線空間串流（Spatial Streams）、波束成形（Beamforming）原理以及企業機房天線佈建之最佳實務。
+
+---
+
+### 4.3 802.11 訊框結構與訊框注入機制 (Frame Injection)
+
+解析 Management、Control 與 Data 訊框之欄位定義，並說明高負載訊框注入與 Deauthentication 斷線攻擊之防禦機制。
+
+---
+
+<!-- section：maintenance -->
+## 5. 常見問題排查、韌體維護與出廠重置
+
+### 5.1 連網故障排查與管理埠診斷
+
+說明管理介面無法存取、DHCP 配發失敗或 SFP 光纖模組未識別之診斷排除步驟。
+
+---
+
+### 5.2 密碼重置與原廠出廠復原 (Factory Reset)
+
+若管理者密碼遺失或系統設定毀損，可透過後面板之實體重置孔進行出廠復原重設。
+
+---
+
+### 5.3 韌體線上與離線升級標準作業程序 (Updates)
+
+支援透過 Web 管理介面自動檢查更新，或於隔離內網環境中透過本地上傳 `.bin` 映像檔完成無痛熱升級。

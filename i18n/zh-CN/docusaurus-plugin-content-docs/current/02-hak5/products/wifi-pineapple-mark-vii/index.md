@@ -1,186 +1,311 @@
 ---
-id: hak5-product-wifi-pineapple-mark-vii
-title: WiFi Pineapple Mark VII
-sidebar_position: 1
-description: 经典双频流氓接入点 — PineAP 套件、邪恶双胞胎攻击、模块、5 GHz 升级路径与逐步首次设置。
-tags: [hak5, wifi-pineapple, 流氓接入点, pineap, 邪恶双胞胎, wifite, 渗透测试]
-keywords: [WiFi Pineapple Mark VII, PineAP, 流氓 AP, 邪恶双胞胎, 强制门户, MK7AC, 172.16.42.1]
-authors: yupitek
-date: 2026-08-21
-last_updated: 2026-08-21
-product: wifi-pineapple-mark-vii
-category: product
-difficulty: beginner
-toc: true
+title：“Hak5 WiFi Pineapple Mark VII 原厂技术说明书与全功能操作手册”
+model：“WiFi Pineapple Mark VII”
+manufacturer：“Hak5”
+category：“无线网络安全审计与流氓 AP 测试平台”
+docs_url：“https://docs.hak5.org/wifi-pineapple/”
+version：“2.0”
+locale：“zh-cn”
 ---
 
-# WiFi Pineapple Mark VII — 完整指南
+# Hak5 WiFi Pineapple Mark VII 原厂技术说明书与全功能操作手册
 
-> **一句话定位**：WiFi Pineapple Mark VII 是一台「会自己开 Wi-Fi 来钓鱼」的无线攻击平台 — 它假装成你信任的无线网络，再用 PineAP 引擎接管受害者的连接。给想学 Wi-Fi 渗透测试、邪恶双胞胎攻击的大学生与 CTF 玩家。
-
-如果 Wi-Fi 渗透测试有一个吉祥物，那就是 WiFi Pineapple。Mark VII 是让**流氓接入点（邪恶双胞胎）**攻击出名的设备的当前世代：它广播自己的网络，*看起来*像合法的，引诱受害者加入，然后给你对他们流量的完全可见性与控制 — 全部来自一个浏览器界面。
-
-如果你正在学习无线安全，Mark VII 就是该买的设备：它便携（USB-C 供电）、便宜，而且 PineAP 套件是学习适用于任何现代流氓 AP 工具的 Wi-Fi 攻击概念的行业标准方式。
-
-> **⚠️ 仅限授权测试。** 只对*你自己的*网络、你自己的设备，或获得书面许可后运行 Pineapple。在别人的网络上广播假的「免费 Wi-Fi」是违法的（台湾：刑法第 358–363 条；另见电信法）。
+> Hak5 出品的 WiFi Pineapple Mark VII 是全球无线网络安全审计、红队渗透测试与流氓 AP（Rogue AP）攻击演练的行业黄金标准。配备 3 组专属特化 2.4 GHz 射频芯片、单核心 MIPS 580 MHz 网络处理器、256 MB 内存与 2 GB eMMC 高速存储，结合专属 PineAP 攻击套件与 Campaigns 自动化作战引擎。
 
 ---
 
-## 规格一览
+## 目录
 
-| 项目 | 规格 |
+- [**1. 产品概述与核心硬件架构**](#1-产品概述与核心硬件架构)
+  - [1.1 WiFi Pineapple Mark VII 原厂介绍](#1-1-wifi-pineapple-mark-vii-原厂介绍)
+  - [1.2 硬件技术规格与原厂校准基准表](#1-2-硬件技术规格与原厂校准基准表)
+- [**2. 初次配置、系统连接与互联网共享**](#2-初次配置系统连接与互联网共享)
+  - [2.1 物理连接与通电指示 (Connecting)](#2-1-物理连接与通电指示-connecting)
+  - [2.2 配置向导与初始化 (Setting up)](#2-2-配置向导与初始化-setting-up)
+  - [2.3 Linux 系统连接配置指南](#2-3-linux-系统连接配置指南)
+  - [2.4 Windows 系统连接配置指南](#2-4-windows-系统连接配置指南)
+  - [2.5 通过无线 Wi-Fi 进行无网线配置](#2-5-通过无线-wi-fi-进行无网线配置)
+  - [2.6 USB U 盘离线自动部署 (Setup by USB Disk)](#2-6-usb-u 盘离线自动部署-setup-by-usb-disk)
+- [**3. Web UI 图形化界面、Recon、PineAP 与 Cloud C²**](#3-web-ui-图形化界面 reconpineap-与-cloud-c)
+  - [3.1 Web UI 界面架构导览 (Introduction to the UI)](#3-1-web-ui-界面架构导览-introduction-to-the-ui)
+  - [3.2 仪表盘监控与实时状态 (Dashboard)](#3-2-仪表盘监控与实时状态-dashboard)
+  - [3.3 Campaigns 自动化作战任务 (Campaigns)](#3-3-campaigns-自动化作战任务-campaigns)
+  - [3.4 PineAP 流氓 AP 攻击引擎核心 (PineAP)](#3-4-pineap-流氓-ap-攻击引擎核心-pineap)
+  - [3.5 Recon 全频段无线频谱侦查 (Recon)](#3-5-recon-全频段无线频谱侦查-recon)
+  - [3.6 Handshake 握手包收集与管理 (Handshakes)](#3-6-handshake-握手包收集与管理-handshakes)
+  - [3.7 Modules 扩展模块管理系统 (Modules)](#3-7-modules-扩展模块管理系统-modules)
+  - [3.8 系统配置、更新与偏好设置 (Settings)](#3-8-系统配置更新与偏好设置-settings)
+  - [3.9 Hak5 Cloud C² 云端集中纳管 (Cloud C²)](#3-9-hak5-cloud-c-云端集中纳管-cloud-c)
+- [**4. Wi-Fi 基础理论、射频技术与 802.11 帧架构**](#4-wi-fi-基础理论射频技术与-80211-帧架构)
+  - [4.1 无线网络通信原理 (Introduction to WiFi)](#4-1-无线网络通信原理-introduction-to-wifi)
+  - [4.2 射频芯片与角色分工 (Radios and Chipsets)](#4-2-射频芯片与角色分工-radios-and-chipsets)
+  - [4.3 Station 与 AP 运行模式剖析](#4-3-station-与-ap-运行模式剖析)
+  - [4.4 发射功率与高增益天线原理 (Power & Antennas)](#4-4-发射功率与高增益天线原理-power--antennas)
+  - [4.5 信道划分与全球区域法规限制](#4-5-信道划分与全球区域法规限制)
+  - [4.6 802.11 帧结构与管理帧解析](#4-6-80211-帧结构与管理帧解析)
+  - [4.7 帧注入与客户端状态机 (Frame Injection)](#4-7-帧注入与客户端状态机-frame-injection)
+- [**5. 开发者资源与自定义模块开发**](#5-开发者资源与自定义模块开发)
+  - [5.1 官方开发者资源库 (Developer Resources)](#5-1-官方开发者资源库-developer-resources)
+  - [5.2 模块架构与社区软件包库贡献指南](#5-2-模块架构与社区软件包库贡献指南)
+- [**6. 常见问答、故障排除、固件升级与硬件改动**](#6-常见问答故障排除固件升级与硬件改动)
+  - [6.1 macOS 平台连接支持 (macOS Support)](#6-1-macos-平台连接支持-macos-support)
+  - [6.2 互联网共享连接建立与排查](#6-2-互联网共享连接建立与排查)
+  - [6.3 忘记密码还原与原厂出厂重置 (Factory Reset)](#6-3-忘记密码还原与原厂出厂重置-factory-reset)
+  - [6.4 固件升级与救援恢复模式 (Firmware Recovery)](#6-4-固件升级与救援恢复模式-firmware-recovery)
+  - [6.5 兼容 802.11 ac 5 GHz 网卡清单 (Compatible Adapters)](#6-5-兼容-80211 ac-5-ghz-网卡清单-compatible-adapters)
+  - [6.6 MK7 LED 改装与 Kismet 保护外壳安装](#6-6-mk7-led-改装与-kismet-保护外壳安装)
+
+---
+
+## 1. 产品概述与核心硬件架构
+
+<!-- section：overview -->
+### 1.1 WiFi Pineapple Mark VII 原厂介绍
+
+Hak5 WiFi Pineapple Mark VII 是专为网络安全从业人员、红队演练专家以及合规性审计人员量身打造的第七代旗舰级无线渗透测试硬件。
+
+相较于前代产品，Mark VII 进行了彻底的架构重构，内置 3 组独立且各司其职的 2.4 GHz 802.11 b/g/n 射频芯片，实现了同频段下“一组专职被动频谱侦察、一组专职流氓 AP 广播与凭据诱捕、一组专职连接注入与干扰”的三工并行能力，彻底消除了以往单一射频在切换模式时所造成的频谱监听盲区。
+
+配合直观流畅的 Web UI 与 Hak5 Cloud C² 云端纳管平台，安全团队可将 Mark VII 隐蔽部署于目标建筑物内，并由千里之外的远程指挥中心进行实时的无线资产测绘与凭据侧录。
+
+### 1.2 硬件技术规格与原厂校准基准表
+
+| 硬件组件项目 | 官方技术规格基准说明 |
 |---|---|
-| 无线 | 2.4 GHz 802.11 b/g/n，3 组专用角色无线电（MediaTek MT7601U + MT7610U）；5 GHz 802.11ac 需可选 MK7AC 适配器（MT7612U） |
-| SoC / RAM / 存储 | 单核 MIPS 网络 SoC / 256 MB RAM / 2 GB eMMC |
-| 天线 | 3× 高增益 RP-SMA（外置、可更换） |
-| 端口 | USB-C（供电 + 以太网）、USB 2.0 主机 |
-| 电源 | USB-C 5V 2A（10 W） |
-| 指示灯 | 单颗 RGB LED |
-| 尺寸 | 107 × 93 × 21 mm |
-| 操作系统 / UI | 基于 OpenWrt 的固件，浏览器管理界面在 1471 端口 |
-| 官方文档 | https://docs.hak5.org/wifi-pineapple |
-
-## 结构
-
-| 部件 | 用途 |
-|---|---|
-| 3× RP-SMA 天线端口 | 用于 AP / 客户端 / 监听角色的无线电 |
-| USB-C 端口 | 供电 AND 以太网上行（一条线，两个任务） |
-| USB 2.0 主机端口 | 插入 MK7AC 5 GHz 适配器或 USB 驱动器 |
-| RGB LED | 启动、升级和状态反馈 |
-| 复位针孔 | 恢复出厂设置 / 恢复 |
+| **核心处理器 (SoC / CPU)** | Single Core MIPS 24 KEc 580 MHz |
+| **系统内存 (RAM)** | 256 MB DDR2 |
+| **内部存储空间 (Storage)** | 2 GB eMMC 高速闪存 |
+| **无线射频模块** | 3 组独立特化之 2.4 GHz 802.11 b/g/n 芯片组（硬件滤波防干扰）|
+| **扩展连接接口** | USB-C 供电/以太网接口、USB 2.0 Host（支持 5 GHz 双频扩展）|
+| **天线配置** | 3 支高增益全向式 RP-SMA 旋钮式天线 |
+| **状态指示模块** | 多色可编程 RGB LED 系统状态指示灯 |
+| **默认管理 IP / 子网掩码** | 172.16.42.1 / 255.255.255.0 |
 
 ---
 
-## 你能用它做什么
+<!-- section：configuration -->
+## 2. 初次配置、系统连接与互联网共享
 
-| 用例 | 怎么做 |
-|---|---|
-| 邪恶双胞胎 / 流氓 AP | 广播克隆的 SSID；受害者连接到你而不是真正的 AP |
-| 中间人 | PineAP 从真正的 AP 捕获客户端；他们的流量经过你 |
-| 侦察 | 被动调查附近的 AP 和客户端（2.4 GHz 原生；5 GHz 需 MK7AC） |
-| 强制门户 | 托管一个假登录页面模块并收集凭据 |
-| WPA/WPA2 企业测试 | 流氓 RADIUS 风格企业 AP（自固件 1.1.0 起支持） |
-| 自动化项目 | PineAP 市场里的模块（pmkid 攻击、握手捕获等） |
+### 2.1 物理连接与通电指示 (Connecting)
 
-```mermaid
-%% name: hak5-product-wifi-pineapple-mark-vii-attack-flow
-sequenceDiagram
-    participant V as Victim laptop
-    participant P as WiFi Pineapple
-    participant R as Real AP
-    V->>P: joins "CoffeeShop" (the fake one)
-    P->>P: PineAP logs connection, applies filters
-    P->>R: uplinks to the real network (Ethernet or client mode)
-    V->>P: HTTP request to any site
-    P->>V: serves captive portal / injected content
-    Note over P: you see everything the victim sends
+1. 将随附的 3 支天线拧紧安装至 Mark VII 机身上的 RP-SMA 接口。
+2. 使用 USB Type-C 连接线将设备连接至测试电脑或合格之 5 V 2 A 电源适配器。
+3. 机身 LED 将亮起蓝灯闪烁，代表嵌入式 Linux 操作系统正在启动（约耗时 30 至 60 秒）。
+4. 当 LED 呈现常亮状态时，代表系统已开机完成并进入就绪模式。
+
+---
+
+### 2.2 配置向导与初始化 (Setting up)
+
+1. 打开浏览器，输入管理地址：`http://172.16.42.1:1471`。
+2. 系统将自动重定向至“Setup Wizard”初次配置向导。
+3. 依序配置 root 管理员密码、时区以及管理用 Wi-Fi AP 之 SSID 与连接密钥。
+4. 保存配置后重新加载，即可使用新密码登录正式管理控制台。
+
+---
+
+### 2.3 Linux 系统连接配置指南
+
+在 Linux 环境下，可使用原厂提供的 `wp7.sh` 配置脚本，一键配置 iptables 转发与网络共享：
+```bash
+sudo ./wp7.sh
 ```
+选择对应外网网卡与 USB 网卡接口，脚本将自动建立 NAT 规则，使 Mark VII 具备访问外网能力。
 
 ---
 
-## 快速入门 — 10 分钟首次启动
+### 2.4 Windows 系统连接配置指南
 
-### 第 1 步 — 开机
-把 USB-C 线插进 5V/2A 充电器（或你的电脑）。等 LED 稳定。
-
-### 第 2 步 — 加入它的网络
-在笔记本上找 Pineapple 的默认 Wi-Fi：SSID `PineAP`，密码 `pineapplesareyummy`。
-
-### 第 3 步 — 打开管理界面
-浏览到：
-
-```
-http://172.16.42.1:1471
-```
-
-预期结果 — WiFi Pineapple 仪表盘。**第一件事：** 在 **Settings → Password** 设置你的管理员密码。
-
-### 第 4 步 — 升级固件并连接上行链路
-1. 在 **Settings → Software Update**，点击 **Check for updates**，然后 **Update**。
-2. 要联网：把以太网线插进 USB-C **Ethernet** 口（必要时用随附的 USB-C 适配器），或配置客户端模式 Wi-Fi 上行。
-3. 验证仪表盘页脚显示新版本。
-
-### 第 5 步 — 运行你的第一次侦察
-1. 在界面里打开 **Recon**。
-2. 把接口设为内部无线电（`wlan1` 是 2.4 GHz 监听无线电）。
-3. 点击 **Scan**。几秒内你会看到附近的 AP 和客户端填充列表 — Pineapple 在*被动*监听。
-
-```text
-[+] Scanning for wireless networks...
-[+] Found 12 APs, 23 clients
-    CoffeeShop (2.4 GHz, WPA2)
-    Home-5G (5 GHz — visible only with MK7AC attached)
-    ...
-```
+在 Windows 10 / 11 中：
+1. 进入“网络和共享中心”$
+ightarrow$“更改适配器设置”。
+2. 在连接互联网的网卡（Wi-Fi 或以太网）上右键选择“属性”。
+3. 切换至“共享”标签页，勾选“允许其他网络用户通过此计算机的 Internet 连接来连接”，并在下拉菜单中选择 WiFi Pineapple 的虚拟以太网网卡。
 
 ---
 
-## PineAP — 核心引擎
+### 2.5 通过无线 Wi-Fi 进行无网线配置
 
-PineAP 是让 Pineapple 区别于无聊路由器的东西。四个面板，四个任务：
-
-| 面板 | 任务 | 典型用途 |
-|---|---|---|
-| **PineAP** | 引擎：响应探测请求、去认证、冒充 | 打开「PineAP Daemon」+「Beacon Response」引诱客户端 |
-| **Recon** | 被动 AP/客户端发现 | 攻击前调查空域 |
-| **Modules** | 现成工具市场 | 握手捕获、PMKID、强制门户、DNS 欺骗 |
-| **Client** | 管理已连接的受害者 | 看谁加入了，观察他们的流量 |
-
-**经典实验室演示 — 去认证 + 邪恶双胞胎：**
-
-1. 在 **Recon** 里找一个你拥有的目标 AP。
-2. 在 **PineAP** 里启用 *PineAP Daemon* 和 *Beacon Response*；把 *SSID* 设为与目标一致。
-3. 从 **Client** 页面（或一个模块）向目标的客户端发送去认证帧。
-4. 受害者重新连接 — 连到*你的*克隆。打开 **Client** 面板看他们出现。
-
-> **你可能会问：** *「为什么受害者会加入假 AP？」* 因为客户端会不断发送针对它们记住的网络的**探测请求**（「Home-5G？」），而 PineAP 守护进程会用匹配的信标应答每一个探测。你的克隆看起来一模一样，所以客户端选了它。这就是全部把戏 — 而且它有效是因为 Wi-Fi 客户端*会广播自己的历史*。
+在无 USB 连接线的环境下，Mark VII 开机后会自动广播名为 `Pineapple_xxxx` 的开放式配置 AP。管理员可直接以笔记本或手机 Wi-Fi 连入该热点完成配置。
 
 ---
 
-## 上 5 GHz（MK7AC 适配器）
+### 2.6 USB U 盘离线自动部署 (Setup by USB Disk)
 
-Mark VII 的内部无线电是 2.4 GHz。要 5 GHz 监听和注入，把 **MK7AC**（MediaTek MT7612U）插到 USB 2.0 主机端口：
-
-1. 插入 MK7AC 并重启。
-2. 在 **Settings** 里，把 *Recon Wireless Interface* 设为新适配器的接口（`wlan3`）。
-3. Recon 现在同时扫描 2.4 GHz **和** 5 GHz。
-
-兼容适配器（Hak5 确认）：MK7AC、**ALFA AWUS036ACM**（MT7612U）和 EP-AC1605 V1。其他芯片组*可能*能用但不保证 — 为了可靠性坚持用 MT7612U。完整的适配器目录和 Kali 驱动程序指南见 [ALFA Network 专区](/alfa-network/)。
+将配置好的 `pineapple.tar.gz` 镜像文件放置于 FAT32 格式 U 盘根目录，插入 Mark VII 开机，系统将全自动完成静默配置，无需任何人机交互。
 
 ---
 
-## 进阶
+<!-- section：features -->
+## 3. Web UI 图形化界面、Recon、PineAP 与 Cloud C²
 
-| 技巧 | 从哪里开始 |
-|---|---|
-| 客户端隔离 / 过滤 | PineAP → Filters：阻止特定客户端连接真正的 AP |
-| 强制门户钓鱼 | 从市场安装强制门户模块；在战利品中收集 POST 的凭据 |
-| WPA 握手捕获 | 握手捕获模块保存 `.cap` 文件 — 在笔记本上离线破解 |
-| WPA2-Enterprise 流氓 AP | Settings → Enterprise 标签：生成 EAP 配置和证书，然后广播 |
-| Cloud C² 远程操作 | 搭配免费自托管的 Cloud C² 服务器远程管理 Pineapple（https://cloudc2.io） |
-| 工具 USB 挂载 | USB 主机端口接受存储；轻松把战利品移出设备 |
+### 3.1 Web UI 界面架构导览 (Introduction to the UI)
 
----
-
-## 故障排查
-
-| 症状 | 原因 | 修复 |
-|---|---|---|
-| `PineAP` SSID 不可见 | 还在启动（最多 60 秒） | 等待；检查 LED。红灯 = 错误 → 通过有线连接查看日志 |
-| 管理界面打不开 | 你不在 `172.16.42.0/24` 网络上 | 忘记其他网络；确认你已加入 `PineAP`；重试 `172.16.42.1:1471` |
-| 仪表盘没有互联网 | 未配置上行链路 | 把 USB-C 以太网接到真实网络；或配置客户端模式 Wi-Fi |
-| Recon 里缺 5 GHz 设备 | 没有接 MK7AC | 加适配器；在 Settings 里设置 *Recon Wireless Interface* |
-| 模块装不上 | 没有互联网上行 | 先修好上行；模块从市场下载 |
-| 忘记密码 | — | 用复位针孔恢复出厂设置并设置新密码 |
+Mark VII 拥有经过彻底美化与响应式设计的现代化管理界面，左侧导航栏分为：
+- **Dashboard（仪表盘）**
+- **Campaigns（作战任务）**
+- **PineAP（流氓 AP 核心）**
+- **Recon（全频段侦查）**
+- **Modules（扩展模块）**
+- **Settings（系统配置）**
 
 ---
 
-## 相关资源
+### 3.2 仪表盘监控与实时状态 (Dashboard)
 
-- [WiFi Pineapple Enterprise](/hak5/products/wifi-pineapple-enterprise/) — 机架式、5 无线电的大哥
-- [WiFi Pineapple Pager](/hak5/products/wifi-pineapple-pager/) — 三频、DuckyScript 驱动的手持设备
-- [ALFA Network](/alfa-network/) — 用于 5 GHz Pineapple 工作的 MT7612U 适配器
-- [固件与下载](/hak5/firmware-downloads/) — 升级路径和模块仓库
-- [故障排查索引](/hak5/troubleshooting-index/) — LED 与连接诊断
-- [Hak5 概览](/hak5/)
+仪表盘实时汇总当前系统资源负载、CPU 使用率、内存消耗、网络传输量、已关联客户端以及当前正在进行的作战模式。
+
+---
+
+### 3.3 Campaigns 自动化作战任务 (Campaigns)
+
+Campaigns 功能允许安全专家预先定义复合式作战场景：
+- 定时自动启动 Recon 扫描周围 5 分钟。
+- 自动将发现的所有未加密热点加入 SSID Pool。
+- 启动 PineAP 开放热点诱捕与凭据钓鱼。
+- 任务结束后全自动产出专业 PDF / HTML 审计报告。
+
+---
+
+### 3.4 PineAP 流氓 AP 攻击引擎核心 (PineAP)
+
+PineAP 是 WiFi Pineapple 系列闻名全球的核心引擎：
+- **Beacon Response**：监听客户端发送的 Probe Request 广播，并伪造为该 SSID 予以响应。
+- **SSID Pool**：维护动态热点名称数据库，支持以千计之热点轮播。
+- **Karma 攻击现代演进版**：完美适配现代智能手机之随机 MAC 与加密保护机制。
+
+---
+
+### 3.5 Recon 全频段无线频谱侦查 (Recon)
+
+利用独立的监听芯片进行全信道扫描，实时分析各 AP 的信道占用度、加密标准（WEP、WPA、WPA2、WPA3-SAE、OWE），并精确捕获每一个空中数据包的信号强度变化。
+
+---
+
+### 3.6 Handshake 握手包收集与管理 (Handshakes)
+
+支持自动监听并截获 WPA/WPA2 4-way Handshake 与 PMKID。捕获之握手包可在 Web UI 中直接一键下载为兼容 hashcat 与 John the Ripper 之标准格式。
+
+---
+
+### 3.7 Modules 扩展模块管理系统 (Modules)
+
+通过丰富的社区模块中心，可一键安装 Nmap 网络扫描、Evil Portal 自定义强制门户、DNS 劫持转向等第三方高阶攻击工具。
+
+---
+
+### 3.8 系统配置、更新与偏好设置 (Settings)
+
+管理 root 密码、修改主机名、配置时区、调整 LED 灯号颜色以及一键备份所有作战配置。
+
+---
+
+### 3.9 Hak5 Cloud C² 云端集中纳管 (Cloud C²)
+
+将 Mark VII 注册绑定至企业私有 Cloud C² 服务器，可在任何具备互联网的地方，穿越 NAT 与防火墙，实现远程云端操作与实时警报接收。
+
+---
+
+## 4. Wi-Fi 基础理论、射频技术与 802.11 帧架构
+
+### 4.1 无线网络通信原理 (Introduction to WiFi)
+
+深入解析 IEEE 802.11 射频传播特性、2.4 GHz 与 5 GHz 频段衰减差异以及半双工（Half-Duplex）CSMA/CA 冲突避免机制。
+
+---
+
+### 4.2 射频芯片与角色分工 (Radios and Chipsets)
+
+详细剖析 Mark VII 内部 3 组无线网卡的微架构分工：
+- **Radio 0 (wlan0)**：默认负责 AP 广播与客户端连接。
+- **Radio 1 (wlan1)**：默认作为客户端外网连接（Client Mode）或二次注入。
+- **Radio 2 (wlan2)**：专职被动监听与 Recon 频谱侦测。
+
+---
+
+### 4.3 Station 与 AP 运行模式剖析
+
+对比 Station（STA 终端客户端）与 Access Point（AP 基站）在空中协调机制中的角色差异。
+
+---
+
+### 4.4 发射功率与高增益天线原理 (Power & Antennas)
+
+说明 dBm 与毫瓦（mW）之转换公式，以及全向性天线（Omni-directional）在垂直与水平方向之辐射方向图特性。
+
+---
+
+### 4.5 信道划分与全球区域法规限制
+
+比较全球各国（FCC、ETSI、MKK）在 2.4 GHz 信道（1-11 vs 1-13 vs 14）与发射功率上限（EIRP）的法规差异。
+
+---
+
+### 4.6 802.11 帧结构与管理帧解析
+
+详细拆解 802.11 帧的三大分类：
+1. **管理帧（Management Frames）**：Beacon、Probe Request/Response、Authentication、Association、Deauthentication。
+2. **控制帧（Control Frames）**：RTS、CTS、ACK。
+3. **数据帧（Data Frames）**：封装上层 IP 数据包之实际载荷。
+
+---
+
+### 4.7 帧注入与客户端状态机 (Frame Injection)
+
+说明原始帧注入（Raw Frame Injection）的实现机制，以及如何通过发送伪造的 Deauth 管理帧打断连接，迫使客户端重新执行四次握手。
+
+---
+
+## 5. 开发者资源与自定义模块开发
+
+### 5.1 官方开发者资源库 (Developer Resources)
+
+Hak5 官方提供模块开发 SDK 与前端 API 规范，支持 HTML5、JavaScript 与后端 PHP / Python / Go 编写自定义扩展插件。
+
+---
+
+### 5.2 模块架构与社区软件包库贡献指南
+
+介绍模块目录结构、`module.info` 配置文件编写规范，以及如何通过 GitHub 提交 PR 将自制模块发布至全球官方软件包库。
+
+---
+
+<!-- section：maintenance -->
+## 6. 常见问答、故障排除、固件升级与硬件改动
+
+### 6.1 macOS 平台连接支持 (macOS Support)
+
+针对 macOS 系统缺少原生 RNDIS 驱动程序之情况，建议通过 Wi-Fi 连接或使用 HoRNDIS 内核扩展模块进行连接。
+
+---
+
+### 6.2 互联网共享连接建立与排查
+
+排查无法连接外网之常见原因：DNS 配置缺失、默认网关冲突或本地防火墙拦截。
+
+---
+
+### 6.3 忘记密码还原与原厂出厂重置 (Factory Reset)
+
+若忘记 root 密码：
+1. 长按机身底部针孔内之重置按钮 10 秒以上。
+2. LED 呈现快速红灯闪烁后放开。
+3. 设备将自动格式化并恢复出厂默认值。
+
+---
+
+### 6.4 固件升级与救援恢复模式 (Firmware Recovery)
+
+在 Web UI 检查更新，或在无法正常开机时，长按 Reset 键同时上电进入 Web Recovery 模式（默认 IP `192.168.1.1`）手动刷入官方救援镜像。
+
+---
+
+### 6.5 兼容 802.11 ac 5 GHz 网卡清单 (Compatible Adapters)
+
+支持通过 USB 2.0 Host 接口外接原厂 **MK7 AC** 双频无线网卡（采用 MediaTek MT7610 U 芯片），立即为 Mark VII 赋予 5 GHz 802.11 ac 频段的侦查与注入能力。
+
+---
+
+### 6.6 MK7 LED 改装与 Kismet 保护外壳安装
+
+详细图解官方 Kismet 外壳安装步骤，优化内部被动散热并支持额外外接散热风扇模块。

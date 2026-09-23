@@ -1,154 +1,195 @@
 ---
-id: hak5-product-plunder-bug-lan-tap
-title: Plunder Bug LAN Tap
-sidebar_position: 17
-description: A pocket-sized USB-C Ethernet tap for passive or active capture — sniff traffic into Wireshark on Windows, Mac, Linux or Android.
-tags: [hak5, plunder-bug, lan-tap, sniffing, wireshark, ethernet]
-keywords: [Plunder Bug, LAN tap, passive capture, active mode, Wireshark, ASIX AX88772C, USB-C Ethernet]
-authors: yupitek
-date: 2026-08-21
-last_updated: 2026-08-21
-product: plunder-bug-lan-tap
-category: product
-difficulty: beginner
-toc: true
+title: "Hak5 Plunder Bug Comprehensive Technical Manual"
+model: "Plunder Bug"
+manufacturer: "Hak5"
+category: "Passive & Active Network Tap"
+docs_url: "https://docs.hak5.org/plunder-bug/"
+version: "1.0"
+locale: "en"
 ---
 
-# Plunder Bug LAN Tap — The Complete Guide
+# Hak5 Plunder Bug Comprehensive Technical Manual
 
-> **Quick Summary**: Plunder Bug is a pocket-sized Ethernet TAP that mirrors bidirectional network traffic directly to a host computer over USB-C. Unpowered and passive, it is built for immediate field packet analysis with Wireshark and tcpdump.
-
-The Plunder Bug is the network side of Hak5's physical-access toolkit: a tiny LAN tap that sits on an Ethernet link and mirrors traffic to your analysis computer. It works in **two modes**:
-
-- **Passive mode** — silently mirror the traffic on the tapped link to your laptop.
-- **Active mode** — inject your analysis device *into* the network (it becomes a simple switch/host) for active scanning.
-
-Because it's USB-C powered with the ASIX AX88772C chipset, it works across platforms with tiny cross-platform scripts — and even with an Android root app for on-site mobile capture. It pairs perfectly with **Wireshark** for analysis.
-
-> **⚠️ Authorised testing only.** Tapping a network link you don't own is illegal. Use on your own lab network or with written permission.
+> The Plunder Bug is an essential tool in the Hak5 pentesting ecosystem, engineered for stealth, efficiency, and full operational reliability.
 
 ---
 
-## Specs at a glance
+## Table of Contents
 
-| Item | Specification |
+- [**1. Product Overview & Hardware Architecture**](#1-product-overview-hardware-architecture)
+  - [1.1 Plunder Bug by Hak5](#1-1-plunder-bug-by-hak5)
+- [**2. Hardware Setup, Connectivity & Drivers**](#2-hardware-setup-connectivity-drivers)
+  - [2.1 Tapping an Ethernet link](#2-1-tapping-an-ethernet-link)
+  - [2.2 Drivers](#2-2-drivers)
+- [**3. Active and Passive Operating Modes & Cross-Platform Switching**](#3-active-and-passive-operating-modes-cross-platform-switching)
+  - [3.1 About Mode Switching](#3-1-about-mode-switching)
+  - [3.2 Windows Mode Switching](#3-2-windows-mode-switching)
+  - [3.3 MacOS Mode Switching](#3-3-macos-mode-switching)
+  - [3.4 Linux Mode Switching](#3-4-linux-mode-switching)
+- [**4. Advanced Network Usage, Packet Capture & Maintenance**](#4-advanced-network-usage-packet-capture-maintenance)
+  - [4.1 Using as a Simple Switch](#4-1-using-as-a-simple-switch)
+
+---
+
+## 1. Product Overview & Hardware Architecture
+
+<!-- section: overview -->
+This chapter details the 1. product overview & hardware architecture specifications, procedures, and operational methodologies for the Plunder Bug.
+
+### Technical Specifications & Ground Truth Hardware Baseline
+
+| Hardware Component | Official Specification Value |
 |---|---|
-| Network interface | 2× 10/100BASE-T Fast Ethernet, auto-negotiation (up to 100 Mbps) |
-| USB interface | USB-C (tap + power, 5V, 20–300 mA draw) |
-| USB Ethernet chipset | ASIX AX88772C |
-| Modes | Passive (mirror traffic) / Active (inject into network) |
-| Analysis software | Wireshark & other open-source analyzers |
-| Mobile support | Android root app for on-site pcap capture |
-| Official docs | https://docs.hak5.org/plunder-bug |
-
-## Anatomy
-
-| Part | Purpose |
-|---|---|
-| Ethernet port A | One side of the tapped link |
-| Ethernet port B | Other side of the tapped link |
-| USB-C port | Connect to your analysis computer (power + data) |
+| **Architecture** | Pocket-Sized Passive/Active USB LAN Tap |
+| **Ethernet Interfaces** | Dual 10/100 Fast Ethernet Ports (Inline Tap RJ-45) |
+| **Tap Output Interface** | 1x USB Type-C High-Speed Port |
+| **Power Requirements** | 5V DC via USB Type-C Connection (< 250mA Draw) |
+| **Operating Modes** | Passive Tap Mode, Active Emulated NIC Mode, Simple Switch Mode |
+| **Chipset** | High-Performance Low-Power ASIX / Realtek Ethernet Controller |
+| **Cross-Platform Compatibility** | Linux (Native), macOS (Native/Driver), Windows (ASIX Driver), Android |
 
 ---
 
-## Passive vs active — the two personalities
+### 1.1 Plunder Bug by Hak5
 
-```mermaid
-%% name: hak5-product-plunder-bug-modes
-flowchart TD
-    subgraph Passive["Passive mode (mirror)"]
-        A[Device A] -->|Ethernet| T1[Plunder Bug]
-        T1 -->|Ethernet| B[Device B]
-        T1 -.->|mirrored copy| L1[Your laptop + Wireshark]
-    end
-    subgraph Active["Active mode (inject)"]
-        C[Device C] --> T2[Plunder Bug becomes a bridge/switch]
-        T2 --> D[Network]
-        T2 --> L2[Your laptop — now on the network itself]
-    end
-```
+The Plunder Bug by Hak5 is pocket-sized LAN Tap that lets you "bug" Ethernet connections with USB-C convenience.
 
-| Mode | What happens | Best for |
-|---|---|---|
-| **Passive** | Traffic A↔B mirrored to your laptop; the link keeps working | Stealthy "what's on this line?" sniffing |
-| **Active** | Your laptop joins the network through the Bug | Active scanning, ARP work, service discovery |
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2FWvyUVCheQae697W5Kn1C%2Fimage.png?alt=media&token=4a49cea2-e563-49e4-8a27-6f3c7740381b)
+
+> [!WARNING]
+> The e-book PDF generated by this document may not format correctly on all devices. For the most-to-date version, please see <https://docs.hak5.org>
 
 ---
 
-## Quickstart — sniff with Wireshark
+## 2. Hardware Setup, Connectivity & Drivers
 
-### Step 1 — Wire it up
-1. Connect one Ethernet end to a device/switch (lab network!).
-2. Connect the other Ethernet end to a second device.
-3. Plug the **USB-C** side into your laptop.
+<!-- section: configuration -->
+This chapter details the 2. hardware setup, connectivity & drivers specifications, procedures, and operational methodologies for the Plunder Bug.
 
-### Step 2 — Load the connection script
-Hak5 ships cross-platform connection scripts. On Linux:
+### 2.1 Tapping an Ethernet link
 
-```bash
-# Run Hak5's provided setup script, or configure manually:
-sudo ip link set dev usb0 up
-sudo dhclient usb0            # get an IP for active mode
-```
+Getting Started
 
-For passive capture, the interface appears automatically (e.g. `usb0` / a new Ethernet adapter on Windows or macOS).
+The Plunder Bug by Hak5 is pocket-sized LAN Tap that lets you "bug" Ethernet connections with USB-C convenience.
 
-### Step 3 — Capture in Wireshark
-Start Wireshark on the new interface and capture:
+Using a USB-C cable, connect the Plunder Bug to a computer running a network analyzer such as Wireshark. The light on the Plunder Bug will illuminate green to indicate that it is powered, and you will notice on the computer a new network interface (ASIX AX88772C USB Ethernet).
 
-```text
-$ wireshark                      # or tcpdump -i usb0 -w capture.pcap
-```
+You will most likely wish to switch the Plunder Bug into passive mode, which mutes the tap port, preventing the host computer from transmitting anything downstream on the tap port. See [instructions for your operating system here](https://docs.hak5.org/hc/en-us/sections/360003406914-Switching-between-Active-and-Passive-modes).
 
-Watch traffic on the tapped link appear live.
+Using two Ethernet cables, plug the Plunder Bug inline between any two devices, such as a PC and a LAN switch. Packets between the two ports will be mirrored on the USB-C tap port, which may be viewed using common open source packet analyzers such as [Wireshark](https://www.wireshark.org/) or [tcpdump](https://www.tcpdump.org/).
 
-### Step 4 — Switch between modes
-Toggle passive/active per the mode-switching instructions for your OS (Windows / Mac / Linux scripts included with the device).
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2FbUUa9pl2ghE8AQiidqDU%2Fimage.png?alt=media&token=a75f84d9-f683-4875-bbe9-de0e661a5d86)
 
 ---
 
-## Hands-on: see it work on your own lab
+### 2.2 Drivers
 
-To prove passive capture works, generate traffic:
+While most systems will automatically recognize and install drivers for the Plunder Bug's USB Ethernet interface (ASIX AX88772C chipset), some Windows and Mac systems may not.
 
-```bash
-# From a device on the tapped link, ping something
-ping -c 3 8.8.8.8
-```
-
-In Wireshark you should see the ICMP echo requests/replies traversing the link. That's your tap doing its job.
+To manually download and install the driver, please visit the [ASIX driver download page for the AX88772C](https://www.asix.com.tw/download.php?sub=driverdetail&PItemID=136).
 
 ---
 
-## Advanced
+## 3. Active and Passive Operating Modes & Cross-Platform Switching
 
-| Capability | How |
-|---|---|
-| Passive mirroring | No IP needed on your laptop — just sniff the mirrored frames |
-| Active injection | Bring your laptop onto the network for active recon |
-| Mobile pcap | Android root app captures `.pcap` on the go |
-| Protocol analysis | Feed captures into Wireshark / tcpdump |
-| Simple switch use | Chain it to bridge a segment without analysis |
+<!-- section: features -->
+This chapter details the 3. active and passive operating modes & cross-platform switching specifications, procedures, and operational methodologies for the Plunder Bug.
 
----
+### 3.1 About Mode Switching
 
-## Troubleshooting
+By default the Plunder Bug's USB-C tap port will act in an active, bidirectional manner. This means that in addition to receiving a mirror of the traffic flowing between the two RJ45 Ethernet ports, it will also act as an additional Ethernet port on the target LAN.&#x20;
 
-| Symptom | Cause | Fix |
-|---|---|---|
-| No traffic in Wireshark | Interface wrong / link not active | Verify the new interface name (`ip link`); ensure Ethernet links are lit |
-| Laptop gets no IP in active mode | DHCP not reaching | Set a manual IP matching the segment |
-| Windows driver missing | ASIX driver not installed | Install the ASIX AX88772C driver, or use the provided script |
-| Android not seeing it | App needs root + OTG | Use the Android root app; enable USB OTG |
-| One side no link | Cable or port fault | Swap/test both Ethernet ends independently |
+This is useful for simultaneously performing active network scans (such as with nmap) while passively sniffing packets. To switch between passive (muted) and the default active (unmuted) modes, use the Plunder Bug mute script specific to your operating system.
 
 ---
 
-## Related resources
+### 3.2 Windows Mode Switching
 
-- [Shark Jack](/hak5/products/shark-jack/) — active network recon, no tap needed
-- [Packet Squirrel Mark II](/hak5/products/packet-squirrel-mark-ii/) — inline manipulation vs passive mirroring
-- [Screen Crab](/hak5/products/screen-crab/) — flip the tap to video
-- [ALFA Network](/alfa-network/) — Wi-Fi adapters for wireless capture
-- [Troubleshooting Index](/hak5/troubleshooting-index/)
-- [Hak5 overview](/hak5/)
+##### Using plunderbug.ps1
+
+Download the plunderbug.ps1 PowerShell script for modern Windows platforms from the [Hak5 Download Center](https://downloads.hak5.org/).
+
+Open PowerShell bypassing the default execution policy so that the script may run. For example, from the Run dialog (WIN+R) enter `powershell -exec bypass`
+
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2F5EWRt8trSK1FlHvux6pX%2Fimage.png?alt=media&token=f476708b-02dc-4ad8-806b-25c432052c20)
+
+Change to the directory of the downloaded plunderbug.ps1 script and execute with the mute or unmute parameter (eg: `.\plunderbug.ps1 mute`)
+
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2Fy7ddi03Kl0UGTDAkMb95%2Fimage.png?alt=media&token=b491d00d-2475-400e-8254-40d610d07bbd)
+
+If necessary, allow User Access Control to run the script as an administrator.
+
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2Fd2k2u13QmHaeWOuMcgsk%2Fimage.png?alt=media&token=7e640109-8ab3-4814-94fd-fc6807b4e1f1)
+
+The script will execute muting or unmuting the port as directed. Press Enter to close the command prompt. The setting will stay in effect until the script is run again with the opposite directive.
+
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2FewrtQUV8tIW5lvwxtaxI%2Fimage.png?alt=media&token=b48894cd-603e-45fa-ad67-d1898bdaaa0e)
+
+##### Manually
+
+If preferred, the Plunder Bug can be muted or unmuted by opening Network Connections (Start > Run > `ncpa.cpl` > \[ENTER])
+
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2FSErYQRzrQ9DGTM7uBnCq%2Fimage.png?alt=media&token=6053d02c-ee89-44a2-bec7-ded696e47cce)
+
+Then right-click the Plunder Bug interface and select Properties
+
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2FVZfXfLFsoT0xL5B8N3LS%2Fimage.png?alt=media&token=84520a2f-226c-4035-97f4-cd76e212bdd9)
+
+Uncheck the boxes next to each of the protocols and click OK.
+
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2FClimefRu4mThjBlmSwtM%2Fimage.png?alt=media&token=54877d8f-b268-4e99-af8f-6e14c096c101)
+
+---
+
+### 3.3 MacOS Mode Switching
+
+##### USING PLUNDERBUG.SH
+
+Download the plunderbug.sh script for \*nix platforms from the [Hak5 Download Center](https://downloads.hak5.org/).
+
+Open a terminal, change to the directory of the downloaded plunderbug.sh script, make it executable (chmod +x ./plunderbug.sh) and run it as root.
+
+plunderbug.sh accepts the arguments --mute and --unmute to switch between active and passive modes
+
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2FQxyq0gKiu9aysIK0U3va%2Fimage.png?alt=media&token=8efc2096-5712-4c3a-a23c-54443306099d)
+
+##### MANUALLY
+
+If preferred, the Plunder Bug can be muted and unmuted by opening Network from System Preferences. Click Advanced, then select "Off" from the Configure IPv4 and IPv6 menus, then click OK and Apply.
+
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2FVLlsFvDzKufOUbmiOkib%2Fimage.png?alt=media&token=cc3afb1f-10d8-42e0-af49-782ea79e9723)
+
+---
+
+### 3.4 Linux Mode Switching
+
+##### USING PLUNDERBUG.SH
+
+Download the plunderbug.sh script for \*nix platforms from the [Hak5 Download Center](https://downloads.hak5.org/).
+
+Open a terminal, change to the directory of the downloaded plunderbug.sh script, make it executable (chmod +x ./plunderbug.sh) and run it as root.
+
+plunderbug.sh accepts the arguments --mute and --unmute to switch between active and passive modes
+
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2FZhHjDzBfIqbqWAeqN5uK%2Fimage.png?alt=media&token=ff5ec752-40ba-4b37-9c46-3720a9cdbff2)
+
+##### MANUALLY
+
+If preferred, the Plunder Bug can be muted and unmuted by opening Network Manager, clicking the configure gear icon next to the Plunder Bug interface, then selecting the disable option from the IPv4 and IPv6 tabs and clicking Apply.
+
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2FMDbi3GV2xePT6MnyeEH9%2Fimage.png?alt=media&token=424e7349-039a-4728-b038-2d72c19035d1)
+
+---
+
+## 4. Advanced Network Usage, Packet Capture & Maintenance
+
+<!-- section: maintenance -->
+This chapter details the 4. advanced network usage, packet capture & maintenance specifications, procedures, and operational methodologies for the Plunder Bug.
+
+### 4.1 Using as a Simple Switch
+
+In a way, the Plunder Bug can be used as a simple switch. In the following example, the Plunder Bug is used to provide the laptop (via USB-C) and the Shark Jack (or any ordinary Ethernet device) network access via the WAN/Uplink port (closest to the Plunder Bug's status LED).
+
+![](https://3565585727-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MIeeQZRUq4NRaa-LFI9%2Fuploads%2FJW6saI6tDVx0Xod5B5ly%2Fimage.png?alt=media&token=5a700841-64c3-4b1e-9614-1241249c8df0)
+
+---

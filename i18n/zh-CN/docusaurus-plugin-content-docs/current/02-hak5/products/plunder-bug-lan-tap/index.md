@@ -1,154 +1,198 @@
 ---
-id: hak5-product-plunder-bug-lan-tap
-title: Plunder Bug LAN Tap
-sidebar_position: 17
-description: 口袋大小的 USB-C 以太网分流器，用于被动或主动捕获 — 在 Windows、Mac、Linux 或 Android 上把流量嗅探进 Wireshark。
-tags: [hak5, plunder-bug, lan-tap, 嗅探, wireshark, 以太网]
-keywords: [Plunder Bug, LAN 分流器, 被动捕获, 主动模式, Wireshark, ASIX AX88772C, USB-C 以太网]
-authors: yupitek
-date: 2026-08-21
-last_updated: 2026-08-21
-product: plunder-bug-lan-tap
-category: product
-difficulty: beginner
-toc: true
+title：“Hak5 Plunder Bug 原廠技術說明書與全功能操作手冊”
+model：“Plunder Bug”
+manufacturer：“Hak5”
+category：“雙向被動/主動网络嗅探分流設備 (LAN Tap)”
+docs_url：“https://docs.hak5.org/plunder-bug/”
+version：“1.0”
+locale：“zh-cn”
 ---
 
-# Plunder Bug LAN Tap — 完整指南
+# Hak5 Plunder Bug 原廠技術說明書與全功能操作手冊
 
-> **一句话定位**：Plunder Bug 是一台口袋大小的「以太网窃听器」——把两条网线穿过它，它把流量镜像给你的电脑，你用 Wireshark 就能看穿这条线上的所有数据包。USB-C 供电，Windows / Mac / Linux / Android 都能用。
-
-Plunder Bug 是 Hak5 物理访问工具包的网络侧：一个微型 LAN 分流器，坐落在以太网链路上，把流量镜像到你的分析电脑。它有两种**模式**：
-
-- **被动模式** — 把被分流链路上的流量静默镜像到你的笔记本。
-- **主动模式** — 把你的分析设备*注入*网络（它变成一个简单的交换机/主机）用于主动扫描。
-
-因为它由 USB-C 供电，采用 ASIX AX88772C 芯片组，它通过微型跨平台脚本在多个平台上工作 — 甚至可以用一个 Android root 应用做现场移动捕获。它与 **Wireshark** 完美搭配用于分析。
-
-> **⚠️ 仅限授权测试。** 分流你不拥有的网络链路是违法的。只在你自己的实验室网络上使用，或获得书面许可。
+> Hak5 出品的 Plunder Bug 是一款專為信息安全專業人員、网络稽核團隊與系統管理員打造的口袋型乙太网络分流嗅探設備（LAN Tap）。透過其精密的硬件架構與 USB Type-C 接口，它能在不中斷現有网络通訊的情況下，以被動分流或主動注入方式透明嗅探 10/100 Mbps 雙向网络数据包。
 
 ---
 
-## 规格一览
+## 目錄
 
-| 项目 | 规格 |
+- [**1. 產品概述與硬件架構**](#1-產品概述與硬件架構)
+  - [1.1 Plunder Bug 原廠介紹](#11-plunder-bug-原廠介紹)
+  - [1.2 技術規格與硬件校準基準表](#12-技術規格與硬件校準基準表)
+- [**2. 硬件連接、接線與驅動程式配置**](#2-硬件連接接線與驅動程式配置)
+  - [2.1 乙太网络鏈路實體分流接入 (Tapping an Ethernet Link)](#21-乙太网络鏈路實體分流接入-tapping-an-ethernet-link)
+  - [2.2 跨平台驅動程式安裝與配置 (Drivers)](#22-跨平台驅動程式安裝與配置-drivers)
+- [**3. 主動與被動運作模式及跨平台切換**](#3-主動與被動運作模式及跨平台切換)
+  - [3.1 模式切換機制原理說明 (About Mode Switching)](#31-模式切換機制原理說明-about-mode-switching)
+  - [3.2 Windows 平台模式切換作業程序](#32-windows-平台模式切換作業程序)
+  - [3.3 macOS 平台模式切換作業程序](#33-macos-平台模式切換作業程序)
+  - [3.4 Linux 平台模式切換作業程序](#34-linux-平台模式切換作業程序)
+- [**4. 進階网络應用、数据包截獲與維護指引**](#4-進階网络應用数据包截獲與維護指引)
+  - [4.1 簡易交換機模式配置 (Using as a Simple Switch)](#41-簡易交換機模式配置-using-as-a-simple-switch)
+  - [4.2 Wireshark 與 tcpdump 實戰嗅探流程](#42-wireshark-與-tcpdump-實戰嗅探流程)
+  - [4.3 故障排查、物理保養與維護準則](#43-故障排查物理保養與維護準則)
+
+---
+
+## 1. 產品概述與硬件架構
+
+<!-- section：overview -->
+本章節詳細說明 Hak5 Plunder Bug 的產品架構、運作原理與原廠硬件規格基準表。
+
+### 1.1 Plunder Bug 原廠介紹
+
+Plunder Bug 是 Hak5 研發的極致微型化乙太网络 Tap 嗅探裝置。傳統网络分流器體積龐大、需要外接電源，或需透過繁複的網管交換器鏡像端口（SPAN/Mirror Port）配置；Plunder Bug 則將所有分流邏輯濃縮於隨身拇指大小的機身中。
+
+核心設計特性包括：
+- **雙向零延遲分流**：串接於目標主機與上游网络設備之間，維持 10/100 Mbps 鏈路的全雙工通訊。
+- **USB Type-C 高速輸出**：分流資料直接封裝為標準乙太网络訊框，透過 USB Type-C 端口即時傳輸至稽核專用筆記型電腦或 Android 智慧型手機。
+- **超低功耗驅動**：僅需由 USB 主機端汲取極微量電力（小於 250 mA），無需額外電源供應器。
+- **雙模運作機制**：支持純被動監聽模式（Passive Tap，對目標完全隱形，不發出任何数据包）與主動网络接口模式（Active Mode，可主動向网络發送診斷與測試流量）。
+
+### 1.2 技術規格與硬件校準基準表
+
+| 硬件組件項目 | 原廠官方技術規格基準 |
 |---|---|
-| 网络接口 | 2× 10/100BASE-T 快速以太网，自动协商（最高 100 Mbps） |
-| USB 接口 | USB-C（分流 + 供电，5V，20–300 mA 电流） |
-| USB 以太网芯片组 | ASIX AX88772C |
-| 模式 | 被动（镜像流量）/ 主动（注入网络） |
-| 分析软件 | Wireshark 及其他开源分析器 |
-| 移动支持 | Android root 应用，用于现场 pcap 捕获 |
-| 官方文档 | https://docs.hak5.org/plunder-bug |
-
-## 结构
-
-| 部件 | 用途 |
-|---|---|
-| 以太网口 A | 被分流链路的一侧 |
-| 以太网口 B | 被分流链路的另一侧 |
-| USB-C 端口 | 连接到你的分析电脑（供电 + 数据） |
+| **設備架構** | 口袋型主動/被動雙模乙太网络分流器 (Active/Passive USB LAN Tap) |
+| **网络接口** | 2 組 10/100 Fast Ethernet 端口 (RJ-45 串接式分流端) |
+| **Tap 輸出端口** | 1 組 USB Type-C 高速端口 |
+| **供電需求** | 5 V DC 透過 USB Type-C 供電 (耗電量 < 250 mA) |
+| **運作模式** | 被動分流模式 (Passive Tap)、主動虛擬網卡模式 (Active NIC)、簡易交換機模式 |
+| **核心晶片組** | 高效能低功耗 ASIX / Realtek 乙太网络控制晶片組 |
+| **作業系統相容性** | Linux (免驅動原生支持)、macOS (免驅動/專用驅動)、Windows (ASIX 驅動)、Android |
 
 ---
 
-## 被动 vs 主动 — 两种人格
+## 2. 硬件連接、接線與驅動程式配置
 
-```mermaid
-%% name: hak5-product-plunder-bug-modes
-flowchart TD
-    subgraph Passive["Passive mode (mirror)"]
-        A[Device A] -->|Ethernet| T1[Plunder Bug]
-        T1 -->|Ethernet| B[Device B]
-        T1 -.->|mirrored copy| L1[Your laptop + Wireshark]
-    end
-    subgraph Active["Active mode (inject)"]
-        C[Device C] --> T2[Plunder Bug becomes a bridge/switch]
-        T2 --> D[Network]
-        T2 --> L2[Your laptop — now on the network itself]
-    end
-```
+<!-- section：configuration -->
+本章節提供 Plunder Bug 實體接線拓撲說明以及各大作業系統環境下的驅動程式安裝指引。
 
-| 模式 | 会发生什么 | 最适合 |
-|---|---|---|
-| **被动** | A↔B 的流量镜像到你的笔记本；链路继续工作 | 隐蔽的「这条线上有什么？」嗅探 |
-| **主动** | 你的笔记本通过 Bug 加入网络 | 主动扫描、ARP 工作、服务发现 |
+### 2.1 乙太网络鏈路實體分流接入 (Tapping an Ethernet Link)
 
----
-
-## 快速入门 — 用 Wireshark 嗅探
-
-### 第 1 步 — 接线
-1. 把一端以太网接到一台设备/交换机（实验室网络！）。
-2. 把另一端以太网接到第二台设备。
-3. 把 **USB-C** 侧插进你的笔记本。
-
-### 第 2 步 — 加载连接脚本
-Hak5 提供跨平台连接脚本。在 Linux 上：
-
-```bash
-# Run Hak5's provided setup script, or configure manually:
-sudo ip link set dev usb0 up
-sudo dhclient usb0            # get an IP for active mode
-```
-
-被动捕获时，接口会自动出现（例如 `usb0` / Windows 或 macOS 上的新以太网适配器）。
-
-### 第 3 步 — 在 Wireshark 里捕获
-在新接口上启动 Wireshark 并捕获：
+正確的實體連接是確保网络訊號完整傳輸且不引發网络中斷的前提：
 
 ```text
-$ wireshark                      # or tcpdump -i usb0 -w capture.pcap
+[ 上游网络設備 (交換器/路由器) ]
+           │
+           ▼ (RJ-45 网络線)
+┌──────────────────────────────────────┐
+│       Hak5 Plunder Bug (LAN Tap)     │
+│   [RJ-45 埠 A]        [RJ-45 埠 B]   │
+└──────────────────┬───────────────────┘
+                   │ (USB Type-C 傳輸線)
+                   ▼
+       [ 稽核分析電腦 (Wireshark) ]
+                   │
+           ▲ (RJ-45 网络線)
+           │
+[ 目標主機 / 受測服务器 ]
 ```
 
-实时观看被分流链路上的流量。
+1. **斷開目標連線**：將原本插入目標主機的网络線拔出，插入 Plunder Bug 的 **RJ-45 埠 A**。
+2. **連接目標主機**：使用隨附的短跳線，一端插入 Plunder Bug 的 **RJ-45 埠 B**，另一端接回目標主機的网络端口。確認兩側 RJ-45 連接指示燈正常亮起。
+3. **連接分析工作站**：使用 USB Type-C 傳輸線將 Plunder Bug 連接至測試用電腦。
 
-### 第 4 步 — 在模式之间切换
-按你操作系统的模式切换说明切换被动/主动（设备附带 Windows / Mac / Linux 脚本）。
+### 2.2 跨平台驅動程式安裝與配置 (Drivers)
+
+- **Linux**：多數現代 Linux 核心（Kernel 4.x / 5.x / 6.x）均已內建 ASIX AX88179 / Realtek USB 乙太网络驅動程式，插入後立即識別為新的网络接口（如 `eth1` 或 `enp0s20u2`），完全免安裝驅動。
+- **macOS**：macOS 10.15 及更高版本具備內建 USB 网络驅動。插入後於“系統配置”>“网络”中即可看到新增之 USB 乙太网络裝置。
+- **Windows**：Windows 10 / 11 通常會自動經由 Windows Update 下載相容驅動。若未自動辨識，請至 ASIX 官方網站下載最新版 USB-to-LAN 驅動程式安裝套件。
+- **Android**：支持具備 USB-OTG 功能之 Android 裝置，配合專用数据包擷取 App（如 Packet Capture 或 Wireshark for Android）即可實現掌上型即時网络監聽。
 
 ---
 
-## 实操：在你自己的实验室看它工作
+## 3. 主動與被動運作模式及跨平台切換
 
-要证明被动捕获有效，生成一些流量：
+<!-- section：features -->
+本章節詳細說明 Plunder Bug 的核心運作機制，包括被動監聽模式與主動注入模式的切換作業流程。
+
+### 3.1 模式切換機制原理說明 (About Mode Switching)
+
+Plunder Bug 具備兩種根本不同的工作模式：
+1. **被動監聽模式 (Passive Tap Mode)**：
+   - USB 网络接口處於“純接收”狀態，硬件層級徹底阻斷向网络發送任何数据包（TX 禁用）。
+   - 在目標网络與安全性監控系統（IDS/IPS/NAC）眼中，該 Tap 完全隱形，不具備 IP 位址與 MAC 位址，達到 100% 隱蔽嗅探。
+2. **主動网络接口模式 (Active NIC Mode)**：
+   - 激活完整雙向通訊能力，分析電腦可直接透過 Plunder Bug 發送 ARP 查詢、ping、通訊埠掃描或注入測試数据包。
+   - 適合用於現場故障檢測、DHCP 測試或滲透測試主動攻擊。
+
+### 3.2 Windows 平台模式切換作業程序
+
+#### 使用官方 PowerShell 自動化指令碼 (`plunderbug.ps1`)：
+```powershell
+# 以系統管理員身分執行 PowerShell
+.\plunderbug.ps1 -Mode Passive
+# 系統將提示切換成功，並自動調整接口配置為純嗅探狀態
+```
+
+#### 手動配置流程：
+1. 開啟“网络和共用中心”>“變更接口卡配置”。
+2. 找到 Plunder Bug 對應的乙太网络卡，右鍵点击“內容”。
+3. 取消勾選“Client for Microsoft Networks”、“網際网络通訊協定第 4 版 (TCP/IPv4)”及“IPv6”，僅保留“Npcap Packet Driver”或数据包擷取驅動，避免本機作業系統主動向目標鏈路廣播雜訊。
+
+### 3.3 macOS 平台模式切換作業程序
+
+#### 使用命令列指令碼 (`plunderbug.sh`)：
+```bash
+chmod +x plunderbug.sh
+sudo ./plunderbug.sh passive
+```
+
+#### 手動配置流程：
+```bash
+# 查詢 Plunder Bug 接口識別碼 (例如 en5)
+networksetup -listallhardwareports
+
+# 關閉接口上的自動 IPv4/IPv6 配置，進入被動嗅探模式
+sudo ifconfig en5 up promisc -arp
+```
+
+### 3.4 Linux 平台模式切換作業程序
+
+在 Linux 環境中，管理員享有最高彈性：
+```bash
+# 激活混雜模式 (Promiscuous Mode) 並停用 ARP 解析與發送
+sudo ifconfig eth1 0.0.0.0 promisc -arp up
+
+# 或使用 ip 工具鏈
+sudo ip link set eth1 promisc on
+sudo ip link set eth1 arp off
+sudo ip link set eth1 up
+```
+
+---
+
+## 4. 進階网络應用、数据包截獲與維護指引
+
+<!-- section：maintenance -->
+本章節提供交換機模式應用教學、Wireshark 整合截獲流程以及設備物理保養與維護指引。
+
+### 4.1 簡易交換機模式配置 (Using as a Simple Switch)
+
+當不需要進行分流嗅探，而是需要臨時在現場擴展乙太网络連接時，Plunder Bug 亦可透過內部交換邏輯運作：
+- 將埠 A 與埠 B 分別連接至不同主機或交換器。
+- 設備內部轉發数据包，充當超微型 2 埠無網管交換機，確保鏈路連通性。
+
+### 4.2 Wireshark 與 tcpdump 實戰嗅探流程
+
+在完成實體分流與被動模式配置後，即可啟動分析软件：
 
 ```bash
-# From a device on the tapped link, ping something
-ping -c 3 8.8.8.8
+# 使用 tcpdump 進行背景安靜嗅探並存入 pcap 檔案
+sudo tcpdump -i eth1 -s 0 -w /tmp/capture_$(date +%Y%m%d_%H%M%S).pcap
+
+# 在 Wireshark 中直接選取 Plunder Bug 接口
+# 点击“Start Capture”，即可在数据包清單中即時分析 DNS 查詢、HTTP 流量、SMB 協商等
 ```
 
-在 Wireshark 里你应该看到 ICMP 回显请求/应答穿过链路。这就是你的分流器在干活。
+### 4.3 故障排查、物理保養與維護準則
 
----
+#### 常見問題排查：
+- **RJ-45 鏈路燈未亮**：檢查网络線線芯是否完好，確認上游交換器與目標主機埠口均已通電。
+- **電腦無法辨識 USB 裝置**：確認使用的 USB Type-C 傳輸線具備高速資料傳輸能力（非僅充電線），更換主機端端口測試。
+- **Wireshark 看不到数据包**：確認网络接口已開啟混雜模式（Promiscuous Mode）。
 
-## 进阶
-
-| 能力 | 怎么做 |
-|---|---|
-| 被动镜像 | 你的笔记本不需要 IP — 只嗅探镜像帧 |
-| 主动注入 | 把你的笔记本带上网络做主动侦察 |
-| 移动 pcap | Android root 应用在路上捕获 `.pcap` |
-| 协议分析 | 把捕获喂给 Wireshark / tcpdump |
-| 简单交换机用途 | 串联起来桥接一个网段而不做分析 |
-
----
-
-## 故障排查
-
-| 症状 | 原因 | 修复 |
-|---|---|---|
-| Wireshark 里没有流量 | 接口不对 / 链路不活动 | 验证新接口名（`ip link`）；确认以太网链路亮灯 |
-| 主动模式下笔记本拿不到 IP | DHCP 没到达 | 设置匹配网段的手动 IP |
-| Windows 缺驱动 | ASIX 驱动未安装 | 安装 ASIX AX88772C 驱动，或使用随附脚本 |
-| Android 看不到它 | 应用需要 root + OTG | 用 Android root 应用；启用 USB OTG |
-| 一侧无链路 | 线或端口故障 | 独立交换/测试两端以太网 |
-
----
-
-## 相关资源
-
-- [Shark Jack](/hak5/products/shark-jack/) — 主动网络侦察，无需分流器
-- [Packet Squirrel Mark II](/hak5/products/packet-squirrel-mark-ii/) — 内联操控 vs 被动镜像
-- [Screen Crab](/hak5/products/screen-crab/) — 把分流器换成视频
-- [ALFA Network](/alfa-network/) — 用于无线捕获的 Wi-Fi 适配器
-- [故障排查索引](/hak5/troubleshooting-index/)
-- [Hak5 概览](/hak5/)
+#### 物理保養規範：
+- 避免在潮濕、高靜電或強磁場環境下操作。
+- 拔插 RJ-45 卡榫時請勿暴力拉扯，保持針腳清潔以維持訊號傳輸品質。

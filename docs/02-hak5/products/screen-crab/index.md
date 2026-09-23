@@ -1,164 +1,333 @@
 ---
-id: hak5-product-screen-crab
-title: Screen Crab
-sidebar_position: 16
-description: A covert HDMI man-in-the-middle implant that silently captures screenshots or video — lag-free, MicroSD storage, WiFi + Cloud C² streaming.
-tags: [hak5, screen-crab, hdmi, video-capture, cloud-c2, mitm]
-keywords: [Screen Crab, HDMI man-in-the-middle, screen capture, video capture, HDMI implant, Cloud C², 1080p]
-authors: yupitek
-date: 2026-08-21
-last_updated: 2026-08-21
-product: screen-crab
-category: product
-difficulty: intermediate
-toc: true
+title: "Hak5 Screen Crab Comprehensive Technical Manual"
+model: "Screen Crab"
+manufacturer: "Hak5"
+category: "Inline Video Man-in-the-Middle Implant"
+docs_url: "https://docs.hak5.org/screen-crab/"
+version: "2.0"
+locale: "en"
 ---
 
-# Screen Crab — The Complete Guide
+# Hak5 Screen Crab Comprehensive Technical Manual
 
-> **Quick Summary**: Screen Crab is an inline HDMI video grabber positioned between a computer and display. It silently captures full-resolution screenshots or video to MicroSD with zero display latency, streaming captures over Wi-Fi to Cloud C².
-
-The Screen Crab is the first HDMI **man-in-the-middle** device made for pentesters. It doesn't intercept network traffic — it intercepts the *video signal itself*. Because it splits the HDMI signal passively (no re-encoding in the data path), the output display sees **zero lag and zero interruption** while the Crab quietly captures a second copy.
-
-It's disarmingly simple: plug it inline, power it over USB, and it starts saving screenshots to the MicroSD card out of the box. Edit a `config.txt` file to change intervals, enable video, or connect it to Wi-Fi + [Cloud C²](/hak5/firmware-downloads/) to watch screens live from a browser.
-
-> **⚠️ Authorised testing only.** Capturing someone's screen without consent is illegal (applicable surveillance and privacy laws). Use on your own machines/displays or with explicit authorization.
+> The Screen Crab is an essential tool in the Hak5 pentesting ecosystem, engineered for stealth, efficiency, and full operational reliability.
 
 ---
 
-## Specs at a glance
+## Table of Contents
 
-| Item | Specification |
+- [**1. Product Overview & Hardware Architecture**](#1-product-overview-hardware-architecture)
+  - [1.1 The Screen Crab by Hak5](#1-1-the-screen-crab-by-hak5)
+  - [1.2 Screen Crab Basics](#1-2-screen-crab-basics)
+- [**2. Configuration, Cloud C² & Operational Modes**](#2-configuration-cloud-c-operational-modes)
+  - [2.1 Configuring the Screen Crab](#2-1-configuring-the-screen-crab)
+  - [2.2 LED Status Indications](#2-2-led-status-indications)
+  - [2.3 Configuring Cloud C²](#2-3-configuring-cloud-c)
+  - [2.4 2024 SSL Update](#2-4-2024-ssl-update)
+- [**3. Hardware Specifications, Safety & Troubleshooting**](#3-hardware-specifications-safety-troubleshooting)
+  - [3.1 Important Safety Information and Warnings](#3-1-important-safety-information-and-warnings)
+  - [3.2 Hardware Specifications](#3-2-hardware-specifications)
+  - [3.3 Troubleshooting Guide](#3-3-troubleshooting-guide)
+
+---
+
+## 1. Product Overview & Hardware Architecture
+
+<!-- section: overview -->
+### Technical Specifications & Ground Truth Hardware Baseline
+
+| Hardware Component | Official Specification Value |
 |---|---|
-| Interface | 2× full-size HDMI (IN / OUT) + USB-C (power) + MicroSD |
-| Standards | HDMI 1.4 / DVI 1.0; 802.11 b/g/n (WiFi, 2.4 GHz) |
-| Resolution | Most 16:9 formats up to 1920×1080 (Full HD 1080p), auto up/downscale |
-| Capture modes | Interval screenshots, or full-motion video (MPEG-4 at 2 / 4 / 16 Mbps) |
-| Storage | MicroSD (SDXC support); loop recording overwrites oldest files |
-| Latency | Zero — passive signal splitter, no lag on output |
-| WiFi | RP-SMA dipole antenna for Cloud C² streaming |
-| Power | USB 5V 1A (5 W) |
-| Dimensions | 105 × 51 × 21 mm |
-| Official docs | https://docs.hak5.org/screen-crab |
-
-## Anatomy
-
-| Part | Purpose |
-|---|---|
-| HDMI **IN** | From the source (computer / console) |
-| HDMI **OUT** | To the monitor / TV (pass-through, zero-lag) |
-| USB-C | Power |
-| MicroSD slot | Screenshots / video storage |
-| WiFi antenna (RP-SMA) | Cloud C² streaming |
-| RGB LED + button | Status (disable LED for stealth) |
+| **Video Interface** | HDMI Passthrough (Input / Output up to 1080p @ 60 fps) |
+| **Wireless** | 2.4 GHz 802.11 b/g/n for Out-of-Band Exfiltration |
+| **Storage** | MicroSD Card Slot (FAT32 / exFAT up to 128 GB) |
+| **Power Interface** | USB-C 5V DC Powered |
+| **Audio Capture** | Inline HDMI PCM Audio Sniffing |
+| **Status Indicator** | Multi-Color RGB Diagnostic LED |
 
 ---
 
-## Installation & data flow
+<!-- section: overview -->
+### 1.1 The Screen Crab by Hak5
 
-```mermaid
-%% name: hak5-product-screen-crab-inline
-flowchart LR
-    S[HDMI source] -->|"HDMI IN"| C[Screen Crab]
-    C -->|"HDMI OUT (zero-lag passthrough)"| M[Monitor]
-    C -->|"passive split → capture"| D[(MicroSD)]
-    C -->|"WiFi"| C2[Cloud C² / browser]
-    D -->|"edit config.txt"| C
+The [Screen Crab](https://hak5.org/products/screen-crab) by Hak5 is a stealthy video man-in-the-middle implant.
+
+This covert inline screen grabber sits between HDMI devices - like a computer and monitor, or console and television - to quietly capture screenshots. Perfect for sysadmins, pentesters and anyone wanting to record what's on a screen.
+
+WiFi enabled to stream screenshots via [Hak5 Cloud C2](https://hak5.org/products/c2).
+
+![](https://80207621-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MiWySN4BHDJlUatEfm3%2F-MiWyYV6D8SApyKgf6pq%2F-MiWymY5QZ16W2jqu9x5%2Fimage.png?alt=media&token=73d1c2a4-bfbc-4d9f-8eb8-8809cbd3dcc0)
+
+> [!WARNING]
+> The e-book PDF generated by this document may not format correctly on all devices. For the most-to-date version, please see <https://docs.hak5.org>
+
+---
+
+<!-- section: features -->
+### 1.2 Screen Crab Basics
+
+Out of the box the Screen Crab will save screenshots at regular intervals to an inserted MicroSD card. Follow these steps for the most basic deployment to get started.
+
+1. Using two HDMI cables (not included) plug the Screen Crab inline between an input (e.g. a computer, chromecast, console, etc) and an output (e.g. monitor, television, projector).
+2. Insert a MicroSD card formatted in either FAT32 or ExFAT.
+3. Power the Screen Crab using a USB-C cable (not included) with a power adapter capable of providing 5 watts (5 Volts, 1 Amp).
+
+After a brief 30-second boot time, the Screen Crab LED will light blue to indicate that the MicroSD card is being written to with screenshots. To stop recording and eject the MicroSD card - press the button, wait for the LED to light solid Green, then eject the card.
+
+![](https://80207621-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiWySN4BHDJlUatEfm3%2Fuploads%2FYS99hXXukAmb1WyUuFfK%2Fimage.png?alt=media&token=dd1de604-3bb2-4a05-bab1-44bd492e613b)
+
+---
+
+## 2. Configuration, Cloud C² & Operational Modes
+
+<!-- section: configuration -->
+### 2.1 Configuring the Screen Crab
+
+By default the Screen Crab will save screenshots to a MicroSD card at regular intervals. With a blank MicroSD inserted, the Screen Crab will write a `config.txt` file to the root card.
+
+##### DEFAULT CONFIGURATION:
+
+```
+LED ON
+CAPTURE_MODE IMAGE
+CAPTURE_INTERVAL 5
+STORAGE FILL
+BUTTON EJECT
 ```
 
-1. Connect the source to the Crab's **HDMI IN**.
-2. Connect your monitor to the Crab's **HDMI OUT** (normal operation, no lag).
-3. Power over USB-C. Screenshots begin saving to the MicroSD at default intervals.
+##### &#x20;CAPTURE CONFIGURATION:
 
----
+```
+ LED [ON, OFF]
 
-## Quickstart — first capture in 2 minutes
+ CAPTURE_MODE [IMAGE, VIDEO, OFF]         (LED indication: Image=Blue, Video=Yellow, Off=Off)
 
-### Step 1 — Insert a MicroSD card
-Any MicroSD works; SDXC gives months of storage. The Crab auto-generates a `config.txt` on first boot.
+ DEDUPLICATE [ON, OFF]  (Only for IMAGE CAPTURE_MODE)
 
-### Step 2 — Wire it inline
-- **HDMI IN** ← your computer.
-- **HDMI OUT** → your monitor.
-- **USB-C** → power.
+ CAPTURE_INTERVAL [N] (in N seconds)
 
-Expected result: the monitor works exactly as before (no delay), and the MicroSD starts collecting screenshots.
+ STORAGE [ROTATE or FILL]
 
-### Step 3 — Read the captures
-Eject the MicroSD and browse:
+ BUTTON [EJECT, OFF]
 
-```text
-/root/
-  loot/
-    2026-08-21-1430/screenshot_001.jpg
-    2026-08-21-1430/screenshot_002.jpg
-    ...
-  config.txt
+ VIDEO_BITRATE [LOW, MEDIUM, HIGH]
+ (low 2Mbps, medium 4Mbps, high 16Mbps)
 ```
 
-### Step 4 — Enable video
-Edit `config.txt` on the MicroSD root:
+---
 
-```text
-# Capture mode: image or video
-capture_mode = video
-# MPEG4 quality: 2, 4, or 16 Mbps
-bitrate = 4
-# Seconds between captures
-interval = 30
+### 2.2 LED Status Indications
+
+![](https://80207621-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiWySN4BHDJlUatEfm3%2Fuploads%2FETbDpgRcXUoiOgTx6Hyj%2Fimage.png?alt=media&token=d784d318-3491-4463-95c2-0e28a657bc38)
+
+#### STARTUP STATUS
+
+* LIGHT CYAN (SHORT)&#x20;
+  * Device received power, starting boot
+* BLINKING GREEN
+  * Waiting for capture to complete, ejecting SD card&#x20;
+
+> [!CAUTION]
+> Removing the MicroSD card before the LED lights solid green may damage the card's format.
+
+* SOLID GREEN
+  * (After light cyan) Booting&#x20;
+  * (After button push) SD is safe to eject
+* SOLID RED
+  * SD card full or not detected
+
+#### CONFIGURATION STATUS
+
+* SOLID CYAN
+  * Wireless config unchanged on device/MicroSD
+* BLINKING CYAN&#x20;
+  * Updating device wireless to match MicroSD `config.txt`
+  * Updating device wireless state to match MicroSD config.txt
+    * Changing from wireless disabled -> wireless enabled
+    * Changing from wireless enabled -> wireless disabled
+* SOLID MAGENTA
+  * Device button listening for capture override
+* INVERSE BLINK MAGENTA
+  * Button pushed once during capture override mode at startup - config set to default image capture
+  * Button pushed twice during capture override mode at startup - config set to default video capture
+
+##### CAPTURE STATUS:
+
+* SOLID BLUE&#x20;
+  * Has video signal and capturing images to SD card
+* SOLID YELLOW
+  * Has video signal and capturing video to SD card
+* SOLID WHITE
+
+  * Has no video signal
+
+##### UPGRADE STATUS:
+
+* BLUE/RED POLICE PATTERN
+  * Screen Crab  detected *`upgrade.bin`* on MicroSD card at boot - starting device upgrade
+* BLUE/MAGENTA POLICE PATTERN
+  * Screen Crab starting framework upgrade&#x20;
+* FOREVER BLINKING RED - only during device upgrade (following police pattern)
+  * Software Upgrade Failed
+
+> [!CAUTION]
+> Do not unplug power from the device or remove the MicroSD card during the upgrade process as doing so may render the device inoperable.
+
+---
+
+### 2.3 Configuring Cloud C²
+
+> [!CAUTION]
+> April 2024: If your C2 server is configured with HTTPS, you will **need to apply the** [**SSL Update**](/screen-crab/getting-started/2024-ssl-update.md)
+
+#### Cloud C² Configuration
+
+To get the most out of your Screen Crab, configure your device to connect to your Cloud C2 instance; This way you'll be able to  to remotely view configure and manage the device - all through the web.
+
+To configure your Screen Crab to connect to your Cloud C2 instance follow these simple steps:
+
+1. Download the `device.config` from Cloud C2&#x20;
+2. Copy the `device.config` to the root of the MicroSD card
+3. Configure `config.txt` on the MicroSD card for wireless
+
+For the best performance using your Screen Crab connected to Cloud C2, use a `config.txt` that **only** contains the wireless options below&#x20;
+
+#### WiFi Configuration
+
+The two WiFi parameters are:
+
+* `WIFI_SSID` – the network name<br>
+* `WIFI_PASS` – the WPA-PSK password
+
+Any characters after these variables will be used as the values. Special considerations must be made for WiFi network names and passwords containing special characters.
+
+For example:
+
+```
+WIFI_SSID This is my network
+WIFI_PASS The P@$$word is 1337!!
 ```
 
-Safely remove the MicroSD, reinsert, power-cycle. The Crab now records MPEG-4 video.
+Should be escaped:
 
----
-
-## Cloud C² — watch from anywhere
-
-To stream screens/video remotely:
-
-1. Edit `config.txt` and add your Wi-Fi network:
-
-```text
-wifi_ssid = OfficeWiFi
-wifi_pass = hunter2example
+```
+WIFI_SSID This is my network
+WIFI_PASS The P\@\$\$word is 1337\!\!
 ```
 
-2. Add your [Cloud C²](/hak5/firmware-downloads/) device file to the MicroSD.
-3. Boot. The Crab connects to Wi-Fi and registers with C² — you can now stream screenshots and download captures from the browser.
-
-> **You might be asking:** *"Zero lag — how?"* The Crab uses a **passive video signal splitter** on the HDMI path. The source's signal is mirrored to the monitor untouched; a duplicate is fed to the capture hardware. Nothing in the original path is re-encoded, so there's no added latency. That's also what makes it so invisible.
+> [!CAUTION]
+> **To fully reset your Screen Crab's wireless configuration:** remove the `WIFI_SSID` and `WIFI_PASS` parameters from your`config.txt`and fully reboot your device before attempting to reconfigure.
 
 ---
 
-## Advanced
+<!-- section: maintenance -->
+### 2.4 2024 SSL Update
 
-| Capability | How |
-|---|---|
-| Loop recording | Continuous capture deletes oldest files to make room (never fills up) |
-| Interval screenshots | Configurable `interval` in seconds |
-| Multiple bitrates | 2 / 4 / 16 Mbps MPEG-4 quality tiers |
-| Stealth LED | Disable the RGB LED for covert operation |
-| Resolution handling | Auto up/downscale to 1080p from most sources |
-| Remote management | Cloud C²: change settings, download captures, live view |
+Let's Encrypt has been phasing out the X3 certificate chain. This change requires applying a one time update to your Screen Crab if you plan to use Cloud C2 with HTTPS.\
+\
+This process from start to finish should only take a few minutes.&#x20;
+
+#### Download the update
+
+The fix is a simple script available for download here: <https://downloads.hak5.org/crab>
+
+> [!CAUTION]
+> This `autoexec.txt` is meant only to be executed on your Screen Crab
+
+#### Applying the update
+
+1. **Power off** the Screen Crab
+2. **Eject the microSD** card and attach to your host machine via card reader
+3. **Copy** the `autoexec.txt` downloaded from downloads.hak5.org to the **root of the MicroSD card**
+4. **Safely eject** the MicroSD card from your host machine
+5. **Insert the MicroSD** card back into your Screen Crab
+6. **Power the device on**
+7. **Done!** \
+   \
+   The script will automatically remove itself upon completion. If your Screen Crab is already registered to your Cloud C2 server, the device should now be online. Additionally an `upgrade.log` will be created on the root of the MicroSD card to add an additional indication of success.&#x20;
 
 ---
 
-## Troubleshooting
+## 3. Hardware Specifications, Safety & Troubleshooting
 
-| Symptom | Cause | Fix |
-|---|---|---|
-| No screenshots saved | MicroSD not seated / write-protected | Re-seat; check lock switch; test with a known-good card |
-| Monitor blinks when Crab inserted | Power / HDMI negotiation | Verify 5V/1A USB power; reseat HDMI connections |
-| Video choppy | Bitrate too low for the scene | Raise to 16 Mbps |
-| Cloud C² never connects | Wi-Fi creds wrong / no device file | Recheck `config.txt`; copy the C² device file to the card |
-| Can't find config.txt | Card not booted once | Insert card, boot once, it auto-generates the config |
+### 3.1 Important Safety Information and Warnings
+
+Your device may get hot to the touch; this is normal. Unplug the device and let it cool before removing it. This device complies with applicable surface temperature standards and limits defined by the International Standard for Safety (IEC 60950-1). Still, sustained contact with warm surfaces for long periods of time may cause discomfort or injury. Keep the device in a well-ventilated area when in use. Allow for adequate air circulation under and around the device. Do not expose the device to water or extreme conditions (moisture, heat, cold, dust), as the device may malfunction or cease to work when exposed to such elements. Do not attempt to disassemble or repair the device yourself. Doing so voids the limited warranty and could harm you or the device. This device is not designed, manufactured or intended for use in hazardous environments requiring fail-safe performance in which the failure of the device could lead directly to death, personal injury, or severe physical or environmental damage.
+
+The Screen Crab is a network administration and pentesting tool for authorized auditing and security analysis purposes only where permitted subject local and international laws where applicable. Users are solely responsible for compliance with all laws of their locality. Hak5 LLC and affiliates claim no responsibility for unauthorized or unlawful use. © Hak5 LLC.
+
+This device complies with Part 15 of the FCC Rules. Operation is subject to the following two conditions: (1) this device may not cause harmful interference, and (2) this device must accept any interference received, including interference that may cause undesired operation. Warning (Part 15.21) Changes or modifications not expressly approved by the party responsible for compliance could void the user’s authority to operate the equipment. RF Exposure (OET Bulletin 65) To comply with FCC RF exposure requirements for mobile transmitting devices, this transmitter should only be used or installed at locations where there is at least 20cm separation distance between the antenna and all persons. Information to the User - Part 15.105 (b) Note: This equipment has been tested and found to comply with the limits for a Class B digital device, pursuant to part 15 of the FCC Rules. These limits are designed to provide reasonable protection against harmful interference in a residential installation. This equipment generates, uses and can radiate radio frequency energy and, if not installed and used in accordance with the instructions, may cause harmful interference to radio communications. However, there is no guarantee that interference will not occur in a particular installation. If this equipment does cause harmful interference to radio or television reception, which can be determined by turning the equipment off and on, the user is encouraged to try to correct the interference by one or more of the following measures: \* Reorient or relocate the receiving antenna. \* Increase the separation between the equipment and receiver. \* Connect the equipment into an outlet on a circuit different from that to which the receiver is connected. \* Consult the dealer or an experienced radio/TV technician for help.
+
+Screen Crab is a trademark of Hak5 LLC. This product is packaged with a limited warranty, the acceptance of which is a condition of sale. See Hak5.org for additional warranty details and limitations. Availability and performance of certain features, services and applications are device and network dependent and may not be available in all areas; additional terms, conditions and/or charges may apply. All features, functionality and other product specifications are subject to change without notice or obligation. Hak5 LLC reserves the right to make changes to the products description in this document without notice. Hak5 LLC does not assume any liability that may occur due to the use or application of the product(s) described herein. Made in China. Designed in San Francisco by Hak5 LLC, 548 Market Street, #39371, San Francisco, CA, 94104.
 
 ---
 
-## Related resources
+### 3.2 Hardware Specifications
 
-- [Firmware & Downloads](/hak5/firmware-downloads/) — Cloud C² server setup
-- [Key Croc](/hak5/products/key-croc/) — keystroke-level interception (complementary: keys *and* screens)
-- [Packet Squirrel Mark II](/hak5/products/packet-squirrel-mark-ii/) — network-side interception
-- [Troubleshooting Index](/hak5/troubleshooting-index/)
-- [Hak5 overview](/hak5/)
+INTERFACE: HDMI, USB, MICROSD\
+STANDARDS: HDMI 1.4/DVI 1.0, 802.11b/g/n\
+FREQUENCY RANGE: 2.412 \~ 2.4835 GHz\
+SIZE: 105 x 51 x 21 mm\
+POWER: 5W (USB 5V 1A)\
+OPERATING TEMPERATURE: 35ºC \~ 45ºC\
+STORAGE TEMPERATURE: -20ºC \~ 50ºC\
+RELATIVE HUMIDITY: 0% to 90% (noncondensing)
+
+Supported WiFi: 2.4Ghz \
+Supported Resolutions: Most resolutions below 1920x1080 in 16:9 format;
+
+---
+
+### 3.3 Troubleshooting Guide
+
+#### WiFi
+
+> [!CAUTION]
+> Be sure to carefully read [WiFi Configuration ](/screen-crab/getting-started/configuring-cloud-c.md#wifi-configuration)before continuing.
+
+> [!WARNING]
+> The Screen Crab **only supports dedicated 2.4Ghz APs.**  Access points with band steering enabled will not work.
+
+##### Advanced WiFi Diagnostics
+
+**Please follow the below guide to generate a WiFi diagnostics file.**
+
+1. Create a file named `autoexec.txt` on the root of the SD card containing:
+
+```
+source /system/bin/crab && do_gpio_setup && locate_sd && wifi_config > $SD_LOCATION/wifiinfo.txt && ping -c 5 8.8.8.8 >> $SD_LOCATION/wifiinfo.txt; ping -c 5 google.com >> $SD_LOCATION/wifiinfo.txt; disable_wifi && sleep 5 && enable_wifi; ping -c 5 8.8.8.8 >> $SD_LOCATION/wifiinfo.txt; ping -c 5 google.com >> $SD_LOCATION/wifiinfo.txt && cycle_colors
+```
+
+2\. Insert the MircoSD card into the Screen Crab and apply power.
+
+3\. After boot and diagnostics, the LED colors will change rapidly.
+
+4\. Check if the device has connected to the WiFi network.
+
+5\. Press the button and safely eject the MicroSD card.
+
+6\. Check the MicroSD card for troubleshooting assistance in the newly created `wifiinfo.txt` file.
+
+***
+
+#### Wont Connect to Cloud C2
+
+> [!NOTE]
+> If your Cloud C2 instance uses HTTPS, you will need to apply the [SSL Update](/screen-crab/getting-started/2024-ssl-update.md)
+
+If you have already confirmed your Screen Crab has a successful connection to the access point configured using the `config.txt`, be sure to confirm your Cloud C2 server configuration is valid and functional; See [Cloud C2 setup ](broken://spaces/-MhzWyFhpTDfjfUXIt5K/pages/-MhzYcHEfBh-4NYJ-Ou-)for more information
+
+&#x20;\
+Additionally confirm that the device.config used to register the Screen Crab is correct.<br>
+
+***
+
+#### No Video Signal
+
+Be sure to confirm the following:
+
+* functional HDMI cables are fully seated in all ports
+* fully functional USB-C cable, with appropriate power delivery
+* target device uses a supported or down-scalable resolution. non-16:9 aspect ratios may not work. Non standard codecs may not work.
+
+---

@@ -1,183 +1,923 @@
 ---
-id: hak5-product-shark-jack
-title: Shark Jack
-sidebar_position: 6
-description: Pocket-sized network recon box — plug into any Ethernet jack, run nmap scans in seconds, exfiltrate loot over SSH.
-tags: [hak5, shark-jack, network-recon, nmap, ethernet, payloads]
-keywords: [Shark Jack, network recon, nmap, arming mode, attack mode, 172.16.24.1, Ethernet pentest]
-authors: yupitek
-date: 2026-08-21
-last_updated: 2026-08-21
-product: shark-jack
-category: product
-difficulty: beginner
-toc: true
+title: "Hak5 Shark Jack Comprehensive Technical Manual"
+model: "Shark Jack"
+manufacturer: "Hak5"
+category: "Portable Network Pentest Implant"
+docs_url: "https://docs.hak5.org/shark-jack/"
+version: "2.0"
+locale: "en"
 ---
 
-# Shark Jack — The Complete Guide
+# Hak5 Shark Jack Comprehensive Technical Manual
 
-> **Quick Summary**: Shark Jack is a pocket-sized, battery-powered Ethernet reconnaissance device. Plugged into an active network jack, it automatically discovers hosts, scans open services, and saves results in 60 seconds.
-
-The Shark Jack packs a full Linux computer and an nmap scanner into something that hangs off a keychain. It espouses Hak5's "hotplug attack, meet LAN" philosophy: physical access to a live Ethernet port is all it takes to gain a foothold of intelligence.
-
-Out of the box it's already dangerous — flip the switch to **attack mode** and it runs a pre-installed nmap scan, saving the results to loot. Flip back to **arming mode** and you SSH in to grab the findings or load custom payloads.
-
-> **⚠️ Authorised testing only.** Jacking into a network you don't own is illegal. Practice on your own switch/lab network.
+> The Shark Jack is an essential tool in the Hak5 pentesting ecosystem, engineered for stealth, efficiency, and full operational reliability.
 
 ---
 
-## Specs at a glance
+## Table of Contents
 
-| Item | Specification |
+- [**1. Product Overview & Hardware Architecture**](#1-product-overview-hardware-architecture)
+  - [1.1 The Shark Jack by Hak5](#1-1-the-shark-jack-by-hak5)
+  - [1.2 Shark Jack Basics](#1-2-shark-jack-basics)
+  - [1.3 Default Settings](#1-3-default-settings)
+- [**2. Unboxing, Quick Start & sharkjack.sh Utility**](#2-unboxing-quick-start-sharkjack-sh-utility)
+  - [2.1 Unboxing and Setup](#2-1-unboxing-and-setup)
+  - [2.2 Using sharkjack.sh](#2-2-using-sharkjack-sh)
+  - [2.3 Two Key Commands](#2-3-two-key-commands)
+  - [2.4 Writing a Simple Payload](#2-4-writing-a-simple-payload)
+- [**3. Firmware Updates & Maintenance Procedures**](#3-firmware-updates-maintenance-procedures)
+  - [3.1 Manual Upgrade](#3-1-manual-upgrade)
+  - [3.2 Over-the-Air Upgrade](#3-2-over-the-air-upgrade)
+- [**4. Payload Development & DuckyScript Command Reference**](#4-payload-development-duckyscript-command-reference)
+  - [4.1 Payload Development Basics](#4-1-payload-development-basics)
+  - [4.2 The NETMODE Command](#4-2-the-netmode-command)
+  - [4.3 The LED Command](#4-3-the-led-command)
+  - [4.4 The SWITCH Command](#4-4-the-switch-command)
+  - [4.5 The BATTERY Command](#4-5-the-battery-command)
+  - [4.6 The SERIAL_WRITE Command](#4-6-the-serial_write-command)
+  - [4.7 The Cloud C2 commands](#4-7-the-cloud-c2-commands)
+  - [4.8 Included Tools](#4-8-included-tools)
+- [**5. Payload Management & Cloud C² Commands**](#5-payload-management-cloud-c-commands)
+  - [5.1 Payload Management](#5-1-payload-management)
+  - [5.2 The LIST Command](#5-2-the-list-command)
+  - [5.3 The ACTIVATE Command](#5-3-the-activate-command)
+- [**6. Troubleshooting, Hardware Hacks & Specifications**](#6-troubleshooting-hardware-hacks-specifications)
+  - [6.1 Firmware Recovery](#6-1-firmware-recovery)
+  - [6.2 Charge the Shark Jack from your Phone](#6-2-charge-the-shark-jack-from-your-phone)
+  - [6.3 Using the Shark Jack with the Plunder Bug](#6-3-using-the-shark-jack-with-the-plunder-bug)
+  - [6.4 Android Serial Setup for Shark Jack Cable](#6-4-android-serial-setup-for-shark-jack-cable)
+  - [6.5 Hardware Specifications](#6-5-hardware-specifications)
+  - [6.6 Safety and Warnings](#6-6-safety-and-warnings)
+
+---
+
+## 1. Product Overview & Hardware Architecture
+
+<!-- section: overview -->
+### Technical Specifications & Ground Truth Hardware Baseline
+
+| Hardware Component | Official Specification Value |
 |---|---|
-| Attack interface | Fast Ethernet (RJ45) — plugs directly into a network |
-| Power | Built-in battery (10–15 min runtime per charge) via USB |
-| OS | Linux with root shell; runs DuckyScript payloads powered by Bash |
-| Payload default | nmap scan → saves results to `/root/loot/` |
-| Arming access | SSH at `172.16.24.1` (static IP in arming mode) |
-| Default credentials | `root` / `hak5shark` |
-| Feedback | Multi-color RGB LED |
-| Switches | Flip switch: attack mode vs arming mode |
-| Official docs | https://docs.hak5.org/shark-jack |
-
-## Anatomy
-
-| Part | Purpose |
-|---|---|
-| RJ45 Ethernet jack | The attack interface — into the target network |
-| USB port | Power/charging + connectivity |
-| Flip switch | Attack mode (run payload) ↔ Arming mode (SSH/config) |
-| RGB LED | Boot / charge / mode / error status |
-| Keychain loop | Carry it everywhere |
+| **SoC / CPU** | Single Core MIPS @ 580 MHz |
+| **System Memory (RAM)** | 64 MB DDR2 |
+| **Internal Storage** | 128 MB High-Speed Flash |
+| **Network Interface** | 10/100 Fast Ethernet RJ-45 Port |
+| **Internal Battery** | Internal Li-ion Battery for Standalone Operation |
+| **Hardware Switch** | 3-Position Mode Switch (Arming, Off/Charging, Attack) |
+| **Status Indicator** | Multi-color Programmable RGB LED |
+| **Default IP / Subnet** | 172.16.24.1 / 255.255.255.0 |
 
 ---
 
-## Modes of operation
+<!-- section: overview -->
+### 1.1 The Shark Jack by Hak5
 
-| Mode | What happens | How to reach |
-|---|---|---|
-| **Attack mode** | Runs the selected payload (default: nmap scan) | Flip switch, plug into Ethernet |
-| **Arming mode** | SSH server at `172.16.24.1`; load payloads, read loot | Flip switch, connect over USB |
+A portable network attack and automation tool for pentesters and systems administrators designed to enable social engineering engagements and opportunistic wired network auditing.&#x20;
 
-```mermaid
-%% name: hak5-product-shark-jack-flows
-flowchart TD
-    A[Powered Shark Jack] --> B{Switch position}
-    B -->|Attack| C[Plug into Ethernet jack]
-    C --> D[Payload runs: default nmap scan]
-    D --> E[Results → /root/loot/scan/]
-    E --> F[Flip to arming mode]
-    F --> G[Connect over USB]
-    G --> H[SSH: read loot, load new payload]
-    B -->|Arming| G
-```
+This documentation covers the basics of operation and deployment, accessing the Linux shell for advanced operations, Internet connectivity, software updates and payload development.
+
+![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MhxW6geyenAGJvaKW11%2F-MhxWG5xH089Et_2AKSV%2F-MhxWdzq0bdpGJTPvmlr%2Fshark_thumb2_760x.jpg?alt=media&token=7925d325-b83f-42bf-a858-227955fd84b5)
+
+> [!WARNING]
+> The e-book PDF generated by this document may not format correctly on all devices. For the most-to-date version, please see <https://docs.hak5.org>
 
 ---
 
-## Quickstart — first recon in 60 seconds
+<!-- section: features -->
+### 1.2 Shark Jack Basics
 
-### Step 1 — Attack
-1. Fully charge the Shark Jack.
-2. Flip the switch to **attack mode**.
-3. Plug it into any live Ethernet jack in **your lab**.
-4. Wait ~60 seconds. The LED tells you what's happening (see [Troubleshooting](/hak5/troubleshooting-index/)).
+The Shark Jack is a portable network attack and automation tool for pentesters and systems administrators designed to enable social engineering engagements and opportunistic wired network auditing. It features a familiar Hak5 payload architecture, flip-of-the-switch operation and multi-color LED for instant feedback.
 
-### Step 2 — Arming & loot retrieval
-1. Flip the switch to **arming mode**, unplug from the network, connect to your computer over USB.
-2. Your computer's Ethernet must be on the Shark's subnet:
+This documentation serves both cable and battery variants of the Shack Jack with notable differences highlighted.
 
-```bash
-ip addr add 172.16.24.2/24 dev eth0     # your NIC joins 172.16.24.0/24
-ssh root@172.16.24.1                     # password: hak5shark
-```
+#### VARIANTS
 
-Expected output:
+##### Shark Jack
 
-```text
-root@172.16.24.1's password:
-Welcome to Shark Jack
-# ls /root/loot/
-scan
-# ls /root/loot/scan/
-2026-08-21-1430-network-scan.txt
-# cat /root/loot/scan/2026-08-21-1430-network-scan.txt
-Nmap scan report for 192.168.1.10
-Host is up (0.0034s latency).
-PORT     STATE    SERVICE
-22/tcp   open     ssh
-80/tcp   open     http
-443/tcp  open     https
-```
+The original Shark Jack is a battery powered device with a 10–15 minute runtime and feedback via RGB LED. It's as comfortable on the keychain as it is in your EDC.
 
-That's your first recon: hosts, open ports, services — enough to plan a follow-up (or report to your blue team).
+![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MhxW6geyenAGJvaKW11%2F-MhxWG5xH089Et_2AKSV%2F-MhxaagJ6dpRd_sohFC3%2Fimage.png?alt=media&token=d082efed-148b-459c-b40d-5a2eaface148)
+
+##### Shark Jack Cable
+
+The Shark Jack Cable is a USB-C powered pentest companion with continuous runtime and feedback via RGB LED and an interactive serial console. It can be planted for long-term headless deployments or run temporarily from a battery source. This can include the operators USB-C powered smartphone ¹, which may enable shell access via serial using a third party app ².
+
+* ¹ smartphone compatibility may vary. Tested with 2021-era flagship Android devices.
+* ² serial access on Android tested using the third party [Serial USB Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_usb_terminal) app.
+
+![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MhxW6geyenAGJvaKW11%2F-MhxWG5xH089Et_2AKSV%2F-MhxaBRiovErW8HUJt8y%2Fimage.png?alt=media&token=12a60ac6-198a-4755-a7f1-a72452363040)
+
+##### Shark Jack Cable Android Serial Setup
+
+[<https://youtu.be/6AMZdFKfWxA>](<https://youtu.be/6AMZdFKfWxA>)
+
+Recommended apps: [Hacker's Keyboard](https://play.google.com/store/apps/details?id=org.pocketworkstation.pckeyboard&hl=en_US&gl=US), [Serial USB Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_usb_terminal&hl=en_US&gl=US).
+
+#### DEPLOYMENT
+
+The Shark Jack is meant to be deployed against a target network for brief reconnaissance, exfiltration and IT automation tasks. With a fully charged battery, the Shark Jack will operate for about 10-15 minutes. The Shark Jack Cable may run for as long as a standard USB-C power source is available.
+
+Out-of-the-box, a pre-installed default payload executes an nmap scan of the connected target network when the switch is in the attack mode. This default payload saves the scan results to a loot directory on the device.
+
+This loot may be recovered from SSH access when the switch is in the arming mode. Further, with the switch in arming mode the default payload may be replaced with your own payloads, written in bash, or payloads downloaded from the community repository at <https://github.com/hak5/shark-payloads>
+
+> [!NOTE]
+> The Shark Jack Cable provides real time access to loot and the ability to download and activate payloads over-the-air by an interactive serial shell.
+
+#### CHARGING
+
+The Shark Jack features a non-removable lithium ion battery. Please read all instructions before use and familiarize yourself with the important safety information and warnings.
+
+To charge the Shark Jack, flip the switch to the OFF / Charging position. Plug the Shark Jack into a standard USB power source using a USB-C cable. After a brief boot period, indicated by a flashing green LED, the Shark Jack will begin charging.&#x20;
+
+When the device is charging, the LED will blink blue. When the device is full charged, the LED will light solid blue - at which time the device should be disconnected from USB power. Do not overcharge, and do not leave unattended while charging.
+
+> [!NOTE]
+> The Shark Jack cable does not feature an internal battery and does not require charging. The switch positions are the same for both Shark Jack and Shark Jack Cable.
+
+#### MODES OF OPERATION
+
+Similar to many Hak5 tools, the Shark Jack features an Arming mode and an Attack mode. In Arming mode, the Shark Jack is accessible from SSH for payload loading and configuration. In Attack mode, the selected payload is executed.
+
+![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MhxW6geyenAGJvaKW11%2Fuploads%2FGwJ7CljRieAaJu41Zg0i%2Fimage.png?alt=media&token=76f2fa38-77c6-4e57-8fed-77425a2a9373)
+
+##### ATTACK MODE
+
+In attack mode, the Shark Jack will execute the `payload.sh` or `payload.txt` bash script from `/root/payload`. Most payloads specify a network mode, setting the Shark Jack as a client with `NETMODE DHCP_CLIENT` or a server with `NETMODE DHCP_SERVER`.
+
+##### ARMING MODE
+
+In arming mode, the Shark Jack will be configured with a static IP address of `172.16.24.1` and will start an SSH server.
+
+With the Shark Jack in arming mode, you may access the embedded linux system via SSH. Connect the Shark Jack to your computer's Ethernet interface, specify a static IP address in the 172.16.24.0/24 range for this interface (for example `172.16.24.2`) then establish an SSH connection to the Shark Jack at `172.16.24.1` (e.g. with the command "`ssh root@172.16.24.1`")
+
+> [!NOTE]
+> The Shark Jack Cable provides access to the shell in arming mode via its dedicated serial console. When connected, press `ENTER` to activate the shell and run `HELP` for a list of payload and firmware management commands.
 
 ---
 
-## Custom payloads
+### 1.3 Default Settings
 
-The default scan is a template. Replace it with your own Bash payload:
+#### DEFAULT SETTINGS
 
-1. SSH in (arming mode) as above.
-2. Edit `/root/payload/payload.sh` (this is what runs in attack mode).
+The default settings for the Shark Jack are:
 
-```bash
+* Username: `root`
+* Password: `hak5shark`
+* Arming Mode IP Address: `172.16.24.1`
+
+#### DIRECTORY STRUCTURE
+
+| PATH                    | Contents                                                         |
+| ----------------------- | ---------------------------------------------------------------- |
+| `/root/loot/`           | log files and other loot stored by payloads                      |
+| `/root/payload/`        | the payload which will execute when the switch is in Attack mode |
+| `/root/payload/library` | payload library, populated by the `UPDATE_PAYLOADS` command ¹    |
+
+¹ command available on the Shark Jack Cable and any Shark Jack with firmware 1.2.0 and above.
+
+#### LED STATUS INDICATIONS
+
+| LED               | Status                   |
+| ----------------- | ------------------------ |
+| Green (blinking)  | Booting up               |
+| Blue (blinking)   | Charging                 |
+| Blue (solid)      | Fully Charged            |
+| Yellow (blinking) | Arming Mode              |
+| Red (blinking)    | Error - no payload found |
+
+#### SHARK JACK HELPERS AND COMMANDS
+
+> [!NOTE]
+> These commands are intended for use with the Shark Jack Cable when connected via Serial in Arming Mode and may be used by any Shark Jack with firmware 1.2.0 and above.
+
+| COMMAND           | Description                                           |
+| ----------------- | ----------------------------------------------------- |
+| HELP              | List Shark Jack helpers and commands                  |
+| ACTIVATE          | Activate a payload                                    |
+| ACTIVATE\_PAYLOAD | Alias for ACTIVATE                                    |
+| LIST              | List the local payload library                        |
+| LIST\_PAYLOADS    | Alias for LIST                                        |
+| UPDATE\_PAYLOADS  | Synchronize local payload library with remote library |
+| UPDATE\_FIRMWARE  | Check for and install available firmware updates      |
+| SERIAL\_WRITE     | Write to the serial console                           |
+| LED               | Configure the LED                                     |
+
+#### SHARK JACK SERIAL SETTINGS
+
+* flow control: none
+* baud rate: 57600
+* parity: none
+* databits: 8
+* stop bit: 1
+
+> [!NOTE]
+> Serial Settings apply only to Shark Jack Cable
+
+---
+
+## 2. Unboxing, Quick Start & sharkjack.sh Utility
+
+<!-- section: configuration -->
+### 2.1 Unboxing and Setup
+
+This article describes the basic process of setting up, deploying the default nmap scan attack and retrieving loot from the Shark Jack.
+
+So your [Shark Jack](https://shop.hak5.org/products/shark-jack) just arrived, you've had a moment to appreciate the sweet metal case it comes in, and now you're eager to dig in and get your hack on! Keep reading.
+
+![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MhxW6geyenAGJvaKW11%2F-MhxfMdfHKBk_0JxF3np%2F-MhxgEKnUjuNDfB7CTmN%2Fimage.png?alt=media&token=569f2563-585f-4f52-ab7a-60ca24cdb0db)
+
+TL;DR - Read the safety info & diagram on the card. Charge it by USB. Flip the switch far forward and plug it into your LAN. When the light goes green, the trap is clean. Unplug, flip the switch to the middle position and plug it into your computer. SSH to `root@172.16.24.1` (pass: '`hak5shark`') and find the scan results in /root/loot. &#x20;
+
+Cool, then what? Read up at [docs.hak5.org](https://docs.hak5.org), grab the latest firmware & tools from downloads.hak5.org, get chatty at forums.hak5.org, spin up your very own Cloud C2 server from [c2.hak5.org](https://c2.hak5.org), and finally nab & contribute payloads from [payloads.hak5.org](https://payloads.hak5.org). Enjoy!\
+\
+Now obviously the prudent first step would be to RTFM (which you can find at docs.hak5.org) but let's throw caution to the wind... That is, with the exception of reviewing all of that important safety information – it does include a Lithium battery after all.
+
+Pay heed.<br>
+
+#### STEP 1: CHARGE IT UP
+
+Flip that mischievous red attack switch to the OFF position - that's the position closest to the USB-C port. Then plug in a USB-C cable to your charger of choice. The [Shark Jack](https://shop.hak5.org/products/shark-jack) will sip a steady 5 volts and about a half amp. After a brief green-blinking boot, it'll blink blue to show that the battery is charging. Give it a few minutes and it'll light solid blue. Then, unplug it. And as you recall from that important safety information – you don't leave lithium batteries unattended while charging. Just sayin'
+
+> [!NOTE]
+> Shark Jack Cable users may skip this step as it does not include a built-in battery.
+
+![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MhxW6geyenAGJvaKW11%2Fuploads%2FRYLgfIyYXQA0yGL6vk7a%2Fimage.png?alt=media&token=3169b895-6c13-4199-9899-fb4f6cdc2707)
+
+#### STEP 2: JACK INTO A NETWORK
+
+Unplug your [Shark Jack](https://shop.hak5.org/products/shark-jack) from the USB charger and give it a moment to cool down. It'll be a little warm from charging, but as you know from that important safety information it complies with IEC standards – so you're all good. Just keep that sly red switch in the off position and take a moment to practice wielding the Shark Jack as if a floppy disk while reciting "you talkin' to me, punk?" in the mirror. Where were we again? Oh right - jacking into your network...
+
+![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MhxW6geyenAGJvaKW11%2Fuploads%2FApF1TWp6CzkLbp1ZZsZP%2Fimage.png?alt=media&token=46d3a958-b649-4e63-9a92-dc760375482f)
+
+Find that sweet 24 port switch mounted in your network closet, or RJ45 wall plate if you've gone full-geek and wired the house with CAT6. Repeat the phrase "this is my network and I'm totally authorized to pentest it" - then flip the evil red switch far forward, closest to the Ethernet jack, to put it in attack mode. It'll start booting and blinking - and at any time it's ready to be plugged into your network. Right outa the box it'll perform a simple nmap scan - and when the fun is done, the light will go green (and the trap will be clean). It's then safe to unplug.<br>
+
+#### STEP 3: SSH IN TO NAB LOOT
+
+Flip that crafty red switch to the middle position to put your [Shark Jack](https://shop.hak5.org/products/shark-jack) into arming mode. Here instead of being a client on your network, it'll act as a server. Connect it to your computer's Ethernet port and you'll get assigned an IP address in the 172.16.24.x hood. From there just open terminal if on MacOS or Linux, or powershell if you're on Windows. Then SSH into the Shark Jack with the command "`ssh root@172.16.24.1`". The default password is "`hak5shark`". After admiring the cute shark ASCII art in the banner, cd over to /root/loot and enjoy those scan results. Want to change the payload? Just copy a `payload.sh` to `/root/payload` – and there's a growing collection at payloads.hak5.org
+
+> [!NOTE]
+> Shark Jack Cable users may access the shell via Serial rather than SSH as no Ethernet interface is required.
+
+![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MhxW6geyenAGJvaKW11%2Fuploads%2FUtVUK9tihlYo1BZa2fEK%2Fimage.png?alt=media&token=330b76b8-ac94-4d3b-9a8a-6c1ef3b64dd2)
+
+Want to make all that even easier? Download the `sharkjack.sh` script (for Mac and Linux) from the Shark Jack section of  [downloads.hak5.org](https://downloads.hak5.org/) – it'll automate gathering loot, swapping out payloads and even upgrading the firmware (you'll wanna do that – new features and tools are added from time to time).<br>
+
+##### THAT'S IT FOR THE BASICS
+
+Of course you should also familiarize yourself with the ins and outs detailed in the official [Shark Jack](https://shop.hak5.org/products/shark-jack) documentation at  [docs.hak5.org](https://docs.hak5.org/).
+
+Once you start diving in and testing payloads, you may also want to set yourself up with a Cloud C2 server – it's great for remote access and exfiltration and is supported by a lot of the payloads. There's a free community version to be had at  [c2.hak5.org](https://c2.hak5.org/), and it runs on your own hardware, so we never see your bits (we don't wanna see 'em).
+
+And finally, join the community at  [forums.hak5.org](https://forums.hak5.org/) – it's home to some really bright pentesters and enthusiasts just like yourself, so you'll fit right in. Cheers!
+
+---
+
+### 2.2 Using sharkjack.sh
+
+This article describes managing payloads and loot with the desktop sharkjack.sh utility.
+
+So you've gotten the [basics down](https://shop.hak5.org/blogs/shark-jack/unboxing-and-setting-up-the-hak5-shark-jack), tried out a few [payloads](https://payloads.hak5.org/), and now you're ready to take your [Shark Jack](https://shop.hak5.org/products/shark-jack) game to the next level. One thing you may have noticed in getting your feet wet is the task of copying payloads to, and loot from the device. What's a hacker to do when something is done more than once? Script it, obviously. Enter: [sharkjack.sh](https://downloads.hak5.org/shark) - now available for MacOS and Linux.
+
+> [!NOTE]
+> Shark Jack Cable users may consider using the built-in commands, as described by running `HELP`, while connected to the Shark Jack in Arming Mode via Serial rather than the desktop sharkjack.sh utility.
+
+![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MhxW6geyenAGJvaKW11%2Fuploads%2FwOwdy8dlN0S1bd5qaiNs%2Fimage.png?alt=media&token=999a959d-9eec-419e-b0ce-5a541036ac57)
+
+The sharkjack.sh script is a pretty front-end that'll assist it not only loading payloads and getting loot off the Shark Jack, but it'll help you setup SSH keys so you can connect quickly - potentially without having to type a password. Further, it'll check to see if your Shark Jack is up to date, and if not it can upgrade the firmware on your device automatically.&#x20;
+
+Let's get started. Begin by downloading `sharkjack.sh` from the tools section of  [downloads.hak5.org/shark](https://downloads.hak5.org/shark). Then, open a terminal and navigate to the directory where you're keeping `sharkjack.sh`. I like to keep my scripts in my home directory, or `~`, so I can quickly get to 'em by typing '`cd`' and hitting enter. Next, make the script executable with '`chmod +x ./sharkjack.sh`' and run it as root with '`sudo ./sharkjack.sh`'
+
+From the `sharkjack.sh` main menu, pressing C will connect via SSH to the Shark Jack. It'll wait for you to flip the devices switch to arming mode (center position) and plug it into your computer's Ethernet port. After authenticating with the Shark Jack, you'll have a '`root@shark:~#`' prompt.
+
+If you want to make logging in even easier, pressing `S` a the main menu will copy your SSH public key to the Shark Jack - and if you haven't created SSH keys before, it'll guide you through the process.
+
+The other functions – like upgrading the firmware, pushing payloads to the device, and getting loot saved on its disk work similarly.
+
+So that's how to easily manage your Shark Jack using the sharkjack.sh helper script. We'd love to hear your thoughts on it in the [forums](https://forums.hak5.org/forum/101-shark-jack/), and you're welcome to contribute from the [github repository](https://github.com/hak5/sharkjack-payloads/blob/master/sharkjack.sh). Cheers!
+
+---
+
+### 2.3 Two Key Commands
+
+Whether on Windows, Mac or Linux – working with the [Shark Jack](https://shop.hak5.org/products/shark-jack) is most convenient from the command line. Best of all, since modern versions of Windows ship with PowerShell, these work identically on all three platforms. In this article I'll show you two commands that'll make working with the Shark Jack a breeze, and how exactly they work.
+
+![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MhxW6geyenAGJvaKW11%2Fuploads%2F68whMJNFEvkMCbLxoa1J%2Fimage.png?alt=media&token=f19e6e33-a367-4f06-8fbf-26a93640c0ef)
+
+Outside of the occasional firmware update, the two biggest functions you'll face when using your Shark Jack in arming mode – the devices management mode – are uploading payloads to the device and downloading loot (log files generated by payloads) from the device.
+
+> [!NOTE]
+> Shark Jack Cable users may consider managing the device via the dedicated Serial console rather than via SSH and SCP.
+
+As you know from the official documentation, in arming mode the Shark Jack runs as a server – both a DHCP server, which will assign your computer an IP address on its network (a network of two, you and it) as well as an SSH server. The SSH server, or Secure Shell, lets you securely access the Shark Jack's command-line. When you 'ssh into' the Shark Jack, you'll get a bash shell on this tiny Linux box – from which you can manage the payload file in `/root/payload`, and the captured loot in `/root/loot`. But SSH has another function, and with it you may never need to drop into the Shark's bash shell.
+
+SCP, or Secure Copy, works just like the cp command locally – except over the Secure Shell (SSH). Using it you can copy files to and from remote devices, just as you would locally using '`cp`' in Bash or PowerShell, or 'copy' in CMD. And with that, here are the two scp commands that'll make your Shark Jack life a breeze.
+
+I'll show you from the Windows users perspective in PowerShell – but the same commands will hold true for the terminal on MacOS and Linux.
+
+#### COPYING A PAYLOAD TO THE SHARK JACK
+
+I like to keep an up to date copy of the Shark Jack payload repository on my computer – so I can try out the latest creations from the Hak5 community. In this example I'll show you how to copy the ipinfo payload, in the form of a shell script or payload.sh file, to the Shark Jack. It's on my hard disk in `C:\Users\bob\SharkJack\payloads\ipinfo`, so if I navigate there in PowerShell I can use the scp command to ferry that file over to the Shark Jack's payload folder - overwriting anything that may already exist there.
+
+> `scp .\payload.sh root@172.16.24.1:payload/`
+
+The first part invokes the 'scp' command to securely copy the file. This command takes two parameters – from and to. In this case the first parameter, from, is the payload.sh file in this local working directory. In Windows PowerShell this is prefixed with `.\.` The next parameter, to, specifies where on the Shark Jack in the form of three elements: the user, the IP address, and the directory. In this case the user is root, the IP address of the Shark Jack is `172.16.24.1`, and the directory is `:payload/`.&#x20;
+
+A remote host with scp takes the form of `user@host:directory` – with `@` separating user and host, and `:` separating host and directory. If no directory is specified after the `:`, the default will be the user's home directory. In this case, the root user's home directory is `/root/` – so specifying `:payload/` is the same as specifying `:/root/payload/` (just with less typing).
+
+Keep in mind this command is going to copy the local `payload.sh` file over to the Shark Jack in `/root/payload/`, overwriting any `payload.sh` file that's already there.<br>
+
+#### COPYING LOOT FROM THE SHARK JACK
+
+Using the same method as above, we're going to reverse the from and to fields to recursively copy loot from the Shark Jack to the local computer.
+
+> `scp -r root@172.16.24.1:loot/ .`
+
+In this case the `-r` argument is specified so say to recursively copy the files. This means it'll copy files from all of the nested directories, since each payload saves loot to its own folder. The rest of the command is similar to the previous, only reversed. In this case the from field is the remote host – again in the form of `user@host:directory`. The to field is the current working directory, as represented by '`.`' – or it could be any path such as `c:\Users\bob\SharkJack\loot\`
+
+So there you go, the two commands that make copying files – payloads and loot – to and from the [Shark Jack](https://shop.hak5.org/products/shark-jack) a breeze. Now if you're looking for something a little more graphical, similar to Windows Explorer, you may want to check out [WinSCP](https://winscp.net/eng/index.php), [FileZilla](https://filezilla-project.org/), or [CyberDuck](https://cyberduck.io/) – all pretty graphical scp tools. Cheers!
+
+---
+
+### 2.4 Writing a Simple Payload
+
+One of the simplest but most useful payloads you can rock on a [Shark Jack](https://shop.hak5.org/products/shark-jack) is a simple port tester. With it you can tell at a glance from the multi-color LED whether a port is active, if it gets an IP address, and whether it has a connection to the Internet. In this article we'll write this basic yet powerful payload.
+
+![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MhxW6geyenAGJvaKW11%2Fuploads%2FGgVVzbTN4Ti9DraWgOQs%2Fimage.png?alt=media&token=1ffe4f52-e5c9-4057-816f-cb223ea3e0aa)
+
+If you've worked in IT for a while you've come across this conundrum. Is this thing on? Without breaking out ye-olde-laptop, we're going to use the Shark Jack to test just this. Let's see how 5 simple lines of bash will give us instant feedback from the RGB LED.
+
+Let's start out payload with the LED command. Even without perusing the official Shark Jack documentation you'll pick up how this command works just by example.
+
+> `LED R SOLID`
+
+It pretty much writes itself. It's an RGB LED, and go figure the R parameter to the LED command tells it to light up Red. The second parameter, solid, said, huh, not to blink. The alternative would be SLOW, FAST or VERYFAST depending on how rapidly you'd want the LED to blink.&#x20;
+
+So in this state, the first thing the Shark Jack is going to do is make its LED red. Meanwhile, the framework is going to attempt to obtain an IP address from the target LAN via DHCP. What we'll want to do next is check to see if that's been successful – and if it has we'll change color. Otherwise, this Shark's staying red, and it'll be quite apparent when using that the port is a no-go.
+
+> `while ! ifconfig eth0 | grep "inet addr"; do sleep 1; done`
+
+This little bash one-liner continuously checks the eth0 interface for the existence of the line "inet addr" – which is what you'll get when running the "ifconfig" command when your interface has an IP address. If it doesn't return any results, it'll "do" the command between "do" and "done", forever. That command? Sleep for one second, before checking again. The trick to this command is the exclamation point before the command – that's the magic that says "do this (sleep for a second) if it IS NOT true". Once the statement IS true (the grep for "inet addr" returns something), the command will be passed and our next command will run. Which in this case, will be:
+
+> `LED Y SOLID`
+
+You can see where this is going. Once the Shark Jack gets an IP address, it's going to light – you guessed it – yellow. Our next command will use the same while loop logic as before to block the script from continuing – in this case until its able to download an HTTP web page.
+
+> `while ! wget http://example.com -qO /dev/null; do sleep 1; done`
+
+I love example.com – don't you? It's always there for us. In this case, just as before, the script won't continue until it's able to complete this action. You can replace example.com with any HTTP site of your choosing – I just prefer to use the site that was reserved by the Internet Engineering Task Force back in 1999.
+
+And finally, the command that has me quoting Dr. Raymond Stantz (played by Dan Aykroyd in 1984):
+
+> `LED G SOLID`
+
+It may not be an Ecto-Containment System, but this payload will quickly answer the age old question – is this thing on?
+
+```
 #!/bin/bash
-# Arming-mode file: /root/payload/payload.sh
+#
+# Title:        Internet Access Tester
+# Author:       Hak5Darren
+# Version:      1.0
+#
+# Description:	This payload tests the port to see if the Shark Jack can
+# obtain an IP address from DHCP, and if it can access the Internet by
+# testing a specified HTTP URL.
+#
+# LED SETUP (Magenta)... Setting NETMODE to DHCP_CLIENT
+# LED Red... No IP address from DHCP yet
+# LED Yellow... Obtained IP address from DHCP, waiting on Internet access
+# LED Green... Confirmed access to Internet
+
+PUBLIC_TEST_URL="http://www.example.com"
+
+LED SETUP
+# Set NETMODE to DHCP_CLIENT for Shark Jack v1.1.0+
 NETMODE DHCP_CLIENT
-LED R
-sleep 5
-nmap -sV -p- --open ${SUBNET}.0/24 -oN /root/loot/full-scan.txt
-LED G
+
+LED R SOLID
+while ! ifconfig eth0 | grep "inet addr"; do sleep 1; done
+LED Y SOLID
+while ! wget $PUBLIC_TEST_URL -qO /dev/null; do sleep 1; done
+LED G SOLID
 ```
 
-> The `${SUBNET}` placeholder and `NETMODE` helpers come from Hak5's payload framework — your payload sets whether the Shark is a DHCP client, server, etc. Full reference in the payload docs.
-
-3. Or pull ready-made payloads from the community repo (`UPDATE_PAYLOADS`, see [Firmware & Downloads](/hak5/firmware-downloads/)).
+And that's it. Find a [prettied-up version](https://github.com/hak5/sharkjack-payloads/blob/master/payloads/library/util/internet-access-tester/payload.sh) ready to go. Love it? Chat with us on the [forums](https://forums.hak5.org/forum/101-shark-jack/). Want more for your Shark Jack? Nab some other sweet [payloads](https://payloads.hak5.org/). Cheers!
 
 ---
 
-## LED reference
+## 3. Firmware Updates & Maintenance Procedures
 
-| LED | Meaning |
-|---|---|
-| Green (blinking) | Booting |
-| Blue (blinking) | Charging |
-| Blue (solid) | Fully charged |
-| Yellow (blinking) | Arming mode — SSH server running |
-| Red (blinking) | Error — no payload found |
-| (payload-defined) | Your own `LED` colours while a payload runs |
+<!-- section: maintenance -->
+### 3.1 Manual Upgrade
 
----
+Shark Jack firmware may be updated by using the [sharkjack.sh](https://downloads.hak5.org/shark) helper script. That said, it is also possible to manually upgrade the firmware by following this process:
 
-## Advanced
+1. Download the latest UPDATE file from <https://downloads.hak5.org/shark> and [verify its checksum](https://docs.hak5.org/hc/en-us/articles/360049922674).
+2. Power on the Shark Jack in Arming Mode and connect it to a reliable USB power source
+3. Copy the file upgrade file to the Shark Jack's /tmp directory via SCP (e.g. "`scp upgrade-1.1.0.bin root@172.16.24.1:/tmp/`")
+4. SSH into the Shark Jack (e.g. "`ssh root@172.16.24.1`")
+5. From the Shark Jack's bash prompt, issue the sysupgrade command relevant to your firmware update file (e.g. "`sysupgrade -n /tmp/upgrade-1.1.0.bin`")
+6. Wait 5-10 minutes as the Shark Jack flashes the firmware and reboots.&#x20;
 
-| Capability | How |
-|---|---|
-| `NETMODE` choices | `DHCP_CLIENT` (get an IP), `DHCP_SERVER` (hand out IPs), `BRIDGE`, `OFF` — depends on the engagement |
-| SMB/HTTP exfiltration | Payloads can push loot off-box over the network |
-| Automated scans | Schedule scans; loot accumulates across deployments |
-| Remote payload library | `UPDATE_PAYLOADS` syncs from the community repo |
-| Root Linux tools | `nmap`, `tcpdump`, `curl`, scripting — full Bash |
+> [!CAUTION]
+> DO NOT unplug the device from USB power during this process as doing so will render the device inoperable. This process will require 5-10 minutes. Powering off the Shark Jack at this time will result in damage to the device.
 
 ---
 
-## Troubleshooting
+### 3.2 Over-the-Air Upgrade
 
-| Symptom | Cause | Fix |
-|---|---|---|
-| Red blinking LED | No payload found | Re-arm; place `payload.sh` in `/root/payload/` |
-| Can't SSH | Your NIC not on `172.16.24.0/24` | `ip addr add 172.16.24.2/24 dev eth0` (or equivalent) |
-| Battery dies mid-scan | 10–15 min runtime | Charge fully first; use the Cable edition for long runs |
-| Scan too slow / huge output | `-p-` full ports | Use a targeted port list for recon speed |
-| DHCP mode fails | No upstream DHCP server | Use `NETMODE DHCP_CLIENT` with a server present, or static |
+Shark Jack Cable users may conveniently upgrade their device's firmware by running the `UPDATE_FIRMWARE` command.
+
+1. Plug the Shark Jack Cable into a network which provides Internet access via DHCP
+2. Flip the Shark Jack Cable switch to Arming Mode
+3. Power the Shark Jack Cable via USB-C from a compatible computer or smartphone
+4. From the computer or smartphone, access the Shark Jack shell via Serial
+5. Press ENTER to activate the serial console
+6. From the `root@shark:~#` prompt, type `UPDATE_FIRMWARE` and press ENTER
+
+If the Shark Jack Cable has Internet access and an update is available, it will download and install automatically.
+
+To cancel the installation, press `CTRL+C` during the 10 second countdown period.
+
+> [!NOTE]
+> If the update fails with an SSL certificate error, verify that the device has the correct date and time with the `date` command, and if necessary rectify this with an NTP update manually using the command `ntpd -q -p 1.openwrt.pool.ntp.org`
+
+> [!CAUTION]
+> DO NOT UNPLUG THE SHARK JACK CABLE DURING THE FIRMWARE INSTALL PROCESS. This process will require 5-10 minutes. Powering off the Shark Jack Cable at this time will result in damage to the device that may render it inoperable.
 
 ---
 
-## Related resources
+## 4. Payload Development & DuckyScript Command Reference
 
-- [Shark Jack Cable](/hak5/products/shark-jack-cable/) — same box, USB-C power + serial console, runs longer
-- [Packet Squirrel Mark II](/hak5/products/packet-squirrel-mark-ii/) — inline Ethernet manipulation
-- [Plunder Bug LAN Tap](/hak5/products/plunder-bug-lan-tap/) — passive/active sniffing
-- [Firmware & Downloads](/hak5/firmware-downloads/) — shark payload repo & firmware
-- [Troubleshooting Index](/hak5/troubleshooting-index/)
-- [Hak5 overview](/hak5/)
+### 4.1 Payload Development Basics
+
+Shark Jack payloads are written in Bash with Ducky Script and can be developed in any standard text editor, such as notepad or vi.
+
+Payload files must be named either payload.sh or payload.txt.&#x20;
+
+Payloads should begin with the typical shebang /bin/bash.
+
+```
+#!/bin/bash
+```
+
+---
+
+### 4.2 The NETMODE Command
+
+`NETMODE` is a Ducky Script command which specifies which network mode to use in a given payload. These network modes determine how the Shark Jack will interface with the network.
+
+> [!NOTE]
+> This command was added in Shark Jack firmware version 1.1.0 and is not available on Shark Jack 1.0.0 or 1.0.1. Shark Jack users, see Software Updates. Shark Jack Cable users, your device comes by default with firmware version 1.2.0 or higher.
+
+#### **NETMODE DHCP\_CLIENT**
+
+In this mode, the Shark Jack will attempt to obtain an IP address from the target network via DHCP. This is the most common network mode.&#x20;
+
+```
+NETMODE DHCP_CLIENT
+```
+
+#### **NETMODE DHCP\_SERVER**
+
+In this mode, the Shark Jack will run a DHCP server and offer an IP address to the host computer on its network in the 172.16.24.0/24 range, similar to Arming mode. This network mode enables attacks against individual computers via Ethernet rather than the network as a whole.
+
+```
+NETMODE DHCP_SERVER
+```
+
+#### **NETMODE TRANSPARENT**
+
+In this mode, the Shark Jack will not offer or attempt to obtain an IP address from DHCP and may be used in conjunction with passive network sniffing programs when more stealth is desired.&#x20;
+
+```
+NETMODE TRANSPARENT
+```
+
+---
+
+### 4.3 The LED Command
+
+The multi-color RGB LED status indicator on the Bash Bunny may be set using the LED command. It accepts either a combination of color and pattern, or a common payload state.
+
+#### LED COLORS
+
+| COMMAND | Description                    |
+| ------- | ------------------------------ |
+| R       | Red                            |
+| G       | Green                          |
+| B       | Blue                           |
+| Y       | Yellow (AKA as Amber)          |
+| C       | Cyan (AKA Light Blue)          |
+| M       | Magenta (AKA Violet or Purple) |
+| W       | White                          |
+
+#### LED PATTERNS
+
+| PATTERN  | Description                                              |
+| -------- | -------------------------------------------------------- |
+| SOLID    | *Default* No blink. Used if pattern argument is ommitted |
+| SLOW     | Symmetric 1000ms ON, 1000ms OFF, repeating               |
+| FAST     | Symmetric 100ms ON, 100ms OFF, repeating                 |
+| VERYFAST | Symmetric 10ms ON, 10ms OFF, repeating                   |
+| SINGLE   | 1 100ms blink(s) ON followed by 1 second OFF, repeating  |
+| DOUBLE   | 2 100ms blink(s) ON followed by 1 second OFF, repeating  |
+| TRIPLE   | 3 100ms blink(s) ON followed by 1 second OFF, repeating  |
+| QUAD     | 4 100ms blink(s) ON followed by 1 second OFF, repeating  |
+| QUIN     | 5 100ms blink(s) ON followed by 1 second OFF, repeating  |
+| ISINGLE  | 1 100ms blink(s) OFF followed by 1 second ON, repeating  |
+| IDOUBLE  | 2 100ms blink(s) OFF followed by 1 second ON, repeating  |
+| ITRIPLE  | 3 100ms blink(s) OFF followed by 1 second ON, repeating  |
+| IQUAD    | 4 100ms blink(s) OFF followed by 1 second ON, repeating  |
+| IQUIN    | 5 100ms blink(s) OFF followed by 1 second ON, repeating  |
+| SUCCESS  | 1000ms VERYFAST blink followed by SOLID                  |
+| 1-10000  | Custom value in ms for continuous symmetric blinking     |
+
+#### LED STATE
+
+These standardized LED States may be used to indicate common payload status. The basic LED states include **SETUP**, **FAIL**, **ATTACK**, **CLEANUP** and **FINISH**. Payload developers are encouraged to use these common payload states. Additional states including multi-staged attack patterns are shown in the table below.
+
+| STATE    | COLOR PATTERN | Description                                   |
+| -------- | ------------- | --------------------------------------------- |
+| SETUP    | M SOLID       | Magenta solid                                 |
+| FAIL     | R SLOW        | Red slow blink                                |
+| FAIL1    | R SLOW        | Red slow blink                                |
+| FAIL2    | R FAST        | Red fast blink                                |
+| FAIL3    | R VERYFAST    | Red very fast blink                           |
+| ATTACK   | Y SINGLE      | Yellow single blink                           |
+| STAGE1   | Y SINGLE      | Yellow single blink                           |
+| STAGE2   | Y DOUBLE      | Yellow double blink                           |
+| STAGE3   | Y TRIPLE      | Yellow triple blink                           |
+| STAGE4   | Y QUAD        | Yellow quadruple blink                        |
+| STAGE5   | Y QUIN        | Yellow quintuple blink                        |
+| SPECIAL  | C ISINGLE     | Cyan inverted single blink                    |
+| SPECIAL1 | C ISINGLE     | Cyan inverted single blink                    |
+| SPECIAL2 | C IDOUBLE     | Cyan inverted double blink                    |
+| SPECIAL3 | C ITRIPLE     | Cyan inverted triple blink                    |
+| SPECIAL4 | C IQUAD       | Cyan inverted quadriple blink                 |
+| SPECIAL5 | C IQUIN       | Cyan inverted quintuple blink                 |
+| CLEANUP  | W FAST        | White fast blink                              |
+| FINISH   | G SUCCESS     | Green 1000ms VERYFAST blink followed by SOLID |
+
+##### EXAMPLES
+
+```
+LED Y SINGLE
+```
+
+```
+LED M 500
+```
+
+```
+LED SETUP
+```
+
+---
+
+### 4.4 The SWITCH Command
+
+`SWITCH` is a Ducky Script command which will indicate which position the Shark Jack's switch is in.
+
+| position  | note         |
+| --------- | ------------ |
+| `switch1` | OFF/Charging |
+| `switch2` | Arming Mode  |
+| `switch3` | Attack Mode  |
+
+---
+
+### 4.5 The BATTERY Command
+
+`BATTERY` is a Ducky Script command which will output the current battery state.
+
+| State         | Note                       |
+| ------------- | -------------------------- |
+| `discharging` | The battery is discharging |
+| `full`        | The battery is full        |
+| `charging`    | The battery is charging    |
+
+> [!NOTE]
+> The `BATTERY` command is specific to the original Shark Jack and is not applicable for the Shark Jack Cable variant as it does not include a built-in battery.
+
+---
+
+### 4.6 The SERIAL_WRITE Command
+
+The `SERIAL_WRITE` command will write any following text to the serial console. This is useful for adding meaningful output to a payload.
+
+> [!NOTE]
+> The ACTIVATE command was introduced with firmware 1.2.0 on the Shark Jack Cable.
+
+#### Example
+
+Add output to a payload with the following:
+
+```
+# Scan network
+LED ATTACK
+SERIAL_WRITE [*] Starting nmap scan...
+nmap $NMAP_OPTIONS $SUBNET -oN $LOOT_DIR/nmap-scan_$COUNT.txt
+```
+
+#### Using Variables
+
+The `SERIAL_WRITE` command will parse any variables, much like the `echo` command.
+
+```
+root@shark:~# DATE=$(date)
+root@shark:~# SERIAL_WRITE $DATE
+Tue Aug 24 00:26:55 UTC 2021
+root@shark:~# 
+```
+
+---
+
+### 4.7 The Cloud C2 commands
+
+The Shark Jack is Cloud C2 enabled — meaning it can be used remotely with the Hak5 Cloud C2 server to exfiltrate loot or be managed from the web interface or web shell.&#x20;
+
+To provision the Shark Jack for Cloud C2 server, see the guide on [adding devices](https://docs.hak5.org/cloud-c2/getting-started/adding-devices).&#x20;
+
+##### C2CONNECT
+
+Unlike some Hak5 devices, such as the WiFi Pineapple, the connection to Cloud C2 is not automatic. First, the `C2CONNECT` command must be run, either interactively (Shark Jack Cable) or from the payload.
+
+> [!CAUTION]
+> If the `C2CONNECT` command fails, check the `/tmp/cc-client-error.log` file for "Error posting update to server" entries, which may indicate that the system clock is out of date. Verify with the `date` command, and if necessary rectify this with an NTP update manually using the command `ntpd -q -p 1.openwrt.pool.ntp.org`
+
+##### C2CONNECT
+
+With a Cloud C2 connection established, loot may be exfiltrated using the `C2EXFIL` command.&#x20;
+
+```
+root@shark:~# C2EXFIL STRING /tmp/cc-client-error.log "The Cloud C2 error log"
+Starting C2 Exfil Tool
+Loot sent Successfully
+```
+
+---
+
+### 4.8 Included Tools
+
+#### Tools Pre-Installed
+
+From v1.0.x
+
+* autossh
+* nmap
+* nc
+* wget
+* python
+
+From v1.1.x
+
+* arp-scan
+* hping3
+* macchanger
+* ngrep
+* nping
+* p0f
+* tcpdump
+
+#### Installing Additional Tools
+
+In order to install additional tools the Shark Jack will require an Internet connection in Arming Mode. Typically this is achieved by using the `NETMODE DHCP_CLIENT` command.&#x20;
+
+Connect to the Shark Jack shell by SSH (or Serial in the case of the Shark Jack Cable) and plug it into a local network. Ensure that it has Internet connection (e.g. `ping -c4 1.1.1.1`). If it does not, use the `NETMODE` command above to establish an Internet connection via DHCP.
+
+Update the package manager with `opkg update`. Using the `opkg list` command you may find the name of the package you wish to install. Finally, install the package with the command `opkg install <name of package>`.&#x20;
+
+##### Example
+
+```
+root@shark:~# opkg install httping
+Installing httping (2.5-1) to root...
+Downloading http://downloads.openwrt.org/releases/18.06-SNAPSHOT/packages/mipsel_24kc/packages/httping_2.5-1_mipsel_24kc.ipk
+Configuring httping.
+root@shark:~# httping
+No URL/host to ping given
+
+root@shark:~# httping example.com
+PING example.com:80 (/):
+connected to 93.184.216.34:80 (43 bytes), seq=0 time= 27.99 ms 
+connected to 93.184.216.34:80 (357 bytes), seq=1 time= 18.41 ms 
+connected to 93.184.216.34:80 (351 bytes), seq=2 time= 17.20 ms 
+connected to 93.184.216.34:80 (43 bytes), seq=3 time= 17.45 ms 
+connected to 93.184.216.34:80 (43 bytes), seq=4 time= 17.35 ms 
+connected to 93.184.216.34:80 (43 bytes), seq=5 time= 17.39 ms 
+^CGot signal 2
+--- http://example.com/ ping statistics ---
+6 connects, 6 ok, 0.00% failed, time 5946ms
+round-trip min/avg/max = 17.2/19.3/28.0 ms
+root@shark:~# 
+```
+
+Learn more about using the opkg package manager from the OpenWRT documentation at <https://openwrt.org/docs/guide-user/additional-software/opkg>
+
+---
+
+## 5. Payload Management & Cloud C² Commands
+
+### 5.1 Payload Management
+
+The `UPDATE_PAYLOADS` command will synchronize the local payload library (stored in `/root/payload/library/`) with the repository online. This command is expected to be run from Arming Mode, and is intended for use with the Shark Jack Cable.
+
+> [!NOTE]
+> The `UPDATE_PAYLOADS` command was introduced with firmware 1.2.0 on the Shark Jack Cable and requires an internet connection.&#x20;
+
+> [!TIP]
+> In many cases an Internet connection may be enabled in Arming mode by issuing the command `NETMODE DHCP_CLIENT`.
+
+#### Usage
+
+```
+root@shark:~# UPDATE_PAYLOADS
+Downloading payloads repository...
+Successfully syncronized payloads repository.
+root@shark:~# 
+```
+
+> [!WARNING]
+> The `UPDATE_PAYLOADS` command will make an Internet connection to github.com/hak5. Consider updating your payloads before connecting to the client site network on any physical engagement.
+
+#### Troubleshooting
+
+If you receive an Internet connection error like the following:
+
+> You must have an internet connection to sync the payload libraries.
+
+Check to ensure that the eth0 interface has an Internet connection. If the IP address is statically assigned to `172.16.24.1`, rather than an address on the target network via DHCP, run the `NETMODE DHCP_CLIENT` command and try `UPDATE_PAYLOADS` again.
+
+---
+
+### 5.2 The LIST Command
+
+The `LIST` command, and its alias `LIST_PAYLOADS`, will list all of the payloads stored locally in the payload library at `/root/payload/library`.&#x20;
+
+> [!NOTE]
+> The ACTIVATE command was introduced with firmware 1.2.0 on the Shark Jack Cable.
+
+#### Usage
+
+```
+root@shark:~# LIST
+Payloads
+========
+ 
+example
+---------
+    cloudc2-multi-file-exfiltration
+ 
+recon
+---------
+    Nmap-C2
+    SLAP-Nmap-to-Slack
+    Sample-Nmap-Payload
+    ipinfo
+    netdiscover
+ 
+util
+---------
+    Jack-Tester
+    internet-access-tester
+    mac-changer
+    package-installer
+    ping-tester
+    ssh-ip-blinker
+ 
+root@shark:~# 
+```
+
+> [!NOTE]
+> If the payload library has not been synchronized with the online repository, run the UPDATE\_PAYLOADS command.
+
+---
+
+### 5.3 The ACTIVATE Command
+
+The ACTIVATE command, and its alias ACTIVATE\_PAYLOAD, specifies a payload from the local library to set for use on next boot in attack mode. This command is expected to be run from Arming Mode, and is intended for use with the Shark Jack Cable.
+
+> [!NOTE]
+> The ACTIVATE command was introduced with firmware 1.2.0 on the Shark Jack Cable.
+
+#### USAGE
+
+```
+/usr/bin/ACTIVATE [payload]
+```
+
+> [!TIP]
+> Since `ACTIVATE` is located in the `$PATH`, the absolute `/usr/bin/` directory may be omitted.
+
+#### EXAMPLES
+
+```
+/usr/bin/ACTIVATE recon/nmap      (Use a payload inside the library)
+/usr/bin/ACTIVATE /tmp/payload.sh (Use a specific file as the payload)
+```
+
+---
+
+## 6. Troubleshooting, Hardware Hacks & Specifications
+
+### 6.1 Firmware Recovery
+
+The Shark Jack features a firmware recovery option which allows the user to restore the devices firmware image. This procedure is performed via a special web interface.
+
+Download the latest firmware image for your Shark Jack from the Hak5 [Download Center](https://downloads.hak5.org/shark).
+
+It is extremely important that you follow the directions precisely as it pertains to powering the device and image selection from the web recovery interface. The video is provided as a reference however does not replace carefully reading the instructions listed below.
+
+[<https://youtu.be/xex2Nugdxek>](<https://youtu.be/xex2Nugdxek>)
+
+Follow these steps to access the recovery web interface and update the firmware.
+
+> [!NOTE]
+> Shark Jack Cable users: begin firmware recovery at step three.
+
+1. With the switch in the OFF position, plug in a suitable USB power source and fully charge the Shark Jack. The LED will blink blue while charging, and solid blue when fully charged. If no LED activity is present, leave the Shark Jack connected to the power source for 10 minutes.
+2. Unplug  the Shark Jack completely from the USB power source
+3. Prepare to press the Shark Jack reset button located on the bottom of the device next to the regulatory label. Using a paperclip, SIM card removal tool or similar instrument practice pressing the button. With the Shark Jack unplugged and with its switch in the off position, carefully insert the instrument and directly downward until you feel resistance. Gently press the button. You should feel a click.
+4. With the instrument at the ready, flip the switch into the arming (middle) position and immediately after press and hold the reset button for 7 seconds.
+5. Connect a USB power source to the Shark Jack
+6. Connect the Shark Jack to your host PC Ethernet interface. After a moment the Shark Jack LED will indicate solid green with intermittent activity flashes.
+7. Set a static IP address for the host PC Ethernet interface connected to the Shark Jack as follows:
+   * IP Address: 192.168.1.2
+   * Netmask: 255.255.255.0
+8. From the host PC, browse to [http://192.168.1.1](http://192.168.1.1/)
+9. A Shark Jack Recovery interface with a red banner will appear. Click to the Recovery tab, then click Browse Firmware, select the Shark Jack firmware downloaded from the Hak5 Download Center, then click Start Upload File.
+   * If your Shark Jack web interface shows a blue banner reading Web Failsafe Recovery, click the OS tab, then click browse, select the Shark Jack firmware downloaded previously, then click Start Upload File. If your Shark Jack features the blue bannered Web Failsafe Recovery interface, it is extremely important that you select the OS tab and not the Firmware tab or any other tab as doing so will render the device inoperable.
+10. This process will take several minutes. Do not interrupt the power supply while the firmware is updating. Once complete, the Shark Jack will restart as indicated by a green blinking LED. At this point, disable the static IP address on the host PC Ethernet interface connected to the Shark Jack and reset it to receive an IP address automatically via DHCP.
+
+> [!CAUTION]
+> DO NOT UNPLUG THE SHARK JACK CABLE DURING THE FIRMWARE RECOVERY PROCESS. This process will require 5-10 minutes. Powering off the Shark Jack Cable at this time will result in damage to the device that may render it inoperable.
+
+---
+
+### 6.2 Charge the Shark Jack from your Phone
+
+Many Android smartphones with USB-C interfaces support powering accessory devices. This can be useful in a pinch to charge your Shark Jack when a traditional USB power source or USB battery bank is not available. From the USB Preferences menu, select "Connected device" from the USB controlled by section.
+
+![IMG\_20191112\_123419.jpg](https://content.invisioncic.com/r167241/monthly_2019_11/IMG_20191112_123419.thumb.jpg.c4e6c22d6a44e9d70ec82724f6982b65.jpg)
+
+---
+
+### 6.3 Using the Shark Jack with the Plunder Bug
+
+In a way, the Plunder Bug can be used as a simple switch. In the following example, the Plunder Bug is used to provide the laptop (via USB-C) and the Shark Jack (or any ordinary Ethernet device) network access via the WAN/Uplink port (closest to the Plunder Bug's status LED).
+
+![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MhxW6geyenAGJvaKW11%2Fuploads%2FmFUKmzEAC2z88P5gWF9W%2Fimage.png?alt=media&token=c18e6543-5eb1-467f-bf52-8569a2e965fe)
+
+---
+
+### 6.4 Android Serial Setup for Shark Jack Cable
+
+[<https://youtu.be/6AMZdFKfWxA>](<https://youtu.be/6AMZdFKfWxA>)
+
+Recommended apps:
+
+* [Serial USB Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_usb_terminal&hl=en_US&gl=US)
+* [Hacker's Keyboard](https://play.google.com/store/apps/details?id=org.pocketworkstation.pckeyboard&hl=en_US&gl=US)
+
+---
+
+### 6.5 Hardware Specifications
+
+#### Shark Jack
+
+SOC: MT7628DAN\
+INTERFACE: Ethernet\
+STANDARDS: 802.3\
+SIZE: 62 x 21 x 12 mm\
+POWER: 2.5W (USB 5V 0.5A)\
+BATTERY: 1S 401020 3.7V 50mAh 0.2W LiPo\
+OPERATING TEMPERATURE: 35ºC \~ 45ºC\
+STORAGE TEMPERATURE: -20ºC \~ 50ºC\
+RELATIVE HUMIDITY: 0% to 90% (noncondensing)
+
+#### Shark Jack Cable
+
+SOC: MT7628DAN\
+INTERFACE: Ethernet, USB UART (CP2102)\
+STANDARDS: 802.3\
+SIZE: 62 x 21 x 12 mm\
+POWER: 2.5W (USB 5V 0.5A)\
+OPERATING TEMPERATURE: 35ºC \~ 45ºC\
+STORAGE TEMPERATURE: -20ºC \~ 50ºC\
+RELATIVE HUMIDITY: 0% to 90% (noncondensing)
+
+---
+
+### 6.6 Safety and Warnings
+
+The Shark Jack contains a Lithium-Polymer (LiPo) battery. Never leave near flammable material, liquids or in extreme temperatures as excessive heat, fire, damage and injury can occur. Never leave unattended while charging. Disconnect charger if battery becomes hot. Read all instructions before use.
+
+Your device may get hot to the touch; this is normal. Unplug the device and let it cool before removing it. This device complies with applicable surface temperature standards and limits defined by the International Standard for Safety (IEC 60950-1). Still, sustained contact with warm surfaces for long periods of time may cause discomfort or injury. Keep the device in a well-ventilated area when in use. Allow for adequate air circulation under and around the device. Do not expose the device to water or extreme conditions (moisture, heat, cold, dust), as the device may malfunction or cease to work when exposed to such elements. Do not attempt to disassemble or repair the device yourself. Doing so voids the limited warranty and could harm you or the device. This device is not designed, manufactured or intended for use in hazardous environments requiring fail-safe performance in which the failure of the device could lead directly to death, personal injury, or severe physical or environmental damage.
+
+Shark Jack is a trademark of Hak5 LLC. This product is packaged with a limited warranty, the acceptance of which is a condition of sale. See Hak5.org for additional warranty details and limitations. Availability and performance of certain features, services and applications are device and network dependent and may not be available in all areas; additional terms, conditions and/or charges may apply. All features, functionality and other product specifications are subject to change without notice or obligation. Hak5 LLC reserves the right to make changes to the products description in this document without notice. Hak5 LLC does not assume any liability that may occur due to the use or application of the product(s) described herein. Made in China. Designed in San Francisco by Hak5 LLC, 548 Market Street, #39371, San Francisco, CA, 94104. Hak5.org.\
+\
+The Shark Jack is a network administration and pentesting tool for authorized auditing and security analysis purposes only where permitted subject local and international laws where applicable. Users are solely responsible for compliance with all laws of their locality. Hak5 LLC and affiliates claim no responsibility for unauthorized or unlawful use. © Hak5 LLC.
+
+---
