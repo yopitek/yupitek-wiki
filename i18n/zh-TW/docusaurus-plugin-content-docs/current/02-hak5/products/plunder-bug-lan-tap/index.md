@@ -1,11 +1,11 @@
 ---
-title：「Hak5 Plunder Bug 原廠技術說明書與全功能操作手冊」
-model：「Plunder Bug」
-manufacturer：「Hak5」
-category：「雙向被動/主動網路側錄分流設備 (LAN Tap)」
-docs_url：「https://docs.hak5.org/plunder-bug/」
-version：「1.0」
-locale：「zh-tw」
+title: "Hak5 Plunder Bug 原廠技術說明書與全功能操作手冊"
+model: "Plunder Bug"
+manufacturer: "Hak5"
+category: "雙向被動/主動網路側錄分流設備 (LAN Tap)"
+docs_url: "https://docs.hak5.org/plunder-bug/"
+version: "1.0"
+locale: "zh-tw"
 ---
 
 # Hak5 Plunder Bug 原廠技術說明書與全功能操作手冊

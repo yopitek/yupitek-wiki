@@ -95,7 +95,7 @@ locale：“zh-cn”
 ![Bash Bunny Mark II (SD)](https://4178757749-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FnxJgJ9UdPfrcuL1U8 DpL%2Fuploads%2FST37YjjBLiCVU4ZHjY8 N%2Fbunnymk2%400.5 x.png?alt=media&token=eb6f3b92-20 df-42 bd-b79 a-67c284a61e9 e)
 
 > [!WARNING]
-> 本文档生成的电子书 PDF 在某些查看设备上可能无法正确排版。如需获取最新版本技术说明，请参阅官方文档站点：<https://docs.hak5.org>。
+> 本文档生成的电子书 PDF 在某些查看设备上可能无法正确排版。如需获取最新版本技术说明，请参阅官方文档站点：[https://docs.hak5.org](https://docs.hak5.org)。
 
 ---
 

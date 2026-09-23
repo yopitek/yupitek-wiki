@@ -1,11 +1,11 @@
 ---
-title：「Hak5 O.MG Cable 原廠技術說明書與全功能操作手冊」
-model：「O.MG Cable」
-manufacturer：「Hak5」
-category：「隱蔽實體與無線 HID 滲透測試專用線纜 (Covert Physical & Wireless Cable)」
-docs_url：「https://o.mg.lol/setup/OMGCable/」
-version：「3.0」
-locale：「zh-tw」
+title: "Hak5 O.MG Cable 原廠技術說明書與全功能操作手冊"
+model: "O.MG Cable"
+manufacturer: "Hak5"
+category: "隱蔽實體與無線 HID 滲透測試專用線纜 (Covert Physical & Wireless Cable)"
+docs_url: "https://o.mg.lol/setup/OMGCable/"
+version: "3.0"
+locale: "zh-tw"
 ---
 
 # Hak5 O.MG Cable 原廠技術說明書與全功能操作手冊

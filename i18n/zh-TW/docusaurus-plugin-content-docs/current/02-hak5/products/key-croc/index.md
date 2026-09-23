@@ -1,11 +1,11 @@
 ---
-title：「Hak5 Key Croc 原廠技術說明書與全功能操作手冊」
-model：「Key Croc」
-manufacturer：「Hak5」
-category：「硬體滲透測試 / HitM 植入裝置」
-docs_url：「https://docs.hak5.org/key-croc/」
-version：「1.3」
-locale：「zh-tw」
+title: "Hak5 Key Croc 原廠技術說明書與全功能操作手冊"
+model: "Key Croc"
+manufacturer: "Hak5"
+category: "硬體滲透測試 / HitM 植入裝置"
+docs_url: "https://docs.hak5.org/key-croc/"
+version: "1.3"
+locale: "zh-tw"
 ---
 
 # Hak5 Key Croc 原廠技術說明書與全功能操作手冊
@@ -83,7 +83,7 @@ Key Croc 是一款具備模式匹配酬載系統與遠端雲端管理能力的�
 ![Key Croc](https://212197980-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2 F-MhLOzjhonMdC6SLKqRt%2Fuploads%2F5ZxTlaKQGYZ03j3E4 bah%2Fkeycroc%400.5 x.png?alt=media&token=e7d21d21-bfcd-41c4-b1b6-99f8b6cb8295)
 
 > [!WARNING]
-> 本文檔產生的電子書 PDF 在某些檢視設備上可能無法正確排版。如需取得最新版本技術說明，請參閱官方文檔站點：<https://docs.hak5.org>。
+> 本文檔產生的電子書 PDF 在某些檢視設備上可能無法正確排版。如需取得最新版本技術說明，請參閱官方文檔站點：[https://docs.hak5.org](https://docs.hak5.org)。
 
 #### 原廠基礎規格指標
 * 傳輸介面：標準 USB

@@ -1,11 +1,11 @@
 ---
-title：「Hak5 O.MG Plug & Adapter 原廠技術說明書與全功能操作手冊」
-model：「O.MG Plug」
-manufacturer：「Hak5」
-category：「模組化串接式 USB 實體攻擊與按鍵注入轉接頭 (Modular USB Adapter)」
-docs_url：「https://o.mg.lol/setup/OMGPlug/」
-version：「3.0」
-locale：「zh-tw」
+title: "Hak5 O.MG Plug & Adapter 原廠技術說明書與全功能操作手冊"
+model: "O.MG Plug"
+manufacturer: "Hak5"
+category: "模組化串接式 USB 實體攻擊與按鍵注入轉接頭 (Modular USB Adapter)"
+docs_url: "https://o.mg.lol/setup/OMGPlug/"
+version: "3.0"
+locale: "zh-tw"
 ---
 
 # Hak5 O.MG Plug & Adapter 原廠技術說明書與全功能操作手冊

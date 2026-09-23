@@ -1,11 +1,11 @@
 ---
-title：「Hak5 Bash Bunny Mark II 原廠技術說明書與全功能操作手冊」
-model：「Bash Bunny Mark II」
-manufacturer：「Hak5」
-category：「多向量 USB 滲透測試電腦」
-docs_url：「https://docs.hak5.org/bash-bunny/」
-version：「2.0」
-locale：「zh-tw」
+title: "Hak5 Bash Bunny Mark II 原廠技術說明書與全功能操作手冊"
+model: "Bash Bunny Mark II"
+manufacturer: "Hak5"
+category: "多向量 USB 滲透測試電腦"
+docs_url: "https://docs.hak5.org/bash-bunny/"
+version: "2.0"
+locale: "zh-tw"
 ---
 
 # Hak5 Bash Bunny Mark II 原廠技術說明書與全功能操作手冊
@@ -95,7 +95,7 @@ locale：「zh-tw」
 ![Bash Bunny Mark II (SD)](https://4178757749-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FnxJgJ9UdPfrcuL1U8 DpL%2Fuploads%2FST37YjjBLiCVU4ZHjY8 N%2Fbunnymk2%400.5 x.png?alt=media&token=eb6f3b92-20 df-42 bd-b79 a-67c284a61e9 e)
 
 > [!WARNING]
-> 本文檔產生的電子書 PDF 在某些檢視裝置上可能無法正確排版。如需取得最新版本技術說明，請參閱官方文檔站點：<https://docs.hak5.org>。
+> 本文檔產生的電子書 PDF 在某些檢視裝置上可能無法正確排版。如需取得最新版本技術說明，請參閱官方文檔站點：[https://docs.hak5.org](https://docs.hak5.org)。
 
 ---
 

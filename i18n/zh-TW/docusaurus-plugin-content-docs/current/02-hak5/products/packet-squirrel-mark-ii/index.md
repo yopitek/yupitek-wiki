@@ -1,11 +1,11 @@
 ---
-title：「Hak5 Packet Squirrel Mark II 原廠技術說明書與全功能操作手冊」
-model：「Packet Squirrel Mark II」
-manufacturer：「Hak5」
-category：「網路中間人串接側錄與遠端存取設備」
-docs_url：「https://docs.hak5.org/packet-squirrel/」
-version：「4.0」
-locale：「zh-tw」
+title: "Hak5 Packet Squirrel Mark II 原廠技術說明書與全功能操作手冊"
+model: "Packet Squirrel Mark II"
+manufacturer: "Hak5"
+category: "網路中間人串接側錄與遠端存取設備"
+docs_url: "https://docs.hak5.org/packet-squirrel/"
+version: "4.0"
+locale: "zh-tw"
 ---
 
 # Hak5 Packet Squirrel Mark II 原廠技術說明書與全功能操作手冊

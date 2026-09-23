@@ -1,11 +1,11 @@
 ---
-title：「Hak5 WiFi Pineapple Enterprise 原廠技術說明書與全功能操作手冊」
-model：「WiFi Pineapple Enterprise」
-manufacturer：「Hak5」
-category：「企業級無線安全稽核與流氓 AP 測試平台」
-docs_url：「https://docs.hak5.org/wifi-pineapple-enterprise/」
-version：「2.0」
-locale：「zh-tw」
+title: "Hak5 WiFi Pineapple Enterprise 原廠技術說明書與全功能操作手冊"
+model: "WiFi Pineapple Enterprise"
+manufacturer: "Hak5"
+category: "企業級無線安全稽核與流氓 AP 測試平台"
+docs_url: "https://docs.hak5.org/wifi-pineapple-enterprise/"
+version: "2.0"
+locale: "zh-tw"
 ---
 
 # Hak5 WiFi Pineapple Enterprise 原廠技術說明書與全功能操作手冊

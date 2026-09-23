@@ -83,7 +83,7 @@ Key Croc 是一款具备模式匹配载荷系统与远程云端管理能力的�
 ![Key Croc](https://212197980-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2 F-MhLOzjhonMdC6SLKqRt%2Fuploads%2F5ZxTlaKQGYZ03j3E4 bah%2Fkeycroc%400.5 x.png?alt=media&token=e7d21d21-bfcd-41c4-b1b6-99f8b6cb8295)
 
 > [!WARNING]
-> 本文档生成的电子书 PDF 在某些查看设备上可能无法正确排版。如需获取最新版本技术说明，请参阅官方文档站点：<https://docs.hak5.org>。
+> 本文档生成的电子书 PDF 在某些查看设备上可能无法正确排版。如需获取最新版本技术说明，请参阅官方文档站点：[https://docs.hak5.org](https://docs.hak5.org)。
 
 #### 原厂基础规格指标
 * 传输接口：标准 USB
