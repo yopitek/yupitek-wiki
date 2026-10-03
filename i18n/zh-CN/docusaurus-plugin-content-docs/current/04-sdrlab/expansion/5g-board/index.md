@@ -1,118 +1,178 @@
 ---
-id: sdrlab-expansion-5g-board
-title: Flipper Zero 5G 扩展板——完整指南
-sidebar_position: 1
-description: Flipper Zero 5G 扩展板（ESP32-C5）——2.4/5 GHz WiFi Marauder、GPS、800 mAh 电池。Momentum 的 GPIO 引脚设置、Marauder 应用与故障排查。
-tags: [sdrlab, flipper-zero, 5g-board, esp32-c5, marauder, gps]
-keywords: [Flipper Zero 5G 扩展板, ESP32-C5, Marauder 5G, WiFi 5GHz Flipper, Momentum GPIO 引脚]
-authors: yupitek
-date: 2026-08-21
-last_updated: 2026-08-21
-product: flipper-5g-board
-category: product
-difficulty: intermediate
-toc: true
+title: Flipper Zero 5G 扩展板 — 完整指南
+source_url: https://doc.yupitek.com/sdrlab/expansion/5g-board/ （zh-cn 版）
+revision: 2026-10-03
+status: 待上架确认稿（审核纪录另存 audit_wiki.md，不含在此档）
+translated_from: flipper_board_wiki_manual_zhtw.md
 ---
 
-# Flipper Zero 5G 扩展板——完整指南
+# Flipper Zero 5G 扩展板 — 完整指南
 
-> **一句话**：5G 扩展板把双频 **2.4 GHz + 5 GHz WiFi** 工具装到你的 Flipper Zero 上——一块运行 Marauder 固件的 ESP32-C5，外加 GPS 接收机和板载电池，集成在一个紧凑模块里。
+> **一句话**：5G 扩展板把双频 **2.4GHz + 5GHz Wi-Fi** 工具装到你的 Flipper Zero 上 — 一颗 ESP32-C5 跑 Marauder 固件，加上 GPS 接收器、2.8 寸屏幕与内置电池，全部整合在一个小模块里。
 
-## 规格速览
+---
+
+## 规格概览
 
 | 项目 | 规格 |
 |---|---|
-| WiFi 模块 | ESP32-C5（2.4 GHz + 5 GHz），预刷 Marauder 5G 固件 |
-| GPS | 板载 GPS 模块，带自动电源切换（连接时用 Flipper 供电，分离时用电池供电） |
-| 电池 | 800 mAh，板上有充电指示灯 |
-| 保护 | 每个信号引脚都有 TVS 二极管 |
-| 天线 | WiFi 3 dBi 双频（11 cm）、GPS 20 dBi、SMA 内针连接器 |
-| 刷写 | USB-C 端口（左前）；按住右后方的按钮，然后插入 USB 进入刷写模式 |
-| 控制 | Flipper Zero 应用：WiFi Marauder、GPS |
+| **Wi-Fi 模块** | **ESP32-C5**（2.4GHz + 5GHz），出厂预烧 Marauder 5G 固件，支持 802.11 b/g/n/**ax** |
+| **Sub-GHz** | **433MHz** A07 射频模块，**10 dBm** 输出（需在 Flipper 设为 External） |
+| **GPS** | 内置主动 GPS 模块，**自动切换供电**（接主机用主机电源、脱离用内置电池） |
+| **屏幕** | **2.8 寸彩色 TFT**，内置 Marauder UI |
+| **电池** | **800 mAh 锂聚合物**，可热插拔，USB-C 充电约 2 小时 |
+| **天线** | **4 组 SMA 母座 + 4 支天线全附，均为 5dBi** — `433M A`／`GPS`／`2.4G`／`2.4G+5G` |
+| **microSD** | **FAT32 格式、32GB 以内** — 抓包存 `.pcap`，wardrive 存 `wardrive_*.csv` |
+| **保护** | 所有信号脚位镀金，每脚内置 **TVS 二极管** |
+| **烧录** | USB-C 口（前左侧）；按住背面按键再插入 USB 进入烧录模式 |
+| **操作** | Flipper Zero 应用程序：`[ESP32] WiFiMarauder`、`GPS` |
+| **尺寸** | **90 × 58 × 15 mm**（不含天线） |
+| **颜色** | 黑／白／透明／红／蓝 |
+| **连接** | Flipper Zero GPIO 排针 2×8，镀金触点 + TVS |
+| **蓝牙** | **BLE 5.0** ⚠️ 不支持 Bluetooth Classic |
 
-## 这块板是干什么的
+### 四组天线连接口
 
-ESP32-C5 是 WiFi 主力：配合 **Marauder 固件**，它可以扫描接入点和客户端、嗅探信标和探测请求、运行 deauth 和 PMKID 捕获测试，并记录 WiFi 活动——现在还包括老 ESP32 板卡看不到的 **5 GHz** 网络。GPS 模块把你的战争驾驶会话变成带地图的数据，小电池则让 WiFi 侧运行时不耗尽 Flipper 的电量。
+| 丝印 | 位置 | 对应 |
+|---|---|---|
+| `433M A` | 上缘左 | 433MHz 射频 |
+| `GPS` | 上缘右 | 主动 GPS 天线 |
+| `2.4G` | 左翼 | Wi-Fi 2.4GHz 专用 |
+| `2.4G/5G` | 右翼 | Wi-Fi 双频 2.4GHz + 5GHz |
 
-> **请只在你自己的网络和设备上使用。** Deauth 攻击和探测嗅探会干扰他人，且在大多数国家受到监管——这是一个实验室/教学工具。
+四个接口为独立的螺丝固定式 SMA 母座，背壳丝印清楚标示每个接口的对应功能，安装天线时请依标示对应插入。四支随货天线增益均为 **5dBi**。
 
-```mermaid
-flowchart LR
-    A["Flipper Zero<br/>Momentum firmware"] --> B["5G Board GPIO header"]
-    B --> C["ESP32-C5<br/>Marauder 5G firmware"]
-    B --> D["GPS module"]
-    C --> E["Marauder app:<br/>scanap / sniff / deauth tests"]
-    D --> F["GPS app: position logging"]
-    C --> G["2.4 GHz + 5 GHz antennas"]
-```
+---
+
+## 这块板子能用来做什么
+
+ESP32-C5 是 Wi-Fi 的主力：搭配 **Marauder 固件**可以扫描 AP 与客户端、嗅探 beacon 与 probe request、执行 deauth 与 PMKID 抓取测试，并记录 Wi-Fi 活动 — **现在包含 5GHz 网络，这是旧 ESP32 板看不到的**。
+
+GPS 模块把你的 wardrive 记录变成带坐标的数据。内置电池让 Wi-Fi 侧不必一直吃 Flipper 的电，也可以脱离 Flipper 单机运行。
+
+433MHz Sub-GHz 模块让你可以从 Flipper Zero 的 Sub-GHz 菜单操作 433MHz 信号研究 — 对 Flipper 内置收讯不良的环境特别有用。
+
+> **请只在你自己的网络与设备上使用。** Deauth 与 probe 嗅探会干扰他人，且在大多数国家受管制。这是实验／教学工具。
+
+---
 
 ## 开始之前
 
-- Flipper 需要包含 Marauder 和 GPS 应用的**自定义固件**——**Momentum**、**Unleashed** 或 **Xtreme**。（固件基础见 [Flipper Zero 专区](/flipper-zero/)。）
-- 按厂商快速入门中的说明在 Flipper 上安装模块（某些版本包含 433 MHz sub-GHz 模块和/或 2.8″ Marauder 屏幕——请阅读你板卡的说明）。
+- Flipper 需要**含 WiFi Marauder 与 GPS 应用的定制固件** — **Momentum**、**Unleashed** 或 **Xtreme**。（固件基础见 [Flipper Zero 章节](/flipper-zero/)。）
+- **本板已内置** 433MHz Sub-GHz 模块、2.8 寸 Marauder 屏幕、800mAh 电池 — 这些不是选配件，不需要另外选购版本。
+- 准备一张 **FAT32、32GB 以内**的 microSD。
+
+---
 
 ## 设置：GPIO 引脚（Momentum 固件）
 
 在 **Momentum** 上：
 
-1. 打开 `Protocol Settings → GPIO Pin Settings`。
-2. 把 **GPS 引脚**设为 `13` 和 `14`（UART 引脚；某些板卡版本使用 15/16——请核对你的厂商快速入门）。
-3. 把 **ESP32 / ESP8266 引脚**设为 `13` 和 `14`（或按板卡版本设为 15/16）——这是与 ESP32-C5 通信的 UART。
-4. 退出设置并重启 Flipper。
+1. 打开 `Protocol Settings → GPIO Pin Settings`
+2. 将 **GPS Pin** 设为 **13** 或 **14**（UART 引脚）
+3. 将 **ESP32 Pin** 设为 **15、16**（与 ESP32-C5 通信的 UART）
+4. 退出设置并重启 Flipper
 
-```mermaid
-flowchart TD
-    A["Protocol Settings → GPIO Pin Settings"] --> B{"Which function?"}
-    B -->|GPS| C["GPS pins = 13 & 14<br/>(or 15 & 16 by revision)"]
-    B -->|WiFi / Marauder| D["ESP32 pins = 13 & 14<br/>(or 15 & 16 by revision)"]
-    C --> E["Reboot Flipper"]
-    D --> E
-```
+> ⚠️ **GPS 与 ESP32 是两组不同的 UART 引脚。**
+> 本板出厂配置为：GPS = 13／14，ESP32 = 15／16。
+> **不可把两者设成同一组引脚**，否则 GPS 与 Wi-Fi 都会没有响应。
+> 若使用 Unleashed 或 Xtreme，设置路径可能略有差异，请参照各固件自身的 GPIO 设置菜单。
 
-## 使用这块板
+---
+
+## 使用本板
 
 ### WiFi Marauder
 
-1. 连接板卡后，打开 `Apps → GPIO → [ESP32] WiFi Marauder`。
-2. 运行 **Scan AP**：附近的接入点会显示 SSID、信道、RSSI 和加密方式。
-3. 运行 **Scan PSD**（数据包嗅探）观察信标/探测流量。
-4. **信道跳跃**和**战争驾驶**（配合 GPS）会产生可导出的日志。
+1. 装好本板后，打开 `Apps → GPIO → [ESP32] WiFiMarauder`
+2. 执行 **Scan AP**：附近的 AP 会显示 SSID、信道、RSSI、加密方式
+3. 执行 **Packet Monitor** 或 **Beacon Sniff** 观察 beacon／probe 流量
+4. **Wardrive**（搭配 GPS）会把记录输出为 CSV，之后可导出分析
 
-`scanap` 后的预期首屏：
+扫描结果示例（**仅为示意格式，非实际抓取数据**）：
 
 ```
-SSID              CH  RSSI  ENC  AUTH
-yupitek-lab       6   -55   WPA2 PSK
+SSID              CH  RSSI  ENC     AUTH
+yupitek-lab       6   -55   WPA2    PSK
 Campus_Guest      11  -72   OPEN
-...
 ```
 
 ### GPS
 
-1. 接上 GPS 天线，指向天空（靠近窗户也可以；室外更好）。
-2. 打开 `Apps → GPIO → GPS`。等待——首次定位可能需要几分钟。
-3. 捕获到卫星后，位置数据开始流动。与 Marauder 结合，就能得到带位置标签的 WiFi 日志。
+1. 接上 GPS 天线，朝向开阔天空方向放置（靠近窗户可以，户外更好）
+2. 打开 `Apps → GPIO → GPS`，等待 — **首次定位需数分钟（冷启动）**
+3. 卫星定位后位置数据就会进来。搭配 Marauder 即可取得带坐标的 Wi-Fi 记录
+
+> ℹ️ GPS 时间固定回报 **UTC+0**。北京时间（UTC+8）请自行加 8 小时。固件菜单没有时区设置选项。
+
+### 433MHz Sub-GHz
+
+1. `Flipper Zero → Sub-GHz → Advanced Settings → Module`
+2. 改为 **External**
+3. 从 Sub-GHz 菜单使用 433MHz 频段
+
+> 不做这一步，Flipper 会继续使用内置的 CC1101，本板的 433MHz 模块不会被启用。
+
+### microSD 记录
+
+1. 将 microSD 格式化为 **FAT32**（**不支持 exFAT／NTFS**），容量 **32GB 以内**
+2. 插入机身记忆卡槽
+3. 在模块内 `Device → Settings` 确认 **PCAP saving 已开启**
+4. 抓取结果存为 `.pcap`（用 [Wireshark](https://www.wireshark.org) 打开）；wardrive 另存 `wardrive_*.csv`
+
+---
 
 ## 更新 ESP32-C5 固件
 
-1. 进入刷写模式：按住右后方的按钮，然后插入 USB-C 线缆。
-2. 用你偏好的工具刷写 Marauder 5G（厂商说明 / ESP 刷写器 / FZEasyMarauderFlash 风格的 ESP32 工具）。
-3. 拔下，重启 Flipper，重新打开 Marauder 应用。
+本板出厂**已预烧 Marauder 5G**，正常情况下不需要重新烧录。
 
-## 故障排查
+若确实需要更新，请先向原厂或经销商索取**本板专用**的固件文件与版本号后再进行 — 开源 Marauder 发布页的通用 ESP32-C5 版本是否完全兼容本板的屏幕、SD 卡、GPS 与引脚配置，目前尚待原厂确认，请勿直接套用未经确认的版本，以免造成设备无法开机。
 
-| 问题 | 原因 | 修复 |
+### 进入烧录模式（USB-C）
+
+1. 按住背面按键
+2. 保持按住的同时插入 USB-C 线（前左侧烧录口）
+3. 使用确认支持 **ESP32-C5** 的烧录工具烧入固件
+4. 拔线、重启 Flipper Zero
+
+> ⚠️ 烧录前请确认所用工具支持 ESP32-C5 芯片；不确定时请以原厂／经销商提供的说明为准。
+
+---
+
+## 疑难排解
+
+| 问题 | 原因 | 解法 |
 |---|---|---|
-| 应用提示"no module" | GPIO 引脚未设置 | 重新检查 `GPIO Pin Settings`；重启 Flipper |
-| GPS 始终无法定位 | 天线未接 / 在室内 | 接上 GPS 天线，靠近窗户/到室外，等待 3–5 分钟 |
-| Marauder 扫描不到任何东西 | ESP UART 引脚设置错误 | 按板卡版本设置 ESP32 引脚；重启 |
-| 板卡能充电但 Flipper 看不到 | Flipper 固件缺少该应用 | 安装 Momentum/Unleashed/Xtreme |
-| 5 GHz 网络不可见 | 固件是 ESP32（非 C5） | 确认板卡运行 ESP32-C5 固件（支持 5 GHz） |
+| 应用程序显示「no module」 | GPIO 引脚未设置 | 重新检查 `GPIO Pin Settings`；重启 Flipper |
+| 扫不到任何网络 | ESP32 UART 引脚设错 | 设置 ESP32 Pin 为 **15、16**；重启 |
+| 5GHz 网络看不到或扫描不稳定 | 可能为固件版本相关限制 | 以扫描／监测为主；建议到 [ESP32 Marauder GitHub](https://github.com/justcallmekoko/ESP32Marauder) 查询当前版本状态 |
+| 5GHz deauth 没反应 | 已知固件限制 | 2.4GHz 较成熟稳定，建议优先使用 |
+| GPS 一直无法定位 | 天线未接／室内／未满足定位时间 | 接上 GPS 天线、朝向开阔天空、走到户外或窗边，等待数分钟完成冷启动 |
+| 模块有电但 Flipper 没反应 | Flipper 固件没有对应应用程序 | 安装 Momentum／Unleashed／Xtreme |
+| SD 卡无法识别 | 格式或容量不符 | 必须 FAT32、32GB 以内；重新格式化 |
+| 没有 PCAP 文件 | PCAP 存储未开启 | `Device → Settings` 开启 PCAP saving |
+| 开机时模块没反应 | GPIO 连接器未完全密合 | 轻压至 flush；确认电池有电或已接 USB-C |
 
-更多帮助：[SDRLAB 故障排查中心](/sdrlab/troubleshooting/)。
+更多帮助：见 [SDRLAB 疑难排解中心](/sdrlab/troubleshooting/)。
 
-## 相关
+---
 
-- [WiFi 多功能板（ESP8266）](/sdrlab/expansion/wifi-multiboard/) — 仅 2.4 GHz 的小兄弟。
-- [NRF24 模块](/sdrlab/expansion/nrf24/) — 2.4 GHz 数据包无线电嗅探。
-- [Flipper Zero 专区](/flipper-zero/) — 基础固件和设备入门。
+## 已知限制
+
+- **5GHz Deauth 的稳定度取决于固件版本。** 开源 Marauder 固件在 ESP32-C5 上的 5GHz deauth 支持仍在持续改进，建议以 2.4GHz 进行 deauth 测试为主；5GHz 建议以扫描、信号监测、wardrive 记录为主要用途。使用前建议到 [ESP32 Marauder GitHub](https://github.com/justcallmekoko/ESP32Marauder) 确认当前版本状态。
+- **5GHz PMKID／EAPOL 可用性尚无定论。** 建议自行实测后再据以宣称支持与否。
+- **GPS 天线具方向性**，商品标示全向天线，但建议朝向开阔天空方向放置以利定位，冷启动需数分钟。
+- **microSD 仅 FAT32、32GB 以内**，不支持 exFAT、NTFS。
+- **蓝牙仅 BLE 5.0**，ESP32-C5 无 Bluetooth Classic（BR/EDR）。
+- **两个 USB-C 口功能不同** — 上缘前面为充电（5V/2A）；前左侧仅烧录，不充电。
+- **两个 Wi-Fi 天线口都要接** — `2.4G` 与 `2.4G/5G` 各接一支天线，缺一支会少掉对应频段的接收能力。
+
+---
+
+## 相关页面
+
+- [WiFi multiboard（ESP8266）](/sdrlab/expansion/wifi-multiboard/) — 仅 2.4GHz 的小弟弟
+- [NRF24 模块](/sdrlab/expansion/nrf24/) — 2.4GHz 包无线电嗅探
+- [Flipper Zero 章节](/flipper-zero/) — 基础固件与设备说明
+
+**标签**：`sdrlab` · `flipper-zero` · `5g-board` · `esp32-c5` · `marauder` · `gps`
