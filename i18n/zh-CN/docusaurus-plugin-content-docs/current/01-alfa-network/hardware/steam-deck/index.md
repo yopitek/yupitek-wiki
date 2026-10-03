@@ -3,7 +3,7 @@ id: alfa-hardware-steam-deck
 title: Steam Deck & UP Squared Pro × ALFA Network 整合指南
 sidebar_label: Steam Deck / UP Squared
 sidebar_position: 9
-description: 无人机论文实测架构：UP Squared Pro 机载边缘计算与 Steam Deck 地面站搭配 ALFA AWUS036ACH 实现 5.745GHz wfb-ng 长距离图传遥测链路设置教程。
+description: \"无人机论文实测架构：UP Squared Pro 机载边缘计算与 Steam Deck 地面站搭配 ALFA AWUS036ACH 实现 5.745GHz wfb-ng 长距离图传遥测链路设置教程。\"
 tags: [steam-deck, steamos, up-squared, alfa, awus036ach, rtl8812au, wfb-ng, uav]
 keywords: [Steam Deck, UP Squared Pro, AWUS036ACH, RTL8812AU, wfb-ng, 无人机, SteamOS 只读]
 ---

@@ -107,7 +107,7 @@ This documentation is for the WiFi Pineapple Mark VII 2.x series firmware.&#x20;
 
 The version 1.x documentation is available as a PDF:
 
-{% file src="/files/8BabPB9jNtvjM5unsh0r" %}
+
 
 ---
 
@@ -551,7 +551,7 @@ From a powered off state, place your USB drive into the USB Type-A port on the W
 > [!CAUTION]
 > During the firmware installation process, as indicated by the red/blue LED status, DO NOT disconnect the power source. Doing so will render the device inoperable.
 
-Once the firmware has installed, you may connect to the WiFi Pineapple network and visit the web interface at [http://172.16.42.1:1471]([http://172.16.42.1:1471 ](http://172.16.42.1:1471 )).
+Once the firmware has installed, you may connect to the WiFi Pineapple network and visit the web interface at [http://172.16.42.1:1471](http://172.16.42.1:1471).
 
 ---
 
@@ -926,7 +926,7 @@ When advertising an enterprise network, the WiFi Pineapple supports three authen
 
 For maximum compatibility, leave the authentication method as **Any**; this will allow most client configurations to connect, but many will default to MSCHAPv2, which will not be able to fully connect to the Evil Enterprise AP.
 
-To try to force clients to use a more vulnerable authentication method, switch to **GTC**.  To capture hashes from clients which are configured to only support MSCHAPv2, use **MSCHAPv2** mode.<br>
+To try to force clients to use a more vulnerable authentication method, switch to **GTC**.  To capture hashes from clients which are configured to only support MSCHAPv2, use **MSCHAPv2** mode.<br />
 
 #### Impersonation
 
@@ -1436,7 +1436,7 @@ Every WiFi radio is a transceiver, meaning it can transmit (TX) and receive (RX)
 
 For the most part chipsets from Atheros and Mediatek have excellent support, with a few Ralink and Realtek chipsets having made a name for themselves in the infosec community as well. Radio chipsets typically interface with a computer over a bus like PCI or USB. A WiFi radio is often called a wireless network interface controller (WNIC or Wireless NIC).
 
-On the other hand a SoC (System on a Chip) is a special WiFi chipset which combines the radio with its own CPU. WiFi SoCs, unlike typical x86-based PCs, traditionally run MIPS or ARM based CPUs. While lower in clock speed than their PC counterparts, they’re specifically optimized for high performance networking. The WiFi Pineapple Mark VII is based on Mediatek MT7601U and MT7610U chipsets.<br>
+On the other hand a SoC (System on a Chip) is a special WiFi chipset which combines the radio with its own CPU. WiFi SoCs, unlike typical x86-based PCs, traditionally run MIPS or ARM based CPUs. While lower in clock speed than their PC counterparts, they’re specifically optimized for high performance networking. The WiFi Pineapple Mark VII is based on Mediatek MT7601U and MT7610U chipsets.<br />
 
 ---
 
@@ -1938,7 +1938,7 @@ Simply put, frame injection is the process of transmitting any WiFi frame desire
 
 Another example may be a deauthentication frame with a spoofed source and destination address. Not all radios and software support this ability. This technique is leveraged by the PineAP suite for a number of attacks using the WiFi Pineapple hardware.
 
-<br>
+<br />
 
 ---
 
@@ -2631,7 +2631,7 @@ See the assembly instructions from [https://www.kismetwireless.net/mk7-kismet-ca
 
 ![](https://3511988592-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-Mhuhsyl_byoEWXOc5EU%2Fuploads%2F8VWdl1uVKYGfpALdArnM%2Fimage.png?alt=media&token=05ae9207-79b8-41ca-9cc4-c42e98a5ab1f)
 
-<br>
+<br />
 
 ---
 

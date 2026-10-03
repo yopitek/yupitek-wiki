@@ -1,11 +1,11 @@
 ---
-title：“Hak5 Bash Bunny Mark II 原厂技术说明书与全功能操作手册”
-model：“Bash Bunny Mark II”
-manufacturer：“Hak5”
-category：“多向量 USB 渗透测试计算机”
-docs_url：“https://docs.hak5.org/bash-bunny/”
-version：“2.0”
-locale：“zh-cn”
+title: "Hak5 Bash Bunny Mark II 原厂技术说明书与全功能操作手册"
+model: "Bash Bunny Mark II"
+manufacturer: "Hak5"
+category: "多向量 USB 渗透测试计算机"
+docs_url: "https://docs.hak5.org/bash-bunny/"
+version: "2.0"
+locale: "zh-cn"
 ---
 
 # Hak5 Bash Bunny Mark II 原厂技术说明书与全功能操作手册

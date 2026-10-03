@@ -122,7 +122,7 @@ USB Rubber Ducky and DuckyScript are the trademarks of Hak5 LLC. Copyright © 20
 
 USB Rubber Ducky and DuckyScript are subject to the [Hak5 license agreement](https://hak5.org/license) ([https://hak5.org/license](https://hak5.org/license))
 
-DuckyScript is the intellectual property of Hak5 LLC for the sole benefit of Hak5 LLC and its licensees. To inquire about obtaining a license to use this material in your own project, [contact us](https://support.hak5.org). Please report counterfeits and brand abuse to <legal@hak5.org>.
+DuckyScript is the intellectual property of Hak5 LLC for the sole benefit of Hak5 LLC and its licensees. To inquire about obtaining a license to use this material in your own project, [contact us](https://support.hak5.org). Please report counterfeits and brand abuse to [legal@hak5.org](mailto:legal@hak5.org).
 
 This material is for education, authorized auditing and analysis purposes where permitted subject to local and international laws. Users are solely responsible for compliance. Hak5 LLC claims no responsibility for unauthorized or unlawful use.
 
@@ -133,8 +133,8 @@ Hak5 LLC products and technology are only available to BIS recognized license ex
 ### 1.2 Unboxing 'Quack-Start' Guide
 
 > [!WARNING]
-> **Before using your new USB Rubber Ducky** <mark style="color:green;">**please read this page start to finish**</mark>**!** \
-> It will answer many of the questions you may already have and <mark style="color:green;">**set you up for success**</mark>!
+> **Before using your new USB Rubber Ducky** <mark>**please read this page start to finish**</mark>**!** \
+> It will answer many of the questions you may already have and <mark>**set you up for success**</mark>!
 
 > [!CAUTION]
 > **DO NOT FLASH.** The limited warranty does not cover damage caused by firmware flash. Flashing legacy or third-party firmware will render the device irrecoverable. The new USB Rubber Ducky is architected in conjunction with Payload Studio such that firmware flashing will never be required. Disregard articles related to the old USB Rubber Ducky and rely solely on the official documentation here at [docs.hak5.org](https://docs.hak5.org).
@@ -160,7 +160,7 @@ It will not however show up as a mass storage "*flash drive*" — so you may be 
 By default, if no other [`BUTTON_DEF`](/hak5-usb-rubber-ducky/button/wait_for_button_press.md) is defined, pressing the button during or after payload execution will cause the USB Rubber Ducky to execute "[`ATTACKMODE STORAGE`](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/attack-modes.md)" — which is essentially "arming mode" (re-connect to the computer as a regular ol' flash drive).
 
 > [!CAUTION]
-> Only press the button **after** inserting the USB Rubber Ducky. Pressing or holding the button *while inserting* the device <mark style="color:red;">will not result in arming mode (ATTACKMODE STORAGE).</mark>
+> Only press the button **after** inserting the USB Rubber Ducky. Pressing or holding the button *while inserting* the device <mark>will not result in arming mode (ATTACKMODE STORAGE).</mark>
 
 You'll absolutely want to familiarize yourself with the chapter on [The Button](/hak5-usb-rubber-ducky/button/wait_for_button_press.md), as well as [Attack Modes](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/attack-modes.md) to make the best use of DuckyScript 3.0 — but if you just want to jump into trying out payloads, this is handy to know.
 
@@ -195,7 +195,7 @@ For this open-case duck surgery you're going to need:
 Remove the metal sheath and the USB-C cap, then carefully separate the top and bottom plastics at the seam. The top and bottom are held together with matching ports and posts. With the PCB seated button-side-up in one half of the case, line up the other side of the case such that you can see where the button lines up with the case. The case may be more difficult to open the first time doing so. A pry tool that can aid in making the job easier.
 
 > [!NOTE]
-> **We suggest keeping the microSD card that comes with the USB Rubber Ducky**. <mark style="color:green;">The smaller size helps reduce boot time.</mark> Keeping many files on or swapping the microSD card for a larger capacity one may decrease the speed at which you can deploy a payload.
+> **We suggest keeping the microSD card that comes with the USB Rubber Ducky**. <mark>The smaller size helps reduce boot time.</mark> Keeping many files on or swapping the microSD card for a larger capacity one may decrease the speed at which you can deploy a payload.
 
 ##### Step Two: Apply the spacer stickers
 
@@ -211,7 +211,7 @@ Remove the metal sheath and the USB-C cap, then carefully separate the top and b
 With the "rain-drop" sticker cutouts in place, carefully align the plastics such that the ports match the posts. Reassemble, then give the duck a test squeeze to verify the button press. Place the metal sheath back on the device, and you're in business!
 
 > [!WARNING]
-> **Avoid applying&#x20;**<mark style="color:red;">**too many**</mark>**&#x20;stickers** - this may cause the button to be permanently depressed with the case reassembled 😔
+> **Avoid applying&#x20;**<mark>**too many**</mark>**&#x20;stickers** - this may cause the button to be permanently depressed with the case reassembled 😔
 
 #### 3. Get familiar with PayloadStudio
 
@@ -269,16 +269,16 @@ Similarly, the [Hak5 forums](https://forums.hak5.org) has been going strong sinc
 
 DuckyScript™ is the programming language of the USB Rubber Ducky™, Hak5® hotplug attack gear and officially licensed devices (Trademark Hak5 LLC. Copyright © 2010 Hak5 LLC. All rights reserved.)
 
-<figure><img src="https://4019606163-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiIkRK_o3RBhZzUkrzr%2Fuploads%2FCiHTAeL8jlCA3mG7ltCF%2FScreencast%20from%2003-03-2023%2001_08_58%20PM.gif?alt=media&amp;token=9e078bdb-f7a5-4329-860d-bb7e31026c74" alt=""><figcaption></figcaption></figure>
+<figure><img src="https://4019606163-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiIkRK_o3RBhZzUkrzr%2Fuploads%2FCiHTAeL8jlCA3mG7ltCF%2FScreencast%20from%2003-03-2023%2001_08_58%20PM.gif?alt=media&amp;token=9e078bdb-f7a5-4329-860d-bb7e31026c74" alt="" /><figcaption></figcaption></figure>
 
 [[https://shop.hak5.org/](https://shop.hak5.org/)]([https://shop.hak5.org/](https://shop.hak5.org/))
 Shop Compatible Devices
-{% endembed %}
+
 
 > [!TIP]
 > DuckyScript™ officially licensed and supported devices are backwards compatible with previous versions, excluding any device specific functionality.&#x20;
 > 
-> *E.g. DuckyScript™ 1.0 payloads written for the USB Rubber Ducky **are valid DuckyScript™ 3.0**\*\* \*\*<mark style="color:green;">**and will function on the New USB Rubber Ducky without modification**</mark>*
+> *E.g. DuckyScript™ 1.0 payloads written for the USB Rubber Ducky **are valid DuckyScript™ 3.0**\*\* \*\*<mark>**and will function on the New USB Rubber Ducky without modification**</mark>*
 
 <table><thead><tr><th width="313.3333333333333" align="center">DuckyScript™ Version</th><th align="center">Device Compatibility </th></tr></thead><tbody><tr><td align="center">1.0</td><td align="center">Original USB Rubber Ducky (USB-A Only)</td></tr><tr><td align="center">2.X</td><td align="center"><a href="https://docs.hak5.org/bash-bunny/">Bash Bunny</a>, <a href="https://docs.hak5.org/key-croc/">Key Croc</a>, <a href="https://docs.hak5.org/packet-squirrel/">Packet Squirrel</a>, <a href="https://docs.hak5.org/lan-turtle/">LAN Turtle</a>, <a href="https://docs.hak5.org/shark-jack/">Shark Jack</a>, <a href="https://docs.hak5.org/hak5-docs/#omg">O.MG Devices</a></td></tr><tr><td align="center">3.0</td><td align="center">New USB Rubber Ducky (USB-A &#x26; USB-C)</td></tr></tbody></table>
 
@@ -286,19 +286,19 @@ Shop Compatible Devices
 > *DuckyScript*™ *includes commands/syntax which only work on some devices. For example, `MATCH` and `SAVEKEYS` are DuckyScript™ commands which are only for* [*Key Croc*](https://docs.hak5.org/key-croc/) *payloads and will not work on other devices.*
 
 > [!CAUTION]
-> <mark style="color:red;">**Hak5 does NOT guarantee payload functionality for unlicensed device's, or payloads NOT compiled using**</mark> [**Hak5 PayloadStudio**](https://payloadstudio.hak5.org)
+> <mark>**Hak5 does NOT guarantee payload functionality for unlicensed device's, or payloads NOT compiled using**</mark> [**Hak5 PayloadStudio**](https://payloadstudio.hak5.org)
 
 [[https://hak5.org/blogs/payloads/](https://hak5.org/blogs/payloads/)]([https://hak5.org/blogs/payloads/](https://hak5.org/blogs/payloads/))
 Hak5 Payload Hub - Featured Payloads & home of the Hak5 Payload Awards
-{% endembed %}
+
 
 [[https://github.com/hak5](https://github.com/hak5)]([https://github.com/hak5](https://github.com/hak5))
 Contribute and browse payloads on GitHub
-{% endembed %}
+
 
 [[https://payloadstudio.hak5.org/login/](https://payloadstudio.hak5.org/login/)]([https://payloadstudio.hak5.org/login/](https://payloadstudio.hak5.org/login/))
 Take your DuckyScript™ payloads to the next level with this full-featured, web-based development environment.
-{% endembed %}
+
 
 #### [Comments](/hak5-usb-rubber-ducky/ducky-script-basics/rem.md)
 
@@ -835,7 +835,7 @@ The pseudorandom number generator provides randomization for keystroke injection
 
 ##### [Random Keystroke Injection](/hak5-usb-rubber-ducky/advanced-features/randomization.md#random-keystroke-injection)
 
-<table><thead><tr><th width="150">Command</th><th>Character Set</th></tr></thead><tbody><tr><td><code>RANDOM_LOWERCASE_LETTER</code></td><td>abcdefghijklmnopqrstuvwxyz</td></tr><tr><td><code>RANDOM_UPPERCASE_LETTER</code></td><td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td></tr><tr><td><code>RANDOM_LETTER</code></td><td>abcdefghijklmnopqrstuvwxyz<br>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td></tr><tr><td><code>RANDOM_NUMBER</code></td><td>0123456789</td></tr><tr><td><code>RANDOM_SPECIAL</code></td><td>!@#$%^&#x26;*()</td></tr><tr><td><code>RANDOM_CHAR</code></td><td>abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>0123456789<br>!@#$%^&#x26;*()</td></tr></tbody></table>
+<table><thead><tr><th width="150">Command</th><th>Character Set</th></tr></thead><tbody><tr><td><code>RANDOM_LOWERCASE_LETTER</code></td><td><code>abcdefghijklmnopqrstuvwxyz</code></td></tr><tr><td><code>RANDOM_UPPERCASE_LETTER</code></td><td><code>ABCDEFGHIJKLMNOPQRSTUVWXYZ</code></td></tr><tr><td><code>RANDOM_LETTER</code></td><td><code>abcdefghijklmnopqrstuvwxyz<br />ABCDEFGHIJKLMNOPQRSTUVWXYZ</code></td></tr><tr><td><code>RANDOM_NUMBER</code></td><td><code>0123456789</code></td></tr><tr><td><code>RANDOM_SPECIAL</code></td><td><code>!@#$%^&#x26;&#42;()</code></td></tr><tr><td><code>RANDOM_CHAR</code></td><td><code>abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />0123456789<br />!@#$%^&#x26;&#42;()</code></td></tr></tbody></table>
 
 ```
 REM 42 random characters
@@ -1117,7 +1117,7 @@ These are the steps that will be repeated numerous times as you continue to lear
 
 > [!WARNING]
 > The Payload **MUST** be named `inject.bin` **exactly.** \
-> *<mark style="color:red;">No other name will function;</mark>* <mark style="color:red;"></mark><mark style="color:red;">`inject (2).bin`</mark> *<mark style="color:red;">will not work.</mark>*
+> *<mark>No other name will function;</mark>* <mark>`inject (2).bin`</mark> *<mark>will not work.</mark>*
 
 > [!CAUTION]
 > On Windows: if explorer is **NOT** set to *Show File Extensions* \
@@ -1269,7 +1269,7 @@ STRING ello, World!
 
 ##### Example without STRING
 
-While DuckyScript Classic supported injecting keystrokes without the use of the `STRING` command, each on their own line, <mark style="color:red;">this practice is deprecated and no longer recommended.</mark>&#x20;
+While DuckyScript Classic supported injecting keystrokes without the use of the `STRING` command, each on their own line, <mark>this practice is deprecated and no longer recommended.</mark>&#x20;
 
 > [!CAUTION]
 > While you may see this used in older payloads it is no longer recommended to use.
@@ -1383,8 +1383,9 @@ For this example its not important that we understand the PowerShell code that i
 STRING foreach($b in $(Get-Content "#TARGET_FILE" -Encoding byte)){foreach($a in 0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01){If($b -band $a){$o+="%{NUMLOCK}"}Else{$o+="%{CAPSLOCK}"}}};$o+="%{SCROLLLOCK}";Add-Type -Assembly System.Windows.Forms;[System.Windows.Forms.SendKeys]::SendWait("$o");exit;
 ```
 
-<pre><code><strong>STRING
-</strong>    foreach($b in $(Get-Content "#TARGET_FILE" -Encoding byte)){
+```
+STRING
+    foreach($b in $(Get-Content "#TARGET_FILE" -Encoding byte)){
         foreach($a in 0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01){
             If($b -band $a){
                 $o+="%{NUMLOCK}"
@@ -1398,7 +1399,7 @@ STRING foreach($b in $(Get-Content "#TARGET_FILE" -Encoding byte)){foreach($a in
     [System.Windows.Forms.SendKeys]::SendWait("$o");
     exit;
 END_STRING
-</code></pre>
+```
 
 ###### Result
 
@@ -1498,14 +1499,14 @@ exit;
 * `STRING_HTML` or `STRINGLN_HTML`
 
 > [!NOTE]
-> These variations work just like`STRING` or `STRINGLN` blocks with the added benefit of adding auto-complete and syntax highlighting specific to the language described by the command <mark style="color:red;">**when using PayloadStudio Pro Edition**</mark>
+> These variations work just like`STRING` or `STRINGLN` blocks with the added benefit of adding auto-complete and syntax highlighting specific to the language described by the command <mark>**when using PayloadStudio Pro Edition**</mark>
 
 ##### Example
 
 ![STRING_POWERSHELL Example](https://4019606163-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiIkRK_o3RBhZzUkrzr%2Fuploads%2FzNAtmunAjTHRQIFCNVwA%2Fimage.png?alt=media&amp;token=b637a7f3-fed5-4399-acd4-5e9bdd7a1ffa)
 
 > [!TIP]
-> This syntax **will work** with PayloadStudio Community edition; only syntax highlighting and auto-complete feature additions are limited to the <mark style="color:red;">Pro</mark> edition.
+> This syntax **will work** with PayloadStudio Community edition; only syntax highlighting and auto-complete feature additions are limited to the <mark>Pro</mark> edition.
 
 #### Cursor Keys
 
@@ -1839,8 +1840,9 @@ Defining a comment block is simple! Start the comment with `REM_BLOCK` and end t
 
 Below is an example taken from an `EXTENSION` describing its usage and intended targets.
 
-<pre><code><strong>REM_BLOCK DOCUMENTATION
-</strong>        USAGE:
+```
+REM_BLOCK DOCUMENTATION
+        USAGE:
             Place at beginning of payload (besides ATTACKMODE) to act as dynamic
             boot delay
     
@@ -1848,7 +1850,7 @@ Below is an example taken from an `EXTENSION` describing its usage and intended 
             Any system that reflects CAPSLOCK will detect minimum required delay
             Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
 END_REM
-</code></pre>
+```
 
 Proper indentation allows this comment block to be collapsed and out of the way after reading.
 
@@ -2409,8 +2411,8 @@ The new USB Rubber Ducky supports three attack modes — `HID`, `STORAGE`, and 
 
 | ATTACKMODE | Description                                                                          |
 | ---------- | ------------------------------------------------------------------------------------ |
-| `HID`      | <p>HID – Human Interface Device.<br>Emulates a Keyboard for Keystroke Injection.</p> |
-| `STORAGE`  | <p>MSC – USB Mass Storage<br>Emulates a Flash Drive for working with files.</p>      |
+| `HID`      | <p>HID – Human Interface Device.<br />Emulates a Keyboard for Keystroke Injection.</p> |
+| `STORAGE`  | <p>MSC – USB Mass Storage<br />Emulates a Flash Drive for working with files.</p>      |
 | `OFF`      | Disables device enumeration by the target.                                           |
 
 ##### HID
@@ -2712,7 +2714,7 @@ A constant is like a variable, except that its value **cannot change** throughou
 
 #### DEFINE
 
-In DuckyScript, a constant is initialized using the `DEFINE` command. One may consider the use of a `DEFINE` within a payload <mark style="color:green;">**like a find-and-replace**</mark> just before the time of compile - within what is called the preprocessor.\
+In DuckyScript, a constant is initialized using the `DEFINE` command. One may consider the use of a `DEFINE` within a payload <mark>**like a find-and-replace**</mark> just before the time of compile - within what is called the preprocessor.\
 \
 `DEFINE` can be used to more easily expose or abstract configuration options used throughout your payload. This means to change a constant value that is described by a `DEFINE` you only need to change it in one location no matter how many times its used throughout your payload.
 
@@ -2727,7 +2729,7 @@ DEFINE LABEL VALUE
 3. `VALUE` is the value to replace matching instances of `LABEL` throughout your payload. The `VALUE` is everything past `LABEL` to the end of the line (minus the first space).
 
 \
-With this in mind its best to keep your `LABEL` as descriptive as possible. Remember -  **it will be replaced with the given** `VALUE` - the length of the `LABEL` will have no affect on the actual length of your compiled payload.<br>
+With this in mind its best to keep your `LABEL` as descriptive as possible. Remember -  **it will be replaced with the given** `VALUE` - the length of the `LABEL` will have no affect on the actual length of your compiled payload.<br />
 
 ##### Within PayloadStudio
 
@@ -2750,7 +2752,7 @@ Depending on the format of your `LABEL`, `DEFINE` will behave differently in it'
 
 `DEFINE #myConstant TEST`\
 &#x20;\
-Using this syntax, `#myURLConstant` will be replaced anywhere within your payload **even if it is touching other characters.** <mark style="color:green;">This is because the</mark> <mark style="color:green;"></mark><mark style="color:green;">`LABEL`</mark> <mark style="color:green;"></mark><mark style="color:green;">starts with</mark> <mark style="color:green;"></mark><mark style="color:green;">`#`</mark>
+Using this syntax, `#myURLConstant` will be replaced anywhere within your payload **even if it is touching other characters.** <mark>This is because the</mark> <mark>`LABEL`</mark> <mark>starts with</mark> <mark>`#`</mark>
 
 ```
 DEFINE #myURLConstant example.com
@@ -2768,7 +2770,7 @@ This will result in `https://www.example.com` because `#myURLConstant` starts wi
 
 `DEFINE myURLConstant TEST`
 
-Using this syntax, `myURLConstant` will be replaced **anywhere it is not touching other characters (is its own individual word)** within your payload. <mark style="color:orange;">This is because the</mark> <mark style="color:orange;"></mark><mark style="color:orange;">`LABEL`</mark> <mark style="color:orange;"></mark><mark style="color:orange;">does not start with</mark> <mark style="color:orange;"></mark><mark style="color:orange;">`#`</mark>&#x20;
+Using this syntax, `myURLConstant` will be replaced **anywhere it is not touching other characters (is its own individual word)** within your payload. <mark>This is because the</mark> <mark>`LABEL`</mark> <mark>does not start with</mark> <mark>`#`</mark>&#x20;
 
 ```
 DEFINE myURLConstant example.com
@@ -2782,7 +2784,7 @@ this will result in `my website name is example.com`&#x20;
 > [!CAUTION]
 > [Best practice is to start your label with `#`](#with)\
 > \
-> While this method is **still supported**, <mark style="color:red;">it is no longer best practice</mark>. \
+> While this method is **still supported**, <mark>it is no longer best practice</mark>. \
 > \
 > Usage of a given `LABEL` becomes *very hard* to spot mid-payload making your payload more ambiguous without the help of PayloadStudio.&#x20;
 > 
@@ -2800,9 +2802,10 @@ this will result in `my website name is example.com`&#x20;
 
 ##### Example as Boolean
 
-<pre><code><strong>REM Example Boolean
-</strong>DEFINE #BLINK_ON_FINISH TRUE
-</code></pre>
+```
+REM Example Boolean
+DEFINE #BLINK_ON_FINISH TRUE
+```
 
 DuckyScript developers may find it useful to include defines at the top of their payload which determine whether or not a function will run. This makes it easier for the end-user to customize a shared payload.&#x20;
 
@@ -2832,8 +2835,9 @@ In both cases this will result in "`https://example.com`" being typed because th
 
 ##### Example Payload
 
-<pre><code><strong>REM Example constants using DEFINE
-</strong>
+```
+REM Example constants using DEFINE
+
 ATTACKMODE HID STORAGE
 
 DEFINE #SPEED 2000
@@ -2845,7 +2849,7 @@ STRING #MESSAGE1
 DELAY #SPEED
 SPACE
 STRING #MESSAGE2
-</code></pre>
+```
 
 ###### Result
 
@@ -2857,12 +2861,13 @@ STRING #MESSAGE2
 
 Considering `DEFINE` is a effectively an automatic find-and-replace step prior to compile, the `VALUE` of a `DEFINE` is not limited to any specific datatypes. Any valid DuckyScript syntax can be the `VALUE` of a `DEFINE`&#x20;
 
-<pre><code><strong>DEFINE #FINISHED_PAYLOAD_LED LED_G
-</strong>
+```
+DEFINE #FINISHED_PAYLOAD_LED LED_G
+
 ...Payload...
 
 #FINISHED_PAYLOAD_LED
-</code></pre>
+```
 
 ![PayloadStudio Annotation](https://4019606163-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiIkRK_o3RBhZzUkrzr%2Fuploads%2F2ED1PKsIEKArwjh4pe2D%2Fimage.png?alt=media&amp;token=5a946bfc-330d-4367-b012-11ab0e6aadef)
 
@@ -3529,7 +3534,7 @@ A high entropy `seed.bin` file may be generated using [Payload Studio](https://e
 
 Random keystroke injection is possible with DuckyScript 3.0. Using the appropriate random command, a random character may be typed.
 
-<table><thead><tr><th width="150">Command</th><th>Character Set</th></tr></thead><tbody><tr><td><code>RANDOM_LOWERCASE_LETTER</code></td><td>abcdefghijklmnopqrstuvwxyz</td></tr><tr><td><code>RANDOM_UPPERCASE_LETTER</code></td><td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td></tr><tr><td><code>RANDOM_LETTER</code></td><td>abcdefghijklmnopqrstuvwxyz<br>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td></tr><tr><td><code>RANDOM_NUMBER</code></td><td>0123456789</td></tr><tr><td><code>RANDOM_SPECIAL</code></td><td>!@#$%^&#x26;*()</td></tr><tr><td><code>RANDOM_CHAR</code></td><td>abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>0123456789<br>!@#$%^&#x26;*()</td></tr></tbody></table>
+<table><thead><tr><th width="150">Command</th><th>Character Set</th></tr></thead><tbody><tr><td><code>RANDOM_LOWERCASE_LETTER</code></td><td><code>abcdefghijklmnopqrstuvwxyz</code></td></tr><tr><td><code>RANDOM_UPPERCASE_LETTER</code></td><td><code>ABCDEFGHIJKLMNOPQRSTUVWXYZ</code></td></tr><tr><td><code>RANDOM_LETTER</code></td><td><code>abcdefghijklmnopqrstuvwxyz<br />ABCDEFGHIJKLMNOPQRSTUVWXYZ</code></td></tr><tr><td><code>RANDOM_NUMBER</code></td><td><code>0123456789</code></td></tr><tr><td><code>RANDOM_SPECIAL</code></td><td><code>!@#$%^&#x26;&#42;()</code></td></tr><tr><td><code>RANDOM_CHAR</code></td><td><code>abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />0123456789<br />!@#$%^&#x26;&#42;()</code></td></tr></tbody></table>
 
 > [!NOTE]
 > Different key-maps will produce different characters on a keyboard. For example, with a US keyboard layout the key combo `SHIFT 3` will produce in a pound, hash or number sign ("`#`"). On a UK keyboard layout, the same key combo will produce the symbol for the pound sterling currency ("`£`").&#x20;
@@ -4821,7 +4826,7 @@ DUCK()
 Copy and paste is a thing of the past! PayloadStudio automatically includes all the official `EXTENSION`s for easy access within autocomplete.&#x20;
 
 > [!NOTE]
-> Just start typing the extension name **then select it&#x20;**<mark style="color:green;">**from the autocomplete menu**</mark>
+> Just start typing the extension name **then select it&#x20;**<mark>**from the autocomplete menu**</mark>
 
 ![Adding extension from autocomplete](https://4019606163-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiIkRK_o3RBhZzUkrzr%2Fuploads%2FoCTl2hQvpcdq5FhltFKL%2FScreenshot%20from%202023-02-05%2019-49-37.png?alt=media&amp;token=9db996f0-ffaf-4434-9220-005657d19b5d)
 
@@ -5075,7 +5080,7 @@ Frequently asked questions
 
 The USB Rubber Ducky is likely stuck in DFU mode.\
 \
-This happens by entering DFU mode (*accidentally)* <mark style="color:red;">by holding the button</mark> <mark style="color:red;"></mark><mark style="color:red;">**while inserting the Ducky to a host**</mark> - some hosts will set a bit keeping the device in DFU mode resulting in the above symptoms.<br>
+This happens by entering DFU mode (*accidentally)* <mark>by holding the button</mark> <mark>**while inserting the Ducky to a host**</mark> - some hosts will set a bit keeping the device in DFU mode resulting in the above symptoms.<br />
 
 ##### Solution
 
@@ -5137,7 +5142,7 @@ Check your currently installed payload's source code (the DuckyScript that you u
 
 ##### Causes
 
-The target host uses a different keyboard layout than the payload was compiled for. <br>
+The target host uses a different keyboard layout than the payload was compiled for. <br />
 
 > [!NOTE]
 > If the correct language was used at the time the payload was generated it is possible that language has incorrect values or missing keys.&#x20;
@@ -5150,7 +5155,7 @@ Use the correct keyboard language for the target host. See: [PayloadStudio docs]
 
 ##### 3rd party encoders
 
-The USB Rubber Ducky has been around for over a decade! This leaves lots of room for now out of date information. Many old tutorials suggest using various "encoders" to compile your payload into a inject.bin. Hak5 originally provided a Java based command line encoder, replaced in 2018 in favor of a single file JSencoder that ran in your browser; both of which have been fully replaced by [PayloadStudio](https://payloadstudio.hak5.org). Any "encoder" besides PayloadStudio is <mark style="color:red;">**fully unsupported**</mark> and likely 3rd party; Expect inconsistent results.
+The USB Rubber Ducky has been around for over a decade! This leaves lots of room for now out of date information. Many old tutorials suggest using various "encoders" to compile your payload into a inject.bin. Hak5 originally provided a Java based command line encoder, replaced in 2018 in favor of a single file JSencoder that ran in your browser; both of which have been fully replaced by [PayloadStudio](https://payloadstudio.hak5.org). Any "encoder" besides PayloadStudio is <mark>**fully unsupported**</mark> and likely 3rd party; Expect inconsistent results.
 
 > [!NOTE]
 > PayloadStudio will work for original USB Rubber Duckies running DuckyScript 1.0 \
@@ -5162,7 +5167,7 @@ The USB Rubber Ducky has been around for over a decade! This leaves lots of room
 Recently Microsoft has updated Notepad on Windows 11; many sources (including those entirely unrelated to the USB Rubber Ducky) have reported numerous issues. Due to this we do not recommend using Notepad to test your payloads; instead use an alternative text editor, or even the Console within PayloadStudio.\
 \
 **Symptoms**: Input lag; jittery input while injecting keystrokes into Notepad.\
-**Solution**: Use an alternative text editor, or even the Console within PayloadStudio.<br>
+**Solution**: Use an alternative text editor, or even the Console within PayloadStudio.<br />
 
 ##### Common questions
 
@@ -5185,7 +5190,7 @@ Unfortunately this category of problem is as broad of a topic and as open ended 
 
 Still having trouble? [Head over to discord and ask for help.](https://discord.gg/HMH5yyKuuA)  \
 \
-**The Hak5 Discord server is not an official support channel.&#x20;**<mark style="color:green;">**Remember that any help offered is by people spending their own time to do so. Be polite and treat others with respect.**</mark>\
+**The Hak5 Discord server is not an official support channel.&#x20;**<mark>**Remember that any help offered is by people spending their own time to do so. Be polite and treat others with respect.**</mark>\
 \
 You can seek **official support** for Hak5 products at [https://shop.hak5.org/pages/support](https://shop.hak5.org/pages/support).
 
@@ -5252,7 +5257,7 @@ USB [VID (Vendor ID) and PID (Product ID)](/hak5-usb-rubber-ducky/attack-modes-c
 
 Similarly, by selecting a pair of VID and PID values for Arming Mode, one may configure the USB Rubber Ducky to attach to the host operating system — for example, on button press.
 
-<figure><img src="https://4019606163-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiIkRK_o3RBhZzUkrzr%2Fuploads%2FJ4RhQbKZnxsltvfh928f%2Fimage.png?alt=media&amp;token=cee12c32-291c-45a9-a5bd-ff9d7c70f75a" alt=""><figcaption></figcaption></figure>
+<figure><img src="https://4019606163-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiIkRK_o3RBhZzUkrzr%2Fuploads%2FJ4RhQbKZnxsltvfh928f%2Fimage.png?alt=media&amp;token=cee12c32-291c-45a9-a5bd-ff9d7c70f75a" alt="" /><figcaption></figcaption></figure>
 
 In the above example, the VID and PID values `046D` and `C31C` are configured as permanently assigned devices which will automatically connect to the Windows 11 virtual machine.
 

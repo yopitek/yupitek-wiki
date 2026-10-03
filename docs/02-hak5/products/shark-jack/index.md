@@ -233,7 +233,7 @@ Cool, then what? Read up at [docs.hak5.org](https://docs.hak5.org), grab the lat
 \
 Now obviously the prudent first step would be to RTFM (which you can find at docs.hak5.org) but let's throw caution to the wind... That is, with the exception of reviewing all of that important safety information – it does include a Lithium battery after all.
 
-Pay heed.<br>
+Pay heed.<br />
 
 #### STEP 1: CHARGE IT UP
 
@@ -250,7 +250,7 @@ Unplug your [Shark Jack](https://shop.hak5.org/products/shark-jack) from the USB
 
 ![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MhxW6geyenAGJvaKW11%2Fuploads%2FApF1TWp6CzkLbp1ZZsZP%2Fimage.png?alt=media&token=46d3a958-b649-4e63-9a92-dc760375482f)
 
-Find that sweet 24 port switch mounted in your network closet, or RJ45 wall plate if you've gone full-geek and wired the house with CAT6. Repeat the phrase "this is my network and I'm totally authorized to pentest it" - then flip the evil red switch far forward, closest to the Ethernet jack, to put it in attack mode. It'll start booting and blinking - and at any time it's ready to be plugged into your network. Right outa the box it'll perform a simple nmap scan - and when the fun is done, the light will go green (and the trap will be clean). It's then safe to unplug.<br>
+Find that sweet 24 port switch mounted in your network closet, or RJ45 wall plate if you've gone full-geek and wired the house with CAT6. Repeat the phrase "this is my network and I'm totally authorized to pentest it" - then flip the evil red switch far forward, closest to the Ethernet jack, to put it in attack mode. It'll start booting and blinking - and at any time it's ready to be plugged into your network. Right outa the box it'll perform a simple nmap scan - and when the fun is done, the light will go green (and the trap will be clean). It's then safe to unplug.<br />
 
 #### STEP 3: SSH IN TO NAB LOOT
 
@@ -261,7 +261,7 @@ Flip that crafty red switch to the middle position to put your [Shark Jack](http
 
 ![](https://4143471261-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MhxW6geyenAGJvaKW11%2Fuploads%2FUtVUK9tihlYo1BZa2fEK%2Fimage.png?alt=media&token=330b76b8-ac94-4d3b-9a8a-6c1ef3b64dd2)
 
-Want to make all that even easier? Download the `sharkjack.sh` script (for Mac and Linux) from the Shark Jack section of  [downloads.hak5.org](https://downloads.hak5.org/) – it'll automate gathering loot, swapping out payloads and even upgrading the firmware (you'll wanna do that – new features and tools are added from time to time).<br>
+Want to make all that even easier? Download the `sharkjack.sh` script (for Mac and Linux) from the Shark Jack section of  [downloads.hak5.org](https://downloads.hak5.org/) – it'll automate gathering loot, swapping out payloads and even upgrading the firmware (you'll wanna do that – new features and tools are added from time to time).<br />
 
 ##### THAT'S IT FOR THE BASICS
 
@@ -325,7 +325,7 @@ The first part invokes the 'scp' command to securely copy the file. This command
 
 A remote host with scp takes the form of `user@host:directory` – with `@` separating user and host, and `:` separating host and directory. If no directory is specified after the `:`, the default will be the user's home directory. In this case, the root user's home directory is `/root/` – so specifying `:payload/` is the same as specifying `:/root/payload/` (just with less typing).
 
-Keep in mind this command is going to copy the local `payload.sh` file over to the Shark Jack in `/root/payload/`, overwriting any `payload.sh` file that's already there.<br>
+Keep in mind this command is going to copy the local `payload.sh` file over to the Shark Jack in `/root/payload/`, overwriting any `payload.sh` file that's already there.<br />
 
 #### COPYING LOOT FROM THE SHARK JACK
 

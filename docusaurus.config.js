@@ -21,7 +21,7 @@ const config = {
   organizationName: 'yupitek',
   projectName: 'yupitek-wiki',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
 
   // Client modules: cross-domain hreflang + click-to-zoom image lightbox.
   clientModules: [

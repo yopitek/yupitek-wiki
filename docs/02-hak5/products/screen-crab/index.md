@@ -196,7 +196,7 @@ For the best performance using your Screen Crab connected to Cloud C2, use a `co
 
 The two WiFi parameters are:
 
-* `WIFI_SSID` – the network name<br>
+* `WIFI_SSID` – the network name<br />
 * `WIFI_PASS` – the WPA-PSK password
 
 Any characters after these variables will be used as the values. Special considerations must be made for WiFi network names and passwords containing special characters.
@@ -318,7 +318,7 @@ source /system/bin/crab && do_gpio_setup && locate_sd && wifi_config > $SD_LOCAT
 If you have already confirmed your Screen Crab has a successful connection to the access point configured using the `config.txt`, be sure to confirm your Cloud C2 server configuration is valid and functional; See [Cloud C2 setup ](broken://spaces/-MhzWyFhpTDfjfUXIt5K/pages/-MhzYcHEfBh-4NYJ-Ou-)for more information
 
 &#x20;\
-Additionally confirm that the device.config used to register the Screen Crab is correct.<br>
+Additionally confirm that the device.config used to register the Screen Crab is correct.<br />
 
 ***
 

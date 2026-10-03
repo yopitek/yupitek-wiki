@@ -1,11 +1,11 @@
 ---
-title：“Hak5 WiFi Pineapple Mark VII 原厂技术说明书与全功能操作手册”
-model：“WiFi Pineapple Mark VII”
-manufacturer：“Hak5”
-category：“无线网络安全审计与流氓 AP 测试平台”
-docs_url：“https://docs.hak5.org/wifi-pineapple/”
-version：“2.0”
-locale：“zh-cn”
+title: "Hak5 WiFi Pineapple Mark VII 原厂技术说明书与全功能操作手册"
+model: "WiFi Pineapple Mark VII"
+manufacturer: "Hak5"
+category: "无线网络安全审计与流氓 AP 测试平台"
+docs_url: "https://docs.hak5.org/wifi-pineapple/"
+version: "2.0"
+locale: "zh-cn"
 ---
 
 # Hak5 WiFi Pineapple Mark VII 原厂技术说明书与全功能操作手册

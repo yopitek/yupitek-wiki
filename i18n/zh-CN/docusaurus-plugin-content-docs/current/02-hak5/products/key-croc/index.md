@@ -1,11 +1,11 @@
 ---
-title：“Hak5 Key Croc 原厂技术说明书与全功能操作手册”
-model：“Key Croc”
-manufacturer：“Hak5”
-category：“硬件渗透测试 / HitM 植入设备”
-docs_url：“https://docs.hak5.org/key-croc/”
-version：“1.3”
-locale：“zh-cn”
+title: "Hak5 Key Croc 原厂技术说明书与全功能操作手册"
+model: "Key Croc"
+manufacturer: "Hak5"
+category: "硬件渗透测试 / HitM 植入设备"
+docs_url: "https://docs.hak5.org/key-croc/"
+version: "1.3"
+locale: "zh-cn"
 ---
 
 # Hak5 Key Croc 原厂技术说明书与全功能操作手册

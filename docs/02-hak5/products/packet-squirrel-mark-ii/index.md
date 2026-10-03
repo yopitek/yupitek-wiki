@@ -826,7 +826,7 @@ In ISOLATE mode, the Packet Squirrel has no network connection, and will not be 
 
 "When I use a word," Humpty Dumpty said in rather a scornful tone, "it means just what I choose it to mean -- neither more nor less."
 
-<table><thead><tr><th width="208">Term</th><th>Definition</th></tr></thead><tbody><tr><td>Bridge</td><td>A network mode (or network device) which copies packets between two physical interfaces, without changing the content of the packets.<br><br>Similar to a switch, a bridge copies packets from one physical network to another physical network, without modification.</td></tr><tr><td>Hub</td><td>A hub distributes packets from all connected devices to all other connected devices.<br><br>A hub operates at the physical layer (layer 1) and has no insight into the contents of the data, and offers no protection against multiple devices transmitting at once.</td></tr><tr><td>Layer <em>N</em></td><td>A reference to a layer in the <a href="/packet-squirrel-mark-ii/networking-tutorial/osi-layers.md">OSI network model</a>; typically used to describe the area of networking, such as layer 2 (raw packets), layer 4 (TCP and above), and so on.</td></tr><tr><td>MAC Address</td><td>A MAC address (Media Access Control), is the unique 6-byte addressed of a network card at the lowest layer.<br><br>MAC addresses <em>must</em> be unique within a network.<br><br>The first 3 bytes of the MAC address are known as the OUI (Organizational Unique Identifier); each manufacturer has a unique UI, which allows identifying (to some extent) what company has produced a network device.  Since many network devices are re-branded or include network chipsets from other companies, this information is not always reliable.</td></tr><tr><td>NAT</td><td>Also known as <em>Network Address Translation</em> or <em>Masquerading</em>; a method where packets from multiple devices on a private network are rewritten to appear to be from a single device on the public network.</td></tr><tr><td>Packet</td><td><p>A packet represents a collection of data on the network transmitted as a single object.</p><p><br>A stream of data (such as a web site or video stream) is broken up into many packets to traverse the network.<br><br>Often used synonymously with the term "frame" to indicate a block of data on a physical network.</p></td></tr><tr><td>Router</td><td>A network mode (or network device) which directs packets from one logical network to another (such as from a private network to an Internet connection, often utilizing NAT in the process).<br><br>Routers are responsible for passing packets from one network to another, such as a private local network passing packets to a larger corporate network or the Internet.<br><br>Routers modify packets to direct them to the new network.</td></tr><tr><td>Switch</td><td>A network device which connects multiple Ethernet devices, while keeping traffic separate.<br><br>A switch operates purely at the data layer (layer 2), and typically has no insight into the types of packets or the protocols contained in the packet.</td></tr></tbody></table>
+<table><thead><tr><th width="208">Term</th><th>Definition</th></tr></thead><tbody><tr><td>Bridge</td><td>A network mode (or network device) which copies packets between two physical interfaces, without changing the content of the packets.<br /><br />Similar to a switch, a bridge copies packets from one physical network to another physical network, without modification.</td></tr><tr><td>Hub</td><td>A hub distributes packets from all connected devices to all other connected devices.<br /><br />A hub operates at the physical layer (layer 1) and has no insight into the contents of the data, and offers no protection against multiple devices transmitting at once.</td></tr><tr><td>Layer <em>N</em></td><td>A reference to a layer in the <a href="/packet-squirrel-mark-ii/networking-tutorial/osi-layers.md">OSI network model</a>; typically used to describe the area of networking, such as layer 2 (raw packets), layer 4 (TCP and above), and so on.</td></tr><tr><td>MAC Address</td><td>A MAC address (Media Access Control), is the unique 6-byte addressed of a network card at the lowest layer.<br /><br />MAC addresses <em>must</em> be unique within a network.<br /><br />The first 3 bytes of the MAC address are known as the OUI (Organizational Unique Identifier); each manufacturer has a unique UI, which allows identifying (to some extent) what company has produced a network device.  Since many network devices are re-branded or include network chipsets from other companies, this information is not always reliable.</td></tr><tr><td>NAT</td><td>Also known as <em>Network Address Translation</em> or <em>Masquerading</em>; a method where packets from multiple devices on a private network are rewritten to appear to be from a single device on the public network.</td></tr><tr><td>Packet</td><td><p>A packet represents a collection of data on the network transmitted as a single object.</p><p><br />A stream of data (such as a web site or video stream) is broken up into many packets to traverse the network.<br /><br />Often used synonymously with the term "frame" to indicate a block of data on a physical network.</p></td></tr><tr><td>Router</td><td>A network mode (or network device) which directs packets from one logical network to another (such as from a private network to an Internet connection, often utilizing NAT in the process).<br /><br />Routers are responsible for passing packets from one network to another, such as a private local network passing packets to a larger corporate network or the Internet.<br /><br />Routers modify packets to direct them to the new network.</td></tr><tr><td>Switch</td><td>A network device which connects multiple Ethernet devices, while keeping traffic separate.<br /><br />A switch operates purely at the data layer (layer 2), and typically has no insight into the types of packets or the protocols contained in the packet.</td></tr></tbody></table>
 
 ---
 
@@ -1227,8 +1227,9 @@ ip.addr == 172.16.32.0/24 && !ip.addr == 172.16.32.1
 
 Display packets on a range of ports:
 
-<pre><code><strong>tcp.port >= 5000 &#x26;&#x26; tcp.port &#x3C;= 6000
-</strong></code></pre>
+```
+tcp.port >= 5000 && tcp.port <= 6000
+```
 
 Display packets from specific ports:
 
@@ -1373,7 +1374,7 @@ Payloads can be constructed of DuckyScript commands alone, or combined with the 
 
 Ducky Script commands for the Packet Squirrel include:
 
-<table><thead><tr><th width="208">Command</th><th data-type="content-ref">Documentation</th><th>Description</th></tr></thead><tbody><tr><td><code>BUTTON</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/button.md">BUTTON</a></td><td>Pauses the payload for the specified number of seconds or until the button is pressed.</td></tr><tr><td><code>C2EXFIL</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/c2exfil.md">C2EXFIL</a></td><td>Send a file via Cloud C²</td></tr><tr><td><code>C2NOTIFY</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/c2notify.md">C2NOTIFY</a></td><td>Send a notification via Cloud C²</td></tr><tr><td><code>C2WATCHDIR</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/c2watchdir.md">C2WATCHDIR</a></td><td>Watch for new files in a directory and automatically send them to Cloud C²</td></tr><tr><td><code>DYNAMICPROXY</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/dynamicproxy.md">DYNAMICPROXY</a></td><td>Create a dynamic man-in-the-middle TCP proxy to intercept traffic in <code>NAT</code> and <code>BRIDGE</code> modes.</td></tr><tr><td><code>KILLPORT</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/killport.md">KILLPORT</a></td><td>Kill any traffic seen on one or several ports by injecting TCP RST packets.</td></tr><tr><td><code>KILLSTREAM</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/killstream.md">KILLSTREAM</a></td><td>Kill any streams on or several ports by injecting TCP RST packets.</td></tr><tr><td><code>LED</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/led.md">LED</a></td><td>Control the RGB LED on the front of the Packet Squirrel; parameters include color and pattern.</td></tr><tr><td><code>MATCHPORT</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/matchport.md">MATCHPORT</a></td><td>Pause the payload until traffic is matched on one or more ports. </td></tr><tr><td><code>MATCHSTREAM</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/matchstream.md">MATCHSTREAM</a></td><td>Pause the payload until traffic matching a regular expression is seen.</td></tr><tr><td><code>NETMODE</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/netmode.md">NETMODE</a></td><td>Set the <a href="/packet-squirrel-mark-ii/getting-started/networking-and-modes.md">network mode</a> of the Packet Squirrel.</td></tr><tr><td><code>SELFDESTRUCT</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/selfdestruct.md">SELFDESTRUCT</a></td><td>Wipe the Packet Squirrel internal storage and attached USB, and reboot into lockdown mode with transparent bridging only.</td></tr><tr><td><code>SSH_START</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ssh_start.md">SSH_START</a></td><td>Launch the SSH server</td></tr><tr><td><code>SSH_STOP</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ssh_stop.md">SSH_STOP</a></td><td>Stop the SSH server</td></tr><tr><td><code>SPOOFDNS</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/spoofdns.md">SPOOFDNS</a></td><td>Overwrite DNS queries</td></tr><tr><td><code>SWITCH</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/switch.md">SWITCH</a></td><td>Reports the current switch position. <br>(<em>This is NOT necessarily the payload currently running, if the switch was moved after boot!</em>)</td></tr><tr><td><code>UI_START</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ui_start.md">UI_START</a></td><td>Launch the Packet Squirrel web UI</td></tr><tr><td><code>UI_STOP</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ui_stop.md">UI_STOP</a></td><td>Stop the Packet Squirrel web UI</td></tr><tr><td><code>USB_FREE</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/usb_free.md">USB_FREE</a></td><td>Return how much USB storage is available, in bytes</td></tr><tr><td><code>USB_STORAGE</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/usb_storage.md">USB_STORAGE</a></td><td>Detect if USB storage is present</td></tr><tr><td><code>USB_WAIT</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/usb_wait.md">USB_WAIT</a></td><td>Wait until USB storage is attached</td></tr></tbody></table>
+<table><thead><tr><th width="208">Command</th><th data-type="content-ref">Documentation</th><th>Description</th></tr></thead><tbody><tr><td><code>BUTTON</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/button.md">BUTTON</a></td><td>Pauses the payload for the specified number of seconds or until the button is pressed.</td></tr><tr><td><code>C2EXFIL</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/c2exfil.md">C2EXFIL</a></td><td>Send a file via Cloud C²</td></tr><tr><td><code>C2NOTIFY</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/c2notify.md">C2NOTIFY</a></td><td>Send a notification via Cloud C²</td></tr><tr><td><code>C2WATCHDIR</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/c2watchdir.md">C2WATCHDIR</a></td><td>Watch for new files in a directory and automatically send them to Cloud C²</td></tr><tr><td><code>DYNAMICPROXY</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/dynamicproxy.md">DYNAMICPROXY</a></td><td>Create a dynamic man-in-the-middle TCP proxy to intercept traffic in <code>NAT</code> and <code>BRIDGE</code> modes.</td></tr><tr><td><code>KILLPORT</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/killport.md">KILLPORT</a></td><td>Kill any traffic seen on one or several ports by injecting TCP RST packets.</td></tr><tr><td><code>KILLSTREAM</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/killstream.md">KILLSTREAM</a></td><td>Kill any streams on or several ports by injecting TCP RST packets.</td></tr><tr><td><code>LED</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/led.md">LED</a></td><td>Control the RGB LED on the front of the Packet Squirrel; parameters include color and pattern.</td></tr><tr><td><code>MATCHPORT</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/matchport.md">MATCHPORT</a></td><td>Pause the payload until traffic is matched on one or more ports. </td></tr><tr><td><code>MATCHSTREAM</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/matchstream.md">MATCHSTREAM</a></td><td>Pause the payload until traffic matching a regular expression is seen.</td></tr><tr><td><code>NETMODE</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/netmode.md">NETMODE</a></td><td>Set the <a href="/packet-squirrel-mark-ii/getting-started/networking-and-modes.md">network mode</a> of the Packet Squirrel.</td></tr><tr><td><code>SELFDESTRUCT</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/selfdestruct.md">SELFDESTRUCT</a></td><td>Wipe the Packet Squirrel internal storage and attached USB, and reboot into lockdown mode with transparent bridging only.</td></tr><tr><td><code>SSH_START</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ssh_start.md">SSH_START</a></td><td>Launch the SSH server</td></tr><tr><td><code>SSH_STOP</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ssh_stop.md">SSH_STOP</a></td><td>Stop the SSH server</td></tr><tr><td><code>SPOOFDNS</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/spoofdns.md">SPOOFDNS</a></td><td>Overwrite DNS queries</td></tr><tr><td><code>SWITCH</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/switch.md">SWITCH</a></td><td>Reports the current switch position. <br />(<em>This is NOT necessarily the payload currently running, if the switch was moved after boot!</em>)</td></tr><tr><td><code>UI_START</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ui_start.md">UI_START</a></td><td>Launch the Packet Squirrel web UI</td></tr><tr><td><code>UI_STOP</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ui_stop.md">UI_STOP</a></td><td>Stop the Packet Squirrel web UI</td></tr><tr><td><code>USB_FREE</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/usb_free.md">USB_FREE</a></td><td>Return how much USB storage is available, in bytes</td></tr><tr><td><code>USB_STORAGE</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/usb_storage.md">USB_STORAGE</a></td><td>Detect if USB storage is present</td></tr><tr><td><code>USB_WAIT</code></td><td><a href="/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/usb_wait.md">USB_WAIT</a></td><td>Wait until USB storage is attached</td></tr></tbody></table>
 
 #### A simple payload
 
@@ -2550,13 +2551,14 @@ echo "${name:(-2)}"   # Prints "hn" (slicing from right)
 
 Pattern matching can be used to directly manipulate paths:
 
-<pre class="language-bash"><code class="lang-bash"><strong>data="/usb/squirrel/data/foo.txt"
-</strong>echo "${data%.txt}"    # Prints /usb/squirrel/data/foo
+```bash
+data="/usb/squirrel/data/foo.txt"
+echo "${data%.txt}"    # Prints /usb/squirrel/data/foo
 echo "${data%/*}"      # Prints /usb/squirrel/data
 
 echo "${data##*.}"     # Prints txt (the file extension)
 echo "${data##*/}"     # Prints foo.txt (just the file name)
-</code></pre>
+```
 
 **String manipulation**
 
@@ -3343,8 +3345,9 @@ The output will be sent to `newfile`.
 
 3. Perform calculations:
 
-<pre class="language-sh"><code class="lang-sh"><strong>cat filename | awk '{ total += $1 } END { print total }' > newfile
-</strong></code></pre>
+```
+cat filename | awk '{ total += $1 } END { print total }' > newfile
+```
 
 This command will add up all the numbers in the first field of the `filename` file and print the total at the end. The `END` keyword specifies that the action should be performed after all lines have been processed.
 
@@ -3910,7 +3913,8 @@ Given an example JSON with a list of URLs to fetch in a payload:
 
 We could then fetch each file with:
 
-<pre class="language-bash"><code class="lang-bash">#!/bin/bash
+```bash
+#!/bin/bash
 
 . /usr/share/libubox/jshn.sh
 
@@ -3922,7 +3926,8 @@ json_init
 json_load_file urls.json
 
 json_for_each_item fetch_file "urls"
-</code></pre>
+
+```
 
 ##### Loading JSON from the web
 
@@ -3988,7 +3993,8 @@ For more complex payloads and JSON documents, using the `jshn` creation framewor
 
 Lets recreate the document above using `jshn` functions:
 
-<pre class="language-bash"><code class="lang-bash"><strong>. /usr/share/libubox/jshn.sh
+```bash
+<strong>. /usr/share/libubox/jshn.sh
 </strong>#!/bin/bash
 
 uservar="mary"
@@ -4013,7 +4019,8 @@ json_close_array
 
 ### Print the JSON
 json_dump
-</code></pre>
+
+```
 
 This would print out the JSON string:
 

@@ -1,11 +1,11 @@
 ---
-title：“Hak5 Shark Jack 原厂技术说明书与全功能操作手册”
-model：“Shark Jack”
-manufacturer：“Hak5”
-category：“便携式网络渗透测试植入设备”
-docs_url：“https://docs.hak5.org/shark-jack/”
-version：“2.0”
-locale：“zh-cn”
+title: "Hak5 Shark Jack 原厂技术说明书与全功能操作手册"
+model: "Shark Jack"
+manufacturer: "Hak5"
+category: "便携式网络渗透测试植入设备"
+docs_url: "https://docs.hak5.org/shark-jack/"
+version: "2.0"
+locale: "zh-cn"
 ---
 
 # Hak5 Shark Jack 原厂技术说明书与全功能操作手册

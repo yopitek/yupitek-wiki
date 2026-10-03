@@ -115,13 +115,13 @@ Key Croc is a trademark of Hak5 LLC. This product is packaged with a limited war
 
 #### Deployment
 
-In its most basic state, the Key Croc acts as a keylogger. To deploy, simply plug the Key Croc into a computer – known herein as the target. Within a few seconds the Key Croc will boot, lighting multiple colors along the way to indicate its state (described below). If a keyboard is not attached to the Key Croc at boot, the LED indicates such with a white light. Plugging a standard IBM-PC compatible USB keyboard into the Key Croc will cause the LED to turn off and the device to enter what is known as Attack Mode. The Key Croc will then clone the hardware identifiers of the keyboard and present itself to the target as that keyboard. Keystrokes typed on the keyboard will be passed through to the target, while simultaneously saving to a log file on the Key Croc. Any active payload will execute once the target types a defined matching key sequence.<br>
+In its most basic state, the Key Croc acts as a keylogger. To deploy, simply plug the Key Croc into a computer – known herein as the target. Within a few seconds the Key Croc will boot, lighting multiple colors along the way to indicate its state (described below). If a keyboard is not attached to the Key Croc at boot, the LED indicates such with a white light. Plugging a standard IBM-PC compatible USB keyboard into the Key Croc will cause the LED to turn off and the device to enter what is known as Attack Mode. The Key Croc will then clone the hardware identifiers of the keyboard and present itself to the target as that keyboard. Keystrokes typed on the keyboard will be passed through to the target, while simultaneously saving to a log file on the Key Croc. Any active payload will execute once the target types a defined matching key sequence.<br />
 
 #### Setup via ARMING MODE
 
 Pressing the hidden arming button on the bottom side of the Key Croc will stop the keystroke passthrough and recording. The Key Croc will enter what is known as Arming Mode, indicated by a blue blinking LED. Instead of emulating the connected keyboard, the Key Croc will now emulate both a serial device and USB flash disk – known as the udisk. Accessing this USB flash disk or udisk, with its drive label "KeyCroc", will present the operator with a number of files and folders.
 
-Among the files and folders present on the USB flash disk is config.txt. Editing this file with a standard text editor (like Notepad on Windows, TextEdit on Mac, vim/nano on Linux) will let you configure settings such as keymap, WiFi, SSH and DNS.<br>
+Among the files and folders present on the USB flash disk is config.txt. Editing this file with a standard text editor (like Notepad on Windows, TextEdit on Mac, vim/nano on Linux) will let you configure settings such as keymap, WiFi, SSH and DNS.<br />
 
 #### Compatibility
 
@@ -463,7 +463,7 @@ The Key Croc features an onboard WiFi module for connecting to nearby 2.4GHz net
 
 The two WiFi parameters are:
 
-* `WIFI_SSID` – the network name<br>
+* `WIFI_SSID` – the network name<br />
 * `WIFI_PASS` – the WPA-PSK password
 
 Any characters after these key words will be used as the values.&#x20;
@@ -566,7 +566,7 @@ In classic Hak5 fashion, the recorded keystrokes and other log files saved on th
 
 Additionally, the payload framework will save a log entry to a matches.log file every time a payload is executed by a pattern match.
 
-Technical note: While in Attack Mode, logs and optionally other data from additional payloads are written to /root/loot. When entering Arming Mode, the contents of `/root/loot` are synchronized with the loot directory on the USB Flash Disk at `/root/udisk/loot`. See the guide on Understanding the Key Croc file system for more technical details on this special consideration.\ <br>
+Technical note: While in Attack Mode, logs and optionally other data from additional payloads are written to /root/loot. When entering Arming Mode, the contents of `/root/loot` are synchronized with the loot directory on the USB Flash Disk at `/root/udisk/loot`. See the guide on Understanding the Key Croc file system for more technical details on this special consideration.\ <br />
 
 #### Managing Payloads
 
@@ -592,7 +592,7 @@ Payloads may also be deactivated by using the `DISABLE_PAYLOAD` command.
 
 * `MATCH` – specifies a pattern that must be typed to trigger payload execution
 * `SAVEKEYS` – saves next or last typed keys to a specified file when a MATCH is found
-* `QUACK` – injects keystrokes using Ducky Script 2.0<br>
+* `QUACK` – injects keystrokes using Ducky Script 2.0<br />
 * `QUACKFILE` – injects keystrokes from specified file
 * `ATTACKMODE` – specifies which device type to emulate
 * `LED` – controls the multi-color LED
@@ -604,19 +604,19 @@ Payloads may also be deactivated by using the `DISABLE_PAYLOAD` command.
 * `CHECK_PAYLOADS` – checks the `MATCH` and `SAVEKEYS` syntax of the loaded payloads
 * `RECORD_PAYLOAD` – interactive payload recorder
 * `ENABLE_PAYLOAD` – enables payload
-* `DISABLE_PAYLOAD` – disables payload<br>
+* `DISABLE_PAYLOAD` – disables payload<br />
 
 #### EXTRAS
 
 * `INSTALL_EXTRAS` – installs optional third party tools
 * `KEYBOARD` – reports if a keyboard is present or missing
-* `udisk` – mount, unmount and format the udisk partition\ <br>
+* `udisk` – mount, unmount and format the udisk partition\ <br />
 
 #### WAIT COMMANDS
 
 * `WAIT_FOR_KEYBOARD_ACTIVITY` – halts payload until keyboard activity is detected
 * `WAIT_FOR_KEYBOARD_INACTIVITY` – halts payload until keyboard is inactive for specified time
-* `WAIT_FOR_LOOT` – halts payload until specified loot is received\ <br>
+* `WAIT_FOR_LOOT` – halts payload until specified loot is received\ <br />
 
 #### CLOUD C2 COMMANDS
 
@@ -1066,7 +1066,7 @@ RNDIS – Remote Network Driver Interface Specification. In this attack mode, th
 
 `RNDIS_SPEED_XX`
 
-Sets the reported RNDIS speed to XX (where 0 < XX <= 4294967) in kilobytes.&#x20;
+Sets the reported RNDIS speed to XX (where `0 < XX <= 4294967`) in kilobytes.&#x20;
 
 ##### **EXAMPLES**
 
@@ -1478,7 +1478,7 @@ So as you might imagine, with just a little work we can flex our bash-fu to extr
 > awk -F '\[ENTER\]' {'print $2'} /root/loot/password.txt
 > ```
 
-And there you have it. This little gem will use `[ENTER]` as the delimiter and print the gold typed between the two `ENTER` key presses. As you might imagine, using the power of bash this could be saved to a file and exfiltrated to [Cloud C2](https://c2.hak5.org), or stored in a variable for even more mischief.<br>
+And there you have it. This little gem will use `[ENTER]` as the delimiter and print the gold typed between the two `ENTER` key presses. As you might imagine, using the power of bash this could be saved to a file and exfiltrated to [Cloud C2](https://c2.hak5.org), or stored in a variable for even more mischief.<br />
 
 #### PUTTING IT ALL TOGETHER
 
@@ -1607,7 +1607,7 @@ That's just one of the new script, which compliment the intuitively named `WAIT_
 
 Those are just some of the awesome new features that await with Key Croc version 1.3. You can find full documentation for all of the commands at [docs.hak5.org](https://docs.hak5.org/).
 
-So, what would you like to see in 1.4? Let us know on the [forums](https://forums.hak5.org/topic/52333-release-key-croc-firmware-13/)! <br>
+So, what would you like to see in 1.4? Let us know on the [forums](https://forums.hak5.org/topic/52333-release-key-croc-firmware-13/)! <br />
 
 ---
 

@@ -370,7 +370,7 @@ From a powered off state, place your USB drive into the USB Type-A port on the W
 > [!CAUTION]
 > During the firmware installation process, as indicated by the red/blue LED status, DO NOT disconnect the power source. Doing so will render the device inoperable.
 
-Once the firmware has installed, you may connect to the WiFi Pineapple network and visit the web interface at [http://172.16.42.1:1471]([http://172.16.42.1:1471 ](http://172.16.42.1:1471 )).
+Once the firmware has installed, you may connect to the WiFi Pineapple network and visit the web interface at [http://172.16.42.1:1471](http://172.16.42.1:1471).
 
 ---
 
@@ -898,7 +898,7 @@ WAN Ethernet allows the WiFi Pineapple Enterprise to connect to a physical netwo
 
 The Manangement Network SSID and password can be configured on the WiFi settings page.
 
-<figure><img src="https://3835023701-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FacPgAPOTCR6FfroWlhOf%2Fuploads%2FV8CBxoQkRByP3dGrRTws%2FScreenshot%20from%202022-09-22%2013-56-51.png?alt=media&amp;token=55e88eba-9635-49bd-bfa4-4cd3996ce010" alt=""><figcaption></figcaption></figure>
+<figure><img src="https://3835023701-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FacPgAPOTCR6FfroWlhOf%2Fuploads%2FV8CBxoQkRByP3dGrRTws%2FScreenshot%20from%202022-09-22%2013-56-51.png?alt=media&amp;token=55e88eba-9635-49bd-bfa4-4cd3996ce010" alt="" /><figcaption></figcaption></figure>
 
 #### **LEDs**
 
@@ -1045,7 +1045,7 @@ Every WiFi radio is a transceiver, meaning it can transmit (TX) and receive (RX)
 
 For the most part chipsets from Atheros and Mediatek have excellent support, with a few Ralink and Realtek chipsets having made a name for themselves in the infosec community as well. Radio chipsets typically interface with a computer over a bus like PCI or USB. A WiFi radio is often called a wireless network interface controller (WNIC or Wireless NIC).
 
-On the other hand a SoC (System on a Chip) is a special WiFi chipset which combines the radio with its own CPU. WiFi SoCs, unlike typical x86-based PCs, traditionally run MIPS or ARM based CPUs. While lower in clock speed than their PC counterparts, they’re specifically optimized for high performance networking. The WiFi Pineapple Mark VII is based on Mediatek MT7601U and MT7610U chipsets.<br>
+On the other hand a SoC (System on a Chip) is a special WiFi chipset which combines the radio with its own CPU. WiFi SoCs, unlike typical x86-based PCs, traditionally run MIPS or ARM based CPUs. While lower in clock speed than their PC counterparts, they’re specifically optimized for high performance networking. The WiFi Pineapple Mark VII is based on Mediatek MT7601U and MT7610U chipsets.<br />
 
 ---
 
@@ -1253,7 +1253,7 @@ Simply put, frame injection is the process of transmitting any WiFi frame desire
 
 Another example may be a deauthentication frame with a spoofed source and destination address. Not all radios and software support this ability. This technique is leveraged by the PineAP suite for a number of attacks using the WiFi Pineapple hardware.
 
-<br>
+<br />
 
 ---
 

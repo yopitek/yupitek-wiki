@@ -141,7 +141,7 @@ In Switch Position 3 (closest to the USB plug) the Bash Bunny will boot into *ar
 | Red (blinking)       | Recovery Mode or Firmware Flashing *from v1.0* **DO NOT UNPLUG**  |
 | Red/Blue Alternating | Recovery Mode or Firmware Flashing *from v1.1+* **DO NOT UNPLUG** |
 
-<br>
+<br />
 
 ---
 
@@ -252,7 +252,7 @@ Payloads can be loaded onto the device simply by moving them to the appropriate 
 
 [*Extensions*](/bash-bunny/writing-payloads/extensions.md) can be sourced which extend the DuckyScript language with user contributed functions and variables which enhance and simplify payloads. \
 \
-All DuckyScript commands are written in ALL CAPS. <br>
+All DuckyScript commands are written in ALL CAPS. <br />
 
 The base DuckyScript commands are:
 
@@ -354,12 +354,12 @@ This table is provides a non-exhaustive list of basic usage for some extensions.
 
 | ATTACKMODE       | Description                                                                                                                                                                                                                                                                                                                                                                         |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `SERIAL`         | <p>ACM – Abstract Control Model<br>Serial Console</p>                                                                                                                                                                                                                                                                                                                               |
-| `ECM_ETHERNET`   | <p>ECM – Ethernet Control Model<br>Linux/Mac/Android Ethernet Adapter</p>                                                                                                                                                                                                                                                                                                           |
-| `RNDIS_ETHERNET` | <p>RNDIS – Remote Network Driver Interface Specification<br>Windows (and some Linux) Ethernet Adapter</p>                                                                                                                                                                                                                                                                           |
+| `SERIAL`         | <p>ACM – Abstract Control Model<br />Serial Console</p>                                                                                                                                                                                                                                                                                                                               |
+| `ECM_ETHERNET`   | <p>ECM – Ethernet Control Model<br />Linux/Mac/Android Ethernet Adapter</p>                                                                                                                                                                                                                                                                                                           |
+| `RNDIS_ETHERNET` | <p>RNDIS – Remote Network Driver Interface Specification<br />Windows (and some Linux) Ethernet Adapter</p>                                                                                                                                                                                                                                                                           |
 | `AUTO_ETHERNET`  | <p>Automatic Ethernet. This attack mode will first attempt to bring up ECM\_ETHERNET. If after the default timeout of 20 seconds no connection is established, RNDIS\_ETHERNET will be attempted. The timeout may be changed by adding ETHERNET\_TIMEOUT\_XX where XX is the number of seconds, e.g. ETHERNET\_TIMEOUT\_60 for one minute.</p><p>Requires firmware version 1.5+</p> |
-| `STORAGE`        | <p>UMS – USB Mass Storage<br>Flash Drive</p>                                                                                                                                                                                                                                                                                                                                        |
-| `HID`            | <p>HID – Human Interface Device<br>Keyboard – Keystroke Injection via Ducky Script </p>                                                                                                                                                                                                                                                                                             |
+| `STORAGE`        | <p>UMS – USB Mass Storage<br />Flash Drive</p>                                                                                                                                                                                                                                                                                                                                        |
+| `HID`            | <p>HID – Human Interface Device<br />Keyboard – Keystroke Injection via Ducky Script </p>                                                                                                                                                                                                                                                                                             |
 
 Many combinations of attack modes are possible, however some are not. For example, `ATTACKMODE HID STORAGE ECM_ETHERNET` is valid while `ATTACKMODE RNDIS_ETHERNET ECM_ETHERNET STORAGE SERIAL` is not. Each attack mode combination registers using a different USB VID/PID (Vendor ID/Product ID) by default. VID and PID can be spoofed using the VID and PID commands.
 
@@ -477,7 +477,7 @@ LED M 500
 LED SETUP
 ```
 
-<br>
+<br />
 
 ---
 
@@ -661,7 +661,7 @@ wget bashbunny.com/bb.sh
 sudo bash ./bb.sh
 ```
 
-<br>
+<br />
 
 ---
 
@@ -675,10 +675,10 @@ The Bash Bunny can share the Internet connection of a host computer. This can be
 
 [[https://youtu.be/U2UMz9C283M](https://youtu.be/U2UMz9C283M)]([https://youtu.be/U2UMz9C283M](https://youtu.be/U2UMz9C283M))
 [https://youtu.be/U2UMz9C283M](https://youtu.be/U2UMz9C283M)
-{% endembed %}
+
 
 1. Ensure that the Bash Bunny has been updated to the latest firmware and that the [get2\_dhclient.sh extension](https://raw.githubusercontent.com/hak5/bashbunny-payloads/master/payloads/extensions/get2_dhclient.sh) is present in the payloads/extensions/ directory on the Bash Bunny's USB mass storage partition. If not, copy the extension from the linked Bash Bunny repository.
-2. With the Bash Bunny in arming mode, create a new payload.txt in switch position 1 directory as follows:<br>
+2. With the Bash Bunny in arming mode, create a new payload.txt in switch position 1 directory as follows:<br />
 
    ```
    LED SETUPATTACKMODE ECM_ETHERNETDHCLIENTLED FINISH≈
@@ -858,7 +858,7 @@ Learn more about using Ducky Script for Keystroke Injection attacks from the **P
 
 ### 6.2 Network Hijacking Attacks with the Bash Bunny
 
-Exploiting local network attack vectors, the Bash Bunny emulates specialized Ethernet adapters. That means the target computer sees the Bash Bunny not as an ordinary flash drive, but as a USB Ethernet Adapter connected to a network. It's a network of two – the Bash Bunny and your target – and once connected, you'll have direct access to the target bypassing any would-be firewalls, countermeasures or intrusion detection systems from the legitimate LAN.<br>
+Exploiting local network attack vectors, the Bash Bunny emulates specialized Ethernet adapters. That means the target computer sees the Bash Bunny not as an ordinary flash drive, but as a USB Ethernet Adapter connected to a network. It's a network of two – the Bash Bunny and your target – and once connected, you'll have direct access to the target bypassing any would-be firewalls, countermeasures or intrusion detection systems from the legitimate LAN.<br />
 
 ![](https://4178757749-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FnxJgJ9UdPfrcuL1U8DpL%2Fuploads%2FnfQINEFggwGf1Ik6EsTx%2Fimage.png?alt=media&token=8452f717-dc07-424f-88e9-4fee4d331246)
 
@@ -919,7 +919,7 @@ These are just some of our favorite exfiltration payloads. For the complete list
 
 [USB Exfiltrator on Hak5 PayloadHub](https://payloadhub.com/blogs/payloads/exfiltrator-for-bash-bunny)
 
-Exfiltrates files from the users Documents folder Saves to the loot folder on the Bash Bunny USB Mass Storage partition named by the victim hostname, date and timestamp.\ <br>
+Exfiltrates files from the users Documents folder Saves to the loot folder on the Bash Bunny USB Mass Storage partition named by the victim hostname, date and timestamp.\ <br />
 
 ##### 2. FASTER SMB EXFILTRATOR
 
@@ -963,7 +963,7 @@ The netcat listener IP address and port is configurable. This can be adapted to 
 
 ##### More Exfiltration Payloads for the Bash Bunny
 
-These only illustrate a very few of the many techniques to an perform exfiltration attack with the Bash Bunny. See all the featured exfiltration payloads at [payloads.hak5.org](https://payloads.hak5.org)<br>
+These only illustrate a very few of the many techniques to an perform exfiltration attack with the Bash Bunny. See all the featured exfiltration payloads at [payloads.hak5.org](https://payloads.hak5.org)<br />
 
 ---
 
@@ -1187,7 +1187,7 @@ This is the same extension that can be used for [remote triggers](https://hak5.o
 
 [[https://youtu.be/8j6hrjSrJaM](https://youtu.be/8j6hrjSrJaM)]([https://youtu.be/8j6hrjSrJaM](https://youtu.be/8j6hrjSrJaM))
 [https://youtu.be/8j6hrjSrJaM](https://youtu.be/8j6hrjSrJaM)
-{% endembed %}
+
 
 ---
 
@@ -1195,7 +1195,7 @@ This is the same extension that can be used for [remote triggers](https://hak5.o
 
 [[https://youtu.be/TYR2a2XoK3A](https://youtu.be/TYR2a2XoK3A)]([https://youtu.be/TYR2a2XoK3A](https://youtu.be/TYR2a2XoK3A))
 [https://youtu.be/TYR2a2XoK3A](https://youtu.be/TYR2a2XoK3A)
-{% endembed %}
+
 
 ---
 
@@ -1203,7 +1203,7 @@ This is the same extension that can be used for [remote triggers](https://hak5.o
 
 [[https://youtu.be/LtqsKftRFiw](https://youtu.be/LtqsKftRFiw)]([https://youtu.be/LtqsKftRFiw](https://youtu.be/LtqsKftRFiw))
 [`https://youtu.be/LtqsKftRFiw`](https://youtu.be/LtqsKftRFiw)
-{% endembed %}
+
 
 ---
 
@@ -1211,7 +1211,7 @@ This is the same extension that can be used for [remote triggers](https://hak5.o
 
 [[https://youtu.be/A6Wq7KcUOo8](https://youtu.be/A6Wq7KcUOo8)]([https://youtu.be/A6Wq7KcUOo8](https://youtu.be/A6Wq7KcUOo8))
 [https://youtu.be/A6Wq7KcUOo8](https://youtu.be/A6Wq7KcUOo8)
-{% endembed %}
+
 
 ---
 
@@ -1219,7 +1219,7 @@ This is the same extension that can be used for [remote triggers](https://hak5.o
 
 [[https://youtu.be/GHZCqCESxTw](https://youtu.be/GHZCqCESxTw)]([https://youtu.be/GHZCqCESxTw](https://youtu.be/GHZCqCESxTw))
 [https://youtu.be/GHZCqCESxTw](https://youtu.be/GHZCqCESxTw)
-{% endembed %}
+
 
 ---
 
@@ -1227,7 +1227,7 @@ This is the same extension that can be used for [remote triggers](https://hak5.o
 
 [[https://youtu.be/JlGSuQ21Vt8](https://youtu.be/JlGSuQ21Vt8)]([https://youtu.be/JlGSuQ21Vt8](https://youtu.be/JlGSuQ21Vt8))
 [https://youtu.be/JlGSuQ21Vt8](https://youtu.be/JlGSuQ21Vt8)
-{% endembed %}
+
 
 ---
 
@@ -1235,7 +1235,7 @@ This is the same extension that can be used for [remote triggers](https://hak5.o
 
 [[https://youtu.be/KbXazzp8QZQ](https://youtu.be/KbXazzp8QZQ)]([https://youtu.be/KbXazzp8QZQ](https://youtu.be/KbXazzp8QZQ))
 [https://youtu.be/KbXazzp8QZQ](https://youtu.be/KbXazzp8QZQ)
-{% endembed %}
+
 
 ---
 
@@ -1243,7 +1243,7 @@ This is the same extension that can be used for [remote triggers](https://hak5.o
 
 [[https://youtu.be/Ei6YhehET3Y](https://youtu.be/Ei6YhehET3Y)]([https://youtu.be/Ei6YhehET3Y](https://youtu.be/Ei6YhehET3Y))
 [https://youtu.be/Ei6YhehET3Y](https://youtu.be/Ei6YhehET3Y)
-{% endembed %}
+
 
 ---
 
@@ -1251,7 +1251,7 @@ This is the same extension that can be used for [remote triggers](https://hak5.o
 
 [[https://youtu.be/J33mkvdKR5U](https://youtu.be/J33mkvdKR5U)]([https://youtu.be/J33mkvdKR5U](https://youtu.be/J33mkvdKR5U))
 [https://youtu.be/J33mkvdKR5U](https://youtu.be/J33mkvdKR5U)
-{% endembed %}
+
 
 ---
 
@@ -1259,7 +1259,7 @@ This is the same extension that can be used for [remote triggers](https://hak5.o
 
 [[https://youtu.be/VPhqD__lOBQ](https://youtu.be/VPhqD__lOBQ)]([https://youtu.be/VPhqD__lOBQ](https://youtu.be/VPhqD__lOBQ))
 [https://youtu.be/VPhqD__lOBQ](https://youtu.be/VPhqD__lOBQ)
-{% endembed %}
+
 
 ---
 
@@ -1267,6 +1267,6 @@ This is the same extension that can be used for [remote triggers](https://hak5.o
 
 [[https://youtu.be/H6z9BXevsZg](https://youtu.be/H6z9BXevsZg)]([https://youtu.be/H6z9BXevsZg](https://youtu.be/H6z9BXevsZg))
 [https://youtu.be/H6z9BXevsZg](https://youtu.be/H6z9BXevsZg)
-{% endembed %}
+
 
 ---

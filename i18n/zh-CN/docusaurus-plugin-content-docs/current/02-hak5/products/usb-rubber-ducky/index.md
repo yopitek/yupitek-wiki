@@ -1,11 +1,11 @@
 ---
-title：“Hak5 USB Rubber Ducky v2 原厂技术说明书与全功能操作手册”
-model：“USB Rubber Ducky v2”
-manufacturer：“Hak5”
-category：“按键注入攻击工具”
-docs_url：“https://docs.hak5.org/usb-rubber-ducky/”
-version：“2.0”
-locale：“zh-cn”
+title: "Hak5 USB Rubber Ducky v2 原厂技术说明书与全功能操作手册"
+model: "USB Rubber Ducky v2"
+manufacturer: "Hak5"
+category: "按键注入攻击工具"
+docs_url: "https://docs.hak5.org/usb-rubber-ducky/"
+version: "2.0"
+locale: "zh-cn"
 ---
 
 # Hak5 USB Rubber Ducky v2 原厂技术说明书与全功能操作手册

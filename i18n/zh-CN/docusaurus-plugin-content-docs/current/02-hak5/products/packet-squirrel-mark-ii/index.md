@@ -1,11 +1,11 @@
 ---
-title：“Hak5 Packet Squirrel Mark II 原厂技术说明书与全功能操作手册”
-model：“Packet Squirrel Mark II”
-manufacturer：“Hak5”
-category：“以太网中间人串联旁路监听与远程访问设备”
-docs_url：“https://docs.hak5.org/packet-squirrel/”
-version：“4.0”
-locale：“zh-cn”
+title: "Hak5 Packet Squirrel Mark II 原厂技术说明书与全功能操作手册"
+model: "Packet Squirrel Mark II"
+manufacturer: "Hak5"
+category: "以太网中间人串联旁路监听与远程访问设备"
+docs_url: "https://docs.hak5.org/packet-squirrel/"
+version: "4.0"
+locale: "zh-cn"
 ---
 
 # Hak5 Packet Squirrel Mark II 原厂技术说明书与全功能操作手册
@@ -513,7 +513,8 @@ bash -x /root/payloads/switch1/payload.sh
 
 Hak5 团队持续推出新固件以提升系统性能与防护力：
 1. 进入维护模式，由浏览器打开 Web UI。
-2. 进入“Settings”$ightarrow$“Firmware Update”标签页。
+2. 进入“Settings”$
+ightarrow$“Firmware Update”标签页。
 3. 点击“Check for Updates”进行在线自动升级，或上传本地下载之固件更新包（`.bin`）。
 4. 升级期间 LED 将红蓝交替闪烁，约耗时 3 至 5 分钟。
 5. 升级完成后系统将自动重启回到维护模式。

@@ -1,11 +1,11 @@
 ---
-title：“Hak5 Screen Crab 原厂技术说明书与全功能操作手册”
-model：“Screen Crab”
-manufacturer：“Hak5”
-category：“HDMI 视频中间人侧录植入设备”
-docs_url：“https://docs.hak5.org/screen-crab/”
-version：“2.0”
-locale：“zh-cn”
+title: "Hak5 Screen Crab 原厂技术说明书与全功能操作手册"
+model: "Screen Crab"
+manufacturer: "Hak5"
+category: "HDMI 视频中间人侧录植入设备"
+docs_url: "https://docs.hak5.org/screen-crab/"
+version: "2.0"
+locale: "zh-cn"
 ---
 
 # Hak5 Screen Crab 原厂技术说明书与全功能操作手册

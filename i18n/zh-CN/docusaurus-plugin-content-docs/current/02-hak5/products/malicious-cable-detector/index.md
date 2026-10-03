@@ -1,11 +1,11 @@
 ---
-title：“Hak5 O.MG 惡意線纜偵測器原廠技術說明書與全功能操作手冊”
-model：“Malicious Cable Detector”
-manufacturer：“Hak5”
-category：“實體硬件威脅鑑識診斷設備與 USB 資料阻断保護器 (Diagnostic Analyzer & Data Blocker)”
-docs_url：“https://shop.hak5.org/products/malicious-cable-detector-by-o-mg”
-version：“2.0”
-locale：“zh-cn”
+title: "Hak5 O.MG 惡意線纜偵測器原廠技術說明書與全功能操作手冊"
+model: "Malicious Cable Detector"
+manufacturer: "Hak5"
+category: "實體硬件威脅鑑識診斷設備與 USB 資料阻断保護器 (Diagnostic Analyzer & Data Blocker)"
+docs_url: "https://shop.hak5.org/products/malicious-cable-detector-by-o-mg"
+version: "2.0"
+locale: "zh-cn"
 ---
 
 # Hak5 O.MG 惡意線纜偵測器原廠技術說明書與全功能操作手冊
