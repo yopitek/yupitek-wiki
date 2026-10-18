@@ -71,14 +71,14 @@ Checklist:
 The Pineapple is a **rogue access point**: it broadcasts its own Wi-Fi so you can manage it and run the PineAP suite from a browser.
 
 1. Power it on (USB-C for the [Mark VII](/hak5/products/wifi-pineapple-mark-vii/), AC for the [Enterprise](/hak5/products/wifi-pineapple-enterprise/), battery for the [Pager](/hak5/products/wifi-pineapple-pager/)).
-2. On your laptop, join the Pineapple's Wi-Fi. Mark VII default: SSID `PineAP`, passphrase `pineapplesareyummy`.
+2. On your laptop, join the Pineapple's Wi-Fi. Mark VII: on first boot it serves an open setup AP named `Pineapple_XXXX` (see the Mark VII page for the full setup).
 3. Open the management UI in a browser: `http://172.16.42.1:1471`.
 4. Set an **admin password** immediately (Settings → Password). Update the firmware (Settings → Software Update).
 5. Connect an Internet uplink if you want the modules to update.
 
 Expected output — the browser shows the Pineapple dashboard with **Recon**, **PineAP**, **Modules** and **Client** panels.
 
-> **Beginner trap:** if you can't see the `PineAP` SSID, the device is still booting — wait 30–60 seconds. Full steps and the 5 GHz upgrade path are on the [Mark VII product page](/hak5/products/wifi-pineapple-mark-vii/).
+> **Beginner trap:** if you can't see the `Pineapple_XXXX` SSID, the device is still booting — wait 30–60 seconds. Full steps and the 5 GHz upgrade path are on the [Mark VII product page](/hak5/products/wifi-pineapple-mark-vii/).
 
 ---
 

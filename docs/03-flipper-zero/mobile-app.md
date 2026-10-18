@@ -51,7 +51,7 @@ Make sure your phone's Bluetooth is on and your phone is within a meter or two o
 
 ## Step 2: Enable Bluetooth on the Flipper Zero
 
-1. Power on your Flipper Zero (`LEFT + BACK`).
+1. Make sure your Flipper Zero is powered on (if it is unresponsive, reboot it by holding `LEFT + BACK` for 5 seconds).
 2. Go to **Main Menu → Bluetooth**.
 3. Set **Bluetooth** to **ON**.
 

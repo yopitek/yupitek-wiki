@@ -111,7 +111,7 @@ The Shark Jack Cable is a USB-C powered pentest companion with continuous runtim
 
 [[https://youtu.be/6AMZdFKfWxA](https://youtu.be/6AMZdFKfWxA)]([https://youtu.be/6AMZdFKfWxA](https://youtu.be/6AMZdFKfWxA))
 
-Recommended apps: [Hacker's Keyboard](https://play.google.com/store/apps/details?id=org.pocketworkstation.pckeyboard&hl=en_US&gl=US), [Serial USB Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_usb_terminal&hl=en_US&gl=US).
+Recommended apps: Hacker's Keyboard, [Serial USB Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_usb_terminal&hl=en_US&gl=US).
 
 #### DEPLOYMENT
 
@@ -413,7 +413,7 @@ And that's it. Find a [prettied-up version](https://github.com/hak5/sharkjack-pa
 
 Shark Jack firmware may be updated by using the [sharkjack.sh](https://downloads.hak5.org/shark) helper script. That said, it is also possible to manually upgrade the firmware by following this process:
 
-1. Download the latest UPDATE file from [https://downloads.hak5.org/shark](https://downloads.hak5.org/shark) and [verify its checksum](https://docs.hak5.org/hc/en-us/articles/360049922674).
+1. Download the latest UPDATE file from [https://downloads.hak5.org/shark](https://downloads.hak5.org/shark) and verify its checksum.
 2. Power on the Shark Jack in Arming Mode and connect it to a reliable USB power source
 3. Copy the file upgrade file to the Shark Jack's /tmp directory via SCP (e.g. "`scp upgrade-1.1.0.bin root@172.16.24.1:/tmp/`")
 4. SSH into the Shark Jack (e.g. "`ssh root@172.16.24.1`")
@@ -607,9 +607,6 @@ LED SETUP
 
 The `SERIAL_WRITE` command will write any following text to the serial console. This is useful for adding meaningful output to a payload.
 
-> [!NOTE]
-> The ACTIVATE command was introduced with firmware 1.2.0 on the Shark Jack Cable.
-
 #### Example
 
 Add output to a payload with the following:
@@ -756,9 +753,6 @@ Check to ensure that the eth0 interface has an Internet connection. If the IP ad
 
 The `LIST` command, and its alias `LIST_PAYLOADS`, will list all of the payloads stored locally in the payload library at `/root/payload/library`.&#x20;
 
-> [!NOTE]
-> The ACTIVATE command was introduced with firmware 1.2.0 on the Shark Jack Cable.
-
 #### Usage
 
 ```
@@ -879,7 +873,7 @@ In a way, the Plunder Bug can be used as a simple switch. In the following examp
 Recommended apps:
 
 * [Serial USB Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_usb_terminal&hl=en_US&gl=US)
-* [Hacker's Keyboard](https://play.google.com/store/apps/details?id=org.pocketworkstation.pckeyboard&hl=en_US&gl=US)
+* Hacker's Keyboard
 
 ---
 

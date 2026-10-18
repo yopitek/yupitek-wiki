@@ -187,7 +187,7 @@ If desired, the `WAIT_FOR_PRESENT` or `WAIT_FOR_NOT_PRESENT` extensions may be u
 
 Further reading:
 
-* [REMOTE TRIGGERS FOR THE BASH BUNNY MARK II](/bash-bunny/beginner-guides/remote-triggers-for-the-bash-bunny-mark-ii.md)
+* REMOTE TRIGGERS FOR THE BASH BUNNY MARK II
 
 #### STORAGE
 
@@ -242,7 +242,7 @@ You will find more specific details describing DuckyScript on the Bash  Bunny fu
 Payloads can be loaded onto the device simply by moving them to the appropriate switch folder when the Bash Bunny is in arming mode (switch position 3 – closest to the USB plug) – mounted to the host computer as Mass Storage.
 
 > [!CAUTION]
-> [Bash Bunny Mark II Considerations](/bash-bunny/getting-started/considerations-for-mark-ii.md)
+> Bash Bunny Mark II Considerations
 
 ---
 
@@ -250,7 +250,7 @@ Payloads can be loaded onto the device simply by moving them to the appropriate 
 
 **DuckyScript™ is the payload language of Hak5 gear.** It consists of a number of simple commands specific to the Bash Bunny hardware, some helper functions and the full power of the Bash Unix shell and command language. These payloads, named `payload.txt`, execute on boot by the Bash Bunny depending on the switch position.
 
-[*Extensions*](/bash-bunny/writing-payloads/extensions.md) can be sourced which extend the DuckyScript language with user contributed functions and variables which enhance and simplify payloads. \
+*Extensions* can be sourced which extend the DuckyScript language with user contributed functions and variables which enhance and simplify payloads. \
 \
 All DuckyScript commands are written in ALL CAPS. <br />
 
@@ -266,7 +266,7 @@ The base DuckyScript commands are:
 
 ##### Converting from USB Rubber Ducky
 
-If you are looking to convert a payload from DuckyScript 1.0 from the USB Rubber Ducky, you will need to append [`QUACK`](/bash-bunny/writing-payloads/quack.md) to most lines in that payload to make it Bash Bunny Compatible.&#x20;
+If you are looking to convert a payload from DuckyScript 1.0 from the USB Rubber Ducky, you will need to append `QUACK` to most lines in that payload to make it Bash Bunny Compatible.&#x20;
 
 ---
 
@@ -643,7 +643,7 @@ Getting the Bash Bunny online can be convenient for a number of reasons, such as
 4. Identify Bash Bunny interface. Device name: “USB Ethernet/RNDIS Gadget”
 5. Right-click Internet interface (e.g. Wi-Fi) and click Properties.
 6. From the Sharing tab, check “Allow other network users to connect through this computer’s Internet connection”, select the Bash Bunny from the Home networking connection list (e.g. Ethernet 2) and click OK.
-7. Right-click Bash Bunny interface (e.g. Ethenet 2) and click Properties.
+7. Right-click Bash Bunny interface (e.g. Ethernet 2) and click Properties.
 8. Select TCP/IPv4 and click Properties.
 9. Set the IP address to 172.16.64.64. Leave Subnet mask as 255.255.255.0 and click OK on both properties windows. Internet Connection Sharing is complete
 
@@ -681,7 +681,10 @@ The Bash Bunny can share the Internet connection of a host computer. This can be
 2. With the Bash Bunny in arming mode, create a new payload.txt in switch position 1 directory as follows:<br />
 
    ```
-   LED SETUPATTACKMODE ECM_ETHERNETDHCLIENTLED FINISH≈
+   LED SETUP
+   ATTACKMODE ECM_ETHERNET
+   DHCLIENT
+   LED FINISH
    ```
 3. Safely eject the Bash Bunny, then flip the selector switch to position 1 and reconnect it to your Mac.
 4. From the System Preferences > Sharing menu on your Mac, check Internet Sharing, then select the Internet interface from "Share your connection from" and the Bash Bunny (labeled RNDIS/Ethernet Gadget) from "To computer using", then save changes and close the menu.\
@@ -913,7 +916,7 @@ It’s also the most convenient way to configure the Bash Bunny, with an dedicat
 
 #### TOP 5 EXFILTRATION PAYLOADS
 
-These are just some of our favorite exfiltration payloads. For the complete listing, check out the [Bash Bunny payload highlights](https://hak5.org/blogs/payloads/tagged/bash-bunny).
+These are just some of our favorite exfiltration payloads. For the complete listing, check out the [Bash Bunny payload highlights](https://github.com/hak5/bashbunny-payloads).
 
 ##### 1.USB EXFILTRATOR
 

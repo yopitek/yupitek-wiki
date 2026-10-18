@@ -119,6 +119,8 @@ Supported gain values (29): 0.0 0.9 1.4 2.7 ...
 Sampling at 2048000 S/s.
 ```
 
+> The exact device and product strings vary with the hardware revision and firmware; what matters is `Found 1 device(s)` and no `usb_claim_interface` errors.
+
 The `Found Rafael Micro R828D tuner` line is your "V4 recognized" badge.
 
 > **Windows**: install [SDR#](https://airspy.com/download/) (or SDR++ / SDR Console) — these ship V4-ready drivers; just launch and select the RTL-SDR source.

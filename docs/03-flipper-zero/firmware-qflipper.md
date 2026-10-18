@@ -167,8 +167,8 @@ Your captured keys, IR codes, and settings live on the microSD card — so **the
 
 Don't panic — the Flipper Zero has a recovery path:
 
-1. **Hold DOWN while powering on** (`LEFT + BACK`) → the boot menu appears.
-2. Select **Firmware update mode**.
+1. First **reboot** the Flipper by holding **LEFT + BACK** for 5 seconds, and charge it for a few minutes.
+2. If it still misbehaves, switch to Recovery mode: **Settings → Power → Reboot → Firmware Upgrade**, then press **RIGHT** (if the device is not operational, follow the alternative steps on the official [Firmware recovery](https://docs.flipper.net/basics/firmware-update/firmware-recovery) page).
 3. Connect USB and flash official firmware with qFlipper (Method A above).
 
 ```mermaid

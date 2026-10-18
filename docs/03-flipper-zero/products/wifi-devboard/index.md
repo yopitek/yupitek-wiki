@@ -139,7 +139,7 @@ Back on the Flipper: **Apps → WiFi Marauder** → the app should show the devb
 | Deauth | Forces clients off a network (test networks only!) |
 | Sniff | Captures probe requests |
 | Hidden SSID reveal | Shows hidden network names when clients probe them |
-| Packet capture | Logs raw 802.11 frames to the SD card |
+| Packet capture | Logs raw 802.11 frames to the Flipper Zero's microSD card |
 
 ### Evil Portal
 

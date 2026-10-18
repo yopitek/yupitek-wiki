@@ -89,7 +89,7 @@ iw dev wlan0 link
 | No gain over stock antenna | Paddle pointing away / not fully seated | Re-aim at the AP; reseat the connector |
 | Works on 2.4 GHz, weak on 5 GHz | 5 GHz needs more aiming precision | Tilt precisely; 7 dBi 5 GHz lobe is narrow |
 | Connector wobbles | Loose RP-SMA | Retighten gently; do not overtighten |
-| Folds back on it own | Hinge friction worn | Minor — orientation with the adapter's own weight is normal |
+| Folds back on its own | Hinge friction worn | Minor — orientation with the adapter's own weight is normal |
 
 ## Related resources
 
