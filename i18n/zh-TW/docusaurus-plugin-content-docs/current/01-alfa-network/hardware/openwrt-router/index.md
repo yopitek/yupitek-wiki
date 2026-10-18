@@ -43,7 +43,7 @@ OpenWrt 路由器（尤其是小型的 GL.iNet 系列）內建的無線模組數
 
 ## ALFA 網卡型號在 OpenWrt 上的支援情況
 
-| ALFA 型號         | 核心晶片               | OpenWrt 22.03.3+ | OpenWrt 23.05+ | 需要安裝的套件                       |
+| ALFA 型號         | 核心晶片               | OpenWrt 24.10 | OpenWrt 25.12 | 需要安裝的套件                       |
 | --------------- | ------------------ | ---------------- | -------------- | ------------------------------ |
 | **AWUS036ACM**  | MediaTek MT7612U   | ✅ 完整支援           | ✅ 完整支援         | `kmod-mt76x2u` `mt76-firmware` |
 | **AWUS036AXML** | MediaTek MT7921AUN | ✅ 支援（有已知限制，見下方）    | ✅ 支援（有已知限制，見下方）  | `kmod-mt7921u`                 |
@@ -65,7 +65,7 @@ OpenWrt 路由器（尤其是小型的 GL.iNet 系列）內建的無線模組數
 
 ## Step-by-Step 設定教學
 
-透過 SSH 登入路由器終端機，依序執行：
+透過 SSH 登入路由器終端機，依序執行（以下指令使用 `opkg`；25.12 等較新版本可能改用 `apk`，請至 openwrt.org 確認）：
 
 ### 步驟 1：更新套件庫索引
 
@@ -116,7 +116,7 @@ wifi config >> /etc/config/wireless
 
 ### 限制 2：6GHz 頻段目前支援不完整
 
-目前 OpenWrt 穩定版（23.05）的網頁管理介面（LuCI）對 6GHz 頻段的設定選項還沒有完全支援。也就是說，AWUS036AXML 在 OpenWrt 上目前主要能穩定使用的是 2.4GHz 和 5GHz，6GHz 頻段的完整支援還在等上游持續開發。
+目前 OpenWrt 24.10 / 25.12的網頁管理介面（LuCI）對 6GHz 頻段的設定選項還沒有完全支援。也就是說，AWUS036AXML 在 OpenWrt 上目前主要能穩定使用的是 2.4GHz 和 5GHz，6GHz 頻段的完整支援還在等上游持續開發。
 
 ---
 

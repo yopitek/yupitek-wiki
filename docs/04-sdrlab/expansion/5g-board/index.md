@@ -21,7 +21,7 @@ translated_from: flipper_board_wiki_manual_zhtw.md
 | **GPS** | Built-in active GPS module, **auto power switching** (host power when docked, internal battery when detached) |
 | **Screen** | **2.8" color TFT**, built-in Marauder UI |
 | **Battery** | **800 mAh Li-Po**, hot-swappable, charges to full via USB-C in about 2 hours |
-| **Antennas** | **4 SMA bulkhead connectors + all 4 antennas included, each 5dBi gain** — `433M A` / `GPS` / `2.4G` / `2.4G+5G` |
+| **Antennas** | **4 SMA bulkhead connectors + all 4 antennas included, each 5dBi gain** — `433M A` / `GPS` / `2.4G` / `2.4G/5G` |
 | **microSD** | **FAT32 format, up to 32GB** — captures saved as `.pcap`, wardrive logs saved as `wardrive_*.csv` |
 | **Protection** | All signal pins gold-plated, each pin has a built-in **TVS diode** |
 | **Flashing** | USB-C port (front-left); hold the rear button while plugging in USB to enter flash mode |

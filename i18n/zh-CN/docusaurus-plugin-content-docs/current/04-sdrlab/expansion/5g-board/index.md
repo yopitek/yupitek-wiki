@@ -21,7 +21,7 @@ translated_from: flipper_board_wiki_manual_zhtw.md
 | **GPS** | 内置主动 GPS 模块，**自动切换供电**（接主机用主机电源、脱离用内置电池） |
 | **屏幕** | **2.8 寸彩色 TFT**，内置 Marauder UI |
 | **电池** | **800 mAh 锂聚合物**，可热插拔，USB-C 充电约 2 小时 |
-| **天线** | **4 组 SMA 母座 + 4 支天线全附，均为 5dBi** — `433M A`／`GPS`／`2.4G`／`2.4G+5G` |
+| **天线** | **4 组 SMA 母座 + 4 支天线全附，均为 5dBi** — `433M A`／`GPS`／`2.4G`／`2.4G/5G` |
 | **microSD** | **FAT32 格式、32GB 以内** — 抓包存 `.pcap`，wardrive 存 `wardrive_*.csv` |
 | **保护** | 所有信号脚位镀金，每脚内置 **TVS 二极管** |
 | **烧录** | USB-C 口（前左侧）；按住背面按键再插入 USB 进入烧录模式 |

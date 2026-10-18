@@ -26,7 +26,7 @@ toc: true
 | Firmware (typical) | ESP8266 Deauther v2 (Spacehuhn) or ESP8266 Marauder port |
 | Frequency band | 2.4 GHz only (no 5 GHz) |
 | Interface | UART serial to Flipper GPIO (TX/RX) |
-| Power | From the Flipper GPIO (3.3 V) |
+| Power | From the Flipper GPIO header: 3.3 V (pin 9) or 5 V (pin 1) per the wiring table below; check your vendor's product page for the supply your board expects |
 | Extras (board-dependent) | Socket for a second radio module (NRF24 / CC1101), dip switch for radio selection |
 | Web UI | AP mode at `192.168.4.1` (default SSID `pwned`, password `deauther`) |
 

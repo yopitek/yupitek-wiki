@@ -1603,7 +1603,7 @@ Previously to get the target's IP address you could cat, grep, sed and awk the d
 
 There are a ton of features specific to the Key Croc payload framework which can now be sourced and used in your payload. For instance, if you want to systematically change WiFi settings, change language/keymap, or manage the udisk. To get a full list of the available functions and what they do, issue the `GET_HELPERS` command from a shell on the Key Croc.
 
-That's just one of the new script, which compliment the intuitively named `WAIT_FOR_ARMING_MODE`, `WAIT_FOR_BUTTON_PRESS`, and `ARMING_MODE`.&#x20;
+That's just one of the new scripts, which complement the intuitively named `WAIT_FOR_ARMING_MODE`, `WAIT_FOR_BUTTON_PRESS`, and `ARMING_MODE`.&#x20;
 
 Those are just some of the awesome new features that await with Key Croc version 1.3. You can find full documentation for all of the commands at [docs.hak5.org](https://docs.hak5.org/).
 

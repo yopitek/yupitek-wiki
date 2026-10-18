@@ -8,78 +8,78 @@ tags: [openwrt, glinet, router, alfa, awus036axml, mt7921u, mt7612u, kmod]
 keywords: [OpenWrt, GL.iNet, AWUS036AXML, AWUS036ACM, kmod-mt7921u, mt76, active monitor bug]
 ---
 
-# OpenWrt 路由器 × ALFA Network 配置與限制指南
+# OpenWrt 路由器 × ALFA Network 配置与限制指南
 
-> **一句話定位**：OpenWrt 路由器（包括 GL.iNet 系列、x86 軟路由等）可以透過 USB 外接 ALFA 無線网卡，多出一組獨立的無線频段，拿來當第二組無線中繼、廣播熱點，或是無線安全监听節點。這篇文章教你怎麼裝、也老實告訴你目前有哪些已知的限制。
+> **一句话定位**：OpenWrt 路由器（包括 GL.iNet 系列、x86 软路由等）可以透过 USB 外接 ALFA 无线网卡，多出一组独立的无线频段，拿来当第二组无线中继、广播热点，或是无线安全监听节点。这篇文章教你怎么装、也老实告诉你目前有哪些已知的限制。
 
-## 這篇文章適合你嗎？
+## 这篇文章适合你吗？
 
-- **難度**：中階（需要會用 SSH 操作路由器）
-- **預估時間**：15〜25 分鐘
-- **你會用到的技能**：基本终端操作
-- **讀完你可以做到**：
-  1. 判斷自己的 ALFA 网卡型号在 OpenWrt 上該裝哪個驱动软件包
-  2. 完成软件包安裝與無線接口设置
+- **难度**：中阶（需要会用 SSH 操作路由器）
+- **预估时间**：15〜25 分钟
+- **你会用到的技能**：基本终端操作
+- **读完你可以做到**：
+  1. 判断自己的 ALFA 网卡型号在 OpenWrt 上该装哪个驱动软件包
+  2. 完成软件包安装与无线接口设置
   3. 知道目前有哪些已知的驱动限制，避免踩坑
 
 ---
 
-## 概念說明：為什麼要在路由器上外接無線网卡
+## 概念说明：为什么要在路由器上外接无线网卡
 
-OpenWrt 路由器（尤其是小型的 GL.iNet 系列）內建的無線模块數量有限，如果你的需求是下面任何一種，內建模块通常不夠用：
+OpenWrt 路由器（尤其是小型的 GL.iNet 系列）内建的无线模块数量有限，如果你的需求是下面任何一种，内建模块通常不够用：
 
-- **多一組獨立的無線中繼（WISP）**：讓路由器一邊連上既有的 Wi-Fi 當「用戶端」取得网络，一邊自己再廣播出一個新的 Wi-Fi 給你的裝置用。
-- **多一組廣播熱點**：內建無線模块已經在用了，還想再開一個獨立的 SSID。
-- **無線安全监听節點**：把路由器變成一個長期擺著的数据包擷取點。
+- **多一组独立的无线中继（WISP）**：让路由器一边连上既有的 Wi-Fi 当「用户端」取得网络，一边自己再广播出一个新的 Wi-Fi 给你的装置用。
+- **多一组广播热点**：内建无线模块已经在用了，还想再开一个独立的 SSID。
+- **无线安全监听节点**：把路由器变成一个长期摆著的数据包撷取点。
 
-外接 ALFA 网卡就是在原本的無線模块之外，多插一張獨立的网卡來做這些事。
+外接 ALFA 网卡就是在原本的无线模块之外，多插一张独立的网卡来做这些事。
 
-> 📘 **名詞小教室**
-> - **kmod（Kernel Module，内核模块）**：OpenWrt 上驱动程序的安裝單位，`kmod-mt7921u` 就是「MT7921U 這顆芯片的内核模块」，裝上之後系統才認得這張网卡。
-> - **opkg**：OpenWrt 專用的软件包管理工具，跟一般 Linux 上的 `apt` 是類似的東西，用來安裝/更新软件软件包。
-> - **WISP（Wireless ISP，無線网络服務供應）模式**：一種讓路由器「先連上別人的 Wi-Fi，再把网络分享出去」的運作方式，常用於延伸网络信号。
+> 📘 **名词小教室**
+> - **kmod（Kernel Module，内核模块）**：OpenWrt 上驱动程序的安装单位，`kmod-mt7921u` 就是「MT7921U 这颗芯片的内核模块」，装上之后系统才认得这张网卡。
+> - **opkg**：OpenWrt 专用的软件包管理工具，跟一般 Linux 上的 `apt` 是类似的东西，用来安装/更新软件软件包。
+> - **WISP（Wireless ISP，无线网络服务供应）模式**：一种让路由器「先连上别人的 Wi-Fi，再把网络分享出去」的运作方式，常用于延伸网络信号。
 
 ---
 
-## ALFA 网卡型号在 OpenWrt 上的支援情況
+## ALFA 网卡型号在 OpenWrt 上的支援情况
 
-| ALFA 型号         | 内核芯片               | OpenWrt 22.03.3+ | OpenWrt 23.05+ | 需要安裝的软件包                       |
+| ALFA 型号         | 内核芯片               | OpenWrt 24.10 | OpenWrt 25.12 | 需要安装的软件包                       |
 | --------------- | ------------------ | ---------------- | -------------- | ------------------------------ |
 | **AWUS036ACM**  | MediaTek MT7612U   | ✅ 完整支援           | ✅ 完整支援         | `kmod-mt76x2u` `mt76-firmware` |
-| **AWUS036AXML** | MediaTek MT7921AUN | ✅ 支援（有已知限制，見下方）    | ✅ 支援（有已知限制，見下方）  | `kmod-mt7921u`                 |
+| **AWUS036AXML** | MediaTek MT7921AUN | ✅ 支援（有已知限制，见下方）    | ✅ 支援（有已知限制，见下方）  | `kmod-mt7921u`                 |
 | **AWUS036ACHM** | MediaTek MT7610U   | ✅ 完整支援           | ✅ 完整支援         | `kmod-mt76x0u`                 |
-| **AWUS036ACH**  | Realtek RTL8812AU  | ❌ 官方软件包庫沒有提供         | ❌ 官方软件包庫沒有提供       | 需自行用 OpenWrt SDK 编译，不建議新手嘗試     |
+| **AWUS036ACH**  | Realtek RTL8812AU  | ❌ 官方软件包库没有提供         | ❌ 官方软件包库没有提供       | 需自行用 OpenWrt SDK 编译，不建议新手尝试     |
 
-**簡單判斷方式**：如果你是第一次嘗試，建議優先選 **AWUS036ACM**（MT7612U）——支援最完整、也沒有下面提到的已知限制。想要更新的 Wi-Fi 6/6E（AWUS036AXML）也可以用，但要先看過下面的已知限制章節。
-
----
-
-## 你需要準備的東西
-
-- [ ] **硬件**：一台已刷好 OpenWrt 的路由器（含 GL.iNet 系列），且可透過 SSH 连接管理
-- [ ] **ALFA 無線网卡**：依上表選擇
-- [ ] **驱动程序參考（GitHub）**：
-  - MediaTek MT76 系列驱动原始碼（OpenWrt 官方維護，`kmod-mt7921u`、`kmod-mt76x2u` 等软件包的來源）：https://github.com/openwrt/mt76
+**简单判断方式**：如果你是第一次尝试，建议优先选 **AWUS036ACM**（MT7612U）——支援最完整、也没有下面提到的已知限制。想要更新的 Wi-Fi 6/6E（AWUS036AXML）也可以用，但要先看过下面的已知限制章节。
 
 ---
 
-## Step-by-Step 设置教學
+## 你需要准备的东西
 
-透過 SSH 登入路由器终端，依序執行：
+- [ ] **硬件**：一台已刷好 OpenWrt 的路由器（含 GL.iNet 系列），且可透过 SSH 连接管理
+- [ ] **ALFA 无线网卡**：依上表选择
+- [ ] **驱动程序参考（GitHub）**：
+  - MediaTek MT76 系列驱动原始码（OpenWrt 官方维护，`kmod-mt7921u`、`kmod-mt76x2u` 等软件包的来源）：https://github.com/openwrt/mt76
 
-### 步骤 1：更新软件包庫索引
+---
+
+## Step-by-Step 设置教学
+
+透过 SSH 登入路由器终端，依序执行（以下命令使用 `opkg`；25.12 等较新版本可能改用 `apk`，请至 openwrt.org 确认）：
+
+### 步骤 1：更新软件包库索引
 
 ```bash
 opkg update
 ```
 
-**預期結果**：终端會列出一連串软件包庫更新的訊息，沒有出現紅色錯誤訊息即代表成功。
+**预期结果**：终端会列出一连串软件包库更新的讯息，没有出现红色错误讯息即代表成功。
 
 ---
 
-### 步骤 2：安裝對應的驱动软件包
+### 步骤 2：安装对应的驱动软件包
 
-依照你使用的网卡型号，選擇對應的指令：
+依照你使用的网卡型号，选择对应的指令：
 
 ```bash
 # 若使用 AWUS036AXML（Wi-Fi 6/6E）：
@@ -89,56 +89,56 @@ opkg install kmod-mt7921u kmod-mt76-core wireless-tools usbutils
 opkg install kmod-mt76x2u kmod-mt76-core wireless-tools usbutils
 ```
 
-**預期結果**：畫面顯示软件包下載與安裝完成的訊息，最後沒有出現錯誤。
+**预期结果**：画面显示软件包下载与安装完成的讯息，最后没有出现错误。
 
 ---
 
-### 步骤 3：重新偵測無線硬件並套用设置
+### 步骤 3：重新侦测无线硬件并套用设置
 
 ```bash
 wifi config >> /etc/config/wireless
 /etc/init.d/network restart
 ```
 
-**預期結果**：网络服務重新啟動後，可以到 LuCI 網頁管理接口（路由器的網頁后台）的「网络 → 無線」頁面，應該會看到多出一組新的無線接口，代表 ALFA 网卡已經被系統正確辨識並可以设置使用。
+**预期结果**：网络服务重新启动后，可以到 LuCI 网页管理接口（路由器的网页后台）的「网络 → 无线」页面，应该会看到多出一组新的无线接口，代表 ALFA 网卡已经被系统正确辨识并可以设置使用。
 
 ---
 
-## 已知限制（老實跟你說，不隱瞞）
+## 已知限制（老实跟你说，不隐瞒）
 
-### 限制 1：AWUS036AXML 在主動监听模式下可能當機
+### 限制 1：AWUS036AXML 在主动监听模式下可能当机
 
-- **現象**：如果你在 OpenWrt 上對 AWUS036AXML（`mt7921u`）啟用「主動监听 + 注入」（例如執行 `aireplay-ng --deauth`），驱动程序可能在幾秒內鎖死，系統日誌會出現 `mt7921u: failed to send tx packet`，网卡直接離線。
-- **原因**：這是上游 `openwrt/mt76` 專案已知的問題（[Issue #839](https://github.com/openwrt/mt76/issues/839)），跟内核處理 USB 数据傳輸緩衝區釋放時的競爭狀態有關，不是你的设置錯誤。
-- **實務建議**：
-  - 如果你只需要**單純擷取数据包**（被動监听，例如用 Kismet 或 tcpdump），可以正常使用，不受這個問題影響。
-  - 如果你需要**主動注入数据包**（例如做滲透測試），目前建議改用 **AWUS036ACM**（`mt76x2u`），這顆芯片的驱动已經過多年驗證，沒有這個問題。
+- **现象**：如果你在 OpenWrt 上对 AWUS036AXML（`mt7921u`）启用「主动监听 + 注入」（例如执行 `aireplay-ng --deauth`），驱动程序可能在几秒内锁死，系统日志会出现 `mt7921u: failed to send tx packet`，网卡直接离线。
+- **原因**：这是上游 `openwrt/mt76` 专案已知的问题（[Issue #839](https://github.com/openwrt/mt76/issues/839)），跟内核处理 USB 数据传输缓冲区释放时的竞争状态有关，不是你的设置错误。
+- **实务建议**：
+  - 如果你只需要**单纯撷取数据包**（被动监听，例如用 Kismet 或 tcpdump），可以正常使用，不受这个问题影响。
+  - 如果你需要**主动注入数据包**（例如做渗透测试），目前建议改用 **AWUS036ACM**（`mt76x2u`），这颗芯片的驱动已经过多年验证，没有这个问题。
 
 ### 限制 2：6GHz 频段目前支援不完整
 
-目前 OpenWrt 穩定版（23.05）的網頁管理接口（LuCI）對 6GHz 频段的设置選項還沒有完全支援。也就是說，AWUS036AXML 在 OpenWrt 上目前主要能穩定使用的是 2.4GHz 和 5GHz，6GHz 频段的完整支援還在等上游持續開發。
+目前 OpenWrt 24.10 / 25.12的网页管理接口（LuCI）对 6GHz 频段的设置选项还没有完全支援。也就是说，AWUS036AXML 在 OpenWrt 上目前主要能稳定使用的是 2.4GHz 和 5GHz，6GHz 频段的完整支援还在等上游持续开发。
 
 ---
 
-## 常見問題與排除指引
+## 常见问题与排除指引
 
-### Q1：裝完软件包後，LuCI 接口還是看不到新的無線接口？
-- **原因**：可能是软件包安裝過程中有錯誤被忽略了，或是网络服務沒有正確重啟。
-- **解決方法**：重新執行 `opkg update` 確認软件包庫索引是最新的，再重新執行步骤 2、3；也可以用 `dmesg | grep -i mt76` 或 `dmesg | grep -i mt7921` 檢查内核有沒有正確加载驱动。
+### Q1：装完软件包后，LuCI 接口还是看不到新的无线接口？
+- **原因**：可能是软件包安装过程中有错误被忽略了，或是网络服务没有正确重启。
+- **解决方法**：重新执行 `opkg update` 确认软件包库索引是最新的，再重新执行步骤 2、3；也可以用 `dmesg | grep -i mt76` 或 `dmesg | grep -i mt7921` 检查内核有没有正确加载驱动。
 
-### Q2：AWUS036ACH（Realtek 芯片）可以用嗎？
-- **原因**：OpenWrt 官方软件包庫目前沒有提供這顆芯片的預编译软件包。
-- **解決方法**：技術上可以透過 OpenWrt SDK 自行编译 out-of-tree 驱动模块，但這需要較進階的编译環境知識，不建議新手嘗試；如果你需要穩定好裝的方案，優先考慮 AWUS036ACM。
+### Q2：AWUS036ACH（Realtek 芯片）可以用吗？
+- **原因**：OpenWrt 官方软件包库目前没有提供这颗芯片的预编译软件包。
+- **解决方法**：技术上可以透过 OpenWrt SDK 自行编译 out-of-tree 驱动模块，但这需要较进阶的编译环境知识，不建议新手尝试；如果你需要稳定好装的方案，优先考虑 AWUS036ACM。
 
 ---
 
-## 參考数据與延伸閱讀
+## 参考数据与延伸阅读
 
-- [AWUS036ACM 產品頁面](/alfa-network/products/awus036acm/)
-- [AWUS036AXML 產品頁面](/alfa-network/products/awus036axml/)
-- [ALFA 無線网卡在 Orange Pi / RK3588 上](/alfa-network/hardware/orange-pi/)——另一個使用 MT76 系列驱动的整合情境
-- [詞彙表](/getting-started/glossary)——kmod、opkg 等名詞的完整解釋
-- MediaTek MT76 系列驱动原始碼（OpenWrt 官方維護）：https://github.com/openwrt/mt76
-- 已知 Bug 追蹤：https://github.com/openwrt/mt76/issues/839
+- [AWUS036ACM 产品页面](/alfa-network/products/awus036acm/)
+- [AWUS036AXML 产品页面](/alfa-network/products/awus036axml/)
+- [ALFA 无线网卡在 Orange Pi / RK3588 上](/alfa-network/hardware/orange-pi/)——另一个使用 MT76 系列驱动的整合情境
+- [词汇表](/getting-started/glossary)——kmod、opkg 等名词的完整解释
+- MediaTek MT76 系列驱动原始码（OpenWrt 官方维护）：https://github.com/openwrt/mt76
+- 已知 Bug 追踪：https://github.com/openwrt/mt76/issues/839
 
-**標籤：** `openwrt` `glinet` `router` `alfa` `awus036axml` `mt7921u` `mt7612u` `kmod` `新手指南`
+**标签：** `openwrt` `glinet` `router` `alfa` `awus036axml` `mt7921u` `mt7612u` `kmod` `新手指南`

@@ -26,7 +26,7 @@ toc: true
 | 韌體（典型） | ESP8266 Deauther v2（Spacehuhn）或 ESP8266 Marauder 移植版 |
 | 頻段 | 僅 2.4 GHz（沒有 5 GHz） |
 | 介面 | UART 序列連到 Flipper GPIO（TX/RX） |
-| 電源 | 來自 Flipper GPIO（3.3 V） |
+| 電源 | 來自 Flipper GPIO 排針：3.3 V（第 9 腳）或 5 V（第 1 腳），依下方接線表；請查閱廠商產品頁確認本板所需供電 |
 | 額外配件（依板子而定） | 第二個無線電模組（NRF24 / CC1101）的插槽、無線電選擇用 dip 開關 |
 | 網頁介面 | AP 模式在 `192.168.4.1`（預設 SSID `pwned`、密碼 `deauther`） |
 

@@ -36,7 +36,7 @@ OpenWrt routers and x86 soft routers typically have built-in Wi-Fi radios. Conne
 
 ## OpenWrt Version & ALFA Chipset Compatibility Matrix
 
-| ALFA Model | Chipset | OpenWrt 22.03.3+ | OpenWrt 23.05+ | Required Kernel Packages |
+| ALFA Model | Chipset | OpenWrt 24.10 | OpenWrt 25.12 | Required Kernel Packages |
 |---|---|---|---|---|
 | **AWUS036ACM** | MediaTek MT7612U | ✅ Fully Supported | ✅ Fully Supported | `kmod-mt76x2u` `mt76-firmware` |
 | **AWUS036AXML** | MediaTek MT7921AUN | ✅ Supported (Known Bug) | ✅ Supported (Known Bug) | `kmod-mt7921u` |
@@ -47,7 +47,7 @@ OpenWrt routers and x86 soft routers typically have built-in Wi-Fi radios. Conne
 
 ## Prerequisites & Checklist
 
-- [ ] OpenWrt router (running OpenWrt 22.03.3+ or 23.05+) with an active internet connection.
+- [ ] OpenWrt router (running OpenWrt 24.10 or 25.12; see the current list at [openwrt.org/releases](https://openwrt.org/releases/start)) with an active internet connection.
 - [ ] ALFA USB adapter: **AWUS036ACM** (Recommended for penetration testing) or **AWUS036AXML** (Recommended for Wi-Fi 6 high throughput).
 - [ ] SSH client access to the router.
 
@@ -57,7 +57,7 @@ OpenWrt routers and x86 soft routers typically have built-in Wi-Fi radios. Conne
 
 ### Step 1: Install Kernel Drivers via `opkg`
 
-SSH into your OpenWrt router and run:
+SSH into your OpenWrt router and run (the commands below use `opkg`; newer releases such as 25.12 may use `apk` instead, so verify at openwrt.org):
 
 ```bash
 # Update package index
@@ -98,4 +98,4 @@ Log in to the LuCI Web UI (`Network → Wireless`). You will see a new radio dev
   2. For **high-rate packet injection / deauth testing**, use **ALFA AWUS036ACM** (`mt76x2u`), which has proven rock-solid over years of upstream testing.
 
 ### ⚠️ 6 GHz Configuration Status
-Current LuCI Web UI (OpenWrt 23.05) lacks complete 6 GHz channel selectors. AWUS036AXML operates primarily as an ultra-high performance 2.4 GHz / 5 GHz radio under OpenWrt.
+Current LuCI Web UI (OpenWrt 24.10 / 25.12) lacks complete 6 GHz channel selectors. AWUS036AXML operates primarily as an ultra-high performance 2.4 GHz / 5 GHz radio under OpenWrt.

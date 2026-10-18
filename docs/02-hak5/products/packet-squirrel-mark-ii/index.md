@@ -3265,17 +3265,17 @@ Here are some examples of how you can use the `sed` command in a payload:
 1. Replace a string in a file:
 
 ```bash
-cat filename | sed -i 's/old_text/new_text/g' > newfile
+cat filename | sed 's/old_text/new_text/g' > newfile
 ```
 
-This command will replace all occurrences of `old_text` with `new_text` in the `filename` file. The `-i` option specifies that the changes should be made in-place, meaning that the original file will be modified.
+This command will replace all occurrences of `old_text` with `new_text` in the `filename` file.
 
 The output will be sent to `newfile`.
 
 2. Delete a line from a file:
 
 ```sh
-cat filename | sed -i '2d' > newfile
+cat filename | sed '2d' > newfile
 ```
 
 This command will delete the second line from the `filename` file. The `d` command is used to delete lines.
@@ -3285,8 +3285,8 @@ The output will be sent to `newfile`.
 3. Insert a line before or after a matching pattern:
 
 ```bash
-cat filename | sed -i '/pattern/i new_text' |
-    sed -i '/pattern/a new_text' > newfile
+cat filename | sed '/pattern/i new_text' |
+    sed '/pattern/a new_text' > newfile
 ```
 
 These commands will insert `new_text` before or after the first occurrence of `pattern` in the `filename` file, respectively. The `i` command is used to insert text before a matching pattern, while the `a` command is used to insert text after a matching pattern.
@@ -3296,7 +3296,7 @@ The output will be sent to `newfile`.
 4. Replace a string in a file only in lines matching a pattern:
 
 ```sh
-cat filename | sed -i '/pattern/s/old_text/new_text/g' > newfile
+cat filename | sed '/pattern/s/old_text/new_text/g' > newfile
 ```
 
 This command will replace all occurrences of `old_text` with `new_text` only in the lines that match `pattern` in the `filename` file. The `s` command is used to substitute text, and the `/pattern/` specifies that the substitution should only be made in lines that match the pattern.
