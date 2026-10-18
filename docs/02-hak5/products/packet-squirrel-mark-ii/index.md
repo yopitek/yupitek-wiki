@@ -174,7 +174,7 @@ Once the Packet Squirrel has finished booting, the LED will flash magenta (or pi
 
 #### Connecting&#x20;
 
-With the Packet Squirrel plugged into your computer (connect the Target Ethernet port on the Packet Squirrel [to your computer](/packet-squirrel-mark-ii/setup/connecting-the-packet-squirrel.md)), navigate to:
+With the Packet Squirrel plugged into your computer (connect the Target Ethernet port on the Packet Squirrel [to your computer](#connecting-the-packet-squirrel)), navigate to:
 
 &#x20;[http://172.16.32.1:1471](http://172.16.32.1:1471)&#x20;
 
@@ -199,7 +199,7 @@ The Packet Squirrel setup process is very simple.
 
 After an introduction to the physical layout and ports of the Packet Squirrel, you will be asked to set a password and timezone.
 
-This password is used to log into the Packet Squirrel via the web interface or via SSH.  Make sure to remember it, but you can always recover your device via a [factory reset](/packet-squirrel-mark-ii/troubleshooting/factory-reset.md) in the worst case.
+This password is used to log into the Packet Squirrel via the web interface or via SSH.  Make sure to remember it, but you can always recover your device via a factory reset in the worst case.
 
 ![Packet Squirrel setup wizard](https://932701053-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F520JUF2JxB2RMXztRVAV%2Fuploads%2FgKRlZ9DYL54sYZd8GNXw%2FScreenshot%20from%202023-02-09%2010-39-06.png?alt=media&amp;token=828e8b2a-e056-4f22-882c-8032a2c81553)
 
@@ -207,7 +207,7 @@ This password is used to log into the Packet Squirrel via the web interface or v
 
 Your Packet Squirrel is now ready to use!
 
-You will be redirected to the [Packet Squirrel dashboard](/packet-squirrel-mark-ii/getting-started/web-ui.md).
+You will be redirected to the [Packet Squirrel dashboard](#web-ui).
 
 ---
 
@@ -216,7 +216,7 @@ You will be redirected to the [Packet Squirrel dashboard](/packet-squirrel-mark-
 
 #### New to Packet Squirrel?
 
-New to the Packet Squirrel ecosystem?  Skip straight to the [Packet Squirrel Basics](/packet-squirrel-mark-ii/getting-started/packet-squirrel-basics.md) chapter!
+New to the Packet Squirrel ecosystem?  Skip straight to the Packet Squirrel Basics chapter!
 
 #### Evolution
 
@@ -230,7 +230,7 @@ The Packet Squirrel Mark II has a web UI accessible at `http://172.16.32.1:1471`
 
 #### New NETMODE modes
 
-There are several new modes for [NETMODE](/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/netmode.md):&#x20;
+There are several new modes for NETMODE:&#x20;
 
 * BRIDGE - Bridge the interfaces, but obtain an IP on the Packet Squirrel as well
 * TRANSPARENT - Bridge the interfaces, do not obtain an IP on the Packet Squirrel
@@ -244,21 +244,21 @@ The Packet Squirrel Mark II supports both Wireguard and OpenVPN connections.
 
 VPN connections are now available on all network modes where the Packet Squirrel has an IP:  `NAT`, `BRIDGE`, and `JAIL`.
 
-The VPN connection can be enabled by any payload, see the [VPN Configuration](/packet-squirrel-mark-ii/advanced-payloads/vpn-configuration.md) chapter for more information!
+The VPN connection can be enabled by any payload, see the VPN Configuration chapter for more information!
 
 #### USB support
 
 Support has been added for the exfat filesystem.
 
-Payloads can now use the [USB\_WAIT](/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/usb_wait.md), [USB\_FREE](/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/usb_free.md), and [USB\_STORAGE](/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/usb_storage.md) commands to determine if the USB storage is available.
+Payloads can now use the USB\_WAIT, USB\_FREE, and [USB\_STORAGE](#usb-storage) commands to determine if the USB storage is available.
 
-USB encryption is now available; see the [USB Encryption](/packet-squirrel-mark-ii/advanced-payloads/usb-encryption.md) chapter for more information.
+USB encryption is now available; see the USB Encryption chapter for more information.
 
 Payloads should utilize the new USB commands to determine if USB storage is available, or wait for USB to be attached.
 
 #### New DuckyScript for Packet Squirrel commands
 
-The available commands for DuckyScript for Packet Squirrel have been greatly expanded, including a logging TCP proxy, connection matching and blocking, DNS spoofing, and more.  Be sure to check out the [DuckyScript for Packet Squirrel](/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel.md) section!
+The available commands for DuckyScript for Packet Squirrel have been greatly expanded, including a logging TCP proxy, connection matching and blocking, DNS spoofing, and more.  Be sure to check out the DuckyScript for Packet Squirrel section!
 
 #### Python 3
 
@@ -418,7 +418,7 @@ When the Packet Squirrel is able to access the Internet (`NAT`, `BRIDGE`, and `J
 
 Payloads are automatically executed depending on the position of the selector switch when the Packet Squirrel is booted. &#x20;
 
-By default, the Packet Squirrel does not start the web UI or the SSH server when running a payload, but individual payloads can start and stop the web UI and SSH server with [UI\_START](/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ui_start.md) [UI\_STOP](/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ui_stop.md) [SSH\_START](/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ssh_start.md) and [SSH\_STOP](/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ssh_stop.md).
+By default, the Packet Squirrel does not start the web UI or the SSH server when running a payload, but individual payloads can start and stop the web UI and SSH server with UI\_START UI\_STOP SSH\_START and SSH\_STOP.
 
 Network services are only available in network modes where the Packet Squrirel can access the network:  `NAT`, `BRIDGE`, and `JAIL` are supported.
 
@@ -429,7 +429,7 @@ Network services are only available in network modes where the Packet Squrirel c
 
 ### 2.3 Web UI
 
-The Packet Squirrel Mark II web UI is enabled during Arming & Configuration mode. It is not enabled by default in payload modes, but a payload can enable it via the [UI\_START](/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/ui_start.md) command.
+The Packet Squirrel Mark II web UI is enabled during Arming & Configuration mode. It is not enabled by default in payload modes, but a payload can enable it via the UI\_START command.
 
 This web UI shows the current status and configuration and allows for editing of payloads directly on the device.
 
@@ -465,7 +465,7 @@ The Packet Squirrel web UI contains a basic editing environment:
 Within the payload editor you can live-edit the payloads, download the payload to your computer for local editing, and upload local files to a payload slot.
 
 > [!NOTE]
-> Looking for more information about creating payloads?  Check out the [Payload Development](/packet-squirrel-mark-ii/payload-development/payload-development-basics.md) guide!
+> Looking for more information about creating payloads?  Check out the Payload Development guide!
 
 #### Settings
 
@@ -487,7 +487,7 @@ The network category under the settings page will show the current network inter
 
 To get your Packet Squirrel online, plug the Network Ethernet port into an Internet connected network that supports DHCP.
 
-In Arming & Configuration mode, `NAT`, `BRIDGE`, or `JAIL` [network modes](/packet-squirrel-mark-ii/getting-started/networking-and-modes.md), the Packet Squirrel will obtain an IP address from the network port via DHCP.  It can also connect to a Cloud C² server and VPN servers.
+In Arming & Configuration mode, `NAT`, `BRIDGE`, or `JAIL` network modes, the Packet Squirrel will obtain an IP address from the network port via DHCP.  It can also connect to a Cloud C² server and VPN servers.
 
 While in Arming & Configuration mode, the Packet Squirrel web UI will display the IP address under the Settings -> Networking panel.
 
@@ -539,7 +539,7 @@ Payloads can configure the LED to many other colors and patters, check your payl
 
 Cloud C² makes it easy for pen testers and IT security teams to deploy and manage fleets of Hak5 gear from a simple cloud dashboard.
 
-The Packet Squirrel supports Cloud C² in all [network modes](/packet-squirrel-mark-ii/getting-started/networking-and-modes.md) where the Packet Squirrel obtains an address (`NAT`, `BRIDGE`, and `JAIL`).  It is not available in `TRANSPARENT` or `ISOLATE` modes.
+The Packet Squirrel supports Cloud C² in all network modes where the Packet Squirrel obtains an address (`NAT`, `BRIDGE`, and `JAIL`).  It is not available in `TRANSPARENT` or `ISOLATE` modes.
 
 #### Cloud C² server
 
@@ -580,7 +580,7 @@ Most USB drives ship pre-formatted with **fat32** or **exfat**. To use these dri
 
 The Packet Squirrel also supports encrypted storage for increased protection of data at rest.
 
-USB encryption requires extra setup steps and payload configurations; to find out more about encrypting USB storage, see the [USB encryption](/packet-squirrel-mark-ii/advanced-payloads/usb-encryption.md) page for advanced payloads.
+USB encryption requires extra setup steps and payload configurations; to find out more about encrypting USB storage, see the USB encryption page for advanced payloads.
 
 ---
 
@@ -826,7 +826,7 @@ In ISOLATE mode, the Packet Squirrel has no network connection, and will not be 
 
 "When I use a word," Humpty Dumpty said in rather a scornful tone, "it means just what I choose it to mean -- neither more nor less."
 
-<table><thead><tr><th width="208">Term</th><th>Definition</th></tr></thead><tbody><tr><td>Bridge</td><td>A network mode (or network device) which copies packets between two physical interfaces, without changing the content of the packets.<br /><br />Similar to a switch, a bridge copies packets from one physical network to another physical network, without modification.</td></tr><tr><td>Hub</td><td>A hub distributes packets from all connected devices to all other connected devices.<br /><br />A hub operates at the physical layer (layer 1) and has no insight into the contents of the data, and offers no protection against multiple devices transmitting at once.</td></tr><tr><td>Layer <em>N</em></td><td>A reference to a layer in the <a href="/packet-squirrel-mark-ii/networking-tutorial/osi-layers.md">OSI network model</a>; typically used to describe the area of networking, such as layer 2 (raw packets), layer 4 (TCP and above), and so on.</td></tr><tr><td>MAC Address</td><td>A MAC address (Media Access Control), is the unique 6-byte addressed of a network card at the lowest layer.<br /><br />MAC addresses <em>must</em> be unique within a network.<br /><br />The first 3 bytes of the MAC address are known as the OUI (Organizational Unique Identifier); each manufacturer has a unique UI, which allows identifying (to some extent) what company has produced a network device.  Since many network devices are re-branded or include network chipsets from other companies, this information is not always reliable.</td></tr><tr><td>NAT</td><td>Also known as <em>Network Address Translation</em> or <em>Masquerading</em>; a method where packets from multiple devices on a private network are rewritten to appear to be from a single device on the public network.</td></tr><tr><td>Packet</td><td><p>A packet represents a collection of data on the network transmitted as a single object.</p><p><br />A stream of data (such as a web site or video stream) is broken up into many packets to traverse the network.<br /><br />Often used synonymously with the term "frame" to indicate a block of data on a physical network.</p></td></tr><tr><td>Router</td><td>A network mode (or network device) which directs packets from one logical network to another (such as from a private network to an Internet connection, often utilizing NAT in the process).<br /><br />Routers are responsible for passing packets from one network to another, such as a private local network passing packets to a larger corporate network or the Internet.<br /><br />Routers modify packets to direct them to the new network.</td></tr><tr><td>Switch</td><td>A network device which connects multiple Ethernet devices, while keeping traffic separate.<br /><br />A switch operates purely at the data layer (layer 2), and typically has no insight into the types of packets or the protocols contained in the packet.</td></tr></tbody></table>
+<table><thead><tr><th width="208">Term</th><th>Definition</th></tr></thead><tbody><tr><td>Bridge</td><td>A network mode (or network device) which copies packets between two physical interfaces, without changing the content of the packets.<br /><br />Similar to a switch, a bridge copies packets from one physical network to another physical network, without modification.</td></tr><tr><td>Hub</td><td>A hub distributes packets from all connected devices to all other connected devices.<br /><br />A hub operates at the physical layer (layer 1) and has no insight into the contents of the data, and offers no protection against multiple devices transmitting at once.</td></tr><tr><td>Layer <em>N</em></td><td>A reference to a layer in the <a href="/packet-squirrel-mark-ii/networking-tutorial/osi-layers.md">OSI network model</a>; typically used to describe the area of networking, such as layer 2 (raw packets), layer 4 (TCP and above), and so on.</td></tr><tr><td>MAC Address</td><td>A MAC address (Media Access Control), is the unique 6-byte addressed of a network card at the lowest layer.<br /><br />MAC addresses <em>must</em> be unique within a network.<br /><br />The first 3 bytes of the MAC address are known as the OUI (Organizational Unique Identifier); each manufacturer has a unique OUI, which allows identifying (to some extent) what company has produced a network device.  Since many network devices are re-branded or include network chipsets from other companies, this information is not always reliable.</td></tr><tr><td>NAT</td><td>Also known as <em>Network Address Translation</em> or <em>Masquerading</em>; a method where packets from multiple devices on a private network are rewritten to appear to be from a single device on the public network.</td></tr><tr><td>Packet</td><td><p>A packet represents a collection of data on the network transmitted as a single object.</p><p><br />A stream of data (such as a web site or video stream) is broken up into many packets to traverse the network.<br /><br />Often used synonymously with the term "frame" to indicate a block of data on a physical network.</p></td></tr><tr><td>Router</td><td>A network mode (or network device) which directs packets from one logical network to another (such as from a private network to an Internet connection, often utilizing NAT in the process).<br /><br />Routers are responsible for passing packets from one network to another, such as a private local network passing packets to a larger corporate network or the Internet.<br /><br />Routers modify packets to direct them to the new network.</td></tr><tr><td>Switch</td><td>A network device which connects multiple Ethernet devices, while keeping traffic separate.<br /><br />A switch operates purely at the data layer (layer 2), and typically has no insight into the types of packets or the protocols contained in the packet.</td></tr></tbody></table>
 
 ---
 
@@ -1322,7 +1322,7 @@ You’ll also see a collection of comments at the beginning of every payload:  T
 
 #### Payload information&#x20;
 
-Payloads can have optional information at the top of the file; these comments help the web UI display information about the payload, and helps other users if you contribute to the [Payload Repository](/packet-squirrel-mark-ii/payload-repository.md).
+Payloads can have optional information at the top of the file; these comments help the web UI display information about the payload, and helps other users if you contribute to the Payload Repository.
 
 * Title: A simple payload title.  This should be descriptive and summarize the purpose of the payload.
 * Description: A longer description about the payload and what it does.
@@ -1345,7 +1345,7 @@ By providing a title and description you make it easier to identify your payload
 
 Variables are used to store values or data that can be used later in the script.&#x20;
 
-We've already seen variables in use in the [Configuring payloads](/packet-squirrel-mark-ii/getting-started/configuring-payloads.md) section, where we use them to control how the payload executes.  Variables are significantly more powerful, however.
+We've already seen variables in use in the Configuring payloads section, where we use them to control how the payload executes.  Variables are significantly more powerful, however.
 
 There are different types of variables in bash:
 
@@ -1422,7 +1422,7 @@ NO_LED=1 BUTTON
 
 When called with a timeout, the `BUTTON` script will return a successful return code (0) when the button is pressed, and an unsuccessful result (non-0) if the timeout expires.
 
-To learn how to write payloads which respond to return codes, check the [Advanced Bash](/packet-squirrel-mark-ii/advanced-payloads.md) section!
+To learn how to write payloads which respond to return codes, check the Advanced Bash section!
 
 #### Experimenting
 
@@ -2044,11 +2044,11 @@ LED R VERYFAST
 
 ### 4.13 NETMODE Command
 
-The `NETMODE` command sets the [networking mode of the Packet Squirrel](/packet-squirrel-mark-ii/getting-started/networking-and-modes.md).
+The `NETMODE` command sets the networking mode of the Packet Squirrel.
 
 #### Options
 
-`NETMODE` accepts one option:  The network mode to set.  For more information on each networking mode, check the "[Networking and modes](/packet-squirrel-mark-ii/getting-started/networking-and-modes.md)" portion of the manual!
+`NETMODE` accepts one option:  The network mode to set.  For more information on each networking mode, check the "Networking and modes" portion of the manual!
 
 * `NAT`\
   Basic NAT mode.
@@ -2089,7 +2089,7 @@ Calling `SELFDESTRUCT` will erase the contents of the USB drive, perform a facto
 > 
 > `SELFDESTRUCT` is meant as a panic-button during a red team exercise to wipe the contents of a Packet Squirrel and render the device invisible on the network.
 > 
-> To recover a Packet Squirrel which has been reset via `SELFDESTRUCT` you must then perform an additional [Factory Reset](/packet-squirrel-mark-ii/troubleshooting/factory-reset.md) process.
+> To recover a Packet Squirrel which has been reset via `SELFDESTRUCT` you must then perform an additional Factory Reset process.
 
 #### Options
 
@@ -2103,7 +2103,7 @@ SELFDESTRUCT --really-do-this
 
 The `SELFDESTRUCT` command will set a flag on the Packet Squirrel which places it in transparent networking mode and prevents the setup process from running.
 
-To recover a device which has been reset via `SELFDESTRUCT`, you must perform an additional [Factory Reset](/packet-squirrel-mark-ii/troubleshooting/factory-reset.md) process, however the device **will not indicate it has finished booting** and **will not light the LED**.
+To recover a device which has been reset via `SELFDESTRUCT`, you must perform an additional Factory Reset process, however the device **will not indicate it has finished booting** and **will not light the LED**.
 
 Set the device to Arming Mode, plug in the power to the USB-C port, and wait approximately 5 minutes, **then** press and hold the push button for 20 seconds.  The LED will blink red and the device will reboot into the normal setup process.
 
@@ -2217,7 +2217,7 @@ This **does not** necessarily reflect the switch position **when the Packet Squi
 
 When called with a timeout, the `SWITCH` script will return the position of the switch (`switch1` through `switch4`).
 
-To learn how to write payloads which can handle responses, check the [Advanced Bash](/packet-squirrel-mark-ii/advanced-payloads.md) section!
+To learn how to write payloads which can handle responses, check the Advanced Bash section!
 
 #### Experimenting
 
@@ -2227,7 +2227,7 @@ You can experiment using the `SWITCH` command live, either in the Web Shell in t
 
 #### Examples
 
-Payloads using the `SWITCH` command must handle the output; for example the following payload sets the LED based on the switch position.  For more information about writing advanced payloads, see the [Advanced Bash](/packet-squirrel-mark-ii/advanced-payloads.md) section!
+Payloads using the `SWITCH` command must handle the output; for example the following payload sets the LED based on the switch position.  For more information about writing advanced payloads, see the Advanced Bash section!
 
 ```bash
 #!/bin/bash
@@ -2287,7 +2287,7 @@ If there is no USB drive attached, `USB_FREE` will return `0`
 
 `USB_FREE` returns as output the amount of space free on an attached USB storage device, in bytes.
 
-To learn how to write payloads which can handle responses, check the [Advanced Bash](/packet-squirrel-mark-ii/advanced-payloads.md) section!
+To learn how to write payloads which can handle responses, check the Advanced Bash section!
 
 #### Experimenting
 
@@ -2297,7 +2297,7 @@ You can experiment using the `USB_FREE` command live, either in the Web Shell in
 
 #### Examples
 
-Payloads using the `USB_FREE` command must handle the output; for example the following payload sets the LED based on the free space.  For more information about writing advanced payloads, see the [Advanced Bash](/packet-squirrel-mark-ii/advanced-payloads.md) section!
+Payloads using the `USB_FREE` command must handle the output; for example the following payload sets the LED based on the free space.  For more information about writing advanced payloads, see the Advanced Bash section!
 
 ```bash
 #!/bin/bash
@@ -2334,7 +2334,7 @@ Payloads which require USB storage can use this to determine if a USB drive is c
 
 `USB_STORAGE` sets a return code of `0` if storage is present and non-zero if it is not.
 
-To learn how to write payloads which can handle responses, check the [Advanced Bash](/packet-squirrel-mark-ii/advanced-payloads.md) section!
+To learn how to write payloads which can handle responses, check the Advanced Bash section!
 
 #### Experimenting
 
@@ -2344,7 +2344,7 @@ You can experiment using the USB\_STORAGE command live, either in the Web Shell 
 
 #### Examples
 
-Payloads using the `USB_STORAGE` command must handle the output; for example the following payload sets the LED based on USB storage being available.  For more information about writing advanced payloads, see the [Advanced Bash](/packet-squirrel-mark-ii/advanced-payloads.md) section!
+Payloads using the `USB_STORAGE` command must handle the output; for example the following payload sets the LED based on USB storage being available.  For more information about writing advanced payloads, see the Advanced Bash section!
 
 ```bash
 #!/bin/bash
@@ -2788,7 +2788,7 @@ fi
 ```
 
 > [!NOTE]
-> What's the `>/dev/null` in the above example?  Check out the section about [redirecting output](/packet-squirrel-mark-ii/advanced-payloads/redirecting-output.md)!
+> What's the `>/dev/null` in the above example?  Check out the section about redirecting output!
 
 Often, however, it is much quicker to use the bash shorthand of `&&` and `||`.  This will execute the next statement only if the previous one succeeded.  To implement the same using these shorthand options:
 
@@ -2796,7 +2796,7 @@ Often, however, it is much quicker to use the bash shorthand of `&&` and `||`.  
 ls /i-dont-exist >/dev/null && echo "I dont't exist"; || echo "I exist"
 ```
 
-The short methods are not always *clearer*, but are often very useful for short tests of command success.  They're covered more in the [Return codes & success](/packet-squirrel-mark-ii/advanced-payloads/return-codes-and-success.md) section!
+The short methods are not always *clearer*, but are often very useful for short tests of command success.  They're covered more in the Return codes & success section!
 
 #### Case
 
@@ -3846,7 +3846,7 @@ echo $uservar $retriesvar
 ```
 
 > [!NOTE]
-> Notice the use of single quotes when defining static JSON here:  This keeps Bash from interpreting the braces and quotes. See the [Quotes and Expansions](/packet-squirrel-mark-ii/advanced-payloads/quotes-and-expansions.md) chapter for more information.
+> Notice the use of single quotes when defining static JSON here:  This keeps Bash from interpreting the braces and quotes. See the Quotes and Expansions chapter for more information.
 
 ##### Getting complex data
 
@@ -4117,7 +4117,7 @@ There's a lot going on here!  Let's break it down:
 6. We define a function that gets called for each object in the `streams` element.
 7. We use the second argument of the function, which is the index value, to descend into the nested object to obtain the port and match values.
 8. We launch `MATCHSTREAM` in the background
-9. We use a [command group](/packet-squirrel-mark-ii/advanced-payloads/command-groups.md) to run the `MATCHSTREAM` commands and wait for any of them to complete
+9. We use a command group to run the `MATCHSTREAM` commands and wait for any of them to complete
 10. The device is placed in `JAIL` mode and the payload exits.
 
 ---
@@ -4223,7 +4223,7 @@ To enable automatic mounting of encrypted storage in a payload, you'll need to a
 
 In the demonstration payloads, this requires you to place the encryption password in your payload script.  For more complex payloads, you may be able to implement other mechanisms for retrieving the password, such as fetching it from a `HTTPS` server on boot.
 
-Even with the password stored in the internal Packet Squirrel flash, the USB storage is still encrypted at rest, and the password can be erased via a factory reset or the `SELFDESTRUCT` [payload command](/packet-squirrel-mark-ii/payload-development/duckyscript-for-packet-squirrel/selfdestruct.md).
+Even with the password stored in the internal Packet Squirrel flash, the USB storage is still encrypted at rest, and the password can be erased via a factory reset or the `SELFDESTRUCT` payload command.
 
 ##### Example encrypted payload&#x20;
 
@@ -4881,7 +4881,7 @@ SSH and the web UI can be enabled in any payload mode where the Packet Squirrel 
 
 ##### Logging commands to a file
 
-The output of commands can be sent to a file (see the chapter on [Redirecting output ](/packet-squirrel-mark-ii/advanced-payloads/redirecting-output.md)for more information).  This can help diagnose errors in a payload that can not be debugged interactively.
+The output of commands can be sent to a file (see the chapter on Redirecting output for more information).  This can help diagnose errors in a payload that can not be debugged interactively.
 
 Remember that files in `/tmp` are not preserved over a reboot - but you can log to `/root/`, for example:
 

@@ -151,7 +151,7 @@ The WiFi Pineapple Mark VII is designed to be powered from most modern systems, 
 
 The WiFi Pineapple will appear as an Ethernet adapter, and the recommended setup method is to use the wired USB connection.
 
-For macOS, additional steps are required because of changes Apple has made to the operating system, for more information check the [macOS directions](/wifi-pineapple/faq/macos-support.md), or consider [setting up via WiFi](/wifi-pineapple/setup/connecting-to-the-wifi-pineapple-over-wifi.md).
+For macOS, additional steps are required because of changes Apple has made to the operating system, for more information check the macOS directions, or consider setting up via WiFi.
 
 #### Powering from external adapters
 
@@ -669,7 +669,7 @@ Along the top of the page, multiple cards show different system status numbers, 
 MAC Address, IP Address and Connected Time can be viewed for all clients connected to non-Management access points. You can also kick a specific client by using the Kick button.
 
 > [!NOTE]
-> Some clients may automatically reconnect quickly. Clients can be denied association via the [PineAP Filters](/wifi-pineapple/ui-overview/pineap.md).
+> Some clients may automatically reconnect quickly. Clients can be denied association via the PineAP Filters.
 
 ##### Notifications
 
@@ -889,7 +889,7 @@ The Evil WPA access point is used to impersonate a WPA (or WPA2) PSK network.  I
 > [!NOTE]
 > Be sure to allow your Evil WPA SSID in your filter configuration, or clients will not be able to connect!
 
-Collected handshakes will be added to the [Handshakes](/wifi-pineapple/ui-overview/recon-1.md) area, where they can be downloaded in standard pcap or hashcat format.
+Collected handshakes will be added to the Handshakes area, where they can be downloaded in standard pcap or hashcat format.
 
 #### Evil Enterprise
 
@@ -1159,7 +1159,7 @@ WiFi Pineapple Modules allow the interface to be extended to support new communi
 Modules are typically contributed by the WiFi Pineapple community, and extend the functionality of the WiFi Pineapple UI.  Typically modules offer a graphical front end to existing tools.
 
 > [!NOTE]
-> Can't find a module for a tool you want?  Check out the Packages section to see if there is a command-line equivalent already!  You can also [help contribute](/wifi-pineapple/developer-documentation/contributing-to-the-module-repository.md) to the module repository!
+> Can't find a module for a tool you want?  Check out the Packages section to see if there is a command-line equivalent already!  You can also help contribute to the module repository!
 
 The main Modules page lists installed modules; to access the module click the corresponding card.  To uninstall modules, click the trashcan icon.
 
@@ -1228,7 +1228,7 @@ The recon interface is used by the WiFi Pineapple when scanning for WiFi network
 
 The default recon interface is `wlan1`, the built-in 2.4GHz WiFi radio.
 
-When a [compatible USB WiFi device](/wifi-pineapple/faq/compatible-802.11ac-adapters.md), such as the [Hak5 MK7AC Adapter](https://shop.hak5.org/products/mk7ac-wifi-adapter) is connected, the `wlan3` interface will become available and can be used for scanning 2.4GHz *and* 5GHz channels.
+When a compatible USB WiFi device, such as the [Hak5 MK7AC Adapter](https://shop.hak5.org/products/mk7ac-wifi-adapter) is connected, the `wlan3` interface will become available and can be used for scanning 2.4GHz *and* 5GHz channels.
 
 ###### USB Ethernet
 
@@ -1590,7 +1590,7 @@ Channel availability is determined by region, with North America only having leg
 
 The 5 GHz spectrum is much more complicated in regards to bandwidth and channel availability by region with further restrictions on indoor/outdoor use. In the United States the FCC designates U-NII (Unlicensed National Information Infrastructure) bands 1-3 available, with 45 channels in total operating in 20, 40, 80 and 160 MHz bandwidth.
 
-The WiFi Pineapple Mark VII operates in the 2.4 GHz band, with optional support for 5GHz operation [using a supported USB WiFi device](/wifi-pineapple/faq/compatible-802.11ac-adapters.md), while the WiFi Pineapple Enterprise operates in both the 2.4 and 5 GHz bands.
+The WiFi Pineapple Mark VII operates in the 2.4 GHz band, with optional support for 5GHz operation using a supported USB WiFi device, while the WiFi Pineapple Enterprise operates in both the 2.4 and 5 GHz bands.
 
 It’s also important to note that similar to modes of operation, a radio can only occupy one channel at a time. For this reason channel hopping is necessary in order to obtain a complete picture of the given spectrum. When performing a Recon scan, the WiFi Pineapple will switch one of its radios into monitor mode to passively listen on a channel. The radio will take a moment to note any data of interest on each channel before moving on to the next.
 
@@ -1895,7 +1895,7 @@ Beacon frames are essential for network discovery. When a client passively scans
 
 **Probe frames** further network discovery and come in two variety, *probe requests* and *probe responses*. Probe requests are transmitted by clients seeking access points. Probe responses are the access point’s replies to these client requests.
 
-When a probe request is transmitted by a client seeking an access point, this is considered active scanning. The client will transmit to the broadcast address either a general probe request or a directed probe request. The former simply asks “what access points are around” while the later specifies the particular SSID for which the client seeks.
+When a probe request is transmitted by a client seeking an access point, this is considered active scanning. The client will transmit to the broadcast address either a general probe request or a directed probe request. The former simply asks “what access points are around” while the latter specifies the particular SSID for which the client seeks.
 
 The probe response includes all of the basic information about the network also included in the beacon frame.
 
@@ -2394,14 +2394,14 @@ The LED should blink **RED** rapidly, and then remain **SOLID RED**.  If the sta
 
 ###### Linux
 
-Assign the WiFi Pineapple's interface a static IP address of **172.16.42.42**. More in-depth instructions can be found in the [Linux Setup page](/wifi-pineapple/setup/connecting-to-the-wifi-pineapple-on-linux.md).
+Assign the WiFi Pineapple's interface a static IP address of **172.16.42.42**. More in-depth instructions can be found in the Linux Setup page.
 
 ###### Windows
 
-Assign the WiFi Pineapple's interface a static IP address of **172.16.42.42**. More in-depth instructions can be found in the [Windows Setup page](/wifi-pineapple/setup/connecting-to-the-wifi-pineapple-on-windows.md).
+Assign the WiFi Pineapple's interface a static IP address of **172.16.42.42**. More in-depth instructions can be found in the Windows Setup page.
 
 > [!NOTE]
-> New to static IP address assignments in Windows? Check [this tutorial](https://www.howtogeek.com/howto/19249/how-to-assign-a-static-ip-address-in-xp-vista-or-windows-7/).
+> New to static IP address assignments in Windows? Check this tutorial.
 
 ##### Uploading the Recovery to the WiFi Pineapple
 
@@ -2425,7 +2425,7 @@ Select **Choose file** and then select the downloaded **recovery file** from ear
 > [!CAUTION]
 > **Do not unplug the device.** Doing so will potentially damage your device. It will automatically reboot once complete.&#x20;
 
-Once the process is complete, you will be able to set the device up again. See the [Setup section](/wifi-pineapple/setup/connecting-the-wifi-pineapple.md) for more details.
+Once the process is complete, you will be able to set the device up again. See the Setup section for more details.
 
 > [!NOTE]
 > Once the device has finished flashing, you will need to navigate to [http://172.16.42.1:1471](http://172.16.42.1:1471) to complete the setup process, same as the first time you configured it!
@@ -2474,7 +2474,7 @@ You should always download any recon scans before performing a system update.
 
 Once the update begins, the LED of the device will flash alternating red and blue.  An update typically takes five to ten minutes, do *not* unplug your device during the update process!
 
-Once the update is complete, the device will reboot and enter setup mode.  If the web interface does not automatically refresh, make sure that you are still [connected to the WiFi Pineapple device](/wifi-pineapple/setup/connecting-to-the-wifi-pineapple-on-linux.md), and navigate to [http://172.16.42.1:1471](http://172.16.42.1:1471) . If you were connected to the WiFi Pineapple via the management WiFi, you will need to connect either using USB-C or the setup WiFi networks.
+Once the update is complete, the device will reboot and enter setup mode.  If the web interface does not automatically refresh, make sure that you are still connected to the WiFi Pineapple device, and navigate to [http://172.16.42.1:1471](http://172.16.42.1:1471) . If you were connected to the WiFi Pineapple via the management WiFi, you will need to connect either using USB-C or the setup WiFi networks.
 
 The SSH host key of the WiFi Pineapple is dynamically generated on first boot - after upgrading your device, you will receive a SSH host key mismatch when connecting via OpenSSH, Putty, or other SSH clients.  This is normal when upgrading, and you should remove the offending key from your client and accept the new key (however, in any other circumstances you should not accept new SSH keys from a host unless you have confirmed they have changed!)
 

@@ -65,7 +65,7 @@ Everything lives under the **Flipper Devices** GitHub organization: https://gith
 |---|---|
 | [flipperzero-firmware](https://github.com/flipperdevices/flipperzero-firmware) | The FlipperOS firmware — official release builds, custom firmware base |
 | [qFlipper](https://github.com/flipperdevices/qFlipper) | Desktop app source |
-| [flipperzero-firmware-sources](https://github.com/flipperdevices/flipperzero-firmware-sources) | Full firmware sources for building your own |
+| [flipperzero-firmware-sources](https://github.com/flipperdevices/flipperzero-firmware) | Full firmware sources for building your own |
 | [video-game-module](https://github.com/flipperdevices/video-game-module) | Video Game Module firmware and games |
 | [Flipper Zero schematics & hardware](https://docs.flipper.net) | Official docs host the GPIO pinout and schematics PDFs |
 

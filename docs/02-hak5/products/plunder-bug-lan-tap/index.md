@@ -74,7 +74,7 @@ The Plunder Bug by Hak5 is pocket-sized LAN Tap that lets you "bug" Ethernet con
 
 Using a USB-C cable, connect the Plunder Bug to a computer running a network analyzer such as Wireshark. The light on the Plunder Bug will illuminate green to indicate that it is powered, and you will notice on the computer a new network interface (ASIX AX88772C USB Ethernet).
 
-You will most likely wish to switch the Plunder Bug into passive mode, which mutes the tap port, preventing the host computer from transmitting anything downstream on the tap port. See [instructions for your operating system here](https://docs.hak5.org/hc/en-us/sections/360003406914-Switching-between-Active-and-Passive-modes).
+You will most likely wish to switch the Plunder Bug into passive mode, which mutes the tap port, preventing the host computer from transmitting anything downstream on the tap port. See instructions for your operating system here.
 
 Using two Ethernet cables, plug the Plunder Bug inline between any two devices, such as a PC and a LAN switch. Packets between the two ports will be mirrored on the USB-C tap port, which may be viewed using common open source packet analyzers such as [Wireshark](https://www.wireshark.org/) or [tcpdump](https://www.tcpdump.org/).
 
