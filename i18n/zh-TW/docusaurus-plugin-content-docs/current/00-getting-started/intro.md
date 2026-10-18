@@ -14,7 +14,7 @@ description: 從這裡開始使用 Yupitek Wiki — 涵蓋 ALFA、Hak5、Flipper
 
 | 品牌 | 重點 | 產品系列頁面 |
 |-------|-------|---------------------|
-| **ALFA Network** | Wi-Fi USB 無線網絡卡、天線、Linux/Kali 支援 | [ALFA Network](/alfa-network/) |
+| **ALFA Network** | Wi-Fi USB 無線網路卡、天線、Linux/Kali 支援 | [ALFA Network](/alfa-network/) |
 | **Hak5** | 滲透測試工具（WiFi Pineapple、Rubber Ducky、O.MG） | [Hak5](/hak5/) |
 | **Flipper Zero** | 多功能工具裝置與配件 | [Flipper Zero](/flipper-zero/) |
 | **SDRLAB** | 軟體定義無線電硬體 | [SDRLAB](/sdrlab/) |

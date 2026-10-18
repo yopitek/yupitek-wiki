@@ -4,7 +4,7 @@ title: RTL8811AU 驅動程式指南（AWUS036ACS）
 sidebar_position: 5
 description: RTL8811AU 晶片深入探討——口袋尺寸的 AWUS036ACS、rtl8811au 驅動程式的 DKMS 安裝、監聽模式與封包注入驗證。
 tags: [alfa, 驅動程式, rtl8811au, dkms, 監聽模式]
-keywords: [RTL8811AU 驅動程式, AWUS036ACS, rtl8811au, 口袋網卡監聽模式]
+keywords: [RTL8811AU 驅動程式, AWUS036ACS, rtl8811au, 口袋網路卡監聽模式]
 ---
 
 # RTL8811AU 驅動程式指南（AWUS036ACS）
@@ -15,7 +15,7 @@ keywords: [RTL8811AU 驅動程式, AWUS036ACS, rtl8811au, 口袋網卡監聽模�
 
 RTL8811AU 基本上是 RTL8812AU 家族的 1×1 版本：單一空間串流、5 GHz 最高 433 Mbps、耗電較低、電路板較小。ALFA 將它包進小巧的 ACS 機身，搭配一支外接 2 dBi RP-SMA 天線——你可以在能藏進鉛筆盒的體積中，獲得經典的 ALFA 滲透測試功能。
 
-就驅動程式而言，與 RTL8812AU 的情況並無不同：**核心內沒有支援監聽模式的驅動程式**，因此我們使用社群的 `8821au-20210708` DKMS 驅動程式。請注意，此驅動程式也涵蓋 RTL8821AU 變體，所以如果你在類似的網卡上看到 `dkms status` 顯示相同的模組名稱，不必驚慌。
+就驅動程式而言，與 RTL8812AU 的情況並無不同：**核心內沒有支援監聽模式的驅動程式**，因此我們使用社群的 `8821au-20210708` DKMS 驅動程式。請注意，此驅動程式也涵蓋 RTL8821AU 變體，所以如果你在類似的網路卡上看到 `dkms status` 顯示相同的模組名稱，不必驚慌。
 
 ```mermaid
 flowchart LR
@@ -55,7 +55,7 @@ sudo modprobe 8821au
 iw dev
 ```
 
-**預期輸出**：一行 `Interface wlan0`（或 `wlan1`）。如果網卡重新插拔後才出現，請將模組加入自動載入：
+**預期輸出**：一行 `Interface wlan0`（或 `wlan1`）。如果網路卡重新插拔後才出現，請將模組加入自動載入：
 
 ```bash
 echo 8821au | sudo tee /etc/modules-load.d/alfa.conf

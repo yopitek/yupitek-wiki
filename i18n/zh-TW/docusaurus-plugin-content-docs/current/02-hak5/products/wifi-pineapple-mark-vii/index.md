@@ -52,7 +52,7 @@ locale: "zh-tw"
   - [6.2 網際網路共用連線建立與排查](#62-網際網路共用連線建立與排查)
   - [6.3 忘記密碼還原與原廠出廠重置 (Factory Reset)](#63-忘記密碼還原與原廠出廠重置-factory-reset)
   - [6.4 韌體升級與救援復原模式 (Firmware Recovery)](#64-韌體升級與救援復原模式-firmware-recovery)
-  - [6.5 相容 802.11 ac 5 GHz 網卡清單 (Compatible Adapters)](#6-5-相容-80211 ac-5-ghz-網卡清單-compatible-adapters)
+  - [6.5 相容 802.11 ac 5 GHz 網路卡清單 (Compatible Adapters)](#6-5-相容-80211 ac-5-ghz-網卡清單-compatible-adapters)
   - [6.6 MK7 LED 改裝與 Kismet 保護外殼安裝](#66-mk7-led-改裝與-kismet-保護外殼安裝)
 
 ---
@@ -110,7 +110,7 @@ Hak5 WiFi Pineapple Mark VII 是專為網路安全從業人員、紅隊演練專
 ```bash
 sudo ./wp7.sh
 ```
-選擇對應對外網卡與 USB 網卡介面，腳本將自動建立 NAT 規則，使 Mark VII 具備連外網能力。
+選擇對應對外網路卡與 USB 網路卡介面，腳本將自動建立 NAT 規則，使 Mark VII 具備連外網能力。
 
 ---
 
@@ -118,8 +118,8 @@ sudo ./wp7.sh
 
 在 Windows 10 / 11 中：
 1. 進入「網路和共用中心」$ightarrow$「變更介面卡設定」。
-2. 在連上網際網路的網卡（Wi-Fi 或乙太網路）上按右鍵選擇「內容」。
-3. 切換至「共用」標籤頁，勾選「允許其他網路使用者透過這台電腦的網際網路連線來連線」，並在下拉選單中選擇 WiFi Pineapple 的虛擬乙太網路網卡。
+2. 在連上網際網路的網路卡（Wi-Fi 或乙太網路）上按右鍵選擇「內容」。
+3. 切換至「共用」標籤頁，勾選「允許其他網路使用者透過這台電腦的網際網路連線來連線」，並在下拉選單中選擇 WiFi Pineapple 的虛擬乙太網路網路卡。
 
 ---
 
@@ -215,7 +215,7 @@ PineAP 是 WiFi Pineapple 系列聞名全球的核心引擎：
 
 ### 4.2 射頻晶片與角色分工 (Radios and Chipsets)
 
-詳細剖析 Mark VII 內部 3 組無線網卡的微架構分工：
+詳細剖析 Mark VII 內部 3 組無線網路卡的微架構分工：
 - **Radio 0 (wlan0)**：預設負責 AP 廣播與客戶端連線。
 - **Radio 1 (wlan1)**：預設作為客戶端外網連線（Client Mode）或二次注入。
 - **Radio 2 (wlan2)**：專職被動監聽與 Recon 頻譜偵測。
@@ -299,9 +299,9 @@ Hak5 官方提供模組開發 SDK 與前端 API 規範，支援 HTML5、JavaScri
 
 ---
 
-### 6.5 相容 802.11 ac 5 GHz 網卡清單 (Compatible Adapters)
+### 6.5 相容 802.11 ac 5 GHz 網路卡清單 (Compatible Adapters)
 
-支援透過 USB 2.0 Host 介面外接原廠 **MK7 AC** 雙頻無線網卡（採用 MediaTek MT7610 U 晶片），立即為 Mark VII 賦予 5 GHz 802.11 ac 頻段的偵查與注入能力。
+支援透過 USB 2.0 Host 介面外接原廠 **MK7 AC** 雙頻無線網路卡（採用 MediaTek MT7610 U 晶片），立即為 Mark VII 賦予 5 GHz 802.11 ac 頻段的偵查與注入能力。
 
 ---
 

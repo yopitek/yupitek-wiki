@@ -68,10 +68,10 @@ flowchart TD
 - [SDR 軟體](/sdrlab/sdr-software/) — GQRX、SDR#、SDR++、SDR Console、HDSDR 與命令列工具，以及該如何依工作需求挑選。
 - [韌體與驅動程式](/sdrlab/firmware/) — 如何讓硬體的驅動程式與韌體保持最新。
 - [疑難排解](/sdrlab/troubleshooting/) — 提供決策樹與症狀表格的問題解決中心。
-- [ALFA Linux 指南](/sdrlab/shared/alfa-linux-guide/) — 針對 Ubuntu 與 Kali 的 ALFA 網絡卡驅動程式（當你把 ALFA 網絡卡與 SDR 裝置搭配使用時很有用）。
+- [ALFA Linux 指南](/sdrlab/shared/alfa-linux-guide/) — 針對 Ubuntu 與 Kali 的 ALFA 網路卡驅動程式（當你把 ALFA 網路卡與 SDR 裝置搭配使用時很有用）。
 
 ## 相關章節
 
 - [Flipper Zero](/flipper-zero/) — 我們大多數擴充模組所插接的基礎裝置。
-- [ALFA Network](/alfa-network/) — 高增益 Wi-Fi 網絡卡與天線，常與 SDR 搭配進行無線協定分析。
+- [ALFA Network](/alfa-network/) — 高增益 Wi-Fi 網路卡與天線，常與 SDR 搭配進行無線協定分析。
 - [快速入門](/getting-started/) — 如果你是第一次造訪本 wiki，請從這裡開始。

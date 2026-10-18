@@ -2,14 +2,14 @@
 id: alfa-product-awus036acm
 title: ALFA AWUS036ACM——經典全能款（MT7612U）
 sidebar_position: 8
-description: ALFA AWUS036ACM——經典 MT7612U AC1200 雙頻無線網絡卡，內建於核心的驅動程式、高功率與極佳的監聽模式。推薦的初學者 Kali 無線網絡卡。
-tags: [alfa, 無線網絡卡, mt7612u, ac1200, kali, 監聽模式]
-keywords: [AWUS036ACM, MT7612U, 推薦 Kali 無線網絡卡, AC1200 USB 無線網絡卡]
+description: ALFA AWUS036ACM——經典 MT7612U AC1200 雙頻無線網路卡，內建於核心的驅動程式、高功率與極佳的監聽模式。推薦的初學者 Kali 無線網路卡。
+tags: [alfa, 無線網路卡, mt7612u, ac1200, kali, 監聽模式]
+keywords: [AWUS036ACM, MT7612U, 推薦 Kali 無線網路卡, AC1200 USB 無線網路卡]
 ---
 
 # ALFA AWUS036ACM——經典全能款（MT7612U）
 
-> **一句話定位（One-liner）**：**AWUS036ACM** 是社群的預設推薦：一支**高功率 MT7612U AC1200** 雙頻無線網絡卡，驅動程式**內建於 Linux 核心**。沒有 DKMS、沒有編譯——在 Kali 或 Ubuntu 上插上，監聽模式（monitor mode）就是能用。它是「我該買哪支 ALFA？」的無聊答案，而無聊代表可靠。
+> **一句話定位（One-liner）**：**AWUS036ACM** 是社群的預設推薦：一支**高功率 MT7612U AC1200** 雙頻無線網路卡，驅動程式**內建於 Linux 核心**。沒有 DKMS、沒有編譯——在 Kali 或 Ubuntu 上插上，監聽模式（monitor mode）就是能用。它是「我該買哪支 ALFA？」的無聊答案，而無聊代表可靠。
 
 ## 規格總覽 (Spec overview)
 
@@ -33,7 +33,7 @@ AWUS036ACM 把 [AWUS036ACH](/alfa-network/products/awus036ach/) 出名的一切�
 - 沒有 DKMS → 核心更新時沒有東西會壞。
 - 監聽模式 + 注入 → 透過原廠 `mac80211` 工具運作。
 
-這個組合就是為什麼它是「我是學生、我想要一支無線網絡卡上資安課、我不想跟作業系統搏鬥」的答案——也是為什麼這本 wiki 在 [Ubuntu](/alfa-network/linux-setup-ubuntu/) 與 [Kali](/alfa-network/linux-setup-kali/) 指南中把它當成參考無線網絡卡。
+這個組合就是為什麼它是「我是學生、我想要一支無線網路卡上資安課、我不想跟作業系統搏鬥」的答案——也是為什麼這本 wiki 在 [Ubuntu](/alfa-network/linux-setup-ubuntu/) 與 [Kali](/alfa-network/linux-setup-kali/) 指南中把它當成參考無線網路卡。
 
 ## 安裝與驅動程式
 
@@ -90,7 +90,7 @@ sudo aireplay-ng --test wlan0mon
 |---|---|---|
 | Kali Linux | ✅ | 內建於核心，零設定 |
 | Ubuntu | ✅ | 20.04+ 隨插即用 |
-| NetHunter / Android | ✅ | 標準的 NetHunter 無線網絡卡 |
+| NetHunter / Android | ✅ | 標準的 NetHunter 無線網路卡 |
 | Windows | ✅ | 官方驅動程式 |
 | Raspberry Pi / Jetson | ✅ | 內建於核心，穩固的 AP + 監聽支援 |
 
@@ -110,4 +110,4 @@ sudo aireplay-ng --test wlan0mon
 - [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/)
 - [NetHunter 設定指南](/alfa-network/linux-setup-nethunter/)
 - [AWUS036AXM](/alfa-network/products/awus036axm/)——Wi-Fi 6 + 藍芽升級款
-- [無線網絡卡比較](/alfa-network/wifi-adapter-comparison/)
+- [無線網路卡比較](/alfa-network/wifi-adapter-comparison/)

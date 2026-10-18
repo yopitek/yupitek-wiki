@@ -22,7 +22,7 @@ keywords: [APA-M04, ALFA 面板天線, 2.4 GHz 指向性天線, PR-SMA 天線]
 | 極化 | 線性、垂直 |
 | 波束寬度 | 窄（指向性——見概念章節） |
 | 安裝 | 壁掛 / 桅杆安裝，面板外型 |
-| 相容性 | 所有配 RP-SMA 天線的 ALFA 無線網絡卡（透過 PR-SMA/RP-SMA 配對） |
+| 相容性 | 所有配 RP-SMA 天線的 ALFA 無線網路卡（透過 PR-SMA/RP-SMA 配對） |
 
 ## 總覽
 
@@ -32,9 +32,9 @@ keywords: [APA-M04, ALFA 面板天線, 2.4 GHz 指向性天線, PR-SMA 天線]
 
 - **兩棟建築之間的點對點連結**（另一端配一面相符的面板）。
 - **把實驗室 AP 的涵蓋聚焦**到走廊或庭院。
-- **僅 2.4 GHz 的裝置**——IoT 節點、較舊的存取點、僅 2.4 GHz 的無線網絡卡，例如復古中繼設定。
+- **僅 2.4 GHz 的裝置**——IoT 節點、較舊的存取點、僅 2.4 GHz 的無線網路卡，例如復古中繼設定。
 
-它不擅長的地方：不要期待它能修好 5 GHz 無線網絡卡的範圍——它只支援 2.4 GHz，要 5 GHz 請用 [APA-M25](/alfa-network/products/apa-m25/) 或三頻 [APA-M25-6E](/alfa-network/products/apa-m25-6e/)。
+它不擅長的地方：不要期待它能修好 5 GHz 無線網路卡的範圍——它只支援 2.4 GHz，要 5 GHz 請用 [APA-M25](/alfa-network/products/apa-m25/) 或三頻 [APA-M25-6E](/alfa-network/products/apa-m25-6e/)。
 
 ## 天線如何在 30 秒內運作
 
@@ -52,11 +52,11 @@ flowchart LR
 
 ### 步驟 1：檢查你的接頭
 
-APA-M04 具有 **RP-SMA 插頭（公）** 接頭（ALFA 的規格表寫著「PR-SMA PLUG」），與 ALFA 的其他天線相同。它可直接鎖上 ALFA 無線網絡卡的 **RP-SMA（母）** 天線埠。如果你有一支接頭不同的通用 WiFi 天線（例如 N 型），你需要一條轉接 pigtail——不要硬塞；接頭不符會損壞針腳。
+APA-M04 具有 **RP-SMA 插頭（公）** 接頭（ALFA 的規格表寫著「PR-SMA PLUG」），與 ALFA 的其他天線相同。它可直接鎖上 ALFA 無線網路卡的 **RP-SMA（母）** 天線埠。如果你有一支接頭不同的通用 WiFi 天線（例如 N 型），你需要一條轉接 pigtail——不要硬塞；接頭不符會損壞針腳。
 
 ### 步驟 2：鎖上去
 
-- 拆下無線網絡卡的原廠天線。
+- 拆下無線網路卡的原廠天線。
 - 把 APA-M04 的接頭鎖到手指緊，然後用輕壓力**轉四分之一圈**——緊就好，絕不要硬轉。鎖太緊會剝壞脆弱的中心針。
 
 ### 步驟 3：指向它
@@ -88,10 +88,10 @@ iw dev wlan0 link
 
 | 搭配 | 結果 |
 |---|---|
-| 所有 ALFA USB 無線網絡卡（RP-SMA 天線連線埠） | ✅ 直接鎖上 |
-| 僅 2.4 GHz 的無線網絡卡 / AP | ✅ 理想 |
+| 所有 ALFA USB 無線網路卡（RP-SMA 天線連線埠） | ✅ 直接鎖上 |
+| 僅 2.4 GHz 的無線網路卡 / AP | ✅ 理想 |
 | 僅 5 GHz 的連結 | ❌ 頻段錯誤——請用 [APA-M25](/alfa-network/products/apa-m25/) |
-| 整合式天線的無線網絡卡（AXER、EACS） | ❌ 沒有可連線的 RP-SMA 連線埠 |
+| 整合式天線的無線網路卡（AXER、EACS） | ❌ 沒有可連線的 RP-SMA 連線埠 |
 
 ## 疑難排解
 
@@ -99,12 +99,12 @@ iw dev wlan0 link
 |---|---|---|
 | 範圍比原廠天線差 | 接頭未完全就位，或面板指向錯誤方向 | 重新就位接頭；用 `iw dev wlan0 link` 的訊號讀數重新瞄準 |
 | 訊號好、速度差 | 2.4 GHz 壅塞，不是天線問題 | 移到乾淨的頻道（`sudo iw dev wlan0 set channel 1/6/11`） |
-| 更換天線後什麼都沒有 | 無線網絡卡的 RP-SMA 針被鎖太緊弄斷 | 檢查中心針；用原廠天線當對照組測試 |
+| 更換天線後什麼都沒有 | 無線網路卡的 RP-SMA 針被鎖太緊弄斷 | 檢查中心針；用原廠天線當對照組測試 |
 | 中午連結正常、晚上失效 | Fresnel 區 / 天氣路徑 | 提高安裝位置；接受長距離連結的大氣變異 |
 
 ## 相關資源
 
 - [APA-M25](/alfa-network/products/apa-m25/)——雙頻 2.4/5 GHz 面板，同樣概念 + 5 GHz
 - [APA-M25-6E](/alfa-network/products/apa-m25-6e/)——含 6 GHz（Wi-Fi 6E）的三頻面板
-- [無線網絡卡比較](/alfa-network/wifi-adapter-comparison/)——挑一支無線電搭配這支天線
-- [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/)——先讓無線網絡卡能通話
+- [無線網路卡比較](/alfa-network/wifi-adapter-comparison/)——挑一支無線電搭配這支天線
+- [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/)——先讓無線網路卡能通話

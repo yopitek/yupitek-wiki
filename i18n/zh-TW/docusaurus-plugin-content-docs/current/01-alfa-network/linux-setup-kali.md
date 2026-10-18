@@ -1,26 +1,26 @@
 ---
 slug: linux-setup-kali
 id: alfa-linux-setup-kali
-title: ALFA 無線網絡卡在 Kali Linux 上——監聽模式與封包注入
+title: ALFA 無線網路卡在 Kali Linux 上——監聽模式與封包注入
 sidebar_position: 5
-description: ALFA 無線網絡卡的完整 Kali Linux 設定——Realtek 晶片的 DKMS 建置、監聽模式、封包注入驗證，以及常見錯誤表。
+description: ALFA 無線網路卡的完整 Kali Linux 設定——Realtek 晶片的 DKMS 建置、監聽模式、封包注入驗證，以及常見錯誤表。
 tags: [alfa, kali, 監聽模式, 封包注入, dkms, aircrack-ng]
 keywords: [ALFA Kali, airmon-ng, Kali 監聽模式, 封包注入, AWUS036ACM Kali, RTL8812AU Kali]
 ---
 
-# ALFA 無線網絡卡在 Kali Linux 上——監聽模式與封包注入
+# ALFA 無線網路卡在 Kali Linux 上——監聽模式與封包注入
 
-> **學習目標（Learning goal）**：完成本指南後，你的 ALFA 無線網絡卡將進入**監聽模式（monitor mode）**並**證明封包注入（packet injection）可用**——這是每個 Wi-Fi 稽核工具（Aircrack-ng、Wifite、Wireshark、Bettercap）都依賴的兩項能力。
-> **適用物件**：初學者–中階、Kali 使用者 ｜ **前置需求**：已安裝 Kali Linux（任何近期版本）、網路連線、你的 ALFA 無線網絡卡。
+> **學習目標（Learning goal）**：完成本指南後，你的 ALFA 無線網路卡將進入**監聽模式（monitor mode）**並**證明封包注入（packet injection）可用**——這是每個 Wi-Fi 稽核工具（Aircrack-ng、Wifite、Wireshark、Bettercap）都依賴的兩項能力。
+> **適用物件**：初學者–中階、Kali 使用者 ｜ **前置需求**：已安裝 Kali Linux（任何近期版本）、網路連線、你的 ALFA 無線網路卡。
 
 ## 概念：為什麼 Kali 不一樣
 
-Ubuntu 把 Wi-Fi 無線網絡卡當成*有禮貌的使用者端*：它們只擷取自己的流量。Kali 的整套工具鏈——Aircrack-ng、Reaver、Wifite——假設無線網絡卡能做兩件額外的事：
+Ubuntu 把 Wi-Fi 無線網路卡當成*有禮貌的使用者端*：它們只擷取自己的流量。Kali 的整套工具鏈——Aircrack-ng、Reaver、Wifite——假設無線網路卡能做兩件額外的事：
 
 1. **監聽模式（monitor mode）**——擷取某個頻道上的*每一*個訊框，而不只是你的連線。
 2. **封包注入（packet injection）**——傳送原始的自製訊框（deauth、probe requests、handshake replays）。
 
-不是每顆晶片都能做到這兩件事。好訊息是：除了 **AWUS036EACS** 之外的所有 ALFA 無線網絡卡都可以，而且內建於核心的 MediaTek 晶片完全不需要安裝驅動程式。
+不是每顆晶片都能做到這兩件事。好訊息是：除了 **AWUS036EACS** 之外的所有 ALFA 無線網路卡都可以，而且內建於核心的 MediaTek 晶片完全不需要安裝驅動程式。
 
 ```mermaid
 flowchart TD
@@ -40,20 +40,20 @@ flowchart TD
 ## 前置需求
 
 - [ ] 已安裝 Kali Linux（在 Kali rolling、核心 6.x 上測試過）
-- [ ] `sudo` 許可權與網路連線
-- [ ] 你的 ALFA 無線網絡卡——先查[相容性矩陣](/alfa-network/linux-compatibility-matrix/)
+- [ ] `sudo` 權限與網路連線
+- [ ] 你的 ALFA 無線網路卡——先查[相容性矩陣](/alfa-network/linux-compatibility-matrix/)
 - [ ] （僅 Realtek 機型）建置工具：`sudo apt install -y build-essential dkms git`
 
 ## 步驟 1：檢查核心看到了什麼
 
-插上無線網絡卡並確認它被偵測到：
+插上無線網路卡並確認它被偵測到：
 
 ```bash
 lsusb | grep -iE "realtek|mediatek"
 iw dev
 ```
 
-**預期輸出**：你的無線網絡卡出現在 `lsusb` 中，且 `iw dev` 至少有一個 `Interface wlan0`（或 `wlan1`）。
+**預期輸出**：你的無線網路卡出現在 `lsusb` 中，且 `iw dev` 至少有一個 `Interface wlan0`（或 `wlan1`）。
 
 ## 步驟 2：安裝驅動程式（僅 Realtek 晶片）
 

@@ -19,7 +19,7 @@ keywords: [MT7921AUN 驅動程式, mt7921u, AWUS036AXML, Linux Wi-Fi 6E, AWUS036
 2. **Wi-Fi 6E**：AXML 版本開啟 **6 GHz 頻段**（5 GHz 以上的頻道 1–233），這是目前可用頻譜中壅塞度最低的。
 3. **需要韌體 blob**——驅動程式從 `linux-firmware` 載入 `mt7921` 韌體，所以請保持該套件更新。
 
-主要警告：因為驅動程式需要 **5.18+ 核心**，較舊的作業系統版本看不到這支無線網絡卡。Ubuntu 22.04+ 與近期 Kali 沒問題；Ubuntu 20.04 不行。
+主要警告：因為驅動程式需要 **5.18+ 核心**，較舊的作業系統版本看不到這支無線網路卡。Ubuntu 22.04+ 與近期 Kali 沒問題；Ubuntu 20.04 不行。
 
 ```mermaid
 flowchart LR
@@ -35,7 +35,7 @@ flowchart LR
 
 - [ ] 核心 **5.18 或更新**的 Linux（`uname -r`）
 - [ ] 已安裝且夠新的 `linux-firmware` 套件
-- [ ] `sudo` 許可權
+- [ ] `sudo` 權限
 - [ ] AWUS036AXM 或 AWUS036AXML
 
 ## 步驟 1：核心檢查
@@ -56,7 +56,7 @@ uname -r
 
 ## 步驟 2：驗證驅動程式與韌體
 
-插上無線網絡卡：
+插上無線網路卡：
 
 ```bash
 lsusb | grep -i mediatek
@@ -79,7 +79,7 @@ mt7921u                65536  0
 sudo apt install linux-firmware
 ```
 
-然後重新插上無線網絡卡。
+然後重新插上無線網路卡。
 
 ## 步驟 3：確認介面與頻段
 

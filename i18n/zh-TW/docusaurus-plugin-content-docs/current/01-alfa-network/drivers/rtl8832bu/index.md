@@ -13,7 +13,7 @@ keywords: [RTL8832BU 驅動程式, RTL8852BU, AWUS036AX, rtl8852bu, Linux Wi-Fi 
 
 ## 概念：Wi-Fi 6，Realtek 風格
 
-RTL8832BU 是一顆 2×2 802.11ax 無線電（AX1800：574 + 1201 Mbps）。與較舊的 AC 網卡相比，使用者最直接感受到的優勢是 **WPA3**——只支援 WPA3 的現代路由器會拒絕你舊的 AC 網卡，但會欣然接受 AX。
+RTL8832BU 是一顆 2×2 802.11ax 無線電（AX1800：574 + 1201 Mbps）。與較舊的 AC 網路卡相比，使用者最直接感受到的優勢是 **WPA3**——只支援 WPA3 的現代路由器會拒絕你舊的 AC 網路卡，但會欣然接受 AX。
 
 驅動程式的狀況與其他 Realtek 晶片相同：**未納入上游核心**，因此我們使用社群驅動程式。目前持續維護的 repo 是 **[`morrownr/rtl8852bu-20250826`](https://github.com/morrownr/rtl8852bu-20250826)**（「Linux Driver for USB WiFi Adapters that are based on the RTL8832BU and RTL8852BU Chipsets」）；其 README 列出 AWUS036AX 與 AWUS036AXER 為支援機種。其安裝程式會將驅動程式註冊到 DKMS，使其在核心更新後自動重新建置。
 
@@ -76,7 +76,7 @@ iw dev wlan0 link
 
 ## 監聽模式與封包注入 {#monitor-mode-and-injection}
 
-此驅動程式的 README 明確指出**不支援監聽模式**。若你需要監聽模式與封包注入，請改用搭載核心內建 MediaTek 驅動程式的網卡（例如 [AWUS036ACM](/alfa-network/products/awus036acm/) 或 [AWUS036AXML](/alfa-network/products/awus036axml/)），或搭配社群驅動程式使用 [AWUS036ACH](/alfa-network/products/awus036ach/)。請參閱[網卡比較](/alfa-network/wifi-adapter-comparison/)。
+此驅動程式的 README 明確指出**不支援監聽模式**。若你需要監聽模式與封包注入，請改用搭載核心內建 MediaTek 驅動程式的網路卡（例如 [AWUS036ACM](/alfa-network/products/awus036acm/) 或 [AWUS036AXML](/alfa-network/products/awus036axml/)），或搭配社群驅動程式使用 [AWUS036ACH](/alfa-network/products/awus036ach/)。請參閱[網路卡比較](/alfa-network/wifi-adapter-comparison/)。
 
 ## 疑難排解
 

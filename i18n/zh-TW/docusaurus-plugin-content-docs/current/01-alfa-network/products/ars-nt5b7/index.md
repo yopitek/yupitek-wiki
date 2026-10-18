@@ -76,7 +76,7 @@ iw dev wlan0 info | grep channel
 
 | 搭配 | 結果 |
 |---|---|
-| 配 RP-SMA 連線埠的 ALFA 無線網絡卡 | ✅ 鎖上 |
+| 配 RP-SMA 連線埠的 ALFA 無線網路卡 | ✅ 鎖上 |
 | 6 GHz / WiFi 6E / WiFi 7 無線電 | ✅ 完整三頻 |
 | 熱/冷/工廠環境 | ✅ 額定 -40 至 +85 °C |
 | 聚焦的長距離連結 | ⚠️ 這裡[面板](/alfa-network/products/apa-m25-6e/)勝過偶極天線 |
@@ -94,5 +94,5 @@ iw dev wlan0 info | grep channel
 
 - [APA-M25-6E](/alfa-network/products/apa-m25-6e/)——三頻指向性面板
 - [ARS-25-57A](/alfa-network/products/ars-25-57a/)——可攜式雙頻槳形天線
-- [AWUS036AXML 產品頁面](/alfa-network/products/awus036axml/)——6 GHz USB 無線網絡卡
+- [AWUS036AXML 產品頁面](/alfa-network/products/awus036axml/)——6 GHz USB 無線網路卡
 - [Unitree 指南](/alfa-network/hardware/unitree/) / [Jetson 指南](/alfa-network/hardware/jetson/)——工業/機器人主機

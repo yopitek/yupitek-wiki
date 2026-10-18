@@ -78,12 +78,12 @@ locale: "zh-tw"
 <!-- section：overview -->
 ### 1.1 Key Croc 原廠介紹 (The Key Croc by Hak5)
 
-Key Croc 是一款具備模式匹配酬載系統與遠端雲端管理能力的智慧型鍵盤側錄與滲透測試植入裝置。本文檔涵蓋硬體運作與部署基礎、透過 Linux Shell 主控台進行高階滲透測試、Wi-Fi 網路連線設定、韌體升級維護以及 DuckyScript 酬載開發工程。
+Key Croc 是一款具備模式匹配酬載系統與遠端雲端管理能力的智慧型鍵盤側錄與滲透測試植入裝置。本文件涵蓋硬體運作與部署基礎、透過 Linux Shell 主控台進行高階滲透測試、Wi-Fi 網路連線設定、韌體升級維護以及 DuckyScript 酬載開發工程。
 
 ![Key Croc](https://212197980-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2 F-MhLOzjhonMdC6SLKqRt%2Fuploads%2F5ZxTlaKQGYZ03j3E4 bah%2Fkeycroc%400.5 x.png?alt=media&token=e7d21d21-bfcd-41c4-b1b6-99f8b6cb8295)
 
 > [!WARNING]
-> 本文檔產生的電子書 PDF 在某些檢視設備上可能無法正確排版。如需取得最新版本技術說明，請參閱官方文檔站點：[https://docs.hak5.org](https://docs.hak5.org)。
+> 本文件產生的電子書 PDF 在某些檢視設備上可能無法正確排版。如需取得最新版本技術說明，請參閱官方文件站點：[https://docs.hak5.org](https://docs.hak5.org)。
 
 #### 原廠基礎規格指標
 * 傳輸介面：標準 USB
@@ -222,12 +222,12 @@ KeyCroc/
 
 ### 4.2 檔案系統深入剖析 (Understanding the File System)
 
-Key Croc 採用嵌入式 Linux 雙分區設計：
-1. **內部 ext4 根分區 (`/`)**：唯讀與系統保護分區，承載完整的 Debian Linux 系統核心與背景常駐守護行程。
-2. **udisk 大容量儲存分區 (`/root/udisk`)**：FAT32 分割區，供 USB Mass Storage 模式對外掛載。
+Key Croc 採用嵌入式 Linux 雙分割區設計：
+1. **內部 ext4 根分割區 (`/`)**：唯讀與系統保護分割區，承載完整的 Debian Linux 系統核心與背景常駐守護行程。
+2. **udisk 大容量儲存分割區 (`/root/udisk`)**：FAT32 分割區，供 USB Mass Storage 模式對外掛載。
 
 > [!NOTE]
-> 在攻擊模式下，Key Croc 核心常駐程序負責將側錄按鍵寫入快取。為避免快閃記憶體損耗並確保資料完整落盤，請於酬載中調用 `sync` 指令。
+> 在攻擊模式下，Key Croc 核心常駐程式負責將側錄按鍵寫入快取。為避免快閃記憶體損耗並確保資料完整落盤，請於酬載中呼叫 `sync` 指令。
 
 ---
 
@@ -263,7 +263,7 @@ Key Croc 酬載是一組副檔名為 `.txt` 的 Bash 與 DuckyScript 混編腳�
 
 一個標準的 Key Croc 酬載通常包含：
 1. **觸發器 (Trigger)**：透過 `MATCH` 指定啟動酬載的關鍵字或正則表達式。
-2. **前置設定 (Setup)**：調用 `ATTACKMODE` 準備攻擊設備，設定 `LED` 狀態。
+2. **前置設定 (Setup)**：呼叫 `ATTACKMODE` 準備攻擊設備，設定 `LED` 狀態。
 3. **注入執行 (Execution)**：利用 `QUACK` 注入指令序列，或執行 Bash 腳本將資料外發。
 
 ---
@@ -280,7 +280,7 @@ Key Croc 原生相容 DuckyScript 2.0 指令集，包括條件控制、變數儲
 |---|---|---|
 | `MATCH` | `MATCH password` | 監聽鍵盤輸入，一旦匹配指定關鍵字立即執行後續腳本 |
 | `SAVEKEYS` | `SAVEKEYS /root/udisk/loot/keys.txt 20` | 將觸發前最後 N 個按鍵儲存至指定外傳路徑 |
-| `ATTACKMODE` | `ATTACKMODE HID ETHERNET` | 宣告模擬之複合 USB 設備端點（HID / 網卡 / 序列埠）|
+| `ATTACKMODE` | `ATTACKMODE HID ETHERNET` | 宣告模擬之複合 USB 設備端點（HID / 網路卡 / 序列埠）|
 | `CLONE` | `CLONE_VID` / `CLONE_PID` | 即時複製下游插入之實體鍵盤的硬體描述符 |
 | `QUACK` | `QUACK GUI r` | 向上游目標電腦模擬鍵盤擊鍵注入 |
 | `QUACK LOCK` | `QUACK LOCK` | 暫時阻斷實體鍵盤轉發，防止使用者按鍵打亂腳本注入 |
@@ -360,7 +360,7 @@ QUACK ENTER
 
 ### 6.10 LED 狀態指示燈語法 (The LED Command)
 
-在維護模式或除錯狀態下，可自由調用燈號反饋：
+在維護模式或除錯狀態下，可自由呼叫燈號回饋：
 * `LED ATTACK`：黃燈閃爍
 * `LED SUCCESS`：常亮綠燈
 * `LED FAIL`：常亮紅燈

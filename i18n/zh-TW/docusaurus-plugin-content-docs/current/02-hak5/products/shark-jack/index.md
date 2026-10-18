@@ -144,7 +144,7 @@ Shark Jack 的核心作戰哲學在於「即插即跑、快速撤離」（Plug a
 # 標題：簡易 Nmap 內網資產探索酬載
 # 說明：自動獲取 IP，掃描同網段活體主機並存檔
 
-# 1. 設置 LED 為品紅色慢閃，提示正在取得 IP
+# 1. 設定 LED 為品紅色慢閃，提示正在取得 IP
 LED M SLOW
 NETMODE DHCP_CLIENT
 

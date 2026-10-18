@@ -2,14 +2,14 @@
 id: alfa-product-awus036acs
 title: ALFA AWUS036ACS——口袋尺寸雙頻 AC433
 sidebar_position: 9
-description: ALFA AWUS036ACS——55 mm 迷你 RTL8811AU AC433 雙頻網卡，配備一支 2 dBi 外接天線，並以 DKMS 驅動支援監聽模式。口袋型 Kali 好夥伴。
-tags: [alfa, 網卡, rtl8811au, ac433, 可攜式]
-keywords: [AWUS036ACS, RTL8811AU, 口袋網卡, 可攜式 Kali 網卡]
+description: ALFA AWUS036ACS——55 mm 迷你 RTL8811AU AC433 雙頻網路卡，配備一支 2 dBi 外接天線，並以 DKMS 驅動支援監聽模式。口袋型 Kali 好夥伴。
+tags: [alfa, 網路卡, rtl8811au, ac433, 可攜式]
+keywords: [AWUS036ACS, RTL8811AU, 口袋網路卡, 可攜式 Kali 網路卡]
 ---
 
 # ALFA AWUS036ACS——口袋尺寸雙頻 AC433
 
-> **一句話摘要**：**AWUS036ACS** 是 55 mm 的口袋型 ALFA——一款 **RTL8811AU AC433** 雙頻網卡，配備一支可摺疊的 2 dBi 天線，並以 DKMS 驅動支援監聽模式。你會隨身攜帶它，因為「你永遠不知道什麼時候會想看看某個 Wi-Fi。」
+> **一句話摘要**：**AWUS036ACS** 是 55 mm 的口袋型 ALFA——一款 **RTL8811AU AC433** 雙頻網路卡，配備一支可摺疊的 2 dBi 天線，並以 DKMS 驅動支援監聽模式。你會隨身攜帶它，因為「你永遠不知道什麼時候會想看看某個 Wi-Fi。」
 
 ## 規格總覽 (Spec overview)
 
@@ -93,4 +93,4 @@ sudo aireplay-ng --test wlan0mon
 - [Kali 設定指南](/alfa-network/linux-setup-kali/)
 - [AWUS036ACH](/alfa-network/products/awus036ach/)——全尺寸高功率兄弟機種
 - [AWUS036ACM](/alfa-network/products/awus036acm/)——核心內建驅動的替代方案
-- [網卡比較](/alfa-network/wifi-adapter-comparison/)
+- [網路卡比較](/alfa-network/wifi-adapter-comparison/)

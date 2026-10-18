@@ -72,4 +72,4 @@ flowchart LR
 
 在大多數地區，擁有並使用 Flipper Zero 進行研究、教育與測試自己的裝置是合法的。然而，各國法律不同：幹擾你不擁有的系統（開啟別人的車庫門、複製你未獲授權測試的門禁卡）可能違法。**只在你自己的裝置上測試，或取得明確授權。** 這同樣適用於 WiFi Devboard 與 Video Game Module。
 
-> 請參閱我們的 [ALFA Network 專區](/alfa-network/) 瞭解用於無線研究的 Wi-Fi 網絡卡與天線，以及 [Hak5 專區](/hak5/) 瞭解 WiFi Pineapple 與 USB Rubber Ducky 等滲透測試工具。
+> 請參閱我們的 [ALFA Network 專區](/alfa-network/) 瞭解用於無線研究的 Wi-Fi 網路卡與天線，以及 [Hak5 專區](/hak5/) 瞭解 WiFi Pineapple 與 USB Rubber Ducky 等滲透測試工具。

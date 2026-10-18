@@ -41,7 +41,7 @@ locale: "zh-tw"
 
 ### 1.1 Plunder Bug 原廠介紹
 
-Plunder Bug 是 Hak5 研發的極致微型化乙太網路 Tap 側錄裝置。傳統網路分流器體積龐大、需要外接電源，或需透過繁複的網管交換器鏡像連接埠（SPAN/Mirror Port）設定；Plunder Bug 則將所有分流邏輯濃縮於隨身拇指大小的機身中。
+Plunder Bug 是 Hak5 研發的極致微型化乙太網路 Tap 側錄裝置。傳統網路分流器體積龐大、需要外接電源，或需透過繁複的網管交換器鏡射連接埠（SPAN/Mirror Port）設定；Plunder Bug 則將所有分流邏輯濃縮於隨身拇指大小的機身中。
 
 核心設計特性包括：
 - **雙向零延遲分流**：串接於目標主機與上游網路設備之間，維持 10/100 Mbps 鏈路的全雙工通訊。
@@ -57,7 +57,7 @@ Plunder Bug 是 Hak5 研發的極致微型化乙太網路 Tap 側錄裝置。傳
 | **網路介面** | 2 組 10/100 Fast Ethernet 連接埠 (RJ-45 串接式分流端) |
 | **Tap 輸出連接埠** | 1 組 USB Type-C 高速連接埠 |
 | **供電需求** | 5 V DC 透過 USB Type-C 供電 (耗電量 < 250 mA) |
-| **運作模式** | 被動分流模式 (Passive Tap)、主動虛擬網卡模式 (Active NIC)、簡易交換機模式 |
+| **運作模式** | 被動分流模式 (Passive Tap)、主動虛擬網路卡模式 (Active NIC)、簡易交換機模式 |
 | **核心晶片組** | 高效能低功耗 ASIX / Realtek 乙太網路控制晶片組 |
 | **作業系統相容性** | Linux (免驅動原生支援)、macOS (免驅動/專用驅動)、Windows (ASIX 驅動)、Android |
 

@@ -104,7 +104,7 @@ flowchart LR
 
 - 準備深入？[SDR 軟體指南](/sdrlab/sdr-software/)說明各種工具；[韌體指南](/sdrlab/firmware/)涵蓋更新。
 - 卡在特定問題？[疑難排解中心](/sdrlab/troubleshooting/)依症狀分類整理。
-- 要把 ALFA Wi-Fi 網絡卡與 SDR 搭配使用？請見 [ALFA Linux 指南](/sdrlab/shared/alfa-linux-guide/)。
+- 要把 ALFA Wi-Fi 網路卡與 SDR 搭配使用？請見 [ALFA Linux 指南](/sdrlab/shared/alfa-linux-guide/)。
 
 ## 法律與合規操作提醒
 

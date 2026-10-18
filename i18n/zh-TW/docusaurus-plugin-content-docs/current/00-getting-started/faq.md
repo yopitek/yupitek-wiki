@@ -10,9 +10,9 @@ description: 關於 Yupitek 產品、Linux 驅動程式支援與下載的常見�
 
 關於 Yupitek 產品、Linux 支援與下載的常見問題解答。
 
-## 我的 Wi-Fi 無線網絡卡在 Linux 上可以開箱即用嗎？
+## 我的 Wi-Fi 無線網路卡在 Linux 上可以開箱即用嗎？
 
-這取決於晶片組。使用 **MediaTek** 晶片組（`mt7612u`、`mt7610u`、`mt7921aun`）的無線網絡卡具備**內建核心（in-kernel）**驅動程式 — 在較新的 Ubuntu、Kali 與 Fedora 上無需安裝任何東西即可使用。使用 **Realtek** 晶片組（`rtl8812au`、`rtl8811au`、`rtl8832bu`、`rtl8821cu`）的無線網絡卡通常需要安裝樹外（out-of-tree）DKMS 驅動程式。完整的詳細說明請參閱 [Linux 相容性矩陣](/alfa-network/linux-compatibility-matrix/)。
+這取決於晶片組。使用 **MediaTek** 晶片組（`mt7612u`、`mt7610u`、`mt7921aun`）的無線網路卡具備**內建核心（in-kernel）**驅動程式 — 在較新的 Ubuntu、Kali 與 Fedora 上無需安裝任何東西即可使用。使用 **Realtek** 晶片組（`rtl8812au`、`rtl8811au`、`rtl8832bu`、`rtl8821cu`）的無線網路卡通常需要安裝樹外（out-of-tree）DKMS 驅動程式。完整的詳細說明請參閱 [Linux 相容性矩陣](/alfa-network/linux-compatibility-matrix/)。
 
 ## 我要去哪裡下載驅動程式與韌體？
 
@@ -20,15 +20,15 @@ description: 關於 Yupitek 產品、Linux 驅動程式支援與下載的常見�
 
 ## 支援哪些作業系統？
 
-**ALFA Network** 無線網絡卡支援 **Kali Linux**、**Ubuntu** 與 **Android NetHunter**，另外在標示處也支援 Windows 與 macOS。在硬體整合方面，ALFA 無線網絡卡已針對 **NVIDIA Jetson**、**Raspberry Pi 3/4/5** 與 **Unitree** 機器人撰寫檔案。逐步操作說明請參閱 [Linux 設定](/alfa-network/linux-setup-ubuntu/) 指南。
+**ALFA Network** 無線網路卡支援 **Kali Linux**、**Ubuntu** 與 **Android NetHunter**，另外在標示處也支援 Windows 與 macOS。在硬體整合方面，ALFA 無線網路卡已針對 **NVIDIA Jetson**、**Raspberry Pi 3/4/5** 與 **Unitree** 機器人撰寫檔案。逐步操作說明請參閱 [Linux 設定](/alfa-network/linux-setup-ubuntu/) 指南。
 
 ## 什麼是 monitor mode（監聽模式），我要如何啟用它？
 
-監聽模式讓無線網絡卡無需連線到任何網路，即可擷取與注入原始的 802.11 訊框。使用 `airmon-ng` 與 `airodump-ng` 進行稽核時需要此模式。並非每個晶片組都能良好支援。我們的 [監聽模式](/alfa-network/linux-setup-kali/) 指南會逐步說明受支援的晶片組。
+監聽模式讓無線網路卡無需連線到任何網路，即可擷取與注入原始的 802.11 訊框。使用 `airmon-ng` 與 `airodump-ng` 進行稽核時需要此模式。並非每個晶片組都能良好支援。我們的 [監聽模式](/alfa-network/linux-setup-kali/) 指南會逐步說明受支援的晶片組。
 
 ## 我要如何知道我的晶片組是否支援封包注入（packet injection）？
 
-晶片組的支援程度不一。ALFA 無線網絡卡所使用的 MediaTek 與 Realtek 晶片組通常支援監聽模式與封包注入，但確切行為取決於所使用的驅動程式。在開始任何測試任務前，請務必先用 `aireplay-ng --test` 快速測試。
+晶片組的支援程度不一。ALFA 無線網路卡所使用的 MediaTek 與 Realtek 晶片組通常支援監聽模式與封包注入，但確切行為取決於所使用的驅動程式。在開始任何測試任務前，請務必先用 `aireplay-ng --test` 快速測試。
 
 ## 我的驅動程式在核心更新後無法運作
 
@@ -39,7 +39,7 @@ sudo dkms autoinstall
 sudo modprobe <chipset-module>
 ```
 
-請參閱適用於您無線網絡卡的特定 [晶片組驅動程式](/alfa-network/drivers/) 指南，以取得確切的模組名稱。
+請參閱適用於您無線網路卡的特定 [晶片組驅動程式](/alfa-network/drivers/) 指南，以取得確切的模組名稱。
 
 ## Hak5 工具需要 Hak5 雲端（o.mg.lol）嗎？
 

@@ -72,7 +72,7 @@ Hak5 維護官方 GitHub 倉庫存放社群 payload。這是你在自己寫之�
 | WiFi Pineapple | https://github.com/hak5/wifi-pineapple-modules | PineAP marketplace 的模組 |
 | **PayloadHub** | https://payloads.hak5.org | 可搜尋、社群評分的跨裝置 payload 索引 |
 
-> **不要盲目信任網路上來的 payload。** 任何你在 Hak5 裝置上執行的指令碼，都會以 root 許可權在一臺 Linux 機器上執行 — 或把按鍵打進目標。讀過每一個你下載的 payload。這正是專業人士在部署前會做的事。
+> **不要盲目信任網路上來的 payload。** 任何你在 Hak5 裝置上執行的指令碼，都會以 root 權限在一臺 Linux 機器上執行 — 或把按鍵打進目標。讀過每一個你下載的 payload。這正是專業人士在部署前會做的事。
 
 ---
 

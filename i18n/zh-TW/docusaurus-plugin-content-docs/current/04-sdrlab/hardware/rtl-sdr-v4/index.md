@@ -173,4 +173,4 @@ V4 可以沿著天線同軸電纜供應 4.5 V / 180 mA，給 LNA、主動式天�
 
 - [SDR 軟體指南](/sdrlab/sdr-software/) — GQRX/SDR#/CLI 工具深入說明。
 - [SDRLAB 快速入門](/sdrlab/quickstart/) — 通用的第一個 30 分鐘流程。
-- [ALFA Linux 指南](/sdrlab/shared/alfa-linux-guide/) — Wi-Fi 夥伴網絡卡。
+- [ALFA Linux 指南](/sdrlab/shared/alfa-linux-guide/) — Wi-Fi 夥伴網路卡。

@@ -364,7 +364,7 @@ RELEASE SHIFT
 
 USB 鍵盤協定中，目標主機每次按下 Caps Lock、Num Lock 或 Scroll Lock 時，主機會主動向鍵盤發送 1 個位元組的 HID Output Report 回傳燈號狀態。
 
-USB Rubber Ducky v2 可即時讀取此狀態反饋！這意味著即使目標主機網路斷線、USB 隨身碟讀寫遭完全禁用，目標電腦端仍可透過 PowerShell 快速切換 Caps Lock 狀態，以二進位或摩斯密碼方式將資料回傳給 USB Rubber Ducky！
+USB Rubber Ducky v2 可即時讀取此狀態回饋！這意味著即使目標主機網路斷線、USB 隨身碟讀寫遭完全禁用，目標電腦端仍可透過 PowerShell 快速切換 Caps Lock 狀態，以二進位或摩斯密碼方式將資料回傳給 USB Rubber Ducky！
 
 ---
 

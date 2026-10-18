@@ -69,7 +69,7 @@ flowchart TD
     A[插入 USB] --> B[系統辨識為 CCID 讀卡機]
     B --> C{要用哪條路?}
     C -->|標準 PC/SC| D[安裝/啟動 pcscd]
-    C -->|libnfc 直連| E[安裝 libnfc + 黑名單內核模組]
+    C -->|libnfc 直連| E[安裝 libnfc + 黑名單核心模組]
     D --> F[pcsc_scan 驗證<br/>看到卡片即成功]
     E --> G[nfc-list 驗證<br/>看到讀卡機即成功]
     F --> H[開始開發<br/>pyscard / opensc-tool]
@@ -258,8 +258,8 @@ Status words: 90 00
 - **解法**：執行方法 B 的 Step 1（黑名單 + `rmmod`），重插或重開機，再用 `nfc-list` 檢查。
 
 ### 2. `pcsc_scan` 列不到讀卡機
-- **原因**：`pcscd` 沒跑，或裝置許可權不足（少數桌面環境）。
-- **解法**：`sudo systemctl start pcscd`；若許可權問題，確認使用者身處能被 udev 允許的群組（通常 default 即可）。
+- **原因**：`pcscd` 沒跑，或裝置權限不足（少數桌面環境）。
+- **解法**：`sudo systemctl start pcscd`；若權限問題，確認使用者身處能被 udev 允許的群組（通常 default 即可）。
 
 ### 3. libnfc 報 `Device or resource busy`
 - **原因**：pcscd（或 pn533 模組）正佔用讀卡機。
@@ -270,7 +270,7 @@ Status words: 90 00
 - **解法**：確認卡片平放於天線正上方、距離 ≤ 50 mm；換一張支援的卡測。
 
 ### 5. `pcsc_scan` 出現大量重複 ATR / 瞬間插拔
-- **原因**：USB 供電不穩或 udev 許可權抖動。
+- **原因**：USB 供電不穩或 udev 權限抖動。
 - **解法**：換一條原廠線、插主機板後方的 USB 埠（避免 HUB）。
 
 ## 相關資源

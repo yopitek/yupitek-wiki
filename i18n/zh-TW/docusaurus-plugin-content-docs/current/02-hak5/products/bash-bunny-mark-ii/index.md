@@ -95,7 +95,7 @@ locale: "zh-tw"
 ![Bash Bunny Mark II (SD)](https://4178757749-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FnxJgJ9UdPfrcuL1U8 DpL%2Fuploads%2FST37YjjBLiCVU4ZHjY8 N%2Fbunnymk2%400.5 x.png?alt=media&token=eb6f3b92-20 df-42 bd-b79 a-67c284a61e9 e)
 
 > [!WARNING]
-> 本文檔產生的電子書 PDF 在某些檢視裝置上可能無法正確排版。如需取得最新版本技術說明，請參閱官方文檔站點：[https://docs.hak5.org](https://docs.hak5.org)。
+> 本文件產生的電子書 PDF 在某些檢視裝置上可能無法正確排版。如需取得最新版本技術說明，請參閱官方文件站點：[https://docs.hak5.org](https://docs.hak5.org)。
 
 ---
 
@@ -119,7 +119,7 @@ locale: "zh-tw"
 
 當 Bash Bunny 處於維護模式時，將呈現以下目錄架構：
 
-* `/*docs*` – 存放說明文檔資料庫。
+* `/*docs*` – 存放說明文件資料庫。
 * `/*languages*` – 用於安裝額外的 HID 鍵盤設定（Keyboard Layouts）與語系定義。
 * `/*loot*` – 專供酬載儲存外傳的日誌、帳密憑證及機密資料。
 * `/*tools*` – 用於存放並安裝額外的 deb 軟體包及第三方滲透測試工具。
@@ -172,7 +172,7 @@ Bash Bunny Mark II 藉由 MicroSD XC 記憶卡插槽與低功耗藍牙（BLE）�
 
 #### 無線通訊考量 (WIRELESS)
 
-若有需要，可在酬載中使用 `WAIT_FOR_PRESENT` 或 `WAIT_FOR_NOT_PRESENT` 延伸模組來實作地理圍欄防禦與遠端觸發機制。當調用這些延伸指令時，系統將即時掃描周遭的藍牙無線環境，並將觀測結果暫存於 `/tmp/bt_observation`。
+若有需要，可在酬載中使用 `WAIT_FOR_PRESENT` 或 `WAIT_FOR_NOT_PRESENT` 延伸模組來實作地理圍欄防禦與遠端觸發機制。當呼叫這些延伸指令時，系統將即時掃描周遭的藍牙無線環境，並將觀測結果暫存於 `/tmp/bt_observation`。
 
 延伸參考指引：
 * [Mark II 遠端觸發指南](#65-mark-ii-低功耗藍牙遠端觸發-remote-triggers-for-mark-ii)
@@ -186,7 +186,7 @@ Bash Bunny Mark II 藉由 MicroSD XC 記憶卡插槽與低功耗藍牙（BLE）�
 > 若要透過維護模式載入或修改酬載，請在**未插入 MicroSD 記憶卡**的狀態下將 Bash Bunny 開機。
 
 * 酬載腳本**僅能由內部 SSD 儲存空間執行**。
-* 若在維護模式開機時插有 MicroSD 卡，該卡將被直接透傳至宿主主機，而不會掛載內部酬載分區。
+* 若在維護模式開機時插有 MicroSD 卡，該卡將被直接透傳至宿主主機，而不會掛載內部酬載分割區。
 
 ##### 酬載設計考量 (Payload Considerations)
 * 當啟用 `ATTACKMODE STORAGE` 時：
@@ -199,7 +199,7 @@ Bash Bunny Mark II 藉由 MicroSD XC 記憶卡插槽與低功耗藍牙（BLE）�
 * udisk 分割區——不論是內部 SSD 還是外部 MicroSD——**同一時間只能被單一設備掛載**。
 * 除非執行了 `udisk mount` 指令，否則本機的 `/root/udisk` 目錄內容將呈現空白。
 * 在未掛載狀態下直接向 `/root/udisk` 寫入資料，將完全不會同步至實際的 udisk 磁區。
-* 若同時啟用了 `ATTACKMODE STORAGE`（將儲存裝置掛載給目標電腦）與 `udisk mount`（將儲存裝置掛載給 Bash Bunny），將引發資料讀寫衝突與檔案系統損毀，因為該分區無法同時被兩台電腦同時掌控。
+* 若同時啟用了 `ATTACKMODE STORAGE`（將儲存裝置掛載給目標電腦）與 `udisk mount`（將儲存裝置掛載給 Bash Bunny），將引發資料讀寫衝突與檔案系統損毀，因為該分割區無法同時被兩台電腦同時掌控。
 
 ##### 檔案系統格式化原則 (Formatting Considerations)
 * MicroSD 卡應僅建立單一分割區，並格式化為適合目標受測作業系統的檔案系統：
@@ -220,13 +220,13 @@ Bash Bunny 酬載核心為放置於開關目錄中的 `payload.txt`。其最獨�
 標準酬載生命週期包含三個關鍵階段：
 1. **設定階段 (Setup)**：初始化 LED 燈號，設定 `ATTACKMODE` 複合設備類型。
 2. **攻擊執行階段 (Attack)**：模擬按鍵注入合成字串、啟用網路介面竊聽或執行惡意酬載。
-3. **收尾階段 (Cleanup)**：保存外傳資料，執行 `sync` 確保磁區寫入，發出 LED 成功信號。
+3. **收尾階段 (Cleanup)**：儲存外傳資料，執行 `sync` 確保磁區寫入，發出 LED 成功信號。
 
 ---
 
 ### 3.2 DuckyScript™ on the Bash Bunny
 
-在 Bash Bunny 上，DuckyScript 指令可直接於腳本中調用。系統在執行時將由直譯引擎自動分流處理：純按鍵語法（如 `STRING`，`ENTER`，`DELAY`）轉交 HID 驅動模組，Linux 命令（如 `ifconfig`，`cat`，`iptables`）則由底層 Bash 核心直接原生執行。
+在 Bash Bunny 上，DuckyScript 指令可直接於腳本中呼叫。系統在執行時將由直譯引擎自動分流處理：純按鍵語法（如 `STRING`，`ENTER`，`DELAY`）轉交 HID 驅動模組，Linux 命令（如 `ifconfig`，`cat`，`iptables`）則由底層 Bash 核心直接原生執行。
 
 ---
 
@@ -255,7 +255,7 @@ QUACK ENTER
 
 ### 3.4 延伸模組 (Extensions)
 
-延伸模組是預先封裝好的 Bash 函式庫，位於 `/payloads/library/extensions/`。透過調用延伸模組，開發者無需重複編寫複雜的網路設定或滲透邏輯。
+延伸模組是預先封裝好的 Bash 函式庫，位於 `/payloads/library/extensions/`。透過呼叫延伸模組，開發者無需重複編寫複雜的網路設定或滲透邏輯。
 
 常用延伸模組包含：
 * `get2_dhclient.sh`：為 ECM 網路介面動態取得 IP 位址。
@@ -270,8 +270,8 @@ QUACK ENTER
 | 攻擊模式程式碼 | 模擬設備類型與用途 |
 |---|---|
 | `SERIAL` | ACM（抽象控制模型）序列埠主控台 |
-| `ECM_ETHERNET` | ECM（乙太網路控制模型）適用於 Linux / macOS / Android 虛擬網卡 |
-| `RNDIS_ETHERNET` | RNDIS 適用於 Windows（以及部分 Linux）虛擬網卡 |
+| `ECM_ETHERNET` | ECM（乙太網路控制模型）適用於 Linux / macOS / Android 虛擬網路卡 |
+| `RNDIS_ETHERNET` | RNDIS 適用於 Windows（以及部分 Linux）虛擬網路卡 |
 | `AUTO_ETHERNET` | 自動乙太網：先嘗試 ECM，若 20 秒內未建立連線則自動退回嘗試 RNDIS。可透過 `ETHERNET_TIMEOUT_XX` 自訂逾時秒數 |
 | `STORAGE` | UMS（USB 大容量儲存裝置）隨身碟磁區 |
 | `HID` | HID（人機介面裝置）模擬鍵盤注入 |
@@ -321,7 +321,7 @@ ATTACKMODE HID STORAGE VID_0x0951 PID_0x1666 MAN_Kingston PROD_DataTraveler SN_0
 
 ### 3.8 檔案系統安全操作 (Working with the File System)
 
-快閃記憶體寫入需要時間緩衝。在酬載執行完畢前，**務必調用 `sync` 指令**，強制作業系統核心將記憶體緩衝區的資料完全寫入實體儲存晶片中，避免因拔除裝置導致資料遺失或分割區損壞：
+快閃記憶體寫入需要時間緩衝。在酬載執行完畢前，**務必呼叫 `sync` 指令**，強制作業系統核心將記憶體緩衝區的資料完全寫入實體儲存晶片中，避免因拔除裝置導致資料遺失或分割區損壞：
 
 ```bash
 # 安全寫入資料至 loot 資料夾
@@ -405,7 +405,7 @@ sudo bash ./bb.sh
 2. 撰寫 `payload.txt` 設定為 `ATTACKMODE ECM_ETHERNET` 並呼叫 `DHCLIENT`。
 3. 在 Mac 的「系統設定」$
 ightarrow$「一般」$
-ightarrow$「共享」中啟用「網際網路共享」，將您的對外連網來源分享給 Bash Bunny 虛擬網卡（RNDIS/Ethernet Gadget）。
+ightarrow$「共享」中啟用「網際網路共享」，將您的對外連網來源分享給 Bash Bunny 虛擬網路卡（RNDIS/Ethernet Gadget）。
 4. 觀察 LED 轉為綠燈即表示成功取得 IP（通常位於 `192.168.2.x` 網段），可直接透過 `ssh root@192.168.2.2` 登入。
 
 #### 方法二：透過 MacPorts 安裝 Squid 代理伺服器
@@ -468,13 +468,13 @@ LED SUCCESS
 
 ### 6.2 網路劫持與毒化攻擊 (Network Hijacking Attacks)
 
-透過將 Bash Bunny 模擬為十億位元 USB 乙太網卡（`ATTACKMODE RNDIS_ETHERNET`），其 DHCP 指標將被作業系統賦予極高優先權。受測主機的所有網路流量將被強制轉向導流至 Bash Bunny，進而搭配 Responder 工具截取本機 NTLMv2 認證憑證雜湊。
+透過將 Bash Bunny 模擬為十億位元 USB 乙太網路卡（`ATTACKMODE RNDIS_ETHERNET`），其 DHCP 指標將被作業系統賦予極高優先權。受測主機的所有網路流量將被強制轉向導流至 Bash Bunny，進而搭配 Responder 工具截取本機 NTLMv2 認證憑證雜湊。
 
 ---
 
 ### 6.3 五大檔案外傳機密竊取酬載 (Top 5 Exfiltration Payloads)
 
-1. **認證憑證竊取 (QuickCreds)**：利用 USB 網卡毒化截取登入雜湊。
+1. **認證憑證竊取 (QuickCreds)**：利用 USB 網路卡毒化截取登入雜湊。
 2. **重要副檔名獵捕器 (File Dumper)**：掃描受測電腦使用者目錄中的 `.docx`，`.pdf`，`.kdbx` 檔案並外傳至隨身碟 loot 資料夾。
 3. **瀏覽器歷史與密碼提取**：自動擷取本機瀏覽器未加密的 Session Cookie 與歷史紀錄。
 4. **系統資訊全景勘測**：匯出主機補丁資訊、內部網段清單與防毒軟體防護狀態。
@@ -531,7 +531,7 @@ LED SUCCESS
 
 ### 7.1 Bash Bunny 入門初階 (Bash Bunny Primer)
 * 官方影片教學連結：[https://youtu.be/8j6hrjSrJaM](https://youtu.be/8j6hrjSrJaM)
-* 介紹硬體開箱、維護模式登入與第一支按鍵腳本運行。
+* 介紹硬體開箱、維護模式登入與第一支按鍵腳本執行。
 
 ### 7.2 搭配 Hamsters 進行釣魚攻擊 (Phishing Attack with Hamsters)
 * 官方影片教學連結：[https://youtu.be/zP8E3j7 rEeo](https://youtu.be/zP8E3j7 rEeo)

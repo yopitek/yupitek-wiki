@@ -12,7 +12,7 @@ description: Yupitek 技術支援 Wiki — ALFA Network、Hak5、Flipper Zero、
 
 請選擇一個產品系列開始：
 
-- [**ALFA Network**](/alfa-network/) — Wi-Fi 無線網絡卡、天線、Linux/Kali 驅動程式與硬體整合。
+- [**ALFA Network**](/alfa-network/) — Wi-Fi 無線網路卡、天線、Linux/Kali 驅動程式與硬體整合。
 - [**Hak5**](/hak5/) — WiFi Pineapple、USB Rubber Ducky、Bash Bunny、O.MG 等更多產品。
 - [**Flipper Zero**](/flipper-zero/) — 多功能工具裝置、韌體與配件。
 - [**SDRLAB**](/sdrlab/) — 軟體定義無線電硬體與擴充模組。

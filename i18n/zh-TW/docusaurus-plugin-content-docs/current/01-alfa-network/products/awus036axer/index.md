@@ -2,9 +2,9 @@
 id: alfa-product-awus036axer
 title: ALFA AWUS036AXER——Wi-Fi 6 Nano（內建天線）
 sidebar_position: 11
-description: ALFA AWUS036AXER——10.5 g 的 Wi-Fi 6 nano 網卡，內建天線，RTL8832BU AX1800、WPA3 與 USB 3.2。體積極小的日常 AX 選擇。
-tags: [alfa, 網卡, rtl8832bu, wifi-6, nano, 內建天線]
-keywords: [AWUS036AXER, RTL8832BU nano, 10.5g 網卡, 內建天線 Wi-Fi 6]
+description: ALFA AWUS036AXER——10.5 g 的 Wi-Fi 6 nano 網路卡，內建天線，RTL8832BU AX1800、WPA3 與 USB 3.2。體積極小的日常 AX 選擇。
+tags: [alfa, 網路卡, rtl8832bu, wifi-6, nano, 內建天線]
+keywords: [AWUS036AXER, RTL8832BU nano, 10.5g 網路卡, 內建天線 Wi-Fi 6]
 ---
 
 # ALFA AWUS036AXER——Wi-Fi 6 Nano（內建天線）
@@ -30,7 +30,7 @@ keywords: [AWUS036AXER, RTL8832BU nano, 10.5g 網卡, 內建天線 Wi-Fi 6]
 
 AXER 沿用 AWUS036AX 的無線電，並去除多餘的體積。它以收進 **10.5 g 機身**的**整合式天線**取代兩支外接天線——插入筆電連接埠後幾乎不會突出。你保有 Wi-Fi 6 速度、WPA3 與 2×2 MIMO；代價是失去外接天線的距離優勢與天線升級的彈性。
 
-這是一款**以用戶端為優先的網卡**：適合在階梯教室裡想要快速、安全的 Wi-Fi 6，又不想隨身帶著網卡加天線的學生。它*並非*長距離監聽的首選——請參閱進階用法中的說明。
+這是一款**以用戶端為優先的網路卡**：適合在階梯教室裡想要快速、安全的 Wi-Fi 6，又不想隨身帶著網路卡加天線的學生。它*並非*長距離監聽的首選——請參閱進階用法中的說明。
 
 ## 安裝與驅動程式
 
@@ -64,7 +64,7 @@ iw dev wlan0 link
 
 ### 監聽模式
 
-此晶片的社群驅動程式**不**支援監聽模式，而且內建天線本來就會限制擷取距離。若需要監聽模式，請使用外接天線且核心內建驅動的網卡，例如 [AWUS036ACM](/alfa-network/products/awus036acm/)。
+此晶片的社群驅動程式**不**支援監聽模式，而且內建天線本來就會限制擷取距離。若需要監聽模式，請使用外接天線且核心內建驅動的網路卡，例如 [AWUS036ACM](/alfa-network/products/awus036acm/)。
 
 ## 相容性
 
@@ -90,4 +90,4 @@ iw dev wlan0 link
 - [RTL8832BU 驅動程式頁面](/alfa-network/drivers/rtl8832bu/)
 - [AWUS036AX](/alfa-network/products/awus036ax/)——相同引擎，外接天線，距離更遠
 - [AWUS036AXM](/alfa-network/products/awus036axm/)——更快且支援藍牙
-- [網卡比較](/alfa-network/wifi-adapter-comparison/)
+- [網路卡比較](/alfa-network/wifi-adapter-comparison/)

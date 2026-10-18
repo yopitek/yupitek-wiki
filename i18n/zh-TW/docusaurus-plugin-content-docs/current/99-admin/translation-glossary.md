@@ -18,14 +18,14 @@ description: 三個 wiki 語言版本共用的標準 en / zh-CN / zh-TW 術語�
 | Access Point (AP) | 存取點 | 存取點 |
 | Monitor mode | 監聽模式 | 監聽模式 |
 | Packet injection | 封包注入 | 封包注入 |
-| Adapter (wireless) | 無線網絡卡 | 無線網絡卡 |
+| Adapter (wireless) | 無線網絡卡 | 無線網路卡 |
 | Driver | 驅動程式 | 驅動程式 |
 | Firmware | 韌體 | 韌體 |
 | Firmware update | 韌體更新 | 韌體更新 |
 | Troubleshooting | 疑難排解 | 疑難排解 |
 | Compatibility matrix | 相容性矩陣 | 相容性矩陣 |
 | Getting started | 快速入門 | 快速入門 |
-| Wi-Fi adapter | Wi-Fi 無線網絡卡 | Wi-Fi 無線網絡卡 |
+| Wi-Fi adapter | Wi-Fi 無線網絡卡 | Wi-Fi 無線網路卡 |
 | Antenna gain | 天線增益 | 天線增益 |
 
 ## 規則

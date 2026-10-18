@@ -1,16 +1,16 @@
 ---
 id: alfa-hardware-unitree
-title: ALFA 網卡在 Unitree 機器狗上的整合與遠距遙測指南
+title: ALFA 網路卡在 Unitree 機器狗上的整合與遠距遙測指南
 sidebar_label: Unitree 機器狗
 sidebar_position: 3
-description: ALFA 無線網絡卡在宇樹 Unitree（Go2 / B2）機器狗上的整合教學——解決內建天線訊號弱與馬達電磁干擾，實現低延遲影像串流與遠距遙測控制。
+description: ALFA 無線網路卡在宇樹 Unitree（Go2 / B2）機器狗上的整合教學——解決內建天線訊號弱與馬達電磁干擾，實現低延遲影像串流與遠距遙測控制。
 tags: [alfa, unitree, robotics, quadruped, wifi-6e, telemetry]
-keywords: [Unitree ALFA, 宇樹 機器狗 無線網卡, Go2 遙測, AWUS036AXML Unitree, 機器人 5GHz 串流]
+keywords: [Unitree ALFA, 宇樹 機器狗 無線網路卡, Go2 遙測, AWUS036AXML Unitree, 機器人 5GHz 串流]
 ---
 
-# ALFA 無線網絡卡在 Unitree 機器人上（Go2 / B2 / A1）
+# ALFA 無線網路卡在 Unitree 機器人上（Go2 / B2 / A1）
 
-> **一句話定位**：Unitree 機器狗（Go2、B2、A1）機載的是 NVIDIA Jetson，但隨附的內建 Wi-Fi 天線很弱。裝上一支搭配外接天線的 ALFA 無線網絡卡，能把機器人的無線控制連結範圍，從「只能跟著你在房間裡走」變成「在場地另一端也能穩定指揮它」。
+> **一句話定位**：Unitree 機器狗（Go2、B2、A1）機載的是 NVIDIA Jetson，但隨附的內建 Wi-Fi 天線很弱。裝上一支搭配外接天線的 ALFA 無線網路卡，能把機器人的無線控制連結範圍，從「只能跟著你在房間裡走」變成「在場地另一端也能穩定指揮它」。
 
 ## 這篇文章適合你嗎？
 
@@ -18,7 +18,7 @@ keywords: [Unitree ALFA, 宇樹 機器狗 無線網卡, Go2 遙測, AWUS036AXML 
 - **預估時間**：30〜45 分鐘
 - **你會用到的技能**：基本 Linux 終端機操作、SSH 遠端連線
 - **讀完你可以做到**：
-  1. 讓 ALFA 無線網絡卡在機器人的機載電腦上被正確辨識
+  1. 讓 ALFA 無線網路卡在機器人的機載電腦上被正確辨識
   2. 建立一個專用的 5 GHz 控制連線，避開 2.4 GHz 的干擾
   3. 用實際的延遲/遺失率數據驗證連線品質好不好
 
@@ -30,11 +30,11 @@ keywords: [Unitree ALFA, 宇樹 機器狗 無線網卡, Go2 遙測, AWUS036AXML 
 
 問題是，機器人運算模組上出廠內建的天線，表現跟你手機、筆電內建的天線差不多——大概 30 公尺就已經很勉強，而且 2.4 GHz 頻段在實驗室環境裡常常被其他 Wi-Fi 裝置、藍牙裝置，甚至機器人自己的馬達電磁干擾（EMI）吃得亂七八糟。
 
-解決方式跟 [Jetson 整合指南](/alfa-network/hardware/jetson/)是同一套邏輯——用外接的 ALFA 無線網絡卡取代原本的無線連結路徑，實際上有效的做法是：
+解決方式跟 [Jetson 整合指南](/alfa-network/hardware/jetson/)是同一套邏輯——用外接的 ALFA 無線網路卡取代原本的無線連結路徑，實際上有效的做法是：
 
 1. **優先用 5 GHz 頻段**：機器人上的 2.4 GHz 頻段很容易被馬達與其他裝置干擾，能避開就避開。
-2. **外接天線位置很重要**：無線網絡卡的外接天線效果比機器人機殼上任何內建天線都好，而且你可以把它擺在金屬機殼上方、訊號不會被遮蔽的位置。
-3. **依需求選網卡**：入門選 [AWUS036ACM](/alfa-network/products/awus036acm/)（相容性最廣）；想要 Wi-Fi 6 加藍牙選 [AWUS036AXM](/alfa-network/products/awus036axm/)；想要 6 GHz 頻段選 [AWUS036AXML](/alfa-network/products/awus036axml/)。
+2. **外接天線位置很重要**：無線網路卡的外接天線效果比機器人機殼上任何內建天線都好，而且你可以把它擺在金屬機殼上方、訊號不會被遮蔽的位置。
+3. **依需求選網路卡**：入門選 [AWUS036ACM](/alfa-network/products/awus036acm/)（相容性最廣）；想要 Wi-Fi 6 加藍牙選 [AWUS036AXM](/alfa-network/products/awus036axm/)；想要 6 GHz 頻段選 [AWUS036AXML](/alfa-network/products/awus036axml/)。
 
 > 📘 **名詞小教室**
 > - **遙測（Telemetry）**：機器人把自己身上的感測器資料（影像、位置、姿態等）即時回傳給你的過程，方便你在遠端掌握機器人的狀態。
@@ -47,8 +47,8 @@ keywords: [Unitree ALFA, 宇樹 機器狗 無線網卡, Go2 遙測, AWUS036AXML 
 
 - [ ] **硬體**：Unitree 機器人（Go2 / B2 / A1），機載電腦可透過 SSH 存取（出廠預設 IP 通常是 `192.168.123.161`）
 - [ ] **地面站筆電**：執行 Ubuntu 系統（可參考 [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/)）
-- [ ] **ALFA 無線網絡卡**：依需求從上一節挑選型號
-- [ ] **獨立供電的 USB Hub**：如果機器人的 USB 供電不足以驅動高功率網卡時使用
+- [ ] **ALFA 無線網路卡**：依需求從上一節挑選型號
+- [ ] **獨立供電的 USB Hub**：如果機器人的 USB 供電不足以驅動高功率網路卡時使用
 - [ ] **驅動程式參考（GitHub）**：
   - MediaTek MT76 系列驅動（適用 MT7612U / MT7921 系列晶片）：https://github.com/morrownr/mt76
   - Unitree 官方 SDK（如果你後續要做更進階的程式化控制）：https://github.com/unitreerobotics/unitree_sdk2
@@ -67,11 +67,11 @@ uname -r
 
 **預期結果**：你會看到一個 L4T（NVIDIA Jetson 專用）核心版本，例如 `5.10.65-tegra` 或 `6.6.0-tegra`。
 
-跟 [Jetson 整合指南](/alfa-network/hardware/jetson/)裡提到的規則一樣：MT7921AUN 晶片的網卡（AWUS036AXM / AXML）需要核心版本 5.18 以上；MT7612U 晶片（AWUS036ACM）則在任何近期核心版本上都能用。
+跟 [Jetson 整合指南](/alfa-network/hardware/jetson/)裡提到的規則一樣：MT7921AUN 晶片的網路卡（AWUS036AXM / AXML）需要核心版本 5.18 以上；MT7612U 晶片（AWUS036ACM）則在任何近期核心版本上都能用。
 
 ---
 
-### 步驟 2：插上 ALFA 無線網絡卡
+### 步驟 2：插上 ALFA 無線網路卡
 
 在機器人的機載電腦上執行：
 
@@ -80,7 +80,7 @@ lsusb | grep -iE "mediatek|realtek"
 iw dev
 ```
 
-**預期結果**：你的網卡出現在 `lsusb` 清單裡，同時多出一個新的無線介面（通常是 `wlan1`）。
+**預期結果**：你的網路卡出現在 `lsusb` 清單裡，同時多出一個新的無線介面（通常是 `wlan1`）。
 
 如果是 Realtek 晶片，請依照 [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/) 安裝 DKMS 驅動程式；如果是 MediaTek 內建於核心的晶片，這一步做完就直接可以用，不用額外安裝任何東西。
 
@@ -147,7 +147,7 @@ iperf3 -s &
 iperf3 -c <機器人IP> -u -b 100M -t 10
 ```
 
-**預期結果**：畫面會顯示一個吞吐量數字（Mbits/sec）以及封包遺失率（通常應該落在 0〜1%）。如果你在實際工作距離上量到的遺失率超過大約 1%，代表天線位置或頻道需要調整——可以試試切換到另一個 5 GHz 頻道（重新設定連線後執行 `sudo iw dev wlan1 set channel 149`），或者把網卡移到機殼上方更不容易被遮蔽的位置。
+**預期結果**：畫面會顯示一個吞吐量數字（Mbits/sec）以及封包遺失率（通常應該落在 0〜1%）。如果你在實際工作距離上量到的遺失率超過大約 1%，代表天線位置或頻道需要調整——可以試試切換到另一個 5 GHz 頻道（重新設定連線後執行 `sudo iw dev wlan1 set channel 149`），或者把網路卡移到機殼上方更不容易被遮蔽的位置。
 
 ---
 
@@ -155,15 +155,15 @@ iperf3 -c <機器人IP> -u -b 100M -t 10
 
 ### Q1：馬達啟動運轉時，連線就會斷斷續續？
 - **原因**：馬達產生的電磁干擾（EMI），加上天線位置不夠好。
-- **解決方法**：把無線網絡卡的天線移到金屬機殼上方；改用 5 GHz 頻段；並檢查目前頻道是否壅塞。
+- **解決方法**：把無線網路卡的天線移到金屬機殼上方；改用 5 GHz 頻段；並檢查目前頻道是否壅塞。
 
-### Q2：無線網絡卡插上機器人後完全看不到？
+### Q2：無線網路卡插上機器人後完全看不到？
 - **原因**：機器人的 USB 連接埠供電受限。
 - **解決方法**：改用獨立供電的 USB Hub；或嘗試插到機器人上不同的 USB 連接埠。
 
-### Q3：MT7921AUN 網卡（AXM / AXML）偵測不到？
+### Q3：MT7921AUN 網路卡（AXM / AXML）偵測不到？
 - **原因**：機器人上的 JetPack 版本太舊，核心版本低於 5.18。
-- **解決方法**：升級機器人機載電腦的 JetPack 版本；或改用 MT7612U 晶片等級的網卡（如 AWUS036ACM）。
+- **解決方法**：升級機器人機載電腦的 JetPack 版本；或改用 MT7612U 晶片等級的網路卡（如 AWUS036ACM）。
 
 ### Q4：距離拉遠之後連線又自動回落到 2.4 GHz？
 - **原因**：基地台或連線設定沒有真正鎖定 5 GHz 頻段。
@@ -177,9 +177,9 @@ iperf3 -c <機器人IP> -u -b 100M -t 10
 
 ## 參考資料與延伸閱讀
 
-- [ALFA 無線網絡卡在 NVIDIA Jetson 上（Orin Nano / NX）](/alfa-network/hardware/jetson/)——同樣的核心版本判斷邏輯，內容更深入
+- [ALFA 無線網路卡在 NVIDIA Jetson 上（Orin Nano / NX）](/alfa-network/hardware/jetson/)——同樣的核心版本判斷邏輯，內容更深入
 - [AWUS036AXM 產品頁面](/alfa-network/products/awus036axm/)——適合機器人控制連結的 Wi-Fi 6 + 藍牙機型
-- [ALFA 無線網絡卡在 Ubuntu 上的完整設定指南](/alfa-network/linux-setup-ubuntu/)——驅動安裝細節
+- [ALFA 無線網路卡在 Ubuntu 上的完整設定指南](/alfa-network/linux-setup-ubuntu/)——驅動安裝細節
 - [詞彙表](/getting-started/glossary)——遙測、EMI 等名詞的完整解釋
 - MediaTek MT76 系列驅動（社群維護，含 DKMS）：https://github.com/morrownr/mt76
 - Unitree 官方 SDK：https://github.com/unitreerobotics/unitree_sdk2

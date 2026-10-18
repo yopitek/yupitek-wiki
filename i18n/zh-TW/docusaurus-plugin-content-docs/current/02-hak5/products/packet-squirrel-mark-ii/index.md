@@ -97,7 +97,7 @@ locale: "zh-tw"
 | **儲存擴充介面 (Storage)** | MicroSD 卡插槽 + USB-A 2.0 Host 隨身碟介面 |
 | **供電介面 (Power)** | USB-C 匯流排供電（5 V DC，1 A）|
 | **硬體控制開關** | 4 檔位實體切換開關（Switch 1，Switch 2，Switch 3，Arming Mode）與微動按鈕 |
-| **VPN 加密協定支援** | 原生支援 OpenVPN 與 WireGuard 通道協議 |
+| **VPN 加密協定支援** | 原生支援 OpenVPN 與 WireGuard 通道協定 |
 | **狀態指示燈** | 多色可程式化 RGB LED 診斷燈 |
 
 ---
@@ -110,7 +110,7 @@ Packet Squirrel Mark II 是由 Hak5 打造的最新一代微型硬體中間人�
 ![Packet Squirrel Mark II](https://932701053-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F520JUF2JxB2RMXztRVAV%2Fuploads%2FhYoepPPoy8Pj5K8LI3E8%2Fsquirrelmk2_flat_halfres.png?alt=media&token=306f2cf9-1510-4238-9 ead-853396a45b4 d)
 
 > [!WARNING]
-> 本文檔專門適用於搭載韌體版本 **4.0.0 或更新版本** 之 Packet Squirrel Mark II。如需第一代舊款硬體說明，請查閱 Hak5 舊版文檔中心。
+> 本文件專門適用於搭載韌體版本 **4.0.0 或更新版本** 之 Packet Squirrel Mark II。如需第一代舊款硬體說明，請查閱 Hak5 舊版文件中心。
 
 ---
 
@@ -289,7 +289,7 @@ RFC 1918 規範之三大保留網段：
 ---
 
 ### 3.7 封包截獲實戰 (Packet capture)
-利用內建的 `tcpdump` 工具，可依條件精準側錄特定協議流量：
+利用內建的 `tcpdump` 工具，可依條件精準側錄特定協定流量：
 ```bash
 # 截獲目標所有 DNS 查詢封包並儲存為 pcap 格式
 tcpdump -i br-lan -nn port 53 -w /mnt/loot/dns_traffic.pcap
@@ -452,7 +452,7 @@ TOKEN=$(curl -s http://api.internal/auth | jq -r .access_token)
 ---
 
 ### 5.10 USB 隨身碟硬體加密 (USB encryption)
-支援 LUKS 加密磁區。只有在輸入正確金鑰後方可解密掛載外傳分區，即使設備於現場遺失亦能確保情報資料絕對保密。
+支援 LUKS 加密磁區。只有在輸入正確金鑰後方可解密掛載外傳分割區，即使設備於現場遺失亦能確保情報資料絕對保密。
 
 ---
 
@@ -468,7 +468,7 @@ TOKEN=$(curl -s http://api.internal/auth | jq -r .access_token)
 ---
 
 ### 5.13 實戰避坑與排錯指南 (Tips，tricks，& pitfalls)
-* **避免在唯讀分區大量寫入**：確保暫存檔案寫入記憶體虛擬磁碟 `/tmp`。
+* **避免在唯讀分割區大量寫入**：確保暫存檔案寫入記憶體虛擬磁碟 `/tmp`。
 * **妥善處理 DHCP 租約衝突**：切換 NETMODE 時務必重新啟動本機 dnsmasq 服務。
 
 ---

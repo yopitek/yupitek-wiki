@@ -2,14 +2,14 @@
 id: alfa-product-awus036achm
 title: ALFA AWUS036ACHM——平價雙頻 AC433
 sidebar_position: 7
-description: ALFA AWUS036ACHM——平價 RTL8811AU？不——是 MT7610U AC433 雙頻無線網絡卡，內建於核心的驅動程式與穩固的監聽模式。絕佳的平價 Kali 入門款。
-tags: [alfa, 無線網絡卡, mt7610u, ac433, 平價]
-keywords: [AWUS036ACHM, MT7610U, 平價無線網絡卡, AC433 Kali]
+description: ALFA AWUS036ACHM——平價 RTL8811AU？不——是 MT7610U AC433 雙頻無線網路卡，內建於核心的驅動程式與穩固的監聽模式。絕佳的平價 Kali 入門款。
+tags: [alfa, 無線網路卡, mt7610u, ac433, 平價]
+keywords: [AWUS036ACHM, MT7610U, 平價無線網路卡, AC433 Kali]
 ---
 
 # ALFA AWUS036ACHM——平價雙頻 AC433
 
-> **一句話定位（One-liner）**：**AWUS036ACHM** 是平價雙頻 ALFA——一支 **MT7610U AC433** 無線網絡卡，配一支可拆卸的 5 dBi 雙頻天線，而且關鍵的是**內建於核心的驅動程式**（自 Linux 4.19 起的 `mt76x0u`）。它是進入 Linux 雙頻監聽模式（monitor mode）最便宜的方式，沒有之一。
+> **一句話定位（One-liner）**：**AWUS036ACHM** 是平價雙頻 ALFA——一支 **MT7610U AC433** 無線網路卡，配一支可拆卸的 5 dBi 雙頻天線，而且關鍵的是**內建於核心的驅動程式**（自 Linux 4.19 起的 `mt76x0u`）。它是進入 Linux 雙頻監聽模式（monitor mode）最便宜的方式，沒有之一。
 
 ## 規格總覽 (Spec overview)
 
@@ -99,4 +99,4 @@ sudo aireplay-ng --test wlan0mon
 - [MT7610U 驅動程式頁面](/alfa-network/drivers/mt7610u/)
 - [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/) 與 [Kali 設定指南](/alfa-network/linux-setup-kali/)
 - [AWUS036ACM](/alfa-network/products/awus036acm/)——更快的兄弟
-- [無線網絡卡比較](/alfa-network/wifi-adapter-comparison/)
+- [無線網路卡比較](/alfa-network/wifi-adapter-comparison/)

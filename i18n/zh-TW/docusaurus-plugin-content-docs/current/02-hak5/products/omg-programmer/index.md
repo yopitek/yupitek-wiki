@@ -113,7 +113,7 @@ flowchart TD
 | 瀏覽器選錯序列埠 | 多個 USB-序列裝置 | 斷開其他裝置；選擇精靈標示的序列埠 |
 | 啟用卡在「detecting」 | 裝置不在 bootloader 模式 | 重新開機；在提示時乾淨地重新連線 |
 | 裝置顯示舊版本 | 韌體步驟被跳過 | 重新執行 WebFlasher 並完成韌體步驟 |
-| Python flasher 錯誤 | 驅動程式 / 許可權 | 以適當許可權執行；OS 注意事項見 O.MG 韌體檔案 |
+| Python flasher 錯誤 | 驅動程式 / 權限 | 以適當權限執行；OS 注意事項見 O.MG 韌體檔案 |
 
 ---
 

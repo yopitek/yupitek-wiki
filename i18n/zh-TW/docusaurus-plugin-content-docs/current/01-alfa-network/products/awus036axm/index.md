@@ -2,14 +2,14 @@
 id: alfa-product-awus036axm
 title: ALFA AWUS036AXM——Wi-Fi 6 AX3000 + 藍芽 5.2
 sidebar_position: 12
-description: ALFA AWUS036AXM——旗艦 Wi-Fi 6 MT7921AUN AX3000 雙頻無線網絡卡，含藍芽 5.2、USB 3.2 與內建於核心的驅動程式。一個 dongle 搞定 WiFi + BT。
-tags: [alfa, 無線網絡卡, mt7921aun, wifi-6, 藍芽, ax3000]
-keywords: [AWUS036AXM, MT7921AUN, AX3000, 藍芽 5.2 無線網絡卡, 內建於核心 WiFi 6]
+description: ALFA AWUS036AXM——旗艦 Wi-Fi 6 MT7921AUN AX3000 雙頻無線網路卡，含藍芽 5.2、USB 3.2 與內建於核心的驅動程式。一個 dongle 搞定 WiFi + BT。
+tags: [alfa, 無線網路卡, mt7921aun, wifi-6, 藍芽, ax3000]
+keywords: [AWUS036AXM, MT7921AUN, AX3000, 藍芽 5.2 無線網路卡, 內建於核心 WiFi 6]
 ---
 
 # ALFA AWUS036AXM——Wi-Fi 6 AX3000 + 藍芽 5.2
 
-> **一句話定位（One-liner）**：**AWUS036AXM** 是 ALFA 的旗艦 Wi-Fi 6 dongle——一支 **MT7921AUN AX3000** 雙頻無線網絡卡，含**藍芽 5.2**、USB 3.2、兩支天線，而且關鍵的是**內建於核心的驅動程式**（自 Linux 5.18 起的 `mt7921u`）。一支棒子取代你的 Wi-Fi 與藍芽。
+> **一句話定位（One-liner）**：**AWUS036AXM** 是 ALFA 的旗艦 Wi-Fi 6 dongle——一支 **MT7921AUN AX3000** 雙頻無線網路卡，含**藍芽 5.2**、USB 3.2、兩支天線，而且關鍵的是**內建於核心的驅動程式**（自 Linux 5.18 起的 `mt7921u`）。一支棒子取代你的 Wi-Fi 與藍芽。
 
 ## 規格總覽 (Spec overview)
 
@@ -100,4 +100,4 @@ sudo aireplay-ng --test wlan0mon
 - [AWUS036AXML](/alfa-network/products/awus036axml/)——Wi-Fi 6E、USB-C 兄弟
 - [AWUS036AX](/alfa-network/products/awus036ax/)——更便宜的 AX1800 替代方案
 - [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/) / [Kali 設定指南](/alfa-network/linux-setup-kali/)
-- [無線網絡卡比較](/alfa-network/wifi-adapter-comparison/)
+- [無線網路卡比較](/alfa-network/wifi-adapter-comparison/)

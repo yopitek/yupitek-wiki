@@ -3,14 +3,14 @@ id: alfa-hardware-orange-pi
 title: Orange Pi & Rockchip RK3588 SBC × ALFA Network 整合指南
 sidebar_label: Orange Pi / RK3588
 sidebar_position: 8
-description: Orange Pi 5 與 Rockchip RK3588 單板電腦搭配 ALFA 網卡——系統核心差異、Armbian Mainline 部署與供電設定，含每一步的預期結果。
+description: Orange Pi 5 與 Rockchip RK3588 單板電腦搭配 ALFA 網路卡——系統核心差異、Armbian Mainline 部署與供電設定，含每一步的預期結果。
 tags: [orange-pi, rk3588, armbian, rockchip, alfa, awus036axml, awus036acm, sbc]
 keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS036ACM, mt76]
 ---
 
 # Orange Pi & Rockchip RK3588 SBC × ALFA Network 整合指南
 
-> **一句話定位**：Orange Pi 5 系列這類搭載 Rockchip RK3588 晶片的單板電腦（SBC）算力很強，常被拿來做邊緣運算的無線閘道器或遠端感測節點。但很多人插上 ALFA 網卡後完全抓不到，誤以為是硬體不相容——實際上關鍵是「你用的系統映像檔」，這篇文章教你怎麼選對系統、正確安裝。
+> **一句話定位**：Orange Pi 5 系列這類搭載 Rockchip RK3588 晶片的單板電腦（SBC）算力很強，常被拿來做邊緣運算的無線閘道器或遠端感測節點。但很多人插上 ALFA 網路卡後完全抓不到，誤以為是硬體不相容——實際上關鍵是「你用的系統映像檔」，這篇文章教你怎麼選對系統、正確安裝。
 
 ## 這篇文章適合你嗎？
 
@@ -18,22 +18,22 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 - **預估時間**：30〜45 分鐘（含系統刷機時間）
 - **你會用到的技能**：基本終端機操作
 - **讀完你可以做到**：
-  1. 搞懂為什麼原廠系統插網卡常常抓不到，該用哪一種系統映像檔
-  2. 完成系統刷機與 ALFA 網卡的驅動確認
+  1. 搞懂為什麼原廠系統插網路卡常常抓不到，該用哪一種系統映像檔
+  2. 完成系統刷機與 ALFA 網路卡的驅動確認
   3. 掌握供電與散熱上要注意的細節，避免長時間使用時斷線
 
 ---
 
-## 概念說明：為什麼原廠系統插上網卡常常沒反應
+## 概念說明：為什麼原廠系統插上網路卡常常沒反應
 
-很多人在 Orange Pi 原廠附的 Debian 系統上插入 ALFA 網卡，發現系統完全沒反應，第一直覺會以為「這張網卡跟我的板子不相容」——但其實問題通常出在**系統核心版本**，不是硬體本身。
+很多人在 Orange Pi 原廠附的 Debian 系統上插入 ALFA 網路卡，發現系統完全沒反應，第一直覺會以為「這張網路卡跟我的板子不相容」——但其實問題通常出在**系統核心版本**，不是硬體本身。
 
 這跟 SBC（單板電腦）這類產品的系統生態有關：
 
-- **原廠 Vendor BSP（Board Support Package）系統**：晶片廠商（這裡是 Rockchip）為了讓硬體能盡快出貨，會先基於一個比較舊的 Linux 核心版本（通常是 5.10）做客製化，讓螢幕、GPU 這些硬體能動。這類系統的核心版本比較舊，對新款 USB 網卡晶片的支援往往還沒跟上。
-- **Armbian Mainline 系統**：Armbian 是一個第三方維護的社群專案，會持續把 SBC 的支援整合進最新的 Linux 主線核心（目前是 6.x 版本）。核心版本新，代表對新款 USB 網卡晶片（尤其是這幾年才推出的 MT7921AUN）的支援也比較完整，通常插上就能直接用。
+- **原廠 Vendor BSP（Board Support Package）系統**：晶片廠商（這裡是 Rockchip）為了讓硬體能盡快出貨，會先基於一個比較舊的 Linux 核心版本（通常是 5.10）做客製化，讓螢幕、GPU 這些硬體能動。這類系統的核心版本比較舊，對新款 USB 網路卡晶片的支援往往還沒跟上。
+- **Armbian Mainline 系統**：Armbian 是一個第三方維護的社群專案，會持續把 SBC 的支援整合進最新的 Linux 主線核心（目前是 6.x 版本）。核心版本新，代表對新款 USB 網路卡晶片（尤其是這幾年才推出的 MT7921AUN）的支援也比較完整，通常插上就能直接用。
 
-**簡單判斷方式**：如果你剛買到板子，插上 ALFA 網卡完全沒反應，第一件事不是懷疑網卡壞了，是先確認自己現在裝的是不是原廠 Vendor BSP 系統——如果是，換成 Armbian Mainline 系統通常就能解決。
+**簡單判斷方式**：如果你剛買到板子，插上 ALFA 網路卡完全沒反應，第一件事不是懷疑網路卡壞了，是先確認自己現在裝的是不是原廠 Vendor BSP 系統——如果是，換成 Armbian Mainline 系統通常就能解決。
 
 > 📘 **名詞小教室**
 > - **SBC（Single Board Computer，單板電腦）**：把 CPU、記憶體、儲存控制器等元件整合在一片電路板上的迷你電腦，Orange Pi、Raspberry Pi 都屬於這類產品。
@@ -42,7 +42,7 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 
 ---
 
-## ALFA 網卡在 RK3588 平台上的支援情況
+## ALFA 網路卡在 RK3588 平台上的支援情況
 
 | ALFA 型號         | 晶片型號                 | Armbian（核心 ≥6.x） | 原廠 Debian（核心 5.10） | 備註                    |
 | --------------- | -------------------- | --------------------- | ----------------------- | ----------------------- |
@@ -60,7 +60,7 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 - [ ] **硬體**：Orange Pi 5 / 5B / 5 Plus，或其他 Rockchip RK3588 / RK3588S 平台的單板電腦
 - [ ] **一張 microSD 卡或 NVMe 硬碟**：用來刷入系統映像檔
 - [ ] **讀卡機**：用來把系統映像檔寫入 microSD 卡
-- [ ] **ALFA 無線網絡卡**：依上表選擇型號
+- [ ] **ALFA 無線網路卡**：依上表選擇型號
 - [ ] **至少 5V/4A（20W）的 Type-C 電源供應器**：詳見下方供電提醒
 - [ ] **驅動程式參考（GitHub）**：
   - MediaTek MT76 系列驅動（Armbian Mainline 系統已內建，如需手動安裝可參考此專案）：https://github.com/morrownr/mt76
@@ -87,7 +87,7 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 
 ---
 
-### 步驟 2：開機並插入 ALFA 網卡
+### 步驟 2：開機並插入 ALFA 網路卡
 
 開機進入 Armbian 系統後，把 ALFA AWUS036AXML（或其他型號）插入板子上**藍色的 USB 3.0 Type-A 連接埠**（板子上會有藍色跟黑色兩種顏色的 USB 埠，藍色代表 USB 3.0，傳輸速度較快，優先使用這個）。
 
@@ -111,20 +111,20 @@ mt7921u 2-1:1.0: firmware: mediatek/WIFI_MT7961_patch_mcu_1_2_tv.bin loaded
 mt7921u 2-1:1.0: firmware: mediatek/WIFI_RAM_CODE_MT7961_1_2.bin loaded
 ```
 
-`iw dev` 則會列出一個新的無線介面（通常是 `wlan1`），代表網卡已經可以正常使用。
+`iw dev` 則會列出一個新的無線介面（通常是 `wlan1`），代表網路卡已經可以正常使用。
 
 ---
 
 ## 供電與散熱注意事項
 
-- **供電預算**：RK3588 全速運作時的功耗大約落在 10〜15W，再加上外接的 ALFA 高功率網卡（約 2〜4W），整機建議使用**至少 5V/4A（20W）的 Type-C 電源供應器**，避免瞬間負載尖峰造成 USB 供電不穩、網卡斷線。
+- **供電預算**：RK3588 全速運作時的功耗大約落在 10〜15W，再加上外接的 ALFA 高功率網路卡（約 2〜4W），整機建議使用**至少 5V/4A（20W）的 Type-C 電源供應器**，避免瞬間負載尖峰造成 USB 供電不穩、網路卡斷線。
 - **連接埠選擇**：優先使用獨立 USB 3.0 控制器通道的連接埠，避免跟其他高速周邊（例如 NVMe USB 外接盒）共用同一個 Hub，共用時容易互相搶頻寬跟供電。
 
 ---
 
 ## 常見問題與排除指引
 
-### Q1：插上網卡後系統完全沒反應？
+### Q1：插上網路卡後系統完全沒反應？
 - **原因**：目前使用的是原廠 Vendor BSP 系統（核心版本較舊），對這顆晶片的支援還沒跟上。
 - **解決方法**：改用 Armbian Mainline 系統（見步驟 1），核心版本較新，通常插上就能直接用。
 
@@ -132,9 +132,9 @@ mt7921u 2-1:1.0: firmware: mediatek/WIFI_RAM_CODE_MT7961_1_2.bin loaded
 - **原因**：原廠 Vendor BSP 系統核心版本較舊，需要手動補齊韌體或驅動模組。
 - **解決方法**：依照上方相容性表格，手動安裝對應的核心模組（例如 `mt76x2u`），並確認韌體檔案已經放在系統正確的路徑下；如果覺得麻煩，改用 Armbian Mainline 會是更省事的做法。
 
-### Q3：使用一段時間後網卡會斷線？
+### Q3：使用一段時間後網路卡會斷線？
 - **原因**：通常是供電不足，尤其是同時外接了其他高速裝置時。
-- **解決方法**：確認電源供應器至少是 5V/4A（20W）；並檢查 ALFA 網卡跟其他裝置有沒有共用同一個 USB Hub，如果有，建議分開接到不同的獨立通道。
+- **解決方法**：確認電源供應器至少是 5V/4A（20W）；並檢查 ALFA 網路卡跟其他裝置有沒有共用同一個 USB Hub，如果有，建議分開接到不同的獨立通道。
 
 ---
 
@@ -142,7 +142,7 @@ mt7921u 2-1:1.0: firmware: mediatek/WIFI_RAM_CODE_MT7961_1_2.bin loaded
 
 - [AWUS036AXML 產品頁面](/alfa-network/products/awus036axml/)
 - [AWUS036ACM 產品頁面](/alfa-network/products/awus036acm/)
-- [ALFA 無線網絡卡在 Raspberry Pi 上（3 / 4 / 5）](/alfa-network/hardware/raspberry-pi/)——另一款輕量嵌入式主機的整合方式，概念可互相參照
+- [ALFA 無線網路卡在 Raspberry Pi 上（3 / 4 / 5）](/alfa-network/hardware/raspberry-pi/)——另一款輕量嵌入式主機的整合方式，概念可互相參照
 - [詞彙表](/getting-started/glossary)——SBC、BSP、Mainline 核心等名詞的完整解釋
 - [Armbian 官方網站](https://www.armbian.com/orange-pi-5/)——Orange Pi 5 系列的 Mainline 映像檔下載（一般使用者從這裡下載即可）
 - Armbian 官方建置框架（GitHub，適合需要自行編譯客製化映像檔的進階使用者）：https://github.com/armbian/build

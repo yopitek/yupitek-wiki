@@ -81,7 +81,7 @@ flowchart LR
 
 ## 未涵蓋？
 
-- 若你要找的是其他品牌（ALFA 網絡卡、Hak5 滲透工具、Flipper Zero、SDR）請回到 [Yupitek Wiki 總覽](/getting-started/)。
+- 若你要找的是其他品牌（ALFA 網路卡、Hak5 滲透工具、Flipper Zero、SDR）請回到 [Yupitek Wiki 總覽](/getting-started/)。
 - ACS 全系列完整的英文官方檔案（datasheet、SDK、API reference）可在 [acs.com.hk](https://www.acs.com.hk) 取得，每顆產品頁的「規格總覽」都有對應連結。
 
 

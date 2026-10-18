@@ -1,21 +1,21 @@
 ---
 slug: linux-setup-ubuntu
 id: alfa-linux-setup-ubuntu
-title: ALFA 無線網絡卡在 Ubuntu 上的完整設定指南
+title: ALFA 無線網路卡在 Ubuntu 上的完整設定指南
 sidebar_position: 4
-description: 每款 ALFA Wi-Fi 無線網絡卡的逐步 Ubuntu 設定——內建於核心的晶片（MT7612U、MT7610U、MT7921AUN）隨插即用，Realtek 晶片（RTL8812AU、RTL8811AU、RTL8832BU）則需 DKMS 安裝。
+description: 每款 ALFA Wi-Fi 無線網路卡的逐步 Ubuntu 設定——內建於核心的晶片（MT7612U、MT7610U、MT7921AUN）隨插即用，Realtek 晶片（RTL8812AU、RTL8811AU、RTL8832BU）則需 DKMS 安裝。
 tags: [alfa, ubuntu, dkms, 驅動程式, 設定]
 keywords: [ALFA Ubuntu, 安裝 RTL8812AU Ubuntu, MT7612U Ubuntu, DKMS Ubuntu, AWUS036ACM Ubuntu]
 ---
 
-# ALFA 無線網絡卡在 Ubuntu 上的完整設定指南
+# ALFA 無線網路卡在 Ubuntu 上的完整設定指南
 
-> **學習目標（Learning goal）**：完成本指南後，你的 ALFA 無線網絡卡將能在 Ubuntu 中顯示（`iw dev`）、連上 Wi-Fi，並且——針對支援的晶片——可以切換到監聽模式（monitor mode）。
-> **適用物件**：初學者–中階 ｜ **前置需求**：Ubuntu 20.04+（Wi-Fi 6E 機型需 22.04+）、網路連線（安裝套件需要它！），以及你的 ALFA 無線網絡卡。
+> **學習目標（Learning goal）**：完成本指南後，你的 ALFA 無線網路卡將能在 Ubuntu 中顯示（`iw dev`）、連上 Wi-Fi，並且——針對支援的晶片——可以切換到監聽模式（monitor mode）。
+> **適用物件**：初學者–中階 ｜ **前置需求**：Ubuntu 20.04+（Wi-Fi 6E 機型需 22.04+）、網路連線（安裝套件需要它！），以及你的 ALFA 無線網路卡。
 
 ## 概念：兩種驅動程式
 
-在碰終端機之前，先了解*為什麼*不同無線網絡卡的設定會不同。這裡有兩個世界：
+在碰終端機之前，先了解*為什麼*不同無線網路卡的設定會不同。這裡有兩個世界：
 
 1. **內建於核心的晶片（MediaTek）**——驅動程式已編譯進 Ubuntu。插上 → 即可使用。這涵蓋 **MT7612U**（AWUS036ACM）、**MT7610U**（AWUS036ACHM）與 **MT7921AUN**（AWUS036AXM / AWUS036AXML，需要 Ubuntu 22.04+ / 核心 5.18+）。
 2. **DKMS 晶片（Realtek）**——驅動程式不在核心內，所以你編譯一次，之後 **DKMS** 會在每次核心更新後自動重新建置。這涵蓋 **RTL8812AU**（AWUS036ACH）、**RTL8811AU**（AWUS036ACS）與 **RTL8832BU**（AWUS036AX / AWUS036AXER）。
@@ -37,12 +37,12 @@ flowchart TD
 
 - [ ] Ubuntu 20.04 或更新版本（用 `lsb_release -a` 確認）
 - [ ] 可用的網路（Wi-Fi 或乙太網路）以下載套件
-- [ ] 你的 ALFA 無線網絡卡與一條 USB-A 或 USB-C 傳輸線（AXML 使用 USB-C）
-- [ ] `sudo` 許可權
+- [ ] 你的 ALFA 無線網路卡與一條 USB-A 或 USB-C 傳輸線（AXML 使用 USB-C）
+- [ ] `sudo` 權限
 
 ## 步驟 1：確認你的晶片
 
-插上無線網絡卡，然後問 Ubuntu 它看到了什麼：
+插上無線網路卡，然後問 Ubuntu 它看到了什麼：
 
 ```bash
 lsusb
@@ -61,7 +61,7 @@ Bus 001 Device 005: ID 0bda:8812 Realtek Semiconductor Corp. RTL8812AU 802.11a/b
 
 ## 步驟 2：內建於核心的路徑（MediaTek——隨插即用）
 
-如果你的無線網絡卡使用 MediaTek 晶片，什麼都不用安裝。驗證：
+如果你的無線網路卡使用 MediaTek 晶片，什麼都不用安裝。驗證：
 
 ```bash
 iw dev

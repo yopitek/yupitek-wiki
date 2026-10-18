@@ -2,14 +2,14 @@
 id: alfa-product-awus036eacs
 title: ALFA AWUS036EACS——Nano WiFi + 藍芽組合
 sidebar_position: 14
-description: ALFA AWUS036EACS——給 Windows 用的小巧 RTL8821CU AC600 + 藍芽 4.2 組合無線網絡卡。桌上型 WiFi+BT 隨插即用；不建議用於 Linux 監聽模式。
-tags: [alfa, 無線網絡卡, rtl8821cu, 藍芽, windows]
-keywords: [AWUS036EACS, RTL8821CU, AC600 藍芽無線網絡卡, nano Wi-Fi 無線網絡卡]
+description: ALFA AWUS036EACS——給 Windows 用的小巧 RTL8821CU AC600 + 藍芽 4.2 組合無線網路卡。桌上型 WiFi+BT 隨插即用；不建議用於 Linux 監聽模式。
+tags: [alfa, 無線網路卡, rtl8821cu, 藍芽, windows]
+keywords: [AWUS036EACS, RTL8821CU, AC600 藍芽無線網路卡, nano Wi-Fi 無線網路卡]
 ---
 
 # ALFA AWUS036EACS——Nano WiFi + 藍芽組合
 
-> **一句話定位（One-liner）**：**AWUS036EACS** 是 ALFA 的 **nano WiFi + 藍芽組合**——一支 **RTL8821CU AC600** 雙頻 dongle，整合 **BT 4.2**，在 **Windows 上隨插即用**。先誠實警告：它的 Linux 驅動程式故事很弱，而且它**不是**監聽模式（monitor mode）無線網絡卡。買它是為了 Windows 桌上型，不是為了 Kali。
+> **一句話定位（One-liner）**：**AWUS036EACS** 是 ALFA 的 **nano WiFi + 藍芽組合**——一支 **RTL8821CU AC600** 雙頻 dongle，整合 **BT 4.2**，在 **Windows 上隨插即用**。先誠實警告：它的 Linux 驅動程式故事很弱，而且它**不是**監聽模式（monitor mode）無線網路卡。買它是為了 Windows 桌上型，不是為了 Kali。
 
 ## 規格總覽 (Spec overview)
 
@@ -35,7 +35,7 @@ EACS 是 ALFA 資安產品線中的異類，而且事先知道這點很重要。
 
 在 Windows 上沒有需要做的事——驅動程式已隨附：
 
-1. 把無線網絡卡插進 USB 連線埠。
+1. 把無線網路卡插進 USB 連線埠。
 2. Windows 自動安裝 RTL8821CU 驅動程式。WiFi 與藍芽都會出現在裝置管理員中。
 
 驗證：
@@ -76,7 +76,7 @@ flowchart TD
 |---|---|---|
 | 找不到 BT 裝置（Windows） | 驅動程式 / 服務衝突 | 檢查裝置管理員；從 ALFA 支援重新安裝驅動程式 |
 | 在 Linux 上完全不能用 | 沒有可靠驅動程式 | 到此為止——改用 [Linux 友善的 ALFA](/alfa-network/wifi-adapter-comparison/) |
-| 監聽模式「可用」但注入失敗 | RTL8821CU 驅動程式限制 | 不要依賴它——擷取工作請更換無線網絡卡 |
+| 監聽模式「可用」但注入失敗 | RTL8821CU 驅動程式限制 | 不要依賴它——擷取工作請更換無線網路卡 |
 | 範圍短 | 整合式 2 dBi 天線 | 設計使然；在 AP 附近使用，不要離它太遠 |
 
 ## 相關資源
@@ -84,5 +84,5 @@ flowchart TD
 - [RTL8821CU 驅動程式頁面](/alfa-network/drivers/rtl8821cu/)——詳細的 Linux 故事
 - [AWUS036ACM](/alfa-network/products/awus036acm/)——建議的 Linux/Kali 替代方案
 - [AWUS036ACS](/alfa-network/products/awus036acs/)——口袋監聽模式替代方案
-- [無線網絡卡比較](/alfa-network/wifi-adapter-comparison/)
+- [無線網路卡比較](/alfa-network/wifi-adapter-comparison/)
 - [相容性矩陣](/alfa-network/linux-compatibility-matrix/)

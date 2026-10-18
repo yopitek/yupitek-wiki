@@ -2,14 +2,14 @@
 id: alfa-product-awus036axml
 title: ALFA AWUS036AXML——Wi-Fi 6E USB-C（6 GHz）
 sidebar_position: 13
-description: ALFA AWUS036AXML——產品線中唯一的三頻 Wi-Fi 6E 無線網絡卡。MT7921AUN AXE3000、USB-C、雙 5 dBi 天線、藍芽 5.2 與內建於核心的驅動程式。
-tags: [alfa, 無線網絡卡, mt7921aun, wifi-6e, usb-c, 三頻]
-keywords: [AWUS036AXML, Wi-Fi 6E 無線網絡卡, 6 GHz, USB-C, AXE3000]
+description: ALFA AWUS036AXML——產品線中唯一的三頻 Wi-Fi 6E 無線網路卡。MT7921AUN AXE3000、USB-C、雙 5 dBi 天線、藍芽 5.2 與內建於核心的驅動程式。
+tags: [alfa, 無線網路卡, mt7921aun, wifi-6e, usb-c, 三頻]
+keywords: [AWUS036AXML, Wi-Fi 6E 無線網路卡, 6 GHz, USB-C, AXE3000]
 ---
 
 # ALFA AWUS036AXML——Wi-Fi 6E USB-C（6 GHz）
 
-> **一句話定位（One-liner）**：**AWUS036AXML** 是 ALFA 產品線中唯一的 **Wi-Fi 6E** 無線網絡卡——一支 **MT7921AUN AXE3000 三頻**（2.4/5/**6 GHz**）無線網絡卡，配 **USB-C**、雙 5 dBi 天線與**藍芽 5.2**，全部建立在**內建於核心的驅動程式**（自 5.18 起的 `mt7921u`）上。這就是學生從現代筆電登上空曠 6 GHz 頻段的方式。
+> **一句話定位（One-liner）**：**AWUS036AXML** 是 ALFA 產品線中唯一的 **Wi-Fi 6E** 無線網路卡——一支 **MT7921AUN AXE3000 三頻**（2.4/5/**6 GHz**）無線網路卡，配 **USB-C**、雙 5 dBi 天線與**藍芽 5.2**，全部建立在**內建於核心的驅動程式**（自 5.18 起的 `mt7921u`）上。這就是學生從現代筆電登上空曠 6 GHz 頻段的方式。
 
 ## 規格總覽 (Spec overview)
 
@@ -27,7 +27,7 @@ keywords: [AWUS036AXML, Wi-Fi 6E 無線網絡卡, 6 GHz, USB-C, AXE3000]
 
 ## 總覽
 
-AXE3000 **AXML** 是 ALFA 為 6 GHz 世代打造的招牌產品。**6 GHz 頻段**（5 GHz 以上的頻道）是目前可用頻譜中壅塞度最低的——沒有舊裝置、沒有重疊的實驗室 AP——而這支無線網絡卡就是你在 Linux 上觸及它的方式。兩個細節讓它特別：
+AXE3000 **AXML** 是 ALFA 為 6 GHz 世代打造的招牌產品。**6 GHz 頻段**（5 GHz 以上的頻道）是目前可用頻譜中壅塞度最低的——沒有舊裝置、沒有重疊的實驗室 AP——而這支無線網路卡就是你在 Linux 上觸及它的方式。兩個細節讓它特別：
 
 1. **它在核心內。** `mt7921u` 驅動程式自 5.18 起進入主線，所以在 Ubuntu 22.04+ 或近期 Kali 上，你把它插進 **USB-C 連線埠**就登上 6 GHz 頻段。沒有 DKMS。
 2. **USB-C + 藍芽 5.2。** 現代超輕薄筆電有 USB-C 但 Wi-Fi 常常很弱；一支 AXML 用真正的無線電與真正的天線取代 Wi-Fi 與 BT。
@@ -107,6 +107,6 @@ AXML 的原廠偶極天線夠用，但[三頻面板](/alfa-network/products/apa-
 
 - [MT7921AUN 驅動程式頁面](/alfa-network/drivers/mt7921aun/)
 - [AWUS036AXM](/alfa-network/products/awus036axm/)——Wi-Fi 6（無 6 GHz）兄弟
-- [APA-M25-6E](/alfa-network/products/apa-m25-6e/)——這支無線網絡卡的三頻面板
+- [APA-M25-6E](/alfa-network/products/apa-m25-6e/)——這支無線網路卡的三頻面板
 - [Jetson 指南](/alfa-network/hardware/jetson/)——6 GHz 串流使用情境
-- [無線網絡卡比較](/alfa-network/wifi-adapter-comparison/)
+- [無線網路卡比較](/alfa-network/wifi-adapter-comparison/)
