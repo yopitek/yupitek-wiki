@@ -160,7 +160,7 @@ For more help, see the [SDRLAB Troubleshooting Center](/sdrlab/troubleshooting/)
 
 ## Related Pages
 
-- [WiFi multiboard (ESP8266)](/sdrlab/expansion/wifi-multiboard/) — the 2.4GHz-only little sibling
+- [WiFi multiboard (ESP32-S2)](/sdrlab/expansion/wifi-multiboard/) — the 2.4GHz-only little sibling
 - [NRF24 module](/sdrlab/expansion/nrf24/) — 2.4GHz packet radio sniffing
 - [Flipper Zero section](/flipper-zero/) — firmware and device basics
 

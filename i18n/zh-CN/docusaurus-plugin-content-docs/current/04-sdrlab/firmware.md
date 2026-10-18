@@ -104,14 +104,14 @@ NRF24 嗅探器、mousejacker 和扩展 WiFi 应用**不在**官方 Flipper 固�
 ### 2. 模块自己的芯片（ESP 固件）
 
 - **5G 扩展板 / ESP32-C5** → Marauder 固件（2.4/5 GHz）。通过板载 USB-C 端口刷写；厂商出厂时已预刷。
-- **WiFi 多功能板 / ESP8266** → ESP8266 Deauther 或 Marauder 固件。通过板载 USB/UART 或网页刷写器刷写。
+- **WiFi 多功能板 / ESP32-S2** → ESP32-S2 Deauther 或 Marauder 固件。通过板载 USB/UART 或网页刷写器刷写。
 - **NRF24 / W5500 模块** → 没有模块固件；它们是纯 SPI 外设，完全由 Flipper 应用控制。
 
 ```mermaid
 flowchart TD
     A[ESP-based Flipper module] --> B{Which chip?}
     B -->|ESP32-C5 on 5G board| C[Marauder 5G<br/>pre-flashed; update via USB-C]
-    B -->|ESP8266 on multiboard| D[Deauther v2 or Marauder<br/>flash via web flasher / esptool]
+    B -->|ESP32-S2 on multiboard| D[Deauther or Marauder<br/>flash via web flasher / esptool]
 ```
 
 ## 更新安全清单

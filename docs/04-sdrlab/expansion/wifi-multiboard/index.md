@@ -1,10 +1,10 @@
 ---
 id: sdrlab-expansion-wifi-multiboard
-title: Flipper Zero WiFi Multiboard (ESP8266) — Complete Guide
+title: Flipper Zero WiFi Multiboard (ESP32-S2) — Complete Guide
 sidebar_position: 3
-description: Flipper Zero WiFi multiboard (ESP8266) — deauther/Marauder firmware, scan and deauth testing on your own networks, web UI at 192.168.4.1, GPIO notes and troubleshooting.
-tags: [sdrlab, flipper-zero, wifi-multiboard, esp8266, deauther]
-keywords: [Flipper Zero WiFi multiboard, ESP8266, WiFi deauther, Marauder ESP8266, pwned 192.168.4.1]
+description: Flipper Zero WiFi multiboard (ESP32-S2) — deauther/Marauder firmware, scan and deauth testing on your own networks, web UI at 192.168.4.1, GPIO notes and troubleshooting.
+tags: [sdrlab, flipper-zero, wifi-multiboard, esp32-s2, deauther]
+keywords: [Flipper Zero WiFi multiboard, ESP32-S2, WiFi deauther, Marauder ESP32-S2, pwned 192.168.4.1]
 authors: yupitek
 date: 2026-08-21
 last_updated: 2026-08-21
@@ -14,16 +14,16 @@ difficulty: intermediate
 toc: true
 ---
 
-# Flipper Zero WiFi Multiboard (ESP8266) — Complete Guide
+# Flipper Zero WiFi Multiboard (ESP32-S2) — Complete Guide
 
-> **One-liner**: the WiFi multiboard is an **ESP8266-powered WiFi tool for the Flipper Zero** — typically pre-flashed with the ESP8266 Deauther firmware — giving you AP scanning, packet monitoring and (on your own networks) deauth testing, plus a standalone web UI you control from any browser.
+> **One-liner**: the WiFi multiboard is an **ESP32-S2-powered WiFi tool for the Flipper Zero** — typically pre-flashed with the ESP32-S2 Deauther firmware — giving you AP scanning, packet monitoring and (on your own networks) deauth testing, plus a standalone web UI you control from any browser.
 
 ## Specs at a glance
 
 | Item | Specification |
 |---|---|
-| WiFi chip | Espressif ESP8266 (2.4 GHz) per the vendor listing title; the vendor description also mentions ESP32-S2, so confirm the chip on your unit |
-| Firmware (typical) | ESP8266 Deauther v2 (Spacehuhn) or ESP8266 Marauder port |
+| WiFi chip | Espressif ESP32-S2 (2.4 GHz) |
+| Firmware (typical) | ESP32-S2 Deauther or Marauder port |
 | Frequency band | 2.4 GHz only (no 5 GHz) |
 | Interface | Plugs into the Flipper GPIO header |
 | Web UI | AP mode at `192.168.4.1` (default SSID `pwned`, password `deauther`) |
@@ -41,7 +41,7 @@ flowchart LR
     D --> H["Verify client resilience<br/>in a lab"]
 ```
 
-The ESP8266 Deauther is the classic pocket tool: scan for networks, pick a target, and run attack modes (deauth, beacon spam) — with the Flipper as the control surface. Because the ESP8266 also exposes its own **access point**, you can drive everything from a phone browser at `http://192.168.4.1` — the Flipper screen is optional.
+The ESP32-S2 Deauther is the classic pocket tool: scan for networks, pick a target, and run attack modes (deauth, beacon spam) — with the Flipper as the control surface. Because the ESP32-S2 also exposes its own **access point**, you can drive everything from a phone browser at `http://192.168.4.1` — the Flipper screen is optional.
 
 > **Use it on networks you own or have explicit permission to test.** Deauth attacks actively disrupt other people's connections; using them on networks you don't control is illegal in most places. The whole point of this tool in a university lab is to learn *why* unsecured WiFi fails and how to defend it.
 
@@ -51,13 +51,13 @@ The ESP8266 Deauther is the classic pocket tool: scan for networks, pick a targe
 
 Install a custom firmware (e.g., **Momentum**) so the WiFi deauther/Marauder apps are available — see the [Flipper Zero section](/flipper-zero/).
 
-### 2. Flash the ESP8266 (first time only)
+### 2. Flash the ESP32-S2 (first time only)
 
 Most boards ship pre-flashed with Deauther. To (re)flash:
 
 1. Put the board in flash mode per your vendor's instructions (often a button while powering).
 2. Connect via USB/UART (or use the Flipper's own flasher app).
-3. Flash the **ESP8266 Deauther v2** binary — sources and pre-built files: [SpacehuhnTech/esp8266_deauther](https://github.com/SpacehuhnTech/esp8266_deauther).
+3. Flash the **ESP32-S2 Deauther** binary — sources and pre-built files: [SpacehuhnTech/esp32_deauther](https://github.com/SpacehuhnTech/esp32_deauther).
 
 ### 3. Attach to the Flipper
 

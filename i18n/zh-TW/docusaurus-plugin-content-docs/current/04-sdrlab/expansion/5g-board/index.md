@@ -159,7 +159,7 @@ Campus_Guest      11  -72   OPEN
 
 ## 相關頁面
 
-- [WiFi multiboard（ESP8266）](/sdrlab/expansion/wifi-multiboard/) — 僅 2.4GHz 的小弟弟
+- [WiFi multiboard（ESP32-S2）](/sdrlab/expansion/wifi-multiboard/) — 僅 2.4GHz 的小弟弟
 - [NRF24 模組](/sdrlab/expansion/nrf24/) — 2.4GHz 封包無線電嗅探
 - [Flipper Zero 章節](/flipper-zero/) — 基礎韌體與裝置說明
 

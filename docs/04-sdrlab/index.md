@@ -5,7 +5,7 @@ title: SDRLAB
 sidebar_position: 4
 description: SDRLAB software-defined radio hardware — RTL-SDR, TRX-duo, H4M and Flipper Zero expansion modules. Quickstart, software, firmware and troubleshooting guides.
 tags: [sdrlab, sdr, rtl-sdr, trx-duo, h4m, flipper-zero, expansion-modules]
-keywords: [SDRLAB, SDR, RTL-SDR V4, TRX-duo, H4M, PortaPack, Flipper Zero, NRF24, ESP8266, W5500]
+keywords: [SDRLAB, SDR, RTL-SDR V4, TRX-duo, H4M, PortaPack, Flipper Zero, NRF24, ESP32-S2, W5500]
 authors: yupitek
 date: 2026-08-21
 last_updated: 2026-08-21
@@ -59,7 +59,7 @@ flowchart TD
 |---|---|---|---|
 | [5G Expansion Board](/sdrlab/expansion/5g-board/) | 2.4/5 GHz WiFi (Marauder) + GPS | ESP32-C5 | WiFi recon, wardriving, GPS logging |
 | [NRF24 module](/sdrlab/expansion/nrf24/) | 2.4 GHz packet radio | nRF24L01+ | Channel scanning, sniffing, wireless mouse/keyboard testing |
-| [WiFi multiboard](/sdrlab/expansion/wifi-multiboard/) | 2.4 GHz WiFi tool | ESP8266 | Deauth testing, packet capture, Evil Portal experiments |
+| [WiFi multiboard](/sdrlab/expansion/wifi-multiboard/) | 2.4 GHz WiFi tool | ESP32-S2 | Deauth testing, packet capture, Evil Portal experiments |
 | [Ethernet test module](/sdrlab/expansion/ethernet-test-module/) | 10/100 Ethernet interface | WIZnet W5500 | Cable testing, DHCP checks, LAN diagnostics |
 
 ## Guides and reference

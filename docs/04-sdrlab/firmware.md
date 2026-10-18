@@ -104,14 +104,14 @@ The NRF24 sniffer, mousejacker and extended WiFi apps are **not** in the officia
 ### 2. The module's own chip (ESP firmware)
 
 - **5G board / ESP32-C5** → Marauder firmware (2.4/5 GHz). Flashed over the board's USB-C port; the vendor ships it pre-flashed.
-- **WiFi multiboard / ESP8266** → ESP8266 Deauther or Marauder firmware. Flashed via the board's USB/UART or a web flasher.
+- **WiFi multiboard / ESP32-S2** → ESP32-S2 Deauther or Marauder firmware. Flashed via the board's USB/UART or a web flasher.
 - **NRF24 / W5500 modules** → no module firmware; they are plain SPI peripherals controlled entirely by Flipper apps.
 
 ```mermaid
 flowchart TD
     A[ESP-based Flipper module] --> B{Which chip?}
     B -->|ESP32-C5 on 5G board| C[Marauder 5G<br/>pre-flashed; update via USB-C]
-    B -->|ESP8266 on multiboard| D[Deauther v2 or Marauder<br/>flash via web flasher / esptool]
+    B -->|ESP32-S2 on multiboard| D[Deauther or Marauder<br/>flash via web flasher / esptool]
 ```
 
 ## Update safety checklist

@@ -1,10 +1,10 @@
 ---
 id: sdrlab-expansion-wifi-multiboard
-title: Flipper Zero WiFi Multiboard（ESP8266）— 完整指南
+title: Flipper Zero WiFi Multiboard（ESP32-S2）— 完整指南
 sidebar_position: 3
-description: Flipper Zero WiFi multiboard（ESP8266）— deauther/Marauder 韌體、在自己的網路上做掃描與 deauth 測試、192.168.4.1 的網頁介面、GPIO 注意事項與疑難排解。
-tags: [sdrlab, flipper-zero, wifi-multiboard, esp8266, deauther]
-keywords: [Flipper Zero WiFi multiboard, ESP8266, WiFi deauther, Marauder ESP8266, pwned 192.168.4.1]
+description: Flipper Zero WiFi multiboard（ESP32-S2）— deauther/Marauder 韌體、在自己的網路上做掃描與 deauth 測試、192.168.4.1 的網頁介面、GPIO 注意事項與疑難排解。
+tags: [sdrlab, flipper-zero, wifi-multiboard, esp32-s2, deauther]
+keywords: [Flipper Zero WiFi multiboard, ESP32-S2, WiFi deauther, Marauder ESP32-S2, pwned 192.168.4.1]
 authors: yupitek
 date: 2026-08-21
 last_updated: 2026-08-21
@@ -14,16 +14,16 @@ difficulty: intermediate
 toc: true
 ---
 
-# Flipper Zero WiFi Multiboard（ESP8266）— 完整指南
+# Flipper Zero WiFi Multiboard（ESP32-S2）— 完整指南
 
-> **一句話總結**：WiFi multiboard 是**以 ESP8266 驅動、給 Flipper Zero 用的 WiFi 工具**——通常預先燒錄 ESP8266 Deauther 韌體——提供 AP 掃描、封包監控與（在你自己的網路上）deauth 測試，還有一個可從任何瀏覽器控制的獨立網頁介面。
+> **一句話總結**：WiFi multiboard 是**以 ESP32-S2 驅動、給 Flipper Zero 用的 WiFi 工具**——通常預先燒錄 ESP32-S2 Deauther 韌體——提供 AP 掃描、封包監控與（在你自己的網路上）deauth 測試，還有一個可從任何瀏覽器控制的獨立網頁介面。
 
 ## 規格一覽
 
 | 專案 | 規格 |
 |---|---|
-| WiFi 晶片 | Espressif ESP8266（2.4 GHz）——依廠商商品標題；廠商描述中亦提到 ESP32-S2，請以實機晶片為準 |
-| 韌體（典型） | ESP8266 Deauther v2（Spacehuhn）或 ESP8266 Marauder 移植版 |
+| WiFi 晶片 | Espressif ESP32-S2（2.4 GHz） |
+| 韌體（典型） | ESP32-S2 Deauther 或 Marauder 移植版 |
 | 頻段 | 僅 2.4 GHz（沒有 5 GHz） |
 | 介面 | 插接於 Flipper GPIO 排針 |
 | 網頁介面 | AP 模式在 `192.168.4.1`（預設 SSID `pwned`、密碼 `deauther`） |
@@ -41,7 +41,7 @@ flowchart LR
     D --> H["Verify client resilience<br/>in a lab"]
 ```
 
-ESP8266 Deauther 是經典的口袋工具：掃描網路、挑選目標、執行攻擊模式（deauth、beacon 轟炸）——以 Flipper 作為控制介面。因為 ESP8266 也暴露自己的**存取點**，你可以從手機瀏覽器在 `http://192.168.4.1` 操作一切——Flipper 螢幕可有可無。
+ESP32-S2 Deauther 是經典的口袋工具：掃描網路、挑選目標、執行攻擊模式（deauth、beacon 轟炸）——以 Flipper 作為控制介面。因為 ESP32-S2 也暴露自己的**存取點**，你可以從手機瀏覽器在 `http://192.168.4.1` 操作一切——Flipper 螢幕可有可無。
 
 > **請在你擁有或明確獲得許可測試的網路上使用。** Deauth 攻擊會主動幹擾他人的連線；在非你控制的網路上使用，在大多數地方是違法的。這個工具在大學實驗室的重點，是學習*為什麼*未受保護的 WiFi 會失效，以及如何防禦它。
 
@@ -51,13 +51,13 @@ ESP8266 Deauther 是經典的口袋工具：掃描網路、挑選目標、執行
 
 安裝自訂韌體（例如 **Momentum**），讓 WiFi deauther/Marauder 應用程式可用——見 [Flipper Zero 專區](/flipper-zero/)。
 
-### 2. 燒錄 ESP8266（僅第一次）
+### 2. 燒錄 ESP32-S2（僅第一次）
 
 大多數板子出廠時已預先燒錄 Deauther。要（重新）燒錄：
 
 1. 依廠商指示讓板子進入燒錄模式（通常是在供電時按某個按鈕）。
 2. 透過 USB/UART 連線（或使用 Flipper 自己的燒錄應用程式）。
-3. 燒錄 **ESP8266 Deauther v2** 二進位檔——原始碼與預先建置的檔案：[SpacehuhnTech/esp8266_deauther](https://github.com/SpacehuhnTech/esp8266_deauther)。
+3. 燒錄 **ESP32-S2 Deauther** 二進位檔——原始碼與預先建置的檔案：[SpacehuhnTech/esp32_deauther](https://github.com/SpacehuhnTech/esp32_deauther)。
 
 ### 3. 接到 Flipper
 

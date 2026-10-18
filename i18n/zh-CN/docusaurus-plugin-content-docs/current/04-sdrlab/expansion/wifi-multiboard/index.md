@@ -1,10 +1,10 @@
 ---
 id: sdrlab-expansion-wifi-multiboard
-title: Flipper Zero WiFi 多功能板（ESP8266）——完整指南
+title: Flipper Zero WiFi 多功能板（ESP32-S2）——完整指南
 sidebar_position: 3
-description: Flipper Zero WiFi 多功能板（ESP8266）——deauther/Marauder 固件、在你自己的网络上做扫描和解除认证测试、位于 192.168.4.1 的 Web 界面、GPIO 说明与故障排查。
-tags: [sdrlab, flipper-zero, wifi-multiboard, esp8266, deauther]
-keywords: [Flipper Zero WiFi 多功能板, ESP8266, WiFi 解除认证, Marauder ESP8266, pwned 192.168.4.1]
+description: Flipper Zero WiFi 多功能板（ESP32-S2）——deauther/Marauder 固件、在你自己的网络上做扫描和解除认证测试、位于 192.168.4.1 的 Web 界面、GPIO 说明与故障排查。
+tags: [sdrlab, flipper-zero, wifi-multiboard, esp32-s2, deauther]
+keywords: [Flipper Zero WiFi 多功能板, ESP32-S2, WiFi 解除认证, Marauder ESP32-S2, pwned 192.168.4.1]
 authors: yupitek
 date: 2026-08-21
 last_updated: 2026-08-21
@@ -14,16 +14,16 @@ difficulty: intermediate
 toc: true
 ---
 
-# Flipper Zero WiFi 多功能板（ESP8266）——完整指南
+# Flipper Zero WiFi 多功能板（ESP32-S2）——完整指南
 
-> **一句话**：WiFi 多功能板是一块 **为 Flipper Zero 打造的 ESP8266 驱动的 WiFi 工具**——通常预刷 ESP8266 Deauther 固件——提供接入点扫描、数据包监控和（在你自己的网络上）解除认证测试，外加一个可从任何浏览器控制的独立 Web 界面。
+> **一句话**：WiFi 多功能板是一块 **为 Flipper Zero 打造的 ESP32-S2 驱动的 WiFi 工具**——通常预刷 ESP32-S2 Deauther 固件——提供接入点扫描、数据包监控和（在你自己的网络上）解除认证测试，外加一个可从任何浏览器控制的独立 Web 界面。
 
 ## 规格速览
 
 | 项目 | 规格 |
 |---|---|
-| WiFi 芯片 | Espressif ESP8266（2.4 GHz）——依厂商商品标题；厂商描述中亦提到 ESP32-S2，请以实机芯片为准 |
-| 固件（典型） | ESP8266 Deauther v2（Spacehuhn）或 ESP8266 Marauder 移植版 |
+| WiFi 芯片 | Espressif ESP32-S2（2.4 GHz） |
+| 固件（典型） | ESP32-S2 Deauther 或 Marauder 移植版 |
 | 频段 | 仅 2.4 GHz（无 5 GHz） |
 | 接口 | 插接于 Flipper GPIO 排针 |
 | Web 界面 | AP 模式位于 `192.168.4.1`（默认 SSID `pwned`，密码 `deauther`） |
@@ -41,7 +41,7 @@ flowchart LR
     D --> H["Verify client resilience<br/>in a lab"]
 ```
 
-ESP8266 Deauther 是经典的袖珍工具：扫描网络、选择目标、运行攻击模式（deauth、信标轰炸）——用 Flipper 作为控制面。由于 ESP8266 还暴露自己的**接入点**，你可以从手机浏览器在 `http://192.168.4.1` 驱动一切——Flipper 屏幕是可选的。
+ESP32-S2 Deauther 是经典的袖珍工具：扫描网络、选择目标、运行攻击模式（deauth、信标轰炸）——用 Flipper 作为控制面。由于 ESP32-S2 还暴露自己的**接入点**，你可以从手机浏览器在 `http://192.168.4.1` 驱动一切——Flipper 屏幕是可选的。
 
 > **请在你拥有或获得明确许可测试的网络上使用。** Deauth 攻击会主动干扰他人的连接；在你不控制的网络上使用它在大多数地方是违法的。这个工具在大学实验室的全部意义，就是学习*为什么*不安全的 WiFi 会失效，以及如何防御它。
 
@@ -51,13 +51,13 @@ ESP8266 Deauther 是经典的袖珍工具：扫描网络、选择目标、运行
 
 安装自定义固件（例如 **Momentum**），这样 WiFi deauther/Marauder 应用才可用——见 [Flipper Zero 专区](/flipper-zero/)。
 
-### 2. 刷写 ESP8266（仅首次）
+### 2. 刷写 ESP32-S2（仅首次）
 
 大多数板卡出厂已预刷 Deauther。要（重新）刷写：
 
 1. 按厂商说明让板卡进入刷写模式（通常是在上电时按住某个按钮）。
 2. 通过 USB/UART 连接（或使用 Flipper 自带的刷写应用）。
-3. 刷写 **ESP8266 Deauther v2** 二进制文件——源码和预编译文件：[SpacehuhnTech/esp8266_deauther](https://github.com/SpacehuhnTech/esp8266_deauther)。
+3. 刷写 **ESP32-S2 Deauther** 二进制文件——源码和预编译文件：[SpacehuhnTech/esp32_deauther](https://github.com/SpacehuhnTech/esp32_deauther)。
 
 ### 3. 接到 Flipper
 

@@ -5,7 +5,7 @@ title: SDRLAB
 sidebar_position: 4
 description: SDRLAB 軟體無線電硬體 — RTL-SDR、TRX-duo、H4M 與 Flipper Zero 擴充模組。快速入門、軟體、韌體與疑難排解指南。
 tags: [sdrlab, sdr, rtl-sdr, trx-duo, h4m, flipper-zero, expansion-modules]
-keywords: [SDRLAB, SDR, RTL-SDR V4, TRX-duo, H4M, PortaPack, Flipper Zero, NRF24, ESP8266, W5500]
+keywords: [SDRLAB, SDR, RTL-SDR V4, TRX-duo, H4M, PortaPack, Flipper Zero, NRF24, ESP32-S2, W5500]
 authors: yupitek
 date: 2026-08-21
 last_updated: 2026-08-21
@@ -59,7 +59,7 @@ flowchart TD
 |---|---|---|---|
 | [5G Expansion Board](/sdrlab/expansion/5g-board/) | 2.4/5 GHz WiFi（Marauder）+ GPS | ESP32-C5 | WiFi 偵察、war driving、GPS 記錄 |
 | [NRF24 module](/sdrlab/expansion/nrf24/) | 2.4 GHz 封包無線電 | nRF24L01+ | 頻道掃描、嗅探、無線滑鼠／鍵盤測試 |
-| [WiFi multiboard](/sdrlab/expansion/wifi-multiboard/) | 2.4 GHz WiFi 工具 | ESP8266 | Deauth 測試、封包擷取、Evil Portal 實驗 |
+| [WiFi multiboard](/sdrlab/expansion/wifi-multiboard/) | 2.4 GHz WiFi 工具 | ESP32-S2 | Deauth 測試、封包擷取、Evil Portal 實驗 |
 | [Ethernet test module](/sdrlab/expansion/ethernet-test-module/) | 10/100 乙太網路介面 | WIZnet W5500 | 纜線測試、DHCP 檢查、LAN 診斷 |
 
 ## 指南與參考資料

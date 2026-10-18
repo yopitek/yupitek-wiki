@@ -104,14 +104,14 @@ NRF24 嗅探器、mousejacker 與擴充 WiFi 應用程式**不在**官方 Flippe
 ### 2. 模組自己的晶片（ESP 韌體）
 
 - **5G board / ESP32-C5** → Marauder 韌體（2.4/5 GHz）。透過主機板的 USB-C 連線埠燒錄；廠商出廠時已預先燒錄。
-- **WiFi multiboard / ESP8266** → ESP8266 Deauther 或 Marauder 韌體。透過主機板的 USB/UART 或網頁燒錄器燒錄。
+- **WiFi multiboard / ESP32-S2** → ESP32-S2 Deauther 或 Marauder 韌體。透過主機板的 USB/UART 或網頁燒錄器燒錄。
 - **NRF24 / W5500 模組** → 沒有模組韌體；它們是完全由 Flipper 應用程式控制的純 SPI 周邊。
 
 ```mermaid
 flowchart TD
     A[ESP-based Flipper module] --> B{Which chip?}
     B -->|ESP32-C5 on 5G board| C[Marauder 5G<br/>pre-flashed; update via USB-C]
-    B -->|ESP8266 on multiboard| D[Deauther v2 or Marauder<br/>flash via web flasher / esptool]
+    B -->|ESP32-S2 on multiboard| D[Deauther or Marauder<br/>flash via web flasher / esptool]
 ```
 
 ## 更新安全核對清單

@@ -90,5 +90,5 @@ NRF24 應用程式**不在**原廠 Flipper 韌體中。請安裝內建它們的�
 ## 相關
 
 - [5G 擴充板](/sdrlab/expansion/5g-board/) — 2.4/5 GHz WiFi + GPS 板。
-- [WiFi multiboard](/sdrlab/expansion/wifi-multiboard/) — ESP8266 WiFi 工具。
+- [WiFi multiboard](/sdrlab/expansion/wifi-multiboard/) — ESP32-S2 WiFi 工具。
 - [Flipper Zero 專區](/flipper-zero/) — 韌體與裝置基礎知識。

@@ -90,5 +90,5 @@ More help: the [SDRLAB troubleshooting hub](/sdrlab/troubleshooting/).
 ## Related
 
 - [5G Expansion Board](/sdrlab/expansion/5g-board/) — 2.4/5 GHz WiFi + GPS board.
-- [WiFi multiboard](/sdrlab/expansion/wifi-multiboard/) — ESP8266 WiFi tooling.
+- [WiFi multiboard](/sdrlab/expansion/wifi-multiboard/) — ESP32-S2 WiFi tooling.
 - [Flipper Zero section](/flipper-zero/) — firmware and device basics.
