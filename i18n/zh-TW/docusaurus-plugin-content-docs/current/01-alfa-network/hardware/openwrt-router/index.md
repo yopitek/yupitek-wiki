@@ -43,14 +43,16 @@ OpenWrt 路由器（尤其是小型的 GL.iNet 系列）內建的無線模組數
 
 ## ALFA 網卡型號在 OpenWrt 上的支援情況
 
-| ALFA 型號         | 核心晶片               | OpenWrt 24.10 | OpenWrt 25.12 | 需要安裝的套件                       |
-| --------------- | ------------------ | ---------------- | -------------- | ------------------------------ |
-| **AWUS036ACM**  | MediaTek MT7612U   | ✅ 完整支援           | ✅ 完整支援         | `kmod-mt76x2u` `mt76-firmware` |
-| **AWUS036AXML** | MediaTek MT7921AUN | ✅ 支援（有已知限制，見下方）    | ✅ 支援（有已知限制，見下方）  | `kmod-mt7921u`                 |
-| **AWUS036ACHM** | MediaTek MT7610U   | ✅ 完整支援           | ✅ 完整支援         | `kmod-mt76x0u`                 |
-| **AWUS036ACH**  | Realtek RTL8812AU  | ❌ 官方套件庫沒有提供         | ❌ 官方套件庫沒有提供       | 需自行用 OpenWrt SDK 編譯，不建議新手嘗試     |
+| ALFA 型號 | 晶片 | OpenWrt 24.10 | OpenWrt 25.12 | 驅動套件 |
+|---|---|---|---|---|
+| **AWUS036ACM** | MediaTek MT7612U | ✅ 官方套件庫有提供 | ✅ 官方套件庫有提供 | `kmod-mt76x2u` |
+| **AWUS036AXML** | MediaTek MT7921AUN | ✅ 官方套件庫有提供（有已知限制，見下方） | ✅ 官方套件庫有提供（有已知限制，見下方） | `kmod-mt7921u` |
+| **AWUS036ACHM** | MediaTek MT7610U | ✅ 官方套件庫有提供 | ✅ 官方套件庫有提供 | `kmod-mt76x0u` |
+| **AWUS036ACH** | Realtek RTL8812AU | ✅ 官方套件庫有提供（社群維護的驅動） | ✅ 官方套件庫有提供（社群維護的驅動） | `kmod-rtl8812au-ct` |
 
-**簡單判斷方式**：如果你是第一次嘗試，建議優先選 **AWUS036ACM**（MT7612U）——支援最完整、也沒有下面提到的已知限制。想要更新的 Wi-Fi 6/6E（AWUS036AXML）也可以用，但要先看過下面的已知限制章節。
+上表只標示驅動套件是否存在於 OpenWrt 官方套件庫（已對照 downloads.openwrt.org 確認）。實際在特定路由器上的運作情形、監聽與注入支援度，取決於硬體平台與核心版本，請參閱 [openwrt.org](https://openwrt.org/) 與 [Table of Hardware](https://openwrt.org/toh/start)。
+
+**簡單判斷方式**：如果你是第一次嘗試，建議優先選 **AWUS036ACM**（MT7612U）——不受下面提到的已知限制影響。想要更新的 Wi-Fi 6/6E（AWUS036AXML）也可以用，但要先看過下面的已知限制章節。
 
 ---
 
@@ -96,7 +98,7 @@ opkg install kmod-mt76x2u kmod-mt76-core wireless-tools usbutils
 ### 步驟 3：重新偵測無線硬體並套用設定
 
 ```bash
-wifi config >> /etc/config/wireless
+wifi config
 /etc/init.d/network restart
 ```
 
@@ -106,17 +108,17 @@ wifi config >> /etc/config/wireless
 
 ## 已知限制（老實跟你說，不隱瞞）
 
-### 限制 1：AWUS036AXML 在主動監聽模式下可能當機
+### 限制 1：AWUS036AXML 在主動監聽模式下會讓驅動停止運作
 
-- **現象**：如果你在 OpenWrt 上對 AWUS036AXML（`mt7921u`）啟用「主動監聽 + 注入」（例如執行 `aireplay-ng --deauth`），驅動程式可能在幾秒內鎖死，系統日誌會出現 `mt7921u: failed to send tx packet`，網卡直接離線。
-- **原因**：這是上游 `openwrt/mt76` 專案已知的問題（[Issue #839](https://github.com/openwrt/mt76/issues/839)），跟核心處理 USB 資料傳輸緩衝區釋放時的競爭狀態有關，不是你的設定錯誤。
+- **現象**：依上游 `openwrt/mt76` 的 [Issue #839](https://github.com/openwrt/mt76/issues/839)，在 AWUS036AXML（`mt7921u`）啟用「主動監聽（active monitor）」後，驅動程式會停止運作；同一份回報中，一般（被動）監聽模式則可正常擷取封包。
+- **狀態**：該 Issue 在上游已標示為關閉；實際行為可能隨核心版本而異，請至 Issue 頁面確認最新情況。
 - **實務建議**：
-  - 如果你只需要**單純擷取封包**（被動監聽，例如用 Kismet 或 tcpdump），可以正常使用，不受這個問題影響。
-  - 如果你需要**主動注入封包**（例如做滲透測試），目前建議改用 **AWUS036ACM**（`mt76x2u`），這顆晶片的驅動已經過多年驗證，沒有這個問題。
+  - 如果你只需要**單純擷取封包**（被動監聽，例如用 Kismet 或 tcpdump），請使用一般監聽模式。
+  - Issue 中指出主動監聽在 `mt76x0u` 與 `mt76x2u` 上可運作；需要主動監聽時，建議改用 **AWUS036ACM**（`mt76x2u`）或 **AWUS036ACHM**（`mt76x0u`）。
 
-### 限制 2：6GHz 頻段目前支援不完整
+### 限制 2：6GHz 頻段的支援情形
 
-目前 OpenWrt 24.10 / 25.12的網頁管理介面（LuCI）對 6GHz 頻段的設定選項還沒有完全支援。也就是說，AWUS036AXML 在 OpenWrt 上目前主要能穩定使用的是 2.4GHz 和 5GHz，6GHz 頻段的完整支援還在等上游持續開發。
+6GHz 在 OpenWrt 上能否使用，取決於驅動程式、地區法規設定與 LuCI 版本，請以 [openwrt.org](https://openwrt.org/) 的最新說明為準。
 
 ---
 
@@ -127,8 +129,7 @@ wifi config >> /etc/config/wireless
 - **解決方法**：重新執行 `opkg update` 確認套件庫索引是最新的，再重新執行步驟 2、3；也可以用 `dmesg | grep -i mt76` 或 `dmesg | grep -i mt7921` 檢查核心有沒有正確載入驅動。
 
 ### Q2：AWUS036ACH（Realtek 晶片）可以用嗎？
-- **原因**：OpenWrt 官方套件庫目前沒有提供這顆晶片的預編譯套件。
-- **解決方法**：技術上可以透過 OpenWrt SDK 自行編譯 out-of-tree 驅動模組，但這需要較進階的編譯環境知識，不建議新手嘗試；如果你需要穩定好裝的方案，優先考慮 AWUS036ACM。
+- **說明**：OpenWrt 官方套件庫有提供 `kmod-rtl8812au-ct`（社群維護的 RTL8812AU 驅動）。監聽與注入等功能是否可用，請參閱 [openwrt.org](https://openwrt.org/)；若你需要已知穩定的方案，優先考慮 AWUS036ACM。
 
 ---
 
