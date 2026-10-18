@@ -121,16 +121,7 @@ ENTER
 
 ### GPIO & hardware debugging
 
-The 2.54 mm header exposes 13 pins. Key pins (see the full pinout in the official docs):
-
-| Pin | Function |
-|---|---|
-| 5V / 3V3 | Power output |
-| GND ×2 | Ground |
-| PC0 / PC1 | UART TX / RX |
-| PB7 / PA6 / PA7 | SPI SCK / MISO / MOSI |
-| PC3 | SWC (SWD clock) |
-| PA13 / PA14 | SWDIO / SWCLK (debug) |
+The 2.54 mm header exposes 13 pins; see the pinout in the official Flipper documentation.
 
 The Flipper can act as a **UART/SPI/I2C to USB converter**, an **SPI flash programmer**, an **AVR ISP programmer**, and an **OpenDAP debug probe** — enough to flash and debug many hobby boards.
 

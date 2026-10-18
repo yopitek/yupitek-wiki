@@ -121,16 +121,7 @@ ENTER
 
 ### GPIO 與硬體除錯
 
-2.54 mm 排針暴露 13 個接腳。關鍵接腳（完整接腳定義請參閱官方檔案）：
-
-| 接腳 | 功能 |
-|---|---|
-| 5V / 3V3 | 電源輸出 |
-| GND ×2 | 接地 |
-| PC0 / PC1 | UART TX / RX |
-| PB7 / PA6 / PA7 | SPI SCK / MISO / MOSI |
-| PC3 | SWC（SWD 時脈） |
-| PA13 / PA14 | SWDIO / SWCLK（除錯） |
+2.54 mm 排針暴露 13 個接腳；接腳定義請參閱 Flipper 官方文件。
 
 Flipper 可以充當 **UART/SPI/I2C 轉 USB 轉換器**、**SPI 快閃程式設計器**、**AVR ISP 程式設計器**與 **OpenDAP 除錯探針**——足以刷寫與除錯許多玩家級開發板。
 

@@ -121,16 +121,7 @@ ENTER
 
 ### GPIO 与硬件调试
 
-2.54 mm 排针暴露 13 个引脚。关键引脚（完整引脚定义见官方文档）：
-
-| 引脚 | 功能 |
-|---|---|
-| 5V / 3V3 | 电源输出 |
-| GND ×2 | 接地 |
-| PC0 / PC1 | UART TX / RX |
-| PB7 / PA6 / PA7 | SPI SCK / MISO / MOSI |
-| PC3 | SWC（SWD 时钟） |
-| PA13 / PA14 | SWDIO / SWCLK（调试） |
+2.54 mm 排针暴露 13 个引脚；引脚定义请参见 Flipper 官方文档。
 
 Flipper 可以充当 **UART/SPI/I2C 转 USB 转换器**、**SPI 闪存编程器**、**AVR ISP 编程器**和 **OpenDAP 调试探针**——足以刷写和调试许多爱好级开发板。
 
