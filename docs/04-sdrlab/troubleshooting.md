@@ -173,7 +173,7 @@ Since Mayhem 1.8.0, most applications live on the **microSD card**, not in flash
 
 ### Fix
 1. Get a microSD card (16 GB is comfortable), format it **FAT32**.
-2. Download the release's `COPY_TO_SDCARD` archive from the [Mayhem releases page](https://github.com/portapack-mayhem/mayhem-firmware/releases) — see [H4M → Mayhem firmware](/sdrlab/hardware/h4m/#mayhem-firmware).
+2. Download the release's `COPY_TO_SDCARD` archive from the [Mayhem releases page](https://github.com/portapack-mayhem/mayhem-firmware/releases) — see [H4M → Mayhem firmware](/sdrlab/hardware/h4m/).
 3. Extract the archive to the card root.
 4. Insert and reboot. Apps appear.
 
@@ -194,7 +194,7 @@ Flat battery is the usual suspect; occasionally a stuck DFU/flash mode.
 ### Fix
 1. Charge until the charging indicator shows progress.
 2. Hold the power button ~3 seconds.
-3. If it still won't start, connect USB-C and check if the PC sees a HackRF device — if yes, flash Mayhem again per [H4M → Mayhem firmware](/sdrlab/hardware/h4m/#mayhem-firmware).
+3. If it still won't start, connect USB-C and check if the PC sees a HackRF device — if yes, flash Mayhem again per [H4M → Mayhem firmware](/sdrlab/hardware/h4m/).
 
 ---
 

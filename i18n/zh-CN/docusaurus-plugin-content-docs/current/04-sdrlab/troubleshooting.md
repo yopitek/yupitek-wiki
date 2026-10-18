@@ -163,7 +163,7 @@ arp -a
 
 ---
 
-## H4M 固件升级后应用丢失
+## H4M 固件升级后应用丢失 {#h4m-apps-missing-after-firmware-update}
 
 ### 症状
 PortaPack 能启动，菜单看起来正常，但很多应用不见了。
@@ -173,7 +173,7 @@ PortaPack 能启动，菜单看起来正常，但很多应用不见了。
 
 ### 修复
 1. 准备一张 microSD 卡（16 GB 很充裕），格式化为 **FAT32**。
-2. 从 [Mayhem 发布页](https://github.com/portapack-mayhem/mayhem-firmware/releases) 下载该版本的 `COPY_TO_SDCARD` 压缩包——见 [H4M → Mayhem 固件](/sdrlab/hardware/h4m/#mayhem-firmware)。
+2. 从 [Mayhem 发布页](https://github.com/portapack-mayhem/mayhem-firmware/releases) 下载该版本的 `COPY_TO_SDCARD` 压缩包——见 [H4M → Mayhem 固件](/sdrlab/hardware/h4m/)。
 3. 把压缩包解压到卡根目录。
 4. 插入并重启。应用就会出现。
 
@@ -194,7 +194,7 @@ PortaPack 能启动，菜单看起来正常，但很多应用不见了。
 ### 修复
 1. 充电直到充电指示灯显示进度。
 2. 按住电源按钮约 3 秒。
-3. 如果还是无法启动，连接 USB-C 并检查电脑是否能看到 HackRF 设备——如果能，按 [H4M → Mayhem 固件](/sdrlab/hardware/h4m/#mayhem-firmware) 重新刷写 Mayhem。
+3. 如果还是无法启动，连接 USB-C 并检查电脑是否能看到 HackRF 设备——如果能，按 [H4M → Mayhem 固件](/sdrlab/hardware/h4m/) 重新刷写 Mayhem。
 
 ---
 
@@ -265,7 +265,7 @@ GPIO 引脚没有为模块设置，或 Flipper 固件没有捆绑该应用。大
 
 ---
 
-## 以太网模块无链路指示灯
+## 以太网模块无链路指示灯 {#ethernet-module-no-link-light}
 
 ### 症状
 插入线缆后 RJ45 端口的 LED 保持熄灭。

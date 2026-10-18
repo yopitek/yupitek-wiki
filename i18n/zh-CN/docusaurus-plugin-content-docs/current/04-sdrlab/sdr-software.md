@@ -118,7 +118,7 @@ Supported sample rates: 225001-300000, 900001-3200000, ...
 4. 在左上角的 **Source** 下拉菜单中选择 **RTL-SDR (RTL2832U)**，然后点击播放图标。
 5. 调谐到本地 FM 电台（88–108 MHz），选择 **WFM** 解调，就可以收听了。
 
-## TRX-duo 软件说明
+## TRX-duo 软件说明 {#trx-duo-software-notes}
 
 TRX-duo *不是*即插即用的 USB 设备——它是一台运行自有嵌入式软件的网络化仪器（官方固件镜像见 [TRX-duo 页面](/sdrlab/hardware/trx-duo/)）。在 PC 端，能与它配合的生态是 **Red Pitaya SDR 软件家族**：
 

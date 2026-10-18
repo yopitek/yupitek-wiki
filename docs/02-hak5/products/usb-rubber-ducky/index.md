@@ -59,9 +59,7 @@ locale: "en"
 
 | Hardware Component | Official Specification Value |
 |---|---|
-| **SoC / MCU** | 32-bit ARM Cortex-M4 Microcontroller |
 | **Storage** | MicroSD Card Slot (FAT32 payload storage) |
-| **Keystroke Speed** | Super-speed keystroke injection (> 1,000 WPM) |
 | **Manual Trigger** | Integrated Push-Button for Manual Payload Trigger |
 | **Host Interface** | USB Type-A Connector |
 | **Indicator** | Multi-color RGB LED Status Indicator |
@@ -4570,7 +4568,7 @@ The two most common exfiltration techniques, as cataloged by the MITRE ATT&CK fr
 * Exfiltration over a physical medium.
 * Exfiltration over network medium.
 
-This section will cover the two most common exfiltration techniques, as well as a third new and novel technique specific to the USB Rubber Ducky with DuckyScript 3.0 — [Keystroke Reflection](#hid-exfiltration).
+This section will cover the two most common exfiltration techniques, as well as a third new and novel technique specific to the USB Rubber Ducky with DuckyScript 3.0 — [Keystroke Reflection](#the-keystroke-reflection-attack).
 
 #### Physical Medium Exfiltration
 

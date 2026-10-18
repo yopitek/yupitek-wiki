@@ -22,12 +22,10 @@ toc: true
 
 | 專案 | 規格 |
 |---|---|
-| WiFi 晶片 | Espressif ESP8266（2.4 GHz、802.11 b/g/n） |
+| WiFi 晶片 | Espressif ESP8266（2.4 GHz）——依廠商商品標題；廠商描述中亦提到 ESP32-S2，請以實機晶片為準 |
 | 韌體（典型） | ESP8266 Deauther v2（Spacehuhn）或 ESP8266 Marauder 移植版 |
 | 頻段 | 僅 2.4 GHz（沒有 5 GHz） |
-| 介面 | UART 序列連到 Flipper GPIO（TX/RX） |
-| 電源 | 來自 Flipper GPIO 排針：3.3 V（第 9 腳）或 5 V（第 1 腳），依下方接線表；請查閱廠商產品頁確認本板所需供電 |
-| 額外配件（依板子而定） | 第二個無線電模組（NRF24 / CC1101）的插槽、無線電選擇用 dip 開關 |
+| 介面 | 插接於 Flipper GPIO 排針 |
 | 網頁介面 | AP 模式在 `192.168.4.1`（預設 SSID `pwned`、密碼 `deauther`） |
 
 ## 你能用它做什麼
@@ -51,7 +49,7 @@ ESP8266 Deauther 是經典的口袋工具：掃描網路、挑選目標、執行
 
 ### 1. Flipper 上的韌體
 
-安裝自訂韌體（**Momentum**、**Unleashed**、**Xtreme**），讓 WiFi deauther/Marauder 應用程式可用——見 [Flipper Zero 專區](/flipper-zero/)。
+安裝自訂韌體（例如 **Momentum**），讓 WiFi deauther/Marauder 應用程式可用——見 [Flipper Zero 專區](/flipper-zero/)。
 
 ### 2. 燒錄 ESP8266（僅第一次）
 
@@ -61,21 +59,14 @@ ESP8266 Deauther 是經典的口袋工具：掃描網路、挑選目標、執行
 2. 透過 USB/UART 連線（或使用 Flipper 自己的燒錄應用程式）。
 3. 燒錄 **ESP8266 Deauther v2** 二進位檔——原始碼與預先建置的檔案：[SpacehuhnTech/esp8266_deauther](https://github.com/SpacehuhnTech/esp8266_deauther)。
 
-### 3. 接線／安裝到 Flipper
+### 3. 接到 Flipper
 
-| ESP8266 | Flipper GPIO |
-|---|---|
-| TX0 | 14 或 16（RX 腳位） |
-| RX0 | 13 或 15（TX 腳位） |
-| VIN | 1（5V）或 9（3.3 V） |
-| GND | 8 或 11（GND） |
-
-> 在多無線電板子上，使用前先把 dip 開關切到 WiFi/ESP8266 位置。
+將板子插到 Flipper 的 GPIO 排針上。廠商未公布此板的腳位與供電細節，請依隨機附的說明操作。
 
 ### 4. 第一次執行 — 掃描
 
 1. 插上板子，開啟 `Apps → WiFi → WiFi Deauther`。
-2. 等待啟動掃描完成（藍色 LED 熄滅）。
+2. 等待啟動掃描完成。
 3. 附近 AP 的清單出現：SSID、頻道、RSSI。
 
 預期的應用程式畫面：
@@ -99,10 +90,7 @@ ESP8266 Deauther 是經典的口袋工具：掃描網路、挑選目標、執行
 | 問題 | 原因 | 修正 |
 |---|---|---|
 | 網頁介面連不上 | 使用者端加入了另一個網路 | 停用自動加入／行動資料；加入 `pwned`；瀏覽 `192.168.4.1` |
-| 應用程式在啟動時卡住 | 啟動掃描被中斷 | 觸碰控制前先等藍色 LED 熄滅 |
-| 沒有列出任何網路 | dip 開關／腳位錯誤 | 把開關切到 WiFi；重新檢查 TX/RX 接線 |
-| 板子未被偵測 | UART 腳位錯誤 | 使用腳位 13/15（TX）與 14/16（RX） |
-| 訊號弱或沒有 | 2.4 GHz 天線方向 | 接上／對準 SMA 天線 |
+| 沒有列出任何網路 | 板子未插緊或韌體未執行 | 重新插緊 GPIO 排針；重新燒錄韌體 |
 
 更多協助：[SDRLAB 疑難排解中心](/sdrlab/troubleshooting/)。
 

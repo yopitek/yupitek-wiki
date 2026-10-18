@@ -55,7 +55,7 @@ Think of it like plugging in a new game controller: **hardware first** (the thin
 - **RTL-SDR V4 on Linux**: you need a *current* driver — older distro packages don't know about the V4's R828D tuner. Follow the [driver update steps on the RTL-SDR V4 page](/sdrlab/hardware/rtl-sdr-v4/#linux-install).
 - **RTL-SDR V4 on Windows**: modern tools (SDR#, SDR++, SDR Console) ship with V4-compatible drivers — just install the software and go.
 - **TRX-duo**: the SD card *is* the firmware. Download the official image (see the [TRX-duo page](/sdrlab/hardware/trx-duo/#firmware-and-sd-image)), write it to a microSD card, insert, boot.
-- **H4M**: install the [Mayhem firmware](/sdrlab/hardware/h4m/#mayhem-firmware) — the device ships functional but Mayhem unlocks the full toolkit.
+- **H4M**: install the [Mayhem firmware](/sdrlab/hardware/h4m/) — the device ships functional but Mayhem unlocks the full toolkit.
 - **Flipper modules**: most need a *custom* Flipper firmware (Momentum, Unleashed, Xtreme) for the extra apps, plus a GPIO pin setting. Each [expansion page](/sdrlab/#flipper-zero-expansion-modules) lists the exact pins.
 
 ## Step 3: Launch software and verify a signal
@@ -96,7 +96,7 @@ Pick a frequency you *know* has signals, not a random spot:
 |---|---|---|
 | `No devices found` in `rtl_test` | Kernel DVB driver grabbed the dongle | Blacklist `dvb_usb_rtl28xxu` (see [RTL-SDR V4 page](/sdrlab/hardware/rtl-sdr-v4/#linux-install)) |
 | TRX-duo web UI unreachable | Wrong static IP / no DHCP on the network | Check the [network section](/sdrlab/hardware/trx-duo/#first-boot-and-network) |
-| H4M has no apps | microSD missing or stale | Copy the `COPY_TO_SDCARD` files from the [Mayhem release](/sdrlab/hardware/h4m/#mayhem-firmware) |
+| H4M has no apps | microSD missing or stale | Copy the `COPY_TO_SDCARD` files from the [Mayhem release](/sdrlab/hardware/h4m/) |
 | Flipper app says "no module" | GPIO pins not set for the module | Set pins under `Protocol Settings → GPIO Pin Settings` (per expansion page) |
 | Everything dead | No antenna attached | Screw on the antenna — an SDR without an antenna is a very quiet paperweight |
 

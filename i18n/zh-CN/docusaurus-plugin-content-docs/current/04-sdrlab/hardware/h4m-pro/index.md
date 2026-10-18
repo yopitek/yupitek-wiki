@@ -127,8 +127,8 @@ flowchart TD
   - -10 dBm = 0.1 mW；-30 dBm = 0.001 mW（换算示例）。
 - **运算规则**：发射功率（dBm）减去衰减量与线损（dB）等于接收端输入功率（dBm）：
   ```text
-P_RX = P_TX - 衰减量 - 线损
-```
+  P_RX = P_TX - 衰减量 - 线损
+  ```
 
 ---
 
@@ -1020,12 +1020,12 @@ P_RX,worst = P_TX,max - A_min - L_min
 - 保守估算线损 `L_min = 0 dB`。
 - 计算接收端最坏情况输入功率：
   ```text
-P_RX,worst = +10 dBm - 50 dB - 0 dB = -40 dBm
-```
+  P_RX,worst = +10 dBm - 50 dB - 0 dB = -40 dBm
+  ```
 - 计算安全余量：
   ```text
-M = P_RX,allowed - P_RX,worst = X - (-40 dBm)
-```
+  M = P_RX,allowed - P_RX,worst = X - (-40 dBm)
+  ```
 - **判读**：余量 `M` 必须 `≥ 10 dB`。**`X` 要填入你依原厂资料确认的接收输入上限**；算例中的 `+10 dBm` 与衰减量都只是教学示意，实验时请改填实际器材数值，并取得书面核准后才能通电。
 
 ---

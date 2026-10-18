@@ -75,7 +75,7 @@ Typical SD-card flow (see the product page for the exact official instructions):
 
 ## H4M: Mayhem firmware
 
-The H4M runs the open-source **Mayhem firmware** (the community fork that turns the PortaPack into a full toolkit). The [H4M page](/sdrlab/hardware/h4m/#mayhem-firmware) covers installation; the official sources are:
+The H4M runs the open-source **Mayhem firmware** (the community fork that turns the PortaPack into a full toolkit). The [H4M page](/sdrlab/hardware/h4m/) covers installation; the official sources are:
 
 - [Mayhem firmware releases](https://github.com/portapack-mayhem/mayhem-firmware/releases) — download `FIRMWARE_mayhem_*.zip` and the matching `COPY_TO_SDCARD` files.
 - [hackrf.app](https://hackrf.app/) — browser-based update over USB (WebUSB).

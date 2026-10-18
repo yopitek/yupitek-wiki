@@ -63,7 +63,7 @@ flowchart TD
 | `rtl_*` 命令列工具 | Linux / Windows / macOS | RTL-SDR V4 | 測試（`rtl_test`）、原始 IQ 擷取、指令碼 |
 | `hackrf_*` 工具 | Linux / Windows / macOS | H4M（作為 HackRF） | 韌體燒錄、原始 IQ TX/RX、頻譜（`hackrf_transfer`） |
 
-## Linux：安裝 GQRX（建議的起點）
+## Linux：安裝 GQRX（建議的起點） {#linux-install-gqrx-recommended-starting-point}
 
 GQRX 是最友善的 Linux GUI，與 RTL-SDR V4 完美搭配。
 
@@ -118,7 +118,7 @@ Supported sample rates: 225001-300000, 900001-3200000, ...
 4. 在左上角的**Source**下拉選單中選取**RTL-SDR (RTL2832U)**，然後按播放圖示。
 5. 調諧到當地的 FM 電臺（88–108 MHz），選取**WFM**解調，就可以收聽了。
 
-## TRX-duo 軟體注意事項
+## TRX-duo 軟體注意事項 {#trx-duo-software-notes}
 
 TRX-duo *不是*隨插即用的 USB 裝置——它是一臺執行自有嵌入式軟體的網路儀器（官方韌體映像檔請見 [TRX-duo 頁面](/sdrlab/hardware/trx-duo/)）。在電腦端，能與它搭配的生態系是 **Red Pitaya SDR 軟體家族**：
 

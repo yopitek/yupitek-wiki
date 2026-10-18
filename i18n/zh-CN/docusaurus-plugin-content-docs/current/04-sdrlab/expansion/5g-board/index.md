@@ -16,31 +16,22 @@ translated_from: flipper_board_wiki_manual_zhtw.md
 
 | 项目 | 规格 |
 |---|---|
-| **Wi-Fi 模块** | **ESP32-C5**（2.4GHz + 5GHz），出厂预烧 Marauder 5G 固件，支持 802.11 b/g/n/**ax** |
+| **Wi-Fi 模块** | **ESP32-C5**（2.4GHz + 5GHz），出厂预烧 Marauder 5G 固件 |
 | **Sub-GHz** | **433MHz** A07 射频模块，**10 dBm** 输出（需在 Flipper 设为 External） |
-| **GPS** | 内置主动 GPS 模块，**自动切换供电**（接主机用主机电源、脱离用内置电池） |
+| **GPS** | 内置 GPS 模块，可由 Flipper 或板上电池供电 |
 | **屏幕** | **2.8 寸彩色 TFT**，内置 Marauder UI |
-| **电池** | **800 mAh 锂聚合物**，可热插拔，USB-C 充电约 2 小时 |
-| **天线** | **4 组 SMA 母座 + 4 支天线全附，均为 5dBi** — `433M A`／`GPS`／`2.4G`／`2.4G/5G` |
-| **microSD** | **FAT32 格式、32GB 以内** — 抓包存 `.pcap`，wardrive 存 `wardrive_*.csv` |
-| **保护** | 所有信号脚位镀金，每脚内置 **TVS 二极管** |
+| **电池** | **800 mAh** 电池；充满电后充电指示灯熄灭 |
+| **天线** | SMA 接口；随附双频 Wi-Fi 天线（3 dBi）、GPS 天线（20 dBi）、433MHz 天线（3 dBi） |
+| **microSD** | **FAT32 格式** — 抓包存 `.pcap`，wardrive 存 `wardrive_*.csv` |
+| **保护** | 所有脚位镀金，每个信号脚内置 **TVS** 保护元件 |
 | **烧录** | USB-C 口（前左侧）；按住背面按键再插入 USB 进入烧录模式 |
 | **操作** | Flipper Zero 应用程序：`[ESP32] WiFiMarauder`、`GPS` |
-| **尺寸** | **90 × 58 × 15 mm**（不含天线） |
-| **颜色** | 黑／白／透明／红／蓝 |
-| **连接** | Flipper Zero GPIO 排针 2×8，镀金触点 + TVS |
-| **蓝牙** | **BLE 5.0** ⚠️ 不支持 Bluetooth Classic |
+| **连接** | Flipper Zero GPIO 排针 |
+| **蓝牙** | **BLE（Bluetooth LE）** ⚠️ 不支持 Bluetooth Classic |
 
-### 四组天线连接口
+### 天线
 
-| 丝印 | 位置 | 对应 |
-|---|---|---|
-| `433M A` | 上缘左 | 433MHz 射频 |
-| `GPS` | 上缘右 | 主动 GPS 天线 |
-| `2.4G` | 左翼 | Wi-Fi 2.4GHz 专用 |
-| `2.4G/5G` | 右翼 | Wi-Fi 双频 2.4GHz + 5GHz |
-
-四个接口为独立的螺丝固定式 SMA 母座，背壳丝印清楚标示每个接口的对应功能，安装天线时请依标示对应插入。四支随货天线增益均为 **5dBi**。
+本板使用 SMA 天线接口。厂商列出的随附天线共三支：双频 Wi-Fi 天线（3 dBi，无需区分频段）、GPS 天线（20 dBi）与 433MHz 天线（3 dBi）。请依板上标示将天线接到对应接口。
 
 ---
 
@@ -58,9 +49,9 @@ GPS 模块把你的 wardrive 记录变成带坐标的数据。内置电池让 Wi
 
 ## 开始之前
 
-- Flipper 需要**含 WiFi Marauder 与 GPS 应用的定制固件** — **Momentum**、**Unleashed** 或 **Xtreme**。（固件基础见 [Flipper Zero 章节](/flipper-zero/)。）
-- **本板已内置** 433MHz Sub-GHz 模块、2.8 寸 Marauder 屏幕、800mAh 电池 — 这些不是选配件，不需要另外选购版本。
-- 准备一张 **FAT32、32GB 以内**的 microSD。
+- Flipper 需要**含 WiFi Marauder 与 GPS 应用的定制固件** — 例如 **Momentum**。（固件基础见 [Flipper Zero 章节](/flipper-zero/)。）
+- **本板已内置** 433MHz Sub-GHz 模块、2.8 寸 Marauder 屏幕、800mAh 电池。
+- 准备一张 **FAT32** 格式的 microSD。
 
 ---
 
@@ -76,7 +67,7 @@ GPS 模块把你的 wardrive 记录变成带坐标的数据。内置电池让 Wi
 > ⚠️ **GPS 与 ESP32 是两组不同的 UART 引脚。**
 > 本板出厂配置为：GPS = 13／14，ESP32 = 15／16。
 > **不可把两者设成同一组引脚**，否则 GPS 与 Wi-Fi 都会没有响应。
-> 若使用 Unleashed 或 Xtreme，设置路径可能略有差异，请参照各固件自身的 GPIO 设置菜单。
+> 若使用其他固件，设置路径可能略有差异，请参照各固件自身的 GPIO 设置菜单。
 
 ---
 
@@ -115,7 +106,7 @@ Campus_Guest      11  -72   OPEN
 
 ### microSD 记录
 
-1. 将 microSD 格式化为 **FAT32**（**不支持 exFAT／NTFS**），容量 **32GB 以内**
+1. 将 microSD 格式化为 **FAT32**（**不支持 exFAT／NTFS**）
 2. 插入机身记忆卡槽
 3. 在模块内 `Device → Settings` 确认 **PCAP saving 已开启**
 4. 抓取结果存为 `.pcap`（用 [Wireshark](https://www.wireshark.org) 打开）；wardrive 另存 `wardrive_*.csv`
@@ -148,8 +139,8 @@ Campus_Guest      11  -72   OPEN
 | 5GHz 网络看不到或扫描不稳定 | 可能为固件版本相关限制 | 以扫描／监测为主；建议到 [ESP32 Marauder GitHub](https://github.com/justcallmekoko/ESP32Marauder) 查询当前版本状态 |
 | 5GHz deauth 没反应 | 已知固件限制 | 2.4GHz 较成熟稳定，建议优先使用 |
 | GPS 一直无法定位 | 天线未接／室内／未满足定位时间 | 接上 GPS 天线、朝向开阔天空、走到户外或窗边，等待数分钟完成冷启动 |
-| 模块有电但 Flipper 没反应 | Flipper 固件没有对应应用程序 | 安装 Momentum／Unleashed／Xtreme |
-| SD 卡无法识别 | 格式或容量不符 | 必须 FAT32、32GB 以内；重新格式化 |
+| 模块有电但 Flipper 没反应 | Flipper 固件没有对应应用程序 | 安装含 WiFi Marauder／GPS 应用的定制固件（例如 Momentum） |
+| SD 卡无法识别 | 格式不符 | 必须 FAT32；重新格式化 |
 | 没有 PCAP 文件 | PCAP 存储未开启 | `Device → Settings` 开启 PCAP saving |
 | 开机时模块没反应 | GPIO 连接器未完全密合 | 轻压至 flush；确认电池有电或已接 USB-C |
 
@@ -161,11 +152,9 @@ Campus_Guest      11  -72   OPEN
 
 - **5GHz Deauth 的稳定度取决于固件版本。** 开源 Marauder 固件在 ESP32-C5 上的 5GHz deauth 支持仍在持续改进，建议以 2.4GHz 进行 deauth 测试为主；5GHz 建议以扫描、信号监测、wardrive 记录为主要用途。使用前建议到 [ESP32 Marauder GitHub](https://github.com/justcallmekoko/ESP32Marauder) 确认当前版本状态。
 - **5GHz PMKID／EAPOL 可用性尚无定论。** 建议自行实测后再据以宣称支持与否。
-- **GPS 天线具方向性**，商品标示全向天线，但建议朝向开阔天空方向放置以利定位，冷启动需数分钟。
-- **microSD 仅 FAT32、32GB 以内**，不支持 exFAT、NTFS。
-- **蓝牙仅 BLE 5.0**，ESP32-C5 无 Bluetooth Classic（BR/EDR）。
-- **两个 USB-C 口功能不同** — 上缘前面为充电（5V/2A）；前左侧仅烧录，不充电。
-- **两个 Wi-Fi 天线口都要接** — `2.4G` 与 `2.4G/5G` 各接一支天线，缺一支会少掉对应频段的接收能力。
+- **microSD 仅 FAT32**，不支持 exFAT、NTFS。
+- **蓝牙仅 BLE**，ESP32-C5 无 Bluetooth Classic（BR/EDR）。
+- **两个 USB-C 口功能不同** — 上缘前面为充电口；前左侧为 ESP32-C5 烧录口。
 
 ---
 

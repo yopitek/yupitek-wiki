@@ -113,26 +113,24 @@ flowchart TD
 In radio frequency engineering, signal levels span dozens of orders of magnitude. We quantify ratios and power using logarithmic decibel scales:
 
 - **dB (Decibel)**: Expresses a **relative ratio** between two power levels:
-  t```text
-dB = 10 * log10(P1 / P2)
-```}
-ight)
-  - +3 dB represents a doubling of power (`2 imes`); -3 dB cuts power in half ($0.5 imes$).
-  - +10 dB represents a 10-fold increase (`10 imes`); +30 dB represents a 1,000-fold increase (`1,000 imes`).
-  - An attenuator labeled 30 dB reduces signal power to $1/1000$ of its original level.
+  ```text
+  dB = 10 * log10(P1 / P2)
+  ```
+  - +3 dB represents a doubling of power (about 2x); -3 dB cuts power in half (about 0.5x).
+  - +10 dB represents a 10-fold increase; +30 dB represents a 1,000-fold increase.
+  - An attenuator labeled 30 dB reduces signal power to 1/1000 of its original level.
 - **dBm (Decibel-milliwatts)**: Expresses an **absolute power level** referenced to **1 milliwatt (1 mW)** across a 50 Ω load:
   ```text
-P(dBm) = 10 * log10(P(mW) / 1 mW)
-```}
-ight)
+  P(dBm) = 10 * log10(P(mW) / 1 mW)
+  ```
   - 0 dBm = 1 mW.
-  - $`+10 dBm` = 10 mW$ (typical maximum output of HackRF One).
-  - $-5 dBm pprox 0.316 mW$ (**maximum safe input limit** before front-end LNA damage).
+  - +10 dBm = 10 mW; +15 dBm is about 32 mW (upper end of HackRF One TX power in the 10 MHz–2170 MHz range).
+  - -5 dBm is about 0.316 mW (**maximum safe input limit** before front-end damage).
   - -30 dBm = 0.001 mW (typical strong laboratory signal).
 - **Core Link Equation**:
   ```text
-P_RX(dBm) = P_TX(dBm) - Attenuation_total(dB) - Cable_Loss(dB)
-```
+  P_RX(dBm) = P_TX(dBm) - Attenuation_total(dB) - Cable_Loss(dB)
+  ```
 
 ---
 
@@ -187,7 +185,7 @@ The HackRF One digitizes the RF spectrum via direct sampling and complex downcon
 |---|---|---|
 | PortaPack H4M | Extension enclosure with 3.2″ matte LCD, rotary encoder, speaker, microphone | Upper acrylic protective layer and control assembly |
 | HackRF One (or R10C) | Core SDR transceiver board | 1 MHz – 6 GHz half-duplex transceiver |
-| Antennas | Telescopic wideband antenna (40–6000 MHz) + band-specific antennas | High-gain rubber duck and telescopic variants |
+| Antennas | Telescopic antenna + band-specific antennas | High-gain rubber duck and telescopic variants |
 | Cables | USB-C high-speed data cable, SMA male-to-male RG316 coaxial cable | Power/data connection and wired loopback testing |
 | Extras (kit-dependent) | 20 dB LNA amplifier module, rechargeable battery, protective case | Laboratory advanced kit accessories |
 
@@ -201,25 +199,25 @@ The HackRF One digitizes the RF spectrum via direct sampling and complex downcon
 | Operating Mode | Half-duplex transceiver |
 | Sample Rates | 2 – 20 Msps (quadrature I/Q) |
 | ADC / DAC Resolution | 8-bit I / 8-bit Q |
-| Host Interface | High-Speed USB 2.0 (USB-C connector) |
+| Host Interface | High-Speed USB 2.0 |
 | Antenna Port | SMA female, 50 Ω impedance |
-| Antenna Port DC Bias | Software-controlled Bias-Tee, max 50 mA @ 3.3 V (Default: OFF) |
+| Antenna Port DC Bias | Software-controlled Bias-Tee, max 50 mA at 3.0–3.3 V (Default: OFF) |
 | Maximum Safe RX Input | **-5 dBm** (exceeding causes permanent LNA burnout!) |
-| Maximum TX Output | +10 dBm (10 mW); typical 0 to +5 dBm |
-| Clock Synchronization | CLK IN / CLK OUT (SMA), support for high-precision 0.1–0.5 PPM TCXO |
+| Maximum TX Output | Varies with frequency: 5 to 15 dBm (10 MHz–2170 MHz), 0 to 5 dBm (2740–4000 MHz), -10 to 0 dBm (4000–6000 MHz); see the [HackRF One documentation](https://hackrf.readthedocs.io/en/latest/hackrf_one.html) |
+| Clock Synchronization | CLK IN / CLK OUT (SMA) for external clock synchronization |
 
 #### PortaPack H4M (Enclosure & Human-Machine Interface)
 
 | Parameter | Specification |
 |---|---|
-| Display | 3.2-inch 240×320 resistive matte LCD touchscreen |
-| Controls | 4 directional navigation buttons, 360° rotary encoder with center push, dedicated power switch |
-| Audio System | Built-in 1W speaker, integrated microphone with toggle switch, 3.5 mm TRRS headphone jack |
+| Display | 3.2-inch LCD touchscreen |
+| Controls | Directional navigation buttons, rotary encoder with center push, power switch |
+| Audio System | Built-in speaker, microphone, 3.5 mm headphone jack |
 | Storage Interface | Push-push microSD card slot (FAT32 formatted, required for apps, logs, recordings) |
-| Battery Module | 2,500 mAh rechargeable Li-Po cell with dedicated charge controller IC |
+| Battery Module | Rechargeable Li-Po cell (integrated) |
 | Charging Interface | USB-C port, hardware ON/OFF slide switch |
-| Expansion Interface | 3.3V GPIO header with I2C bus support for external sensors and GPS modules |
-| Enclosure Construction | Black-and-white graffiti patterned transparent acrylic sandwich casing |
+| Expansion Interface | GPIO header for external peripherals such as GPS modules |
+| Enclosure Construction | Acrylic sandwich casing |
 
 #### Key Improvements on H4M over Legacy H2
 
@@ -234,13 +232,13 @@ The HackRF One digitizes the RF spectrum via direct sampling and complex downcon
 ![H4M Two-Layer Modular Architecture](/img/sdrlab/h4m/h4m-0.4-1.png)
 
 1. **Lower Layer (HackRF One Core)**: Houses the Maxim MAX2837 wideband transceiver, MAX5864 baseband ADC/DAC, RFFC5072 mixer, and NXP LPC43xx ARM Cortex-M4/M0 microcontrollers.
-2. **Upper Layer (PortaPack H4M Board)**: Houses the 3.2-inch LCD screen, audio codec (WM8731 or AK4951), rotary encoder, directional buttons, and microSD slot.
+2. **Upper Layer (PortaPack H4M Board)**: Houses the 3.2-inch LCD screen, audio codec, rotary encoder, directional buttons, and microSD slot.
 
 ### Receiving Antenna Selection Guide
 
 ![Receiving Antenna Types and Band Selection](/img/sdrlab/h4m/h4m-2.4-1.png)
 
-1. **Telescopic Antenna (40 MHz – 1 GHz)**: Ideal for general exploration, FM broadcast, VHF airband, and UHF amateur radio. Adjust length according to wavelength: `L(m) = 75 / f(MHz)`.
+1. **Telescopic Antenna (VHF/UHF)**: Ideal for general exploration, FM broadcast, VHF airband, and UHF amateur radio. Adjust length according to wavelength: `L(m) = 75 / f(MHz)`.
 2. **Rubber Duck ISM Antenna (433 MHz / 915 MHz)**: Compact and tuned for Sub-GHz ISM remotes, IoT sensors, and weather stations.
 3. **2.4 GHz / 5.8 GHz Dual-Band Wi-Fi Antenna**: Dedicated to Wi-Fi and Bluetooth channel monitoring.
 
@@ -279,8 +277,8 @@ Never initiate wired loopback transmission experiments without verifying the att
 ![Firmware Version and SD Card Asset Pairing Principle](/img/sdrlab/h4m/h4m-3.5-1.png)
 
 - **Mayhem Firmware Repository**: [portapack-mayhem/mayhem-firmware](https://github.com/portapack-mayhem/mayhem-firmware/releases)
-  - Firmware Binary: `portapack-h1_h2-mayhem.bin` or `.ppfw.tar`
-  - SD Asset Package: `COPY_TO_SDCARD.zip` (matching exact release tag)
+  - Firmware: `FIRMWARE_mayhem_vX.Y.Z.zip` (contains `firmware/firmware_hackrf.bin`) or `OCI_hackrf_mayhem_vX.Y.Z.ppfw.tar`
+  - SD Asset Package: `COPY_TO_SDCARD_hackrf_mayhem_vX.Y.Z.zip` (matching exact release tag)
 - **Host Tools**: `hackrf` package (`sudo apt install hackrf` on Debian/Ubuntu/Kali; `brew install hackrf` on macOS).
 
 ---
@@ -291,22 +289,22 @@ Never initiate wired loopback transmission experiments without verifying the att
 
 ![Li-Po Battery Charging Verification and Status Indicators](/img/sdrlab/h4m/h4m-2.6-1.png)
 
-1. **Charging Parameters**: Standard 5V USB-C charger (5V / 1A to 2A). Fast-charge USB-PD chargers that do not support 5V fallback should be avoided.
+1. **Charging Parameters**: Standard 5V USB-C charger. Fast-charge USB-PD chargers that do not support 5V fallback should be avoided.
 2. **Charging Procedure**:
    - Turn the H4M power switch to **OFF** during charging for maximum safety.
-   - The charging indicator LED will illuminate RED during charging and transition to GREEN/BLUE when full.
+   - Refer to the charge indicator on your unit; wait until charging is complete.
 3. **Battery Maintenance**: Never store the device completely discharged. Recharge to ~50% (approx. 3.85V) for long-term storage.
 
 ### 4.2 First Boot Self-Check
 
 1. Slide the `POWER` switch to ON.
-2. Observe display startup sequence. Mayhem splash screen should appear within 3 seconds.
-3. Check the status bar at the top: battery indicator should show healthy voltage (≥ 3.7V), SD icon should indicate presence if inserted.
+2. Observe display startup sequence. Mayhem splash screen should appear.
+3. Check the status bar at the top: battery indicator should show a healthy charge level, SD icon should indicate presence if inserted.
 4. Verify firmware version:
 
 ![Check Your Device Version First](/img/sdrlab/h4m/h4m-0.1-1.png)
 
-   - Navigate to `Settings` -> `About`. Verify that the hardware target string reads `hackrf` (NOT `hpro`).
+   - Confirm that the firmware you flashed is the `hackrf` build (file names containing `hackrf`), NOT the `hpro` build.
 
 ---
 
@@ -330,18 +328,17 @@ Mayhem firmware requires the card to be formatted as standard **FAT32** with Mas
 
 ### 5.2 Extracting the Asset Package
 
-1. Download `COPY_TO_SDCARD_*.zip` corresponding to your flashed firmware version.
+1. Download `COPY_TO_SDCARD_hackrf_*.zip` corresponding to your flashed firmware version.
 2. Extract the contents directly to the root of the microSD card.
 3. Expected root directory layout:
    ```
-   MAYHEM_ROOT/
+   (SD root)
    ├── APPS/             # Executable Mayhem application modules
-   ├── BITOFS/           # Digital bitstream data
+   ├── FIRMWARE/         # Firmware images for the Flash Utility
    ├── FREQMAN/          # Frequency manager database files (.TXT)
-   ├── MAPS/             # Offline map tiles for ADS-B and APRS tracking
-   ├── SETTINGS/         # Persistent system configuration
    ├── SPLASH/           # Custom startup splash images
-   └── WHIP/             # Antenna resonance database
+   ├── WAV/ , SAMPLES/   # Audio and IQ sample folders
+   └── (ADSB/, AIS/, GPS/, OSM/ ... app-specific data folders)
    ```
 
 ---
@@ -429,7 +426,7 @@ If the device streams continuously without dropped samples, the core radio hardw
 1. **APRS (Automatic Packet Reporting System)**:
    - Frequency: `144.390 MHz` (North America) / `144.800 MHz` (Europe) / `144.640 MHz` (Taiwan).
    - Application: Select **Receive** → **APRS**. Decodes amateur radio GPS packets and telemetry directly to the screen.
-2. **POCSAG Paging Decryption**:
+2. **POCSAG Paging Decoding**:
    - Frequencies: Standard VHF/UHF paging allocations.
    - Application: Select **Receive** → **POCSAG**. Demonstrates legacy FSK numeric and alphanumeric packet decoding.
 3. **Bluetooth Low Energy (BLE) Observation**:
@@ -474,14 +471,14 @@ Data Rate (Bytes/s) = Sample Rate (Samples/s) * 4 Bytes
 ![Four Hardware Protection Layers in Wired Transmission](/img/sdrlab/h4m/h4m-8.3-1.png)
 
 When connecting the TX output of Device A to the RX input of Device B:
-- Maximum TX Output: $P_TX = `+10 dBm`$
+- Maximum TX Output (worst case, 10 MHz–2170 MHz): `P_TX = +15 dBm`
 - Maximum Safe RX Input: `P_RX,max = -5 dBm`
 - Target Safety Limit: `P_RX,safe ≤ -10 dBm`
 - Minimum Required Attenuation:
-  t```text
-Attn_min = P_TX - P_RX,safe = +10 dBm - (-10 dBm) = 20 dB
-```
-- **Laboratory Mandate**: Standard safety practice requires **50 dB attenuation** (30 dB + 20 dB inline fixed attenuators + DC Block). This ensures that even at full +10 dBm TX power, the received power is `-40 dBm`, completely eliminating any risk of LNA damage.
+  ```text
+  Attn_min = P_TX - P_RX,safe = +15 dBm - (-10 dBm) = 25 dB
+  ```
+- **Laboratory Mandate**: Standard safety practice requires **50 dB attenuation** (30 dB + 20 dB inline fixed attenuators + DC Block). This ensures that even at the worst-case +15 dBm TX power, the received power is about `-35 dBm`, well below the damage threshold.
 
 ### 10.3 Wired Capture Workflow
 
@@ -514,7 +511,7 @@ Attn_min = P_TX - P_RX,safe = +10 dBm - (-10 dBm) = 20 dB
 
 ### 11.1 Updating via Built-in Flash Utility (Recommended)
 
-1. Download the latest `.ppfw.tar` package (hardware target: `hackrf`) from Mayhem releases.
+1. Download the latest `OCI_hackrf_mayhem_vX.Y.Z.ppfw.tar` package (hardware target: `hackrf`) from Mayhem releases.
 2. Copy the file to the root of the FAT32 microSD card.
 3. Insert card into H4M, power on, and navigate to **Utilities** → **Flash Utility**.
 4. Select the `.ppfw.tar` file, confirm the target is `hackrf`, and proceed. The device will program the SPI flash and reboot automatically.
@@ -529,10 +526,12 @@ If a bad flash results in a black screen:
 1. Locate the `DFU` tactile button on the HackRF One board.
 2. Hold down the `DFU` button while plugging in the USB-C cable to the PC, then release.
 3. Verify device enumeration with `dfu-util -l`.
-4. Reflash firmware:
+4. Load the HackRF USB firmware over DFU, then reflash the Mayhem firmware (both files are in the `firmware/` folder of `FIRMWARE_mayhem_vX.Y.Z.zip`):
    ```bash
-   dfu-util -d 1fc9:000c --download portapack-h1_h2-mayhem.bin -s 0x18000000:leave
+   dfu-util --device 1fc9:000c --alt 0 --download hackrf_usb.dfu
+   hackrf_spiflash -w firmware_hackrf.bin
    ```
+   See the [HackRF documentation](https://hackrf.readthedocs.io/en/latest/updating_firmware.html) for the official recovery procedure.
 
 ---
 
@@ -544,7 +543,7 @@ If a bad flash results in a black screen:
 
 | Symptom | Probable Cause | Corrective Action |
 |---|---|---|
-| Black screen upon boot | Battery completely depleted / Sleep lock | Charge via 5V/2A for 30 min; check USB-C cable; enter DFU mode to test |
+| Black screen upon boot | Battery completely depleted / Sleep lock | Charge via a standard 5V USB-C charger; check USB-C cable; enter DFU mode to test |
 | Apps menu empty | MicroSD card missing, unformatted, or corrupted | Reformat card as FAT32; extract matching `COPY_TO_SDCARD` assets to root |
 | No audio from speaker | Volume set to 0 / Headphones plugged in / Wrong mode | Unplug 3.5mm jack; increase volume; confirm modulation is set to `WFM` |
 | Host PC cannot see HackRF | Unit is in standalone PortaPack mode | Select `HackRF Mode` in Mayhem main menu before running host software |
@@ -592,7 +591,7 @@ If a bad flash results in a black screen:
 1. [ ] Can you explain the physical difference between dB and dBm, and state the absolute damage threshold for HackRF One?
 2. [ ] Can you explain why the internal RF Amp must remain OFF during standard FM broadcast reception?
 3. [ ] Can you locate the `HackRF Mode` entry in Mayhem to connect the device to GQRX or SDR++?
-4. [ ] In a wired loopback experiment, how many dB of attenuation are required to safely reduce a +10 dBm TX signal below -10 dBm?
+4. [ ] In a wired loopback experiment, how many dB of attenuation are required to safely reduce a +15 dBm TX signal below -10 dBm?
 5. [ ] What is the purpose of the `.TXT` file generated alongside every `.C16` recording?
 
 ---
@@ -617,8 +616,8 @@ If a bad flash results in a black screen:
 
 ## Appendix B: Complete Hardware Accessory Specifications
 
-- **Attenuators**: 50 Ω SMA Fixed Attenuator Kit (10 dB, 20 dB, 30 dB), 2W continuous power, DC–6 GHz bandwidth, VSWR ≤ 1.25.
-- **DC Block**: SMA Inner DC Block, 50 Ω, 10 MHz – 6 GHz, 50V max voltage.
+- **Attenuators**: 50 Ω SMA fixed attenuators (e.g., 10 dB, 20 dB, 30 dB), ≥ 2W, DC–6 GHz.
+- **DC Block**: SMA Inner DC Block, 50 Ω, 10 MHz – 6 GHz.
 - **Dummy Load**: 50 Ω SMA Male Termination, 2W power, DC–6 GHz.
 - **Cables**: High-flexibility RG316 coaxial cables with gold-plated SMA male connectors.
 
@@ -628,23 +627,23 @@ If a bad flash results in a black screen:
 
 ```
 [Transmitter: H4M-A] 
-  TX Power: +10 dBm
+  TX Power: +15 dBm (worst case)
        │
        ▼
-  [Inline 30 dB Attenuator]  ──> Level: -20 dBm
+  [Inline 30 dB Attenuator]  ──> Level: -15 dBm
        │
        ▼
-  [Inline 20 dB Attenuator]  ──> Level: -40 dBm
+  [Inline 20 dB Attenuator]  ──> Level: -35 dBm
        │
        ▼
-  [DC Block (0.5 dB Loss)]   ──> Level: -40.5 dBm
+  [DC Block (0.5 dB Loss)]   ──> Level: -35.5 dBm
        │
        ▼
-  [Coaxial Cable (0.5 dB Loss)] ──> Level: -41 dBm
+  [Coaxial Cable (0.5 dB Loss)] ──> Level: -36 dBm
        │
        ▼
 [Receiver: H4M-B]
-  Input Level: -41 dBm  (Well below safe -10 dBm threshold!)
+  Input Level: -36 dBm  (Well below safe -10 dBm threshold!)
 ```
 
 ---

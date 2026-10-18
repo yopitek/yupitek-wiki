@@ -22,12 +22,10 @@ toc: true
 
 | 项目 | 规格 |
 |---|---|
-| WiFi 芯片 | Espressif ESP8266（2.4 GHz，802.11 b/g/n） |
+| WiFi 芯片 | Espressif ESP8266（2.4 GHz）——依厂商商品标题；厂商描述中亦提到 ESP32-S2，请以实机芯片为准 |
 | 固件（典型） | ESP8266 Deauther v2（Spacehuhn）或 ESP8266 Marauder 移植版 |
 | 频段 | 仅 2.4 GHz（无 5 GHz） |
-| 接口 | UART 串口接到 Flipper GPIO（TX/RX） |
-| 供电 | 来自 Flipper GPIO 排针：3.3 V（第 9 脚）或 5 V（第 1 脚），按下方接线表；请查阅厂商产品页确认本板所需供电 |
-| 附加件（视板卡而定） | 第二无线电模块（NRF24 / CC1101）的插座、无线电选择拨码开关 |
+| 接口 | 插接于 Flipper GPIO 排针 |
 | Web 界面 | AP 模式位于 `192.168.4.1`（默认 SSID `pwned`，密码 `deauther`） |
 
 ## 你能用它做什么
@@ -51,7 +49,7 @@ ESP8266 Deauther 是经典的袖珍工具：扫描网络、选择目标、运行
 
 ### 1. Flipper 上的固件
 
-安装自定义固件（**Momentum**、**Unleashed**、**Xtreme**），这样 WiFi deauther/Marauder 应用才可用——见 [Flipper Zero 专区](/flipper-zero/)。
+安装自定义固件（例如 **Momentum**），这样 WiFi deauther/Marauder 应用才可用——见 [Flipper Zero 专区](/flipper-zero/)。
 
 ### 2. 刷写 ESP8266（仅首次）
 
@@ -61,21 +59,14 @@ ESP8266 Deauther 是经典的袖珍工具：扫描网络、选择目标、运行
 2. 通过 USB/UART 连接（或使用 Flipper 自带的刷写应用）。
 3. 刷写 **ESP8266 Deauther v2** 二进制文件——源码和预编译文件：[SpacehuhnTech/esp8266_deauther](https://github.com/SpacehuhnTech/esp8266_deauther)。
 
-### 3. 接线 / 连接到 Flipper
+### 3. 接到 Flipper
 
-| ESP8266 | Flipper GPIO |
-|---|---|
-| TX0 | 14 或 16（RX 引脚） |
-| RX0 | 13 或 15（TX 引脚） |
-| VIN | 1（5V）或 9（3.3 V） |
-| GND | 8 或 11（GND） |
-
-> 在多无线电板卡上，使用前把拨码开关拨到 WiFi/ESP8266 位置。
+将板卡插到 Flipper 的 GPIO 排针上。厂商未公布此板的引脚与供电细节，请依随机附的说明操作。
 
 ### 4. 首次运行——扫描
 
 1. 插入板卡，打开 `Apps → WiFi → WiFi Deauther`。
-2. 等待启动扫描完成（蓝色 LED 熄灭）。
+2. 等待启动扫描完成。
 3. 附近接入点列表出现：SSID、信道、RSSI。
 
 预期应用屏幕：
@@ -99,10 +90,7 @@ ESP8266 Deauther 是经典的袖珍工具：扫描网络、选择目标、运行
 | 问题 | 原因 | 修复 |
 |---|---|---|
 | Web 界面无法访问 | 客户端加入了另一个网络 | 关闭自动加入/移动数据；加入 `pwned`；浏览 `192.168.4.1` |
-| 应用启动时卡住 | 启动扫描被打断 | 在触碰控制之前等待蓝色 LED 熄灭 |
-| 没有列出网络 | 拨码开关/引脚错误 | 把开关拨到 WiFi；重新检查 TX/RX 接线 |
-| 板卡未被检测到 | UART 引脚错误 | 使用引脚 13/15（TX）和 14/16（RX） |
-| 信号弱或没有 | 2.4 GHz 天线朝向 | 接上/对准 SMA 天线 |
+| 没有列出网络 | 板卡未插紧或固件未运行 | 重新插紧 GPIO 排针；重新烧录固件 |
 
 更多帮助：[SDRLAB 故障排查中心](/sdrlab/troubleshooting/)。
 

@@ -36,8 +36,16 @@ OpenWrt routers and x86 soft routers typically have built-in Wi-Fi radios. Conne
 
 ## OpenWrt Version & ALFA Chipset Compatibility Matrix
 
-| ALFA Model | Chipset | OpenWrt 24.10 | OpenWrt 25.12 | Required Kernel Packages |
+| ALFA Model | Chipset | OpenWrt 24.10 | OpenWrt 25.12 | Driver Package |
 |---|---|---|---|---|
+| **AWUS036ACM** | MediaTek MT7612U | ✅ Package in official feed | ✅ Package in official feed | `kmod-mt76x2u` |
+| **AWUS036AXML** | MediaTek MT7921AUN | ✅ Package in official feed (see known issue below) | ✅ Package in official feed (see known issue below) | `kmod-mt7921u` |
+| **AWUS036ACHM** | MediaTek MT7610U | ✅ Package in official feed | ✅ Package in official feed | `kmod-mt76x0u` |
+| **AWUS036ACH** | Realtek RTL8812AU | ✅ Package in official feed (community driver) | ✅ Package in official feed (community driver) | `kmod-rtl8812au-ct` |
+
+The table only states whether the driver package exists in the official OpenWrt package feed (checked against downloads.openwrt.org). Behavior on a specific router, monitor-mode and injection support depend on the target and kernel; see [openwrt.org](https://openwrt.org/) and the [Table of Hardware](https://openwrt.org/toh/start).
+
+---|---|---|---|---|
 | **AWUS036ACM** | MediaTek MT7612U | ✅ Fully Supported | ✅ Fully Supported | `kmod-mt76x2u` `mt76-firmware` |
 | **AWUS036AXML** | MediaTek MT7921AUN | ✅ Supported (Known Bug) | ✅ Supported (Known Bug) | `kmod-mt7921u` |
 | **AWUS036ACHM** | MediaTek MT7610U | ✅ Fully Supported | ✅ Fully Supported | `kmod-mt76x0u` |
@@ -80,7 +88,7 @@ dmesg | grep -E "mt7921|mt76"
 ### Step 3: Generate Wireless Config and Restart Network
 
 ```bash
-wifi config >> /etc/config/wireless
+wifi config
 /etc/init.d/network restart
 ```
 
@@ -90,12 +98,12 @@ Log in to the LuCI Web UI (`Network → Wireless`). You will see a new radio dev
 
 ## Important Upstream Limitations & Bug Warnings
 
-### ⚠️ Known Bug: AWUS036AXML Active Monitor Mode Driver Crash (Issue #839)
-- **Symptom**: Enabling active monitor mode and continuous frame injection (such as deauth frames) on `mt7921u` under OpenWrt causes the driver to lock up within seconds (`mt7921u: failed to send tx packet`), taking the adapter offline.
-- **Root Cause**: Upstream `openwrt/mt76` Issue #839 (DMA concurrency locking bug in 5.10/5.15 kernels).
+### ⚠️ Known Bug: AWUS036AXML Active Monitor Mode Stops the Driver (Issue #839)
+- **Symptom**: Per upstream `openwrt/mt76` [Issue #839](https://github.com/openwrt/mt76/issues/839), enabling *active monitor* mode on `mt7921u` (AWUS036AXML) makes the driver stop working. Plain (passive) monitor mode captures packets normally in the same report.
+- **Status**: The issue is marked closed upstream; behavior may differ by kernel version, so check the issue thread for the current state.
 - **Engineering Workaround**:
-  1. For **passive packet capture** (Kismet / tcpdump), AWUS036AXML works normally.
-  2. For **high-rate packet injection / deauth testing**, use **ALFA AWUS036ACM** (`mt76x2u`), which has proven rock-solid over years of upstream testing.
+  1. For **passive packet capture** (Kismet / tcpdump), use AWUS036AXML in regular monitor mode.
+  2. The issue reports active monitor mode working on `mt76x0u` and `mt76x2u`; for active monitor use cases choose **AWUS036ACM** (`mt76x2u`) or **AWUS036ACHM** (`mt76x0u`).
 
 ### ⚠️ 6 GHz Configuration Status
-Current LuCI Web UI (OpenWrt 24.10 / 25.12) lacks complete 6 GHz channel selectors. AWUS036AXML operates primarily as an ultra-high performance 2.4 GHz / 5 GHz radio under OpenWrt.
+6 GHz availability on OpenWrt depends on the driver, regulatory domain, and LuCI version. See [openwrt.org](https://openwrt.org/) for the current status.

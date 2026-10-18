@@ -22,12 +22,10 @@ toc: true
 
 | Item | Specification |
 |---|---|
-| WiFi chip | Espressif ESP8266 (2.4 GHz, 802.11 b/g/n) |
+| WiFi chip | Espressif ESP8266 (2.4 GHz) per the vendor listing title; the vendor description also mentions ESP32-S2, so confirm the chip on your unit |
 | Firmware (typical) | ESP8266 Deauther v2 (Spacehuhn) or ESP8266 Marauder port |
 | Frequency band | 2.4 GHz only (no 5 GHz) |
-| Interface | UART serial to Flipper GPIO (TX/RX) |
-| Power | From the Flipper GPIO header: 3.3 V (pin 9) or 5 V (pin 1) per the wiring table below; check your vendor's product page for the supply your board expects |
-| Extras (board-dependent) | Socket for a second radio module (NRF24 / CC1101), dip switch for radio selection |
+| Interface | Plugs into the Flipper GPIO header |
 | Web UI | AP mode at `192.168.4.1` (default SSID `pwned`, password `deauther`) |
 
 ## What you can do with it
@@ -51,7 +49,7 @@ The ESP8266 Deauther is the classic pocket tool: scan for networks, pick a targe
 
 ### 1. Firmware on the Flipper
 
-Install a custom firmware (**Momentum**, **Unleashed**, **Xtreme**) so the WiFi deauther/Marauder apps are available — see the [Flipper Zero section](/flipper-zero/).
+Install a custom firmware (e.g., **Momentum**) so the WiFi deauther/Marauder apps are available — see the [Flipper Zero section](/flipper-zero/).
 
 ### 2. Flash the ESP8266 (first time only)
 
@@ -61,21 +59,14 @@ Most boards ship pre-flashed with Deauther. To (re)flash:
 2. Connect via USB/UART (or use the Flipper's own flasher app).
 3. Flash the **ESP8266 Deauther v2** binary — sources and pre-built files: [SpacehuhnTech/esp8266_deauther](https://github.com/SpacehuhnTech/esp8266_deauther).
 
-### 3. Wire / attach to the Flipper
+### 3. Attach to the Flipper
 
-| ESP8266 | Flipper GPIO |
-|---|---|
-| TX0 | 14 or 16 (RX pin) |
-| RX0 | 13 or 15 (TX pin) |
-| VIN | 1 (5V) or 9 (3.3 V) |
-| GND | 8 or 11 (GND) |
-
-> On multi-radio boards, set the dip switch to the WiFi/ESP8266 position before use.
+Plug the board onto the Flipper GPIO header. The vendor does not publish pin or power details for this board, so follow the instructions that came with your unit.
 
 ### 4. First run — scan
 
 1. Plug the board in, open `Apps → WiFi → WiFi Deauther`.
-2. Wait for the startup scan to finish (the blue LED goes off).
+2. Wait for the startup scan to finish.
 3. A list of nearby APs appears: SSID, channel, RSSI.
 
 Expected app screen:
@@ -99,10 +90,7 @@ Expected app screen:
 | Problem | Cause | Fix |
 |---|---|---|
 | Web UI unreachable | Client joined another network | Disable auto-join/mobile data; join `pwned`; browse `192.168.4.1` |
-| App freezes at startup | Interrupted startup scan | Wait for the blue LED to go off before touching controls |
-| No networks listed | Wrong dip switch / pins | Set switch to WiFi; re-check TX/RX wiring |
-| Board not detected | UART pins wrong | Use pins 13/15 (TX) and 14/16 (RX) |
-| Weak or no signal | 2.4 GHz antenna orientation | Attach/aim the SMA antenna |
+| No networks listed | Board not seated or firmware not running | Re-seat the board on the GPIO header; re-flash the firmware |
 
 More help: the [SDRLAB troubleshooting hub](/sdrlab/troubleshooting/).
 

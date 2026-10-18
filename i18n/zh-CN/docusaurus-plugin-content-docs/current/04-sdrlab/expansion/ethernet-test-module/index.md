@@ -47,7 +47,7 @@ flowchart LR
 
 对大学网络实验室来说这是宝贝：在向 IT 报障之前先验证墙上的端口、几秒钟证明一根线缆是坏的、在真实网络上演示 DHCP 行为——全部从口袋里完成。
 
-## 与 Flipper 的接线
+## 与 Flipper 的接线 {#wiring-to-the-flipper}
 
 典型 W5500 模块（W5500 Lite）接线：
 

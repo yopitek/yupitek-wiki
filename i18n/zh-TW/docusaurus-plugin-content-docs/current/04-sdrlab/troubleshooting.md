@@ -173,7 +173,7 @@ PortaPack 開機了、選單看起來正常，但很多應用程式不見了。
 
 ### 修正
 1. 準備一張 microSD 卡（16 GB 很夠用），格式化為 **FAT32**。
-2. 從 [Mayhem 版本頁面](https://github.com/portapack-mayhem/mayhem-firmware/releases)下載該版本的 `COPY_TO_SDCARD` 壓縮檔——見 [H4M → Mayhem 韌體](/sdrlab/hardware/h4m/#mayhem-firmware)。
+2. 從 [Mayhem 版本頁面](https://github.com/portapack-mayhem/mayhem-firmware/releases)下載該版本的 `COPY_TO_SDCARD` 壓縮檔——見 [H4M → Mayhem 韌體](/sdrlab/hardware/h4m/)。
 3. 把壓縮檔解壓縮到卡片根目錄。
 4. 插入並重新開機。應用程式就出現了。
 
@@ -194,7 +194,7 @@ PortaPack 開機了、選單看起來正常，但很多應用程式不見了。
 ### 修正
 1. 充電直到充電指示燈顯示進度。
 2. 按住電源按鈕約 3 秒。
-3. 還是無法啟動？連線 USB-C，檢查電腦是否看到 HackRF 裝置——如果有，依照 [H4M → Mayhem 韌體](/sdrlab/hardware/h4m/#mayhem-firmware)重新燒錄 Mayhem。
+3. 還是無法啟動？連線 USB-C，檢查電腦是否看到 HackRF 裝置——如果有，依照 [H4M → Mayhem 韌體](/sdrlab/hardware/h4m/)重新燒錄 Mayhem。
 
 ---
 

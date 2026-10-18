@@ -70,7 +70,7 @@ Charge LED: OFF → ORANGE (charging) → GREEN (full)
 | 充電非常慢 | 設計上充電限制在約 1A 上限 | 使用任何良好的 5V/2A 充電器；充飽時間約 2 小時 |
 | 停在某個百分比 | 電芯不平衡或電池老化 | 在較涼爽的房間充電；若持續發生，聯絡支援 |
 
-## USB 與藍芽
+## USB 與藍芽 {#usb--bluetooth}
 
 ### Q3：qFlipper 顯示「no device found」
 
@@ -136,7 +136,7 @@ Bus 001 Device 004: ID 0483:5740 STMicroelectronics Flipper Zero
 | 有些卡片讀得到、有些不行 | 卡片型別不受支援（例如需要驗證的加密 DESFire） | 在[產品頁面](/flipper-zero/products/flipper-zero/)檢視支援清單；沒有鑰匙就無法讀取加密卡片 |
 | 讀得到但無法模擬 | 模擬範圍設計上就很短 | 模擬天線很小——將 Flipper 緊貼讀卡機 |
 
-## 儲存空間與 microSD
+## 儲存空間與 microSD {#storage--microsd}
 
 ### Q7：「SD card: not present」或儲存失敗
 
@@ -184,7 +184,7 @@ flowchart LR
 
 如果連開機選單都不出現：讓它充電 1 小時，然後重試。如果還是沒反應，韌體儲存空間可能已損壞——這種情況很少見，需要[尋求支援](#still-stuck)。
 
-## 還是卡住？
+## 還是卡住？ {#still-stuck}
 
 如果以上方法都無法解決，請在[官方支援入口網站](https://support.flipper.net)開啟工單。為了快速獲得回覆，請準備：
 

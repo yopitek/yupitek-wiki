@@ -53,7 +53,7 @@ flowchart TD
 | [SDRLab TRX-duo](/sdrlab/hardware/trx-duo/) | 雙通道 16 位元收發器（Xilinx Zynq 7010） | 10 kHz – 60 MHz | HF 業餘無線電、實驗室實驗、Red Pitaya 相容應用 |
 | [SDRLab H4M](/sdrlab/hardware/h4m/) | HackRF One + PortaPack 手持式收發器 | 1 MHz – 6 GHz | 現場訊號追蹤、頻譜分析、可攜式 TX/RX 實驗 |
 
-## Flipper Zero 擴充模組
+## Flipper Zero 擴充模組 {#flipper-zero-expansion-modules}
 
 | 模組 | 功能 | 無線電晶片 | 頁面 |
 |---|---|---|---|
