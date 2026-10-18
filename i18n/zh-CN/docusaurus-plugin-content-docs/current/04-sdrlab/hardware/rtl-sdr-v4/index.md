@@ -117,11 +117,9 @@ Found Rafael Micro R828D tuner
 Supported gain values (29): 0.0 0.9 1.4 2.7 ...
 [R82XX] PLL not locked!
 Sampling at 2048000 S/s.
-```
-
 `Found Rafael Micro R828D tuner` 这一行就是你的"V4 已识别"徽章。
 
-> **Windows**：安装 [SDR#](https://airspy.com/download/)（或 SDR++ / SDR Console）——它们自带 V4 就绪的驱动；直接启动并选择 RTL-SDR 源即可。
+> 确切的设备和产品字符串会随硬件版本和固件而变化；重要的是 `Found 1 device(s)` 且没有 `usb_claim_interface` 错误。
 
 ## 快速入门——三下点击听到 FM
 

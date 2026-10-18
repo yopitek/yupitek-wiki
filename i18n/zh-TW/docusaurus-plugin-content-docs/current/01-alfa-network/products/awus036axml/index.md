@@ -16,7 +16,7 @@ keywords: [AWUS036AXML, Wi-Fi 6E 無線網絡卡, 6 GHz, USB-C, AXE3000]
 | 專案 | 規格 |
 |---|---|
 | 晶片 | MediaTek MT7921AUN |
-| Wi-Fi 等級 | AXE3000（574 + 1201 + **2402 Mbps**） |
+| Wi-Fi 等級 | AXE3000 — 最高 600 / 1200 / 1200 Mbps（2.4 / 5 / 6 GHz），依 ALFA 規格表 |
 | 頻段 | 2.4 + 5 + **6 GHz** |
 | 介面 | **USB-C** |
 | 天線 | 2 × 外接 5 dBi，RP-SMA |

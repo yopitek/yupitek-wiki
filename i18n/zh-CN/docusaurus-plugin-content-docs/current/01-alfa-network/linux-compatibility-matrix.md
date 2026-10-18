@@ -42,11 +42,10 @@ flowchart TD
 | AWUS036AXM | MT7921AUN | `mt7921u` | ✅ 自 5.18 起 | ✅ | ✅ | ✅ |
 | AWUS036AXML | MT7921AUN | `mt7921u` | ✅ 自 5.18 起 | ✅ | ✅ | ✅ |
 | AWUS036ACH | RTL8812AU | `rtl8812au-dkms` | ❌ | 🔧 | 🔧 | 🔧 |
-| AWUS036ACS | RTL8811AU | `rtl8811au`（DKMS） | ❌ | 🔧 | 🔧 | 🔧 |
-| AWUS036AX | RTL8832BU | `rtl88x2bu`（DKMS） | ❌ | 🔧 | 🔧 | ⚠️ |
-| AWUS036AXER | RTL8832BU | `rtl88x2bu`（DKMS） | ❌ | 🔧 | 🔧 | ⚠️ |
+| AWUS036ACS | RTL8811AU | `8821au`（DKMS） | ❌ | 🔧 | 🔧 | 🔧 |
+| AWUS036AX | RTL8832BU | `rtl8852bu`（DKMS） | ❌ | 🔧 | 🔧 | ⚠️ |
+| AWUS036AXER | RTL8832BU | `rtl8852bu`（DKMS） | ❌ | 🔧 | 🔧 | ⚠️ |
 | AWUS036EACS | RTL8821CU | —（无可靠驱动） | ❌ | ❌ | ❌ | ❌ |
-
 ## 「内核内置」对你意味着什么
 
 当芯片组的驱动程序位于 Linux 内核中时，你的操作系统会预装它。插上网卡适配器，`dmesg` 会显示它被驱动程序认领——无需编译、无需 DKMS、不会因内核更新而损坏。这是本页 MediaTek 与 Realtek 网卡适配器之间最大的可靠性差异。

@@ -167,10 +167,9 @@ Flashing ...
 
 别慌——Flipper Zero 有恢复路径：
 
-1. **按住 DOWN 的同时开机**（`LEFT + BACK`）→ 出现启动菜单。
-2. 选择 **Firmware update mode**。
+1. 首先通过按住 **LEFT + BACK** 5 秒来**重启** Flipper，并充电几分钟。
+2. 如果问题仍然存在，请切换到恢复模式：**设置 → 电源 → 重启 → 固件升级**，然后按 **RIGHT**（如果设备无法操作，请按照官方 [Firmware recovery](https://docs.flipper.net/basics/firmware-update/firmware-recovery) 页面上的替代步骤操作）。
 3. 连接 USB 并用 qFlipper 刷写官方固件（上面的方法 A）。
-
 ```mermaid
 flowchart LR
     A[Device won't boot] --> B[Power on with DOWN held]

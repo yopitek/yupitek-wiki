@@ -10,9 +10,7 @@ keywords: [ALFA 网卡适配器对比, AWUS036ACM vs AWUS036ACH, Wi-Fi 6E 网卡
 
 # ALFA 无线网卡对比
 
-> **结论先行（Bottom line）**：如果你是使用 Kali Linux 做课程或实验的大学生，买 **AWUS036ACM**——它的 MediaTek MT7612U 芯片组内置于 Linux 内核，监听模式开箱即用，而且价格低于旗舰型号。如果你的项目*必须*有 Wi-Fi 6E 速度，**AWUS036AXML** 是唯一的三频选项。如果你是主要需要一个紧凑 WiFi + 蓝牙组合的 Windows 用户，**AWUS036EACS** 是你的（唯一）选择。
-
-
+> **结论先行（Bottom line）**：如果你是使用 Kali Linux 做课程或实验的大学生，买 **AWUS036ACM**——它的 MediaTek MT7612U 芯片组内置于 Linux 内核，监听模式开箱即用，而且价格低于旗舰型号。如果你的项目*必须*有 Wi-Fi 6E 速度，**AWUS036AXML**（USB-C）或 **AWUS036AXM**（USB-A）——两者均为三频。如果你是主要需要一个紧凑 WiFi + 蓝牙组合的 Windows 用户，**AWUS036EACS** 是你的（唯一）选择。
 ![ALFA Wi-Fi 适配器产品线一览——四大使用情境](/img/wifi-adapter-comparison/wifi-adapter-comparison-lineup.svg)
 
 *💡 点击上方图片可开启高分辨率放大灯箱，清晰检视完整型号与芯片规格。*
@@ -25,15 +23,11 @@ keywords: [ALFA 网卡适配器对比, AWUS036ACM vs AWUS036ACH, Wi-Fi 6E 网卡
 | [AWUS036ACH](/alfa-network/products/awus036ach/) | RTL8812AU | AC1200 | USB 3.0 | 2.4 + 5 GHz | 300 + 867 Mbps | ✅ 优秀（DKMS） | 2 × 外置 5 dBi，RP-SMA |
 | [AWUS036ACHM](/alfa-network/products/awus036achm/) | MT7610U | AC433 | USB 2.0 | 2.4 + 5 GHz | 150 + 433 Mbps | ✅ 良好（内核内置） | 2 × 外置 5 dBi，RP-SMA |
 | [AWUS036ACM](/alfa-network/products/awus036acm/) | MT7612U | AC1200 | USB 3.0 | 2.4 + 5 GHz | 300 + 867 Mbps | ✅ 优秀（内核内置） | 2 × 外置 5 dBi，RP-SMA |
-| [AWUS036ACS](/alfa-network/products/awus036acs/) | RTL8811AU | AC433 | USB 2.0 | 2.4 + 5 GHz | 150 + 433 Mbps | ✅ 良好（DKMS） | 2 × 外置 5 dBi，RP-SMA（55 mm 机身） |
+| [AWUS036ACS](/alfa-network/products/awus036acs/) | RTL8811AU | AC433 | USB 2.0 | 2.4 + 5 GHz | 150 + 433 Mbps | ✅ 良好（DKMS） | 1 × 外置 2 dBi，RP-SMA（55 mm 机身） |
 | [AWUS036AX](/alfa-network/products/awus036ax/) | RTL8832BU | AX1800 | USB 3.2 | 2.4 + 5 GHz | 574 + 1201 Mbps | ✅ 良好（DKMS） | 2 × 外置 6 dBi，RP-SMA |
 | [AWUS036AXER](/alfa-network/products/awus036axer/) | RTL8832BU | AX1800 | USB 3.2 | 2.4 + 5 GHz | 574 + 1201 Mbps | ✅ 良好（DKMS） | 内置（10.5 g 纳米机身） |
-| [AWUS036AXM](/alfa-network/products/awus036axm/) | MT7921AUN | AX3000 | USB 3.2 | 2.4 + 5 GHz | 574 + 2402 Mbps | ✅ 良好（内核内置） | 2 × 外置 5 dBi，RP-SMA + BT 5.2 |
-| [AWUS036AXML](/alfa-network/products/awus036axml/) | MT7921AUN | AXE3000 | USB-C | 2.4 + 5 + 6 GHz | 574 + 1201 + 2402 Mbps | ✅ 良好（内核内置） | 2 × 外置 5 dBi，RP-SMA + BT 5.2 |
-| [AWUS036EACS](/alfa-network/products/awus036eacs/) | RTL8821CU | AC600 | USB 2.0 | 2.4 + 5 GHz | 150 + 433 Mbps | ❌ 不可靠 | 集成 2 dBi + BT 4.2 |
-
-### 如何解读速度数字
-
+| [AWUS036AXM](/alfa-network/products/awus036axm/) | MT7921AUN | AX3000 级 | USB 3.2 | 2.4 + 5 + 6 GHz | 最高 600 + 1200 + 1200 Mbps | ✅ 良好（内核内置） | 2 × 外置 5 dBi，RP-SMA + BT 5.2 |
+| [AWUS036AXML](/alfa-network/products/awus036axml/) | MT7921AUN | AXE3000 | USB-C | 2.4 + 5 + 6 GHz | 最高 600 + 1200 + 1200 Mbps | ✅ 良好（内核内置） | 2 × 外置 5 dBi，RP-SMA + BT 5.2 |
 「+」分隔两个频段：**2.4 GHz + 5 GHz**（AXE 型号再加 + 6 GHz）。「300 + 867」的网卡适配器是 **AC1200** 等级：300 Mbps 是 2.4 GHz 上限（2 个空间流 × 150 Mbps），867 Mbps 是 5 GHz 上限（2 × 433 Mbps）。实际吞吐量通常为链路速率的 50–70%——物理损耗、墙壁和 USB 总线开销吃掉了其余部分。
 
 ## 哪款适合你？

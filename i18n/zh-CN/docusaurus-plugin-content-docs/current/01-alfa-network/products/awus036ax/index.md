@@ -22,8 +22,8 @@ keywords: [AWUS036AX, RTL8832BU, Wi-Fi 6 网卡适配器, WPA3, AX1800]
 | 天线 | 2 × 外置 6 dBi，RP-SMA |
 | 安全 | WPA3（同时支持 WPA2/WPA） |
 | MIMO | 2×2 |
-| Linux 驱动 | `rtl88x2bu`（DKMS，非内核内置） |
-| 监听模式 | ✅ 良好 |
+| Linux 驱动 | `rtl8852bu`（DKMS，非内核内置） |
+| 监听模式 | ❌ 社区驱动不支持（参见[驱动指南](/alfa-network/drivers/rtl8832bu/)） |
 
 ## 总览
 
@@ -37,23 +37,18 @@ AWUS036AX 是 ALFA 著名的 AC 世代与 Wi-Fi 6 世界之间的桥梁。引擎
 ## 安装与驱动
 
 完整步骤见 [RTL8832BU 驱动页面](/alfa-network/drivers/rtl8832bu/)。简版：
-
-```bash
-cd /opt && sudo git clone https://github.com/aircrack-ng/rtl88x2bu.git
-cd rtl88x2bu && sudo make dkms_install
-sudo modprobe 88x2bu
+cd /opt && sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
+cd rtl8852bu-20250826 && sudo sh install-driver.sh
+sudo modprobe 8852bu
 ```
 
-**预期输出**：`DKMS: install completed.`，然后 `iw dev` 中出现接口。
+**预期输出**：安装程序完成（提示时重启），然后 `iw dev` 中出现接口。
 
 ```mermaid
 flowchart LR
-    A["AWUS036AX"] --> B["DKMS build (rtl88x2bu)"]
-    B --> C["modprobe 88x2bu"]
+    A["AWUS036AX"] --> B["DKMS build (rtl8852bu)"]
+    B --> C["modprobe 8852bu"]
     C --> D["Connect WPA3 network"]
-    D --> E["airmon-ng start wlan0 (optional)"]
-```
-
 ## 进阶用法
 
 ### 连接仅 WPA3 的网络
@@ -64,18 +59,9 @@ iw dev wlan0 link
 ```
 
 **预期输出**：`Connected`，靠近接入点时 5 GHz 链路速率最高 **1201 Mb/s**（2×2 80 MHz）。
+### 监听模式
 
-### 监听模式（需要时）
-
-```bash
-sudo airmon-ng start wlan0
-sudo aireplay-ng --test wlan0mon
-```
-
-**预期输出**：`wlan0mon` + 注入 `30/30: 100%`。
-
-## 兼容性
-
+该芯片组的社区驱动**不**支持监听模式。如需使用监听模式和注入功能，请使用内核内置的 MediaTek 适配器，例如 [AWUS036ACM](/alfa-network/products/awus036acm/) 或 [AWUS036AXML](/alfa-network/products/awus036axml/)。
 | 平台 | 支持 | 说明 |
 |---|---|---|
 | Kali Linux | ✅ | DKMS |
@@ -89,7 +75,7 @@ sudo aireplay-ng --test wlan0mon
 | 症状 | 原因 | 修复 |
 |---|---|---|
 | WPA3 网络不可见 | 驱动/wpa_supplicant 太旧 | 更新驱动 + 操作系统 |
-| DKMS 构建失败 | 新内核 vs 仓库 | `cd /opt/rtl88x2bu && git pull && make dkms_install` |
+| DKMS 构建失败 | 新内核 vs 仓库 | `cd /opt/rtl8852bu-20250826 && git pull && sudo sh install-driver.sh` |
 | 链路高速但传输慢 | USB 2.0 端口 | 使用 USB 3.x 端口（网卡适配器是 USB 3.2） |
 | 注入 0/30 | 空信道 | `sudo iw wlan0mon set channel 6` |
 

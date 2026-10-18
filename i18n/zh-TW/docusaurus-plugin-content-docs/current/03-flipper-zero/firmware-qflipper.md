@@ -165,12 +165,8 @@ Flashing ...
 
 ## 復原：你的 Flipper 無法開機
 
-別慌——Flipper Zero 有復原路徑：
-
-1. **開機時按住 DOWN**（`LEFT + BACK`）→ 會出現開機選單。
-2. 選擇 **Firmware update mode**。
-3. 連線 USB 並使用 qFlipper 刷寫官方韌體（上述方法 A）。
-
+1. 首先**重新啟動** Flipper，按住 **LEFT + BACK** 5 秒，並充電幾分鐘。
+2. 如果仍然異常，切換至 Recovery 模式：**Settings → Power → Reboot → Firmware Upgrade**，然後按 **RIGHT**（若裝置無法運作，請遵循官方 [Firmware recovery](https://docs.flipper.net/basics/firmware-update/firmware-recovery) 頁面上的替代步驟）。
 ```mermaid
 flowchart LR
     A[Device won't boot] --> B[Power on with DOWN held]

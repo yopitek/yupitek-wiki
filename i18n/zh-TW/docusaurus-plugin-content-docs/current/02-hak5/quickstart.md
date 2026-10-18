@@ -69,16 +69,15 @@ flowchart TD
 ## 1. WiFi Pineapple 家族（Mark VII / Enterprise / Pager）
 
 Pineapple 是一個 **rogue 存取點**：它廣播自己的 Wi-Fi，讓你能從瀏覽器管理它並執行 PineAP 套件。
-
 1. 開機（[Mark VII](/hak5/products/wifi-pineapple-mark-vii/) 用 USB-C、[Enterprise](/hak5/products/wifi-pineapple-enterprise/) 用 AC 電源、[Pager](/hak5/products/wifi-pineapple-pager/) 用電池）。
-2. 在你的筆電上，連上 Pineapple 的 Wi-Fi。Mark VII 預設：SSID `PineAP`，密碼 `pineapplesareyummy`。
+2. 在你的筆電上，連上 Pineapple 的 Wi-Fi。Mark VII：首次開機時會提供一個名為 `Pineapple_XXXX` 的開放設定 AP（完整設定請參閱 Mark VII 頁面）。
 3. 在瀏覽器開啟管理介面：`http://172.16.42.1:1471`。
 4. 立刻設定**管理員密碼**（Settings → Password）。更新韌體（Settings → Software Update）。
 5. 如果你想要模組更新，就接上網際網路 uplink。
 
 預期輸出 — 瀏覽器顯示 Pineapple 儀錶板，包含 **Recon**、**PineAP**、**Modules** 與 **Client** 面板。
 
-> **初學者陷阱：** 如果你看不到 `PineAP` SSID，裝置還在開機 — 等 30–60 秒。完整步驟與 5 GHz 升級路徑在 [Mark VII 產品頁](/hak5/products/wifi-pineapple-mark-vii/)。
+> **初學者陷阱：** 如果你看不到 `Pineapple_XXXX` SSID，裝置還在開機 — 等 30–60 秒。完整步驟與 5 GHz 升級路徑在 [Mark VII 產品頁](/hak5/products/wifi-pineapple-mark-vii/)。
 
 ---
 

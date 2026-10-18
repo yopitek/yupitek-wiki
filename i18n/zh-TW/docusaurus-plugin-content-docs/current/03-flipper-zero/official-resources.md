@@ -65,7 +65,7 @@ flowchart TD
 |---|---|
 | [flipperzero-firmware](https://github.com/flipperdevices/flipperzero-firmware) | FlipperOS 韌體 — 官方發布版本、自訂韌體基礎 |
 | [qFlipper](https://github.com/flipperdevices/qFlipper) | 桌面應用程式原始碼 |
-| [flipperzero-firmware-sources](https://github.com/flipperdevices/flipperzero-firmware-sources) | 用於自行建置的完整韌體原始碼 |
+| [flipperzero-firmware-sources](https://github.com/flipperdevices/flipperzero-firmware) | 用於自行建置的完整韌體原始碼 |
 | [video-game-module](https://github.com/flipperdevices/video-game-module) | Video Game Module 韌體與遊戲 |
 | [Flipper Zero 電路圖與硬體](https://docs.flipper.net) | 官方檔案提供 GPIO 接腳定義與電路圖 PDF |
 

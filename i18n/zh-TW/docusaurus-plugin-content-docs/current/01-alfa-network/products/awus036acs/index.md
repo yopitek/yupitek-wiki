@@ -2,14 +2,14 @@
 id: alfa-product-awus036acs
 title: ALFA AWUS036ACS——口袋大小雙頻 AC433
 sidebar_position: 9
-description: ALFA AWUS036ACS——小巧 55 mm RTL8811AU AC433 雙頻無線網絡卡，配兩支 5 dBi 天線與 DKMS 驅動的監聽模式。口袋 Kali 夥伴。
+description: ALFA AWUS036ACS——小巧 55 mm RTL8811AU AC433 雙頻無線網絡卡，配一支 2 dBi 外接天線與 DKMS 驅動的監聽模式。口袋 Kali 夥伴。
 tags: [alfa, 無線網絡卡, rtl8811au, ac433, 可攜式]
 keywords: [AWUS036ACS, RTL8811AU, 口袋無線網絡卡, 可攜式 Kali 無線網絡卡]
 ---
 
 # ALFA AWUS036ACS——口袋大小雙頻 AC433
 
-> **一句話定位（One-liner）**：**AWUS036ACS** 是 55 mm 口袋 ALFA——一支 **RTL8811AU AC433** 雙頻無線網絡卡，配兩支可摺疊的 5 dBi 天線與 DKMS 驅動的監聽模式（monitor mode）。它是你隨身攜帶的無線網絡卡，因為「你永遠不知道什麼時候會想看看某些 Wi-Fi」。
+> **一句話定位（One-liner）**：**AWUS036ACS** 是 55 mm 口袋 ALFA——一支 **RTL8811AU AC433** 雙頻無線網絡卡，配一支可摺疊的 2 dBi 天線與 DKMS 驅動的監聽模式（monitor mode）。它是你隨身攜帶的無線網絡卡，因為「你永遠不知道什麼時候會想看看某些 Wi-Fi」。
 
 ## 規格總覽 (Spec overview)
 
@@ -19,9 +19,9 @@ keywords: [AWUS036ACS, RTL8811AU, 口袋無線網絡卡, 可攜式 Kali 無線�
 | Wi-Fi 等級 | AC433（150 + 433 Mbps） |
 | 介面 | USB 2.0 |
 | 頻段 | 2.4 + 5 GHz |
-| 天線 | 2 × 外接 5 dBi，RP-SMA |
+| 天線 | 1 × 外接 2 dBi 雙頻偶極，RP-SMA |
 | 機身 | ~55 mm——口袋大小 |
-| Linux 驅動程式 | `rtl8811au`（DKMS，不在核心內） |
+| Linux 驅動程式 | `8821au`（DKMS，不在核心內） |
 | 監聽模式 | ✅ 良好 |
 | 封包注入 | ✅ 良好 |
 
@@ -34,19 +34,15 @@ ACS 是把經典 ALFA 配方縮小而不失去精髓的結果。它保留雙頻�
 ## 安裝與驅動程式
 
 完整細節在 [RTL8811AU 驅動程式頁面](/alfa-network/drivers/rtl8811au/)。簡短版本：
-
-```bash
-cd /opt && sudo git clone https://github.com/aircrack-ng/rtl8811au.git
-cd rtl8811au && sudo make dkms_install
-sudo modprobe 8811au
-```
-
+cd /opt && sudo git clone https://github.com/morrownr/8821au-20210708.git
+cd 8821au-20210708 && sudo sh install-driver.sh
+sudo modprobe 8821au
 **預期輸出**：`DKMS: install completed.` 然後 `iw dev` 中出現介面。
 
 ```mermaid
 flowchart LR
     A["AWUS036ACS in backpack"] --> B["DKMS driver build (once)"]
-    B --> C["modprobe 8811au"]
+    B --> C["modprobe 8821au"]
     C --> D["airmon-ng start wlan0"]
     D --> E["wlan0mon — ready anywhere"]
 ```
@@ -85,7 +81,7 @@ sudo aireplay-ng --test wlan0mon
 | 只有 managed 模式 | 核心 stub 衝突 | 把 `rtl8811au` 加入黑名單（見[驅動程式頁面](/alfa-network/drivers/rtl8811au/)） |
 | 注入 0/30 | 空頻道 | `sudo iw wlan0mon set channel 6` |
 | 吞吐量低 | 1×1 AC433 硬體 | 不是 bug |
-| 重新開機後偵測不到 | 模組未自動載入 | 把 `8811au` 加入 `/etc/modules-load.d/alfa.conf` |
+| 重新開機後偵測不到 | 模組未自動載入 | 把 `8821au` 加入 `/etc/modules-load.d/alfa.conf` |
 
 ## 相關資源
 

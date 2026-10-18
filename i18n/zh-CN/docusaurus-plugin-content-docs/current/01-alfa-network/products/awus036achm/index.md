@@ -9,7 +9,7 @@ keywords: [AWUS036ACHM, MT7610U, 预算网卡适配器, AC433 Kali]
 
 # ALFA AWUS036ACHM——预算级双频 AC433
 
-> **一句话定位（One-liner）**：**AWUS036ACHM** 是预算级双频 ALFA——一款 **MT7610U AC433** 网卡适配器，带两根 5 dBi 天线，关键是**内核内置驱动**（自 Linux 4.19 起的 `mt76x0u`）。它是 Linux 上进入双频监听模式最便宜的方式，没有之一。
+> **一句话定位（One-liner）**：**AWUS036ACHM** 是预算级双频 ALFA——一款 **MT7610U AC433** 网卡适配器，带一根可拆卸的 5 dBi 双频天线，关键是**内核内置驱动**（自 Linux 4.19 起的 `mt76x0u`）。它是 Linux 上进入双频监听模式最便宜的方式，没有之一。
 
 ## 规格总览（Spec overview）
 
@@ -19,7 +19,7 @@ keywords: [AWUS036ACHM, MT7610U, 预算网卡适配器, AC433 Kali]
 | Wi-Fi 等级 | AC433（150 + 433 Mbps） |
 | 接口 | USB 2.0 |
 | 频段 | 2.4 + 5 GHz |
-| 天线 | 2 × 外置 5 dBi，RP-SMA |
+| 天线 | 1 × 可拆卸 5 dBi 双频偶极子，RP-SMA |
 | Linux 驱动 | `mt76x0u`——**自 4.19 起内核内置** |
 | 监听模式 | ✅ 良好 |
 | 数据包注入 | ✅ 良好 |

@@ -121,27 +121,24 @@ DKMS: install completed.
 
 ### 3.3 RTL8811AU（AWUS036ACS）
 
-```bash
 cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl8811au.git
-cd rtl8811au
-sudo make dkms_install
+sudo git clone https://github.com/morrownr/8821au-20210708.git
+cd 8821au-20210708
+sudo sh install-driver.sh
 ```
 
-**預期輸出**：`DKMS: install completed.`——模組名稱 `8811au`。
+**預期輸出**：腳本會使用 DKMS 建置並安裝驅動程式（請回答其提示，並在要求時重新啟動）——模組名稱 `8821au`。
 
 ### 3.4 RTL8832BU（AWUS036AX / AWUS036AXER）
 
 ```bash
 cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl88x2bu.git
-cd rtl88x2bu
-sudo make dkms_install
+sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
+cd rtl8852bu-20250826
+sudo sh install-driver.sh
 ```
 
-**預期輸出**：`DKMS: install completed.`——模組名稱 `88x2bu`。
-
-### 3.5 重新插上並檢查
+**預期輸出**：腳本會使用 DKMS 建置並安裝驅動程式（請回答其提示，並在要求時重新啟動）——模組名稱 `8852bu`。注意：此驅動程式**不**支援監控模式。
 
 拔下再重新插上無線網絡卡（或執行 `sudo modprobe <module>`），然後驗證：
 
@@ -151,7 +148,7 @@ iw dev
 
 **預期輸出**：出現一行 `Interface wlan1`（如果它是你唯一的無線網絡卡則為 `wlan0`）。
 
-> **你可能會想問**——*「哪個模組名稱對應我的無線網絡卡？」* 對照你的晶片：`8812au` → AWUS036ACH、`8811au` → AWUS036ACS、`88x2bu` → AWUS036AX / AXER。[驅動程式頁面](/alfa-network/drivers/rtl8812au/) 有更深入的各晶片細節。
+> **你可能會想問**——*「哪個模組名稱對應我的無線網絡卡？」* 對照你的晶片：`8812au` → AWUS036ACH、`8821au` → AWUS036ACS、`8852bu` → AWUS036AX / AXER。[驅動程式頁面](/alfa-network/drivers/rtl8812au/) 有更深入的各晶片細節。
 
 ## 步驟 4：驗證一切 {#step-4-verify-everything}
 
@@ -207,4 +204,4 @@ iw dev
 - [晶片驅動程式頁面](/alfa-network/drivers/mt7612u/)——各晶片的深入探討
 - [疑難排解索引](/alfa-network/troubleshooting/)——其他任何出錯的情況
 - [相容性矩陣](/alfa-network/linux-compatibility-matrix/)——完整的作業系統涵蓋表
-- aircrack-ng 驅動程式 repos：[rtl8812au](https://github.com/aircrack-ng/rtl8812au)、[rtl8811au](https://github.com/aircrack-ng/rtl8811au)、[rtl88x2bu](https://github.com/aircrack-ng/rtl88x2bu)
+- aircrack-ng 驅動程式 repos：[rtl8812au](https://github.com/aircrack-ng/rtl8812au)、[8821au-20210708](https://github.com/morrownr/8821au-20210708) (RTL8811AU)、[rtl8852bu-20250826](https://github.com/morrownr/rtl8852bu-20250826) (RTL8832BU)

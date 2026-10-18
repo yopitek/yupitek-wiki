@@ -35,13 +35,10 @@ flowchart LR
 
 ## 第 1 步：克隆并构建
 
-```bash
 cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl8811au.git
-cd rtl8811au
-sudo make dkms_install
-```
-
+sudo git clone https://github.com/morrownr/8821au-20210708.git
+cd 8821au-20210708
+sudo sh install-driver.sh
 **预期输出**：
 
 ```text
@@ -49,11 +46,8 @@ DKMS: install completed.
 ```
 
 ## 第 2 步：加载并验证
-
-```bash
-sudo modprobe 8811au
+sudo modprobe 8821au
 iw dev
-```
 
 **预期输出**：一个 `Interface wlan0`（或 `wlan1`）行。如果网卡适配器只在重新插拔后才出现，把模块加入自动加载：
 
@@ -71,9 +65,8 @@ sudo aireplay-ng --test wlan0mon
 
 **预期输出**：
 
-```text
 PHY	Interface	Driver		Chipset
-phy0	wlan0		8811au		Realtek Semiconductor Corp. RTL8811AU
+phy0	wlan0		8821au		Realtek Semiconductor Corp. RTL8811AU
 ...
 12:34:56  Injection is working!
 12:34:56  30/30:  100%
@@ -90,11 +83,11 @@ sudo systemctl restart NetworkManager
 
 | 症状 | 原因 | 修复 |
 |---|---|---|
-| DKMS 构建失败 | 缺少头文件 / 内核太新 | `sudo apt install linux-headers-$(uname -r)`；`sudo git pull && sudo make dkms_install` |
+| DKMS 构建失败 | 缺少头文件 / 内核太新 | `sudo apt install linux-headers-$(uname -r)`；`cd 8821au-20210708 && git pull && sudo sh install-driver.sh` |
 | 接口只能在 managed 模式 | 内核桩模块 `rtl8811au` 抢占了它 | `echo "blacklist rtl8811au" \| sudo tee /etc/modprobe.d/alfa-8811au.conf`；重启 |
 | 注入 0/30 | 空信道 | `sudo iw wlan0mon set channel 6`；在接入点附近测试 |
 | 吞吐量低于预期 | 1×1 无线电（AC433）——硬件极限 | 不是 bug；5 GHz 上实际值约 150–250 Mbps |
-| 重启后检测不到 | 模块未自动加载 | 把 `8811au` 加入 `/etc/modules-load.d/alfa.conf` |
+| 重启后检测不到 | 模块未自动加载 | 把 `8821au` 加入 `/etc/modules-load.d/alfa.conf` |
 
 ## 参考
 
@@ -102,4 +95,4 @@ sudo systemctl restart NetworkManager
 - [Kali 设置指南](/alfa-network/linux-setup-kali/)
 - [Ubuntu 设置指南](/alfa-network/linux-setup-ubuntu/)
 - [故障排查索引](/alfa-network/troubleshooting/)
-- 驱动仓库：[aircrack-ng/rtl8811au](https://github.com/aircrack-ng/rtl8811au)
+- 驱动仓库：[morrownr/8821au-20210708](https://github.com/morrownr/8821au-20210708)（RTL8811AU / RTL8821AU；原 `aircrack-ng/rtl8811au` 仓库已不存在）

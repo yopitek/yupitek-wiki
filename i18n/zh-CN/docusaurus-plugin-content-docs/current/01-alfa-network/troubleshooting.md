@@ -141,9 +141,8 @@ sudo iw dev wlan0mon info   # confirm it really is type monitor
 ### 修复
 1. 锁定一个有活跃接入点的信道：`sudo iw dev wlan0mon set channel 6`
 2. 重新测试。仍然是 0/30？改用 aircrack-ng 驱动仓库重建，这些仓库默认启用监听 + VIF：
-   - [rtl8812au](/alfa-network/drivers/rtl8812au/)、[rtl8811au](/alfa-network/drivers/rtl8811au/)、[rtl88x2bu](/alfa-network/drivers/rtl8832bu/)
+   - [rtl8812au](/alfa-network/drivers/rtl8812au/)、[rtl8811au](/alfa-network/drivers/rtl8811au/)、[rtl8832bu](/alfa-network/drivers/rtl8832bu/)
 3. 在无射频信号的区域，用手机热点在同一信道创建你自己的接入点。
-
 ---
 
 ## 问题 5：Wi-Fi 频繁掉线或速度慢

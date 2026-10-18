@@ -51,7 +51,7 @@ sequenceDiagram
 
 ## 第 2 步：在 Flipper Zero 上启用蓝牙
 
-1. 打开 Flipper Zero（`LEFT + BACK`）。
+1. 确保您的 Flipper Zero 已开机（如果无响应，请长按 `LEFT + BACK` 5 秒以重启设备）。
 2. 进入 **主菜单 → Bluetooth**。
 3. 将 **Bluetooth** 设为 **ON**。
 

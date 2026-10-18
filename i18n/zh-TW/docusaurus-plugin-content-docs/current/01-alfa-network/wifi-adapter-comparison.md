@@ -10,9 +10,7 @@ keywords: [ALFA 無線網絡卡比較, AWUS036ACM vs AWUS036ACH, Wi-Fi 6E 無線
 
 # ALFA Wi-Fi 無線網絡卡比較
 
-> **結論先行（Bottom line）**：如果你是使用 Kali Linux 做課程作業或實驗室練習的大學生，買 **AWUS036ACM**——它的 MediaTek MT7612U 晶片內建於 Linux 核心，監聽模式（monitor mode）直接可用，而且比旗艦機型便宜。如果你的專案*需要* Wi-Fi 6E 速度，**AWUS036AXML** 是唯一的三頻選項。如果你是主要需要小巧 WiFi + 藍芽組合的 Windows 使用者，**AWUS036EACS** 是你的（唯一）無線網絡卡。
-
-
+> **結論先行（Bottom line）**：如果你是使用 Kali Linux 做課程作業或實驗室練習的大學生，買 **AWUS036ACM**——它的 MediaTek MT7612U 晶片內建於 Linux 核心，監聽模式（monitor mode）直接可用，而且比旗艦機型便宜。如果你的專案*需要* Wi-Fi 6E 速度，**AWUS036AXML**（USB-C）或 **AWUS036AXM**（USB-A）——兩者皆為三頻。如果你是主要需要小巧 WiFi + 藍芽組合的 Windows 使用者，**AWUS036EACS** 是你的（唯一）無線網絡卡。
 ![ALFA Wi-Fi 網絡卡產品線總覽——四大使用情境](/img/wifi-adapter-comparison/wifi-adapter-comparison-lineup.svg)
 
 *💡 點擊上方圖片可開啟高解析度放大燈箱，清晰檢視完整型號與晶片規格。*
@@ -25,32 +23,26 @@ keywords: [ALFA 無線網絡卡比較, AWUS036ACM vs AWUS036ACH, Wi-Fi 6E 無線
 | [AWUS036ACH](/alfa-network/products/awus036ach/) | RTL8812AU | AC1200 | USB 3.0 | 2.4 + 5 GHz | 300 + 867 Mbps | ✅ 極佳（DKMS） | 2 × 外接 5 dBi，RP-SMA |
 | [AWUS036ACHM](/alfa-network/products/awus036achm/) | MT7610U | AC433 | USB 2.0 | 2.4 + 5 GHz | 150 + 433 Mbps | ✅ 良好（內建於核心） | 2 × 外接 5 dBi，RP-SMA |
 | [AWUS036ACM](/alfa-network/products/awus036acm/) | MT7612U | AC1200 | USB 3.0 | 2.4 + 5 GHz | 300 + 867 Mbps | ✅ 極佳（內建於核心） | 2 × 外接 5 dBi，RP-SMA |
-| [AWUS036ACS](/alfa-network/products/awus036acs/) | RTL8811AU | AC433 | USB 2.0 | 2.4 + 5 GHz | 150 + 433 Mbps | ✅ 良好（DKMS） | 2 × 外接 5 dBi，RP-SMA（55 mm 機身） |
+| [AWUS036ACS](/alfa-network/products/awus036acs/) | RTL8811AU | AC433 | USB 2.0 | 2.4 + 5 GHz | 150 + 433 Mbps | ✅ 良好（DKMS） | 1 × 外接 2 dBi，RP-SMA（55 mm 機身） |
 | [AWUS036AX](/alfa-network/products/awus036ax/) | RTL8832BU | AX1800 | USB 3.2 | 2.4 + 5 GHz | 574 + 1201 Mbps | ✅ 良好（DKMS） | 2 × 外接 6 dBi，RP-SMA |
 | [AWUS036AXER](/alfa-network/products/awus036axer/) | RTL8832BU | AX1800 | USB 3.2 | 2.4 + 5 GHz | 574 + 1201 Mbps | ✅ 良好（DKMS） | 內建（10.5 g nano 機身） |
-| [AWUS036AXM](/alfa-network/products/awus036axm/) | MT7921AUN | AX3000 | USB 3.2 | 2.4 + 5 GHz | 574 + 2402 Mbps | ✅ 良好（內建於核心） | 2 × 外接 5 dBi，RP-SMA + BT 5.2 |
-| [AWUS036AXML](/alfa-network/products/awus036axml/) | MT7921AUN | AXE3000 | USB-C | 2.4 + 5 + 6 GHz | 574 + 1201 + 2402 Mbps | ✅ 良好（內建於核心） | 2 × 外接 5 dBi，RP-SMA + BT 5.2 |
-| [AWUS036EACS](/alfa-network/products/awus036eacs/) | RTL8821CU | AC600 | USB 2.0 | 2.4 + 5 GHz | 150 + 433 Mbps | ❌ 不可靠 | 整合式 2 dBi + BT 4.2 |
-
-### 解讀速度數字
-
+| [AWUS036AXM](/alfa-network/products/awus036axm/) | MT7921AUN | AX3000 級 | USB 3.2 | 2.4 + 5 + 6 GHz | 最高 600 + 1200 + 1200 Mbps | ✅ 良好（內建於核心） | 2 × 外接 5 dBi，RP-SMA + BT 5.2 |
+| [AWUS036AXML](/alfa-network/products/awus036axml/) | MT7921AUN | AXE3000 | USB-C | 2.4 + 5 + 6 GHz | 最高 600 + 1200 + 1200 Mbps | ✅ 良好（內建於核心） | 2 × 外接 5 dBi，RP-SMA + BT 5.2 |
 「+」分隔兩個頻段：**2.4 GHz + 5 GHz**（AXE 機型則為 + 6 GHz）。「300 + 867」的無線網絡卡是 **AC1200** 等級：300 Mbps 是 2.4 GHz 上限（2 個空間串流 × 150 Mbps），867 Mbps 是 5 GHz 上限（2 × 433 Mbps）。實際吞吐量通常是連結速率的 50–70%——物理、牆壁與 USB 匯流排開銷吃掉了其餘部分。
 
 ## 哪一款適合你？
 
 ### 如果你要 Kali / 監聽模式 / 封包注入 → AWUS036ACM
 
-MT7612U 晶片**自 Linux 4.19 起內建於核心**，這代表：在任何近期的 Kali 或 Ubuntu 上插上，`ip link` 就已經顯示 `wlan0`。監聽模式透過標準 `iw` 指令運作，封包注入也可靠。它還以兩支 5 dBi 天線推出真正的 500 mW TX 功率——對實驗室練習來說是真正有用的範圍。完整工作流程在 [Kali 設定指南](/alfa-network/linux-setup-kali/)。
+MT7612U 晶片**自 Linux 4.19 起內建於核心**，這代表：在任何近期的 Kali 或 Ubuntu 上插上，`ip link` 就已經顯示 `wlan0`。監聽模式透過標準 `iw` 指令運作，封包注入也可靠。它還提供 19–23 dBm TX 功率（約 100–200 mW，依 ALFA 規格表）搭配兩支外接天線——對實驗室練習來說是真正有用的範圍。完整工作流程在 [Kali 設定指南](/alfa-network/linux-setup-kali/)。
 
 ### 如果你要 Wi-Fi 6E（6 GHz）→ AWUS036AXML
 
-AXML 是產品線中唯一具備 **6 GHz 頻段**（AXE3000）的無線網絡卡。它使用 MediaTek **MT7921AUN**，其 `mt7921u` 驅動程式自核心 5.18 起進入主線——所以同樣沒有 DKMS 的麻煩。它也是唯一的 USB-C 機型，這使它成為現代超輕薄筆電或平板電腦的完美夥伴。請見 [Wi-Fi 6E 設定說明](/alfa-network/linux-setup-ubuntu/)。
+AXML（如同 AXM）提供 **6 GHz 頻段**（AXE3000）。它使用 MediaTek **MT7921AUN**，其 `mt7921u` 驅動程式自核心 5.18 起進入主線——所以同樣沒有 DKMS 的麻煩。它也是 Wi-Fi 6E 組合中的 USB-C 機型（AXM 為 USB-A），這使它成為現代超輕薄筆電或平板電腦的完美夥伴。請見 [Wi-Fi 6E 設定說明](/alfa-network/linux-setup-ubuntu/)。
 
 ### 如果你要純使用者端無線網絡卡（快速、穩定、不做滲透測試）→ AWUS036AXM 或 AWUS036AX
 
-AXM 是兩者中較快的（AX3000，5 GHz 上 2.4 Gbps），並加上**藍芽 5.2**——一個 dongle 搞定 WiFi + BT。AX 提供 Wi-Fi 6 + WPA3，外觀更經典 ALFA，價格略低。兩者在你需要時都能做監聽模式，但都不是專門嗅探的首選。
-
-### 如果你帶筆電旅行 / 想要口袋無線網絡卡 → AWUS036ACS 或 AWUS036AXER
+AXM 是兩者中較快等級的（AX3000，依 ALFA 規格 5 GHz 上最高 1200 Mbps），並加上**藍芽 5.2**——一個 dongle 搞定 WiFi + BT。AX 提供 Wi-Fi 6 + WPA3，外觀更經典 ALFA，價格略低。兩者在你需要時都能做監聽模式，但都不是專門嗅探的首選。
 
 ACS（55 mm 機身）與 AXER（10.5 g、內建天線）放進揹包就消失。ACS 是平價監聽模式夥伴；AXER 是日常使用的 Wi-Fi 6 nano。
 

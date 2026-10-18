@@ -9,7 +9,7 @@ keywords: [AWUS036ACHM, MT7610U, 平價無線網絡卡, AC433 Kali]
 
 # ALFA AWUS036ACHM——平價雙頻 AC433
 
-> **一句話定位（One-liner）**：**AWUS036ACHM** 是平價雙頻 ALFA——一支 **MT7610U AC433** 無線網絡卡，配兩支 5 dBi 天線，而且關鍵的是**內建於核心的驅動程式**（自 Linux 4.19 起的 `mt76x0u`）。它是進入 Linux 雙頻監聽模式（monitor mode）最便宜的方式，沒有之一。
+> **一句話定位（One-liner）**：**AWUS036ACHM** 是平價雙頻 ALFA——一支 **MT7610U AC433** 無線網絡卡，配一支可拆卸的 5 dBi 雙頻天線，而且關鍵的是**內建於核心的驅動程式**（自 Linux 4.19 起的 `mt76x0u`）。它是進入 Linux 雙頻監聽模式（monitor mode）最便宜的方式，沒有之一。
 
 ## 規格總覽 (Spec overview)
 
@@ -19,7 +19,7 @@ keywords: [AWUS036ACHM, MT7610U, 平價無線網絡卡, AC433 Kali]
 | Wi-Fi 等級 | AC433（150 + 433 Mbps） |
 | 介面 | USB 2.0 |
 | 頻段 | 2.4 + 5 GHz |
-| 天線 | 2 × 外接 5 dBi，RP-SMA |
+| 天線 | 1 × 可拆卸 5 dBi 雙頻偶極天線，RP-SMA |
 | Linux 驅動程式 | `mt76x0u`——**自 4.19 起內建於核心** |
 | 監聽模式 | ✅ 良好 |
 | 封包注入 | ✅ 良好 |

@@ -51,7 +51,7 @@ sequenceDiagram
 
 ## 步驟 2：在 Flipper Zero 上啟用藍芽
 
-1. 開啟 Flipper Zero（`LEFT + BACK`）。
+1. 確認您的 Flipper Zero 已開機（若無反應，請長按 `LEFT + BACK` 5 秒以重新啟動）。
 2. 前往 **主選單 → Bluetooth**。
 3. 將 **Bluetooth** 設為 **ON**。
 

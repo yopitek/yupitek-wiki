@@ -69,16 +69,15 @@ flowchart TD
 ## 1. WiFi Pineapple 家族（Mark VII / Enterprise / Pager）
 
 Pineapple 是一个**流氓接入点**：它广播自己的 Wi-Fi，让你能从浏览器管理它并运行 PineAP 套件。
-
 1. 开机（[Mark VII](/hak5/products/wifi-pineapple-mark-vii/) 用 USB-C，[Enterprise](/hak5/products/wifi-pineapple-enterprise/) 用交流电，[Pager](/hak5/products/wifi-pineapple-pager/) 用电池）。
-2. 在笔记本上加入 Pineapple 的 Wi-Fi。Mark VII 默认：SSID `PineAP`，密码 `pineapplesareyummy`。
+2. 在笔记本上加入 Pineapple 的 Wi-Fi。Mark VII：首次启动时会提供一个名为 `Pineapple_XXXX` 的开放设置 AP（完整设置请参见 Mark VII 页面）。
 3. 在浏览器打开管理界面：`http://172.16.42.1:1471`。
 4. 立即设置**管理员密码**（Settings → Password）。升级固件（Settings → Software Update）。
 5. 如果你想让模块更新，连接一个互联网上行链路。
 
 预期输出 — 浏览器显示 Pineapple 仪表盘，带有 **Recon**、**PineAP**、**Modules** 和 **Client** 面板。
 
-> **初学者陷阱：** 如果看不到 `PineAP` SSID，设备还在启动 — 等 30–60 秒。完整步骤和 5 GHz 升级路径在 [Mark VII 产品页](/hak5/products/wifi-pineapple-mark-vii/)。
+> **初学者陷阱：** 如果看不到 `Pineapple_XXXX` SSID，设备还在启动 — 等 30–60 秒。完整步骤和 5 GHz 升级路径在 [Mark VII 产品页](/hak5/products/wifi-pineapple-mark-vii/)。
 
 ---
 

@@ -139,7 +139,7 @@ Hard resetting via RTS pin...
 | Deauth | 强制客户端断开网络（仅限测试网络！） |
 | Sniff | 捕获探测请求 |
 | Hidden SSID reveal | 客户端探测时显示隐藏网络名称 |
-| Packet capture | 将原始 802.11 帧记录到 SD 卡 |
+| Packet capture | 将原始 802.11 帧记录到 Flipper Zero 的 microSD 卡 |
 
 ### Evil Portal
 

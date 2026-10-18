@@ -23,8 +23,8 @@ keywords: [AWUS036AXER, RTL8832BU 纳米, 10.5g 网卡适配器, 内置天线 Wi
 | 重量 | 10.5 g |
 | 安全 | WPA3 |
 | MIMO | 2×2 |
-| Linux 驱动 | `rtl88x2bu`（DKMS） |
-| 监听模式 | ✅（内置天线——见说明） |
+| Linux 驱动 | `rtl8852bu`（DKMS） |
+| 监听模式 | ❌ 社区驱动不支持（参见[驱动指南](/alfa-network/drivers/rtl8832bu/)） |
 
 ## 总览
 
@@ -35,21 +35,18 @@ AXER 拿走 AWUS036AX 的无线电，剥掉体积。它不用两根外置天线�
 ## 安装与驱动
 
 与 [AWUS036AX](/alfa-network/products/awus036ax/) 完全相同的驱动故事——完整步骤见 [RTL8832BU 驱动页面](/alfa-network/drivers/rtl8832bu/)：
-
-```bash
-cd /opt && sudo git clone https://github.com/aircrack-ng/rtl88x2bu.git
-cd rtl88x2bu && sudo make dkms_install
-sudo modprobe 88x2bu
+cd /opt && sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
+cd rtl8852bu-20250826 && sudo sh install-driver.sh
+sudo modprobe 8852bu
 ```
 
-**预期输出**：`DKMS: install completed.`，然后 `iw dev` 中出现接口。
+**预期输出**：安装程序完成（提示时重启），然后 `iw dev` 中出现接口。
 
 ```mermaid
 flowchart LR
-    A["AWUS036AXER (10.5 g)"] --> B["DKMS build rtl88x2bu"]
-    B --> C["modprobe 88x2bu"]
+    A["AWUS036AXER (10.5 g)"] --> B["DKMS build rtl8852bu"]
+    B --> C["modprobe 8852bu"]
     C --> D["Connect — fast and flush"]
-```
 
 ## 进阶用法
 
@@ -61,13 +58,9 @@ iw dev wlan0 link
 ```
 
 **预期输出**：已连接；靠近接入点时 5 GHz 链路速率最高 **1201 Mb/s**。
+### 监听模式
 
-### 监听模式——有一个注意事项
-
-内置天线意味着覆盖范围和灵敏度有限。监听模式*能用*（驱动支持），但严肃的捕获工作，外置天线的 [AWUS036AX](/alfa-network/products/awus036ax/) 或 [AWUS036ACM](/alfa-network/products/awus036acm/) 是更好的工具。NetHunter 兼容性在这款上也很勉强。
-
-## 兼容性
-
+该芯片组的社区驱动**不**支持监听模式，且内置天线也会限制捕获范围。如需使用监听模式，请选择支持内核驱动且配备外置天线的适配器，例如 [AWUS036ACM](/alfa-network/products/awus036acm/)。
 | 平台 | 支持 | 说明 |
 |---|---|---|
 | Kali Linux | ✅ | DKMS，但内置天线限制覆盖范围 |

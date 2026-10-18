@@ -9,7 +9,7 @@ keywords: [APA-M25-6E, 三頻面板天線, 6 GHz 天線, Wi-Fi 6E 天線]
 
 # ALFA APA-M25-6E——三頻面板天線（Wi-Fi 6E 就緒）
 
-> **一句話定位（One-liner）**：**APA-M25-6E** 是一面涵蓋 **2.4、5 與 6 GHz** 的 **10 dBi 指向性面板天線**——經典 APA-M25 的 Wi-Fi 6E 版本。如果你的無線網絡卡有 6 GHz 無線電（[AWUS036AXML](/alfa-network/products/awus036axml/)），這支天線讓它真的能橫跨校園。
+> **一句話定位（One-liner）**：**APA-M25-6E** 是一面涵蓋 **2.4、5 與 6 GHz** 的 **指向性面板天線（最高 10 dBi）**——經典 APA-M25 的 Wi-Fi 6E 版本。如果你的無線網絡卡有 6 GHz 無線電（[AWUS036AXML](/alfa-network/products/awus036axml/)），這支天線讓它真的能橫跨校園。
 
 ## 規格總覽 (Spec overview)
 
@@ -17,15 +17,15 @@ keywords: [APA-M25-6E, 三頻面板天線, 6 GHz 天線, Wi-Fi 6E 天線]
 |---|---|
 | 型別 | 指向性面板天線 |
 | 頻段 | 2.4 GHz / 5 GHz / **6 GHz（Wi-Fi 6E）** |
-| 增益 | 10 dBi |
-| 接頭 | PR-SMA（母）——與無線網絡卡的 RP-SMA 配對 |
+| 增益 | 8 dBi @ 2.4 GHz · 10 dBi @ 5 GHz · 9 dBi @ 6 GHz |
+| 接頭 | RP-SMA 公頭——適配無線網絡卡的 RP-SMA 埠 |
 | 極化 | 線性、垂直 |
 | 設計 | 緊湊面板，壁掛/桅杆安裝 |
 | 使用情境 | 固定點對點連結、6 GHz 回程、長距離使用者端連結 |
 
 ## 總覽
 
-APA-M25 是標準的雙頻面板。**6E** 變體加上 **6 GHz 頻段**——相同的 10 dBi 面板設計，重新調校讓頻譜頂端不再是事後才想到。為什麼這很重要？6 GHz 頻段（5 GHz 以上的頻道 1–233）是目前 Wi-Fi 連結能用的壅塞度最低的頻譜，但前提是你的*天線*真的能透過它。舊的「雙頻」面板在 5.8 GHz 以上就急遽衰減；6E 版本就是為它打造的。
+APA-M25 是標準的雙頻面板。**6E** 變體加上 **6 GHz 頻段**——相同的面板設計，重新調校讓頻譜頂端不再是事後才想到。為什麼這很重要？6 GHz 頻段（5 GHz 以上的頻道 1–233）是目前 Wi-Fi 連結能用的壅塞度最低的頻譜，但前提是你的*天線*真的能透過它。舊的「雙頻」面板在 5.8 GHz 以上就急遽衰減；6E 版本就是為它打造的。
 
 它擅長的地方：
 
@@ -50,7 +50,7 @@ flowchart LR
 
 ### 步驟 1：接頭檢查
 
-APA-M25-6E 是 **PR-SMA 母**，與 ALFA 無線網絡卡上的 **RP-SMA 公** 天線連線埠相符。把它配到任何有外接天線的 ALFA 無線網絡卡——[AWUS036AXML](/alfa-network/products/awus036axml/) 是 6 GHz 工作的自然夥伴。
+APA-M25-6E 使用 **RP-SMA 公頭（公）**，與 APA-M25 相同，並可安裝於 ALFA 無線網絡卡的天線連線埠。把它配到任何有外接天線的 ALFA 無線網絡卡——[AWUS036AXML](/alfa-network/products/awus036axml/) 是 6 GHz 工作的自然夥伴。
 
 ### 步驟 2：安裝與瞄準
 

@@ -35,13 +35,10 @@ flowchart LR
 
 ## 步驟 1：複製並建置
 
-```bash
 cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl8811au.git
-cd rtl8811au
-sudo make dkms_install
-```
-
+sudo git clone https://github.com/morrownr/8821au-20210708.git
+cd 8821au-20210708
+sudo sh install-driver.sh
 **預期輸出**：
 
 ```text
@@ -49,11 +46,8 @@ DKMS: install completed.
 ```
 
 ## 步驟 2：載入並驗證
-
-```bash
-sudo modprobe 8811au
+sudo modprobe 8821au
 iw dev
-```
 
 **預期輸出**：一行 `Interface wlan0`（或 `wlan1`）。如果無線網絡卡重新插上後才出現，把模組加入自動載入：
 
@@ -71,9 +65,8 @@ sudo aireplay-ng --test wlan0mon
 
 **預期輸出**：
 
-```text
-PHY	Interface	Driver		Chipset
-phy0	wlan0		8811au		Realtek Semiconductor Corp. RTL8811AU
+PHY	介面	驅動程式		晶片組
+phy0	wlan0		8821au		Realtek Semiconductor Corp. RTL8811AU
 ...
 12:34:56  Injection is working!
 12:34:56  30/30:  100%
@@ -90,11 +83,11 @@ sudo systemctl restart NetworkManager
 
 | 症狀 | 原因 | 修復 |
 |---|---|---|
-| DKMS 建置失敗 | 缺少標頭檔 / 核心太新 | `sudo apt install linux-headers-$(uname -r)`；`sudo git pull && sudo make dkms_install` |
+| DKMS 建置失敗 | 缺少標頭檔 / 核心太新 | `sudo apt install linux-headers-$(uname -r)`；`cd 8821au-20210708 && git pull && sudo sh install-driver.sh` |
 | 介面只在 managed 模式 | 核心 stub `rtl8811au` 搶走了它 | `echo "blacklist rtl8811au" \| sudo tee /etc/modprobe.d/alfa-8811au.conf`；重新開機 |
 | 注入 0/30 | 空頻道 | `sudo iw wlan0mon set channel 6`；在 AP 附近測試 |
 | 吞吐量低於預期 | 1×1 無線電（AC433）——硬體限制 | 不是 bug；5 GHz 上實際預期 ~150–250 Mbps |
-| 重新開機後偵測不到 | 模組未自動載入 | 把 `8811au` 加入 `/etc/modules-load.d/alfa.conf` |
+| 重新開機後偵測不到 | 模組未自動載入 | 把 `8821au` 加入 `/etc/modules-load.d/alfa.conf` |
 
 ## 參考資料
 
@@ -102,4 +95,4 @@ sudo systemctl restart NetworkManager
 - [Kali 設定指南](/alfa-network/linux-setup-kali/)
 - [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/)
 - [疑難排解索引](/alfa-network/troubleshooting/)
-- 驅動程式 repo：[aircrack-ng/rtl8811au](https://github.com/aircrack-ng/rtl8811au)
+- 驅動程式 repo：[morrownr/8821au-20210708](https://github.com/morrownr/8821au-20210708)（RTL8811AU / RTL8821AU；原本的 `aircrack-ng/rtl8811au` 儲存庫已不存在）

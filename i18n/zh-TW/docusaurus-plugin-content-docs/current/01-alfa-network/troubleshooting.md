@@ -141,9 +141,8 @@ sudo iw dev wlan0mon info   # confirm it really is type monitor
 ### 修復
 1. 鎖定有活躍 AP 的頻道：`sudo iw dev wlan0mon set channel 6`
 2. 重測。還是 0/30？用 aircrack-ng 驅動程式 repos 重建，它們預設啟用 monitor + VIF：
-   - [rtl8812au](/alfa-network/drivers/rtl8812au/)、[rtl8811au](/alfa-network/drivers/rtl8811au/)、[rtl88x2bu](/alfa-network/drivers/rtl8832bu/)
+   - [rtl8812au](/alfa-network/drivers/rtl8812au/)、[rtl8811au](/alfa-network/drivers/rtl8811au/)、[rtl8832bu](/alfa-network/drivers/rtl8832bu/)
 3. 在無 RF 的區域，用手機熱點在同一個頻道上建立你自己的 AP。
-
 ---
 
 ## 問題 5：Wi-Fi 一直斷線或很慢

@@ -90,7 +90,7 @@ sudo systemctl restart NetworkManager
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| DKMS build fails | Missing headers / too-new kernel | `sudo apt install linux-headers-$(uname -r)`; `sudo git pull && sudo make dkms_install` |
+| DKMS build fails | Missing headers / too-new kernel | `sudo apt install linux-headers-$(uname -r)`; `cd 8821au-20210708 && git pull && sudo sh install-driver.sh` |
 | Interface only in managed mode | Kernel stub `rtl8811au` grabbed it | `echo "blacklist rtl8811au" \| sudo tee /etc/modprobe.d/alfa-8811au.conf`; reboot |
 | Injection 0/30 | Empty channel | `sudo iw wlan0mon set channel 6`; test near an AP |
 | Throughput lower than expected | 1×1 radio (AC433) — hardware limit | Not a bug; expect ~150–250 Mbps real-world on 5 GHz |

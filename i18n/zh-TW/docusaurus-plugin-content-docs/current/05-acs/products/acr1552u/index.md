@@ -48,7 +48,7 @@ toc: true
 | Firmware 升級 | ✅（透過 USB） |
 | 尺寸/重量 | 98.0 × 65.0 × 12.8 mm / 約 79–89 g |
 | 系統支援 | Windows、Linux、macOS、Android、iOS/iPadOS 16+ |
-| 官方檔案 | [ACR1552U 產品頁](https://www.acs.com.hk/en/products/575/acr1552u-usb-nfc-reader-iv/)、[技術規格 (PDF)](https://www.smartcardfocus.com/files/ACR1552U-M1SAM/TechnicalSpecification_TSP-ACR1552U-1.05_Jan2024.pdf) |
+| 官方檔案 | [ACR1552U 產品頁](https://www.acs.com.hk/en/products/575/acr1552u-usb-nfc-reader-iv/)、API Reference (PDF) |
 
 ## 這顆與前兩顆差在哪（重點）
 

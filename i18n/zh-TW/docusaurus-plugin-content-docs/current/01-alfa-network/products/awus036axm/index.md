@@ -16,9 +16,9 @@ keywords: [AWUS036AXM, MT7921AUN, AX3000, 藍芽 5.2 無線網絡卡, 內建於�
 | 專案 | 規格 |
 |---|---|
 | 晶片 | MediaTek MT7921AUN |
-| Wi-Fi 等級 | AX3000（574 + 2402 Mbps） |
+| Wi-Fi 等級 | AX3000 等級 — 最高 600 / 1200 / 1200 Mbps（2.4 / 5 / 6 GHz），依 ALFA 規格表 |
 | 介面 | USB 3.2 |
-| 頻段 | 2.4 + 5 GHz |
+| 頻段 | 2.4 + 5 + 6 GHz |
 | 天線 | 2 × 外接 5 dBi，RP-SMA |
 | 藍芽 | **BT 5.2**（同一個 dongle） |
 | MIMO | 2×2 |
@@ -27,7 +27,7 @@ keywords: [AWUS036AXM, MT7921AUN, AX3000, 藍芽 5.2 無線網絡卡, 內建於�
 
 ## 總覽
 
-AXM 是備受喜愛的 [AWUS036ACM](/alfa-network/products/awus036acm/) 的現代繼任者——MediaTek 無線電、內建於核心的驅動程式、沒有 DKMS 的麻煩——但帶上整整一代的升級：**AX3000** 速度（5 GHz 上 2.4 Gbps）、**藍芽 5.2** 搭在同一個 USB 裝置上，以及一顆在擁擠環境中處理得更好的新無線電。
+AXM 是備受喜愛的 [AWUS036ACM](/alfa-network/products/awus036acm/) 的現代繼任者——MediaTek 無線電、內建於核心的驅動程式、沒有 DKMS 的麻煩——但帶上整整一代的升級：**AX3000** 速度（依 ALFA 規格表，5 GHz 上最高 1200 Mbps）、**藍芽 5.2** 搭在同一個 USB 裝置上，以及一顆在擁擠環境中處理得更好的新無線電。
 
 對 Linux 使用者來說，吸引力與 ACM 相同：**它就是能用**。驅動程式在核心內（需要 5.18+，所以 Ubuntu 22.04+ 或近期 Kali）、監聽模式（monitor mode）透過標準 `mac80211` 路徑可用，而且紅利是你的 WiFi 與藍芽共用一個連線埠。
 

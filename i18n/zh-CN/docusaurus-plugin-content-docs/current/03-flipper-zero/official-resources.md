@@ -65,7 +65,7 @@ flowchart TD
 |---|---|
 | [flipperzero-firmware](https://github.com/flipperdevices/flipperzero-firmware) | FlipperOS 固件——官方发布构建、自定义固件基础 |
 | [qFlipper](https://github.com/flipperdevices/qFlipper) | 桌面应用源码 |
-| [flipperzero-firmware-sources](https://github.com/flipperdevices/flipperzero-firmware-sources) | 用于自行构建的完整固件源码 |
+| [flipperzero-firmware-sources](https://github.com/flipperdevices/flipperzero-firmware) | 用于自行构建的完整固件源码 |
 | [video-game-module](https://github.com/flipperdevices/video-game-module) | Video Game Module 固件和游戏 |
 | [Flipper Zero 原理图与硬件](https://docs.flipper.net) | 官方文档提供 GPIO 引脚定义和原理图 PDF |
 

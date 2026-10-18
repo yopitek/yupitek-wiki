@@ -64,11 +64,9 @@ Bus 003 Device 002: ID 0cf3:9271 Qualcomm Atheros Communications AR9271 802.11n
 ## 第 2 步——安装匹配的驱动
 
 每个芯片组都有自己的怪癖：
-
 - **MediaTek（MT79xx / MT76xx）**：某些内核已内置树内 `mt76` 支持——芯片组指南会告诉你什么时候够用、什么时候需要编译厂商驱动。
-- **Realtek（RTL88xx）**：几乎总是需要树外驱动（`rtl88x2bu` 风格的 DKMS 构建）。预期流程是 `make` + `sudo make install` + 重启。
+- **Realtek（RTL88xx）**：几乎总是需要树外驱动（如 `rtl8852bu` 等社区 DKMS 构建）。预期流程是 `make` + `sudo make install` + 重启。
 - **Atheros**：`ath9k_htc` 已在内核中——通常即插即用。
-
 按芯片组专属指南执行确切命令；它们都以一个**验证步骤**收尾：
 
 ```bash

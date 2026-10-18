@@ -22,8 +22,8 @@ keywords: [AWUS036AX, RTL8832BU, Wi-Fi 6 無線網絡卡, WPA3, AX1800]
 | 天線 | 2 × 外接 6 dBi，RP-SMA |
 | 安全性 | WPA3（與 WPA2/WPA 並存） |
 | MIMO | 2×2 |
-| Linux 驅動程式 | `rtl88x2bu`（DKMS，不在核心內） |
-| 監聽模式 | ✅ 良好 |
+| Linux 驅動程式 | `rtl8852bu`（DKMS，不在核心內） |
+| 監聽模式 | ❌ 社群驅動程式不支援（請參閱[驅動程式指南](/alfa-network/drivers/rtl8832bu/)） |
 
 ## 總覽
 
@@ -32,28 +32,23 @@ AWUS036AX 是 ALFA 著名的 AC 世代與 Wi-Fi 6 世界之間的橋樑。引擎
 1. **WPA3 支援**——校園與 6 GHz 世代的網路正在鎖定 WPA3-SAE。舊 AC 無線網絡卡會被拒絕；這支會協商新的安全握手。
 2. **Wi-Fi 6 效率**——OFDMA 與更好的多使用者處理代表 AX 在擁擠的演講廳 RF 中比任何 AC 無線網絡卡都撐得住。
 
-它保留經典的 ALFA DNA——兩支 6 dBi 外接天線、高功率前端，以及你想要時的 DKMS 驅動監聽模式（monitor mode）。驅動程式**不在核心內**，所以有一次性的 DKMS 建置。
+它保留經典的 ALFA DNA——兩支 6 dBi 外接天線、高功率前端，以及以使用者為優先的 Wi-Fi 6 無線晶片。驅動程式**不在核心內**，所以有一次性的 DKMS 建置。
 
 ## 安裝與驅動程式
 
 完整步驟在 [RTL8832BU 驅動程式頁面](/alfa-network/drivers/rtl8832bu/)。簡短版本：
-
-```bash
-cd /opt && sudo git clone https://github.com/aircrack-ng/rtl88x2bu.git
-cd rtl88x2bu && sudo make dkms_install
-sudo modprobe 88x2bu
+cd /opt && sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
+cd rtl8852bu-20250826 && sudo sh install-driver.sh
+sudo modprobe 8852bu
 ```
 
-**預期輸出**：`DKMS: install completed.` 然後 `iw dev` 中出現介面。
+**預期輸出**：安裝程式完成（提示時請重新啟動），然後 `iw dev` 中出現介面。
 
 ```mermaid
 flowchart LR
-    A["AWUS036AX"] --> B["DKMS build (rtl88x2bu)"]
-    B --> C["modprobe 88x2bu"]
+    A["AWUS036AX"] --> B["DKMS build (rtl8852bu)"]
+    B --> C["modprobe 8852bu"]
     C --> D["Connect WPA3 network"]
-    D --> E["airmon-ng start wlan0 (optional)"]
-```
-
 ## 進階使用
 
 ### 連到只支援 WPA3 的網路
@@ -64,18 +59,9 @@ iw dev wlan0 link
 ```
 
 **預期輸出**：`Connected` 與靠近 AP 時最高 **1201 Mb/s** 的 5 GHz 連結速率（2×2 80 MHz）。
+### 監聽模式
 
-### 監聽模式（需要時）
-
-```bash
-sudo airmon-ng start wlan0
-sudo aireplay-ng --test wlan0mon
-```
-
-**預期輸出**：`wlan0mon` + 注入 `30/30: 100%`。
-
-## 相容性
-
+此晶片組的社群驅動程式**不**支援監聽模式。若需使用監聽模式與注入功能，請使用內建於核心的 MediaTek 轉接器，例如 [AWUS036ACM](/alfa-network/products/awus036acm/) 或 [AWUS036AXML](/alfa-network/products/awus036axml/)。
 | 平臺 | 支援 | 注意事項 |
 |---|---|---|
 | Kali Linux | ✅ | DKMS |
@@ -89,7 +75,7 @@ sudo aireplay-ng --test wlan0mon
 | 症狀 | 原因 | 修復 |
 |---|---|---|
 | WPA3 網路看不見 | 驅動程式/wpa_supplicant 太舊 | 更新驅動程式 + 作業系統 |
-| DKMS 建置失敗 | 新核心 vs repo | `cd /opt/rtl88x2bu && git pull && make dkms_install` |
+| DKMS 建置失敗 | 新核心 vs repo | `cd /opt/rtl8852bu-20250826 && git pull && sudo sh install-driver.sh` |
 | 高連結速率但傳輸慢 | USB 2.0 連線埠 | 使用 USB 3.x 連線埠（無線網絡卡是 USB 3.2） |
 | 注入 0/30 | 空頻道 | `sudo iw wlan0mon set channel 6` |
 

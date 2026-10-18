@@ -42,11 +42,10 @@ flowchart TD
 | AWUS036AXM | MT7921AUN | `mt7921u` | ✅ 自 5.18 起 | ✅ | ✅ | ✅ |
 | AWUS036AXML | MT7921AUN | `mt7921u` | ✅ 自 5.18 起 | ✅ | ✅ | ✅ |
 | AWUS036ACH | RTL8812AU | `rtl8812au-dkms` | ❌ | 🔧 | 🔧 | 🔧 |
-| AWUS036ACS | RTL8811AU | `rtl8811au` (DKMS) | ❌ | 🔧 | 🔧 | 🔧 |
-| AWUS036AX | RTL8832BU | `rtl88x2bu` (DKMS) | ❌ | 🔧 | 🔧 | ⚠️ |
-| AWUS036AXER | RTL8832BU | `rtl88x2bu` (DKMS) | ❌ | 🔧 | 🔧 | ⚠️ |
+| AWUS036ACS | RTL8811AU | `8821au` (DKMS) | ❌ | 🔧 | 🔧 | 🔧 |
+| AWUS036AX | RTL8832BU | `rtl8852bu` (DKMS) | ❌ | 🔧 | 🔧 | ⚠️ |
+| AWUS036AXER | RTL8832BU | `rtl8852bu` (DKMS) | ❌ | 🔧 | 🔧 | ⚠️ |
 | AWUS036EACS | RTL8821CU | — (無可靠驅動程式) | ❌ | ❌ | ❌ | ❌ |
-
 ## 「內建於核心」對你意味著什麼
 
 當某顆晶片的驅動程式位於 Linux 核心內，你的作業系統會隨附預先安裝。插上無線網絡卡後 `dmesg` 會顯示它被驅動程式認領——不需要編譯、不需要 DKMS、不會因核心更新而壞掉。這是本頁 MediaTek 與 Realtek 無線網絡卡之間最大的可靠性差異。

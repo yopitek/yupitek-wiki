@@ -57,7 +57,7 @@ iw dev
 
 ## 第 2 步：安装驱动（仅 Realtek 芯片组）
 
-如果你的芯片组是 RTL8812AU / RTL8811AU / RTL8832BU，用 DKMS 构建 aircrack-ng 维护的驱动。如果你的芯片组是 MediaTek（MT7612U / MT7610U / MT7921AUN），**跳到第 3 步**——驱动已经在你内核里。
+如果你的芯片组是 RTL8812AU / RTL8811AU / RTL8832BU，用 DKMS 构建社区维护的驱动（RTL8812AU 使用 aircrack-ng；RTL8811AU 和 RTL8832BU 使用 morrownr）。如果你的芯片组是 MediaTek（MT7612U / MT7610U / MT7921AUN），**跳到第 3 步**——驱动已经在你内核里。
 
 ### RTL8812AU（AWUS036ACH）
 
@@ -76,27 +76,23 @@ sudo make dkms_install
 
 ### RTL8811AU（AWUS036ACS）
 
-```bash
 cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl8811au.git
-cd rtl8811au
-sudo make dkms_install
-```
-
+sudo git clone https://github.com/morrownr/8821au-20210708.git
+cd 8821au-20210708
+sudo sh install-driver.sh
 ### RTL8832BU（AWUS036AX / AWUS036AXER）
 
-```bash
 cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl88x2bu.git
-cd rtl88x2bu
-sudo make dkms_install
+sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
+cd rtl8852bu-20250826
+sudo sh install-driver.sh
 ```
 
 重新插拔网卡适配器（或 `sudo modprobe <module>`）并确认出现接口：`iw dev`。
 
-## 第 3 步：终止干扰进程
+> RTL8832BU 驱动（AWUS036AX / AXER）**不**支持监听模式。若需监听模式和注入功能，请使用配备内核内置 MediaTek 驱动的适配器（例如 AWUS036ACM 或 AWUS036AXML）或 AWUS036ACH。
 
-Kali 的 NetworkManager 会争夺 Wi-Fi 接口的控制权。在切换到监听模式之前先停掉它：
+## 第 3 步：终止干扰进程
 
 ```bash
 sudo airmon-ng check kill
