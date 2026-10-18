@@ -20,7 +20,7 @@ keywords: [AWUS036ACM, MT7612U, recommended Kali adapter, AC1200 USB adapter]
 | Interface | USB 3.0 |
 | Bands | 2.4 + 5 GHz |
 | Antenna | 2 × external 5 dBi, RP-SMA |
-| TX power | High power (500 mW class) |
+| TX power | 19–23 dBm depending on mode (about 100–200 mW), per ALFA's spec sheet |
 | Linux driver | `mt76x2u` — **in-kernel since 4.19** |
 | Monitor mode | ✅ excellent |
 | Packet injection | ✅ excellent |

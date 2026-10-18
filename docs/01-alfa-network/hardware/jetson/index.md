@@ -29,7 +29,7 @@ keywords: [Jetson Orin ALFA, Jetson Wi-Fi 6E, AWUS036AXML Jetson, robotics wirel
 Jetson Orin carrier boards typically include modest integrated Wi-Fi radios sufficient only for routine package downloads. High-performance robotics, autonomous navigation (ROS 2), and real-time computer vision require substantially more:
 
 1. **6 GHz Wi-Fi 6E (Empty Spectrum)**: Standard carrier radios operate on congested 2.4 GHz and 5 GHz bands. The 6 GHz spectrum provides wide 80/160 MHz channels with near-zero lab interference—ideal for streaming 4K RTSP camera feeds and 3D LiDAR point clouds.
-2. **High-Gain External Antennas**: High-power ALFA adapters with dual RP-SMA antennas (such as the ARS-NT5B7 or APA-M25) penetrate obstacles and maintain line-of-sight telemetry over 100+ meters.
+2. **High-Gain External Antennas**: High-gain ALFA antennas (such as the ARS-NT5B7 omni antenna or the APA-M25 panel antenna) paired with your adapter penetrate obstacles and maintain line-of-sight telemetry over 100+ meters.
 3. **Dedicated Monitor Mode**: Enables passive wireless sniffing and spectrum analysis directly on robot development platforms.
 
 ### JetPack & L4T Kernel Compatibility Matrix

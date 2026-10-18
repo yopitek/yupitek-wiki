@@ -2,14 +2,14 @@
 id: alfa-product-awus036acs
 title: ALFA AWUS036ACS — Pocket-Size Dual-Band AC433
 sidebar_position: 9
-description: ALFA AWUS036ACS — tiny 55 mm RTL8811AU AC433 dual-band adapter with two 5 dBi antennas and DKMS-driven monitor mode. The pocket Kali companion.
+description: ALFA AWUS036ACS — tiny 55 mm RTL8811AU AC433 dual-band adapter with one 2 dBi external antenna and DKMS-driven monitor mode. The pocket Kali companion.
 tags: [alfa, adapter, rtl8811au, ac433, portable]
 keywords: [AWUS036ACS, RTL8811AU, pocket adapter, portable Kali adapter]
 ---
 
 # ALFA AWUS036ACS — Pocket-Size Dual-Band AC433
 
-> **Quick Summary**: The **AWUS036ACS** is the 55 mm pocket ALFA — an **RTL8811AU AC433** dual-band adapter with two fold-out 5 dBi antennas and DKMS-driven monitor mode. It is the adapter you carry because "you never know when you will want to look at some Wi-Fi."
+> **Quick Summary**: The **AWUS036ACS** is the 55 mm pocket ALFA — an **RTL8811AU AC433** dual-band adapter with one fold-out 2 dBi antenna and DKMS-driven monitor mode. It is the adapter you carry because "you never know when you will want to look at some Wi-Fi."
 
 ## Specifications Overview (Spec overview)
 
@@ -19,7 +19,7 @@ keywords: [AWUS036ACS, RTL8811AU, pocket adapter, portable Kali adapter]
 | Wi-Fi class | AC433 (150 + 433 Mbps) |
 | Interface | USB 2.0 |
 | Bands | 2.4 + 5 GHz |
-| Antenna | 2 × external 5 dBi, RP-SMA |
+| Antenna | 1 × external 2 dBi dual-band dipole, RP-SMA |
 | Body | ~55 mm — pocket sized |
 | Linux driver | `rtl8811au` (DKMS, not in-kernel) |
 | Monitor mode | ✅ good |
@@ -65,7 +65,7 @@ sudo aireplay-ng --test wlan0mon
 
 ### Travel rig
 
-Pair the fold-out antennas (they stay attached in transit) with a [Jetson](/alfa-network/hardware/jetson/) or laptop for a portable capture/analysis station. Fold the antennas, drop it in the pocket, done.
+Pair the fold-out antenna (it stays attached in transit) with a [Jetson](/alfa-network/hardware/jetson/) or laptop for a portable capture/analysis station. Fold the antenna, drop it in the pocket, done.
 
 ## Compatibility
 

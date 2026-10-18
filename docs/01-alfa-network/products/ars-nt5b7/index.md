@@ -19,7 +19,7 @@ keywords: [ARS-NT5B7, WiFi 7 antenna, tri-band dipole, industrial antenna, -40 8
 | Bands | 2.4 / 5 / **6 GHz (Wi-Fi 6E/7)** |
 | Gain | Up to 7 dBi (best on 6 GHz) |
 | Operating temperature | **-40 °C to +85 °C** (industrial) |
-| Connector | Industry-standard (IPEX / RP-SMA / N depending on variant — check your SKU) |
+| Connector | RP-SMA (male) — per ALFA's spec sheet |
 | Design | Ruggedized dipole, weather-tolerant materials |
 | Use case | Embedded gateways, industrial IoT, robots, outdoor radios, WiFi 7 |
 
@@ -53,12 +53,11 @@ WiFi 7 (802.11be) runs on all three bands simultaneously via MLO (multi-link ope
 
 ### Step 1: Match the connector
 
-The ARS-NT5B7 ships in connector variants (commonly IPEX/U.FL for on-board modules, or RP-SMA for external radio ports). Match it to your radio before anything else — do not force a mismatched connector.
+The ARS-NT5B7 uses an **RP-SMA (male)** connector (per ALFA's spec sheet). Match it to your radio's RP-SMA (female) port before anything else — do not force a mismatched connector.
 
 ### Step 2: Mount with clearance
 
 - Mount the dipole **upright and away from metal** — a dipole touching a metal wall becomes half its intended antenna.
-- For IPEX variants, route the cable with gentle bends (IPEX is fragile at the solder joint; use strain relief).
 
 ### Step 3: Verify across bands
 
@@ -73,14 +72,13 @@ iw dev wlan0 info | grep channel
 
 - **Industrial gateways**: pair with a 6 GHz-capable radio module and field-test at the enclosure's actual operating temperature.
 - **Multi-link (MLO) setups on WiFi 7**: the tri-band dipole lets all three links coexist on one antenna — no per-band antenna farm needed.
-- **Robot field links**: combine with a [Unitree](/alfa-network/hardware/unitree/) or [Jetson](/alfa-network/hardware/jetson/) integration and route the IPEX pigtail to the robot's radio.
+- **Robot field links**: combine with a [Unitree](/alfa-network/hardware/unitree/) or [Jetson](/alfa-network/hardware/jetson/) integration and route the antenna cable to the robot's radio.
 
 ## Compatibility
 
 | With | Result |
 |---|---|
-| On-board WLAN modules (IPEX variant) | ✅ Direct fit |
-| ALFA adapters with RP-SMA ports (RP-SMA variant) | ✅ Screws on |
+| ALFA adapters with RP-SMA ports | ✅ Screws on |
 | 6 GHz / WiFi 6E / WiFi 7 radios | ✅ Full tri-band |
 | Hot/cold/factory environments | ✅ Rated -40 to +85 °C |
 | Focused long-distance links | ⚠️ A [panel](/alfa-network/products/apa-m25-6e/) beats a dipole here |
@@ -90,7 +88,6 @@ iw dev wlan0 info | grep channel
 | Symptom | Diagnosis | Fix |
 |---|---|---|
 | Weak 6 GHz, fine on 2.4/5 | Wrong SKU (2.4/5-only variant) or obstruction | Confirm SKU is tri-band; reposition away from metal |
-| IPEX connector disconnects | Fragile solder joint / no strain relief | Re-seat gently; add strain relief to the cable |
 | Signal drops when mounted | Dipole touching chassis metal | Re-mount with clearance (see Step 2) |
 | Works in lab, not in field | Thermal/EMI environment differs | Verify within the real enclosure; check the -40/85 °C rating applies to your use |
 

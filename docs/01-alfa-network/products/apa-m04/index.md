@@ -18,7 +18,7 @@ keywords: [APA-M04, ALFA panel antenna, 2.4 GHz directional antenna, PR-SMA ante
 | Type | Directional panel antenna |
 | Band | 2.4 GHz (802.11b/g/n) |
 | Gain | 7 dBi |
-| Connector | PR-SMA (female) |
+| Connector | RP-SMA plug (male) — ALFA's spec sheet writes "PR-SMA PLUG" |
 | Polarization | Linear, vertical |
 | Beamwidth | Narrow (directional — see the concept section) |
 | Mounting | Wall / mast mount, panel form factor |
@@ -52,7 +52,7 @@ An **omni** antenna radiates evenly around its axis (a donut). A **panel** anten
 
 ### Step 1: Check your connector
 
-The APA-M04 is **PR-SMA (female)**. The adapters' antennas are **RP-SMA (male)**. PR-SMA and RP-SMA are designed to pair — the inner pin polarity matches. If you own a generic WiFi antenna with a different connector (e.g. N-type), you need an adapter pigtail — do not force anything; mismatched connectors damage pins.
+The APA-M04 has an **RP-SMA plug (male)** connector (ALFA's spec sheet writes "PR-SMA PLUG"), like ALFA's other antennas. It screws straight onto the **RP-SMA (female)** antenna ports of ALFA adapters. If you own a generic WiFi antenna with a different connector (e.g. N-type), you need an adapter pigtail — do not force anything; mismatched connectors damage pins.
 
 ### Step 2: Screw it on
 

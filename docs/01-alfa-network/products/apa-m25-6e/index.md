@@ -9,7 +9,7 @@ keywords: [APA-M25-6E, tri-band panel antenna, 6 GHz antenna, Wi-Fi 6E antenna]
 
 # ALFA APA-M25-6E — Tri-Band Panel Antenna (Wi-Fi 6E Ready)
 
-> **Quick Summary**: The **APA-M25-6E** is a **10 dBi directional panel antenna** that covers **2.4, 5 and 6 GHz** — the Wi-Fi 6E version of the classic APA-M25. If your adapter has a 6 GHz radio (the [AWUS036AXML](/alfa-network/products/awus036axml/)), this is the antenna that lets it actually reach across a campus.
+> **Quick Summary**: The **APA-M25-6E** is a **directional panel antenna (up to 10 dBi)** that covers **2.4, 5 and 6 GHz** — the Wi-Fi 6E version of the classic APA-M25. If your adapter has a 6 GHz radio (the [AWUS036AXML](/alfa-network/products/awus036axml/)), this is the antenna that lets it actually reach across a campus.
 
 ## Specifications Overview (Spec overview)
 
@@ -17,15 +17,15 @@ keywords: [APA-M25-6E, tri-band panel antenna, 6 GHz antenna, Wi-Fi 6E antenna]
 |---|---|
 | Type | Directional panel antenna |
 | Bands | 2.4 GHz / 5 GHz / **6 GHz (Wi-Fi 6E)** |
-| Gain | 10 dBi |
-| Connector | PR-SMA (female) — pairs with the adapters' RP-SMA |
+| Gain | 8 dBi @ 2.4 GHz · 10 dBi @ 5 GHz · 9 dBi @ 6 GHz |
+| Connector | RP-SMA plug (male) — fits the adapters' RP-SMA ports |
 | Polarization | Linear, vertical |
 | Design | Compact panel, wall/mast mount |
 | Use case | Fixed point-to-point links, 6 GHz backhauls, long-range client links |
 
 ## Overview
 
-The APA-M25 was the standard dual-band panel. The **6E** variant adds the **6 GHz band** — the same 10 dBi panel design, retuned so the top of the spectrum is not an afterthought. Why does that matter? The 6 GHz band (channels 1–233 above 5 GHz) is the least congested spectrum a Wi-Fi link can use today, but only if your *antenna* actually passes it. Old "dual-band" panels fall off hard above 5.8 GHz; the 6E version is built for it.
+The APA-M25 was the standard dual-band panel. The **6E** variant adds the **6 GHz band** — the same panel design, retuned so the top of the spectrum is not an afterthought. Why does that matter? The 6 GHz band (channels 1–233 above 5 GHz) is the least congested spectrum a Wi-Fi link can use today, but only if your *antenna* actually passes it. Old "dual-band" panels fall off hard above 5.8 GHz; the 6E version is built for it.
 
 Where it shines:
 
@@ -50,7 +50,7 @@ Gain works exactly as on the [APA-M04](/alfa-network/products/apa-m04/): a panel
 
 ### Step 1: Connector check
 
-The APA-M25-6E is **PR-SMA female**, matching the **RP-SMA male** antenna ports on ALFA adapters. Pair it with any ALFA adapter that has external antennas — the [AWUS036AXML](/alfa-network/products/awus036axml/) being the natural partner for 6 GHz work.
+The APA-M25-6E uses an **RP-SMA plug (male)**, like the APA-M25, and fits the antenna ports on ALFA adapters. Pair it with any ALFA adapter that has external antennas — the [AWUS036AXML](/alfa-network/products/awus036axml/) being the natural partner for 6 GHz work.
 
 ### Step 2: Mount and aim
 

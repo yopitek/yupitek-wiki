@@ -16,9 +16,9 @@ keywords: [AWUS036AXM, MT7921AUN, AX3000, Bluetooth 5.2 adapter, in-kernel WiFi 
 | Item | Spec |
 |---|---|
 | Chipset | MediaTek MT7921AUN |
-| Wi-Fi class | AX3000 (574 + 2402 Mbps) |
+| Wi-Fi class | AX3000 class — up to 600 / 1200 / 1200 Mbps (2.4 / 5 / 6 GHz), per ALFA's spec sheet |
 | Interface | USB 3.2 |
-| Bands | 2.4 + 5 GHz |
+| Bands | 2.4 + 5 + 6 GHz |
 | Antenna | 2 × external 5 dBi, RP-SMA |
 | Bluetooth | **BT 5.2** (same dongle) |
 | MIMO | 2×2 |
@@ -27,7 +27,7 @@ keywords: [AWUS036AXM, MT7921AUN, AX3000, Bluetooth 5.2 adapter, in-kernel WiFi 
 
 ## Overview
 
-The AXM is the modern successor to the beloved [AWUS036ACM](/alfa-network/products/awus036acm/) — MediaTek radio, in-kernel driver, no DKMS pain — but with a whole generation of upgrades: **AX3000** speeds (2.4 Gbps on 5 GHz), **Bluetooth 5.2** riding on the same USB device, and a newer radio that handles crowded environments better.
+The AXM is the modern successor to the beloved [AWUS036ACM](/alfa-network/products/awus036acm/) — MediaTek radio, in-kernel driver, no DKMS pain — but with a whole generation of upgrades: **AX3000** speeds (up to 1200 Mbps on 5 GHz, per ALFA's spec sheet), **Bluetooth 5.2** riding on the same USB device, and a newer radio that handles crowded environments better.
 
 For Linux users the appeal is the same as the ACM: **it just works**. Driver in the kernel (need 5.18+, so Ubuntu 22.04+ or recent Kali), monitor mode available via the standard `mac80211` path, and the bonus that your WiFi and Bluetooth share one port.
 

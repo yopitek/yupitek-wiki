@@ -16,7 +16,7 @@ keywords: [AWUS036AXML, Wi-Fi 6E adapter, 6 GHz, USB-C, AXE3000]
 | Item | Spec |
 |---|---|
 | Chipset | MediaTek MT7921AUN |
-| Wi-Fi class | AXE3000 (574 + 1201 + **2402 Mbps**) |
+| Wi-Fi class | AXE3000 — up to 600 / 1200 / 1200 Mbps (2.4 / 5 / 6 GHz), per ALFA's spec sheet |
 | Bands | 2.4 + 5 + **6 GHz** |
 | Interface | **USB-C** |
 | Antenna | 2 × external 5 dBi, RP-SMA |

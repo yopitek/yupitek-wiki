@@ -17,19 +17,19 @@ keywords: [APA-M25, ALFA panel antenna, 10 dBi dual band, RP-SMA antenna]
 |---|---|
 | Type | Directional panel antenna |
 | Bands | 2.4 GHz + 5 GHz |
-| Gain | 10 dBi |
-| Connector | **RP-SMA (male)** — note the difference from the PR-SMA panels |
+| Gain | 8 dBi @ 2.4 GHz · 10 dBi @ 5 GHz |
+| Connector | **RP-SMA (male)** |
 | Polarization | Linear, vertical |
 | Design | Compact flat panel, wall/mast mount |
 | Use case | Fixed point-to-point links, long-range client links, coverage focusing |
 
 ## Overview
 
-The APA-M25 is the panel most people picture when they think "ALFA directional antenna": a flat, weather-tolerant rectangle that turns any external-antenna ALFA adapter into a long-range link tool. Its **10 dBi on both 2.4 and 5 GHz** is the practical ceiling for a panel you can aim by eye — beyond this, antennas get big, narrow and unforgiving.
+The APA-M25 is the panel most people picture when they think "ALFA directional antenna": a flat, weather-tolerant rectangle that turns any external-antenna ALFA adapter into a long-range link tool. Its **8 dBi at 2.4 GHz and 10 dBi at 5 GHz** is the practical ceiling for a panel you can aim by eye — beyond this, antennas get big, narrow and unforgiving.
 
 Two things to note up front:
 
-1. **RP-SMA (male) connector** — it plugs straight into the adapter's **RP-SMA (female)** antenna port without any adapter, because the pin polarity matches the socket on the adapter side. (The [APA-M25-6E](/alfa-network/products/apa-m25-6e/) and [APA-M04](/alfa-network/products/apa-m04/) use PR-SMA, which *also* pairs correctly with RP-SMA ports — both families are designed to mate with ALFA adapter ports.)
+1. **RP-SMA (male) connector** — it plugs straight into the adapter's **RP-SMA (female)** antenna port without any adapter, because the pin polarity matches the socket on the adapter side. (The [APA-M25-6E](/alfa-network/products/apa-m25-6e/) and [APA-M04](/alfa-network/products/apa-m04/) use the same RP-SMA plug; ALFA's spec sheet writes the APA-M04 connector as "PR-SMA PLUG".)
 2. **No 6 GHz** — this is a 2.4/5 GHz panel. For Wi-Fi 6E, get the 6E variant.
 
 Where it shines: student projects, building-to-building links, and lab coverage shaping — anywhere you need focused range without a mast.
