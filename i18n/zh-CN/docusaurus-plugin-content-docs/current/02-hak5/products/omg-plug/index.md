@@ -25,7 +25,7 @@ locale: "zh-cn"
   - [2.2 Web Flasher 瀏覽器序列燒錄指引](#22-web-flasher-瀏覽器序列燒錄指引)
   - [2.3 建立 Wi-Fi 管理無線基地台](#23-建立-wi-fi-管理無線基地台)
   - [2.4 網頁控制台功能巡禮與參數調整](#24-網頁控制台功能巡禮與參數調整)
-- [**3. 载荷編寫、DuckyScript 語法與執行模式**](#3-载荷編寫-duckyscript-語法與執行模式)
+- [**3. 载荷編寫、DuckyScript 語法與執行模式**](#3-载荷編寫duckyscript-語法與執行模式)
   - [3.1 DuckyScript for O.MG Plug 核心指令](#31-duckyscript-for-omg-plug-核心指令)
   - [3.2 载荷槽位架構與遠端快速觸發](#32-载荷槽位架構與遠端快速觸發)
   - [3.3 串聯 USB 實體鍵盤嗅探機制 (Keylogger)](#33-串聯-usb-實體鍵盤嗅探機制-keylogger)

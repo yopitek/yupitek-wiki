@@ -16,18 +16,18 @@ locale: "en"
 
 ## Table of Contents
 
-- [**1. Product Overview & Hardware Architecture**](#1-product-overview-hardware-architecture)
-  - [1.1 Plunder Bug by Hak5](#1-1-plunder-bug-by-hak5)
-- [**2. Hardware Setup, Connectivity & Drivers**](#2-hardware-setup-connectivity-drivers)
-  - [2.1 Tapping an Ethernet link](#2-1-tapping-an-ethernet-link)
-  - [2.2 Drivers](#2-2-drivers)
-- [**3. Active and Passive Operating Modes & Cross-Platform Switching**](#3-active-and-passive-operating-modes-cross-platform-switching)
-  - [3.1 About Mode Switching](#3-1-about-mode-switching)
-  - [3.2 Windows Mode Switching](#3-2-windows-mode-switching)
-  - [3.3 MacOS Mode Switching](#3-3-macos-mode-switching)
-  - [3.4 Linux Mode Switching](#3-4-linux-mode-switching)
-- [**4. Advanced Network Usage, Packet Capture & Maintenance**](#4-advanced-network-usage-packet-capture-maintenance)
-  - [4.1 Using as a Simple Switch](#4-1-using-as-a-simple-switch)
+- [**1. Product Overview & Hardware Architecture**](#1-product-overview--hardware-architecture)
+  - [1.1 Plunder Bug by Hak5](#11-plunder-bug-by-hak5)
+- [**2. Hardware Setup, Connectivity & Drivers**](#2-hardware-setup-connectivity--drivers)
+  - [2.1 Tapping an Ethernet link](#21-tapping-an-ethernet-link)
+  - [2.2 Drivers](#22-drivers)
+- [**3. Active and Passive Operating Modes & Cross-Platform Switching**](#3-active-and-passive-operating-modes--cross-platform-switching)
+  - [3.1 About Mode Switching](#31-about-mode-switching)
+  - [3.2 Windows Mode Switching](#32-windows-mode-switching)
+  - [3.3 MacOS Mode Switching](#33-macos-mode-switching)
+  - [3.4 Linux Mode Switching](#34-linux-mode-switching)
+- [**4. Advanced Network Usage, Packet Capture & Maintenance**](#4-advanced-network-usage-packet-capture--maintenance)
+  - [4.1 Using as a Simple Switch](#41-using-as-a-simple-switch)
 
 ---
 

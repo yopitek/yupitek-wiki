@@ -17,17 +17,17 @@ locale: "zh-tw"
 ## 目錄
 
 - [**1. 產品概述與硬體架構**](#1-產品概述與硬體架構)
-  - [1.1 Screen Crab 原廠介紹](#1-1-screen-crab-原廠介紹)
-  - [1.2 運作架構與核心原理 (Screen Crab Basics)](#1-2-運作架構與核心原理-screen-crab-basics)
-- [**2. 組態設定、Cloud C² 與操作模式**](#2-組態設定-cloud-c-與操作模式)
-  - [2.1 組態設定檔解析 (Configuring the Screen Crab)](#2-1-組態設定檔解析-configuring-the-screen-crab)
-  - [2.2 LED 狀態指示燈號診斷 (LED Status Indications)](#2-2-led-狀態指示燈號診斷-led-status-indications)
-  - [2.3 Hak5 Cloud C² 雲端連線設定 (Configuring Cloud C²)](#2-3-hak5-cloud-c-雲端連線設定-configuring-cloud-c)
-  - [2.4 2024 SSL 憑證安全更新 (2024 SSL Update)](#2-4-2024-ssl-憑證安全更新-2024-ssl-update)
+  - [1.1 Screen Crab 原廠介紹](#11-screen-crab-原廠介紹)
+  - [1.2 運作架構與核心原理 (Screen Crab Basics)](#12-運作架構與核心原理-screen-crab-basics)
+- [**2. 組態設定、Cloud C² 與操作模式**](#2-組態設定cloud-c-與操作模式)
+  - [2.1 組態設定檔解析 (Configuring the Screen Crab)](#21-組態設定檔解析-configuring-the-screen-crab)
+  - [2.2 LED 狀態指示燈號診斷 (LED Status Indications)](#22-led-狀態指示燈號診斷-led-status-indications)
+  - [2.3 Hak5 Cloud C² 雲端連線設定 (Configuring Cloud C²)](#23-hak5-cloud-c-雲端連線設定-configuring-cloud-c)
+  - [2.4 2024 SSL 憑證安全更新 (2024 SSL Update)](#24-2024-ssl-憑證安全更新-2024-ssl-update)
 - [**3. 硬體規格、安全性指南與故障排除**](#3-硬體規格安全性指南與故障排除)
-  - [3.1 重要安全指引與法規聲明 (Safety and Warnings)](#3-1-重要安全指引與法規聲明-safety-and-warnings)
-  - [3.2 官方技術規格基準表 (Hardware Specifications)](#3-2-官方技術規格基準表-hardware-specifications)
-  - [3.3 常見故障排查指引 (Troubleshooting Guide)](#3-3-常見故障排查指引-troubleshooting-guide)
+  - [3.1 重要安全指引與法規聲明 (Safety and Warnings)](#31-重要安全指引與法規聲明-safety-and-warnings)
+  - [3.2 官方技術規格基準表 (Hardware Specifications)](#32-官方技術規格基準表-hardware-specifications)
+  - [3.3 常見故障排查指引 (Troubleshooting Guide)](#33-常見故障排查指引-troubleshooting-guide)
 
 ---
 

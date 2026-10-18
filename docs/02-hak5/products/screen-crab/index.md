@@ -16,18 +16,18 @@ locale: "en"
 
 ## Table of Contents
 
-- [**1. Product Overview & Hardware Architecture**](#1-product-overview-hardware-architecture)
-  - [1.1 The Screen Crab by Hak5](#1-1-the-screen-crab-by-hak5)
-  - [1.2 Screen Crab Basics](#1-2-screen-crab-basics)
-- [**2. Configuration, Cloud C² & Operational Modes**](#2-configuration-cloud-c-operational-modes)
-  - [2.1 Configuring the Screen Crab](#2-1-configuring-the-screen-crab)
-  - [2.2 LED Status Indications](#2-2-led-status-indications)
-  - [2.3 Configuring Cloud C²](#2-3-configuring-cloud-c)
-  - [2.4 2024 SSL Update](#2-4-2024-ssl-update)
-- [**3. Hardware Specifications, Safety & Troubleshooting**](#3-hardware-specifications-safety-troubleshooting)
-  - [3.1 Important Safety Information and Warnings](#3-1-important-safety-information-and-warnings)
-  - [3.2 Hardware Specifications](#3-2-hardware-specifications)
-  - [3.3 Troubleshooting Guide](#3-3-troubleshooting-guide)
+- [**1. Product Overview & Hardware Architecture**](#1-product-overview--hardware-architecture)
+  - [1.1 The Screen Crab by Hak5](#11-the-screen-crab-by-hak5)
+  - [1.2 Screen Crab Basics](#12-screen-crab-basics)
+- [**2. Configuration, Cloud C² & Operational Modes**](#2-configuration-cloud-c--operational-modes)
+  - [2.1 Configuring the Screen Crab](#21-configuring-the-screen-crab)
+  - [2.2 LED Status Indications](#22-led-status-indications)
+  - [2.3 Configuring Cloud C²](#23-configuring-cloud-c)
+  - [2.4 2024 SSL Update](#24-2024-ssl-update)
+- [**3. Hardware Specifications, Safety & Troubleshooting**](#3-hardware-specifications-safety--troubleshooting)
+  - [3.1 Important Safety Information and Warnings](#31-important-safety-information-and-warnings)
+  - [3.2 Hardware Specifications](#32-hardware-specifications)
+  - [3.3 Troubleshooting Guide](#33-troubleshooting-guide)
 
 ---
 
@@ -315,7 +315,7 @@ source /system/bin/crab && do_gpio_setup && locate_sd && wifi_config > $SD_LOCAT
 > [!NOTE]
 > If your Cloud C2 instance uses HTTPS, you will need to apply the SSL Update
 
-If you have already confirmed your Screen Crab has a successful connection to the access point configured using the `config.txt`, be sure to confirm your Cloud C2 server configuration is valid and functional; See [Cloud C2 setup ](#2-3-configuring-cloud-c)for more information
+If you have already confirmed your Screen Crab has a successful connection to the access point configured using the `config.txt`, be sure to confirm your Cloud C2 server configuration is valid and functional; See [Cloud C2 setup ](#23-configuring-cloud-c)for more information
 
 &#x20;\
 Additionally confirm that the device.config used to register the Screen Crab is correct.<br />
