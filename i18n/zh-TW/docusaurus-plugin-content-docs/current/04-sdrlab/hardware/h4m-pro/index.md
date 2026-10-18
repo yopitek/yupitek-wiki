@@ -2,7 +2,7 @@
 id: sdrlab-hardware-h4m-pro
 title: SDRLab H4M Pro（HackRF Pro R10C PortaPack）— 完整指南
 sidebar_position: 4
-description: SDRLab H4M Pro — 2026 最新旗艦 HackRF Pro R10C 射頻架構、獨立 18650 電池管理、雙側 4 端口天線陣列與專屬 Mayhem 韌體完整操作指南。
+description: SDRLab H4M Pro — 2026 最新旗艦 HackRF Pro R10C 射頻架構、獨立 18650 電池管理、雙側 4 連接埠天線陣列與專屬 Mayhem 韌體完整操作指南。
 tags: [sdrlab, h4m-pro, hackrf-pro, portapack, mayhem, sdr, 18650]
 keywords: [H4M Pro, PortaPack H4M Pro, HackRF Pro, R10C, Mayhem hpro, 18650 battery, portable SDR]
 authors: yupitek
@@ -324,7 +324,7 @@ SDRLab H4M Pro 採用模組化疊層架構：
 
 
 :::danger 有線實驗防護原則
-進行任何射頻發射（TX）或重放（Replay）實驗時，**嚴禁將兩台 SDR 的 `ANT` 端口以同軸線直接互連**！若無足夠衰減，發射功率將直接燒毀接收端低雜訊放大器（LNA）。
+進行任何射頻發射（TX）或重放（Replay）實驗時，**嚴禁將兩台 SDR 的 `ANT` 連接埠以同軸線直接互連**！若無足夠衰減，發射功率將直接燒毀接收端低雜訊放大器（LNA）。
 :::
 
 - **50 Ω 射頻同軸電纜**：優質雙層遮蔽 RG-316 或 RG-142，SMA 公對公接頭。

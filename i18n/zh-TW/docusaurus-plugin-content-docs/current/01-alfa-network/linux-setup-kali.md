@@ -76,19 +76,23 @@ sudo make dkms_install
 
 ### RTL8811AU（AWUS036ACS）
 
+```bash
 cd /opt
 sudo git clone https://github.com/morrownr/8821au-20210708.git
 cd 8821au-20210708
 sudo sh install-driver.sh
+```
+
 ### RTL8832BU（AWUS036AX / AWUS036AXER）
 
+```bash
 cd /opt
 sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
 cd rtl8852bu-20250826
 sudo sh install-driver.sh
 ```
 
-重新插上無線網絡卡（或 `sudo modprobe <module>`）並確認介面出現：`iw dev`。
+重新插上無線網路卡（或 `sudo modprobe <module>`）並確認介面出現：`iw dev`。
 
 > RTL8832BU 驅動程式（AWUS036AX / AXER）**不**支援監聽模式。若需監聽模式與封包注入，請使用搭載核心內建 MediaTek 驅動程式的適配器（例如 AWUS036ACM 或 AWUS036AXML）或 AWUS036ACH。
 
@@ -137,7 +141,7 @@ iwconfig
 
 ## 步驟 5：證明封包注入可用
 
-注入是每支 Wi-Fi 無線網絡卡的技能檢定。對空執行 Aircrack-ng 自我測試（它會廣播）：
+注入是每支 Wi-Fi 無線網路卡的技能檢定。對空執行 Aircrack-ng 自我測試（它會廣播）：
 
 ```bash
 sudo aireplay-ng --test wlan0mon
@@ -152,7 +156,7 @@ sudo aireplay-ng --test wlan0mon
 12:34:56  30/30:  100%
 ```
 
-**`30/30: 100%`**——這就是神奇的一行。它代表無線網絡卡注入了 30 個 probe requests 並聽到全部 30 個，證明在監聽模式下 TX 與 RX 都正常運作。如果你看到 `Failed` 或很低的百分比，代表無線網絡卡實際上沒有在注入——請見下方常見錯誤表。
+**`30/30: 100%`**——這就是神奇的一行。它代表無線網路卡注入了 30 個 probe requests 並聽到全部 30 個，證明在監聽模式下 TX 與 RX 都正常運作。如果你看到 `Failed` 或很低的百分比，代表無線網路卡實際上沒有在注入——請見下方常見錯誤表。
 
 ## 步驟 6：把你的工具指向它
 
@@ -164,7 +168,7 @@ sudo timeout 10 tcpdump -i wlan0mon -c 100
 
 **預期輸出**：`100 packets captured`（或 10 秒內到達的任何數量——看到*任何* 802.11 訊框就證明擷取可用）。
 
-完成後，把無線網絡卡恢復到一般模式：
+完成後，把無線網路卡恢復到一般模式：
 
 ```bash
 sudo airmon-ng stop wlan0mon
@@ -177,11 +181,11 @@ sudo systemctl restart NetworkManager
 |---|---|---|
 | `airmon-ng start` 顯示 `No such device` | 介面名稱是 `wlan1` 或驅動程式未載入 | 執行 `iw dev` 找出真正的名稱；Realtek 用 `sudo modprobe <module>` |
 | `aireplay-ng --test` → `No such device` | 你還在 `wlan0`，不是 `wlan0mon` | 重新檢查 `iwconfig`；從步驟 4 重新啟動監聽模式 |
-| `Injection is working!` 但 `0/30` 回覆 | 無線網絡卡 TX 正常但 RX 過濾器壞了（某些 Realtek 驅動程式常見） | 嘗試鎖定頻道：`sudo iw wlan0mon set channel 6`；重測；升級 DKMS 驅動程式 |
+| `Injection is working!` 但 `0/30` 回覆 | 無線網路卡 TX 正常但 RX 過濾器壞了（某些 Realtek 驅動程式常見） | 嘗試鎖定頻道：`sudo iw wlan0mon set channel 6`；重測；升級 DKMS 驅動程式 |
 | DKMS 建置失敗並顯示 "No rule to make target" | Kali 核心對 repo 快照來說太新 | `cd /opt/rtl8812au && sudo git pull && sudo make dkms_install` |
 | 監聽模式幾分鐘後失效 | USB 省電 / 熱節流 | 使用供電 USB hub 或 USB 3.0 連線埠；`sudo iwconfig wlan0mon txpower 20` |
 | `airmon-ng check kill` 弄斷了我的網路 | 預期行為——NetworkManager 被停止了 | 工作結束後 `sudo systemctl restart NetworkManager` |
-| 無線網絡卡在 managed 模式正常，但 `iw` 中沒有列出 `monitor` | 驅動程式建置時未含監聽支援 | 用 aircrack-ng repos 重建（它們啟用 monitor + VIF） |
+| 無線網路卡在 managed 模式正常，但 `iw` 中沒有列出 `monitor` | 驅動程式建置時未含監聽支援 | 用 aircrack-ng repos 重建（它們啟用 monitor + VIF） |
 
 > **你可能會想問**——*「擷取這些東西合法嗎？」* 監聽模式與注入是技術能力，不是執照。在大多數司法管轄區，在你不擁有或未獲授權測試的網路上擷取或注入是非法的。每個課程實驗室都假設你在**自己的 AP 或實驗室網路**上測試。請留在那裡。
 

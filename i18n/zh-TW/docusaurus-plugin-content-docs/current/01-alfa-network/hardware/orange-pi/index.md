@@ -96,7 +96,7 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 ### 步驟 3：驗證驅動與無線介面
 
 ```bash
-# 檢查核心是否有正確辨識網卡
+# 檢查核心是否有正確辨識網路卡
 dmesg | grep -i "mt7921"
 
 # 檢查無線介面狀態

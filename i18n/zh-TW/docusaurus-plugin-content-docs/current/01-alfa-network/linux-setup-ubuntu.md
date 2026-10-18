@@ -121,6 +121,7 @@ DKMS: install completed.
 
 ### 3.3 RTL8811AU（AWUS036ACS）
 
+```bash
 cd /opt
 sudo git clone https://github.com/morrownr/8821au-20210708.git
 cd 8821au-20210708
@@ -140,15 +141,15 @@ sudo sh install-driver.sh
 
 **預期輸出**：腳本會使用 DKMS 建置並安裝驅動程式（請回答其提示，並在要求時重新啟動）——模組名稱 `8852bu`。注意：此驅動程式**不**支援監控模式。
 
-拔下再重新插上無線網絡卡（或執行 `sudo modprobe <module>`），然後驗證：
+拔下再重新插上無線網路卡（或執行 `sudo modprobe <module>`），然後驗證：
 
 ```bash
 iw dev
 ```
 
-**預期輸出**：出現一行 `Interface wlan1`（如果它是你唯一的無線網絡卡則為 `wlan0`）。
+**預期輸出**：出現一行 `Interface wlan1`（如果它是你唯一的無線網路卡則為 `wlan0`）。
 
-> **你可能會想問**——*「哪個模組名稱對應我的無線網絡卡？」* 對照你的晶片：`8812au` → AWUS036ACH、`8821au` → AWUS036ACS、`8852bu` → AWUS036AX / AXER。[驅動程式頁面](/alfa-network/drivers/rtl8812au/) 有更深入的各晶片細節。
+> **你可能會想問**——*「哪個模組名稱對應我的無線網路卡？」* 對照你的晶片：`8812au` → AWUS036ACH、`8821au` → AWUS036ACS、`8852bu` → AWUS036AX / AXER。[驅動程式頁面](/alfa-network/drivers/rtl8812au/) 有更深入的各晶片細節。
 
 ## 步驟 4：驗證一切 {#step-4-verify-everything}
 
@@ -171,11 +172,11 @@ phy#1
 		type managed
 ```
 
-三個指令都有輸出 = 你的 ALFA 無線網絡卡已完全正常運作。
+三個指令都有輸出 = 你的 ALFA 無線網路卡已完全正常運作。
 
 ## 進階：監聽模式（支援的晶片）
 
-監聽模式（monitor mode）讓無線網絡卡擷取某個頻道上的所有封包，而不只是自己的連線。在內建於核心的晶片上，這是兩個指令的工作：
+監聽模式（monitor mode）讓無線網路卡擷取某個頻道上的所有封包，而不只是自己的連線。在內建於核心的晶片上，這是兩個指令的工作：
 
 ```bash
 sudo ip link set wlan1 down
@@ -192,11 +193,11 @@ iw dev
 
 | 錯誤 / 症狀 | 原因 | 修復 |
 |---|---|---|
-| `lsusb` 顯示無線網絡卡但沒有 `wlanX` 介面 | DKMS 模組未載入（Realtek） | `sudo modprobe 8812au`（對應你的晶片），然後檢查 `dmesg \| tail` |
+| `lsusb` 顯示無線網路卡但沒有 `wlanX` 介面 | DKMS 模組未載入（Realtek） | `sudo modprobe 8812au`（對應你的晶片），然後檢查 `dmesg \| tail` |
 | `make dkms_install` 失敗並顯示 "Kernel preparation unnecessary" | 缺少核心標頭檔 | `sudo apt install linux-headers-$(uname -r)` 後重試 |
-| `apt upgrade` 後無線網絡卡消失 | 核心更新，DKMS 重建靜默失敗 | `sudo dkms autoinstall` 然後重新開機 |
+| `apt upgrade` 後無線網路卡消失 | 核心更新，DKMS 重建靜默失敗 | `sudo dkms autoinstall` 然後重新開機 |
 | 重新開機後 `iw dev` 什麼都沒有（Realtek） | 模組不在自動載入清單中 | `echo 8812au \| sudo tee /etc/modules-load.d/alfa.conf` |
-| Wi-Fi 6E 無線網絡卡（AXML）在 20.04 上偵測不到 | 核心對 `mt7921u` 來說太舊 | 升級到 Ubuntu 22.04+（核心 5.18+） |
+| Wi-Fi 6E 無線網路卡（AXML）在 20.04 上偵測不到 | 核心對 `mt7921u` 來說太舊 | 升級到 Ubuntu 22.04+（核心 5.18+） |
 
 ## 參考資料
 

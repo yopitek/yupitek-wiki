@@ -107,7 +107,7 @@ ip link show
 # 1. 終止可能干擾的系統服務
 airmon-ng check kill
 
-# 2. 開啟監聽模式（假設網卡介面為 wlan1）
+# 2. 開啟監聽模式（假設網路卡介面為 wlan1）
 airmon-ng start wlan1
 
 # 3. 驗證 monitor 介面（通常會變成 wlan1mon）
