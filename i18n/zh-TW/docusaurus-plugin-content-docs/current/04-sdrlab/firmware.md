@@ -75,7 +75,7 @@ TRX-duo 是一臺嵌入式 Linux 電腦（Xilinx Zynq 7010 + ARM Cortex-A9），
 
 ## H4M：Mayhem 韌體
 
-H4M 執行開源 **Mayhem 韌體**（把 PortaPack 變成完整工具組的社群分支）。[H4M 頁面](/sdrlab/hardware/h4m/#mayhem-firmware)涵蓋安裝；官方來源如下：
+H4M 執行開源 **Mayhem 韌體**（把 PortaPack 變成完整工具組的社群分支）。[H4M 頁面](/sdrlab/hardware/h4m/)涵蓋安裝；官方來源如下：
 
 - [Mayhem 韌體版本](https://github.com/portapack-mayhem/mayhem-firmware/releases) — 下載 `FIRMWARE_mayhem_*.zip` 與對應的 `COPY_TO_SDCARD` 檔案。
 - [hackrf.app](https://hackrf.app/) — 透過 USB（WebUSB）在瀏覽器中更新。

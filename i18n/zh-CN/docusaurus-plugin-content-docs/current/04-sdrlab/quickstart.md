@@ -55,7 +55,7 @@ flowchart LR
 - **Linux 上的 RTL-SDR V4**：你需要一个*最新的*驱动——旧版发行版软件包不认识 V4 的 R828D 调谐器。请按照 [RTL-SDR V4 页面上的驱动更新步骤](/sdrlab/hardware/rtl-sdr-v4/#linux-install) 操作。
 - **Windows 上的 RTL-SDR V4**：现代工具（SDR#、SDR++、SDR Console）自带兼容 V4 的驱动——直接安装软件即可使用。
 - **TRX-duo**：SD 卡*就是*固件。下载官方镜像（见 [TRX-duo 页面](/sdrlab/hardware/trx-duo/#firmware-and-sd-image)），写入 microSD 卡，插入，启动。
-- **H4M**：安装 [Mayhem 固件](/sdrlab/hardware/h4m/#mayhem-firmware)——设备出厂即可用，但 Mayhem 才能解锁完整工具包。
+- **H4M**：安装 [Mayhem 固件](/sdrlab/hardware/h4m/)——设备出厂即可用，但 Mayhem 才能解锁完整工具包。
 - **Flipper 模块**：大多数需要*自定义* Flipper 固件（Momentum、Unleashed、Xtreme）才能使用额外应用，还需要设置 GPIO 引脚。每个[扩展页面](/sdrlab/#flipper-zero-expansion-modules)都列出了确切的引脚。
 
 ## 第 3 步：启动软件并验证信号
@@ -96,7 +96,7 @@ flowchart LR
 |---|---|---|
 | `rtl_test` 报 `No devices found` | 内核 DVB 驱动抢占了接收棒 | 屏蔽 `dvb_usb_rtl28xxu`（见 [RTL-SDR V4 页面](/sdrlab/hardware/rtl-sdr-v4/#linux-install)） |
 | TRX-duo Web 界面无法访问 | 静态 IP 错误 / 网络上没有 DHCP | 检查[网络部分](/sdrlab/hardware/trx-duo/#first-boot-and-network) |
-| H4M 没有应用 | microSD 缺失或过期 | 从 [Mayhem 发布页](/sdrlab/hardware/h4m/#mayhem-firmware) 复制 `COPY_TO_SDCARD` 文件 |
+| H4M 没有应用 | microSD 缺失或过期 | 从 [Mayhem 发布页](/sdrlab/hardware/h4m/) 复制 `COPY_TO_SDCARD` 文件 |
 | Flipper 应用提示"no module" | 未为模块设置 GPIO 引脚 | 在 `Protocol Settings → GPIO Pin Settings` 下设置引脚（按各扩展页面） |
 | 一切都没反应 | 没接天线 | 拧上天线——没有天线的 SDR 只是一个非常安静的镇纸 |
 

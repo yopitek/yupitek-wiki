@@ -150,7 +150,7 @@ iw dev
 
 > **你可能想知道**——*「哪个模块名对应我的网卡适配器？」* 匹配你的芯片组：`8812au` → AWUS036ACH，`8821au` → AWUS036ACS，`8852bu` → AWUS036AX / AXER。[驱动页面](/alfa-network/drivers/rtl8812au/)有更深入的芯片组细节。
 
-## 第 4 步：验证一切
+## 第 4 步：验证一切 {#step-4-verify-everything}
 
 三项命令的健康检查：
 
