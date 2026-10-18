@@ -16,39 +16,39 @@ locale: "en"
 
 ## Table of Contents
 
-- [**1. Product Overview & Quack-Start Guide**](#1-product-overview-quack-start-guide)
-  - [1.1 USB Rubber Ducky by Hak5](#1-1-usb-rubber-ducky-by-hak5)
-  - [1.2 Unboxing 'Quack-Start' Guide](#1-2-unboxing-quack-start-guide)
-  - [1.3 DuckyScript™ Quick Reference](#1-3-duckyscript-quick-reference)
-- [**2. DuckyScript Fundamentals & Hardware Controls**](#2-duckyscript-fundamentals-hardware-controls)
-  - [2.1 Hello, World!](#2-1-hello-world)
-  - [2.2 Keystroke Injection](#2-2-keystroke-injection)
-  - [2.3 Comments](#2-3-comments)
-  - [2.4 Delays](#2-4-delays)
-  - [2.5 The Button](#2-5-the-button)
-  - [2.6 The LED](#2-6-the-led)
-- [**3. Logic, Variables, Conditions & Functions**](#3-logic-variables-conditions-functions)
-  - [3.1 Attack Modes](#3-1-attack-modes)
-  - [3.2 Constants](#3-2-constants)
-  - [3.3 Variables](#3-3-variables)
-  - [3.4 Operators](#3-4-operators)
-  - [3.5 Conditional Statements](#3-5-conditional-statements)
-  - [3.6 Loops](#3-6-loops)
-  - [3.7 Functions](#3-7-functions)
-- [**4. Advanced Attack Engineering & Covert Exfiltration**](#4-advanced-attack-engineering-covert-exfiltration)
-  - [4.1 Randomization](#4-1-randomization)
-  - [4.2 Holding Keys](#4-2-holding-keys)
-  - [4.3 Payload Control](#4-3-payload-control)
-  - [4.4 Jitter](#4-4-jitter)
-  - [4.5 Payload Hiding](#4-5-payload-hiding)
-  - [4.6 Storage Activity](#4-6-storage-activity)
-  - [4.7 Lock Keys](#4-7-lock-keys)
-  - [4.8 Exfiltration](#4-8-exfiltration)
-  - [4.9 Extensions](#4-9-extensions)
-  - [4.10 Conditional Compilation](#4-10-conditional-compilation)
-- [**5. Tips, Tricks, Troubleshooting & Maintenance**](#5-tips-tricks-troubleshooting-maintenance)
-  - [5.1 Common issues](#5-1-common-issues)
-  - [5.2 Tips & Best Practices](#5-2-tips-best-practices)
+- [**1. Product Overview & Quack-Start Guide**](#1-product-overview--quack-start-guide)
+  - [1.1 USB Rubber Ducky by Hak5](#11-usb-rubber-ducky-by-hak5)
+  - [1.2 Unboxing 'Quack-Start' Guide](#12-unboxing-quack-start-guide)
+  - [1.3 DuckyScript™ Quick Reference](#13-duckyscript-quick-reference)
+- [**2. DuckyScript Fundamentals & Hardware Controls**](#2-duckyscript-fundamentals--hardware-controls)
+  - [2.1 Hello, World!](#21-hello-world)
+  - [2.2 Keystroke Injection](#22-keystroke-injection)
+  - [2.3 Comments](#23-comments)
+  - [2.4 Delays](#24-delays)
+  - [2.5 The Button](#25-the-button)
+  - [2.6 The LED](#26-the-led)
+- [**3. Logic, Variables, Conditions & Functions**](#3-logic-variables-conditions--functions)
+  - [3.1 Attack Modes](#31-attack-modes)
+  - [3.2 Constants](#32-constants)
+  - [3.3 Variables](#33-variables)
+  - [3.4 Operators](#34-operators)
+  - [3.5 Conditional Statements](#35-conditional-statements)
+  - [3.6 Loops](#36-loops)
+  - [3.7 Functions](#37-functions)
+- [**4. Advanced Attack Engineering & Covert Exfiltration**](#4-advanced-attack-engineering--covert-exfiltration)
+  - [4.1 Randomization](#41-randomization)
+  - [4.2 Holding Keys](#42-holding-keys)
+  - [4.3 Payload Control](#43-payload-control)
+  - [4.4 Jitter](#44-jitter)
+  - [4.5 Payload Hiding](#45-payload-hiding)
+  - [4.6 Storage Activity](#46-storage-activity)
+  - [4.7 Lock Keys](#47-lock-keys)
+  - [4.8 Exfiltration](#48-exfiltration)
+  - [4.9 Extensions](#49-extensions)
+  - [4.10 Conditional Compilation](#410-conditional-compilation)
+- [**5. Tips, Tricks, Troubleshooting & Maintenance**](#5-tips-tricks-troubleshooting--maintenance)
+  - [5.1 Common issues](#51-common-issues)
+  - [5.2 Tips & Best Practices](#52-tips--best-practices)
 
 ---
 
@@ -2782,7 +2782,7 @@ this will result in `my website name is example.com`&#x20;
 ![PayloadStudio Annotation](https://4019606163-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiIkRK_o3RBhZzUkrzr%2Fuploads%2FnsGlSG1H4NblUiBHFPXG%2Fimage.png?alt=media&amp;token=303e4a9e-a06e-4ae9-b58e-210e0c99ed4a)
 
 > [!CAUTION]
-> [Best practice is to start your label with `#`](#with)\
+> [Best practice is to start your label with `#`](#with-)\
 > \
 > While this method is **still supported**, <mark>it is no longer best practice</mark>. \
 > \
@@ -2831,7 +2831,7 @@ DEFINE #MESSAGE example.com
 STRING https://#MESSAGE
 ```
 
-In both cases this will result in "`https://example.com`" being typed because the label used starts with a `#` [See above](#with)
+In both cases this will result in "`https://example.com`" being typed because the label used starts with a `#` [See above](#with-)
 
 ##### Example Payload
 
