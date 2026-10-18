@@ -97,18 +97,10 @@ sudo systemctl enable --now pcscd
 **Step 2：确认 USB 设备**
 
 ```bash
-lsusb
+lsusb | grep -i "Advanced Card Systems"
 ```
 
-预期（依型号版本略有不同，皆为 Advanced Card Systems, Ltd）：
-
-- `ACR1552U-M1`（USB Type-A）→ `ID 072f:2303`
-- `ACR1552U-M2` / `-MF` → `ID 072f:2308`
-- Firmware 升级模式 → `ID 072f:2302`
-
-```text
-Bus 001 Device 005: ID 072f:2303 Advanced Card Systems, Ltd
-```
+读卡器应显示为 Advanced Card Systems 设备。
 
 **Step 3：扫描读卡器**
 

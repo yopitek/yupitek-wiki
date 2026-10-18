@@ -82,13 +82,10 @@ sudo apt install -y pcscd pcsc-tools libpcsclite-dev libccid
 ### Step 2: Verify USB Enumeration
 
 ```bash
-lsusb | grep -i "072f"
+lsusb | grep -i "Advanced Card Systems"
 ```
 
-*Expected output:*
-```text
-Bus 001 Device 005: ID 072f:2300 Advanced Card Systems, Ltd. ACR1552U Reader
-```
+The reader should appear as an Advanced Card Systems device.
 
 ### Step 3: Run `pcsc_scan`
 
