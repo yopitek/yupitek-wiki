@@ -23,8 +23,8 @@ keywords: [AWUS036AXER, RTL8832BU nano, 10.5g adapter, internal antenna Wi-Fi 6]
 | Weight | 10.5 g |
 | Security | WPA3 |
 | MIMO | 2×2 |
-| Linux driver | `rtl88x2bu` (DKMS) |
-| Monitor mode | ✅ (internal antenna — see note) |
+| Linux driver | `rtl8852bu` (DKMS) |
+| Monitor mode | ❌ not supported by the community driver (see the [driver guide](/alfa-network/drivers/rtl8832bu/)) |
 
 ## Overview
 
@@ -37,17 +37,17 @@ This is a **client-first adapter**: it is for the student in a lecture hall who 
 Identical driver story to the [AWUS036AX](/alfa-network/products/awus036ax/) — full steps on the [RTL8832BU driver page](/alfa-network/drivers/rtl8832bu/):
 
 ```bash
-cd /opt && sudo git clone https://github.com/aircrack-ng/rtl88x2bu.git
-cd rtl88x2bu && sudo make dkms_install
-sudo modprobe 88x2bu
+cd /opt && sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
+cd rtl8852bu-20250826 && sudo sh install-driver.sh
+sudo modprobe 8852bu
 ```
 
-**Expected output**: `DKMS: install completed.` then an interface in `iw dev`.
+**Expected output**: the installer finishes (reboot when it asks), then an interface appears in `iw dev`.
 
 ```mermaid
 flowchart LR
-    A["AWUS036AXER (10.5 g)"] --> B["DKMS build rtl88x2bu"]
-    B --> C["modprobe 88x2bu"]
+    A["AWUS036AXER (10.5 g)"] --> B["DKMS build rtl8852bu"]
+    B --> C["modprobe 8852bu"]
     C --> D["Connect — fast and flush"]
 ```
 
@@ -62,9 +62,9 @@ iw dev wlan0 link
 
 **Expected output**: connected; up to **1201 Mb/s** link rate on 5 GHz near the AP.
 
-### Monitor mode — with a caveat
+### Monitor mode
 
-The internal antenna means range and sensitivity are limited. Monitor mode *works* (the driver supports it), but for serious capture work the external-antenna [AWUS036AX](/alfa-network/products/awus036ax/) or [AWUS036ACM](/alfa-network/products/awus036acm/) is the better instrument. NetHunter compatibility is also marginal with this one.
+The community driver for this chipset does **not** support monitor mode, and the internal antenna would limit capture range anyway. For monitor mode use an external-antenna in-kernel adapter such as the [AWUS036ACM](/alfa-network/products/awus036acm/).
 
 ## Compatibility
 
@@ -81,7 +81,7 @@ The internal antenna means range and sensitivity are limited. Monitor mode *work
 | Symptom | Cause | Fix |
 |---|---|---|
 | Short range vs external-antenna ALFAs | Internal antenna by design | Expected — use for client work, not long links |
-| WPA3 network not visible | Stale driver | Update `rtl88x2bu` + OS |
+| WPA3 network not visible | Stale driver | Update `rtl8852bu` + OS |
 | DKMS build fails | New kernel | `git pull && make dkms_install` |
 | Slow on USB 2.0 port | Bandwidth cap | Use a USB 3.x port |
 

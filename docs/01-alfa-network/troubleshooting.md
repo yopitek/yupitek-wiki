@@ -141,7 +141,7 @@ Driver built without proper monitor/injection support, **or** you are on a chann
 ### Fix
 1. Lock a channel with active APs: `sudo iw dev wlan0mon set channel 6`
 2. Retest. Still 0/30? Rebuild with the aircrack-ng driver repos, which ship monitor + VIF enabled by default:
-   - [rtl8812au](/alfa-network/drivers/rtl8812au/), [rtl8811au](/alfa-network/drivers/rtl8811au/), [rtl88x2bu](/alfa-network/drivers/rtl8832bu/)
+   - [rtl8812au](/alfa-network/drivers/rtl8812au/), [rtl8811au](/alfa-network/drivers/rtl8811au/), [rtl8832bu](/alfa-network/drivers/rtl8832bu/)
 3. In a dead RF zone, create your own AP with a phone hotspot on the same channel.
 
 ---

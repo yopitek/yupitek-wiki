@@ -57,7 +57,7 @@ iw dev
 
 ## Step 2: Install the driver (Realtek chipsets only)
 
-If your chipset is RTL8812AU / RTL8811AU / RTL8832BU, build the aircrack-ng-maintained driver with DKMS. If your chipset is MediaTek (MT7612U / MT7610U / MT7921AUN), **skip to Step 3** — the driver is already in your kernel.
+If your chipset is RTL8812AU / RTL8811AU / RTL8832BU, build the community-maintained driver with DKMS (aircrack-ng for RTL8812AU; morrownr for RTL8811AU and RTL8832BU). If your chipset is MediaTek (MT7612U / MT7610U / MT7921AUN), **skip to Step 3** — the driver is already in your kernel.
 
 ### RTL8812AU (AWUS036ACH)
 
@@ -78,21 +78,23 @@ sudo make dkms_install
 
 ```bash
 cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl8811au.git
-cd rtl8811au
-sudo make dkms_install
+sudo git clone https://github.com/morrownr/8821au-20210708.git
+cd 8821au-20210708
+sudo sh install-driver.sh
 ```
 
 ### RTL8832BU (AWUS036AX / AWUS036AXER)
 
 ```bash
 cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl88x2bu.git
-cd rtl88x2bu
-sudo make dkms_install
+sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
+cd rtl8852bu-20250826
+sudo sh install-driver.sh
 ```
 
 Re-plug the adapter (or `sudo modprobe <module>`) and confirm an interface appears: `iw dev`.
+
+> The RTL8832BU driver (AWUS036AX / AXER) does **not** support monitor mode. For monitor mode and injection use an adapter with an in-kernel MediaTek driver (for example the AWUS036ACM or AWUS036AXML) or the AWUS036ACH.
 
 ## Step 3: Kill interfering processes
 

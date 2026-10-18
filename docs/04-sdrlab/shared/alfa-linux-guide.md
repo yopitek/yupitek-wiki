@@ -66,7 +66,7 @@ The `ID xxxx:xxxx` is the vendor:device pair. Compare it against the table below
 Each chipset has its own quirks:
 
 - **MediaTek (MT79xx / MT76xx)**: some kernels already carry in-tree `mt76` support — the chipset guide tells you when that's enough and when to build the vendor driver.
-- **Realtek (RTL88xx)**: almost always need the out-of-tree driver (`rtl88x2bu`-style DKMS builds). Expect `make` + `sudo make install` + reboot.
+- **Realtek (RTL88xx)**: almost always need the out-of-tree driver (community DKMS builds such as `rtl8852bu`). Expect `make` + `sudo make install` + reboot.
 - **Atheros**: `ath9k_htc` is in the kernel — usually plug-and-play.
 
 Follow the chipset-specific guide for exact commands; they all end with a **verify step**:

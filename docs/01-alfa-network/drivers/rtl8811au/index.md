@@ -13,15 +13,15 @@ keywords: [RTL8811AU driver, AWUS036ACS, rtl8811au, pocket adapter monitor mode]
 
 ## Concept: same family, one stream
 
-The RTL8811AU is essentially the 1×1 variant of the RTL8812AU family: one spatial stream, 433 Mbps max on 5 GHz, lower power draw, smaller board. ALFA wraps it in the tiny ACS body with two 5 dBi external antennas — you get the classic ALFA pen-testing behavior in a package that hides in a pencil case.
+The RTL8811AU is essentially the 1×1 variant of the RTL8812AU family: one spatial stream, 433 Mbps max on 5 GHz, lower power draw, smaller board. ALFA wraps it in the tiny ACS body with one external 2 dBi RP-SMA antenna — you get the classic ALFA pen-testing behavior in a package that hides in a pencil case.
 
-Driver-wise, nothing changes from the RTL8812AU story: **no in-kernel driver with monitor support**, so we use the community `rtl8811au` DKMS driver. Note the driver also covers the RTL8821AU variant, so do not panic if your `dkms status` shows the same module name on similar dongles.
+Driver-wise, nothing changes from the RTL8812AU story: **no in-kernel driver with monitor support**, so we use the community `8821au-20210708` DKMS driver. Note the driver also covers the RTL8821AU variant, so do not panic if your `dkms status` shows the same module name on similar dongles.
 
 ```mermaid
 flowchart LR
     A["AWUS036ACS plugged in"] --> B["No usable in-kernel driver"]
-    B --> C["Build rtl8811au via DKMS"]
-    C --> D["8811au module loaded"]
+    B --> C["Build 8821au-20210708 via DKMS"]
+    C --> D["8821au module loaded"]
     D --> E["airmon-ng start wlan0"]
     E --> F["wlan0mon + injection test"]
 ```
@@ -37,9 +37,9 @@ flowchart LR
 
 ```bash
 cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl8811au.git
-cd rtl8811au
-sudo make dkms_install
+sudo git clone https://github.com/morrownr/8821au-20210708.git
+cd 8821au-20210708
+sudo sh install-driver.sh
 ```
 
 **Expected output**:
@@ -51,14 +51,14 @@ DKMS: install completed.
 ## Step 2: Load and verify
 
 ```bash
-sudo modprobe 8811au
+sudo modprobe 8821au
 iw dev
 ```
 
 **Expected output**: an `Interface wlan0` (or `wlan1`) line. If the adapter only shows up after re-plug, add the module to auto-load:
 
 ```bash
-echo 8811au | sudo tee /etc/modules-load.d/alfa.conf
+echo 8821au | sudo tee /etc/modules-load.d/alfa.conf
 ```
 
 ## Step 3: Monitor mode + injection
@@ -73,7 +73,7 @@ sudo aireplay-ng --test wlan0mon
 
 ```text
 PHY	Interface	Driver		Chipset
-phy0	wlan0		8811au		Realtek Semiconductor Corp. RTL8811AU
+phy0	wlan0		8821au		Realtek Semiconductor Corp. RTL8811AU
 ...
 12:34:56  Injection is working!
 12:34:56  30/30:  100%
@@ -94,7 +94,7 @@ sudo systemctl restart NetworkManager
 | Interface only in managed mode | Kernel stub `rtl8811au` grabbed it | `echo "blacklist rtl8811au" \| sudo tee /etc/modprobe.d/alfa-8811au.conf`; reboot |
 | Injection 0/30 | Empty channel | `sudo iw wlan0mon set channel 6`; test near an AP |
 | Throughput lower than expected | 1×1 radio (AC433) — hardware limit | Not a bug; expect ~150–250 Mbps real-world on 5 GHz |
-| Not detected after reboot | Module not auto-loaded | Add `8811au` to `/etc/modules-load.d/alfa.conf` |
+| Not detected after reboot | Module not auto-loaded | Add `8821au` to `/etc/modules-load.d/alfa.conf` |
 
 ## References
 
@@ -102,4 +102,4 @@ sudo systemctl restart NetworkManager
 - [Kali setup guide](/alfa-network/linux-setup-kali/)
 - [Ubuntu setup guide](/alfa-network/linux-setup-ubuntu/)
 - [Troubleshooting index](/alfa-network/troubleshooting/)
-- Driver repo: [aircrack-ng/rtl8811au](https://github.com/aircrack-ng/rtl8811au)
+- Driver repo: [morrownr/8821au-20210708](https://github.com/morrownr/8821au-20210708) (RTL8811AU / RTL8821AU; the former `aircrack-ng/rtl8811au` repository no longer exists)

@@ -123,23 +123,23 @@ The module is now `8812au` and DKMS will rebuild it on every kernel update — y
 
 ```bash
 cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl8811au.git
-cd rtl8811au
-sudo make dkms_install
+sudo git clone https://github.com/morrownr/8821au-20210708.git
+cd 8821au-20210708
+sudo sh install-driver.sh
 ```
 
-**Expected output**: `DKMS: install completed.` — module name `8811au`.
+**Expected output**: the script builds and installs the driver with DKMS (answer its prompts and reboot when it asks) — module name `8821au`.
 
 ### 3.4 RTL8832BU (AWUS036AX / AWUS036AXER)
 
 ```bash
 cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl88x2bu.git
-cd rtl88x2bu
-sudo make dkms_install
+sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
+cd rtl8852bu-20250826
+sudo sh install-driver.sh
 ```
 
-**Expected output**: `DKMS: install completed.` — module name `88x2bu`.
+**Expected output**: the script builds and installs the driver with DKMS (answer its prompts and reboot when it asks) — module name `8852bu`. Note: this driver does **not** support monitor mode.
 
 ### 3.5 Re-plug and check
 
@@ -151,7 +151,7 @@ iw dev
 
 **Expected output**: an `Interface wlan1` (or `wlan0` if it is your only adapter) line appears.
 
-> **You might be wondering** — *"Which module name corresponds to my adapter?"* Match your chipset: `8812au` → AWUS036ACH, `8811au` → AWUS036ACS, `88x2bu` → AWUS036AX / AXER. The [driver pages](/alfa-network/drivers/rtl8812au/) have deeper per-chipset details.
+> **You might be wondering** — *"Which module name corresponds to my adapter?"* Match your chipset: `8812au` → AWUS036ACH, `8821au` → AWUS036ACS, `8852bu` → AWUS036AX / AXER. The [driver pages](/alfa-network/drivers/rtl8812au/) have deeper per-chipset details.
 
 ## Step 4: Verify everything {#step-4-verify-everything}
 
@@ -207,4 +207,4 @@ iw dev
 - [Chipset driver pages](/alfa-network/drivers/mt7612u/) — deep dives per chipset
 - [Troubleshooting index](/alfa-network/troubleshooting/) — anything else that goes wrong
 - [Compatibility matrix](/alfa-network/linux-compatibility-matrix/) — full OS coverage table
-- aircrack-ng driver repos: [rtl8812au](https://github.com/aircrack-ng/rtl8812au), [rtl8811au](https://github.com/aircrack-ng/rtl8811au), [rtl88x2bu](https://github.com/aircrack-ng/rtl88x2bu)
+- aircrack-ng driver repos: [rtl8812au](https://github.com/aircrack-ng/rtl8812au), [8821au-20210708](https://github.com/morrownr/8821au-20210708) (RTL8811AU), [rtl8852bu-20250826](https://github.com/morrownr/rtl8852bu-20250826) (RTL8832BU)

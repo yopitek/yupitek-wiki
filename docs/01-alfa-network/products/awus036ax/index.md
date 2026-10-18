@@ -22,8 +22,8 @@ keywords: [AWUS036AX, RTL8832BU, Wi-Fi 6 adapter, WPA3, AX1800]
 | Antenna | 2 × external 6 dBi, RP-SMA |
 | Security | WPA3 (alongside WPA2/WPA) |
 | MIMO | 2×2 |
-| Linux driver | `rtl88x2bu` (DKMS, not in-kernel) |
-| Monitor mode | ✅ good |
+| Linux driver | `rtl8852bu` (DKMS, not in-kernel) |
+| Monitor mode | ❌ not supported by the community driver (see the [driver guide](/alfa-network/drivers/rtl8832bu/)) |
 
 ## Overview
 
@@ -32,26 +32,25 @@ The AWUS036AX is the bridge between ALFA's famous AC generation and the Wi-Fi 6 
 1. **WPA3 support** — campus and 6 GHz-era networks are locking down to WPA3-SAE. Old AC adapters get refused; this one negotiates the new security handshake.
 2. **Wi-Fi 6 efficiency** — OFDMA and better multi-user handling mean the AX holds up better in crowded lecture-hall RF than any AC adapter.
 
-It keeps the classic ALFA DNA — two 6 dBi external antennas, high-power front-end, and DKMS-driven monitor mode when you want it. The driver is **not in the kernel**, so there is a one-time DKMS build.
+It keeps the classic ALFA DNA — two 6 dBi external antennas, high-power front-end, and a client-first Wi-Fi 6 radio. The driver is **not in the kernel**, so there is a one-time DKMS build.
 
 ## Install & drivers
 
 Full steps on the [RTL8832BU driver page](/alfa-network/drivers/rtl8832bu/). Short version:
 
 ```bash
-cd /opt && sudo git clone https://github.com/aircrack-ng/rtl88x2bu.git
-cd rtl88x2bu && sudo make dkms_install
-sudo modprobe 88x2bu
+cd /opt && sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
+cd rtl8852bu-20250826 && sudo sh install-driver.sh
+sudo modprobe 8852bu
 ```
 
-**Expected output**: `DKMS: install completed.` then an interface in `iw dev`.
+**Expected output**: the installer finishes (reboot when it asks), then an interface appears in `iw dev`.
 
 ```mermaid
 flowchart LR
-    A["AWUS036AX"] --> B["DKMS build (rtl88x2bu)"]
-    B --> C["modprobe 88x2bu"]
+    A["AWUS036AX"] --> B["DKMS build (rtl8852bu)"]
+    B --> C["modprobe 8852bu"]
     C --> D["Connect WPA3 network"]
-    D --> E["airmon-ng start wlan0 (optional)"]
 ```
 
 ## Advanced usage
@@ -65,14 +64,9 @@ iw dev wlan0 link
 
 **Expected output**: `Connected` and a 5 GHz link rate up to **1201 Mb/s** (2×2 80 MHz) close to the AP.
 
-### Monitor mode (when needed)
+### Monitor mode
 
-```bash
-sudo airmon-ng start wlan0
-sudo aireplay-ng --test wlan0mon
-```
-
-**Expected output**: `wlan0mon` + injection `30/30: 100%`.
+The community driver for this chipset does **not** support monitor mode. For monitor mode and injection use an in-kernel MediaTek adapter such as the [AWUS036ACM](/alfa-network/products/awus036acm/) or [AWUS036AXML](/alfa-network/products/awus036axml/).
 
 ## Compatibility
 
@@ -89,7 +83,7 @@ sudo aireplay-ng --test wlan0mon
 | Symptom | Cause | Fix |
 |---|---|---|
 | WPA3 network invisible | Driver/wpa_supplicant too old | Update driver + OS |
-| DKMS build fails | New kernel vs repo | `cd /opt/rtl88x2bu && git pull && make dkms_install` |
+| DKMS build fails | New kernel vs repo | `cd /opt/rtl8852bu-20250826 && git pull && sudo sh install-driver.sh` |
 | Slow transfers despite high link | USB 2.0 port | Use a USB 3.x port (adapter is USB 3.2) |
 | Injection 0/30 | Empty channel | `sudo iw wlan0mon set channel 6` |
 

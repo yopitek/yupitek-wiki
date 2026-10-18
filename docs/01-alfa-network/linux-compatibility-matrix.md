@@ -43,8 +43,8 @@ Legend: ✅ works out of the box · 🔧 works after a DKMS install · ⚠️ pa
 | AWUS036AXML | MT7921AUN | `mt7921u` | ✅ since 5.18 | ✅ | ✅ | ✅ |
 | AWUS036ACH | RTL8812AU | `rtl8812au-dkms` | ❌ | 🔧 | 🔧 | 🔧 |
 | AWUS036ACS | RTL8811AU | `rtl8811au` (DKMS) | ❌ | 🔧 | 🔧 | 🔧 |
-| AWUS036AX | RTL8832BU | `rtl88x2bu` (DKMS) | ❌ | 🔧 | 🔧 | ⚠️ |
-| AWUS036AXER | RTL8832BU | `rtl88x2bu` (DKMS) | ❌ | 🔧 | 🔧 | ⚠️ |
+| AWUS036AX | RTL8832BU | `rtl8852bu` (DKMS) | ❌ | 🔧 | 🔧 | ⚠️ |
+| AWUS036AXER | RTL8832BU | `rtl8852bu` (DKMS) | ❌ | 🔧 | 🔧 | ⚠️ |
 | AWUS036EACS | RTL8821CU | — (no reliable driver) | ❌ | ❌ | ❌ | ❌ |
 
 ## What "in-kernel" means for you
