@@ -19,7 +19,7 @@ keywords: [AWUS036AX, RTL8832BU, Wi-Fi 6 adapter, WPA3, AX1800]
 | Wi-Fi class | AX1800 (574 + 1201 Mbps) |
 | Interface | USB 3.2 |
 | Bands | 2.4 + 5 GHz |
-| Antenna | 2 × external 6 dBi, RP-SMA |
+| Antenna | 2 × external dual-band, RP-SMA |
 | Security | WPA3 (alongside WPA2/WPA) |
 | MIMO | 2×2 |
 | Linux driver | `rtl8852bu` (DKMS, not in-kernel) |
@@ -32,7 +32,7 @@ The AWUS036AX is the bridge between ALFA's famous AC generation and the Wi-Fi 6 
 1. **WPA3 support** — campus and 6 GHz-era networks are locking down to WPA3-SAE. Old AC adapters get refused; this one negotiates the new security handshake.
 2. **Wi-Fi 6 efficiency** — OFDMA and better multi-user handling mean the AX holds up better in crowded lecture-hall RF than any AC adapter.
 
-It keeps the classic ALFA DNA — two 6 dBi external antennas, high-power front-end, and a client-first Wi-Fi 6 radio. The driver is **not in the kernel**, so there is a one-time DKMS build.
+It keeps the classic ALFA DNA — two external antennas, high-power front-end, and a client-first Wi-Fi 6 radio. The driver is **not in the kernel**, so there is a one-time DKMS build.
 
 ## Install & drivers
 
