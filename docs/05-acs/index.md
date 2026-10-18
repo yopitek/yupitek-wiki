@@ -17,7 +17,7 @@ toc: true
 
 # ACS — Smart Card & NFC Readers
 
-> **Quick Summary**: ACS (Advanced Card Systems) PC/SC smart card and NFC readers bridge physical contactless cards (access badges, transit cards, MIFARE, FeliCa, e-Passports, and ISO 15693 asset tags) into standardized computer `SCard*` interfaces, allowing applications and custom scripts to read and write them effortlessly.
+> **Quick Summary**: ACS (Advanced Card Systems) PC/SC smart card and NFC readers bridge physical contactless cards (access badges, transit cards, MIFARE, FeliCa, and ISO 15693 asset tags) into standardized computer `SCard*` interfaces, allowing applications and custom scripts to read and write them effortlessly.
 
 If you are new to smart card and NFC readers, review the architectural concept below before exploring individual product guides.
 
@@ -47,15 +47,15 @@ PC/SC serves as the universal API for smart card hardware. Code developed agains
 
 | Product | One-Line Summary | Best Use Case |
 |---|---|---|
-| [ACR122U](/acs/products/acr122u/) | The classic, budget-friendly entry-level NFC reader with widespread community support | Student projects, MIFARE research, libnfc direct hardware testing |
+| [ACR122U](/acs/products/acr122u/) | PC-linked ISO 14443 / MIFARE / FeliCa contactless reader/writer | Student projects, MIFARE research, libnfc direct hardware testing |
 | [ACR1252U](/acs/products/acr1252u/) | NFC Forum-certified reader featuring a built-in SAM security slot (NFC Reader III) | Production NFC deployments, Card Emulation, Peer-to-Peer, secure authentication |
-| [ACR1552U](/acs/products/acr1552u/) | 4th-Gen multi-protocol flagship reader with ISO 15693 & Keyboard Emulation | Enterprise multi-protocol environments, ISO 15693 asset tracking, healthcare & e-Government |
+| [ACR1552U](/acs/products/acr1552u/) | 4th-Gen multi-protocol reader with ISO 15693 & Keyboard Emulation | Enterprise multi-protocol environments, ISO 15693 asset tracking, healthcare & e-Government |
 
 ## Choosing the Right Reader
 
 1. **What is your target media?** For standard MIFARE access cards or coursework → **ACR122U**. For production security and hardware SAM slot requirements → **ACR1252U**. For ISO 15693 asset tags and high-speed multi-card support → **ACR1552U**.
-2. **Which development stack are you using?** For direct raw `libnfc` driver access → **ACR122U** (the only model with direct `acr122_usb` kernel driver support). For standard PC/SC across platforms → all three models.
-3. **Budget and Certification Requirements?** ACR122U offers maximum economy; ACR1252U provides official NFC Forum compliance; ACR1552U offers future-proof multi-protocol versatility.
+2. **Which development stack are you using?** For direct raw `libnfc` driver access → **ACR122U** (`libnfc` ships an `acr122_usb` driver for it). For standard PC/SC across platforms → all three models.
+3. **Certification and feature requirements?** ACR122U is the entry-level model; ACR1252U adds NFC Forum certification and a SAM slot; ACR1552U adds ISO 15693 and Keyboard Emulation.
 
 ## Quick Specification Comparison
 
@@ -69,6 +69,8 @@ PC/SC serves as the universal API for smart card hardware. Code developed agains
 | Keyboard Emulation Mode | ❌ | ❌ | ✅ |
 | Native libnfc Driver | ✅ (`acr122_usb`) | ⚠️ (PC/SC mode) | ⚠️ (PC/SC mode) |
 | Web / Browser NFC | Requires PC/SC Bridge | Requires PC/SC Bridge | Requires PC/SC Bridge |
+
+❌ = not listed in the ACS datasheet for that model.
 
 ## Getting Started
 

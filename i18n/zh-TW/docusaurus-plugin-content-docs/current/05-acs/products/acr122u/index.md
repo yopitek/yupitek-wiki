@@ -17,9 +17,9 @@ toc: true
 
 # ACR122U — USB NFC Reader 完整說明
 
-> **一句話定位**：ACR122U 是 ACS 最經典、最廣為人知的 PC/SC 感應讀卡機。它把 ISO 14443 Type A/B、MIFARE、FeliCa 與 NFC (ISO 18092) 卡片/標籤變成標準 USB 讀卡機，開源社群（libnfc、pyscard、mfoc...）支援最完整，是大學生專題與 MIFARE 研究的最佳起點。
+> **一句話定位**：ACR122U 是 ACS 的 PC/SC 非接觸式智慧卡讀寫機。它把 ISO 14443 Type A/B、MIFARE、FeliCa 與 NFC (ISO 18092) 卡片/標籤變成標準 USB 讀卡機，適用於支付、門禁、考勤與大眾運輸等應用。
 
-它是「讀卡機界的 Arduino」——便宜、到處買得到、任何 PC/SC 程式都能用、且是這三顆裡**唯一**有 libnfc 直連 driver 的型號（這在開發上有巨大優勢，後面「進階應用」會講）。
+ACR122U 符合 PC/SC 與 CCID 規範；開源專案 libnfc 也提供直連它的 driver（`acr122_usb`，見後文）。
 
 ## 開箱與外觀
 
@@ -29,20 +29,18 @@ toc: true
 - **蜂鳴器**：單音，可由軟體控制。
 - **連線線**：固定式 USB Type-A 線，長 1 m，不可拆。
 
-讀卡成功時 LED 通常會閃綠、並發出一聲嗶——這是「讀到了」最直接的訊號。
 
 ## 規格總覽
 
 | 專案 | 規格 |
 |------|------|
-| 晶片/核心 | NXP PN532（13.56 MHz） |
-| 支援標準/卡片 | ISO/IEC 18092 NFC、ISO 14443 Type A & B、MIFARE Classic®、MIFARE Ultralight®、FeliCa |
+| 支援標準/卡片 | ISO/IEC 18092 NFC、ISO 14443 Type A & B、MIFARE Classic®、FeliCa |
 | 作業頻率 | 13.56 MHz |
 | 讀寫速度 | 106 / 212 / **424** kbps（NFC 標籤） |
 | USB 介面 | USB 2.0 Full Speed（12 Mbps）、CCID compliant |
 | 讀距 | 最遠 50 mm（依卡片型別而定） |
 | 防碰撞 | 內建（同一時間只存取一張卡） |
-| 供電 | 由 USB 供電，典型 100 mA / 最大 200 mA，5 V |
+| 供電 | 由 USB 供電，最大 200 mA，5 V |
 | 尺寸/重量 | 98.0 × 65.0 × 12.8 mm / 70 g |
 | API | PC/SC、CT-API（透過 PC/SC wrapper） |
 | 認證 | ISO 14443、PC/SC、CCID、CE、FCC、KC、VCCI、RoHS、Microsoft WHQL |
@@ -54,13 +52,13 @@ toc: true
 
 | 能力 | 說明 |
 |------|------|
-| ✅ 讀/寫 MIFARE Classic、Ultralight | 可搭配 `libfreefare` / `nfc-mfclassic` 使用 |
+| ✅ 讀/寫 MIFARE Classic | 可搭配 `libfreefare` / `nfc-mfclassic` 使用 |
 | ✅ 讀/寫 ISO 14443-4 卡片 | 走標準 PC/SC APDU |
 | ✅ 讀/寫 FeliCa、ISO 18092 NFC 標籤 | 走 pseudo-APDU |
 | ✅ 卡號（UID）讀取 | 最常用的操作，幾行程式碼 |
-| ❌ 卡片模擬（Card Emulation） | 本顆為 Reader/Writer 用途，非模擬 |
-| ❌ ISO 15693 | 這顆不支援（需 ACR1552U） |
-| ❌ SAM 安全插槽 | 這顆沒有（ACR1252U/1552U 才有） |
+| — 規格書未列出：卡片模擬（Card Emulation） | ACS 規格書未列出（ACR1252U / ACR1552U 有列出） |
+| — 規格書未列出：ISO 15693 | ACS 規格書未列出（ACR1552U 有列出） |
+| — 規格書未列出：SAM 安全插槽 | ACS 規格書未列出（ACR1252U / ACR1552U 有列出） |
 
 ## 安裝與驅動
 
@@ -247,7 +245,7 @@ Status words: 90 00
 
 | 平臺 | 支援 | 備註 |
 |------|------|------|
-| Windows 10/11 | ✅ | 內建 Microsoft CCID/PC/SC 驅動，免裝 ACS 驅動即插即用 |
+| Windows 10 | ✅ | 內建 Microsoft CCID/PC/SC 驅動，免裝 ACS 驅動即插即用 |
 | Linux (Kali/Ubuntu) | ✅ | 建議黑名單 `pn533` 模組；pcscd 或 libnfc 皆可 |
 | macOS | ✅ | 內建 PC/SC，`pcsc_scan` 可直接用；可搭 pyscard |
 | Android 3.1+ | ⚠️ | 需 ACS Android Library，非免驅動 |

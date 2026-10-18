@@ -17,7 +17,7 @@ toc: true
 
 # ACS — 智能卡与 NFC 读卡器
 
-> **一句话定位**：ACS (Advanced Card Systems) 的 PC/SC 智能卡与 NFC 读卡器，把现实世界的感应卡（门禁卡、交通卡、MIFARE、FeliCa、电子护照、ISO 15693 资产标签）变成电脑上一个标准的 `SCard*` 接口，让任何 PC/SC 应用程序与你写的程序都能读写它们。
+> **一句话定位**：ACS (Advanced Card Systems) 的 PC/SC 智能卡与 NFC 读卡器，把现实世界的感应卡（门禁卡、交通卡、MIFARE、FeliCa、ISO 15693 资产标签）变成电脑上一个标准的 `SCard*` 接口，让任何 PC/SC 应用程序与你写的程序都能读写它们。
 
 如果你是第一次接触「读卡器」，可以先看下面的概念图，再用底下的产品链接跳到自己那一款。
 
@@ -47,15 +47,15 @@ flowchart LR
 
 | 产品 | 一句话定位 | 最佳用途 |
 |------|-----------|---------|
-| [ACR122U](/acs/products/acr122u/) | 最经典、最便宜、社区支持最广的入门 NFC 读卡器 | 学生项目、MIFARE 研究、libnfc/多卡测试 |
+| [ACR122U](/acs/products/acr122u/) | PC 连接式 ISO 14443 / MIFARE / FeliCa 感应读写器 | 学生项目、MIFARE 研究、libnfc/多卡测试 |
 | [ACR1252U](/acs/products/acr1252u/) | NFC Forum 认证、带 SAM 安全插槽的 NFC Reader III | 需要元件的 NFC 应用、卡片模拟/点对点、正式部署 |
-| [ACR1552U](/acs/products/acr1552u/) | 第 4 代、多协议、支持 ISO 15693 的旗舰 | 政府/医保/交通/资产盘点等专业多卡应用 |
+| [ACR1552U](/acs/products/acr1552u/) | 第 4 代、多协议、支持 ISO 15693 与键盘模拟 | 政府/医保/交通/资产盘点等专业多卡应用 |
 
 ## 怎么选？3 个问句
 
 1. **你要做什么？** 只要读 MIFARE 门禁卡或学校项目 → **ACR122U**。要正式产品、要 SAM 安全 → **ACR1252U**。要连 ISO 15693（资产标签）都支持、要最快 → **ACR1552U**。
-2. **你想用什么开发？** 想用 libnfc 直连 + 大量开源工具 → **ACR122U**（唯一有 libnfc 直连 driver 的一款）。要走标准 PC/SC、跨平台 → 三者皆可。
-3. **预算与未来？** 入门省预算选 ACR122U；要 NFC Forum 认证与安全性的商业开发选 ACR1252U；要最大兼容性的长期投资选 ACR1552U。
+2. **你想用什么开发？** 想用 libnfc 直连 + 大量开源工具 → **ACR122U**（libnfc 内置 `acr122_usb` driver）。要走标准 PC/SC、跨平台 → 三者皆可。
+3. **认证与功能需求？** ACR122U 为入门款；ACR1252U 多了 NFC Forum 认证与 SAM 插槽；ACR1552U 多了 ISO 15693 与键盘模拟。
 
 ## 快速规格比较
 
@@ -69,6 +69,8 @@ flowchart LR
 | 键盘模拟模式 | ❌ | ❌ | ✅ |
 | libnfc 直连 driver | ✅ `acr122_usb` | ⚠️ 只能走 PC/SC | ⚠️ 只能走 PC/SC |
 | 网页/浏览器 NFC | 需 PC/SC bridge | 需 PC/SC bridge（详见 [ACR1252U 的 Web NFC 章节](/acs/products/acr1252u/#web-nfc-macos-browser)） | 需 PC/SC bridge |
+
+❌ = 该型号的 ACS 规格书未列出。
 
 ## 进入方式
 

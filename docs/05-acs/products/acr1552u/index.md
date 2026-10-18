@@ -17,14 +17,14 @@ toc: true
 
 # ACR1552U — USB NFC Reader IV (4th Generation) Complete Guide
 
-> **Quick Summary**: The ACR1552U is ACS's 4th-generation flagship multi-protocol USB reader. Delivering ultra-fast **848 kbps** data rates, extended **ISO 15693** vicinity tag support, built-in **Keyboard Emulation mode**, and a hardware **SAM slot**, it is the definitive enterprise solution for healthcare, government e-Passports, and multi-standard asset tracking.
+> **Quick Summary**: The ACR1552U is ACS's 4th-generation multi-protocol USB reader. Delivering up to **848 kbps** data rates, extended **ISO 15693** vicinity tag support, built-in **Keyboard Emulation mode**, and a hardware **SAM slot**, it is suited to e-Government, e-Healthcare, transportation, and access control applications.
 
-If the ACR122U is the experimental playground and the ACR1252U is the certified NFC specialist, the ACR1552U is the ultimate versatile flagship supporting virtually all 13.56 MHz RFID standards.
+Compared with the ACR122U and ACR1252U, the ACR1552U adds ISO 15693 support, up to 848 kbps, and Keyboard Emulation mode.
 
 ## Unboxing & Hardware Overview
 
-- **Dimensions & Weight**: 98.0 × 65.0 × 12.8 mm, white ABS casing, 79–89 g.
-- **Antenna**: High-efficiency 50 × 40 mm internal antenna providing an industry-leading **operating range of up to 70 mm**.
+- **Dimensions & Weight**: 98.0 × 65.0 × 12.8 mm, white casing, 89 g (±5 g).
+- **Antenna**: 50 × 40 mm antenna with an **operating range of up to 70 mm** (depending on tag type).
 - **Interface Variants**: Available in USB Type-A (`ACR1552U-M1`) and USB Type-C (`ACR1552U-MF`).
 - **SAM Security Slot**: 1 × ISO 7816 Class A (5V) SIM-sized slot supporting up to 1,250 kbps.
 - **Programmable Indicators**: Blue/Green bi-color LED and programmable audio buzzer.
@@ -37,14 +37,14 @@ If the ACR122U is the experimental playground and the ACR1252U is the certified 
 | Supported Protocols & Tags | **ISO 14443 Types A & B (Parts 1–4), ISO 15693, ISO/IEC 18092 NFC**, MIFARE®, FeliCa, SRI/SRIX, CTS, Innovatron, Picopass, Topaz |
 | Operating Frequency | 13.56 MHz |
 | Baud Rates | **106 / 212 / 424 / 848 kbps** (ISO 14443); 26 / 53 kbps (ISO 15693) |
-| Operating Distance | Up to **70 mm** (depending on transponder geometry) |
+| Operating Distance | Up to **70 mm** (depending on tag type) |
 | NFC Operating Modes | Smart Card Reader/Writer, **Keyboard Emulation**, Card Emulation |
 | SAM Slot | 1 × ISO 7816 Class A (5V) SIM slot (T=0, T=1 protocols, 13.4–1,250 kbps) |
-| Extended APDU | ✅ Supported (Up to 64 KB) |
+| Extended APDU | ✅ Extended contactless APDU commands |
 | Host Interface | USB 2.0 Full Speed (12 Mbps), CCID compliant |
-| Dimensions / Weight | 98.0 × 65.0 × 12.8 mm / 79–89 g |
+| Dimensions / Weight | 98.0 × 65.0 × 12.8 mm / 89 g (±5 g) |
 | Certifications | ISO 14443, ISO 15693, PC/SC, CCID, CE, FCC, RoHS, REACH, Microsoft WHQL |
-| OS Compatibility | Windows 10/11, Linux, macOS, Android, iOS / iPadOS 16+ |
+| OS Compatibility | Windows, Linux, macOS, Android |
 | Official Documentation | [ACR1552U Product Page](https://www.acs.com.hk/en/products/575/acr1552u-usb-nfc-reader-iv/), API Reference (PDF) |
 
 ## Comparison: ACR122U vs ACR1252U vs ACR1552U
@@ -53,23 +53,19 @@ If the ACR122U is the experimental playground and the ACR1252U is the certified 
 |---|---|---|---|
 | Max ISO 14443 Speed | 424 kbps | 424 kbps | **848 kbps** |
 | Max Read Distance | 50 mm | 50 mm | **70 mm** |
-| ISO 15693 Vicinity Support | ❌ | ❌ | **✅ Full Support** |
-| Keyboard Emulation Mode | ❌ | ❌ | **✅ Built-in** |
+| ISO 15693 Vicinity Support | ❌ | ❌ | **✅ Supported** |
+| Keyboard Emulation Mode | ❌ | ❌ | **✅ Supported** |
 | SAM Security Slot | ❌ | ✅ | **✅ High-speed SAM** |
-| Extended APDU (64 KB) | ❌ | ⚠️ Partial | **✅ Native Support** |
-
-:::note Why ISO 15693 Matters
-ISO 15693 vicinity cards are widely deployed in library asset management, medical supply tracking, and industrial inventory tags. The ACR1552U allows one unified reader to process both standard access cards (ISO 14443) and inventory tags (ISO 15693).
-:::
+| Extended APDU | — | — | **✅ Supported** |
 
 ## Application Architectures
 
 ```mermaid
 flowchart TD
-    A[ACR1552U Flagship Reader] --> B[e-Government & Travel<br/>Electronic Passports & National ID]
-    A --> C[Healthcare Systems<br/>Health Insurance Cards & Staff Badges]
-    A --> D[Asset Tracking<br/>ISO 15693 Library & Warehouse Tags]
-    A --> E[Keyboard Emulation<br/>Zero-Software Direct USB Keystroke Output]
+    A[ACR1552U Reader] --> B[e-Government]
+    A --> C[e-Healthcare]
+    A --> D[ISO 15693 Tags]
+    A --> E[Keyboard Emulation Mode]
 ```
 
 ## Installation & Setup (Linux + macOS)
@@ -137,7 +133,7 @@ else:
 
 ### 2. Keyboard Emulation not outputting keystrokes
 - **Cause**: Reader is configured in standard PC/SC mode rather than HID Keyboard Emulation mode.
-- **Fix**: Use the ACS Configuration Tool to enable Keyboard Emulation and configure desired delimiter characters (e.g., Enter or Tab).
+- **Fix**: Refer to the ACS ACR1552U Reference Manual for how to enable Keyboard Emulation mode and configure its output.
 
 ### 3. SAM communication errors
 - **Cause**: SAM card mismatch or improper seating.

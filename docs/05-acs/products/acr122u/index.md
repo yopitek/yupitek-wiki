@@ -17,32 +17,30 @@ toc: true
 
 # ACR122U — USB NFC Reader Complete Guide
 
-> **Quick Summary**: The ACR122U is ACS's most iconic and widely adopted PC/SC contactless reader. Bridging ISO 14443 Type A/B, MIFARE, FeliCa, and ISO 18092 NFC tags into standard USB interfaces, it boasts unmatched open-source library support (`libnfc`, `pyscard`, `mfoc`) and serves as the definitive starting point for RFID/NFC academic projects and research.
+> **Quick Summary**: The ACR122U is a PC-linked contactless smart card reader/writer from ACS. Bridging ISO 14443 Type A/B, MIFARE, FeliCa, and ISO 18092 NFC tags into standard USB interfaces, it is designed for applications such as payment, access control, time and attendance, and mass transit.
 
-Often referred to as the "Arduino of NFC readers," the ACR122U is cost-effective, widely available, PC/SC-compliant, and the **only model** in its class featuring a direct native `libnfc` driver (`acr122_usb`).
+The ACR122U is PC/SC- and CCID-compliant. The community `libnfc` project also ships a direct driver for it (`acr122_usb`, see Method B below).
 
 ## Unboxing & Hardware Overview
 
-- **Dimensions & Weight**: 98.0 × 65.0 × 12.8 mm, pearl-white ABS casing, 70 g.
-- **Antenna**: Integrated 50 × 40 mm PCB antenna located beneath the top surface (operating range up to 50 mm).
+- **Dimensions & Weight**: 98.0 × 65.0 × 12.8 mm, pearl-white casing, 70 g.
+- **Antenna**: Integrated 50 × 40 mm antenna (operating range up to 50 mm, depending on tag type).
 - **LED**: Bi-color LED (Red/Green), software controllable.
 - **Buzzer**: Monotone buzzer, software controllable.
 - **Cable**: Integrated USB 2.0 Type-A cable, 1.0 m length.
 
-When a card is successfully detected, the LED flashes green and the buzzer emits a confirmation beep.
 
 ## Specifications Overview
 
 | Item | Specification |
 |---|---|
-| Core Chipset | NXP PN532 (13.56 MHz) |
-| Supported Standards / Cards | ISO/IEC 18092 NFC, ISO 14443 Type A & B, MIFARE Classic®, MIFARE Ultralight®, FeliCa |
+| Supported Standards / Cards | ISO/IEC 18092 NFC, ISO 14443 Type A & B, MIFARE Classic®, FeliCa |
 | Operating Frequency | 13.56 MHz |
 | Read/Write Speed | 106 / 212 / **424** kbps |
 | Host Interface | USB 2.0 Full Speed (12 Mbps), CCID compliant |
-| Operating Distance | Up to 50 mm (dependent on tag geometry) |
+| Operating Distance | Up to 50 mm (dependent on tag type) |
 | Anti-collision | Built-in (one card accessed at a time) |
-| Power Supply | USB bus-powered, 5V DC (typical 100 mA, max 200 mA) |
+| Power Supply | USB bus-powered, 5V DC (max 200 mA) |
 | Dimensions / Weight | 98.0 × 65.0 × 12.8 mm / 70 g |
 | API Support | PC/SC, CT-API (via PC/SC wrapper) |
 | Certifications | ISO 14443, PC/SC, CCID, CE, FCC, KC, VCCI, RoHS, Microsoft WHQL |
@@ -54,13 +52,13 @@ When a card is successfully detected, the LED flashes green and the buzzer emits
 
 | Feature | Status | Notes |
 |---|---|---|
-| Read/Write MIFARE Classic & Ultralight | ✅ Supported | Compatible with `libfreefare` and `nfc-mfclassic` |
+| Read/Write MIFARE Classic | ✅ Supported | Compatible with `libfreefare` and `nfc-mfclassic` |
 | Read/Write ISO 14443-4 Cards | ✅ Supported | Standard PC/SC APDU transmission |
 | Read/Write FeliCa & ISO 18092 Tags | ✅ Supported | Handled via pseudo-APDU commands |
 | Read Card Serial Number (UID) | ✅ Supported | Standardized `FF CA 00 00 00` APDU call |
-| Card Emulation Mode | ❌ Not Supported | Dedicated reader/writer firmware |
-| ISO 15693 (Vicinity Cards) | ❌ Not Supported | Requires ACR1552U |
-| SAM (Secure Access Module) Slot | ❌ Not Supported | Requires ACR1252U or ACR1552U |
+| Card Emulation Mode | — Not listed | Not listed in the ACS datasheet (ACR1252U and ACR1552U list it) |
+| ISO 15693 (Vicinity Cards) | — Not listed | Not listed in the ACS datasheet (ACR1552U lists it) |
+| SAM (Secure Access Module) Slot | — Not listed | Not listed in the ACS datasheet (ACR1252U and ACR1552U list a SAM slot) |
 
 ## Installation & Driver Setup
 
@@ -189,11 +187,10 @@ else:
 
 | OS / Platform | Compatibility | Driver / Notes |
 |---|---|---|
-| Windows 10 / 11 | ✅ Supported | Plug & Play via Microsoft CCID driver |
+| Windows 10 | ✅ Supported | Plug & Play via Microsoft CCID driver |
 | Ubuntu / Debian / Kali | ✅ Supported | `pcscd` + `libpcsclite` (requires kernel module blacklist) |
 | macOS | ✅ Supported | Built-in Apple CCID / PC/SC framework |
 | Android | ✅ Supported | Via USB OTG and Android CCID libraries |
-| Raspberry Pi / Jetson | ✅ Supported | Standard ARM Linux packages |
 
 ## Troubleshooting
 

@@ -3,7 +3,7 @@ id: acs-product-acr1552u
 title: ACR1552U — USB NFC Reader IV（第 4 代）完整說明
 slug: /acs/products/acr1552u
 sidebar_position: 3
-description: ACS ACR1552U 完整指南 — 第 4 代旗艦多協定感應讀卡機，支援 ISO 14443 Type A/B (848 kbps)、ISO 15693、ISO 18092 NFC、MIFARE、FeliCa，內建 SAM 與鍵盤模擬模式。規格、Linux/macOS 設定、應用、疑難排解。
+description: ACS ACR1552U 完整指南 — 第 4 代多協定感應讀卡機，支援 ISO 14443 Type A/B (848 kbps)、ISO 15693、ISO 18092 NFC、MIFARE、FeliCa，內建 SAM 與鍵盤模擬模式。規格、Linux/macOS 設定、應用、疑難排解。
 tags: [acs, acr1552u, nfc, iso-15693, iso-14443, rfid, sam, keyboard-emulation, pcsc]
 keywords: [ACR1552U, ACS, NFC Reader IV, ISO 15693, ISO 14443, smart card reader, SAM, keyboard emulation]
 authors: yupitek
@@ -17,9 +17,9 @@ toc: true
 
 # ACR1552U — USB NFC Reader IV（第 4 代）完整說明
 
-> **一句話定位**：ACR1552U 是 ACS 第 4 代旗艦 USB 讀卡機，特色是**多協定**——它多了 **ISO 15693** 支援與高達 **848 kbps** 的讀寫速度，並首度加入**鍵盤模擬（Keyboard Emulation）模式**，加上 SAM 安全插槽，是政府、健保、交通、資產盤點等「需要讀很多種卡」的應用首選。
+> **一句話定位**：ACR1552U 是 ACS 第 4 代 USB 讀卡機，特色是**多協定**——支援 **ISO 15693**、最高 **848 kbps** 的讀寫速度，並提供**鍵盤模擬（Keyboard Emulation）模式**，加上 SAM 安全插槽，適用於政府、健保、交通、門禁等「需要讀很多種卡」的應用。
 
-如果 ACR122U 是「入門玩具」、ACR1252U 是「NFC 專業版」，那 ACR1552U 就是「什麼都能插、更快、更廣」的旗艦。
+相較於 ACR122U 與 ACR1252U，ACR1552U 多了 ISO 15693 支援、最高 848 kbps，以及鍵盤模擬模式。
 
 ## 開箱與外觀
 
@@ -42,12 +42,11 @@ toc: true
 | NFC 模式 | Reader/Writer、**Keyboard Emulation**、Card Emulation |
 | SAM 插槽 | 1 × ISO 7816 Class A（5 V）/ SIM 尺寸／T=0、T=1，13.4 kbps–1,250 kbps，時脈 5 MHz（可 10 MHz） |
 | 防碰撞 | 內建 |
-| 擴充 APDU | ✅（最大 64 KB） |
 | USB 介面 | USB CCID，USB 2.0 Full Speed（12 Mbps），相容 USB 3.0 |
 | 供電 | 5 VDC，最大 300 mA |
 | Firmware 升級 | ✅（透過 USB） |
 | 尺寸/重量 | 98.0 × 65.0 × 12.8 mm / 約 79–89 g |
-| 系統支援 | Windows、Linux、macOS、Android、iOS/iPadOS 16+ |
+| 系統支援 | Windows、Linux、macOS、Android |
 | 官方檔案 | [ACR1552U 產品頁](https://www.acs.com.hk/en/products/575/acr1552u-usb-nfc-reader-iv/)、API Reference (PDF) |
 
 ## 這顆與前兩顆差在哪（重點）
@@ -63,19 +62,19 @@ toc: true
 | libnfc 直連 | ✅ | ❌（走 PC/SC） | ❌（走 PC/SC） |
 
 :::note 哪些卡只有 ACR1552U 能讀？
-**ISO 15693** 主要用在資產追蹤標籤（圖書館、倉儲、衣物吊牌）與部分智慧標籤；**Picopass / Topaz / SRIX** 等則出現在特定門禁與電子標籤生態。若你的專案會碰到這些，只有 ACR1552U 能通吃。
+**ISO 15693**、**Picopass / Topaz / SRI/SRIX / CTS / Innovatron** 為 ACR1552U 規格書列出的支援卡種；ACR122U 與 ACR1252U 規格書未列出 ISO 15693。
 :::
 
 ## 應用場景
 
 ```mermaid
 flowchart TD
-    A[ACR1552U 多協定旗艦] --> B[e-Government<br/>電子身分證/護照]
-    A --> C[e-Banking / e-Payment<br/>金融卡雙向認證]
-    A --> D[e-Healthcare<br/>健保卡/病歷卡]
-    A --> E[Transportation<br/>交通卡/票務]
-    A --> F[Access Control<br/>門禁/身分]
-    A --> G[Asset Tracking<br/>ISO 15693 資產標籤]
+    A[ACR1552U] --> B[e-Government]
+    A --> C[e-Banking / e-Payment]
+    A --> D[e-Healthcare]
+    A --> E[Transportation]
+    A --> F[Access Control]
+    A --> G[ISO 15693]
     A --> H[Smart Poster / Marketing<br/>URL 行銷]
 
     style A fill:#2563eb,color:#fff
@@ -128,7 +127,7 @@ Scanning present readers...
 
 **Step 4：macOS**
 
-macOS 內建 PC/SC，還特別新增了 **iOS/iPadOS 16+** 支援。直接：
+macOS 內建 PC/SC。直接：
 
 ```bash
 pcsc_scan
@@ -165,11 +164,10 @@ ISO 15693 標籤的讀法與 ISO 14443 不同，且各家標籤（NXP ICODE、ST
 
 | 平臺 | 支援 | 備註 |
 |------|------|------|
-| Windows 10/11 | ✅ | 內建 Microsoft CCID/PC/SC 驅動 |
+| Windows | ✅ | 內建 Microsoft CCID/PC/SC 驅動 |
 | Linux (Kali/Ubuntu) | ✅ | 走 PC/SC（pcscd）；無 libnfc 直連 |
 | macOS | ✅ | 內建 PC/SC，免驅動 |
 | Android | ✅ | OTG + PC/SC 應用 |
-| iOS/iPadOS 16+ | ✅ | 透過支援的 PC/SC 應用使用 |
 | 瀏覽器 | ⚠️ | Web NFC 只在 Android；桌面需 PC/SC bridge（見 ACR1252U 的 [Web NFC 章節](/acs/products/acr1252u/#web-nfc-macos-browser)） |
 
 ## 疑難排解

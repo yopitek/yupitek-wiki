@@ -17,9 +17,9 @@ toc: true
 
 # ACR1252U — USB NFC Reader III（NFC Forum Certified）完整說明
 
-> **一句話定位**：ACR1252U 是 ACS 第二代 NFC 讀卡機家族中最受歡迎的成員，主打 **NFC Forum 認證** + **內建 SAM（Secure Access Module）安全插槽**。它能做 NFC 的 Reader/Writer、Card Emulation、Peer-to-Peer 三種模式，適合要上正式產品、需要金鑰分散與雙向認證的開發者。
+> **一句話定位**：ACR1252U 是 ACS 的 NFC Forum 認證 NFC 讀卡機，主打 **NFC Forum 認證** + **內建 SAM（Secure Access Module）安全插槽**。它支援 NFC 的 Reader/Writer、Card Emulation、Peer-to-Peer 三種模式，適合需要金鑰分散與雙向認證的開發者。
 
-如果你在 ACR122U 與 ACR1252U 之間猶豫：ACR122U 是「便宜好玩的入門」，ACR1252U 是「要上線、要安全、要 NFC Forum 相容標章」的專業選擇。
+如果你在 ACR122U 與 ACR1252U 之間猶豫：ACR1252U 多了 NFC Forum 認證、SAM 插槽，以及 Card Emulation / Peer-to-Peer 模式。
 
 ## 開箱與外觀
 
@@ -41,20 +41,19 @@ toc: true
 | NFC 模式 | Reader/Writer、Peer-to-Peer、Card Emulation（三種全支援） |
 | SAM 插槽 | 1 × ISO 7816 Class A（5 V）/ SIM 尺寸／T=0、T=1，9.6–215 kbps |
 | 防碰撞 | 內建 |
-| 擴充 APDU | ✅（最大 64 KB） |
 | USB 介面 | USB CCID，USB 2.0 Full Speed（12 Mbps），相容 USB 3.0 |
 | 供電 | 5 VDC，最大 200 mA |
 | Firmware 升級 | ✅（透過 USB） |
 | 尺寸/重量 | 98.0 × 65.0 × 12.8 mm / 81 g |
 | USB Vendor/Product ID | `072F:223B` |
 | 系統支援 | Windows、Linux、macOS、Android |
-| 官方檔案 | [ACR1252U 產品頁](https://www.acs.com.hk/en/products/178/acr1252u-usb-nfc-reader-iii/)、[技術規格 (PDF)](https://www.smartcardfocus.com/files/ACR1252U-DOT/TechnicalSpecification_TSP-ACR1252U-2.02_Mar2024.pdf) |
+| 官方檔案 | [ACR1252U 產品頁](https://www.acs.com.hk/en/products/342/acr1252u-usb-nfc-reader-iii-nfc-forum-certified-reader/)、[技術規格 (PDF)](https://www.smartcardfocus.com/files/ACR1252U-DOT/TechnicalSpecification_TSP-ACR1252U-2.02_Mar2024.pdf) |
 
 ## 重點特色深入
 
 ### SAM 安全插槽（這顆的殺手級功能）
 
-SAM = Secure Access Module。把一張 SAM 卡插進 slot 後，讀卡機可以把**金鑰分散（Key Diversification）**與**雙向認證（Mutual Authentication）**這些敏感運算「外包」給實體 SAM 卡執行，金鑰永遠不離開硬體。這對金融、門禁、交通等需要高安全等級的應用至關重要——就算主機被入侵，讀卡機也拿不到真正的金鑰。
+SAM = Secure Access Module。把一張 SAM 卡插進 slot 後，可搭配 SAM 卡進行**金鑰分散（Key Diversification）**與**雙向認證（Mutual Authentication）**，為非接觸式交易提供較高的安全性。
 
 ### 三種 NFC 模式
 
@@ -68,8 +67,8 @@ flowchart LR
 ```
 
 - **Reader/Writer**：最常用，讀寫 NFC 標籤與卡片。
-- **Card Emulation**：讓讀卡機「扮演」一張感應卡，供其他讀卡機/手機讀取（例如會員卡模擬、數位門禁）。
-- **Peer-to-Peer**：與另一臺支援 P2P 的 NFC 裝置交換資料（例如與手機 Android Beam 對談）。
+- **Card Emulation**：讓讀卡機「扮演」一張感應卡，供其他讀卡機/手機讀取。
+- **Peer-to-Peer**：與另一臺支援 P2P 的 NFC 裝置交換資料。
 
 ## 安裝與驅動（Linux）
 
@@ -199,7 +198,7 @@ print(f"SW: {sw1:02X} {sw2:02X}")
 
 | 平臺 | 支援 | 備註 |
 |------|------|------|
-| Windows 10/11 | ✅ | 內建 Microsoft CCID/PC/SC 驅動，即插即用 |
+| Windows | ✅ | 內建 Microsoft CCID/PC/SC 驅動，即插即用 |
 | Linux (Kali/Ubuntu) | ✅ | 走 PC/SC（pcscd）；**無 libnfc 直連** |
 | macOS | ✅ | 內建 PC/SC，免驅動 |
 | Android | ✅ | 可透過 OTG + PC/SC 應用使用 |
