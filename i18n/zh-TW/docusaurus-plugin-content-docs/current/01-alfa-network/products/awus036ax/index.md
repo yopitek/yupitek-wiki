@@ -2,87 +2,95 @@
 id: alfa-product-awus036ax
 title: ALFA AWUS036AX——Wi-Fi 6 雙頻 AX1800
 sidebar_position: 10
-description: ALFA AWUS036AX——Wi-Fi 6 RTL8832BU AX1800 雙頻無線網絡卡，支援 WPA3、2x2 MIMO 與 DKMS 驅動程式。比 AC 等級無線網絡卡更長距離的升級款。
-tags: [alfa, 無線網絡卡, rtl8832bu, wifi-6, wpa3, ax1800]
-keywords: [AWUS036AX, RTL8832BU, Wi-Fi 6 無線網絡卡, WPA3, AX1800]
+description: ALFA AWUS036AX——Wi-Fi 6 RTL8832BU AX1800 雙頻網卡，支援 WPA3、2x2 MIMO 與 DKMS 驅動程式。相較於 AC 等級網卡的長距離升級選擇。
+tags: [alfa, 網卡, rtl8832bu, wifi-6, wpa3, ax1800]
+keywords: [AWUS036AX, RTL8832BU, Wi-Fi 6 網卡, WPA3, AX1800]
 ---
 
 # ALFA AWUS036AX——Wi-Fi 6 雙頻 AX1800
 
-> **一句話定位（One-liner）**：**AWUS036AX** 是 ALFA 的 Wi-Fi 6 入門款——一支 **RTL8832BU AX1800** 雙頻無線網絡卡，支援 **WPA3**、**2×2 MIMO** 與兩支外接天線。如果你的校園或實驗室路由器已經只支援 WPA3，這支無線網絡卡仍然能讓你連進去。
+> **一句話摘要**：**AWUS036AX** 是 ALFA 的 Wi-Fi 6 入門款——一款 **RTL8832BU AX1800** 雙頻網卡，支援 **WPA3**、**2×2 MIMO**，並配備兩支外接天線。如果你的校園或實驗室路由器已改為僅支援 WPA3，這款網卡仍能讓你連得上線。
 
 ## 規格總覽 (Spec overview)
 
-| 專案 | 規格 |
+| 項目 | 規格 |
 |---|---|
 | 晶片 | Realtek RTL8832BU |
 | Wi-Fi 等級 | AX1800（574 + 1201 Mbps） |
 | 介面 | USB 3.2 |
 | 頻段 | 2.4 + 5 GHz |
 | 天線 | 2 × 外接 6 dBi，RP-SMA |
-| 安全性 | WPA3（與 WPA2/WPA 並存） |
+| 安全性 | WPA3（同時支援 WPA2/WPA） |
 | MIMO | 2×2 |
-| Linux 驅動程式 | `rtl8852bu`（DKMS，不在核心內） |
+| Linux 驅動程式 | `rtl8852bu`（DKMS，非核心內建） |
 | 監聽模式 | ❌ 社群驅動程式不支援（請參閱[驅動程式指南](/alfa-network/drivers/rtl8832bu/)） |
 
 ## 總覽
 
-AWUS036AX 是 ALFA 著名的 AC 世代與 Wi-Fi 6 世界之間的橋樑。引擎蓋下是現代的 **RTL8832BU** 2×2 ax 無線電（AX1800），帶來兩項學生真正有感升級：
+AWUS036AX 是銜接 ALFA 著名 AC 世代與 Wi-Fi 6 世界的橋樑。內部採用新一代 **RTL8832BU** 2×2 ax 無線電（AX1800），帶來學生真正有感的兩項升級：
 
-1. **WPA3 支援**——校園與 6 GHz 世代的網路正在鎖定 WPA3-SAE。舊 AC 無線網絡卡會被拒絕；這支會協商新的安全握手。
-2. **Wi-Fi 6 效率**——OFDMA 與更好的多使用者處理代表 AX 在擁擠的演講廳 RF 中比任何 AC 無線網絡卡都撐得住。
+1. **WPA3 支援**——校園與 6 GHz 時代的網路正逐步鎖定為 WPA3-SAE。舊的 AC 網卡會被拒絕；這款則能協商新的安全性交握。
+2. **Wi-Fi 6 效率**——OFDMA 與更佳的多用戶處理能力，讓 AX 在擁擠的階梯教室 RF 環境中，表現比任何 AC 網卡都更穩定。
 
-它保留經典的 ALFA DNA——兩支 6 dBi 外接天線、高功率前端，以及以使用者為優先的 Wi-Fi 6 無線晶片。驅動程式**不在核心內**，所以有一次性的 DKMS 建置。
+它保留了經典的 ALFA DNA——兩支 6 dBi 外接天線、高功率前端，以及以用戶端為優先的 Wi-Fi 6 無線電。驅動程式**不在核心內**，因此需要進行一次性的 DKMS 建置。
 
 ## 安裝與驅動程式
 
-完整步驟在 [RTL8832BU 驅動程式頁面](/alfa-network/drivers/rtl8832bu/)。簡短版本：
+完整步驟請見 [RTL8832BU 驅動程式頁面](/alfa-network/drivers/rtl8832bu/)。簡短版本：
+
+```bash
 cd /opt && sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
 cd rtl8852bu-20250826 && sudo sh install-driver.sh
 sudo modprobe 8852bu
 ```
 
-**預期輸出**：安裝程式完成（提示時請重新啟動），然後 `iw dev` 中出現介面。
+**預期輸出**：安裝程式完成（它要求時請重新開機），之後 `iw dev` 中會出現一個介面。
 
 ```mermaid
 flowchart LR
     A["AWUS036AX"] --> B["DKMS build (rtl8852bu)"]
     B --> C["modprobe 8852bu"]
     C --> D["Connect WPA3 network"]
-## 進階使用
+```
 
-### 連到只支援 WPA3 的網路
+## 進階用法
+
+### 連線至僅支援 WPA3 的網路
 
 ```bash
 nmcli device wifi connect "MySSID" password "my-passphrase"
 iw dev wlan0 link
 ```
 
-**預期輸出**：`Connected` 與靠近 AP 時最高 **1201 Mb/s** 的 5 GHz 連結速率（2×2 80 MHz）。
+**預期輸出**：`Connected`，且在靠近 AP 時 5 GHz 連線速率最高達 **1201 Mb/s**（2×2 80 MHz）。
+
 ### 監聽模式
 
-此晶片組的社群驅動程式**不**支援監聽模式。若需使用監聽模式與注入功能，請使用內建於核心的 MediaTek 轉接器，例如 [AWUS036ACM](/alfa-network/products/awus036acm/) 或 [AWUS036AXML](/alfa-network/products/awus036axml/)。
-| 平臺 | 支援 | 注意事項 |
+此晶片的社群驅動程式**不**支援監聽模式。若需要監聽模式與封包注入，請使用核心內建驅動的 MediaTek 網卡，例如 [AWUS036ACM](/alfa-network/products/awus036acm/) 或 [AWUS036AXML](/alfa-network/products/awus036axml/)。
+
+## 相容性
+
+| 平台 | 支援 | 備註 |
 |---|---|---|
 | Kali Linux | ✅ | DKMS |
 | Ubuntu | ✅ | DKMS |
 | NetHunter / Android | ⚠️ | Realtek；可能無法在手機核心上建置 |
-| Windows | ✅ | 官方驅動程式，WPA3 沒問題 |
-| Raspberry Pi / Jetson | ✅ | ARM64 上的 DKMS |
+| Windows | ✅ | 官方驅動程式，WPA3 正常 |
+| Raspberry Pi / Jetson | ✅ | ARM64 上使用 DKMS |
 
 ## 疑難排解
 
 | 症狀 | 原因 | 修復 |
 |---|---|---|
-| WPA3 網路看不見 | 驅動程式/wpa_supplicant 太舊 | 更新驅動程式 + 作業系統 |
-| DKMS 建置失敗 | 新核心 vs repo | `cd /opt/rtl8852bu-20250826 && git pull && sudo sh install-driver.sh` |
-| 高連結速率但傳輸慢 | USB 2.0 連線埠 | 使用 USB 3.x 連線埠（無線網絡卡是 USB 3.2） |
+| 看不到 WPA3 網路 | 驅動程式/wpa_supplicant 太舊 | 更新驅動程式與作業系統 |
+| DKMS 建置失敗 | 新核心與 repo 不相容 | `cd /opt/rtl8852bu-20250826 && git pull && sudo sh install-driver.sh` |
+| 連線速率高但傳輸慢 | USB 2.0 連接埠 | 使用 USB 3.x 連接埠（本網卡為 USB 3.2） |
 | 注入 0/30 | 空頻道 | `sudo iw wlan0mon set channel 6` |
 
 ## 相關資源
 
 - [RTL8832BU 驅動程式頁面](/alfa-network/drivers/rtl8832bu/)
-- [AWUS036AXER](/alfa-network/products/awus036axer/)——nano Wi-Fi 6 變體
-- [AWUS036AXM](/alfa-network/products/awus036axm/)——更快的 AX3000 + 藍芽機型
+- [AWUS036AXER](/alfa-network/products/awus036axer/)——nano 版 Wi-Fi 6 機種
+- [AWUS036AXM](/alfa-network/products/awus036axm/)——更快的 AX3000 + 藍牙機種
 - [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/) / [Kali 設定指南](/alfa-network/linux-setup-kali/)
-- [無線網絡卡比較](/alfa-network/wifi-adapter-comparison/)
+- [網卡比較](/alfa-network/wifi-adapter-comparison/)

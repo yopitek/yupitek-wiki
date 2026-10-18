@@ -1,29 +1,30 @@
 ---
 id: alfa-driver-rtl8832bu
-title: RTL8832BU 驱动指南（AWUS036AX / AWUS036AXER）
+title: RTL8832BU 驱动程序指南（AWUS036AX / AWUS036AXER）
 sidebar_position: 6
-description: RTL8832BU 芯片组深度解析——AWUS036AX 与 AWUS036AXER 背后的 Wi-Fi 6 RTL88x2BU 驱动，DKMS 安装、WPA3 与监听模式。
+description: RTL8832BU 芯片深入探讨——AWUS036AX 与 AWUS036AXER 背后的 Wi-Fi 6 芯片、社区 rtl8852bu DKMS 驱动程序、WPA3。此驱动程序不支持监听模式。
 tags: [alfa, 驱动程序, rtl8832bu, wifi-6, dkms, wpa3]
-keywords: [RTL8832BU 驱动, AWUS036AX, rtl88x2bu, Linux Wi-Fi 6, WPA3]
+keywords: [RTL8832BU 驱动程序, RTL8852BU, AWUS036AX, rtl8852bu, Linux Wi-Fi 6, WPA3]
 ---
 
-# RTL8832BU 驱动指南（AWUS036AX / AWUS036AXER）
+# RTL8832BU 驱动程序指南（AWUS036AX / AWUS036AXER）
 
-> **一句话定位（One-liner）**：**Realtek RTL8832BU** 是 **AWUS036AX** 及其纳米兄弟 **AWUS036AXER** 内部的 Wi-Fi 6（802.11ax）芯片组。它不在内核中，所以你需要构建一次 `rtl88x2bu` DKMS 驱动——然后享受 AX1800 速度、**WPA3** 支持和可用的监听模式。
+> **一句话摘要**：**Realtek RTL8832BU** 是 **AWUS036AX** 及其 nano 版兄弟机型 **AWUS036AXER** 内部的 Wi-Fi 6（802.11ax）芯片。它不在内核内，因此你只需建置一次社区的 `rtl8852bu` DKMS 驱动程序，即可享有 AX1800 速度与 **WPA3** 支持。**此驱动程序不支持监听模式**——请参阅[监听模式与封包注入](#monitor-mode-and-injection)。
 
-## 概念：Realtek 风格的 Wi-Fi 6
+## 概念：Wi-Fi 6，Realtek 风格
 
-RTL8832BU 是一款 2×2 802.11ax 无线电（AX1800：574 + 1201 Mbps）。与较旧的 AC 网卡适配器相比，用户能明显感受到的最大进步是 **WPA3**——只支持 WPA3 的现代路由器会拒绝你的旧 AC 适配器，但会愉快地接受 AX。
+RTL8832BU 是一颗 2×2 802.11ax 无线电（AX1800：574 + 1201 Mbps）。与较旧的 AC 网卡相比，用户最直接感受到的优势是 **WPA3**——只支持 WPA3 的现代路由器会拒绝你旧的 AC 网卡，但会欣然接受 AX。
 
-驱动情况与其他 Realtek 芯片组如出一辙：**未上游**，所以我们使用社区驱动。首选仓库是 **`aircrack-ng/rtl88x2bu`**，它覆盖 88X2BU 家族（RTL8822BU 和 RTL8832BU），带监听模式 + VIF 支持。DKMS 让它在历次内核更新中保持重建。
+驱动程序的状况与其他 Realtek 芯片相同：**未纳入上游内核**，因此我们使用社区驱动程序。目前持续维护的 repo 是 **[`morrownr/rtl8852bu-20250826`](https://github.com/morrownr/rtl8852bu-20250826)**（「Linux Driver for USB WiFi Adapters that are based on the RTL8832BU and RTL8852BU Chipsets」）；其 README 列出 AWUS036AX 与 AWUS036AXER 为支持机型。其安装程序会将驱动程序注册到 DKMS，使其在内核更新后自动重新建置。
+
+> 本指南早期版本使用 `aircrack-ng/rtl88x2bu`。该 repository 已不存在，且 88x2bu 系列（RTL8812BU / RTL8822BU）属于另一个 802.11ac 芯片家族——请勿将其用于 AWUS036AX / AXER。
 
 ```mermaid
 flowchart LR
     A["AWUS036AX / AXER plugged in"] --> B["No in-kernel driver for RTL8832BU"]
-    B --> C["Build rtl88x2bu via DKMS"]
-    C --> D["88x2bu module loaded"]
+    B --> C["Build rtl8852bu via DKMS"]
+    C --> D["8852bu module loaded"]
     D --> E["Connect: WPA3-capable"]
-    E --> F["airmon-ng start wlan0 → monitor mode"]
 ```
 
 ## 前置需求
@@ -33,35 +34,31 @@ flowchart LR
 - [ ] `sudo` 权限
 - [ ] AWUS036AX 或 AWUS036AXER
 
-## 第 1 步：构建驱动
+## 步骤 1：建置驱动程序
 
 ```bash
 cd /opt
-sudo git clone https://github.com/aircrack-ng/rtl88x2bu.git
-cd rtl88x2bu
-sudo make dkms_install
+sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
+cd rtl8852bu-20250826
+sudo sh install-driver.sh
 ```
 
-**预期输出**：
+**预期输出**：脚本会以 DKMS 建置并安装驱动程序。请回答其提示，并在它要求时重启。
 
-```text
-DKMS: install completed.
-```
-
-## 第 2 步：加载并验证
+## 步骤 2：加载并验证
 
 ```bash
-sudo modprobe 88x2bu
+sudo modprobe 8852bu
 iw dev
 ```
 
-**预期输出**：一个接口行，例如 `Interface wlan0 ... type managed`。跨重启自动加载：
+**预期输出**：一行接口信息，例如 `Interface wlan0 ... type managed`。安装程序通常会设置好重启后自动加载；若没有，请运行：
 
 ```bash
-echo 88x2bu | sudo tee /etc/modules-load.d/alfa.conf
+echo 8852bu | sudo tee /etc/modules-load.d/alfa.conf
 ```
 
-## 第 3 步：连接（WPA3 开箱即用）
+## 步骤 3：连接（WPA3 开箱即用）
 
 ```bash
 nmcli device wifi connect "MySSID" password "my-passphrase"
@@ -69,55 +66,32 @@ nmcli device wifi connect "MySSID" password "my-passphrase"
 
 **预期输出**：`Device 'wlan0' successfully activated with 'MySSID'.`
 
-验证安全套件和链路速度：
+验证安全性套件与连接速率：
 
 ```bash
 iw dev wlan0 link
 ```
 
-**预期输出**：显示 `SSID: MySSID` 以及协商速率——在 5 GHz 上，靠近接入点时你应该看到 **1201 Mb/s** 或根据距离降级（2×2 80 MHz）。
+**预期输出**：显示 `SSID: MySSID` 以及协商后的速率——在 5 GHz 频段最高约 **1201 Mb/s**，或依距离而降至较低速率（2×2 80 MHz）。
 
-## 第 4 步：监听模式 + 注入
+## 监听模式与封包注入 {#monitor-mode-and-injection}
 
-```bash
-sudo airmon-ng check kill
-sudo airmon-ng start wlan0
-sudo aireplay-ng --test wlan0mon
-```
+此驱动程序的 README 明确指出**不支持监听模式**。若你需要监听模式与封包注入，请改用搭载内核内置 MediaTek 驱动程序的网卡（例如 [AWUS036ACM](/alfa-network/products/awus036acm/) 或 [AWUS036AXML](/alfa-network/products/awus036axml/)），或搭配社区驱动程序使用 [AWUS036ACH](/alfa-network/products/awus036ach/)。请参阅[网卡比较](/alfa-network/wifi-adapter-comparison/)。
 
-**预期输出**：
-
-```text
-PHY	Interface	Driver		Chipset
-phy0	wlan0		88x2bu		Realtek
-...
-12:34:56  Injection is working!
-12:34:56  30/30:  100%
-```
-
-> **你可能想知道**——*「Wi-Fi 6 和监听模式？它们能共存吗？」* 能——社区驱动保留了渗透测试工具需要的经典监听/注入行为，而 managed 模式增加了 AX 速率和 WPA3。你不需要二选一。
-
-## 第 5 步：恢复正常
-
-```bash
-sudo airmon-ng stop wlan0mon
-sudo systemctl restart NetworkManager
-```
-
-## 故障排查
+## 疑难排解
 
 | 症状 | 原因 | 修复 |
 |---|---|---|
-| 在非常新的内核上构建失败 | 仓库需要最新提交 | `cd /opt/rtl88x2bu && sudo git pull && sudo make dkms_install` |
-| WPA3 网络不可见 | 驱动或 wpa_supplicant 太旧 | 更新驱动；`sudo apt update && sudo apt upgrade` |
-| 网卡适配器只能 managed，没有监听 | 内核桩模块冲突（罕见） | 用 `dmesg` 确认哪个模块绑定了；黑名单桩模块 |
-| 注入 0/30 | 空信道 | `sudo iw wlan0mon set channel 6`；在接入点附近测试 |
-| 链路高速但传输慢 | USB 2.0 端口瓶颈 | 使用 USB 3.x 端口（AX 是 USB 3.2） |
+| 在非常新的内核上建置失败 | repo 需要最新的 commit | `cd /opt/rtl8852bu-20250826 && sudo git pull && sudo sh install-driver.sh` |
+| 看不到 WPA3 网络 | 驱动程序或 wpa_supplicant 太旧 | 更新驱动程序；`sudo apt update && sudo apt upgrade` |
+| 内核升级后驱动程序失效 | DKMS 未重新建置 | `sudo dkms status`，然后重新运行 `sudo sh install-driver.sh` |
+| 已安装针对同一硬件的另一个内核外驱动程序 | 模块冲突 | 安装程序能侦测大多数冲突；请检查 `sudo dkms status` 并移除旧驱动程序 |
+| 连接速率高但传输慢 | USB 2.0 端口瓶颈 | 使用 USB 3.x 端口（AX 为 USB 3.2） |
 
-## 参考
+## 参考数据
 
-- [AWUS036AX 产品页面](/alfa-network/products/awus036ax/)和 [AWUS036AXER 产品页面](/alfa-network/products/awus036axer/)
+- [AWUS036AX 产品页面](/alfa-network/products/awus036ax/)与 [AWUS036AXER 产品页面](/alfa-network/products/awus036axer/)
 - [Kali 设置指南](/alfa-network/linux-setup-kali/)
 - [Ubuntu 设置指南](/alfa-network/linux-setup-ubuntu/)
-- [故障排查索引](/alfa-network/troubleshooting/)
-- 驱动仓库：[aircrack-ng/rtl88x2bu](https://github.com/aircrack-ng/rtl88x2bu)
+- [疑难排解索引](/alfa-network/troubleshooting/)
+- 驱动程序 repo：[morrownr/rtl8852bu-20250826](https://github.com/morrownr/rtl8852bu-20250826)

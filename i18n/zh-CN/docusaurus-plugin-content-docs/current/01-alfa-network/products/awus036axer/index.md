@@ -1,86 +1,93 @@
 ---
 id: alfa-product-awus036axer
-title: ALFA AWUS036AXER——Wi-Fi 6 纳米款（内置天线）
+title: ALFA AWUS036AXER——Wi-Fi 6 Nano（内置天线）
 sidebar_position: 11
-description: ALFA AWUS036AXER——10.5 g Wi-Fi 6 纳米网卡适配器，内置天线、RTL8832BU AX1800、WPA3 和 USB 3.2。极简体积的日常 AX。
-tags: [alfa, 网卡适配器, rtl8832bu, wifi-6, 纳米, 内置天线]
-keywords: [AWUS036AXER, RTL8832BU 纳米, 10.5g 网卡适配器, 内置天线 Wi-Fi 6]
+description: ALFA AWUS036AXER——10.5 g 的 Wi-Fi 6 nano 网卡，内置天线，RTL8832BU AX1800、WPA3 与 USB 3.2。体积极小的日常 AX 选择。
+tags: [alfa, 网卡, rtl8832bu, wifi-6, nano, 内置天线]
+keywords: [AWUS036AXER, RTL8832BU nano, 10.5g 网卡, 内置天线 Wi-Fi 6]
 ---
 
-# ALFA AWUS036AXER——Wi-Fi 6 纳米款（内置天线）
+# ALFA AWUS036AXER——Wi-Fi 6 Nano（内置天线）
 
-> **一句话定位（One-liner）**：**AWUS036AXER** 是 ALFA 的 **10.5 g 纳米款**——与大型 AWUS036AX 相同的 **RTL8832BU AX1800** Wi-Fi 6 引擎，但采用**内置天线**和 USB 3.2，所以它平贴端口、几乎隐形。为日常携带人群准备的 Wi-Fi 6 + WPA3。
+> **一句话摘要**：**AWUS036AXER** 是 ALFA 的 **10.5 g nano** 机型——与大型 AWUS036AX 采用相同的 **RTL8832BU AX1800** Wi-Fi 6 引擎，但配备**内置天线**与 USB 3.2，插入后几乎与端口齐平、毫不显眼。为日常随身携带族群提供 Wi-Fi 6 + WPA3。
 
-## 规格总览（Spec overview）
+## 规格总览 (Spec overview)
 
 | 项目 | 规格 |
 |---|---|
-| 芯片组 | Realtek RTL8832BU |
+| 芯片 | Realtek RTL8832BU |
 | Wi-Fi 等级 | AX1800（574 + 1201 Mbps） |
 | 接口 | USB 3.2 |
 | 频段 | 2.4 + 5 GHz |
 | 天线 | **内置**（无外置 RP-SMA） |
 | 重量 | 10.5 g |
-| 安全 | WPA3 |
+| 安全性 | WPA3 |
 | MIMO | 2×2 |
-| Linux 驱动 | `rtl8852bu`（DKMS） |
-| 监听模式 | ❌ 社区驱动不支持（参见[驱动指南](/alfa-network/drivers/rtl8832bu/)） |
+| Linux 驱动程序 | `rtl8852bu`（DKMS） |
+| 监听模式 | ❌ 社区驱动程序不支持（请参阅[驱动程序指南](/alfa-network/drivers/rtl8832bu/)） |
 
 ## 总览
 
-AXER 拿走 AWUS036AX 的无线电，剥掉体积。它不用两根外置天线，而是用一根**集成天线**折叠进 **10.5 g 机身**——结果插进笔记本端口后几乎不突出。你保留 Wi-Fi 6 速度、WPA3 和 2×2 MIMO；你放弃的是外置天线的覆盖范围和天线升级路径。
+AXER 沿用 AWUS036AX 的无线电，并去除多余的体积。它以收进 **10.5 g 机身**的**集成式天线**取代两支外置天线——插入笔电端口后几乎不会突出。你保有 Wi-Fi 6 速度、WPA3 与 2×2 MIMO；代价是失去外置天线的距离优势与天线升级的弹性。
 
-这是一款**客户端优先的网卡适配器**：它面向阶梯教室里想要快速、安全 Wi-Fi 6、又不想随身带着适配器加天线到处跑的学生。它*不是*远距离监听的选择——见进阶用法中的说明。
+这是一款**以客户端为优先的网卡**：适合在阶梯教室里想要快速、安全的 Wi-Fi 6，又不想随身带着网卡加天线的学生。它*并非*长距离监听的首选——请参阅高端用法中的说明。
 
-## 安装与驱动
+## 安装与驱动程序
 
-与 [AWUS036AX](/alfa-network/products/awus036ax/) 完全相同的驱动故事——完整步骤见 [RTL8832BU 驱动页面](/alfa-network/drivers/rtl8832bu/)：
+驱动程序的情况与 [AWUS036AX](/alfa-network/products/awus036ax/) 相同——完整步骤请见 [RTL8832BU 驱动程序页面](/alfa-network/drivers/rtl8832bu/)：
+
+```bash
 cd /opt && sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
 cd rtl8852bu-20250826 && sudo sh install-driver.sh
 sudo modprobe 8852bu
 ```
 
-**预期输出**：安装程序完成（提示时重启），然后 `iw dev` 中出现接口。
+**预期输出**：安装程序完成（它要求时请重启），之后 `iw dev` 中会出现一个接口。
 
 ```mermaid
 flowchart LR
     A["AWUS036AXER (10.5 g)"] --> B["DKMS build rtl8852bu"]
     B --> C["modprobe 8852bu"]
     C --> D["Connect — fast and flush"]
+```
 
-## 进阶用法
+## 高端用法
 
-### 客户端模式出色
+### 卓越的客户端模式
 
 ```bash
 nmcli device wifi connect "MySSID" password "my-passphrase"
 iw dev wlan0 link
 ```
 
-**预期输出**：已连接；靠近接入点时 5 GHz 链路速率最高 **1201 Mb/s**。
+**预期输出**：已连接；靠近 AP 时 5 GHz 连接速率最高达 **1201 Mb/s**。
+
 ### 监听模式
 
-该芯片组的社区驱动**不**支持监听模式，且内置天线也会限制捕获范围。如需使用监听模式，请选择支持内核驱动且配备外置天线的适配器，例如 [AWUS036ACM](/alfa-network/products/awus036acm/)。
-| 平台 | 支持 | 说明 |
-|---|---|---|
-| Kali Linux | ✅ | DKMS，但内置天线限制覆盖范围 |
-| Ubuntu | ✅ | DKMS |
-| NetHunter / Android | ⚠️ | Realtek、内置天线、优先级低 |
-| Windows | ✅ | 官方驱动，WPA3 |
-| Raspberry Pi / Jetson | ✅ | ARM64 上的 DKMS |
+此芯片的社区驱动程序**不**支持监听模式，而且内置天线本来就会限制截取距离。若需要监听模式，请使用外置天线且内核内置驱动的网卡，例如 [AWUS036ACM](/alfa-network/products/awus036acm/)。
 
-## 故障排查
+## 兼容性
+
+| 平台 | 支持 | 备注 |
+|---|---|---|
+| Kali Linux | ✅ | DKMS，但内置天线限制了距离 |
+| Ubuntu | ✅ | DKMS |
+| NetHunter / Android | ⚠️ | Realtek、内置天线，优先级低 |
+| Windows | ✅ | 官方驱动程序，WPA3 |
+| Raspberry Pi / Jetson | ✅ | ARM64 上使用 DKMS |
+
+## 疑难排解
 
 | 症状 | 原因 | 修复 |
 |---|---|---|
-| 覆盖范围比外置天线 ALFA 短 | 内置天线是设计使然 | 预期行为——用于客户端工作，不做长距离链路 |
-| WPA3 网络不可见 | 驱动过旧 | 更新 `rtl88x2bu` + 操作系统 |
-| DKMS 构建失败 | 新内核 | `git pull && make dkms_install` |
-| USB 2.0 端口上慢 | 带宽上限 | 使用 USB 3.x 端口 |
+| 距离比外置天线的 ALFA 短 | 设计上采用内置天线 | 属于正常现象——请用于客户端用途，而非长距离连接 |
+| 看不到 WPA3 网络 | 驱动程序过旧 | 更新 `rtl8852bu` 与操作系统 |
+| DKMS 建置失败 | 新内核 | `git pull && make dkms_install` |
+| 在 USB 2.0 端口上速度慢 | 带宽上限 | 使用 USB 3.x 端口 |
 
 ## 相关资源
 
-- [RTL8832BU 驱动页面](/alfa-network/drivers/rtl8832bu/)
-- [AWUS036AX](/alfa-network/products/awus036ax/)——相同引擎，外置天线，覆盖更远
-- [AWUS036AXM](/alfa-network/products/awus036axm/)——更快 + 蓝牙
-- [网卡适配器对比](/alfa-network/wifi-adapter-comparison/)
+- [RTL8832BU 驱动程序页面](/alfa-network/drivers/rtl8832bu/)
+- [AWUS036AX](/alfa-network/products/awus036ax/)——相同引擎，外置天线，距离更远
+- [AWUS036AXM](/alfa-network/products/awus036axm/)——更快且支持蓝牙
+- [网卡比较](/alfa-network/wifi-adapter-comparison/)

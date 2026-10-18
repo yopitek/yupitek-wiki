@@ -1,43 +1,47 @@
 ---
 id: alfa-product-awus036acs
-title: ALFA AWUS036ACS——口袋大小雙頻 AC433
+title: ALFA AWUS036ACS——口袋尺寸雙頻 AC433
 sidebar_position: 9
-description: ALFA AWUS036ACS——小巧 55 mm RTL8811AU AC433 雙頻無線網絡卡，配一支 2 dBi 外接天線與 DKMS 驅動的監聽模式。口袋 Kali 夥伴。
-tags: [alfa, 無線網絡卡, rtl8811au, ac433, 可攜式]
-keywords: [AWUS036ACS, RTL8811AU, 口袋無線網絡卡, 可攜式 Kali 無線網絡卡]
+description: ALFA AWUS036ACS——55 mm 迷你 RTL8811AU AC433 雙頻網卡，配備一支 2 dBi 外接天線，並以 DKMS 驅動支援監聽模式。口袋型 Kali 好夥伴。
+tags: [alfa, 網卡, rtl8811au, ac433, 可攜式]
+keywords: [AWUS036ACS, RTL8811AU, 口袋網卡, 可攜式 Kali 網卡]
 ---
 
-# ALFA AWUS036ACS——口袋大小雙頻 AC433
+# ALFA AWUS036ACS——口袋尺寸雙頻 AC433
 
-> **一句話定位（One-liner）**：**AWUS036ACS** 是 55 mm 口袋 ALFA——一支 **RTL8811AU AC433** 雙頻無線網絡卡，配一支可摺疊的 2 dBi 天線與 DKMS 驅動的監聽模式（monitor mode）。它是你隨身攜帶的無線網絡卡，因為「你永遠不知道什麼時候會想看看某些 Wi-Fi」。
+> **一句話摘要**：**AWUS036ACS** 是 55 mm 的口袋型 ALFA——一款 **RTL8811AU AC433** 雙頻網卡，配備一支可摺疊的 2 dBi 天線，並以 DKMS 驅動支援監聽模式。你會隨身攜帶它，因為「你永遠不知道什麼時候會想看看某個 Wi-Fi。」
 
 ## 規格總覽 (Spec overview)
 
-| 專案 | 規格 |
+| 項目 | 規格 |
 |---|---|
 | 晶片 | Realtek RTL8811AU |
 | Wi-Fi 等級 | AC433（150 + 433 Mbps） |
 | 介面 | USB 2.0 |
 | 頻段 | 2.4 + 5 GHz |
-| 天線 | 1 × 外接 2 dBi 雙頻偶極，RP-SMA |
-| 機身 | ~55 mm——口袋大小 |
-| Linux 驅動程式 | `8821au`（DKMS，不在核心內） |
+| 天線 | 1 × 外接 2 dBi 雙頻偶極天線，RP-SMA |
+| 機身 | 約 55 mm——口袋尺寸 |
+| Linux 驅動程式 | `8821au`（DKMS，非核心內建） |
 | 監聽模式 | ✅ 良好 |
 | 封包注入 | ✅ 良好 |
 
 ## 總覽
 
-ACS 是把經典 ALFA 配方縮小而不失去精髓的結果。它保留雙頻、外接天線與可用的監聽模式，但把它們包進一個消失在筆電包裡的 **55 mm 機身**。它的 1×1 RTL8811AU 無線電是 AC433 等級——對管理訊框擷取、注入示範與輕量分析綽綽有餘，而且對吞吐量限制很誠實。
+ACS 是在不失去關鍵要素的前提下，將經典 ALFA 配方縮小的成果。它保留了雙頻、外接天線與可用的監聽模式，卻裝進能消失在筆電包裡的 **55 mm 機身**。其 1×1 RTL8811AU 無線電屬於 AC433 等級——足以進行管理框架擷取、注入示範與輕量分析，並坦白呈現其傳輸量的限制。
 
-取捨與其他 Realtek ALFA 相同：驅動程式**不在核心內**，所以有一次性的 DKMS 建置（之後它會幫你處理核心更新）。如果你寧願零驅動程式工作，多花一點錢買內建於核心的 [AWUS036ACM](/alfa-network/products/awus036acm/)。
+取捨與其他 Realtek 系列 ALFA 相同：驅動程式**不在核心內**，因此需要進行一次性的 DKMS 建置（之後核心更新時由它自動處理）。如果你希望完全不用處理驅動程式，可以多花一點錢選擇核心內建驅動的 [AWUS036ACM](/alfa-network/products/awus036acm/)。
 
 ## 安裝與驅動程式
 
-完整細節在 [RTL8811AU 驅動程式頁面](/alfa-network/drivers/rtl8811au/)。簡短版本：
+完整細節請見 [RTL8811AU 驅動程式頁面](/alfa-network/drivers/rtl8811au/)。簡短版本：
+
+```bash
 cd /opt && sudo git clone https://github.com/morrownr/8821au-20210708.git
 cd 8821au-20210708 && sudo sh install-driver.sh
 sudo modprobe 8821au
-**預期輸出**：`DKMS: install completed.` 然後 `iw dev` 中出現介面。
+```
+
+**預期輸出**：`DKMS: install completed.`，之後 `iw dev` 中會出現一個介面。
 
 ```mermaid
 flowchart LR
@@ -47,9 +51,9 @@ flowchart LR
     D --> E["wlan0mon — ready anywhere"]
 ```
 
-## 進階使用
+## 進階用法
 
-### 在路上做監聽模式
+### 外出時的監聽模式
 
 ```bash
 sudo airmon-ng check kill
@@ -59,34 +63,34 @@ sudo aireplay-ng --test wlan0mon
 
 **預期輸出**：`wlan0mon` + `30/30: 100%`。
 
-### 旅行裝置
+### 旅行裝備
 
-把可摺疊天線（運輸時保持連線）配上 [Jetson](/alfa-network/hardware/jetson/) 或筆電，組成可攜式擷取/分析站。摺起天線、放進口袋、完成。
+將可摺疊天線（運送途中保持接上）搭配 [Jetson](/alfa-network/hardware/jetson/) 或筆電，即可組成可攜式擷取/分析工作站。摺起天線、放進口袋，就完成了。
 
 ## 相容性
 
-| 平臺 | 支援 | 注意事項 |
+| 平台 | 支援 | 備註 |
 |---|---|---|
 | Kali Linux | ✅ | DKMS；aircrack-ng repo |
 | Ubuntu | ✅ | DKMS |
-| NetHunter / Android | 🔧 | Realtek，所以不保證 |
+| NetHunter / Android | 🔧 | Realtek，因此不保證可用 |
 | Windows | ✅ | 官方驅動程式 |
-| Raspberry Pi / Jetson | ✅ | ARM64 上的 DKMS 建置 |
+| Raspberry Pi / Jetson | ✅ | ARM64 上建置 DKMS |
 
 ## 疑難排解
 
 | 症狀 | 原因 | 修復 |
 |---|---|---|
 | DKMS 建置失敗 | 缺少標頭檔 / 新核心 | `sudo apt install linux-headers-$(uname -r)`；`git pull && make dkms_install` |
-| 只有 managed 模式 | 核心 stub 衝突 | 把 `rtl8811au` 加入黑名單（見[驅動程式頁面](/alfa-network/drivers/rtl8811au/)） |
+| 僅有 managed 模式 | 核心 stub 衝突 | 將 `rtl8811au` 加入黑名單（請參閱[驅動程式頁面](/alfa-network/drivers/rtl8811au/)） |
 | 注入 0/30 | 空頻道 | `sudo iw wlan0mon set channel 6` |
-| 吞吐量低 | 1×1 AC433 硬體 | 不是 bug |
-| 重新開機後偵測不到 | 模組未自動載入 | 把 `8821au` 加入 `/etc/modules-load.d/alfa.conf` |
+| 傳輸量偏低 | 1×1 AC433 硬體 | 並非 bug |
+| 重新開機後偵測不到 | 模組未自動載入 | 將 `8821au` 加入 `/etc/modules-load.d/alfa.conf` |
 
 ## 相關資源
 
 - [RTL8811AU 驅動程式頁面](/alfa-network/drivers/rtl8811au/)
 - [Kali 設定指南](/alfa-network/linux-setup-kali/)
-- [AWUS036ACH](/alfa-network/products/awus036ach/)——全尺寸高功率兄弟
-- [AWUS036ACM](/alfa-network/products/awus036acm/)——內建於核心的替代方案
-- [無線網絡卡比較](/alfa-network/wifi-adapter-comparison/)
+- [AWUS036ACH](/alfa-network/products/awus036ach/)——全尺寸高功率兄弟機種
+- [AWUS036ACM](/alfa-network/products/awus036acm/)——核心內建驅動的替代方案
+- [網卡比較](/alfa-network/wifi-adapter-comparison/)
