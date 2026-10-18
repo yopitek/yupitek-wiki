@@ -21,7 +21,7 @@ keywords: [AWUS036ACS, RTL8811AU, pocket adapter, portable Kali adapter]
 | Bands | 2.4 + 5 GHz |
 | Antenna | 1 × external 2 dBi dual-band dipole, RP-SMA |
 | Body | ~55 mm — pocket sized |
-| Linux driver | `rtl8811au` (DKMS, not in-kernel) |
+| Linux driver | `8821au` (DKMS, not in-kernel) |
 | Monitor mode | ✅ good |
 | Packet injection | ✅ good |
 
@@ -36,9 +36,9 @@ The trade-off mirrors the other Realtek ALFAs: the driver is **not in the kernel
 Full details on the [RTL8811AU driver page](/alfa-network/drivers/rtl8811au/). The short version:
 
 ```bash
-cd /opt && sudo git clone https://github.com/aircrack-ng/rtl8811au.git
-cd rtl8811au && sudo make dkms_install
-sudo modprobe 8811au
+cd /opt && sudo git clone https://github.com/morrownr/8821au-20210708.git
+cd 8821au-20210708 && sudo sh install-driver.sh
+sudo modprobe 8821au
 ```
 
 **Expected output**: `DKMS: install completed.` then an interface in `iw dev`.
@@ -46,7 +46,7 @@ sudo modprobe 8811au
 ```mermaid
 flowchart LR
     A["AWUS036ACS in backpack"] --> B["DKMS driver build (once)"]
-    B --> C["modprobe 8811au"]
+    B --> C["modprobe 8821au"]
     C --> D["airmon-ng start wlan0"]
     D --> E["wlan0mon — ready anywhere"]
 ```
@@ -85,7 +85,7 @@ Pair the fold-out antenna (it stays attached in transit) with a [Jetson](/alfa-n
 | Managed-mode only | Kernel stub conflict | Blacklist `rtl8811au` (see [driver page](/alfa-network/drivers/rtl8811au/)) |
 | Injection 0/30 | Empty channel | `sudo iw wlan0mon set channel 6` |
 | Throughput low | 1×1 AC433 hardware | Not a bug |
-| Not detected after reboot | Module not auto-loaded | Add `8811au` to `/etc/modules-load.d/alfa.conf` |
+| Not detected after reboot | Module not auto-loaded | Add `8821au` to `/etc/modules-load.d/alfa.conf` |
 
 ## Related resources
 
