@@ -22,7 +22,7 @@ keywords: [RTL8821CU 驅動程式, AWUS036EACS, rtw88_8821cu, rtl8821cu Linux, A
 | 韌體 | 24.11.0（H2C version 12） |
 | Monitor 2.4G / 5G | ✅ / ✅ |
 | Injection 2.4G / 5G | ✅ 100% / ✅ 100% |
-| AP 2.4G / 5G | ✅ / ✅（80 MHz） |
+| AP 2.4G / 5G | ✅ / ✅（5 GHz 為 802.11a、20 MHz 實測；VHT80 未測） |
 | WPA3-SAE（AP 端） | ✅（2.4 GHz 實測） |
 | WPA handshake 擷取 | ✅ 端到端（79 ACKs） |
 | VIF | 🟡 被動 monitor 可與 managed 在同一頻道並存；不支援獨立的雙 VIF |

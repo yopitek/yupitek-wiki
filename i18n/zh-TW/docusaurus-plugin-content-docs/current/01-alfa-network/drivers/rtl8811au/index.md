@@ -23,7 +23,7 @@ iw dev
 
 預期輸出：`0bda:0811` 裝置、類似 `rtw88_8821au ... Firmware version 42.4.0, H2C version 0` 的一行，以及一個介面（在 GX10 上名為 `wlx` + MAC）。
 
-實測：monitor 2.4G / 5G ✅，injection 2.4G 100%、5G 96%，AP 2.4G / 5G（頻寬未確認）、WPA3-SAE（AP 於 5 GHz 實測）、VIF ✅，WPA handshake 端到端擷取 ✅；不支援 IBSS / mesh / active monitor / P2P（`-95`）。
+實測：monitor 2.4G / 5G ✅，injection 2.4G 100%、5G 96%，AP 2.4G / 5G（5 GHz 為 802.11a、20 MHz 實測；VHT80 未測）、WPA3-SAE（AP 於 5 GHz 實測）、VIF ✅，WPA handshake 端到端擷取 ✅；不支援 IBSS / mesh / active monitor / P2P（`-95`）。
 
 以下「概念」與步驟 1–2 為舊 kernel（< 6.13）的 DKMS 做法。
 

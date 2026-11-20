@@ -21,7 +21,7 @@ The in-kernel `rtw88_8821au` driver also covers the RTL8821AU variant, so the sa
 
 - Platform: ASUS Ascent GX10 (NVIDIA GB10), Ubuntu 24.04 LTS ARM64, kernel `6.17.0-1014-nvidia`, 2026-11-16 to 2026-11-19.
 - USB ID `0bda:0811`, driver `rtw88_8821au` (in-kernel), firmware 42.4.0 (H2C version 0).
-- Results: monitor 2.4/5 GHz ✅, injection 100 % (2.4 GHz) and 96 % (5 GHz) ✅, AP 2.4/5 GHz ✅, WPA3-SAE ✅ (AP tested on 5 GHz), end-to-end handshake capture ✅, VIF ✅. IBSS, mesh, active monitor and P2P are not supported (`-95`).
+- Results: monitor 2.4/5 GHz ✅, injection 100 % (2.4 GHz) and 96 % (5 GHz) ✅, AP 2.4/5 GHz ✅ (5 GHz: 802.11a, 20 MHz tested; VHT80 not tested), WPA3-SAE ✅ (AP tested on 5 GHz), end-to-end handshake capture ✅, VIF ✅. IBSS, mesh, active monitor and P2P are not supported (`-95`).
 
 ```mermaid
 flowchart TD

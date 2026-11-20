@@ -21,7 +21,7 @@ Older versions of this guide called its Linux support unreliable. That was true 
 
 - Platform: ASUS Ascent GX10 (NVIDIA GB10), Ubuntu 24.04 LTS ARM64, kernel `6.17.0-1014-nvidia`, 2026-11-16 to 2026-11-19.
 - USB ID `0bda:c820`, driver `rtw88_8821cu` (in-kernel), firmware 24.11.0 (H2C version 12).
-- Results: monitor 2.4/5 GHz ✅, injection 100 % on both bands ✅ (deauth got 79 ACKs), AP 2.4/5 GHz ✅, WPA3-SAE ✅ (AP tested on 2.4 GHz), end-to-end handshake ✅, VIF 🟡 (passive monitor alongside managed on the same channel; independent dual VIF not supported), Bluetooth ✅. IBSS, mesh, active monitor and P2P are not supported (`-95`).
+- Results: monitor 2.4/5 GHz ✅, injection 100 % on both bands ✅ (deauth got 79 ACKs), AP 2.4/5 GHz ✅ (5 GHz: 802.11a, 20 MHz tested; VHT80 not tested), WPA3-SAE ✅ (AP tested on 2.4 GHz), end-to-end handshake ✅, VIF 🟡 (passive monitor alongside managed on the same channel; independent dual VIF not supported), Bluetooth ✅. IBSS, mesh, active monitor and P2P are not supported (`-95`).
 - Gotcha: it is a composite device. After re-plugging, the WiFi function can hang during probe and no `wlx` interface appears — plug it into a different USB port.
 
 ```mermaid

@@ -42,7 +42,7 @@ keywords: [AWUS036EACS, RTL8821CU, rtw88_8821cu, AC600 Bluetooth adapter, nano W
 |---|---|---|
 | Monitor | ✅ | ✅ |
 | Injection | ✅ 100 % | ✅ 100 % |
-| AP | ✅ | ✅ (80 MHz) |
+| AP | ✅ | ✅ (802.11a, 20 MHz tested; VHT80 not tested) |
 | WPA3-SAE (AP side) | ✅ | Not tested |
 
 | Advanced feature | Result |

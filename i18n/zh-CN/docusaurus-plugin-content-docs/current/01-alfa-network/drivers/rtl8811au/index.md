@@ -21,7 +21,7 @@ sudo dmesg | grep -i 8821au
 iw dev
 ```
 
-`dmesg` 预期可看到 `rtw88_8821au ... Firmware version 42.4.0, H2C version 0`。实测结果：2.4 / 5 GHz monitor 均 ✅；注入 2.4 GHz 100%、5 GHz 96%（5 GHz 注入前先 `sudo iw reg set US`，测完还原）；AP 2.4 / 5 GHz ✅（频宽未确认）；WPA3-SAE ✅（AP 于 5 GHz 实测）；handshake 端到端 ✅。IBSS、Mesh、Active monitor、P2P 均不支持（`-95`）。以下「步骤 1～2」的 DKMS 流程**仅适用于 kernel < 6.13**。
+`dmesg` 预期可看到 `rtw88_8821au ... Firmware version 42.4.0, H2C version 0`。实测结果：2.4 / 5 GHz monitor 均 ✅；注入 2.4 GHz 100%、5 GHz 96%（5 GHz 注入前先 `sudo iw reg set US`，测完还原）；AP 2.4 / 5 GHz ✅（5 GHz 为 802.11a、20 MHz 实测；VHT80 未测）；WPA3-SAE ✅（AP 于 5 GHz 实测）；handshake 端到端 ✅。IBSS、Mesh、Active monitor、P2P 均不支持（`-95`）。以下「步骤 1～2」的 DKMS 流程**仅适用于 kernel < 6.13**。
 
 ## 概念：同一家族，单一流
 
