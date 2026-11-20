@@ -64,13 +64,13 @@ iw dev wlan0 link
 iw dev wlan0 info | grep channel
 ```
 
-**预期输出**：链路建立并有信号值；在 6E/7 设备上，信道行显示 **6 GHz 频率**（例如 `channel 37 (6115 MHz)`）。检查你的网关使用的每个频段的信号——三个频段都应保持合理数值。
+**预期输出**：链路建立并有信号值；在 6E/7 设备上，信道行显示 **6 GHz 频率**（例如 `channel 37 (6135 MHz)`）。检查你的网关使用的每个频段的信号——三个频段都应保持合理数值。
 
 ## 进阶用法
 
 - **工业网关**：与支持 6 GHz 的无线电模块配对，并在机柜的实际工作温度下做现场测试。
 - **WiFi 7 上的多链路（MLO）设置**：三频偶极子让三条链路在一根天线上共存——无需按频段建天线阵。
-- **机器人野外链路**：结合 [Unitree](/alfa-network/hardware/unitree/) 或 [Jetson](/alfa-network/hardware/jetson/) 集成，把天线电缆接到机器人的无线电上。
+- **机器人野外链路**：结合 [Unitree](/alfa-network/hardware/unitree/) 或 [Jetson](/alfa-network/hardware/jetson/) 集成，把天线电缆接到机器人的无线电上（Unitree 与 Jetson 均未实测）。
 
 ## 兼容性
 

@@ -5,12 +5,12 @@ title: ALFA Adapters — Troubleshooting Index
 sidebar_position: 7
 description: Diagnose any ALFA Wi-Fi adapter problem — symptoms, diagnosis commands, root causes and fixes, with links to chipset-specific driver pages.
 tags: [alfa, troubleshooting, drivers, monitor-mode, dkms]
-keywords: [ALFA troubleshooting, adapter not detected, monitor mode not working, DKMS fails, WiFi adapter fix]
+keywords: [ALFA troubleshooting, adapter not detected, monitor mode not working, DKMS fails, WiFi adapter fix, RX stall, hcxdumptool]
 ---
 
 # ALFA Adapters — Troubleshooting Index
 
-> **Troubleshooting Golden Rules**: **Hardware first → driver second → configuration last.** More than 80 % of "my ALFA is broken" reports turn out to be a power issue, a missing DKMS rebuild, or a kernel-update side effect — not a dead adapter. Follow the tree below before you blame the hardware.
+> **Troubleshooting Golden Rules**: **Hardware first → driver second → configuration last.** Most "my ALFA is broken" reports turn out to be a power issue, an old kernel (Realtek models need kernel 6.2+ for EACS, 6.13+ for ACH / ACS, 6.17+ for AX / AXER, or a DKMS driver), or a kernel-update side effect — not a dead adapter. Follow the tree below before you blame the hardware.
 
 ```mermaid
 flowchart TD
@@ -18,11 +18,11 @@ flowchart TD
     B -->|"No"| C["Hardware / power path:<br/>try another port, powered hub,<br/>another cable, another PC"]
     C -->|"Still invisible"| D["Return / RMA the adapter"]
     B -->|"Yes"| E{"Does iw dev list an interface?"}
-    E -->|"No"| F["Driver problem:<br/>load module (dkms),<br/>check dmesg for firmware errors"]
+    E -->|"No"| F["Driver problem:<br/>kernel older than the card's in-kernel version (Realtek)? use DKMS,<br/>check dmesg for firmware errors"]
     E -->|"Yes"| G{"Works in managed mode?"}
     G -->|"No"| H["Config problem:<br/>NetworkManager, rfkill, reg domain"]
     G -->|"Yes"| I{"Monitor mode is the goal?"}
-    I -->|"Yes, but fails"| J["Driver lacks monitor support:<br/>use aircrack-ng driver repos"]
+    I -->|"Yes, but fails"| J["Replug (RX stall), check channel and reg domain,<br/>MT7921 cards: injection not supported on stock 6.17"]
     I -->|"All fine"| K["You are done — enjoy!"]
 ```
 
@@ -33,7 +33,7 @@ flowchart TD
 | Category | Typical issues |
 |---|---|
 | **Detection** | Adapter not in `lsusb`, no interface, disappears after reboot |
-| **Driver** | DKMS build fails, module not loaded, firmware errors in `dmesg` |
+| **Driver** | Kernel too old for the in-kernel driver, DKMS build fails (older kernels only), module not loaded, firmware errors in `dmesg` |
 | **Connection** | Won't associate, drops constantly, slow link |
 | **Monitor mode** | `airmon-ng` fails, injection test fails, no frames captured |
 | **Power** | Adapter dies under load, works on one PC but not another |
@@ -45,7 +45,7 @@ flowchart TD
 |---|---|---|
 | MT7612U | AWUS036ACM | [mt7612u](/alfa-network/drivers/mt7612u/) |
 | MT7610U | AWUS036ACHM | [mt7610u](/alfa-network/drivers/mt7610u/) |
-| MT7921AUN | AWUS036AXM / AWUS036AXML | [mt7921aun](/alfa-network/drivers/mt7921aun/) |
+| MT7921AU / MT7921AUN | AWUS036AXM / AWUS036AXML | [mt7921aun](/alfa-network/drivers/mt7921aun/) |
 | RTL8812AU | AWUS036ACH | [rtl8812au](/alfa-network/drivers/rtl8812au/) |
 | RTL8811AU | AWUS036ACS | [rtl8811au](/alfa-network/drivers/rtl8811au/) |
 | RTL8832BU | AWUS036AX / AWUS036AXER | [rtl8832bu](/alfa-network/drivers/rtl8832bu/) |
@@ -85,21 +85,25 @@ Almost always **USB power or cable** — especially on the high-power models (AW
 ### Diagnosis
 ```bash
 dmesg | grep -iE "wlan|firmware|error"
-lsmod | grep -iE "mt76|8812|8811|88x2|8821"
+lsmod | grep -iE "mt76|mt7921|rtw88|rtw89|8812|8811|8821|8852"
 ```
 
 ### Root cause
-Two common causes:
-- **Realtek chipsets**: the DKMS module was never loaded (or failed to build after a kernel update).
-- **MediaTek Wi-Fi 6E**: the kernel is older than 5.18 (`mt7921u` missing) or firmware blobs are absent.
+Common causes:
+- **Realtek chipsets on a kernel older than the in-kernel version (EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17)**: the DKMS module was never loaded (or failed to build after a kernel update). On a new enough kernel the in-kernel `rtw88` / `rtw89` driver binds by itself.
+- **MediaTek MT7921 (AXM / AXML)**: the kernel is older than 5.18 (`mt7921u` missing) or firmware blobs are absent.
+- **Composite WiFi + Bluetooth devices (AWUS036EACS, AWUS036AXML)**: after re-plugging, the WiFi function can hang during probe (`lsusb` shows the device but no `wlx...` interface appears).
 
 ### Fix
-- Realtek: `sudo modprobe 8812au` (match your chipset), and add it to `/etc/modules-load.d/alfa.conf` so it auto-loads on boot. If `modprobe` says `Module not found`, rebuild: `sudo dkms autoinstall`.
+- Realtek, kernel new enough (EACS ≥ 6.2, ACH / ACS ≥ 6.13, AX / AXER ≥ 6.17): nothing to install — check `sudo dmesg | tail` for the `rtw88_*` / `rtw89_*` lines and `sudo apt install linux-firmware`. (Older kernel only: `sudo modprobe 8812au` (match your chipset), add it to `/etc/modules-load.d/alfa.conf`; if `modprobe` says `Module not found`, rebuild with `sudo dkms autoinstall`.)
 - MediaTek: `sudo apt install linux-firmware` and reboot. Kernel too old? Upgrade the OS — see the [compatibility matrix](/alfa-network/linux-compatibility-matrix/).
+- EACS / AXML with no `wlx...` interface after re-plug: unplug and plug into a **different USB port**. Rebinding the driver by hand usually does not help.
 
 ---
 
-## Issue 3: DKMS build fails after a kernel update
+## Issue 3: DKMS build fails after a kernel update (older kernels only)
+
+> This issue only applies if you installed a community DKMS driver, which is only needed for the Realtek models on kernels older than their in-kernel version (EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17). On a new enough kernel the Realtek chips use the in-kernel `rtw88` / `rtw89` drivers and there is nothing to rebuild.
 
 ### Symptom
 "Adapter stopped working" right after `apt upgrade`; `dmesg` shows `8812au: version magic ... should be ...`.
@@ -131,18 +135,18 @@ The driver's DKMS recipe could not rebuild against the new kernel — usually mi
 
 ### Diagnosis
 ```bash
-sudo aireplay-ng --test wlan0mon
-sudo iw dev wlan0mon info   # confirm it really is type monitor
+sudo aireplay-ng --test <monitor-interface>
+sudo iw dev <monitor-interface> info   # confirm it really is type monitor
 ```
 
 ### Root cause
-Driver built without proper monitor/injection support, **or** you are on a channel no AP is using (injection needs an AP beacon to reply to), **or** the RF environment is empty (isolated lab).
+You are on a channel no AP is using (injection needs an AP to reply to), **or** the RF environment is empty (isolated lab), **or** (5 GHz) the regulatory domain blocks TX, **or** the adapter is an **AWUS036AXM / AXML**: the MT7921 cards did not pass injection on stock kernel 6.17 (main cause: a mac80211 chanctx regression since kernel 6.16; the firmware also locks the injection rate to 1/6 Mbps), so `aireplay-ng --test` finds 0 APs there. On older kernels with a community DKMS driver, a driver built without monitor/injection support is another possible cause.
 
 ### Fix
-1. Lock a channel with active APs: `sudo iw dev wlan0mon set channel 6`
-2. Retest. Still 0/30? Rebuild with the aircrack-ng driver repos, which ship monitor + VIF enabled by default:
-   - [rtl8812au](/alfa-network/drivers/rtl8812au/), [rtl8811au](/alfa-network/drivers/rtl8811au/), [rtl8832bu](/alfa-network/drivers/rtl8832bu/)
-3. In a dead RF zone, create your own AP with a phone hotspot on the same channel.
+1. Lock a channel with active APs: `sudo iw dev <monitor-interface> set channel 6`
+2. 5 GHz: run `sudo iw reg set US` before the test, and restore your region afterwards (on the GX10 we restored with `sudo iw reg set TW`).
+3. Retest. Still 0/30 on an MT7921 card (AXM / AXML)? That is the known stock-6.17 limitation — use another card (ACM, ACHM, ACH, ACS, EACS, AX, AXER passed on 2.4 GHz). On a kernel older than your card's in-kernel version with a Realtek card, see the DKMS driver pages: [rtl8812au](/alfa-network/drivers/rtl8812au/), [rtl8811au](/alfa-network/drivers/rtl8811au/), [rtl8832bu](/alfa-network/drivers/rtl8832bu/).
+4. In a dead RF zone, create your own AP with a phone hotspot on the same channel.
 
 ---
 
@@ -153,7 +157,7 @@ Link connects then drops every few minutes; throughput far below the class ratin
 
 ### Diagnosis
 ```bash
-iw dev wlan0 link          # signal + tx rate
+iw dev <interface> link    # signal + tx rate
 iw reg get | head -20      # regulatory domain
 ```
 
@@ -164,8 +168,8 @@ iw reg get | head -20      # regulatory domain
 
 ### Fix
 1. Set your region: `sudo iw reg set TW` (or your country code).
-2. Set TX power: `sudo iwconfig wlan0 txpower 30` (max legal for your domain).
-3. Disable power save: `sudo iwconfig wlan0 power off`.
+2. Set TX power: `sudo iwconfig <interface> txpower 30` (max legal for your domain).
+3. Disable power save: `sudo iwconfig <interface> power off`.
 4. Prefer a USB 3.0 port for AC1200+ adapters — USB 2.0 caps throughput.
 
 ---
@@ -173,7 +177,7 @@ iw reg get | head -20      # regulatory domain
 ## Issue 6: 5 GHz channels missing
 
 ### Symptom
-Only 2.4 GHz networks visible; `iwlist wlan0 freq` shows no 5 GHz entries.
+Only 2.4 GHz networks visible; `iwlist <interface> freq` shows no 5 GHz entries.
 
 ### Root cause
 The regulatory domain is unset or restricted (often `country 00` on fresh installs), so the driver refuses 5 GHz channels.
@@ -181,8 +185,23 @@ The regulatory domain is unset or restricted (often `country 00` on fresh instal
 ### Fix
 ```bash
 sudo iw reg set TW    # replace with your country code
-sudo ip link set wlan0 down && sudo ip link set wlan0 up
+sudo ip link set <interface> down && sudo ip link set <interface> up
 ```
+
+---
+
+## Platform notes: ASUS GX10 / Ubuntu 24.04 ARM64
+
+These come from our test run (kernel 6.17.0-1014-nvidia, 2026-11-16 to 2026-11-19) and apply to all nine ALFA cards unless noted:
+
+- **Do not run `airmon-ng check kill`.** It stops NetworkManager and cuts the GX10's network. Use `iw` and operate only on the adapter's `wlx...` interface; never touch the built-in `wlP9s9`.
+- **RX stall**: after switching monitor/AP modes repeatedly, a card can stop receiving anything. Unplug and replug it (the interface name stays the same because it derives from the MAC).
+- **EACS / AXML re-plug**: if the WiFi probe hangs and no `wlx...` interface appears, plug into a different USB port.
+- **5 GHz injection / deauth**: run `sudo iw reg set US` first to unlock TX, and restore your region afterwards.
+- **`hcxdumptool` 8.x failed to arm on every card except the EACS** (it needs active monitor; the EACS armed on 2.4 GHz but failed on 5 GHz). Use `airodump-ng` + `aireplay-ng`; convert captures with `hcxpcapngtool --all`.
+- **aircrack-ng on ARM64** has to be compiled from source (and use the git version of wifite).
+- **Handshake capture** in an office with several APs of the same name: do not lock `--bssid`, capture the whole channel.
+- **Only use these tools on networks you own or are authorized to test.**
 
 ---
 
@@ -193,7 +212,7 @@ Before you give up, collect this exact information and contact us (or the [drive
 ```bash
 uname -r
 lsusb
-dkms status
+dkms status    # only relevant if you installed a DKMS driver (older kernels only)
 dmesg | tail -50
 iw dev
 ```

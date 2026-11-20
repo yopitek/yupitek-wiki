@@ -12,6 +12,8 @@ keywords: [Jetson Orin ALFA, Jetson Wi-Fi 6E, AWUS036AXML Jetson, robotics wirel
 
 > **Quick Summary**: NVIDIA Jetson Orin Nano and NX developer kits are designed as vision and AI compute modules, meaning their default wireless capability is often basic 2.4/5 GHz with internal PCB antennas. Adding an external ALFA Wi-Fi adapter unlocks **6 GHz (Wi-Fi 6E) low-latency camera streaming for robotics**, high-gain external antenna range, and wireless packet auditing on JetPack.
 
+> **Test scope**: Yupitek's ALFA compatibility testing was done only on ASUS GX10 / Ubuntu 24.04 ARM64 / kernel 6.17. **NVIDIA Jetson has not been tested.** Statements on this page about driver availability are inferred from the platform's kernel version and the kernel release in which each driver reached mainline (ACM / ACHM 4.19, AXM / AXML 5.18, EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17), not verified on the hardware. Only test networks you own or are authorized to test.
+
 ## Is This Guide for You?
 
 - **Difficulty**: Intermediate (familiarity with terminal commands and Linux kernel concepts).
@@ -36,11 +38,13 @@ Jetson Orin carrier boards typically include modest integrated Wi-Fi radios suff
 
 Jetson runs NVIDIA Linux for Tegra (L4T) kernels rather than generic Ubuntu desktop kernels. Compatibility depends on your installed JetPack release:
 
-| JetPack Version | L4T Kernel Version | MediaTek MT7921AUN (AWUS036AXML) | MediaTek MT7612U (AWUS036ACM) | Realtek RTL8812AU (AWUS036ACH) |
+| JetPack Version | L4T Kernel Version | MediaTek MT7921AUN (AWUS036AXML), `mt7921u` since 5.18 | MediaTek MT7612U (AWUS036ACM), `mt76x2u` since 4.19 | Realtek RTL8812AU (AWUS036ACH), `rtw88_8812au` since 6.13 |
 |---|---|---|---|---|
-| **JetPack 6.x** | Linux 5.15 / 6.x | ✅ **In-kernel (Plug & Play)** | ✅ **In-kernel (Plug & Play)** | ⚠️ Requires DKMS build |
-| **JetPack 5.x** | Linux 5.10 | ⚠️ Requires Backport / Firmware | ✅ **In-kernel (Plug & Play)** | ⚠️ Requires DKMS build |
-| **JetPack 4.x** | Linux 4.9 | ❌ Unsupported | ⚠️ Manual driver compile | ⚠️ Requires DKMS build |
+| **JetPack 6.x** | Linux 5.15 (check `uname -r`) | In-kernel only if the kernel is 5.18 or newer; on 5.15 it needs a backport / DKMS | ✅ In-kernel | In-kernel only if the kernel is 6.13 or newer; otherwise DKMS |
+| **JetPack 5.x** | Linux 5.10 | ⚠️ Kernel older than 5.18: needs a backport / out-of-tree driver | ✅ In-kernel | ⚠️ DKMS required (kernel older than 6.13) |
+| **JetPack 4.x** | Linux 4.9 | ❌ Kernel older than 5.18: out-of-tree driver only | ⚠️ Kernel older than 4.19: manual driver compile | ⚠️ DKMS required (kernel older than 6.13) |
+
+This matrix is **inferred from kernel versions, not tested on Jetson**. Other Realtek models reached mainline in EACS 6.2 and AX / AXER 6.17; below those versions they need DKMS or a newer kernel. Where the platform kernel is not listed, the answer depends on the platform kernel version.
 
 ---
 
@@ -105,7 +109,7 @@ Connect to a Wi-Fi 6E network via NetworkManager:
 nmcli device wifi connect "Your_6GHz_SSID" password "YourPassword"
 ```
 
-Or enable monitor mode for wireless research:
+Or enable monitor mode for wireless research (on the GX10 test platform the AWUS036AXML showed weak monitor mode and failed packet injection; use the AWUS036ACM when you need injection):
 ```bash
 sudo ip link set wlan1 down
 sudo iw dev wlan1 set type monitor
@@ -121,8 +125,8 @@ sudo ip link set wlan1 up
 - **Solution**: Use a dedicated 19V DC barrel jack supply or 5V/4A USB-C PD power adapter.
 
 ### Q2: `lsusb` shows device, but `iw dev` shows no interface on JetPack 5.x?
-- **Root Cause**: Missing MediaTek firmware binaries in `/lib/firmware/mediatek/`.
-- **Solution**: Download the firmware files from the kernel git repository:
+- **Root Cause**: On kernels older than 5.18 (for example JetPack 5.x on 5.10) the `mt7921u` driver is not in the kernel at all, so the interface cannot appear. If the kernel is 5.18 or newer, the cause is usually missing MediaTek firmware binaries in `/lib/firmware/mediatek/`.
+- **Solution**: Use a kernel with `mt7921u` (or an out-of-tree backport); if the driver is present, download the firmware files from the kernel git repository:
   ```bash
   sudo wget -P /lib/firmware/mediatek https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/mediatek/WIFI_MT7961_patch_mcu_1_2_tv.bin
   sudo wget -P /lib/firmware/mediatek https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/mediatek/WIFI_RAM_CODE_MT7961_1_2.bin

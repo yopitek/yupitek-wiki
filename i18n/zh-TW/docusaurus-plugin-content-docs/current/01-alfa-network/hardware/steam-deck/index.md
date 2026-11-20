@@ -3,14 +3,16 @@ id: alfa-hardware-steam-deck
 title: Steam Deck & UP Squared Pro × ALFA Network 整合指南
 sidebar_label: Steam Deck / UP Squared
 sidebar_position: 9
-description: 無人機論文實測架構：UP Squared Pro 機載邊緣運算與 Steam Deck 地面站搭配 ALFA AWUS036ACH 實現 5.745GHz wfb-ng 長距離影像遙測鏈路設定教學。
+description: 參考架構（Yupitek 未實測）：UP Squared Pro 機載邊緣運算與 Steam Deck 地面站搭配 ALFA AWUS036ACH 建立 5.745GHz wfb-ng 長距離影像遙測鏈路的設定教學。
 tags: [steam-deck, steamos, up-squared, alfa, awus036ach, rtl8812au, wfb-ng, uav]
 keywords: [Steam Deck, UP Squared Pro, AWUS036ACH, RTL8812AU, wfb-ng, 無人機, SteamOS 唯讀]
 ---
 
 # Steam Deck & UP Squared Pro × ALFA Network 整合指南
 
-> **一句話定位**：這是一個比較進階、專門的應用情境——用 UP Squared Pro 當機載邊緣運算主機、Steam Deck 當掌上型地面控制站，中間透過 ALFA AWUS036ACH 建立一條長距離、低延遲的單向影像與遙測傳輸鏈路，常見於無人載具系統（UAS，例如自製空拍機、地面機器人）的研究與實測專案。
+> **一句話定位**：這是一個比較進階、專門的應用情境——用 UP Squared Pro 當機載邊緣運算主機、Steam Deck 當掌上型地面控制站，中間透過 ALFA AWUS036ACH 建立一條長距離、低延遲的單向影像與遙測傳輸鏈路，常見於無人載具系統（UAS，例如自製空拍機、地面機器人）的研究與社群專案。
+
+> ⚠️ **實測範圍**：Yupitek 的 ALFA 相容性測試僅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上進行，**Steam Deck、UP Squared Pro 與 wfb-ng尚未實測**。本頁關於驅動是否可用的說明，是依平台核心版本與各驅動進入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推論，並非在該硬體上驗證。AWUS036ACH 的核心內建驅動（`rtw88_8812au`，kernel 6.13 起）在 GX10 上只驗證過監聽與封包注入（2.4／5 GHz 皆 100%），並未驗證 wfb-ng；下方是否需要 DKMS 驅動，取決於 SteamOS 的核心版本。請僅在您自己擁有或已獲授權的網路上測試。
 
 ## 這篇文章適合你嗎？
 
@@ -22,7 +24,7 @@ keywords: [Steam Deck, UP Squared Pro, AWUS036ACH, RTL8812AU, wfb-ng, 無人機,
   2. 在 SteamOS 這種唯讀系統上正確安裝驅動程式，且不破壞系統的安全性設計
   3. 知道系統更新後驅動程式為什麼會消失、該怎麼快速恢復
 
-> ⚠️ **適用範圍提醒**：這篇文章記錄的是一個特定研究情境下的實測配置，跟前面幾篇「新手入門」性質的文章不太一樣，會用到比較多進階概念。如果你是第一次接觸 ALFA 網路卡，建議先從 [Raspberry Pi 整合指南](/alfa-network/hardware/raspberry-pi/) 開始熟悉基本操作。
+> ⚠️ **適用範圍提醒**：這篇文章整理的是一個特定研究與社群情境的參考配置（Yupitek 並未實測），跟前面幾篇「新手入門」性質的文章不太一樣，會用到比較多進階概念。如果你是第一次接觸 ALFA 網路卡，建議先從 [Raspberry Pi 整合指南](/alfa-network/hardware/raspberry-pi/) 開始熟悉基本操作。
 
 ---
 
@@ -48,9 +50,9 @@ keywords: [Steam Deck, UP Squared Pro, AWUS036ACH, RTL8812AU, wfb-ng, 無人機,
 
 在 `wfb-ng` 這類長距離單向廣播鏈路中，需要驅動程式能做到幾件比較特殊的事：把封包長度設到接近極限、關閉前面提到的 ACK 應答機制，並且能在非標準或特定的 5GHz 頻道（例如 5.745 GHz，頻道 149）上進行無連線的單向廣播。
 
-**ALFA AWUS036ACH** 使用的 Realtek RTL8812AU 晶片，搭配獨立的功率放大器（PA）與訊號放大器（LNA），加上雙外接天線接頭，是目前學術與社群社群驗證最扎實的長距離 `wfb-ng` 硬體方案。
+**ALFA AWUS036ACH** 使用的 Realtek RTL8812AU 晶片，搭配獨立的功率放大器（PA）與訊號放大器（LNA），加上雙外接天線接頭，因此是社群的 `wfb-ng` 設定中最常被提到的型號。
 
-> **老實說明**：目前有實際學術論文一手驗證的，僅限於 **AWUS036ACH（RTL8812AU 晶片）**。其他型號（如 AWUS036AXML、AWUS036ACM）在 `wfb-ng` 這個框架下，目前還沒有直接的實測數據可以佐證效果，這篇文章不對它們做過度推論。如果你想嘗試其他型號，建議先自行做小規模測試驗證。
+> **老實說明**：Yupitek 並未實測 `wfb-ng`、Steam Deck 或 UP Squared Pro。其他型號（如 AWUS036AXML、AWUS036ACM）在 `wfb-ng` 框架下沒有任何實測數據，這篇文章不對它們做推論；尤其 AXML 在 GX10 的實測中封包注入失敗，不適合用於依賴注入的鏈路。如果你想嘗試其他型號，建議先自行做小規模測試驗證。
 
 ---
 
@@ -149,8 +151,8 @@ SteamOS 有一個容易讓人踩坑的機制：**A/B 分割區覆蓋**。每次�
 - **解決方法**：只要想起來，隨時執行 `sudo steamos-readonly enable` 補回來即可，不會有無法復原的問題，但建議養成安裝完立刻重新啟用的習慣，避免忘記。
 
 ### Q4：能不能用其他型號的 ALFA 網路卡（AXML / ACM）試試看？
-- **原因**：目前 `wfb-ng` 框架下，只有 AWUS036ACH 有實際學術論文驗證過的數據。
-- **解決方法**：技術上可以嘗試，但目前沒有現成的實測數據可以參考，建議自己先做小規模、短距離的測試，確認延遲與可靠度符合你的需求後，再應用到正式場景。
+- **原因**：Yupitek 並未實測 `wfb-ng`，本頁只以 AWUS036ACH 為參考配置；AXML 在 GX10 的實測中封包注入失敗（`Found 0 APs`／`No Answer`），ACM 的注入成功率為 2.4 GHz 63–83%、5 GHz 76%。
+- **解決方法**：技術上可以嘗試 ACM，但 AXML 不建議；請先自己做小規模、短距離的測試，確認延遲與可靠度符合你的需求後，再應用到正式場景。
 
 ---
 

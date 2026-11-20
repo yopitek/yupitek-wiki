@@ -12,6 +12,8 @@ keywords: [Jetson Orin ALFA, Jetson Wi-Fi 6E, AWUS036AXML Jetson, 机器人无�
 
 > **一句话定位**：Jetson 内置的 Wi-Fi 天线很弱，做机器人或电脑视觉项目时常常撑不住。装上一支 ALFA 无线网卡，就能让 Jetson 用 6 GHz 频段（Wi-Fi 6E）低延迟串流影像，或激活监听模式做无线研究。
 
+> ⚠️ **实测范围**：Yupitek 的 ALFA 兼容性测试仅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上进行，**NVIDIA Jetson尚未实测**。本页关于驱动是否可用的说明，是依平台内核版本与各驱动进入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推断，并非在该硬件上验证。实际请以 `uname -r` 为准。请仅在您自己拥有或已获授权的网络上测试。
+
 ## 这篇文章适合你吗？
 
 - **难度**：入门〜中阶（会下 Linux 终端指令即可，不需要写程序）
@@ -29,23 +31,25 @@ keywords: [Jetson Orin ALFA, Jetson Wi-Fi 6E, AWUS036AXML Jetson, 机器人无�
 Jetson Orin Nano / NX 主板（含它的载板）出厂就带了一颗无线网卡，但那颗网卡的设计目标只是「能上网、能 `apt update`」，不是为了机器人或电脑视觉这种对带宽、延迟要求更高的应用设计的。如果你的项目需要下面任何一项，内置网卡通常不够用：
 
 - **6 GHz（Wi-Fi 6E）频段**：Jetson 载板的内置网卡只有 2.4 GHz 和 5 GHz。6 GHz 是一个相对「空旷」、杂讯少的频段，很适合拿来即时传摄影机画面或光达（LiDAR）点云数据，不用跟同一间实验室里一堆人的 2.4 GHz 设备抢带宽。
-- **稳定的高吞吐量连接**：目前 ALFA 产品线里唯一支持 6 GHz 的无线网卡是 **AWUS036AXML**，芯片是 MT7921AUN，而且它的驱动进程从 Linux 内核 5.18 版之后就已经内置，不用自己编译。
+- **稳定的高吞吐量连接**：目前实测确认 6 GHz 可用的 ALFA 无线网卡是 **AWUS036AXML**（芯片 MT7921AUN；AXM 的 6 GHz 未实测），而且它的驱动程序从 Linux 内核 5.18 版之后就已经内置，不用自己编译。
 - **监听模式（Monitor Mode）**：如果你的项目是做无线网络研究（例如分析数据包），可以通过标准的 `mac80211` 驱动路径，在支持的芯片上直接激活监听模式。
 
 > 📘 **名词小教室**
 > - **监听模式（Monitor Mode）**：让网卡不只接收「要给自己的」数据包，而是把空气中飞过的所有无线数据包都抓下来，是做无线网络分析、Wireshark 课程作业的基础模式。一般上网用的「Managed 模式」做不到这件事。
-> - **DKMS（Dynamic Kernel Module Support）**：一种让驱动进程「跟着内核版本自动重新编译」的机制。白话说：以后系统更新内核版本，DKMS 会自动帮你的网卡驱动重新编译一次，不用每次都手动重装。
-> - **JetPack**：NVIDIA 官方为 Jetson 系列准备的完整系统套件（包含客制化的 Linux 内核、驱动进程、开发工具）。JetPack 的版本会直接决定你的 Jetson 用的是哪个内核版本，这对能不能用某些网卡芯片有直接影响。
+> - **DKMS（Dynamic Kernel Module Support）**：一种让驱动程序「跟着内核版本自动重新编译」的机制。白话说：以后系统更新内核版本，DKMS 会自动帮你的网卡驱动重新编译一次，不用每次都手动重装。
+> - **JetPack**：NVIDIA 官方为 Jetson 系列准备的完整系统套件（包含定制化的 Linux 内核、驱动程序、开发工具）。JetPack 的版本会直接决定你的 Jetson 用的是哪个内核版本，这对能不能用某些网卡芯片有直接影响。
 > - **L4T（Linux for Tegra）**：Jetson 专用的 Linux 内核，不是一般 Ubuntu 桌机用的内核，所以内核版本命名和更新方式跟一般 Linux 教学看到的不太一样。
 
 Jetson 能用哪种驱动路径，关键在于你的 **JetPack 版本**（决定内核版本）：
 
-| JetPack 版本 | L4T 内核版本 | `mt7921u`（AWUS036AXM / AXML 适用） | `mt76x2u`（AWUS036ACM / ACHM 适用） |
+| JetPack 版本 | L4T 内核版本 | `mt7921u`（AWUS036AXM / AXML；mainline 自 5.18） | `mt76x2u` / `mt76x0u`（AWUS036ACM / ACHM；mainline 自 4.19） |
 | ------------ | ------------ | ------------------------------------ | ------------------------------------ |
-| JetPack 5.x  | 5.10         | ❌ 内核太旧，不支持                  | ✅ 支持                              |
-| JetPack 6.x  | 6.6          | ✅ 支持                              | ✅ 支持                              |
+| JetPack 5.x  | 5.10         | ❌ 内核早于 5.18，需自行 backport／DKMS | ✅ 内核已内置                        |
+| JetPack 6.x  | 5.15         | ❌ 内核早于 5.18，需自行 backport／DKMS | ✅ 内核已内置                        |
 
-**记住这条规则**：如果你买的是 **AWUS036AXML**（要用 6 GHz），你的 Jetson 一定要是 **JetPack 6**。如果你用的是经典款 **AWUS036ACM**，JetPack 5 或 6 都可以用。
+上表是**按内核版本推断，并未在 Jetson 上实测**。Realtek 机型的 mainline 起始版本为：EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17；内核低于该版本时需要 DKMS 或更新内核，实际视平台内核版本而定。
+
+**记住这条规则**：AWUS036AXML 的驱动 `mt7921u` 需要内核 5.18 以上，请用 `uname -r` 确认；按 NVIDIA 公布的内核版本，JetPack 5（5.10）与 JetPack 6（5.15）都早于 5.18，内核不含主线 `mt7921u`，需要 backport／DKMS 驱动（推断，未实测；可用 `modinfo mt7921u` 确认）。经典款 **AWUS036ACM** 的 `mt76x2u` 自内核 4.19 起内置，JetPack 5 或 6 都可以用。
 
 ---
 
@@ -54,11 +58,11 @@ Jetson 能用哪种驱动路径，关键在于你的 **JetPack 版本**（决定
 - [ ] **硬件**：已安装好 JetPack 的 NVIDIA Jetson Orin Nano 或 Orin NX
 - [ ] **网络环境**：第一次设置建议先接乙太网络线（避免因为 Wi-Fi 没设好而连不上机器调试）
 - [ ] **ALFA 无线网卡**：
-  - 要用 6 GHz（Wi-Fi 6E）：[AWUS036AXML 产品页面](/alfa-network/products/awus036axml/)（需要 JetPack 6）
+  - 要用 6 GHz（Wi-Fi 6E）：[AWUS036AXML 产品页面](/alfa-network/products/awus036axml/)（JetPack 5／6 的内核均早于 5.18，需 backport／DKMS 驱动）
   - 一般用途、兼容性最广：[AWUS036ACM 产品页面](/alfa-network/products/awus036acm/)（JetPack 5 / 6 都可以）
-- [ ] **驱动进程参考（GitHub）**：
-  - MediaTek MT76 系列驱动（社群维护的独立可安装版本，含 DKMS，适用 MT7612U / MT7921 系列芯片）：https://github.com/morrownr/mt76
-  - Realtek RTL8812AU 驱动（aircrack-ng 社群维护，支持 ARM64）：https://github.com/aircrack-ng/rtl8812au
+- [ ] **驱动程序参考（GitHub）**：
+  - MediaTek MT76 系列驱动（社区维护的独立可安装版本，含 DKMS，适用 MT7612U / MT7921 系列芯片）：https://github.com/morrownr/mt76
+  - Realtek RTL8812AU 驱动（aircrack-ng 社区维护，支持 ARM64）：https://github.com/aircrack-ng/rtl8812au
 - [ ] 若使用高功率无线网卡，建议准备一个**有独立供电的 USB Hub**（Jetson 的 USB 连接端口在高负载时可能供电不足）
 
 ---
@@ -77,12 +81,12 @@ dpkg -l | grep nvidia-l4t-core | head -1
 **预期结果**：你会看到类似下面两种其中一种输出：
 
 ```text
-6.6.0-tegra            # JetPack 6 — 支援 mt7921u（AXM / AXML 系列）
+5.15.x-tegra           # JetPack 6（内核 5.15）
 # 或
-5.10.104-tegra          # JetPack 5 — 只支援 MT7612U 这类旧芯片（ACM / ACHM 系列）
+5.10.x-tegra           # JetPack 5（内核 5.10）
 ```
 
-如果你看到的是 `5.10.x`，代表你目前只能用 AWUS036ACM 这类 MT7612U 芯片的网卡；如果要用支持 6 GHz 的 AWUS036AXML，需要先把 Jetson 升级到 JetPack 6。
+无论是 `5.10.x` 还是 `5.15.x`，内核都早于 5.18：AWUS036ACM／ACHM（mt76，4.19 起内置）可以直接使用；AWUS036AXM／AXML（`mt7921u`）需要 backport／DKMS 驱动，请先用 `modinfo mt7921u` 确认内核是否已带有此模块。
 
 ---
 
@@ -157,7 +161,7 @@ gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
 
 ### 步骤 4：Realtek 机型的安装路径（如果你的网卡不是 MediaTek 芯片）
 
-如果 `lsusb` 抓不到 MediaTek 设备，代表你的网卡可能是 Realtek 芯片，需要额外编译安装驱动进程（也就是前面提到的 DKMS）。
+如果 `lsusb` 抓不到 MediaTek 设备，代表你的网卡可能是 Realtek 芯片，需要额外编译安装驱动程序（也就是前面提到的 DKMS）。Realtek 机型是否需要 DKMS 取决于内核版本：EACS 自 6.2、ACH／ACS 自 6.13、AX／AXER 自 6.17 起已内置于 mainline，低于该版本才需要（视平台内核版本而定，未在 Jetson 实测）；下方 aircrack-ng 的驱动仅适用于 RTL8812AU（AWUS036ACH）。
 
 Jetson 的 ARM64（aarch64）架构也可以编译 DKMS 驱动，只是编译时间会比一般桌机 Linux 慢一些，尤其在 Orin Nano 上请耐心等待：
 
@@ -187,7 +191,7 @@ sudo airmon-ng start wlan0
 sudo aireplay-ng --test wlan0mon
 ```
 
-**预期结果**：接口会变成 `wlan0mon`，并在测试时看到类似 `30/30: 100%` 的注入成功率，代表监听模式运作正常。
+**预期结果**：接口会变成 `wlan0mon`，代表监听模式已启用。`aireplay-ng --test` 的注入成功率因网卡而异：在 ASUS GX10／kernel 6.17 的实测中，ACM 在 2.4 GHz 约 63–83%；**AXM／AXML 的注入测试会失败**（显示 `Found 0 APs`／`No Answer`，主因是 kernel 6.16 起 mac80211 chanctx 的退化，并非芯片限制），且监听表现偏弱。以上在 Jetson 上尚未实测。
 
 > ⚠️ **供电提醒**：Orin Nano 的 USB 连接端口在高负载下可能供电不稳。如果你的网卡是高功率型号，建议搭配**有独立供电的 USB Hub**。另外也留意 Jetson 的电源模式（`nvpmodel`）——如果目前是降频的省电模式，也可能影响 USB 供电稳定度，可以尝试切换到较高性能的电源模式。
 
@@ -195,13 +199,13 @@ sudo aireplay-ng --test wlan0mon
 
 ## 常见问题与排除指引
 
-### Q1：AWUS036AXML 在 JetPack 5 上完全看不到？
-- **原因**：JetPack 5 的内核版本（5.10）还没有内置 `mt7921u` 驱动模块。
-- **解决方法**：升级到 JetPack 6（内核版本 6.6），或改用支持 MT7612U 芯片的 AWUS036ACM。
+### Q1：AWUS036AXML 在 JetPack 5／6 上完全看不到？
+- **原因**：JetPack 5（5.10）与 JetPack 6（5.15）的内核都早于 5.18，没有主线 `mt7921u` 驱动模块。
+- **解决方法**：升级 JetPack 无法解决；请安装 backport／DKMS 版 `mt7921u` 驱动，或改用 mt76 芯片、内核 4.19 起内置的 AWUS036ACM。
 
 ### Q2：明明设置好了，却找不到 6 GHz 信道？
 - **原因**：法规领域（国家代码）没有设置，系统不知道该开放哪些信道。
-- **解决方法**：运行 `sudo iw reg set <你的國家代碼>`，再重新激活网卡接口。
+- **解决方法**：运行 `sudo iw reg set <你的国家代码>`，再重新激活网卡接口。
 
 ### Q3：跑摄影机串流时网卡常常断线？
 - **原因**：USB 供电不足，高负载时电压不稳。
@@ -216,8 +220,8 @@ sudo aireplay-ng --test wlan0mon
   装好标头档后再重新运行 `sudo make dkms_install`。
 
 ### Q5：监听模式怎么样都激活不了？
-- **原因**：通常是 Realtek 网卡的 stub 驱动进程（系统默认但功能阳春的驱动）跟你要用的完整版驱动互相打架。
-- **解决方法**：确认你已经按照步骤 4 安装好 aircrack-ng 版本的驱动进程，而不是系统自带的阳春版。
+- **原因**：通常是 Realtek 网卡的 stub 驱动程序（系统默认但功能阳春的驱动）跟你要用的完整版驱动互相打架。
+- **解决方法**：确认你已经按照步骤 4 安装好 aircrack-ng 版本的驱动程序，而不是系统自带的阳春版。
 
 ---
 
@@ -229,8 +233,8 @@ sudo aireplay-ng --test wlan0mon
 - [ALFA 无线网卡在 Kali Linux 上——监听模式与数据包注入](/alfa-network/linux-setup-kali/)——监听模式的延伸细节
 - [ALFA 无线网卡在 Raspberry Pi 上（3 / 4 / 5）](/alfa-network/hardware/raspberry-pi/)——另一款轻量嵌入式主机的集成方式
 - [词汇表](/getting-started/glossary)——监听模式、DKMS 等名词的完整解释
-- MediaTek MT76 系列驱动（社群维护，含 DKMS）：https://github.com/morrownr/mt76
-- Realtek RTL8812AU 驱动（aircrack-ng 社群维护）：https://github.com/aircrack-ng/rtl8812au
+- MediaTek MT76 系列驱动（社区维护，含 DKMS）：https://github.com/morrownr/mt76
+- Realtek RTL8812AU 驱动（aircrack-ng 社区维护）：https://github.com/aircrack-ng/rtl8812au
 - [NVIDIA Jetson 官方文档](https://docs.nvidia.com/jetson/)
 
 **标签：** `alfa` `jetson` `nvidia` `机器人` `wifi-6e` `监听模式` `新手指南`

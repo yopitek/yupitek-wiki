@@ -12,6 +12,8 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 
 > **一句話定位**：Orange Pi 5 系列這類搭載 Rockchip RK3588 晶片的單板電腦（SBC）算力很強，常被拿來做邊緣運算的無線閘道器或遠端感測節點。但很多人插上 ALFA 網路卡後完全抓不到，誤以為是硬體不相容——實際上關鍵是「你用的系統映像檔」，這篇文章教你怎麼選對系統、正確安裝。
 
+> ⚠️ **實測範圍**：Yupitek 的 ALFA 相容性測試僅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上進行，**Orange Pi／RK3588 板子尚未實測**。本頁關於驅動是否可用的說明，是依平台核心版本與各驅動進入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推論，並非在該硬體上驗證。請僅在您自己擁有或已獲授權的網路上測試。
+
 ## 這篇文章適合你嗎？
 
 - **難度**：入門〜中階（會下 Linux 終端機指令即可）
@@ -46,10 +48,10 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 
 | ALFA 型號         | 晶片型號                 | Armbian（核心 ≥6.x） | 原廠 Debian（核心 5.10） | 備註                    |
 | --------------- | -------------------- | --------------------- | ----------------------- | ----------------------- |
-| **AWUS036AXML** | MT7921AUN（Wi-Fi 6E） | ✅ 即插即用                | ⚠️ 需手動補上韌體檔案         | 支援 2.4G / 5G / 6G      |
-| **AWUS036ACM**  | MT7612U（802.11ac）   | ✅ 即插即用                | ⚠️ 需手動載入 `mt76x2u`        | 監聽與封包注入的首選           |
-| **AWUS036ACHM** | MT7610U（802.11ac）   | ✅ 即插即用                | ⚠️ 需手動載入 `mt76x0u`        | 單天線，適合長時間監聽用途          |
-| **AWUS036ACH**  | RTL8812AU            | ⚠️ 需自行編譯 DKMS          | ⚠️ 需自行編譯 DKMS            | 需先安裝 `linux-headers` |
+| **AWUS036AXML** | MT7921AUN（Wi-Fi 6E） | ✅ 即插即用（`mt7921u`，核心 5.18+） | ⚠️ 核心 5.10 早於 5.18，需 backport／外部驅動 | 支援 2.4G / 5G / 6G；GX10 實測封包注入失敗 |
+| **AWUS036ACM**  | MT7612U（802.11ac）   | ✅ 即插即用                | ⚠️ 需手動載入 `mt76x2u`（mainline 自 4.19）        | 可封包注入（GX10 實測 2.4 GHz 63–83%，低於 EACS／ACH／ACS） |
+| **AWUS036ACHM** | MT7610U（802.11ac）   | ✅ 即插即用                | ⚠️ 需手動載入 `mt76x0u`（mainline 自 4.19）        | 單天線（1T1R），適合小型化監聽用途          |
+| **AWUS036ACH**  | RTL8812AU            | ⚠️ 核心 6.13+ 內建 `rtw88_8812au`，低於 6.13 才需自行編譯 DKMS | ⚠️ 需自行編譯 DKMS            | 需先安裝 `linux-headers` |
 
 **簡單判斷方式**：如果你想要最省事、插上就能用，建議直接刷 Armbian Mainline 系統（見下方步驟），可以完全避開原廠系統上手動補韌體、載驅動的麻煩。
 

@@ -17,8 +17,10 @@ keywords: [NetHunter ALFA, Android OTG 无线网卡, AWUS036ACM NetHunter, Kali 
 
 NetHunter 是运行在 Android 设备 **chroot** 中的 Kali Linux。真正干活的是手机的内核——而手机内核*不是* Ubuntu 内核：
 
-1. **内核内置驱动**：受主线 Linux 支持的芯片组（MT7612U、MT7610U、MT7921AUN）通常能用，因为 NetHunter 的内核镜像包含主线 `mt76` 驱动家族。
-2. **DKMS 驱动**：在 Android chroot 内编译 Realtek DKMS 驱动很痛苦——手机内核很少提供构建所需的头文件和工具链。RTL8812AU 在部分设备上*可以*工作，但请把它当作一个项目，而不是一个设置步骤。
+1. **内核内置驱动**：受主线 Linux 支持的芯片组在手机内核够新时通常能用：MT7612U（ACM）与 MT7610U（ACHM）自 4.19，MT7921AU(N)（AXM / AXML）自 5.18，RTL8821CU（EACS）自 6.2，RTL8812AU（ACH）与 RTL8811AU（ACS）自 6.13，RTL8832BU（AX / AXER）自 6.17。特定 NetHunter 内核镜像是否包含这些驱动因手机而异，我们未实测。
+2. **DKMS 驱动**：仅当手机内核低于上述 Realtek 内置版本时才需要；在 Android chroot 内编译 Realtek DKMS 驱动很痛苦——手机内核很少提供构建所需的头文件和工具链。RTL8812AU 在部分设备上*可以*工作，但请把它当作一个项目，而不是一个设置步骤。
+
+> **注意**：Kali/NetHunter 未实机测试，版本判断依 kernel 版本。
 
 **经验法则**：对于 NetHunter，优先选择 **AWUS036ACM（MT7612U）**。它是社区默认的 NetHunter 网卡适配器，这是有原因的。
 
@@ -41,7 +43,7 @@ sequenceDiagram
 - [ ] 已 root 且安装了 **Kali NetHunter** 的 Android 手机（官方 NetHunter 镜像，或已 root 设备上的 **NetHunter Store** 应用）
 - [ ] OTG 线缆（USB-C 或 micro-USB，取决于你的手机）——高功率网卡适配器最好带外接供电
 - [ ] 内核内置芯片组的 ALFA 网卡适配器：**AWUS036ACM / AWUS036ACHM / AWUS036AXM / AWUS036AXML**
-- [ ] 内核足够新以支持你的芯片组的手机（MT7921AUN 型号需要内核 5.18+）
+- [ ] 内核足够新以支持你的芯片组的手机（ACM / ACHM 需 4.19+，MT7921AUN 型号需 5.18+；Realtek 型号 EACS 需 6.2+、ACH / ACS 需 6.13+、AX / AXER 需 6.17+，否则要 DKMS）
 
 ## 第 1 步：检查你的内核
 
@@ -51,7 +53,7 @@ sequenceDiagram
 uname -r
 ```
 
-**预期输出**：类似 `4.19.157-perf+`（较旧手机）或 `5.15.xx-gki`（较新）。对于 MT7921AUN 网卡适配器，你需要 **5.18 或更新**；MT7612U 在 4.19 上就能正常工作。
+**预期输出**：类似 `4.19.157-perf+`（较旧手机）或 `5.15.xx-gki`（较新）。对于 MT7921AUN 网卡适配器，你需要 **5.18 或更新**；MT7612U 的驱动自 4.19 起已进入主线。
 
 > **你可能想知道**——*「我需要特定的 NetHunter 内核吗？」* 是的——NetHunter 团队为一份特定的受支持设备列表构建内核。先查看[官方设备列表](https://www.kali.org/docs/nethunter/)：不受支持的手机意味着没有支持监听模式的内核，无论你怎么做，网卡适配器都永远无法离开 managed 模式。
 
@@ -92,10 +94,9 @@ phy#0
 
 ## 第 4 步：监听模式
 
-在 Kali 终端内（你需要 root——NetHunter 默认以 root 运行）：
+在 Kali 终端内（你需要 root——NetHunter 默认以 root 运行）。**请勿运行 `airmon-ng check kill`**，它会终止 NetworkManager 并断网：
 
 ```bash
-airmon-ng check kill
 airmon-ng start wlan0
 iwconfig
 ```
@@ -108,7 +109,7 @@ iwconfig
 aireplay-ng --test wlan0mon
 ```
 
-**预期输出**：`30/30: 100%` 和 `Injection is working!`
+**预期输出**：`30/30: 100%` 和 `Injection is working!`（我们未在 Android 上实测）。MT7921 系列（AWUS036AXM / AXML）在我们的桌面测试中，于 stock kernel 6.17 注入失败，因此使用这两款时不要指望此步骤能通过。
 
 ## Realtek 芯片组怎么办？
 

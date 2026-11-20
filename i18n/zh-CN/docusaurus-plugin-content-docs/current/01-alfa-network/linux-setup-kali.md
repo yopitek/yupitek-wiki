@@ -3,7 +3,7 @@ slug: linux-setup-kali
 id: alfa-linux-setup-kali
 title: ALFA 网卡适配器在 Kali Linux 上——监听模式与数据包注入
 sidebar_position: 5
-description: ALFA 网卡适配器的完整 Kali Linux 设置——Realtek 芯片组的 DKMS 构建、监听模式、数据包注入验证，以及常见错误表。
+description: ALFA 网卡适配器的完整 Kali Linux 设置——内核够新时直接使用内置驱动、旧内核上 Realtek 芯片组的 DKMS 构建、监听模式、数据包注入验证，以及常见错误表。
 tags: [alfa, kali, 监听模式, 数据包注入, dkms, aircrack-ng]
 keywords: [ALFA Kali, airmon-ng, Kali 监听模式, 数据包注入, AWUS036ACM Kali, RTL8812AU Kali]
 ---
@@ -20,14 +20,18 @@ Ubuntu 把 Wi-Fi 网卡适配器当作*礼貌的客户端*：它们只捕获自�
 1. **监听模式（monitor mode）**——捕获信道上的*每一个*帧，而不仅仅是你的连接。
 2. **数据包注入（packet injection）**——发送原始构造的帧（deauth、probe request、握手重放）。
 
-不是每个芯片组都能做到这两点。好消息是：除 **AWUS036EACS** 外，所有 ALFA 网卡适配器都可以，而且内核内置的 MediaTek 芯片组无需安装任何驱动就能做到。
+不是每个芯片组都能做到这两点。在我们的 GX10 实测（kernel 6.17）中，九款里有七款两者都通过（ACHM 在 2.4 GHz 可注入、5 GHz 仅广播）；**AWUS036AXM / AXML** 可进监听模式捕获，但**数据包注入失败**。内核够新时，所有网卡都用内置驱动，无需安装任何驱动；DKMS 只用于旧内核。
+
+> **注意**：Kali/NetHunter 未实机测试，版本判断依 kernel 版本。
+
+各网卡的内核内置起始版本（依 Linux Kernel Driver Database）：ACM（MT7612U）与 ACHM（MT7610U）4.19；AXM 与 AXML（MT7921AU(N)）5.18；EACS（RTL8821CU）6.2；ACH（RTL8812AU）与 ACS（RTL8811AU）6.13；AX 与 AXER（RTL8832BU）6.17。用 `uname -r` 检查。目前的 Kali rolling 内核通常足以支持全部九款；ASUS GX10（Ubuntu 24.04、kernel 6.17.0-1014-nvidia）上九款都不需要 DKMS。
 
 ```mermaid
 flowchart TD
-    A["Plug ALFA adapter into Kali box"] --> B{"Chipset in kernel?"}
-    B -->|"MT7612U / MT7610U / MT7921AUN"| C["Nothing to install"]
-    B -->|"RTL8812AU / RTL8811AU / RTL8832BU"| D["dkms build (once)"]
-    C --> E["airmon-ng check kill"]
+    A["Plug ALFA adapter into Kali box"] --> B{"uname -r new enough for your card?"}
+    B -->|"Yes: MT7612U, MT7610U 4.19 / MT7921AUN 5.18 / RTL8821CU 6.2 / RTL8812AU, RTL8811AU 6.13 / RTL8832BU 6.17"| C["Nothing to install (in-kernel)"]
+    B -->|"No: Realtek on an older kernel"| D["dkms build (once)"]
+    C --> E["nmcli dev set wlan0 managed no<br/>(never airmon-ng check kill)"]
     D --> E
     E --> F["airmon-ng start wlan0"]
     F --> G["Interface becomes wlan0mon"]
@@ -39,10 +43,10 @@ flowchart TD
 
 ## 前置需求
 
-- [ ] 已安装 Kali Linux（在 Kali rolling、内核 6.x 上测试过）
+- [ ] 已安装 Kali Linux（我们未在 Kali 实机上测试；请用 `uname -r` 对照上述版本）
 - [ ] `sudo` 权限和网络连接
 - [ ] 你的 ALFA 网卡适配器——先查看[兼容性矩阵](/alfa-network/linux-compatibility-matrix/)
-- [ ] （仅 Realtek 型号）构建工具：`sudo apt install -y build-essential dkms git`
+- [ ] （仅旧内核上的 Realtek 型号：ACH / ACS 低于 6.13、EACS 低于 6.2、AX / AXER 低于 6.17）构建工具：`sudo apt install -y build-essential dkms git`
 
 ## 第 1 步：检查内核看到了什么
 
@@ -55,11 +59,11 @@ iw dev
 
 **预期输出**：你的网卡适配器出现在 `lsusb` 中，并且 `iw dev` 中至少有一个 `Interface wlan0`（或 `wlan1`）。
 
-## 第 2 步：安装驱动（仅 Realtek 芯片组）
+## 第 2 步：安装驱动（仅旧内核上的 Realtek）
 
-如果你的芯片组是 RTL8812AU / RTL8811AU / RTL8832BU，用 DKMS 构建社区维护的驱动（RTL8812AU 使用 aircrack-ng；RTL8811AU 和 RTL8832BU 使用 morrownr）。如果你的芯片组是 MediaTek（MT7612U / MT7610U / MT7921AUN），**跳到第 3 步**——驱动已经在你内核里。
+如果 `uname -r` 不低于你的网卡的内置版本（ACM / ACHM 4.19、AXM / AXML 5.18、EACS 6.2、ACH / ACS 6.13、AX / AXER 6.17），**跳到第 3 步**——驱动已经在你内核里。仅在旧内核上、对 Realtek 芯片组（ACH = RTL8812AU、ACS = RTL8811AU、EACS = RTL8821CU、AX / AXER = RTL8832BU），才用 DKMS 构建社区维护的驱动（RTL8812AU 使用 aircrack-ng；RTL8811AU 和 RTL8832BU 使用 morrownr）。MediaTek 芯片组（ACM = MT7612U、ACHM = MT7610U、AXM / AXML = MT7921AU(N)）永远不需要 DKMS。
 
-### RTL8812AU（AWUS036ACH）
+### RTL8812AU（AWUS036ACH）——仅 kernel < 6.13
 
 ```bash
 sudo apt update
@@ -74,14 +78,18 @@ sudo make dkms_install
 
 > 为什么用 aircrack-ng 分支？Kali 的内核滚动很快，aircrack-ng 维护者会在每次内核发布后几天内更新这些驱动——在滚动发行版上至关重要。[RTL8812AU 驱动页面](/alfa-network/drivers/rtl8812au/)有深度解析。
 
-### RTL8811AU（AWUS036ACS）
+### RTL8811AU（AWUS036ACS）——仅 kernel < 6.13
 
+```bash
 cd /opt
 sudo git clone https://github.com/morrownr/8821au-20210708.git
 cd 8821au-20210708
 sudo sh install-driver.sh
-### RTL8832BU（AWUS036AX / AWUS036AXER）
+```
 
+### RTL8832BU（AWUS036AX / AWUS036AXER）——仅 kernel < 6.17
+
+```bash
 cd /opt
 sudo git clone https://github.com/morrownr/rtl8852bu-20250826.git
 cd rtl8852bu-20250826
@@ -90,25 +98,20 @@ sudo sh install-driver.sh
 
 重新插拔网卡适配器（或 `sudo modprobe <module>`）并确认出现接口：`iw dev`。
 
-> RTL8832BU 驱动（AWUS036AX / AXER）**不**支持监听模式。若需监听模式和注入功能，请使用配备内核内置 MediaTek 驱动的适配器（例如 AWUS036ACM 或 AWUS036AXML）或 AWUS036ACH。
+> 内核内置的 `rtw89_8852bu` 驱动（AWUS036AX / AXER，kernel ≥ 6.17）支持监听模式（接收强）与数据包注入（2.4 GHz 实测 96 % / 73 %）；旧版社区 DKMS 驱动的监听行为我们未实测。若要最高的注入成功率，请使用 AWUS036EACS 或 AWUS036ACH（双频均为 100 %）。
 
-## 第 3 步：终止干扰进程
+## 第 3 步：让 NetworkManager 不要干扰网卡（请勿运行 `airmon-ng check kill`）
+
+NetworkManager 可能会抢夺 Wi-Fi 接口的控制权。**请勿运行 `airmon-ng check kill`**：它会终止 NetworkManager 和 wpa_supplicant，让整台机器断网。请改为只让 NetworkManager 忽略 ALFA 这张卡的接口：
 
 ```bash
-sudo airmon-ng check kill
+sudo nmcli dev set wlan0 managed no
+nmcli dev status
 ```
 
-**预期输出**：
+**预期输出**：ALFA 接口显示为 `unmanaged`，其他连接不受影响。
 
-```text
-Killing these processes:
-
-    PID Name
-   1234 wpa_supplicant
-   2345 NetworkManager
-```
-
-> ⚠️ 这会断开你当前的 Wi-Fi 连接（你杀掉了 NetworkManager！）。如果你正通过 Wi-Fi 工作，会失去连接——请使用以太网线或在本机操作。之后可以用 `sudo systemctl restart NetworkManager` 恢复。
+> ⚠️ 只操作 ALFA 网卡适配器的接口（在 GX10 上名称为 `wlx` + MAC），不要动内置 Wi-Fi。用完后用 `sudo nmcli dev set wlan0 managed yes` 还给 NetworkManager。
 
 ## 第 4 步：启动监听模式
 
@@ -152,7 +155,7 @@ sudo aireplay-ng --test wlan0mon
 12:34:56  30/30:  100%
 ```
 
-**`30/30: 100%`**——这就是魔法行。它意味着网卡适配器注入了 30 个 probe request 并听到了全部 30 个，证明监听模式下 TX 和 RX 都正常。如果你看到 `Failed` 或低百分比，说明网卡适配器实际上没有在注入——参见下面的常见错误表。
+**`30/30: 100%`**——这就是魔法行。它意味着网卡适配器注入了 30 个 probe request 并听到了全部 30 个，证明监听模式下 TX 和 RX 都正常。如果你看到 `Failed` 或低百分比，说明网卡适配器实际上没有在注入——参见下面的常见错误表。MT7921 系列（AWUS036AXM / AXML）在 stock kernel 6.17 上此测试会显示 `Found 0 APs` / `No Answer`：这是已知的注入失败，不是你的设置有误。
 
 ## 第 6 步：把工具指向它
 
@@ -168,7 +171,7 @@ sudo timeout 10 tcpdump -i wlan0mon -c 100
 
 ```bash
 sudo airmon-ng stop wlan0mon
-sudo systemctl restart NetworkManager
+sudo nmcli dev set wlan0 managed yes
 ```
 
 ## 常见错误（FAQ）
@@ -180,7 +183,8 @@ sudo systemctl restart NetworkManager
 | `Injection is working!` 但 `0/30` 回复 | 网卡适配器 TX 正常但 RX 过滤坏了（某些 Realtek 驱动常见） | 尝试锁定信道：`sudo iw wlan0mon set channel 6`；重测；升级 DKMS 驱动 |
 | DKMS 构建失败并提示 "No rule to make target" | Kali 内核对仓库快照来说太新 | `cd /opt/rtl8812au && sudo git pull && sudo make dkms_install` |
 | 监听模式几分钟后失效 | USB 省电 / 热节流 | 使用带供电的 USB 集线器或 USB 3.0 端口；`sudo iwconfig wlan0mon txpower 20` |
-| `airmon-ng check kill` 杀掉了我的网络 | 预期行为——NetworkManager 被停止了 | 会话结束后 `sudo systemctl restart NetworkManager` |
+| `airmon-ng` 警告有进程「可能造成问题」 | NetworkManager / wpa_supplicant 正在运行 | **不要**运行 `airmon-ng check kill`（会终止 NetworkManager 并断网）；改用 `sudo nmcli dev set wlan0 managed no` |
+| AWUS036AXM / AXML 的 `aireplay-ng --test` 显示 `Found 0 APs` / `No Answer` | MT7921 系列在 stock kernel 6.17 的已知注入失败（kernel 6.16 起的 mac80211 chanctx 回归） | 注入改用其他网卡（EACS、ACH、ACS、ACM、AX、AXER）；AXM / AXML 当 AP 或普通客户端没问题 |
 | 网卡适配器在 managed 模式正常，但 `iw` 中没有列出 `monitor` | 驱动构建时未包含监听支持 | 用 aircrack-ng 仓库重建（它们启用监听 + VIF） |
 
 > **你可能想知道**——*「捕获这些东西合法吗？」* 监听模式和注入是技术能力，不是许可证。在大多数司法管辖区，在你未拥有或未获授权测试的网络上捕获或注入是非法的。每门课程实验都假设你在**自己的接入点或实验网络**上测试。请保持在那里。

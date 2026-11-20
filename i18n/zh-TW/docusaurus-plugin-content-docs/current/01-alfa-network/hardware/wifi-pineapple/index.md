@@ -10,7 +10,9 @@ keywords: [WiFi Pineapple, Hak5, AWUS036ACM, MT7612U, 5GHz 監聽模式, PineAP,
 
 # Hak5 WiFi Pineapple × ALFA Network 整合指南
 
-> **一句話定位**：Hak5 WiFi Pineapple Mark VII 出廠只涵蓋 2.4 GHz 頻段，要涵蓋 5 GHz 頻段（現在大部分裝置都會用到）就需要外接網路卡。ALFA AWUS036ACM 用的晶片跟 Hak5 原廠擴充卡完全同款，但天線增益更高、散熱更好，是目前最推薦的搭配選擇。
+> **一句話定位**：Hak5 WiFi Pineapple Mark VII 出廠只涵蓋 2.4 GHz 頻段，要涵蓋 5 GHz 頻段（現在大部分裝置都會用到）就需要外接網路卡。ALFA AWUS036ACM 用的晶片跟 Hak5 原廠擴充卡完全同款，但外接兩支 RP-SMA 天線，可自行換上增益更高的天線，是 Hak5 文件指定的 MT7612U 方案。
+
+> ⚠️ **實測範圍**：Yupitek 的 ALFA 相容性測試僅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上進行，**WiFi Pineapple尚未實測**。本頁關於驅動是否可用的說明，是依平台核心版本與各驅動進入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推論，並非在該硬體上驗證。在 GX10 的實測中，ACM 的 2.4／5 GHz 監聽可用、注入成功率 2.4 GHz 63–83%／5 GHz 76%，兩個頻段的 AP 模式也可用。請僅在您自己擁有或已獲授權的網路上測試。
 
 ## 這篇文章適合你嗎？
 
@@ -28,9 +30,9 @@ keywords: [WiFi Pineapple, Hak5, AWUS036ACM, MT7612U, 5GHz 監聽模式, PineAP,
 
 WiFi Pineapple Mark VII 這台設備本身內建了兩組 2.4 GHz 無線電模組（一組用來當管理連線，另外一到兩組負責掃描附近的 Wi-Fi 訊號並廣播）。但如果你的實驗或課程需要涵蓋 **5 GHz 頻段**（802.11a/n/ac），內建的無線電就不夠用了，必須透過機身上的 USB 埠外接一張支援 5 GHz 的網路卡。
 
-Hak5 官方文件明確指出，**MediaTek MT7612U** 晶片是唯一保證能在 WiFi Pineapple 上穩定運作的 5 GHz 網路卡晶片。原因跟軟體架構有關：WiFi Pineapple 使用的是 OpenWrt 這套嵌入式系統，Realtek 系列晶片（例如 RTL8812AU）在這個環境下需要額外的驅動程式，在高負載（大量封包同時處理）時容易讓系統當機或無預警重開機；而 MediaTek 的 `mt76x2u` 驅動則是直接寫進 OpenWrt 核心裡，穩定性好很多。
+Hak5 官方文件明確指出，**MediaTek MT7612U** 晶片是唯一保證能在 WiFi Pineapple 上穩定運作的 5 GHz 網路卡晶片。原因跟軟體架構有關：WiFi Pineapple 使用的是 OpenWrt 這套嵌入式系統，在較舊的 OpenWrt 核心上（核心低於 6.13 時 ACH／ACS 需外部驅動，EACS 為 6.2、AX／AXER 為 6.17），Realtek 系列晶片需要額外的驅動程式；而 MediaTek 的 `mt76x2u` 驅動自核心 4.19 起就在 mainline，OpenWrt 核心可直接使用。
 
-**ALFA AWUS036ACM** 使用的正是同一顆 MT7612U 晶片，跟 Hak5 官方擴充卡 MK7AC 系統辨識起來完全一樣，差別在於 ALFA 網路卡用的是標準 RP-SMA 天線接頭（可以自己換天線），而且散熱設計更好，長時間使用比較不容易過熱降速。
+**ALFA AWUS036ACM** 使用的正是同一顆 MT7612U 晶片，跟 Hak5 官方擴充卡 MK7AC 系統辨識起來完全一樣，差別在於 ALFA 網路卡用的是標準 RP-SMA 天線接頭（可以自己換天線）。
 
 > 📘 **名詞小教室**
 > - **Recon（偵察掃描）**：WiFi Pineapple 裡的一個功能模組，用來掃描附近有哪些 Wi-Fi 基地台（AP）和連線中的裝置。

@@ -3,7 +3,7 @@ slug: linux-setup-kali
 id: alfa-linux-setup-kali
 title: ALFA Adapters on Kali Linux — Monitor Mode & Packet Injection
 sidebar_position: 5
-description: Complete Kali Linux setup for ALFA adapters — DKMS build for Realtek chipsets, monitor mode, packet injection verification, and a common-errors table.
+description: Complete Kali Linux setup for ALFA adapters — in-kernel drivers on a new enough kernel, a DKMS build for Realtek chipsets on older kernels, monitor mode, packet injection verification, and a common-errors table.
 tags: [alfa, kali, monitor-mode, packet-injection, dkms, aircrack-ng]
 keywords: [ALFA Kali, airmon-ng, monitor mode Kali, packet injection, AWUS036ACM Kali, RTL8812AU Kali]
 ---
@@ -20,14 +20,18 @@ Ubuntu treats Wi-Fi adapters as *polite clients*: they only capture their own tr
 1. **Monitor mode** — capture *every* frame on a channel, not just your connection.
 2. **Packet injection** — transmit raw crafted frames (deauth, probe requests, handshake replays).
 
-Not every chipset can do both. The good news: all ALFA adapters except the **AWUS036EACS** can, and the in-kernel MediaTek chipsets do it without any driver installation.
+Not every chipset can do both. On our GX10 tests (kernel 6.17) seven of the nine adapters did both (the ACHM injects on 2.4 GHz and only broadcast on 5 GHz); the **AWUS036AXM / AXML** capture in monitor mode but **failed injection**. When your kernel is new enough every adapter uses its in-kernel driver, so no driver installation is needed. DKMS is only for older kernels.
+
+> **Note**: Kali/NetHunter were not tested on real hardware. The driver advice here is decided by kernel version only.
+
+In-kernel start versions (from the Linux Kernel Driver Database): ACM (MT7612U) and ACHM (MT7610U) 4.19; AXM and AXML (MT7921AU(N)) 5.18; EACS (RTL8821CU) 6.2; ACH (RTL8812AU) and ACS (RTL8811AU) 6.13; AX and AXER (RTL8832BU) 6.17. Check yours with `uname -r`. A current Kali rolling kernel is normally new enough for all nine; the ASUS GX10 (Ubuntu 24.04, kernel 6.17.0-1014-nvidia) had all nine working without DKMS.
 
 ```mermaid
 flowchart TD
-    A["Plug ALFA adapter into Kali box"] --> B{"Chipset in kernel?"}
-    B -->|"MT7612U / MT7610U / MT7921AUN"| C["Nothing to install"]
-    B -->|"RTL8812AU / RTL8811AU / RTL8832BU"| D["dkms build (once)"]
-    C --> E["airmon-ng check kill"]
+    A["Plug ALFA adapter into Kali box"] --> B{"uname -r new enough for your card?"}
+    B -->|"Yes: MT7612U 4.19 / MT7610U 4.19 / MT7921AUN 5.18 / RTL8821CU 6.2 / RTL8812AU, RTL8811AU 6.13 / RTL8832BU 6.17"| C["Nothing to install (in-kernel driver)"]
+    B -->|"No: Realtek on an older kernel"| D["dkms build (once)"]
+    C --> E["nmcli dev set wlan0 managed no<br/>(never airmon-ng check kill)"]
     D --> E
     E --> F["airmon-ng start wlan0"]
     F --> G["Interface becomes wlan0mon"]
@@ -39,10 +43,10 @@ flowchart TD
 
 ## Prerequisites
 
-- [ ] Kali Linux installed (tested on Kali rolling, kernel 6.x)
+- [ ] Kali Linux installed (not tested on real Kali hardware by us; check `uname -r` against the versions above)
 - [ ] `sudo` access and an internet connection
 - [ ] Your ALFA adapter — check the [compatibility matrix](/alfa-network/linux-compatibility-matrix/) first
-- [ ] (Realtek models only) build tools: `sudo apt install -y build-essential dkms git`
+- [ ] (Realtek models on an older kernel only: ACH / ACS below 6.13, EACS below 6.2, AX / AXER below 6.17) build tools: `sudo apt install -y build-essential dkms git`
 
 ## Step 1: Check what the kernel sees
 
@@ -55,11 +59,11 @@ iw dev
 
 **Expected output**: your adapter listed in `lsusb`, and at least one `Interface wlan0` (or `wlan1`) in `iw dev`.
 
-## Step 2: Install the driver (Realtek chipsets only)
+## Step 2: Install the driver (only for Realtek on an older kernel)
 
-If your chipset is RTL8812AU / RTL8811AU / RTL8832BU, build the community-maintained driver with DKMS (aircrack-ng for RTL8812AU; morrownr for RTL8811AU and RTL8832BU). If your chipset is MediaTek (MT7612U / MT7610U / MT7921AUN), **skip to Step 3** — the driver is already in your kernel.
+If `uname -r` is at or above your card's in-kernel version (ACM / ACHM 4.19, AXM / AXML 5.18, EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17), **skip to Step 3** — the driver is already in your kernel. Only on an older kernel, for the Realtek chipsets (ACH = RTL8812AU, ACS = RTL8811AU, EACS = RTL8821CU, AX / AXER = RTL8832BU), build the community-maintained driver with DKMS (aircrack-ng for RTL8812AU; morrownr for RTL8811AU and RTL8832BU). The MediaTek chipsets (ACM = MT7612U, ACHM = MT7610U, AXM / AXML = MT7921AU(N)) never need DKMS.
 
-### RTL8812AU (AWUS036ACH)
+### RTL8812AU (AWUS036ACH) — kernel < 6.13 only
 
 ```bash
 sudo apt update
@@ -74,7 +78,7 @@ sudo make dkms_install
 
 > Why the aircrack-ng fork? Kali's kernel rolls fast, and the aircrack-ng maintainers update these drivers within days of every kernel release — essential on a rolling distro. The [RTL8812AU driver page](/alfa-network/drivers/rtl8812au/) has the deep dive.
 
-### RTL8811AU (AWUS036ACS)
+### RTL8811AU (AWUS036ACS) — kernel < 6.13 only
 
 ```bash
 cd /opt
@@ -83,7 +87,7 @@ cd 8821au-20210708
 sudo sh install-driver.sh
 ```
 
-### RTL8832BU (AWUS036AX / AWUS036AXER)
+### RTL8832BU (AWUS036AX / AWUS036AXER) — kernel < 6.17 only
 
 ```bash
 cd /opt
@@ -94,27 +98,20 @@ sudo sh install-driver.sh
 
 Re-plug the adapter (or `sudo modprobe <module>`) and confirm an interface appears: `iw dev`.
 
-> The RTL8832BU driver (AWUS036AX / AXER) does **not** support monitor mode. For monitor mode and injection use an adapter with an in-kernel MediaTek driver (for example the AWUS036ACM or AWUS036AXML) or the AWUS036ACH.
+> The in-kernel `rtw89_8852bu` driver (AWUS036AX / AXER, kernel ≥ 6.17) supports monitor mode with strong reception and injection (96 % / 73 % on 2.4 GHz in our tests). Monitor-mode behavior of the older community DKMS driver was not tested by us. For the best injection rates use the AWUS036EACS or AWUS036ACH (100 % on both bands).
 
-## Step 3: Kill interfering processes
+## Step 3: Keep NetworkManager away from the adapter (do not run `airmon-ng check kill`)
 
-Kali's NetworkManager fights for control of Wi-Fi interfaces. Stop it before switching to monitor mode:
+NetworkManager can fight for control of the Wi-Fi interface. **Do not run `airmon-ng check kill`**: it kills NetworkManager and wpa_supplicant and drops your whole network connection. Instead, tell NetworkManager to ignore only the ALFA interface:
 
 ```bash
-sudo airmon-ng check kill
+sudo nmcli dev set wlan0 managed no
+nmcli dev status
 ```
 
-**Expected output**:
+**Expected output**: the ALFA interface is listed as `unmanaged`; your other connections stay up.
 
-```text
-Killing these processes:
-
-    PID Name
-   1234 wpa_supplicant
-   2345 NetworkManager
-```
-
-> ⚠️ This drops your current Wi-Fi connection (you killed NetworkManager!). If you are working over Wi-Fi, you will lose your link — use an Ethernet cable or work locally. You can restore it later with `sudo systemctl restart NetworkManager`.
+> ⚠️ Operate only on the ALFA adapter's interface (on the GX10 it is named `wlx` + MAC); never touch the built-in Wi-Fi. When you are done, give the interface back with `sudo nmcli dev set wlan0 managed yes`.
 
 ## Step 4: Start monitor mode
 
@@ -158,7 +155,7 @@ sudo aireplay-ng --test wlan0mon
 12:34:56  30/30:  100%
 ```
 
-**`30/30: 100%`** — that is the magic line. It means the adapter injected 30 probe requests and heard all 30, proving both TX and RX work on monitor mode. If you see `Failed` or a low percentage, the adapter is not actually injecting — see the common errors table below.
+**`30/30: 100%`** — that is the magic line. It means the adapter injected 30 probe requests and heard all 30, proving both TX and RX work on monitor mode. If you see `Failed` or a low percentage, the adapter is not actually injecting — see the common errors table below. On the MT7921 cards (AWUS036AXM / AXML) this test shows `Found 0 APs` / `No Answer` on stock kernel 6.17: that is the known injection failure, not a mistake in your setup.
 
 ## Step 6: Point your tools at it
 
@@ -174,7 +171,7 @@ When done, return the adapter to normal mode:
 
 ```bash
 sudo airmon-ng stop wlan0mon
-sudo systemctl restart NetworkManager
+sudo nmcli dev set wlan0 managed yes
 ```
 
 ## Common errors (FAQ)
@@ -186,7 +183,8 @@ sudo systemctl restart NetworkManager
 | `Injection is working!` but `0/30` replies | Adapter TX works but RX filter broken (common on some Realtek drivers) | Try channel lock: `sudo iw wlan0mon set channel 6`; retest; upgrade the DKMS driver |
 | DKMS build fails with "No rule to make target" | Kali kernel too new for the repo snapshot | `cd /opt/rtl8812au && sudo git pull && sudo make dkms_install` |
 | Monitor mode dies after a few minutes | USB power saving / thermal throttle | Use a powered USB hub or USB 3.0 port; `sudo iwconfig wlan0mon txpower 20` |
-| `airmon-ng check kill` killed my internet | Expected — NetworkManager was stopped | `sudo systemctl restart NetworkManager` after the session |
+| `airmon-ng` warns that processes "could cause trouble" | NetworkManager / wpa_supplicant are running | Do **not** run `airmon-ng check kill` (it kills NetworkManager and your network); use `sudo nmcli dev set wlan0 managed no` instead |
+| `aireplay-ng --test` shows `Found 0 APs` / `No Answer` on an AWUS036AXM / AXML | Known injection failure of the MT7921 cards on stock kernel 6.17 (mac80211 chanctx regression since 6.16) | Use another card for injection (EACS, ACH, ACS, ACM, AX, AXER); AXM / AXML are fine as AP or client |
 | Adapter works in managed mode but `monitor` not listed in `iw` | Driver built without monitor support | Rebuild with aircrack-ng repos (they enable monitor + VIF) |
 
 > **You might be wondering** — *"Is it legal to capture this stuff?"* Monitor mode and injection are technical capabilities, not a license. In most jurisdictions, capturing or injecting on networks you do not own or lack permission to test is illegal. Every course lab assumes you test on **your own AP or a lab network**. Keep it there.

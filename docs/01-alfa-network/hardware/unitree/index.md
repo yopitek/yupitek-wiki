@@ -10,7 +10,9 @@ keywords: [Unitree ALFA, Unitree quadruped Wi-Fi, Go2 telemetry, AWUS036AXML Uni
 
 # ALFA Adapters on Unitree Quadruped Robots
 
-> **Quick Summary**: Unitree quadruped robots (such as the Go2 and B2) rely on high-bandwidth telemetry and low-latency video streaming between the onboard computer (NVIDIA Jetson / x86 PC) and the remote operator. Replacing the default internal Wi-Fi with an **ALFA AWUS036AXML (Wi-Fi 6E)** or **AWUS036ACM (5 GHz)** delivers rock-solid control links immune to motor electromagnetic interference (EMI).
+> **Quick Summary**: Unitree quadruped robots (such as the Go2 and B2) rely on high-bandwidth telemetry and low-latency video streaming between the onboard computer (NVIDIA Jetson / x86 PC) and the remote operator. Replacing the default internal Wi-Fi with an **ALFA AWUS036AXML (Wi-Fi 6E)** or **AWUS036ACM (5 GHz)** can give a more reliable control link than the default internal Wi-Fi, and 5 / 6 GHz operation avoids the 2.4 GHz band where motor electromagnetic interference (EMI) is most significant.
+
+> **Test scope**: Yupitek's ALFA compatibility testing was done only on ASUS GX10 / Ubuntu 24.04 ARM64 / kernel 6.17. **Unitree robots have not been tested.** Statements on this page about driver availability are inferred from the platform's kernel version and the kernel release in which each driver reached mainline (ACM / ACHM 4.19, AXM / AXML 5.18, EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17), not verified on the hardware. Range and latency on the robot have not been measured. Only test networks you own or are authorized to test.
 
 ## Is This Guide for You?
 
@@ -28,9 +30,9 @@ keywords: [Unitree ALFA, Unitree quadruped Wi-Fi, Go2 telemetry, AWUS036AXML Uni
 
 Quadruped robots are dynamic mobile sensor arrays. The onboard computing module must stream LiDAR, multi-camera feeds, and IMU state data in real time:
 
-1. **Motor EMI Suppression**: High-torque BLDC joint motors generate significant electromagnetic noise on 2.4 GHz. Switching to 5 GHz or 6 GHz completely bypasses motor noise.
+1. **Motor EMI Suppression**: High-torque BLDC joint motors generate significant electromagnetic noise on 2.4 GHz. Switching to 5 GHz or 6 GHz avoids the 2.4 GHz band where motor noise is most significant.
 2. **Body Chassis Obstruction**: Carbon fiber and aluminum robot chassis attenuate signals from internal PCB antennas. Elevated RP-SMA external antennas maintain uninterrupted line of sight.
-3. **Wi-Fi 6E Low Latency**: AWUS036AXML provides sub-10ms latency for ROS 2 command topics.
+3. **Wi-Fi 6E and the 6 GHz band**: AWUS036AXML adds the 6 GHz band (6 GHz was tested working on the GX10 test platform). Latency for ROS 2 command topics on a Unitree robot has not been measured.
 
 ---
 

@@ -3,14 +3,16 @@ id: alfa-hardware-steam-deck
 title: Steam Deck & UP Squared Pro × ALFA Network Integration Guide
 sidebar_label: Steam Deck / UP Squared
 sidebar_position: 9
-description: Real-world validation of UP Squared Pro edge onboard system and Steam Deck ground station with ALFA AWUS036ACH over 5.745GHz wfb-ng long-range video/telemetry link.
+description: Reference architecture (not tested by Yupitek) for a UP Squared Pro onboard computer and Steam Deck ground station with ALFA AWUS036ACH over a 5.745GHz wfb-ng long-range video/telemetry link.
 tags: [steam-deck, steamos, up-squared, alfa, awus036ach, rtl8812au, wfb-ng, uav]
 keywords: [Steam Deck, UP Squared Pro, AWUS036ACH, RTL8812AU, wfb-ng, UAS, SteamOS readonly]
 ---
 
 # Steam Deck & UP Squared Pro × ALFA Network Integration Guide
 
-> **Quick Summary**: In 2026 Unmanned Aerial System (UAS) field research, teams deployed the **UP Squared Pro** as the airborne real-time vision computer and the **Valve Steam Deck (SteamOS)** as the handheld Ground Control Station (GCS). Both ends utilized **ALFA AWUS036ACH** adapters over `wfb-ng` (Wi-Fi Broadcast Next Generation) on 5.745 GHz to establish a long-range, low-latency unidirectional broadcast link. This guide covers setup, SteamOS immutable filesystem handling, and partition recovery.
+> **Quick Summary**: A commonly described Unmanned Aerial System (UAS) setup uses the **UP Squared Pro** as the airborne real-time vision computer and the **Valve Steam Deck (SteamOS)** as the handheld Ground Control Station (GCS), with **ALFA AWUS036ACH** adapters at both ends over `wfb-ng` (Wi-Fi Broadcast Next Generation) on 5.745 GHz for a long-range, low-latency unidirectional broadcast link. This guide covers setup, SteamOS immutable filesystem handling, and partition recovery.
+
+> **Test scope**: Yupitek's ALFA compatibility testing was done only on ASUS GX10 / Ubuntu 24.04 ARM64 / kernel 6.17. **Steam Deck, UP Squared Pro and wfb-ng have not been tested.** Statements on this page about driver availability are inferred from the platform's kernel version and the kernel release in which each driver reached mainline (ACM / ACHM 4.19, AXM / AXML 5.18, EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17), not verified on the hardware. The ACH in-kernel driver (`rtw88_8812au`, kernel 6.13+) was exercised on the GX10 only for monitor mode and injection (100% on 2.4 and 5 GHz), not for wfb-ng; whether you need the DKMS driver below depends on the SteamOS kernel version. Only test networks you own or are authorized to test.
 
 ## Is This Guide for You?
 
@@ -52,11 +54,11 @@ flowchart LR
 
 ---
 
-## Why Field Research Specifically Certified ALFA AWUS036ACH
+## Why the AWUS036ACH Is the Commonly Cited Choice
 
-In `wfb-ng` long-range FPV links, the **Realtek RTL8812AU driver** supports customized frame injection parameters, disables ACK retransmissions, and enforces operation on specific 5 GHz channels (e.g. 5.745 GHz / Channel 149). The ALFA AWUS036ACH incorporates dual hardware power amplifiers (PA/LNA) and dual RP-SMA ports, representing the most thoroughly documented hardware combination for `wfb-ng`.
+In `wfb-ng` long-range FPV links, the **Realtek RTL8812AU driver** supports customized frame injection parameters, disables ACK retransmissions, and enforces operation on specific 5 GHz channels (e.g. 5.745 GHz / Channel 149). The ALFA AWUS036ACH incorporates dual hardware power amplifiers (PA/LNA) and dual RP-SMA ports, which is why it is the card most often cited in community `wfb-ng` setups.
 
-> **Strict Scope Disclaimer**: Field research data specifically validates the **AWUS036ACH (RTL8812AU)**. Other models (such as AXML / ACM) have not been formally benchmarked under `wfb-ng` and are not pre-certified in this document.
+> **Strict Scope Disclaimer**: Yupitek has not tested `wfb-ng`, the Steam Deck, or the UP Squared Pro. Other models (such as AXML / ACM) have not been benchmarked under `wfb-ng` and are not endorsed in this document. On the GX10 test platform the AXML failed packet injection, so it should not be used for injection-based links.
 
 ---
 

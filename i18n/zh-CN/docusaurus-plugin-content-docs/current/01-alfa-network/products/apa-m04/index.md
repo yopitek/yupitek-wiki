@@ -88,7 +88,7 @@ iw dev wlan0 link
 
 | 搭配 | 结果 |
 |---|---|
-| 所有 ALFA USB 网卡适配器（RP-SMA 天线端口） | ✅ 直接拧上 |
+| 带 RP-SMA 天线端口的 ALFA USB 网卡（AXER、EACS 除外） | ✅ 直接拧上 |
 | 仅 2.4 GHz 的网卡适配器 / 接入点 | ✅ 理想 |
 | 仅 5 GHz 的链路 | ❌ 频段错误——使用 [APA-M25](/alfa-network/products/apa-m25/) |
 | 集成天线的网卡适配器（AXER、EACS） | ❌ 没有可连接的 RP-SMA 端口 |

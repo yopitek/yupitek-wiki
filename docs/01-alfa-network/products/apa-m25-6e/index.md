@@ -71,22 +71,23 @@ iw dev wlan0 info | grep channel
 
 ```text
 signal: -48 dBm
-channel 37 (6115 MHz)
+channel 37 (6135 MHz)
 ```
 
-The `6115 MHz` line proves you are on the **6 GHz band** — the whole point of this antenna. Aim the panel until `signal` stops improving.
+The `6135 MHz` line proves you are on the **6 GHz band** — the whole point of this antenna. Aim the panel until `signal` stops improving.
 
 ## Advanced usage
 
 - **6 GHz link pairs**: for a full 6 GHz point-to-point link you need 6 GHz-capable gear on both ends (AP + client). The panel is the client-side piece.
 - **Polarization discipline**: keep both ends' polarization vertical (or both horizontal). A 90° mismatch wastes more gain than the antenna provides.
-- **Lab experiments**: use the panel with monitor mode to focus a capture field down one direction — great for wireless-communication coursework.
+- **Lab experiments**: use the panel with monitor mode to focus a capture field down one direction — great for wireless-communication coursework. Note that on the AWUS036AXML monitor reception is weak and packet injection failed on stock kernel 6.17; for capture work pair a panel with an adapter that has strong monitor mode (e.g. AWUS036ACH or AWUS036AX).
 
 ## Compatibility
 
 | With | Result |
 |---|---|
-| AWUS036AXML (6 GHz radio, RP-SMA) | ✅ Perfect match — unlocks 6 GHz range |
+| AWUS036AXML (6 GHz radio, RP-SMA) | ✅ Perfect match — unlocks 6 GHz range (6 GHz tested working on GX10) |
+| AWUS036AXM (RP-SMA) | ⚠️ Works on 2.4/5 GHz; 6 GHz was not tested on the AXM |
 | Any ALFA adapter with RP-SMA antenna ports | ✅ Works (2.4/5 GHz) |
 | 6 GHz-only gear (Wi-Fi 6E APs) | ✅ Designed for it |
 | Adapters with integrated antennas (AXER, EACS) | ❌ No connector to attach to |

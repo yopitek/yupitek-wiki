@@ -64,13 +64,13 @@ iw dev wlan0 link
 iw dev wlan0 info | grep channel
 ```
 
-**預期輸出**：連結啟動並有訊號數值；在 6E/7 裝置上頻道那一行顯示 **6 GHz 頻率**（例如 `channel 37 (6115 MHz)`）。檢查你的閘道器使用的每個頻段上的訊號——三個都應該維持合理數字。
+**預期輸出**：連結啟動並有訊號數值；在 6E/7 裝置上頻道那一行顯示 **6 GHz 頻率**（例如 `channel 37 (6135 MHz)`）。檢查你的閘道器使用的每個頻段上的訊號——三個都應該維持合理數字。
 
 ## 進階使用
 
 - **工業閘道器**：搭配支援 6 GHz 的無線電模組，並在機櫃的實際工作溫度下做現場測試。
 - **WiFi 7 上的多連結（MLO）設定**：三頻偶極天線讓三條連結共存於一支天線上——不需要每頻段一支天線農場。
-- **機器人野外連結**：搭配 [Unitree](/alfa-network/hardware/unitree/) 或 [Jetson](/alfa-network/hardware/jetson/) 整合，並把天線纜線佈線到機器人的無線電。
+- **機器人野外連結**：搭配 [Unitree](/alfa-network/hardware/unitree/) 或 [Jetson](/alfa-network/hardware/jetson/) 整合，並把天線纜線佈線到機器人的無線電（Unitree 與 Jetson 皆未實測）。
 
 ## 相容性
 

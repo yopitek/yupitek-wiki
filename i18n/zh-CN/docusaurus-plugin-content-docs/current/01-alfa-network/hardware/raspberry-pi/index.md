@@ -10,7 +10,9 @@ keywords: [Raspberry Pi ALFA, 树莓派 无线网卡, AWUS036ACH 树莓派, AWUS
 
 # ALFA 无线网卡在 Raspberry Pi 上（3 / 4 / 5）
 
-> **一句话定位**：Raspberry Pi 内置的 Wi-Fi 只有单天线，信号弱、范围小。装上一支 ALFA 无线网卡，就能把 Pi 变成一台平价的 Wi-Fi 实验室工作站——拿来截取数据包做课堂作业，或当成一个真正有信号范围的无线基地台。
+> **一句话定位**：Raspberry Pi 内置的 Wi-Fi 只有单天线，信号弱、范围小。装上一支 ALFA 无线网卡，就能把 Pi 变成一台平价的 Wi-Fi 实验室工作站——拿来截取数据包做课堂作业，或当成一个真正有信号范围的无线接入点。
+
+> ⚠️ **实测范围**：Yupitek 的 ALFA 兼容性测试仅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上进行，**Raspberry Pi尚未实测**。本页关于驱动是否可用的说明，是依平台内核版本与各驱动进入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推断，并非在该硬件上验证。请仅在您自己拥有或已获授权的网络上测试。
 
 ## 这篇文章适合你吗？
 
@@ -20,7 +22,7 @@ keywords: [Raspberry Pi ALFA, 树莓派 无线网卡, AWUS036ACH 树莓派, AWUS
 - **读完你可以做到**：
   1. 让 ALFA 无线网卡在 Pi 上被正确辨识
   2. 用它做监听模式数据包截取，并在 Wireshark 上分析
-  3. 把 Pi 变成一台真正的 Wi-Fi 基地台（Access Point）
+  3. 把 Pi 变成一台真正的 Wi-Fi 接入点（Access Point）
 
 ---
 
@@ -29,19 +31,19 @@ keywords: [Raspberry Pi ALFA, 树莓派 无线网卡, AWUS036ACH 树莓派, AWUS
 Raspberry Pi 内置的无线网卡是单天线设计，信号本来就不强——拿来 SSH 远程连接没问题，但要做数据包分析（嗅探）或帮整个房间提供 Wi-Fi，内置网卡完全不够力。外置一支 ALFA 无线网卡可以解决这两个问题：
 
 - **监听模式（Monitor Mode）实验室工作站**：搭配内置于 Linux 内核的芯片，插入就能直接开始截取数据包，很适合做 Wireshark 课堂作业——插入、`airmon-ng start`、开始截取。
-- **访问点（hostapd Access Point）**：搭配外置天线的高功率网卡（如 AWUS036ACM/ACH），可以把 Pi 变成一台真正有效范围的 Wi-Fi 基地台，信号范围比内置网卡好很多。
-- **双无线电技巧**：让 Pi 内置的网卡负责「连上网络」，外置的 ALFA 网卡负责「当基地台广播」——一台 Pi，同时服务两个网络。
+- **访问点（hostapd Access Point）**：搭配外置天线的高功率网卡（如 AWUS036ACM/ACH），可以把 Pi 变成一台真正有效范围的 Wi-Fi 接入点，信号范围比内置网卡好很多。
+- **双无线电技巧**：让 Pi 内置的网卡负责「连上网络」，外置的 ALFA 网卡负责「当接入点广播」——一台 Pi，同时服务两个网络。
 
 > 📘 **名词小教室**
 > - **监听模式（Monitor Mode）**：让网卡把空气中飞过的所有无线数据包都抓下来，而不只是接收「要给自己的」数据包，是做无线网络分析的基础模式。
-> - **hostapd**：一套可以让 Linux 设备变成 Wi-Fi 基地台（Access Point）的软件，装好后你的 Pi 就能像家用路由器一样广播出一个 Wi-Fi 网络让别人连。
+> - **hostapd**：一套可以让 Linux 设备变成 Wi-Fi 接入点（Access Point）的软件，装好后你的 Pi 就能像家用路由器一样广播出一个 Wi-Fi 网络让别人连。
 > - **DHCP / NAT**：DHCP 是自动配发 IP 地址给连上你 Pi 的设备的机制；NAT 则是让这些设备能通过 Pi 分享到的网络连上网际网络。这两个没设好，别人连得上你的 Wi-Fi 但上不了网。
 
 各主板的硬件差异，会直接影响你能不能顺畅使用高功率网卡：
 
 | 主板  | USB 规格          | 使用注意事项                          |
 | ---- | -------------- | ----------------------------- |
-| Pi 3 | USB 2.0        | 支持机型中最旧的一款；AC433 等级或内置于内核的网卡没问题 |
+| Pi 3 | USB 2.0        | 支持机型中最旧的一款；AC600 等级或内置于内核的网卡没问题 |
 | Pi 4 | USB 2.0（共享总线） | 最受欢迎的选择——用高功率网卡请务必加一个独立供电的 USB Hub |
 | Pi 5 | USB 3.0 + PCIe | 目前最快的 USB 规格；搭配 AC1200/AX1800 等级网卡吞吐量最佳 |
 
@@ -55,9 +57,9 @@ Raspberry Pi 内置的无线网卡是单天线设计，信号本来就不强—�
 - [ ] **前置作业**：已完成 `sudo apt update && sudo apt upgrade`
 - [ ] **ALFA 无线网卡**：监听模式强烈建议选用[内置于内核的芯片机型](/alfa-network/linux-compatibility-matrix/)，安装最省事
 - [ ] **独立供电的 USB Hub**：如果你用的是高功率网卡，务必准备
-- [ ] **驱动进程参考（GitHub）**：
-  - MediaTek MT76 系列驱动（社群维护、含 DKMS，适用 MT7612U / MT7921 系列芯片）：https://github.com/morrownr/mt76
-  - Realtek RTL8812AU 驱动（aircrack-ng 社群维护）：https://github.com/aircrack-ng/rtl8812au
+- [ ] **驱动程序参考（GitHub）**：
+  - MediaTek MT76 系列驱动（社区维护、含 DKMS，适用 MT7612U / MT7921 系列芯片）：https://github.com/morrownr/mt76
+  - Realtek RTL8812AU 驱动（aircrack-ng 社区维护）：https://github.com/aircrack-ng/rtl8812au
 
 ---
 
@@ -74,7 +76,7 @@ iw dev
 
 **预期结果**：你的网卡会出现在 `lsusb` 清单里，并且在 `iw dev` 里看到一个新接口，通常是 `wlan1`（Pi 内置的无线网卡多半是 `wlan0`）。
 
-如果你的 ALFA 网卡是 Realtek 芯片，需要先安装 DKMS 驱动进程：
+如果你的 ALFA 网卡是 Realtek 芯片，是否需要 DKMS 取决于内核版本（EACS 自 6.2、ACH／ACS 自 6.13、AX／AXER 自 6.17 起已内置于 mainline；Pi 的内核版本请以 `uname -r` 为准），内核较旧时再安装 DKMS 驱动程序（下方 repo 适用于 RTL8812AU，即 AWUS036ACH）：
 
 ```bash
 sudo apt install -y git dkms build-essential bc libelf-dev linux-headers-$(uname -r)
@@ -98,17 +100,17 @@ iwconfig wlan1mon
 
 **预期结果**：`wlan1mon  IEEE 802.11  Mode:Monitor`——出现 `Mode:Monitor` 代表监听模式已经成功激活。
 
-把截取到的数据包存成文档，之后拿到笔记本电脑上用 Wireshark 分析：
+把截取到的数据包存成文件，之后拿到笔记本电脑上用 Wireshark 分析：
 
 ```bash
 sudo tcpdump -i wlan1mon -w lab-capture.pcap
 ```
 
-**预期结果**：终端显示 `listening on wlan1mon`，代表正在截取。想结束就按 `Ctrl-C`，然后把 `lab-capture.pcap` 这个文档传到你的笔记本电脑，用 Wireshark 打开分析。
+**预期结果**：终端显示 `listening on wlan1mon`，代表正在截取。想结束就按 `Ctrl-C`，然后把 `lab-capture.pcap` 这个文件传到你的笔记本电脑，用 Wireshark 打开分析。
 
 ---
 
-### 步骤 3：把 Pi 变成一台 Wi-Fi 基地台（hostapd）
+### 步骤 3：把 Pi 变成一台 Wi-Fi 接入点（hostapd）
 
 先安装需要的软件：
 
@@ -157,7 +159,7 @@ sudo systemctl status hostapd --no-pager | head -10
 
 ### 步骤 4：双无线电技巧（高端，可选读）
 
-如果你想让 Pi 内置的 Wi-Fi 继续当作管理用的连接（例如 SSH 远程），同时让 ALFA 网卡专心当基地台，可以这样设置：
+如果你想让 Pi 内置的 Wi-Fi 继续当作管理用的连接（例如 SSH 远程），同时让 ALFA 网卡专心当接入点，可以这样设置：
 
 ```bash
 sudo systemctl stop wpa_supplicant@wlan1 2>/dev/null   # 确保 ALFA 不会去抢连接
@@ -180,7 +182,7 @@ sudo systemctl restart hostapd
 - **解决方法**：先运行 `iw dev` 确认目前的接口名称——Pi 内置网卡通常是 `wlan0`，ALFA 网卡通常是 `wlan1`，但不一定每次都一样，务必先确认再操作。
 
 ### Q3：hostapd 启动失败，出现 `nl80211: Could not configure driver mode`？
-- **原因**：驱动进程没有支持 AP（基地台）模式，或接口正被其他服务占用。
+- **原因**：驱动程序没有支持 AP（接入点）模式，或接口正被其他服务占用。
 - **解决方法**：优先使用内置于内核的 MediaTek 芯片（`mt76` 系列对 AP 模式支持稳定）；并先运行 `sudo airmon-ng stop wlan1mon` 确保接口没有卡在监听模式。
 
 ### Q4：用户连上我的 Wi-Fi，但上不了网？
@@ -204,8 +206,8 @@ sudo systemctl restart hostapd
 - [ALFA 无线网卡在 Kali Linux 上——监听模式与数据包注入](/alfa-network/linux-setup-kali/)——监听模式的延伸操作
 - [ALFA 无线网卡在 NVIDIA Jetson 上（Orin Nano / NX）](/alfa-network/hardware/jetson/)——规格更大的嵌入式主机集成方式
 - [词汇表](/getting-started/glossary)——监听模式、hostapd 等名词的完整解释
-- MediaTek MT76 系列驱动（社群维护，含 DKMS）：https://github.com/morrownr/mt76
-- Realtek RTL8812AU 驱动（aircrack-ng 社群维护）：https://github.com/aircrack-ng/rtl8812au
+- MediaTek MT76 系列驱动（社区维护，含 DKMS）：https://github.com/morrownr/mt76
+- Realtek RTL8812AU 驱动（aircrack-ng 社区维护）：https://github.com/aircrack-ng/rtl8812au
 - [hostapd 官方文档](https://w1.fi/hostapd/)——官方 AP 守护程序说明
 
-**标签：** `alfa` `raspberry-pi` `hostapd` `存取點` `监听模式` `新手指南`
+**标签：** `alfa` `raspberry-pi` `hostapd` `接入点` `监听模式` `新手指南`

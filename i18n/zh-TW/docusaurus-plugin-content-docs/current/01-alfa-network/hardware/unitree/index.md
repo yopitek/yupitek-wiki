@@ -12,6 +12,8 @@ keywords: [Unitree ALFA, 宇樹 機器狗 無線網路卡, Go2 遙測, AWUS036AX
 
 > **一句話定位**：Unitree 機器狗（Go2、B2、A1）機載的是 NVIDIA Jetson，但隨附的內建 Wi-Fi 天線很弱。裝上一支搭配外接天線的 ALFA 無線網路卡，能把機器人的無線控制連結範圍，從「只能跟著你在房間裡走」變成「在場地另一端也能穩定指揮它」。
 
+> ⚠️ **實測範圍**：Yupitek 的 ALFA 相容性測試僅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上進行，**Unitree 機器人尚未實測**。本頁關於驅動是否可用的說明，是依平台核心版本與各驅動進入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推論，並非在該硬體上驗證。機器人上的實際距離與延遲都未量測。請僅在您自己擁有或已獲授權的網路上測試。
+
 ## 這篇文章適合你嗎？
 
 - **難度**：中階（需要會用 SSH 連線操作機載電腦）
@@ -34,7 +36,7 @@ keywords: [Unitree ALFA, 宇樹 機器狗 無線網路卡, Go2 遙測, AWUS036AX
 
 1. **優先用 5 GHz 頻段**：機器人上的 2.4 GHz 頻段很容易被馬達與其他裝置干擾，能避開就避開。
 2. **外接天線位置很重要**：無線網路卡的外接天線效果比機器人機殼上任何內建天線都好，而且你可以把它擺在金屬機殼上方、訊號不會被遮蔽的位置。
-3. **依需求選網路卡**：入門選 [AWUS036ACM](/alfa-network/products/awus036acm/)（相容性最廣）；想要 Wi-Fi 6 加藍牙選 [AWUS036AXM](/alfa-network/products/awus036axm/)；想要 6 GHz 頻段選 [AWUS036AXML](/alfa-network/products/awus036axml/)。
+3. **依需求選網路卡**：入門選 [AWUS036ACM](/alfa-network/products/awus036acm/)（相容性最廣）；想要 Wi-Fi 6 可選 [AWUS036AXM](/alfa-network/products/awus036axm/)（藍牙未實測；實測藍牙可用的是 AXML）；想要 6 GHz 頻段選 [AWUS036AXML](/alfa-network/products/awus036axml/)。
 
 > 📘 **名詞小教室**
 > - **遙測（Telemetry）**：機器人把自己身上的感測器資料（影像、位置、姿態等）即時回傳給你的過程，方便你在遠端掌握機器人的狀態。
@@ -178,7 +180,7 @@ iperf3 -c <機器人IP> -u -b 100M -t 10
 ## 參考資料與延伸閱讀
 
 - [ALFA 無線網路卡在 NVIDIA Jetson 上（Orin Nano / NX）](/alfa-network/hardware/jetson/)——同樣的核心版本判斷邏輯，內容更深入
-- [AWUS036AXM 產品頁面](/alfa-network/products/awus036axm/)——適合機器人控制連結的 Wi-Fi 6 + 藍牙機型
+- [AWUS036AXM 產品頁面](/alfa-network/products/awus036axm/)——適合機器人控制連結的 Wi-Fi 6 機型（藍牙未實測）
 - [ALFA 無線網路卡在 Ubuntu 上的完整設定指南](/alfa-network/linux-setup-ubuntu/)——驅動安裝細節
 - [詞彙表](/getting-started/glossary)——遙測、EMI 等名詞的完整解釋
 - MediaTek MT76 系列驅動（社群維護，含 DKMS）：https://github.com/morrownr/mt76

@@ -10,7 +10,9 @@ keywords: [OpenWrt, GL.iNet, AWUS036AXML, AWUS036ACM, kmod-mt7921u, mt76, active
 
 # OpenWrt 路由器 × ALFA Network 配置与限制指南
 
-> **一句话定位**：OpenWrt 路由器（包括 GL.iNet 系列、x86 软路由等）可以透过 USB 外接 ALFA 无线网卡，多出一组独立的无线频段，拿来当第二组无线中继、广播热点，或是无线安全监听节点。这篇文章教你怎么装、也老实告诉你目前有哪些已知的限制。
+> **一句话定位**：OpenWrt 路由器（包括 GL.iNet 系列、x86 软路由等）可以通过 USB 外接 ALFA 无线网卡，多出一组独立的无线频段，拿来当第二组无线中继、广播热点，或是无线安全监听节点。这篇文章教你怎么装、也老实告诉你目前有哪些已知的限制。
+
+> ⚠️ **实测范围**：Yupitek 的 ALFA 兼容性测试仅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上进行，**OpenWrt 路由器（含 GL.iNet）尚未实测**。本页关于驱动是否可用的说明，是依平台内核版本与各驱动进入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推断，并非在该硬件上验证。在 GX10／kernel 6.17 的实测中，AWUS036AXML／AXM 的监听表现偏弱，且数据包注入失败（`aireplay-ng` 显示 `Found 0 APs`／`No Answer`，主因是 kernel 6.16 起 mac80211 chanctx 的退化，并非芯片限制）；因此较适合一般连接、AP 与被动捕获。请仅在您自己拥有或已获授权的网络上测试。
 
 ## 这篇文章适合你吗？
 
@@ -48,7 +50,7 @@ OpenWrt 路由器（尤其是小型的 GL.iNet 系列）内建的无线模块数
 | **AWUS036ACM** | MediaTek MT7612U | ✅ 官方软件包库有提供 | ✅ 官方软件包库有提供 | `kmod-mt76x2u` |
 | **AWUS036AXML** | MediaTek MT7921AUN | ✅ 官方软件包库有提供（有已知限制，见下方） | ✅ 官方软件包库有提供（有已知限制，见下方） | `kmod-mt7921u` |
 | **AWUS036ACHM** | MediaTek MT7610U | ✅ 官方软件包库有提供 | ✅ 官方软件包库有提供 | `kmod-mt76x0u` |
-| **AWUS036ACH** | Realtek RTL8812AU | ✅ 官方软件包库有提供（社群维护的驱动） | ✅ 官方软件包库有提供（社群维护的驱动） | `kmod-rtl8812au-ct` |
+| **AWUS036ACH** | Realtek RTL8812AU | ✅ 官方软件包库有提供（社区维护的驱动） | ✅ 官方软件包库有提供（社区维护的驱动） | `kmod-rtl8812au-ct` |
 
 上表只标示驱动软件包是否存在于 OpenWrt 官方软件包库（已对照 downloads.openwrt.org 确认）。实际在特定路由器上的运作情形、监听与注入支援度，取决于硬件平台与内核版本，请参阅 [openwrt.org](https://openwrt.org/) 与 [Table of Hardware](https://openwrt.org/toh/start)。
 
@@ -58,7 +60,7 @@ OpenWrt 路由器（尤其是小型的 GL.iNet 系列）内建的无线模块数
 
 ## 你需要准备的东西
 
-- [ ] **硬件**：一台已刷好 OpenWrt 的路由器（含 GL.iNet 系列），且可透过 SSH 连接管理
+- [ ] **硬件**：一台已刷好 OpenWrt 的路由器（含 GL.iNet 系列），且可通过 SSH 连接管理
 - [ ] **ALFA 无线网卡**：依上表选择
 - [ ] **驱动程序参考（GitHub）**：
   - MediaTek MT76 系列驱动原始码（OpenWrt 官方维护，`kmod-mt7921u`、`kmod-mt76x2u` 等软件包的来源）：https://github.com/openwrt/mt76
@@ -67,7 +69,7 @@ OpenWrt 路由器（尤其是小型的 GL.iNet 系列）内建的无线模块数
 
 ## Step-by-Step 设置教学
 
-透过 SSH 登入路由器终端，依序执行（以下命令使用 `opkg`；25.12 等较新版本可能改用 `apk`，请至 openwrt.org 确认）：
+通过 SSH 登入路由器终端，依序执行（以下命令使用 `opkg`；25.12 等较新版本可能改用 `apk`，请至 openwrt.org 确认）：
 
 ### 步骤 1：更新软件包库索引
 
@@ -95,7 +97,7 @@ opkg install kmod-mt76x2u kmod-mt76-core wireless-tools usbutils
 
 ---
 
-### 步骤 3：重新侦测无线硬件并套用设置
+### 步骤 3：重新检测无线硬件并套用设置
 
 ```bash
 wifi config
@@ -114,7 +116,7 @@ wifi config
 - **状态**：该 Issue 在上游已标示为关闭；实际行为可能随内核版本而异，请至 Issue 页面确认最新情况。
 - **实务建议**：
   - 如果你只需要**单纯撷取数据包**（被动监听，例如用 Kismet 或 tcpdump），请使用一般监听模式。
-  - Issue 中指出主动监听在 `mt76x0u` 与 `mt76x2u` 上可运作；需要主动监听时，建议改用 **AWUS036ACM**（`mt76x2u`）或 **AWUS036ACHM**（`mt76x0u`）。
+  - Issue 中指出主动监听在 `mt76x0u` 与 `mt76x2u` 上可运作；需要主动监听时，可以改试 **AWUS036ACM**（`mt76x2u`）或 **AWUS036ACHM**（`mt76x0u`）；在 GX10 的实测中，ACM 的主动监听可设置但 ACK 未验证，ACHM 仅部分可用，两者都尚未在 OpenWrt 上实测。
 
 ### 限制 2：6GHz 频段的支援情形
 
@@ -129,7 +131,7 @@ wifi config
 - **解决方法**：重新执行 `opkg update` 确认软件包库索引是最新的，再重新执行步骤 2、3；也可以用 `dmesg | grep -i mt76` 或 `dmesg | grep -i mt7921` 检查内核有没有正确加载驱动。
 
 ### Q2：AWUS036ACH（Realtek 芯片）可以用吗？
-- **说明**：OpenWrt 官方软件包库有提供 `kmod-rtl8812au-ct`（社群维护的 RTL8812AU 驱动）。监听与注入等功能是否可用，请参阅 [openwrt.org](https://openwrt.org/)；若你需要已知稳定的方案，优先考虑 AWUS036ACM。
+- **说明**：OpenWrt 官方软件包库有提供 `kmod-rtl8812au-ct`（社区维护的 RTL8812AU 驱动）。监听与注入等功能是否可用，请参阅 [openwrt.org](https://openwrt.org/)；若你需要已知稳定的方案，优先考虑 AWUS036ACM。
 
 ---
 

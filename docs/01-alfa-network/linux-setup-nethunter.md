@@ -17,8 +17,11 @@ keywords: [NetHunter ALFA, Android OTG Wi-Fi adapter, AWUS036ACM NetHunter, Kali
 
 NetHunter is Kali Linux running inside a **chroot** on your Android device. The phone's kernel still does the real work — and phone kernels are *not* the Ubuntu kernel:
 
-1. **In-kernel drivers**: a chipset supported by mainline Linux (MT7612U, MT7610U, MT7921AUN) usually works, because NetHunter's kernel images include the mainline `mt76` driver family.
-2. **DKMS drivers**: compiling Realtek DKMS drivers inside an Android chroot is painful — phone kernels rarely ship the headers and toolchain the build needs. The RTL8812AU *can* work on some devices, but treat it as a project, not a setup step.
+1. **In-kernel drivers**: a chipset supported by mainline Linux usually works once the phone kernel is new enough: MT7612U (ACM) and MT7610U (ACHM) from 4.19, MT7921AU(N) (AXM / AXML) from 5.18, RTL8821CU (EACS) from 6.2, RTL8812AU (ACH) and RTL8811AU (ACS) from 6.13, RTL8832BU (AX / AXER) from 6.17. Whether a given NetHunter kernel image includes these drivers depends on the phone and was not tested by us.
+2. **DKMS drivers**: only needed when the phone kernel is older than the Realtek version above, and compiling them inside an Android chroot is painful — phone kernels rarely ship the headers and toolchain the build needs. The RTL8812AU *can* work on some devices, but treat it as a project, not a setup step.
+
+> **Note**: Kali/NetHunter were not tested on real hardware. The driver advice here is decided by kernel version only.
+
 
 **Rule of thumb**: for NetHunter, prefer the **AWUS036ACM (MT7612U)**. It is the community's default NetHunter adapter for a reason.
 
@@ -41,17 +44,17 @@ sequenceDiagram
 - [ ] Rooted Android phone with **Kali NetHunter** installed (the official NetHunter image, or the **NetHunter Store** app on a rooted device)
 - [ ] OTG cable (USB-C or micro-USB depending on your phone) — ideally with external power for high-power adapters
 - [ ] ALFA adapter with an in-kernel chipset: **AWUS036ACM / AWUS036ACHM / AWUS036AXM / AWUS036AXML**
-- [ ] A phone with a kernel new enough for your chipset (kernel 5.18+ for the MT7921AUN models)
+- [ ] A phone with a kernel new enough for your chipset (4.19+ for ACM / ACHM, 5.18+ for the MT7921AUN models; Realtek models need 6.2+ for EACS, 6.13+ for ACH / ACS, 6.17+ for AX / AXER, otherwise DKMS)
 
 ## Step 1: Check your kernel
 
-Some chipsets need a recent kernel. Open a terminal in the NetHunter app (or adb shell) and run:
+Some chipsets need a recent kernel (see the versions above). Open a terminal in the NetHunter app (or adb shell) and run:
 
 ```bash
 uname -r
 ```
 
-**Expected output**: something like `4.19.157-perf+` (older phones) or `5.15.xx-gki` (newer). For the MT7921AUN adapters you need **5.18 or newer**; the MT7612U works fine on 4.19.
+**Expected output**: something like `4.19.157-perf+` (older phones) or `5.15.xx-gki` (newer). For the MT7921AUN adapters you need **5.18 or newer**; the MT7612U driver has been in mainline since 4.19.
 
 > **You might be wondering** — *"Do I need a specific NetHunter kernel?"* Yes — the NetHunter team builds kernels for a specific list of supported devices. Check the [official device list](https://www.kali.org/docs/nethunter/) first: an unsupported phone means no monitor-mode-capable kernel, and the adapter will never leave managed mode no matter what you do.
 
@@ -92,10 +95,9 @@ The interface is visible inside the chroot — this is the moment most OTG setup
 
 ## Step 4: Monitor mode
 
-Inside the Kali terminal (you need root — NetHunter runs as root by default):
+Inside the Kali terminal (you need root — NetHunter runs as root by default). Do **not** run `airmon-ng check kill`; it kills NetworkManager and the network connection:
 
 ```bash
-airmon-ng check kill
 airmon-ng start wlan0
 iwconfig
 ```
@@ -108,11 +110,11 @@ iwconfig
 aireplay-ng --test wlan0mon
 ```
 
-**Expected output**: `30/30: 100%` and `Injection is working!`
+**Expected output**: `30/30: 100%` and `Injection is working!` (not tested by us on Android). The MT7921 cards (AWUS036AXM / AXML) failed injection on stock kernel 6.17 in our desktop tests, so do not expect this step to pass with them.
 
 ## What about Realtek chipsets?
 
-The **RTL8812AU (AWUS036ACH)** deserves an honest paragraph: it *can* work on NetHunter devices whose kernel includes a pre-built `8812au` module (some community kernels do), but **do not plan your course project around it**. DKMS compilation inside the Android chroot fails on most phones because the phone kernel headers are absent. If your only adapter is Realtek, test on a laptop first — the [Kali guide](/alfa-network/linux-setup-kali/) works there — and treat the phone as a bonus.
+The **RTL8812AU (AWUS036ACH)** deserves an honest paragraph: it is in the mainline kernel from 6.13 (rare on phones), and on older phone kernels it *can* work on NetHunter devices whose kernel includes a pre-built `8812au` module (some community kernels do), but **do not plan your course project around it**. DKMS compilation inside the Android chroot fails on most phones because the phone kernel headers are absent. If your only adapter is Realtek, test on a laptop first — the [Kali guide](/alfa-network/linux-setup-kali/) works there — and treat the phone as a bonus.
 
 ## Common errors (FAQ)
 

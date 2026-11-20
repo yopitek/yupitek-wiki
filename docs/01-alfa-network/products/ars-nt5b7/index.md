@@ -66,13 +66,13 @@ iw dev wlan0 link
 iw dev wlan0 info | grep channel
 ```
 
-**Expected output**: link up with a signal value; on 6E/7 gear the channel line shows a **6 GHz frequency** (e.g. `channel 37 (6115 MHz)`). Check the signal on each band your gateway uses — all three should hold reasonable numbers.
+**Expected output**: link up with a signal value; on 6E/7 gear the channel line shows a **6 GHz frequency** (e.g. `channel 37 (6135 MHz)`). Check the signal on each band your gateway uses — all three should hold reasonable numbers.
 
 ## Advanced usage
 
 - **Industrial gateways**: pair with a 6 GHz-capable radio module and field-test at the enclosure's actual operating temperature.
 - **Multi-link (MLO) setups on WiFi 7**: the tri-band dipole lets all three links coexist on one antenna — no per-band antenna farm needed.
-- **Robot field links**: combine with a [Unitree](/alfa-network/hardware/unitree/) or [Jetson](/alfa-network/hardware/jetson/) integration and route the antenna cable to the robot's radio.
+- **Robot field links**: combine with a [Unitree](/alfa-network/hardware/unitree/) or [Jetson](/alfa-network/hardware/jetson/) integration and route the antenna cable to the robot's radio (Unitree and Jetson were not tested by us).
 
 ## Compatibility
 
