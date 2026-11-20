@@ -42,7 +42,7 @@ keywords: [AWUS036EACS, RTL8821CU, rtw88_8821cu, AC600 藍牙無線網路卡, na
 |---|---|---|
 | Monitor | ✅ | ✅ |
 | Injection | ✅ 100% | ✅ 100% |
-| AP 熱點 | ✅ | ✅（80 MHz） |
+| AP 熱點 | ✅ | ✅（802.11a、20 MHz 實測；VHT80 未測） |
 | WPA3-SAE（AP 端） | ✅ | 未測試 |
 
 | 進階功能 | 結果 |

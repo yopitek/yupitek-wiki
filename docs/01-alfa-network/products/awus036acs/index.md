@@ -41,7 +41,7 @@ keywords: [AWUS036ACS, RTL8811AU, rtw88_8821au, pocket adapter, portable Kali ad
 |---|---|---|
 | Monitor | ✅ | ✅ |
 | Injection | ✅ 100 % | ✅ 96 % |
-| AP | ✅ | ✅ (channel width not confirmed) |
+| AP | ✅ | ✅ (802.11a, 20 MHz tested; VHT80 not tested) |
 | WPA3-SAE (AP side) | Not tested | ✅ |
 
 | Advanced feature | Result |

@@ -20,7 +20,7 @@ keywords: [RTL8821CU 驱动, AWUS036EACS, rtw88_8821cu, rtl8821cu Linux, AC600 �
 | 固件 | 24.11.0（H2C version 12） |
 | Monitor 2.4 GHz / 5 GHz | ✅ / ✅（强） |
 | 注入 2.4 GHz / 5 GHz | ✅ 100% / ✅ 100%（deauth 实测收到 79 ACKs） |
-| AP 2.4 GHz / 5 GHz | ✅ / ✅（80 MHz） |
+| AP 2.4 GHz / 5 GHz | ✅ / ✅（5 GHz 为 802.11a、20 MHz 实测；VHT80 未测） |
 | WPA3-SAE（AP 端） | ✅（2.4 GHz 实测） |
 | WPA handshake 抓取 | ✅ 端到端（`.22000`） |
 | VIF | 🟡 被动 monitor 可与 managed 在同一信道并存；不支持独立的双 VIF |
