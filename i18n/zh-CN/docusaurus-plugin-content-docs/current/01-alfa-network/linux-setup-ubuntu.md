@@ -3,7 +3,7 @@ slug: linux-setup-ubuntu
 id: alfa-linux-setup-ubuntu
 title: ALFA 网卡适配器在 Ubuntu 上——完整设置指南
 sidebar_position: 4
-description: 每一款 ALFA Wi-Fi 网卡适配器的逐步 Ubuntu 设置——内核内置芯片组（MT7612U、MT7610U、MT7921AUN）即插即用，Realtek 芯片组（RTL8812AU、RTL8811AU、RTL8832BU）DKMS 安装。
+description: 每一款 ALFA Wi-Fi 网卡适配器的逐步 Ubuntu 设置——kernel ≥ 6.17 时全部 9 款网卡内核内置、即插即用（Ubuntu 24.04 + kernel 6.17 实测），每款网卡各有最低内核版本；内核低于该版本的 Realtek 芯片组才需要 DKMS 安装。
 tags: [alfa, ubuntu, dkms, 驱动程序, 设置]
 keywords: [ALFA Ubuntu, 安装 RTL8812AU Ubuntu, MT7612U Ubuntu, DKMS Ubuntu, AWUS036ACM Ubuntu]
 ---
@@ -11,20 +11,22 @@ keywords: [ALFA Ubuntu, 安装 RTL8812AU Ubuntu, MT7612U Ubuntu, DKMS Ubuntu, AW
 # ALFA 网卡适配器在 Ubuntu 上——完整设置指南
 
 > **学习目标（Learning goal）**：学完本指南，你的 ALFA 网卡适配器将在 Ubuntu 中可见（`iw dev`）、能连接 Wi-Fi，并且——对于受支持的芯片组——能够切换进监听模式。
-> **适用对象**：初学者–中级 ｜ **前置需求**：Ubuntu 20.04+（Wi-Fi 6E 型号需要 22.04+）、网络连接（安装软件包需要！），以及你的 ALFA 网卡适配器。
+> **适用对象**：初学者–中级 ｜ **前置需求**：Ubuntu 24.04（GA 内核 6.8 涵盖 ACM、ACHM、AXM、AXML、EACS；HWE 6.14 再加上 ACH、ACS；AX 和 AXER 需要 kernel 6.17 或更新；实测：Ubuntu 24.04 LTS ARM64、kernel 6.17.0-1014-nvidia）；内核低于该型号内置版本时（EACS < 6.2、ACH / ACS < 6.13、AX / AXER < 6.17）另需为 Realtek 型号安装 DKMS；以及你的 ALFA 网卡适配器。
 
 ## 概念：两类驱动程序
 
-在碰终端之前，先理解*为什么*不同网卡适配器的设置不同。存在两个世界：
+在碰终端之前，先理解*为什么*设置取决于你的内核版本。现在是这样的两个世界：
 
-1. **内核内置芯片组（MediaTek）**——驱动程序已经编译进 Ubuntu。插上 → 就能用。这涵盖 **MT7612U**（AWUS036ACM）、**MT7610U**（AWUS036ACHM）和 **MT7921AUN**（AWUS036AXM / AWUS036AXML，需要 Ubuntu 22.04+ / 内核 5.18+）。
-2. **DKMS 芯片组（Realtek）**——驱动程序不在内核中，所以你需要编译一次，之后 **DKMS** 会在每次内核更新后保持重建。这涵盖 **RTL8812AU**（AWUS036ACH）、**RTL8811AU**（AWUS036ACS）和 **RTL8832BU**（AWUS036AX / AWUS036AXER）。
+1. **kernel ≥ 6.17：全部内置**（各型号最低版本：ACM / ACHM 4.19、AXM / AXML 5.18、EACS 6.2、ACH / ACS 6.13、AX / AXER 6.17）——9 款网卡的驱动程序都已经在内核里，插上 → 就能用，不需要 DKMS（本指南在 ASUS GX10、Ubuntu 24.04 LTS ARM64、kernel 6.17.0-1014-nvidia 上实测）。MediaTek 系列更早就内置：**MT7612U**（AWUS036ACM）、**MT7610U**（AWUS036ACHM）自 4.19，**MT7921AU / MT7921AUN**（AWUS036AXM / AWUS036AXML）自 5.18（需 Ubuntu 22.04 HWE 或更新版本）。
+2. **旧内核：只有内核低于内置版本的 Realtek 才需要 DKMS**——**RTL8812AU**（AWUS036ACH）、**RTL8811AU**（AWUS036ACS）在 kernel < 6.13，**RTL8832BU**（AWUS036AX / AWUS036AXER）在 kernel < 6.17，**RTL8821CU**（AWUS036EACS）在 kernel < 6.2 时没有内置驱动，需要编译一次，之后 **DKMS** 会在每次内核更新后保持重建。
 
 ```mermaid
 flowchart TD
     A["Plug ALFA adapter into USB port"] --> B{"Which chipset is inside?"}
-    B -->|"MT7612U / MT7610U / MT7921AUN"| C["Driver is in the kernel"]
-    B -->|"RTL8812AU / RTL8811AU / RTL8832BU"| D["Driver is NOT in the kernel"]
+    B -->|"MT7612U / MT7610U / MT7921AU(N)"| C["Driver is in the kernel"]
+    B -->|"Realtek RTL88xx / RTL8821CU"| K{"Kernel new enough?<br/>EACS 6.2 / ACH, ACS 6.13 / AX, AXER 6.17"}
+    K -->|"Yes"| C
+    K -->|"No"| D["Driver is NOT in the kernel"]
     C --> E["Check with iw dev"]
     E --> F["Adapter appears? Done!"]
     D --> G["Install build tools: build-essential dkms git"]
@@ -35,7 +37,7 @@ flowchart TD
 
 ## 前置需求
 
-- [ ] Ubuntu 20.04 或更新（用 `lsb_release -a` 检查）
+- [ ] Ubuntu 24.04 或更新，且内核不低于你的网卡的内置版本（用 `lsb_release -a` 与 `uname -r` 检查；GA 6.8 涵盖 ACM、ACHM、AXM、AXML、EACS；HWE 6.14 再加上 ACH、ACS；GX10 的 6.17 涵盖全部 9 款）；内核更旧时只有 Realtek 型号需要 DKMS
 - [ ] 可用的网络（Wi-Fi 或以太网）以下载软件包
 - [ ] 你的 ALFA 网卡适配器和一根 USB-A 或 USB-C 线缆（AXML 使用 USB-C）
 - [ ] `sudo` 权限
@@ -56,12 +58,19 @@ Bus 001 Device 005: ID 0bda:8812 Realtek Semiconductor Corp. RTL8812AU 802.11a/b
 ```
 
 - `0e8d` = MediaTek（内核内置路径）
-- `0bda` = Realtek（DKMS 路径）
+- `0bda` = Realtek（内核够新时内置：EACS ≥ 6.2、ACH / ACS ≥ 6.13、AX / AXER ≥ 6.17；更旧的内核走 DKMS 路径）
 - 不确定？对照[兼容性矩阵](/alfa-network/linux-compatibility-matrix/)中的芯片组表。
 
-## 第 2 步：内核内置路径（MediaTek——即插即用）
+## 第 2 步：内核内置路径（内核不低于你的网卡的内置版本；MediaTek 更早即可）
 
-如果你的网卡适配器使用 MediaTek 芯片组，无需安装任何东西。验证：
+如果你的内核不低于该网卡的内置版本（或网卡适配器使用 MediaTek 芯片组），无需安装任何东西。验证：
+
+```bash
+uname -r
+dmesg | grep -iE 'mt76|mt7921u|rtw88|rtw89' | tail -5
+```
+
+**预期输出**：`uname -r` 不低于该网卡的内置版本（如 `6.17.0-1014-nvidia`），`dmesg` 可见对应驱动（`mt76x2u`、`mt76x0u`、`mt7921u`、`rtw88_8812au`、`rtw88_8821au`、`rtw88_8821cu`、`rtw89_8852bu`）认领了网卡。再确认接口：
 
 ```bash
 iw dev
@@ -87,9 +96,9 @@ nmcli device wifi connect "MySSID" password "my-passphrase"
 
 跳到[第 4 步：验证一切](#step-4-verify-everything)。
 
-## 第 3 步：DKMS 路径（Realtek——一次性构建）
+## 第 3 步：DKMS 路径（**仅适用内核低于该网卡内置版本的 Realtek**——一次性构建）
 
-对于 RTL8812AU（AWUS036ACH）、RTL8811AU（AWUS036ACS）和 RTL8832BU（AWUS036AX / AXER），构建一次驱动程序。三者遵循相同模式——安装工具、克隆仓库、运行安装程序。
+**内核够新请跳过本步骤**。仅当你的内核低于该网卡的内置版本（`uname -r` 确认；ACH / ACS < 6.13、AX / AXER < 6.17）时，才需要为 RTL8812AU（AWUS036ACH）、RTL8811AU（AWUS036ACS）和 RTL8832BU（AWUS036AX / AXER）构建一次驱动程序（RTL8821CU / AWUS036EACS 的社区驱动不稳定，建议直接升级内核）。三者遵循相同模式——安装工具、克隆仓库、运行安装程序。
 
 ### 3.1 安装构建工具
 
@@ -121,6 +130,7 @@ DKMS: install completed.
 
 ### 3.3 RTL8811AU（AWUS036ACS）
 
+```bash
 cd /opt
 sudo git clone https://github.com/morrownr/8821au-20210708.git
 cd 8821au-20210708
@@ -138,7 +148,7 @@ cd rtl8852bu-20250826
 sudo sh install-driver.sh
 ```
 
-**预期输出**：脚本使用 DKMS 构建并安装驱动（按提示操作，并在要求时重启）——模块名 `8852bu`。注意：此驱动**不**支持监听模式。
+**预期输出**：脚本使用 DKMS 构建并安装驱动（按提示操作，并在要求时重启）——模块名 `8852bu`。注意：这是旧内核（< 6.17）的 DKMS 驱动；kernel ≥ 6.17 的内置 `rtw89_8852bu` 实测支持监听模式与注入。
 
 拔下再插上网卡适配器（或运行 `sudo modprobe <module>`），然后验证：
 
@@ -152,7 +162,7 @@ iw dev
 
 ## 第 4 步：验证一切 {#step-4-verify-everything}
 
-三项命令的健康检查：
+三项命令的健康检查（内置驱动时接口名通常为 `wlx<MAC>`，以下以 `wlan1` 为例）：
 
 ```bash
 ip link show | grep -E "^[0-9]+: wl"        # interface exists?
@@ -175,7 +185,9 @@ phy#1
 
 ## 进阶：监听模式（受支持芯片组）
 
-监听模式让网卡适配器捕获信道上的每一个数据包，而不仅仅是自己的连接。在内核内置芯片组上，这是两条命令的事：
+监听模式让网卡适配器捕获信道上的每一个数据包，而不仅仅是自己的连接。在内核内置驱动上，这是两条命令的事（请勿执行 `airmon-ng check kill`，会关闭 NetworkManager）：
+
+> 实测注意：九款在 2.4 / 5 GHz 均可进监听模式（AX / AXER 接收强）；AXM / AXML（mt7921u）接收较弱，且在 stock kernel 6.17 上封包注入未通过（ACHM 在 5 GHz 仅广播帧）；hcxdumptool 8.x 除 EACS（2.4 GHz 可启动、5 GHz 失败）外，其余网卡均 failed to arm，请改用 airodump-ng + aireplay-ng；ARM64 的 aircrack-ng 需自原始码编译；5 GHz 注入前先 `sudo iw reg set US`，测完还原。
 
 ```bash
 sudo ip link set wlan1 down
@@ -192,11 +204,11 @@ iw dev
 
 | 错误 / 症状 | 原因 | 修复 |
 |---|---|---|
-| `lsusb` 显示网卡适配器但没有 `wlanX` 接口 | DKMS 模块未加载（Realtek） | `sudo modprobe 8812au`（匹配你的芯片组），然后检查 `dmesg \| tail` |
-| `make dkms_install` 失败并提示 "Kernel preparation unnecessary" | 缺少内核头文件 | `sudo apt install linux-headers-$(uname -r)` 然后重试 |
-| `apt upgrade` 后网卡适配器消失 | 内核更新，DKMS 重建静默失败 | `sudo dkms autoinstall` 然后重启 |
-| 重启后 `iw dev` 什么都没有（Realtek） | 模块不在自动加载列表中 | `echo 8812au \| sudo tee /etc/modules-load.d/alfa.conf` |
-| Wi-Fi 6E 网卡适配器（AXML）在 20.04 上检测不到 | 内核太旧，不支持 `mt7921u` | 升级到 Ubuntu 22.04+（内核 5.18+） |
+| `lsusb` 显示网卡适配器但没有 `wlanX` 接口 | 内核低于该网卡内置版本且 DKMS 模块未加载（Realtek）；或 EACS / AXML 重插后 probe 卡死 | 旧内核：`sudo modprobe 8812au`（匹配你的芯片组），再看 `dmesg \| tail`；EACS / AXML 请换一个 USB 口 |
+| （仅旧内核）`make dkms_install` 失败并提示 "Kernel preparation unnecessary" | 缺少内核头文件 | `sudo apt install linux-headers-$(uname -r)` 然后重试 |
+| （仅旧内核，DKMS）`apt upgrade` 后网卡适配器消失 | 内核更新，DKMS 重建静默失败 | `sudo dkms autoinstall` 然后重启 |
+| 重启后 `iw dev` 什么都没有（Realtek，仅旧内核的 DKMS 方式） | 模块不在自动加载列表中 | `echo 8812au \| sudo tee /etc/modules-load.d/alfa.conf` |
+| 网卡适配器（AXM / AXML）在 Ubuntu 20.04 上检测不到 | 内核太旧，不支持 `mt7921u` | 升级内核到 5.18 以上（Ubuntu 22.04 HWE 或更新版本） |
 
 ## 参考
 

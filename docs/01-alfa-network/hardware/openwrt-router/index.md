@@ -12,6 +12,8 @@ keywords: [OpenWrt, GL.iNet, AWUS036AXML, AWUS036ACM, kmod-mt7921u, mt76, active
 
 > **Quick Summary**: Adding an external ALFA USB adapter to an OpenWrt router (or GL.iNet travel router) creates a dedicated second WAN (WISP repeater), high-gain hotspot AP, or wireless sniffer node. This guide covers package installation and openly discloses **upstream GitHub Issue #839 (Active Monitor Driver Crash)** with workarounds.
 
+> **Test scope**: Yupitek's ALFA compatibility testing was done only on ASUS GX10 / Ubuntu 24.04 ARM64 / kernel 6.17. **OpenWrt / GL.iNet routers have not been tested.** Statements on this page about driver availability are inferred from the platform's kernel version and the kernel release in which each driver reached mainline (ACM / ACHM 4.19, AXM / AXML 5.18, EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17), not verified on the hardware. On the GX10 test platform the AWUS036AXML showed weak monitor mode and failed packet injection, so it is suitable for client / AP use and passive capture only. Only test networks you own or are authorized to test.
+
 ## Is This Guide for You?
 
 - **Difficulty**: Intermediate (familiarity with OpenWrt LuCI web interface and SSH terminal).
@@ -45,18 +47,12 @@ OpenWrt routers and x86 soft routers typically have built-in Wi-Fi radios. Conne
 
 The table only states whether the driver package exists in the official OpenWrt package feed (checked against downloads.openwrt.org). Behavior on a specific router, monitor-mode and injection support depend on the target and kernel; see [openwrt.org](https://openwrt.org/) and the [Table of Hardware](https://openwrt.org/toh/start).
 
----|---|---|---|---|
-| **AWUS036ACM** | MediaTek MT7612U | ✅ Fully Supported | ✅ Fully Supported | `kmod-mt76x2u` `mt76-firmware` |
-| **AWUS036AXML** | MediaTek MT7921AUN | ✅ Supported (Known Bug) | ✅ Supported (Known Bug) | `kmod-mt7921u` |
-| **AWUS036ACHM** | MediaTek MT7610U | ✅ Fully Supported | ✅ Fully Supported | `kmod-mt76x0u` |
-| **AWUS036ACH** | Realtek RTL8812AU | ❌ Not in official feed | ❌ Not in official feed | Requires custom SDK compilation |
-
 ---
 
 ## Prerequisites & Checklist
 
 - [ ] OpenWrt router (running OpenWrt 24.10 or 25.12; see the current list at [openwrt.org/releases](https://openwrt.org/releases/start)) with an active internet connection.
-- [ ] ALFA USB adapter: **AWUS036ACM** (Recommended for penetration testing) or **AWUS036AXML** (Recommended for Wi-Fi 6 high throughput).
+- [ ] ALFA USB adapter: **AWUS036ACM** (`mt76x2u`, in-kernel since Linux 4.19) or **AWUS036AXML** (Recommended for Wi-Fi 6 high throughput).
 - [ ] SSH client access to the router.
 
 ---
@@ -103,7 +99,7 @@ Log in to the LuCI Web UI (`Network → Wireless`). You will see a new radio dev
 - **Status**: The issue is marked closed upstream; behavior may differ by kernel version, so check the issue thread for the current state.
 - **Engineering Workaround**:
   1. For **passive packet capture** (Kismet / tcpdump), use AWUS036AXML in regular monitor mode.
-  2. The issue reports active monitor mode working on `mt76x0u` and `mt76x2u`; for active monitor use cases choose **AWUS036ACM** (`mt76x2u`) or **AWUS036ACHM** (`mt76x0u`).
+  2. The issue reports active monitor mode working on `mt76x0u` and `mt76x2u`; for active monitor use cases try **AWUS036ACM** (`mt76x2u`) or **AWUS036ACHM** (`mt76x0u`). On the GX10 test platform, active monitor on the ACM could be set but ACK handling was not verified, and on the ACHM it worked only partially; neither was tested on OpenWrt.
 
 ### ⚠️ 6 GHz Configuration Status
 6 GHz availability on OpenWrt depends on the driver, regulatory domain, and LuCI version. See [openwrt.org](https://openwrt.org/) for the current status.

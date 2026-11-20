@@ -12,6 +12,8 @@ keywords: [Raspberry Pi ALFA, 樹莓派 無線網路卡, AWUS036ACH 樹莓派, A
 
 > **一句話定位**：Raspberry Pi 內建的 Wi-Fi 只有單天線，訊號弱、範圍小。裝上一支 ALFA 無線網路卡，就能把 Pi 變成一台平價的 Wi-Fi 實驗室工作站——拿來擷取封包做課堂作業，或當成一個真正有訊號範圍的無線基地台。
 
+> ⚠️ **實測範圍**：Yupitek 的 ALFA 相容性測試僅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上進行，**Raspberry Pi尚未實測**。本頁關於驅動是否可用的說明，是依平台核心版本與各驅動進入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推論，並非在該硬體上驗證。請僅在您自己擁有或已獲授權的網路上測試。
+
 ## 這篇文章適合你嗎？
 
 - **難度**：入門（會下 Linux 終端機指令即可，不需要寫程式）
@@ -41,7 +43,7 @@ Raspberry Pi 內建的無線網路卡是單天線設計，訊號本來就不強�
 
 | 主機板  | USB 規格          | 使用注意事項                          |
 | ---- | -------------- | ----------------------------- |
-| Pi 3 | USB 2.0        | 支援機型中最舊的一款；AC433 等級或內建於核心的網路卡沒問題 |
+| Pi 3 | USB 2.0        | 支援機型中最舊的一款；AC600 等級或內建於核心的網路卡沒問題 |
 | Pi 4 | USB 2.0（共享匯流排） | 最受歡迎的選擇——用高功率網路卡請務必加一個獨立供電的 USB Hub |
 | Pi 5 | USB 3.0 + PCIe | 目前最快的 USB 規格；搭配 AC1200/AX1800 等級網路卡吞吐量最佳 |
 
@@ -74,7 +76,7 @@ iw dev
 
 **預期結果**：你的網路卡會出現在 `lsusb` 清單裡，並且在 `iw dev` 裡看到一個新介面，通常是 `wlan1`（Pi 內建的無線網路卡多半是 `wlan0`）。
 
-如果你的 ALFA 網路卡是 Realtek 晶片，需要先安裝 DKMS 驅動程式：
+如果你的 ALFA 網路卡是 Realtek 晶片，是否需要 DKMS 取決於核心版本（EACS 自 6.2、ACH／ACS 自 6.13、AX／AXER 自 6.17 起已內建於 mainline；Pi 的核心版本請以 `uname -r` 為準），核心較舊時再安裝 DKMS 驅動程式（下方 repo 適用 RTL8812AU，即 AWUS036ACH）：
 
 ```bash
 sudo apt install -y git dkms build-essential bc libelf-dev linux-headers-$(uname -r)

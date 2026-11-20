@@ -12,6 +12,8 @@ keywords: [Unitree ALFA, 宇树 机器狗 无线网卡, Go2 遥测, AWUS036AXML 
 
 > **一句话定位**：Unitree 机器狗（Go2、B2、A1）机载的是 NVIDIA Jetson，但随附的内置 Wi-Fi 天线很弱。装上一支搭配外置天线的 ALFA 无线网卡，能把机器人的无线控制链接范围，从「只能跟着你在房间里走」变成「在场地另一端也能稳定指挥它」。
 
+> ⚠️ **实测范围**：Yupitek 的 ALFA 兼容性测试仅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上进行，**Unitree 机器人尚未实测**。本页关于驱动是否可用的说明，是依平台内核版本与各驱动进入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推断，并非在该硬件上验证。机器人上的实际距离与延迟都未测量。请仅在您自己拥有或已获授权的网络上测试。
+
 ## 这篇文章适合你吗？
 
 - **难度**：中阶（需要会用 SSH 连接操作机载电脑）
@@ -34,7 +36,7 @@ keywords: [Unitree ALFA, 宇树 机器狗 无线网卡, Go2 遥测, AWUS036AXML 
 
 1. **优先用 5 GHz 频段**：机器人上的 2.4 GHz 频段很容易被马达与其他设备干扰，能避开就避开。
 2. **外置天线位置很重要**：无线网卡的外置天线效果比机器人机壳上任何内置天线都好，而且你可以把它摆在金属机壳上方、信号不会被屏蔽的位置。
-3. **依需求选网卡**：入门选 [AWUS036ACM](/alfa-network/products/awus036acm/)（兼容性最广）；想要 Wi-Fi 6 加蓝牙选 [AWUS036AXM](/alfa-network/products/awus036axm/)；想要 6 GHz 频段选 [AWUS036AXML](/alfa-network/products/awus036axml/)。
+3. **依需求选网卡**：入门选 [AWUS036ACM](/alfa-network/products/awus036acm/)（兼容性最广）；想要 Wi-Fi 6 可选 [AWUS036AXM](/alfa-network/products/awus036axm/)（蓝牙未实测；实测蓝牙可用的是 AXML）；想要 6 GHz 频段选 [AWUS036AXML](/alfa-network/products/awus036axml/)。
 
 > 📘 **名词小教室**
 > - **遥测（Telemetry）**：机器人把自己身上的传感器数据（影像、位置、姿态等）即时回传给你的过程，方便你在远程掌握机器人的状态。
@@ -49,10 +51,10 @@ keywords: [Unitree ALFA, 宇树 机器狗 无线网卡, Go2 遥测, AWUS036AXML 
 - [ ] **地面站笔记本电脑**：运行 Ubuntu 系统（可参考 [Ubuntu 设置指南](/alfa-network/linux-setup-ubuntu/)）
 - [ ] **ALFA 无线网卡**：依需求从上一节挑选型号
 - [ ] **独立供电的 USB Hub**：如果机器人的 USB 供电不足以驱动高功率网卡时使用
-- [ ] **驱动进程参考（GitHub）**：
+- [ ] **驱动程序参考（GitHub）**：
   - MediaTek MT76 系列驱动（适用 MT7612U / MT7921 系列芯片）：https://github.com/morrownr/mt76
   - Unitree 官方 SDK（如果你后续要做更高端的程序化控制）：https://github.com/unitreerobotics/unitree_sdk2
-  - 社群维护的 ROS2 / Wi-Fi 集成项目（想串接 ROS2 生态系可以参考）：https://github.com/abizovnuralem/go2_ros2_sdk
+  - 社区维护的 ROS2 / Wi-Fi 集成项目（想串接 ROS2 生态系可以参考）：https://github.com/abizovnuralem/go2_ros2_sdk
 
 ---
 
@@ -82,13 +84,13 @@ iw dev
 
 **预期结果**：你的网卡出现在 `lsusb` 清单里，同时多出一个新的无线接口（通常是 `wlan1`）。
 
-如果是 Realtek 芯片，请依照 [Ubuntu 设置指南](/alfa-network/linux-setup-ubuntu/) 安装 DKMS 驱动进程；如果是 MediaTek 内置于内核的芯片，这一步做完就直接可以用，不用额外安装任何东西。
+如果是 Realtek 芯片，请依照 [Ubuntu 设置指南](/alfa-network/linux-setup-ubuntu/) 安装 DKMS 驱动程序；如果是 MediaTek 内置于内核的芯片，这一步做完就直接可以用，不用额外安装任何东西。
 
 ---
 
 ### 步骤 3：创建专用的 5 GHz 控制连接
 
-用一个独立的无线基地台（可以是你的地面站笔记本电脑开热点，或另一台路由器）创建专用连接，让机器人的控制链接跟实验室里其他 Wi-Fi 流量分开，互不干扰：
+用一个独立的无线接入点（可以是你的地面站笔记本电脑开热点，或另一台路由器）创建专用连接，让机器人的控制链接跟实验室里其他 Wi-Fi 流量分开，互不干扰：
 
 ```bash
 sudo nmcli device wifi connect "robot-link" password "你的密码"
@@ -103,7 +105,7 @@ iw dev wlan1 link
 iw dev wlan1 info | grep channel
 ```
 
-**预期结果**：显示类似 `channel 36 (5180 MHz)` 这样的 5 GHz 信道信息。如果显示的是 2.4 GHz 的信道，代表你的基地台目前设置成 2.4 GHz，需要回去基地台端切换成 5 GHz。
+**预期结果**：显示类似 `channel 36 (5180 MHz)` 这样的 5 GHz 信道信息。如果显示的是 2.4 GHz 的信道，代表你的接入点目前设置成 2.4 GHz，需要回去接入点端切换成 5 GHz。
 
 ---
 
@@ -161,29 +163,29 @@ iperf3 -c <机器人IP> -u -b 100M -t 10
 - **原因**：机器人的 USB 连接端口供电受限。
 - **解决方法**：改用独立供电的 USB Hub；或尝试插到机器人上不同的 USB 连接端口。
 
-### Q3：MT7921AUN 网卡（AXM / AXML）侦测不到？
+### Q3：MT7921AUN 网卡（AXM / AXML）检测不到？
 - **原因**：机器人上的 JetPack 版本太旧，内核版本低于 5.18。
 - **解决方法**：升级机器人机载电脑的 JetPack 版本；或改用 MT7612U 芯片等级的网卡（如 AWUS036ACM）。
 
 ### Q4：距离拉远之后连接又自动回落到 2.4 GHz？
-- **原因**：基地台或连接设置没有真正锁定 5 GHz 频段。
+- **原因**：接入点或连接设置没有真正锁定 5 GHz 频段。
 - **解决方法**：重新确认步骤 4 的指令有正确运行（`802-11-wireless.band a`），并用步骤 3 的检查指令再次确认信道。
 
 ### Q5：连接量测时出现高延迟的尖峰值？
 - **原因**：目前使用的信道壅塞，附近有其他设备在抢同一个信道。
-- **解决方法**：挑一个比较干净的 5 GHz 信道测试；如果你的基地台支持，也可以考虑改用 6 GHz 频段（需搭配 AWUS036AXML）。
+- **解决方法**：挑一个比较干净的 5 GHz 信道测试；如果你的接入点支持，也可以考虑改用 6 GHz 频段（需搭配 AWUS036AXML）。
 
 ---
 
 ## 参考数据与延伸阅读
 
 - [ALFA 无线网卡在 NVIDIA Jetson 上（Orin Nano / NX）](/alfa-network/hardware/jetson/)——同样的内核版本判断逻辑，内容更深入
-- [AWUS036AXM 产品页面](/alfa-network/products/awus036axm/)——适合机器人控制链接的 Wi-Fi 6 + 蓝牙机型
+- [AWUS036AXM 产品页面](/alfa-network/products/awus036axm/)——适合机器人控制链接的 Wi-Fi 6 机型（蓝牙未实测）
 - [ALFA 无线网卡在 Ubuntu 上的完整设置指南](/alfa-network/linux-setup-ubuntu/)——驱动安装细节
 - [词汇表](/getting-started/glossary)——遥测、EMI 等名词的完整解释
-- MediaTek MT76 系列驱动（社群维护，含 DKMS）：https://github.com/morrownr/mt76
+- MediaTek MT76 系列驱动（社区维护，含 DKMS）：https://github.com/morrownr/mt76
 - Unitree 官方 SDK：https://github.com/unitreerobotics/unitree_sdk2
-- 社群维护的 ROS2 / Wi-Fi 集成项目：https://github.com/abizovnuralem/go2_ros2_sdk
+- 社区维护的 ROS2 / Wi-Fi 集成项目：https://github.com/abizovnuralem/go2_ros2_sdk
 - [Unitree 官方文档](https://support.unitree.com/)——机器人 SDK 与网络设置参考
 
-**标签：** `alfa` `unitree` `机器人` `机器狗` `無線控制` `新手指南`
+**标签：** `alfa` `unitree` `机器人` `机器狗` `无线控制` `新手指南`

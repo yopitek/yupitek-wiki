@@ -10,7 +10,9 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 
 # Orange Pi & Rockchip RK3588 SBC × ALFA Network 集成指南
 
-> **一句话定位**：Orange Pi 5 系列这类搭载 Rockchip RK3588 芯片的单板电脑（SBC）算力很强，常被拿来做边缘运算的无线网关或远程传感节点。但很多人插入 ALFA 网卡后完全抓不到，误以为是硬件不兼容——实际上关键是「你用的系统镜像文档」，这篇文章教你怎么选对系统、正确安装。
+> **一句话定位**：Orange Pi 5 系列这类搭载 Rockchip RK3588 芯片的单板电脑（SBC）算力很强，常被拿来做边缘运算的无线网关或远程传感节点。但很多人插入 ALFA 网卡后完全抓不到，误以为是硬件不兼容——实际上关键是「你用的系统镜像文件」，这篇文章教你怎么选对系统、正确安装。
+
+> ⚠️ **实测范围**：Yupitek 的 ALFA 兼容性测试仅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上进行，**Orange Pi／RK3588 板子尚未实测**。本页关于驱动是否可用的说明，是依平台内核版本与各驱动进入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推断，并非在该硬件上验证。请仅在您自己拥有或已获授权的网络上测试。
 
 ## 这篇文章适合你吗？
 
@@ -18,7 +20,7 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 - **预估时间**：30〜45 分钟（含系统刷机时间）
 - **你会用到的技能**：基本终端操作
 - **读完你可以做到**：
-  1. 搞懂为什么原厂系统插网卡常常抓不到，该用哪一种系统镜像文档
+  1. 搞懂为什么原厂系统插网卡常常抓不到，该用哪一种系统镜像文件
   2. 完成系统刷机与 ALFA 网卡的驱动确认
   3. 掌握供电与散热上要注意的细节，避免长时间使用时断线
 
@@ -30,15 +32,15 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 
 这跟 SBC（单板电脑）这类产品的系统生态有关：
 
-- **原厂 Vendor BSP（Board Support Package）系统**：芯片厂商（这里是 Rockchip）为了让硬件能尽快出货，会先基于一个比较旧的 Linux 内核版本（通常是 5.10）做客制化，让屏幕、GPU 这些硬件能动。这类系统的内核版本比较旧，对新款 USB 网卡芯片的支持往往还没跟上。
-- **Armbian Mainline 系统**：Armbian 是一个第三方维护的社群项目，会持续把 SBC 的支持集成进最新的 Linux 主线内核（目前是 6.x 版本）。内核版本新，代表对新款 USB 网卡芯片（尤其是这几年才推出的 MT7921AUN）的支持也比较完整，通常插入就能直接用。
+- **原厂 Vendor BSP（Board Support Package）系统**：芯片厂商（这里是 Rockchip）为了让硬件能尽快出货，会先基于一个比较旧的 Linux 内核版本（通常是 5.10）做定制化，让屏幕、GPU 这些硬件能动。这类系统的内核版本比较旧，对新款 USB 网卡芯片的支持往往还没跟上。
+- **Armbian Mainline 系统**：Armbian 是一个第三方维护的社区项目，会持续把 SBC 的支持集成进最新的 Linux 主线内核（目前是 6.x 版本）。内核版本新，代表对新款 USB 网卡芯片（尤其是这几年才推出的 MT7921AUN）的支持也比较完整，通常插入就能直接用。
 
 **简单判断方式**：如果你刚买到板子，插入 ALFA 网卡完全没反应，第一件事不是怀疑网卡坏了，是先确认自己现在装的是不是原厂 Vendor BSP 系统——如果是，换成 Armbian Mainline 系统通常就能解决。
 
 > 📘 **名词小教室**
 > - **SBC（Single Board Computer，单板电脑）**：把 CPU、内存、保存控制器等组件集成在一片电路板上的迷你电脑，Orange Pi、Raspberry Pi 都属于这类产品。
-> - **BSP（Board Support Package）**：芯片厂商为了让自家硬件能正常开机、驱动屏幕与周边，提供的一整套客制化系统与驱动进程。BSP 系统通常内核版本比较旧，但对板子本身的硬件（例如特定的显示输出）支持反而可能更好。
-> - **Mainline 内核**：Linux 官方维护的主线内核版本，社群持续在更新。使用 Mainline 内核的系统（如 Armbian）通常对新款周边设备的支持比 BSP 系统更新更快。
+> - **BSP（Board Support Package）**：芯片厂商为了让自家硬件能正常开机、驱动屏幕与周边，提供的一整套定制化系统与驱动程序。BSP 系统通常内核版本比较旧，但对板子本身的硬件（例如特定的显示输出）支持反而可能更好。
+> - **Mainline 内核**：Linux 官方维护的主线内核版本，社区持续在更新。使用 Mainline 内核的系统（如 Armbian）通常对新款周边设备的支持比 BSP 系统更新更快。
 
 ---
 
@@ -46,10 +48,10 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 
 | ALFA 型号         | 芯片型号                 | Armbian（内核 ≥6.x） | 原厂 Debian（内核 5.10） | 备注                    |
 | --------------- | -------------------- | --------------------- | ----------------------- | ----------------------- |
-| **AWUS036AXML** | MT7921AUN（Wi-Fi 6E） | ✅ 即插即用                | ⚠️ 需手动补上固件文档         | 支持 2.4G / 5G / 6G      |
-| **AWUS036ACM**  | MT7612U（802.11ac）   | ✅ 即插即用                | ⚠️ 需手动加载 `mt76x2u`        | 监听与数据包注入的首选           |
-| **AWUS036ACHM** | MT7610U（802.11ac）   | ✅ 即插即用                | ⚠️ 需手动加载 `mt76x0u`        | 单天线，适合长时间监听用途          |
-| **AWUS036ACH**  | RTL8812AU            | ⚠️ 需自行编译 DKMS          | ⚠️ 需自行编译 DKMS            | 需先安装 `linux-headers` |
+| **AWUS036AXML** | MT7921AUN（Wi-Fi 6E） | ✅ 即插即用（`mt7921u`，内核 5.18+） | ⚠️ 内核 5.10 早于 5.18，需 backport／外部驱动 | 支持 2.4G / 5G / 6G；GX10 实测数据包注入失败 |
+| **AWUS036ACM**  | MT7612U（802.11ac）   | ✅ 即插即用                | ⚠️ 需手动加载 `mt76x2u`（mainline 自 4.19）        | 可数据包注入（GX10 实测 2.4 GHz 63–83%，低于 EACS／ACH／ACS） |
+| **AWUS036ACHM** | MT7610U（802.11ac）   | ✅ 即插即用                | ⚠️ 需手动加载 `mt76x0u`（mainline 自 4.19）        | 单天线（1T1R），适合小型化监听用途          |
+| **AWUS036ACH**  | RTL8812AU            | ⚠️ 内核 6.13+ 内置 `rtw88_8812au`，低于 6.13 才需自行编译 DKMS | ⚠️ 需自行编译 DKMS            | 需先安装 `linux-headers` |
 
 **简单判断方式**：如果你想要最省事、插入就能用，建议直接刷 Armbian Mainline 系统（见下方步骤），可以完全避开原厂系统上手动补固件、载驱动的麻烦。
 
@@ -58,32 +60,32 @@ keywords: [Orange Pi 5, RK3588, Armbian mainline, vendor BSP, AWUS036AXML, AWUS0
 ## 你需要准备的东西
 
 - [ ] **硬件**：Orange Pi 5 / 5B / 5 Plus，或其他 Rockchip RK3588 / RK3588S 平台的单板电脑
-- [ ] **一张 microSD 卡或 NVMe 硬盘**：用来刷入系统镜像文档
-- [ ] **读卡机**：用来把系统镜像文档写入 microSD 卡
+- [ ] **一张 microSD 卡或 NVMe 硬盘**：用来刷入系统镜像文件
+- [ ] **读卡机**：用来把系统镜像文件写入 microSD 卡
 - [ ] **ALFA 无线网卡**：依上表选择型号
 - [ ] **至少 5V/4A（20W）的 Type-C 电源供应器**：详见下方供电提醒
-- [ ] **驱动进程参考（GitHub）**：
+- [ ] **驱动程序参考（GitHub）**：
   - MediaTek MT76 系列驱动（Armbian Mainline 系统已内置，如需手动安装可参考此项目）：https://github.com/morrownr/mt76
   - Realtek RTL8812AU 驱动（AWUS036ACH 适用）：https://github.com/aircrack-ng/rtl8812au
-  - Armbian 建置项目（若想自行编译客制化镜像文档，而不是直接下载官方预编译版本）：https://github.com/armbian/build
+  - Armbian 建置项目（若想自行编译定制化镜像文件，而不是直接下载官方预编译版本）：https://github.com/armbian/build
 
 ---
 
 ## Step-by-Step 设置教学
 
-### 步骤 1：下载并刷入 Armbian Mainline 镜像文档
+### 步骤 1：下载并刷入 Armbian Mainline 镜像文件
 
-前往 [Armbian 官方网站](https://www.armbian.com/orange-pi-5/)，下载适用于 Orange Pi 5 的 Armbian Linux（内核 6.x Mainline）镜像文档，并用刷机工具（如 balenaEtcher 或 Raspberry Pi Imager）写入 microSD 卡或 NVMe 硬盘。
+前往 [Armbian 官方网站](https://www.armbian.com/orange-pi-5/)，下载适用于 Orange Pi 5 的 Armbian Linux（内核 6.x Mainline）镜像文件，并用刷机工具（如 balenaEtcher 或 Raspberry Pi Imager）写入 microSD 卡或 NVMe 硬盘。
 
 **预期结果**：刷机工具显示写入完成，没有出现校验失败的错误消息。
 
-> 💡 **想自己编译客制化镜像文档？** 官网下载的是预编译好的版本，对大部分人来说已经够用。但如果你的项目需要客制化内核选项（例如加装额外的内核模块），可以改用 Armbian 官方的建置框架自行编译：
+> 💡 **想自己编译定制化镜像文件？** 官网下载的是预编译好的版本，对大部分人来说已经够用。但如果你的项目需要定制化内核选项（例如加装额外的内核模块），可以改用 Armbian 官方的建置框架自行编译：
 > ```bash
 > git clone https://github.com/armbian/build
 > cd build
 > ./compile.sh
 > ```
-> 这个做法对新手来说门槛较高（需要至少 8GB 内存、约 50GB 硬盘空间的编译环境），一般情况下不需要，直接用官网预编译镜像文档就好。
+> 这个做法对新手来说门槛较高（需要至少 8GB 内存、约 50GB 硬盘空间的编译环境），一般情况下不需要，直接用官网预编译镜像文件就好。
 
 ---
 
@@ -130,7 +132,7 @@ mt7921u 2-1:1.0: firmware: mediatek/WIFI_RAM_CODE_MT7961_1_2.bin loaded
 
 ### Q2：一定要用原厂系统，该怎么办？
 - **原因**：原厂 Vendor BSP 系统内核版本较旧，需要手动补齐固件或驱动模块。
-- **解决方法**：依照上方兼容性表格，手动安装对应的内核模块（例如 `mt76x2u`），并确认固件文档已经放在系统正确的路径下；如果觉得麻烦，改用 Armbian Mainline 会是更省事的做法。
+- **解决方法**：依照上方兼容性表格，手动安装对应的内核模块（例如 `mt76x2u`），并确认固件文件已经放在系统正确的路径下；如果觉得麻烦，改用 Armbian Mainline 会是更省事的做法。
 
 ### Q3：使用一段时间后网卡会断线？
 - **原因**：通常是供电不足，尤其是同时外置了其他高速设备时。
@@ -144,8 +146,8 @@ mt7921u 2-1:1.0: firmware: mediatek/WIFI_RAM_CODE_MT7961_1_2.bin loaded
 - [AWUS036ACM 产品页面](/alfa-network/products/awus036acm/)
 - [ALFA 无线网卡在 Raspberry Pi 上（3 / 4 / 5）](/alfa-network/hardware/raspberry-pi/)——另一款轻量嵌入式主机的集成方式，概念可互相参照
 - [词汇表](/getting-started/glossary)——SBC、BSP、Mainline 内核等名词的完整解释
-- [Armbian 官方网站](https://www.armbian.com/orange-pi-5/)——Orange Pi 5 系列的 Mainline 镜像文档下载（一般用户从这里下载即可）
-- Armbian 官方建置框架（GitHub，适合需要自行编译客制化镜像文档的高端用户）：https://github.com/armbian/build
+- [Armbian 官方网站](https://www.armbian.com/orange-pi-5/)——Orange Pi 5 系列的 Mainline 镜像文件下载（一般用户从这里下载即可）
+- Armbian 官方建置框架（GitHub，适合需要自行编译定制化镜像文件的高端用户）：https://github.com/armbian/build
 - MediaTek MT76 系列驱动：https://github.com/morrownr/mt76
 - Realtek RTL8812AU 驱动：https://github.com/aircrack-ng/rtl8812au
 

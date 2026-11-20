@@ -20,7 +20,7 @@ slug: /alfa-network/
 ```mermaid
 flowchart TD
     A["You want Wi-Fi gear for Linux / security / robotics"] --> B{"What do you actually need?"}
-    B -->|"Pen-testing, packet sniffing, monitor mode"| C["AC-class adapter with external antenna<br/>(AWUS036ACM / AWUS036ACH / AWUS036ACS)"]
+    B -->|"Pen-testing, packet sniffing, monitor mode"| C["AC-class adapter with external antenna<br/>(AWUS036EACS / AWUS036ACH / AWUS036ACS)"]
     B -->|"Fast everyday client, Wi-Fi 6E"| D["AWUS036AXML / AWUS036AXM / AWUS036AX"]
     B -->|"Streaming / robotics on Jetson or Pi"| E["Hardware integration guides"]
     B -->|"Extend range of an existing adapter"| F["External antennas<br/>(APA / ARS series)"]
@@ -36,9 +36,9 @@ flowchart TD
 | 頁面 | 內容 |
 |---|---|
 | [Wi-Fi 無線網路卡比較](/alfa-network/wifi-adapter-comparison/) | 每款 USB 無線網路卡並排比較：晶片、速度等級、頻段、監聽模式支援——以及依使用情境的「哪一款適合你」 |
-| [Linux 相容性矩陣](/alfa-network/linux-compatibility-matrix/) | 哪些無線網路卡在 Kali Linux、Ubuntu 與 NetHunter/Android 上可開箱即用 |
-| [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/) | 逐步教學：內建於核心的晶片（隨插即用）與 Realtek 晶片的 DKMS 建置 |
-| [Kali Linux 設定指南](/alfa-network/linux-setup-kali/) | dkms 建置、監聽模式、封包注入——完整的滲透測試工作流程 |
+| [Linux 相容性矩陣](/alfa-network/linux-compatibility-matrix/) | 每款無線網路卡需要的核心版本，以及我們在 Ubuntu 24.04 上的實測結果（Kali 與 NetHunter/Android：未在實體硬體上實測） |
+| [Ubuntu 設定指南](/alfa-network/linux-setup-ubuntu/) | 逐步教學：核心內建驅動（核心 6.17 隨插即用），以及僅限舊核心的 DKMS 建置 |
+| [Kali Linux 設定指南](/alfa-network/linux-setup-kali/) | 監聽模式、封包注入——完整的滲透測試工作流程（Kali 本身未在實體硬體上實測） |
 | [NetHunter（Android）設定指南](/alfa-network/linux-setup-nethunter/) | 把手機 + OTG 變成行動稽核裝置 |
 | [疑難排解索引](/alfa-network/troubleshooting/) | 每個常見 ALFA 問題的症狀 → 診斷 → 根本原因 → 修復 |
 | [驅動程式](/alfa-network/drivers/mt7612u/) | 以晶片為主的指南：MT7612U、MT7610U、MT7921AUN、RTL8812AU、RTL8811AU、RTL8832BU、RTL8821CU |
@@ -49,7 +49,7 @@ flowchart TD
 
 選擇無線網路卡其實就是選擇**晶片**，因為晶片決定了：
 
-1. **你需要哪個驅動程式**——以及它是否已內建於 Linux 核心（隨插即用），還是需要 DKMS 建置。
+1. **你需要哪個驅動程式**——以及它是否已內建於 Linux 核心（隨插即用），或是在較舊的核心上需要 DKMS 建置。
 2. **監聽模式與封包注入是否可用**——這是 Kali / Wireshark / Aircrack-ng 工作的核心需求。
 3. **無線網路卡有多快、多遠**。
 
@@ -57,15 +57,17 @@ flowchart TD
 
 | 晶片 | 無線網路卡 | 內建於核心的驅動程式？ | 監聽模式？ | 最適合 |
 |---|---|---|---|---|
-| **MT7612U** | AWUS036ACM | ✅（自核心 4.19 起） | ✅ 極佳 | Kali 的經典全能款 |
-| **MT7610U** | AWUS036ACHM | ✅（自核心 4.19 起） | ✅ 良好 | 平價雙頻監聽模式 |
-| **MT7921AUN** | AWUS036AXM / AWUS036AXML | ✅（自核心 5.18 起） | ✅ 良好 | Wi-Fi 6 / 6E 速度 + 藍芽組合 |
-| **RTL8812AU** | AWUS036ACH | ❌ DKMS | ✅ 極佳 | 高功率經典款，社群龐大 |
-| **RTL8811AU** | AWUS036ACS | ❌ DKMS | ✅ 良好 | 口袋大小的監聽無線網路卡 |
-| **RTL8832BU** | AWUS036AX / AWUS036AXER | ❌ DKMS | ✅ 良好 | 支援 WPA3 的 Wi-Fi 6 |
-| **RTL8821CU** | AWUS036EACS | ❌ 不穩定 | ❌ 不可靠 | **僅限 Windows**——WiFi + 藍芽組合 |
+| **MT7612U** | AWUS036ACM | ✅ `mt76x2u`（自核心 4.19 起進入主線） | ✅ 監聽 + 注入（2.4 GHz 為 63–83 %、5 GHz 為 76 %） | Mesh / IBSS 實驗、一般監聽模式 |
+| **MT7610U** | AWUS036ACHM | ✅ `mt76x0u`（自核心 4.19 起進入主線） | ✅ 監聽；注入在 2.4 GHz 為 96–100 %，5 GHz 僅廣播封包 | 單天線平價款、Mesh / IBSS 實驗 |
+| **MT7921AUN** | AWUS036AXM / AWUS036AXML | ✅ `mt7921u`（自核心 5.18 起進入主線） | 🟡 監聽接收偏弱；❌ 在原廠核心 6.17 上注入失敗（injection fails on stock kernel 6.17） | Wi-Fi 6 用戶端／AP 熱點，另有藍牙；AXML 已驗證 6 GHz（AXM 的 6 GHz 未實測）；不適合注入 |
+| **RTL8812AU** | AWUS036ACH | ✅ `rtw88_8812au`（自核心 6.13 起進入主線） | ✅ 監聽 + 注入，雙頻皆 100 % | 注入 + 握手封包擷取、遠距離監聽 |
+| **RTL8811AU** | AWUS036ACS | ✅ `rtw88_8821au`（自核心 6.13 起進入主線） | ✅ 監聽 + 注入（2.4 GHz 為 100 %、5 GHz 為 96 %） | 口袋大小，適合注入 + 握手封包擷取 |
+| **RTL8832BU** | AWUS036AX / AWUS036AXER | ✅ `rtw89_8852bu`（自核心 6.17 起進入主線） | ✅ 監聽接收強；2.4 GHz 注入 AX 為 96 %、AXER 為 73 % | Wi-Fi 6 + AP 熱點；AXER 接收能力最強 |
+| **RTL8821CU** | AWUS036EACS | ✅ `rtw88_8821cu`（自核心 6.2 起進入主線） | ✅ 監聽 + 注入，雙頻皆 100 % | Wi-Fi + 藍牙二合一，雙頻注入皆 100 % |
 
-> **你可能會想問**——*「什麼是 DKMS？」* 它是一套系統，會在每次 Linux 核心更新時自動重新建置第三方驅動程式。像 RTL8812AU 這類 Realtek 晶片不在核心內，所以 DKMS 讓它們在每次更新後都能繼續運作。我們在 [Ubuntu 指南](/alfa-network/linux-setup-ubuntu/) 中逐步說明。
+這七種晶片在我們的測試平台（ASUS GX10、Ubuntu 24.04 ARM64、核心 6.17.0-1014-nvidia）上都使用核心內建驅動，不需要 DKMS。
+
+> **你可能會想問**——*「什麼是 DKMS？」* 它是一套系統，會在每次 Linux 核心更新時自動重新建置第三方驅動程式。只有在你的核心比上表所列版本更舊時才需要（例如 RTL8812AU 的驅動自核心 6.13 起已內建）；在舊核心上，DKMS 會讓社群驅動在每次更新後都能繼續運作。我們在 [Ubuntu 指南](/alfa-network/linux-setup-ubuntu/) 中逐步說明。
 
 ## 快速入門
 

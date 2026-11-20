@@ -10,7 +10,9 @@ keywords: [WiFi Pineapple, Hak5, AWUS036ACM, MT7612U, 5GHz 监听模式, PineAP,
 
 # Hak5 WiFi Pineapple × ALFA Network 集成指南
 
-> **一句话定位**：Hak5 WiFi Pineapple Mark VII 出厂只涵盖 2.4 GHz 频段，要涵盖 5 GHz 频段（现在大部分设备都会用到）就需要外置网卡。ALFA AWUS036ACM 用的芯片跟 Hak5 原厂扩充卡完全同款，但天线增益更高、散热更好，是目前最推荐的搭配选择。
+> **一句话定位**：Hak5 WiFi Pineapple Mark VII 出厂只涵盖 2.4 GHz 频段，要涵盖 5 GHz 频段（现在大部分设备都会用到）就需要外置网卡。ALFA AWUS036ACM 用的芯片跟 Hak5 原厂扩充卡完全同款，但外接两支 RP-SMA 天线，可自行换上增益更高的天线，是 Hak5 文档指定的 MT7612U 方案。
+
+> ⚠️ **实测范围**：Yupitek 的 ALFA 兼容性测试仅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上进行，**WiFi Pineapple尚未实测**。本页关于驱动是否可用的说明，是依平台内核版本与各驱动进入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推断，并非在该硬件上验证。在 GX10 的实测中，ACM 的 2.4／5 GHz 监听可用、注入成功率 2.4 GHz 63–83%／5 GHz 76%，两个频段的 AP 模式也可用。请仅在您自己拥有或已获授权的网络上测试。
 
 ## 这篇文章适合你吗？
 
@@ -28,12 +30,12 @@ keywords: [WiFi Pineapple, Hak5, AWUS036ACM, MT7612U, 5GHz 监听模式, PineAP,
 
 WiFi Pineapple Mark VII 这台设备本身内置了两组 2.4 GHz 无线电模块（一组用来当管理连接，另外一到两组负责扫描附近的 Wi-Fi 信号并广播）。但如果你的实验或课程需要涵盖 **5 GHz 频段**（802.11a/n/ac），内置的无线电就不够用了，必须通过机身上的 USB 端口外置一张支持 5 GHz 的网卡。
 
-Hak5 官方文档明确指出，**MediaTek MT7612U** 芯片是唯一保证能在 WiFi Pineapple 上稳定运作的 5 GHz 网卡芯片。原因跟软件架构有关：WiFi Pineapple 使用的是 OpenWrt 这套嵌入式系统，Realtek 系列芯片（例如 RTL8812AU）在这个环境下需要额外的驱动进程，在高负载（大量数据包同时处理）时容易让系统当机或无预警重开机；而 MediaTek 的 `mt76x2u` 驱动则是直接写进 OpenWrt 内核里，稳定性好很多。
+Hak5 官方文档明确指出，**MediaTek MT7612U** 芯片是唯一保证能在 WiFi Pineapple 上稳定运作的 5 GHz 网卡芯片。原因跟软件架构有关：WiFi Pineapple 使用的是 OpenWrt 这套嵌入式系统，在较旧的 OpenWrt 内核上（内核低于 6.13 时 ACH／ACS 需外部驱动，EACS 为 6.2、AX／AXER 为 6.17），Realtek 系列芯片需要额外的驱动程序；而 MediaTek 的 `mt76x2u` 驱动自内核 4.19 起就在 mainline，OpenWrt 内核可直接使用。
 
-**ALFA AWUS036ACM** 使用的正是同一颗 MT7612U 芯片，跟 Hak5 官方扩充卡 MK7AC 系统辨识起来完全一样，差别在于 ALFA 网卡用的是标准 RP-SMA 天线接头（可以自己换天线），而且散热设计更好，长时间使用比较不容易过热降速。
+**ALFA AWUS036ACM** 使用的正是同一颗 MT7612U 芯片，跟 Hak5 官方扩充卡 MK7AC 系统辨识起来完全一样，差别在于 ALFA 网卡用的是标准 RP-SMA 天线接头（可以自己换天线）。
 
 > 📘 **名词小教室**
-> - **Recon（侦察扫描）**：WiFi Pineapple 里的一个功能模块，用来扫描附近有哪些 Wi-Fi 基地台（AP）和连接中的设备。
+> - **Recon（侦察扫描）**：WiFi Pineapple 里的一个功能模块，用来扫描附近有哪些 Wi-Fi 接入点（AP）和连接中的设备。
 > - **PineAP**：WiFi Pineapple 的内核功能之一，可以仿真广播 Wi-Fi 信号，常用于无线网络安全教学与研究情境。
 > - **USB VID:PID**：每个 USB 设备出厂时都有一组「厂商代码:产品代码」，系统可以靠这组代码辨识设备是什么型号，等一下验证网卡有没有被正确辨识时会用到。
 
@@ -45,7 +47,7 @@ Hak5 官方文档明确指出，**MediaTek MT7612U** 芯片是唯一保证能在
 - [ ] **ALFA 无线网卡**：[AWUS036ACM 产品页面](/alfa-network/products/awus036acm/)
 - [ ] **供电设备**：一个能稳定输出 **5V/3A（15W）以上**、支持 QC 或 PD 快充协定的电源供应器或充电宝（原因见下方「供电注意事项」）
 - [ ] **天线（依使用情境挑选，详见第四节）**：全向天线或指向性平板天线
-- [ ] **驱动进程参考（GitHub）**：
+- [ ] **驱动程序参考（GitHub）**：
   - MediaTek MT76 系列驱动原代码（WiFi Pineapple 的固件与此驱动家族同源）：https://github.com/openwrt/mt76
 - [ ] **官方兼容性文档**：[Hak5 官方兼容 802.11ac 网卡清单](https://docs.hak5.org/wifi-pineapple/faq/compatible-802.11ac-adapters/)
 
@@ -90,7 +92,7 @@ Bus 001 Device 003: ID 0e8d:7612 MediaTek Inc. MT7612U 802.11a/b/g/n/ac Wireless
 dmesg | grep -E "mt76|wlan"
 ```
 
-**预期结果**：应该会看到类似这样的几行消息，代表驱动进程和固件都加载成功：
+**预期结果**：应该会看到类似这样的几行消息，代表驱动程序和固件都加载成功：
 
 ```text
 mt76x2u 1-1:1.0: ASIC revision: 76120011 mac 00110000
@@ -113,11 +115,11 @@ iw dev
 2. 进入 **Recon（侦察扫描）** 模块：
    - 接口选择下拉列表里应该会自动出现 `wlan3 (5GHz)`。
    - 勾选同时扫描 **2.4 GHz + 5 GHz**，扫描周期可以设置为 `Continuous`（持续）或 `1 min`（每分钟）。
-   - 点击 **Start Scan**，系统就会开始同时扫描 5GHz 信道（36〜165）上的基地台与连接设备。
+   - 点击 **Start Scan**，系统就会开始同时扫描 5GHz 信道（36〜165）上的接入点与连接设备。
 3. 进入 **PineAP** 模块：
    - 在 **PineAP Settings** 里，可以把 5GHz 的广播指派给 `wlan3`，这样就能让 2.4GHz（`wlan1`）和 5GHz（`wlan3`）两个频段同时广播。
 
-**预期结果**：Recon 页面上开始出现侦测到的设备与基地台清单，代表 5GHz 频段已经成功纳入扫描范围。
+**预期结果**：Recon 页面上开始出现检测到的设备与接入点清单，代表 5GHz 频段已经成功纳入扫描范围。
 
 ---
 

@@ -12,6 +12,8 @@ keywords: [Raspberry Pi ALFA, Raspberry Pi Wi-Fi adapter, AWUS036ACH Raspberry P
 
 > **Quick Summary**: The Raspberry Pi's onboard Wi-Fi is compact but limited by low-gain PCB antennas and fixed regulatory power limits. Adding an ALFA high-power USB adapter turns your Pi into an enterprise-grade wireless probe, field auditor, or long-range IoT gateway.
 
+> **Test scope**: Yupitek's ALFA compatibility testing was done only on ASUS GX10 / Ubuntu 24.04 ARM64 / kernel 6.17. **Raspberry Pi has not been tested.** Statements on this page about driver availability are inferred from the platform's kernel version and the kernel release in which each driver reached mainline (ACM / ACHM 4.19, AXM / AXML 5.18, EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17), not verified on the hardware. Only test networks you own or are authorized to test.
+
 ## Is This Guide for You?
 
 - **Difficulty**: Beginner to Intermediate.
@@ -49,9 +51,9 @@ flowchart TD
 
 | Model | Chipset | Band | Raspberry Pi OS Driver | Recommended Use Case |
 |---|---|---|---|---|
-| **AWUS036ACM** | MediaTek MT7612U | 2.4G + 5G | ✅ In-tree (`mt76x2u`) | **Top Pick**: Zero-configuration packet injection |
-| **AWUS036AXML** | MediaTek MT7921AUN | 2.4G + 5G + 6G | ✅ In-tree (`mt7921u`, Kernel ≥5.18) | **Top Pick**: Wi-Fi 6/6E high-speed links |
-| **AWUS036ACH** | Realtek RTL8812AU | 2.4G + 5G | ⚠️ DKMS build required | High-gain dual-antenna long-range audits |
+| **AWUS036ACM** | MediaTek MT7612U | 2.4G + 5G | ✅ In-tree (`mt76x2u`, kernel 4.19+) | **Top Pick**: In-kernel monitor mode and packet injection with no extra drivers |
+| **AWUS036AXML** | MediaTek MT7921AUN | 2.4G + 5G + 6G | ✅ In-tree (`mt7921u`, Kernel ≥5.18) | **Top Pick**: Wi-Fi 6/6E client / AP links (monitor is weak and injection failed on the GX10 test platform) |
+| **AWUS036ACH** | Realtek RTL8812AU | 2.4G + 5G | ⚠️ DKMS required on kernels older than 6.13 (in-kernel `rtw88_8812au` from 6.13) | High-gain dual-antenna long-range audits |
 | **AWUS036NHA** | Atheros AR9271 | 2.4G | ✅ In-tree (`ath9k_htc`) | Classic 2.4 GHz packet injection |
 
 ---
@@ -67,13 +69,13 @@ lsusb
 ### Step 2: Driver Setup
 
 #### For MediaTek Adapters (AWUS036ACM / AWUS036AXML):
-Raspberry Pi OS (Bookworm / Bullseye) includes drivers out of the box. No manual compilation required:
+These drivers are built into the Linux kernel (`mt76x2u` since 4.19, `mt7921u` since 5.18), so whether they work out of the box depends on your Raspberry Pi OS kernel version (check `uname -r`). With a new enough kernel no manual compilation is required:
 ```bash
 sudo apt update && sudo apt install -y wireless-tools iw
 ```
 
 #### For Realtek Adapters (AWUS036ACH / AWUS036ACS):
-Install kernel headers and DKMS driver:
+Realtek drivers are in-kernel only on newer kernels (ACS / ACH from 6.13, EACS from 6.2); on older kernels install kernel headers and the DKMS driver (the repository below covers RTL8812AU, i.e. AWUS036ACH):
 ```bash
 sudo apt update
 sudo apt install -y raspberrypi-kernel-headers build-essential dkms git
@@ -86,7 +88,7 @@ sudo reboot
 ### Step 3: Enable Monitor Mode
 
 ```bash
-sudo airmon-ng check kill
+# Do NOT run `airmon-ng check kill`: it terminates NetworkManager
 sudo airmon-ng start wlan1
 ```
 

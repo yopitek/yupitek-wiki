@@ -10,7 +10,9 @@ keywords: [WiFi Pineapple, Hak5, AWUS036ACM, MT7612U, 5GHz monitor mode, PineAP,
 
 # Hak5 WiFi Pineapple × ALFA Network Integration Guide
 
-> **Quick Summary**: Hak5 official documentation ([docs.hak5.org](https://docs.hak5.org/wifi-pineapple/faq/compatible-802.11ac-adapters/)) explicitly designates the **MediaTek MT7612U** chipset as the only 802.11ac external adapter guaranteed to work reliably in all penetration testing scenarios. The **ALFA AWUS036ACM** shares the exact same MT7612U chipset architecture as the Hak5 MK7AC OEM module, but provides higher antenna gain via dual RP-SMA ports and enhanced thermal dissipation for prolonged 5 GHz auditing and PineAP rogue AP campaigns.
+> **Quick Summary**: Hak5 official documentation ([docs.hak5.org](https://docs.hak5.org/wifi-pineapple/faq/compatible-802.11ac-adapters/)) explicitly designates the **MediaTek MT7612U** chipset as the only 802.11ac external adapter guaranteed to work reliably in all penetration testing scenarios. The **ALFA AWUS036ACM** shares the exact same MT7612U chipset architecture as the Hak5 MK7AC OEM module, but exposes two RP-SMA antenna ports so you can fit higher-gain antennas for 5 GHz auditing and PineAP rogue AP campaigns.
+
+> **Test scope**: Yupitek's ALFA compatibility testing was done only on ASUS GX10 / Ubuntu 24.04 ARM64 / kernel 6.17. **The WiFi Pineapple has not been tested.** Statements on this page about driver availability are inferred from the platform's kernel version and the kernel release in which each driver reached mainline (ACM / ACHM 4.19, AXM / AXML 5.18, EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17), not verified on the hardware. On the GX10 test platform the ACM supported monitor mode on 2.4 / 5 GHz, injection at 63-83% (2.4 GHz) and 76% (5 GHz), and AP mode on both bands. Only test networks you own or are authorized to test.
 
 ## Is This Guide for You?
 
@@ -28,7 +30,7 @@ keywords: [WiFi Pineapple, Hak5, AWUS036ACM, MT7612U, 5GHz monitor mode, PineAP,
 
 The WiFi Pineapple Mark VII features internal 2.4 GHz radios. To audit modern enterprise 5 GHz (802.11a/n/ac) networks, an external USB radio module is required.
 
-Under embedded OpenWrt kernels, Realtek chipsets rely on out-of-tree drivers that frequently trigger kernel panics during high-throughput packet injection. The MediaTek `mt76x2u` driver in the AWUS036ACM is compiled directly into the OpenWrt kernel, offering superior DMA buffer reclamation and thermal stability.
+On older embedded OpenWrt kernels (before Linux 6.13 for ACH / ACS, 6.2 for EACS, 6.17 for AX / AXER), Realtek chipsets rely on out-of-tree drivers, and Hak5 guarantees only the MT7612U chipset for 802.11ac adapters. The MediaTek `mt76x2u` driver used by the AWUS036ACM has been in the mainline kernel since 4.19 and is available in the OpenWrt kernel.
 
 ---
 

@@ -88,7 +88,7 @@ iw dev wlan0 link
 
 | With | Result |
 |---|---|
-| All ALFA USB adapters (RP-SMA antenna ports) | ✅ Screws straight on |
+| ALFA USB adapters with RP-SMA antenna ports (all except AXER and EACS) | ✅ Screws straight on |
 | 2.4 GHz-only adapters / APs | ✅ Ideal |
 | 5 GHz-only links | ❌ Wrong band — use the [APA-M25](/alfa-network/products/apa-m25/) |
 | Adapters with integrated antennas (AXER, EACS) | ❌ No RP-SMA port to attach to |

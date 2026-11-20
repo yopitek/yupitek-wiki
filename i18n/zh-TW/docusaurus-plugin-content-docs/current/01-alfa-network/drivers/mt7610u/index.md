@@ -9,11 +9,15 @@ keywords: [MT7610U 驅動程式, AWUS036ACHM, mt76x0u, Linux 監聽模式]
 
 # MT7610U 驅動程式指南（AWUS036ACHM）
 
-> **一句話定位（One-liner）**：**MediaTek MT7610U** 是 **AWUS036ACHM** 內部的 1T1R（單串流）雙頻晶片——一款平價 AC433 無線網路卡，其 `mt76x0u` 驅動程式**自 4.19 起內建於 Linux 核心**。就像它的老大哥 MT7612U 一樣，在任何現代 Linux 上都是隨插即用。
+> **一句話定位（One-liner）**：**MediaTek MT7610U** 是 **AWUS036ACHM** 內部的 1T1R（單串流）雙頻晶片——一款平價 AC600（150 + 433 Mbps）無線網路卡，其 `mt76x0u` 驅動程式**自 4.19 起內建於 Linux 核心**。就像它的老大哥 MT7612U 一樣，在任何現代 Linux 上都是隨插即用。
+
+## 實測：ASUS GX10 / Ubuntu 24.04 ARM64
+
+測試平台：ASUS Ascent GX10（NVIDIA GB10）、Ubuntu 24.04 LTS ARM64、kernel 6.17.0-1014-nvidia（2026-11-16～11-19）。AWUS036ACHM（USB ID `0e8d:7610`，韌體 `mt7610u.bin`）由內建的 `mt76x0u` 驅動，插上即可用，不需 DKMS。實測：monitor 2.4G / 5G ✅；injection 2.4G 96–100%、5G 僅廣播可通過（逐台定向回應率未測量）；AP 2.4G / 5G ✅（AP 請用純 802.11g（2.4 GHz）／純 802.11a（5 GHz））；WPA3-SAE ✅（須 `sae_pwe=0`，`sae_pwe=2` 時 iPhone 7 Plus 連不上）；VIF ✅；handshake 🟡（2.4G 可）；active monitor 🟡；IBSS / mesh 🟡（僅單機驗證）；P2P 未測試（需第二台設備）。
 
 ## 概念：「小老弟」晶片
 
-MT7612U 是 2×2 無線電，而 MT7610U 是 **1×1**——單一空間串流，所以 5 GHz 上限是 433 Mbps 而不是 867。這正是 AWUS036ACHM 的 AC433 規格。你在速度上失去的，在簡潔與價格上贏回來：它是最便宜的 ALFA 無線網路卡，同時仍給你**內建於核心的驅動程式 + 雙頻 + 可用的監聽模式（monitor mode）**。
+MT7612U 是 2×2 無線電，而 MT7610U 是 **1×1**——單一空間串流，所以 5 GHz 上限是 433 Mbps 而不是 867。這正是 AWUS036ACHM 的 AC600（150 + 433 Mbps）規格。你在速度上失去的，在簡潔與價格上贏回來：它是最便宜的 ALFA 無線網路卡，同時仍給你**內建於核心的驅動程式 + 雙頻 + 可用的監聽模式（monitor mode）**。
 
 驅動程式位於同一個主線 `mt76` 家族（`drivers/net/wireless/mediatek/mt76/mt76x0/`），所以體驗與 MT7612U 完全相同：
 
@@ -39,20 +43,19 @@ flowchart LR
 ## 步驟 1：驗證驅動程式
 
 ```bash
-lsusb | grep -i mediatek
-lsmod | grep mt76x0
+lsusb | grep 0e8d:7610
+sudo dmesg | grep mt76x0u | tail -3
 ```
 
-**預期輸出**：
+**預期輸出**（GX10 實測；匯流排／裝置編號與 `wlx` MAC 會因機器而異）：
 
 ```text
-Bus 001 Device 005: ID 0e8d:7610 MediaTek Inc. MT7610U
-mt76x0u                20480  0
-mt76x02_common         49152  2 mt76x0u
-mt76                   94208  2 mt76x0u,mt76x02_common
+Bus 003 Device 005: ID 0e8d:7610 MediaTek Inc. WiFi
+mt76x0u 3-1:1.0: ASIC revision: 76100002 MAC revision: 76502000
+mt76x0u 3-1:1.0 wlx00c0cababcd2: renamed from wlan0
 ```
 
-如果 `lsmod` 是空的但 `lsusb` 看得到裝置：`sudo modprobe mt76x0u`。
+如果 `lsusb` 看得到裝置但沒有 `mt76x0u` 行：`sudo modprobe mt76x0u`。
 
 ## 步驟 2：確認介面
 
@@ -60,7 +63,7 @@ mt76                   94208  2 mt76x0u,mt76x02_common
 iw dev
 ```
 
-**預期輸出**：
+**預期輸出**（範例；在 GX10 上介面名稱為 `wlx` + MAC）：
 
 ```text
 phy#0
@@ -95,13 +98,15 @@ iw dev
 sudo airmon-ng start wlan0
 ```
 
+> 在 GX10 或任何由 NetworkManager 提供網路的桌機上，**請勿執行 `airmon-ng check kill`**；只對該網卡的 `wlx...` 介面使用 `iw`。
+
 注入檢查：
 
 ```bash
 sudo aireplay-ng --test wlan0mon
 ```
 
-**預期輸出**：`30/30: 100%` 與 `Injection is working!`
+**預期輸出**：`Injection is working!`；本機實測 2.4G 回應率 96–100%，5G 僅廣播注入可通過，逐台定向回應率未測量。
 
 ## 步驟 5：恢復正常
 
@@ -116,7 +121,7 @@ sudo systemctl restart NetworkManager
 |---|---|---|
 | 不在 `lsusb` 中 | 電源 / 傳輸線 | 不同的連線埠、供電 hub——[疑難排解索引](/alfa-network/troubleshooting/) |
 | 沒有介面 | 驅動程式未載入 | `sudo modprobe mt76x0u`；檢查 `dmesg \| grep mt76` |
-| 5 GHz 吞吐量卡在 ~150 Mbps | 這就是 1×1 硬體限制 | 不是 bug——AC433 等級代表連結 ~300–400 Mbps，實際 ~150–250 |
+| 5 GHz 吞吐量卡在 ~150 Mbps | 這就是 1×1 硬體限制 | 不是 bug——5 GHz 連結速率最高 433 Mbps，實際約 150–250 Mbps |
 | 監聽模式被拒絕 | 核心 < 4.19 | 升級核心 / 作業系統 |
 | 注入測試失敗 | 頻道無訊號 / RF 區域 | `sudo iw wlan0mon set channel 6`，在 AP 附近測試 |
 

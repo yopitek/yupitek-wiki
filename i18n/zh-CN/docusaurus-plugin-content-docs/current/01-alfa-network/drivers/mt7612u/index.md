@@ -11,6 +11,8 @@ keywords: [MT7612U 驱动, AWUS036ACM, mt76x2u, Linux 监听模式]
 
 > **一句话定位（One-liner）**：**MediaTek MT7612U** 是 **AWUS036ACM** 内部的芯片组——它的 `mt76x2u` 驱动**自 Linux 内核 4.19 起内置**。仅此一点就让 ACM 成为 Linux 上摩擦最小的 ALFA 网卡适配器：无需安装、无需 DKMS、无需维护。
 
+**实测平台**：ASUS GX10、Ubuntu 24.04 ARM64、kernel 6.17.0-1014-nvidia；USB ID `0e8d:7612`；固件 `mt7662_rom_patch.bin` / `mt7662.bin`。Monitor 2.4 / 5 GHz ✅；注入 2.4 GHz 63–83%、5 GHz 76%；AP 2.4 / 5 GHz（80 MHz）✅；WPA3-SAE ✅；VIF（STA+AP、AP+monitor）✅；WPA handshake：注入可用，但未实际执行端到端抓取；active monitor 🟡（可设置，ACK 未验证）；IBSS / mesh 🟡（仅单机验证）；P2P 未测试。（kernel ≥ 4.19 同样无需 DKMS——MediaTek mt76 自 4.19 起内置。）
+
 ## 概念：「内核内置」对 MT7612U 意味着什么
 
 MT7612U 是一款 **2T2R**（2 发 / 2 收）双频 802.11ac 无线电——即 AC1200 规格中的「300 + 867 Mbps」。由于 MediaTek 把驱动上游进了主线内核（`drivers/net/wireless/mediatek/mt76/`），每个 Linux 发行版都预编译了它。
@@ -32,7 +34,7 @@ flowchart LR
 
 ## 前置需求
 
-- [ ] 内核 **4.19 或更新**的 Linux（`uname -r`——Ubuntu 20.04+ / 任意较新 Kali 均可）
+- [ ] 内核 **4.19 或更新**的 Linux（`uname -r`——Ubuntu 22.04+ / 任意较新 Kali 均可；GX10 实测 kernel 6.17.0-1014-nvidia）
 - [ ] `sudo` 权限
 - [ ] AWUS036ACM（或任意 MT7612U 适配器）
 
@@ -41,20 +43,25 @@ flowchart LR
 插上网卡适配器并检查：
 
 ```bash
-lsusb | grep -i mediatek
-lsmod | grep mt76x2u
+lsusb | grep 0e8d:7612
+sudo dmesg | grep -E 'mt76x2u|usb .*: (Product|Manufacturer)' | tail -8
 ```
 
-**预期输出**：
+**预期输出**（GX10 实测；总线／设备编号与 `wlx` MAC 因机器而异）：
 
 ```text
-Bus 001 Device 004: ID 0e8d:7612 MediaTek Inc. MT7612U 802.11a/b/g/n/ac 2T2R Wireless Adapter
-mt76x2u                24576  0
-mt76x2_common          36864  1 mt76x2u
-mt76                   94208  2 mt76x2u,mt76x2_common
+Bus 003 Device 003: ID 0e8d:7612 MediaTek Inc. MT7612U 802.11a/b/g/n/ac Wireless Adapter
+usb 3-1: Product: Wireless
+usb 3-1: Manufacturer: MediaTek Inc.
+mt76x2u 3-1:1.0: ASIC revision: 76120044
+mt76x2u 3-1:1.0: ROM patch build: 20141115060606a
+mt76x2u 3-1:1.0: Firmware Version: 0.0.00
+mt76x2u 3-1:1.0: Build: 1
+mt76x2u 3-1:1.0: Build Time: 201507311614____
+mt76x2u 3-1:1.0 wlx00c0cabf874c: renamed from wlan0
 ```
 
-`mt76x2u` 行带有非零引用计数，说明驱动认领了你的网卡适配器。（如果 `lsmod` 什么都没有但 `lsusb` 能看到设备，说明驱动是按需加载的内核模块——运行 `sudo modprobe mt76x2u`。）
+出现 `mt76x2u` 行说明驱动认领了你的网卡适配器；固件为 `mt7662.bin` 与 `mt7662_rom_patch.bin`。（如果 `lsusb` 能看到设备但没有 `mt76x2u` 行，运行 `sudo modprobe mt76x2u`。）
 
 ## 第 2 步：确认接口
 
@@ -62,7 +69,7 @@ mt76                   94208  2 mt76x2u,mt76x2_common
 iw dev
 ```
 
-**预期输出**：
+**预期输出**（示例；在 GX10 上接口名为 `wlx` + MAC）：
 
 ```text
 phy#0
@@ -97,7 +104,7 @@ iw dev
 sudo airmon-ng start wlan0
 ```
 
-**预期输出**：
+**预期输出**（仅为示例——我们在 GX10 的测试刻意未使用 `airmon-ng`，改用 `iw`）：
 
 ```text
 PHY	Interface	Driver		Chipset
@@ -111,7 +118,7 @@ phy0	wlan0		mt76x2u		MediaTek Inc. MT7612U
 sudo aireplay-ng --test wlan0mon
 ```
 
-**预期输出**：`30/30: 100%` 和 `Injection is working!`
+**预期输出**：`Injection is working!`；实测回应率 2.4 GHz 约 63–83%、5 GHz 约 76%（不一定是 30/30）。在 GX10 或任何由 NetworkManager 提供网络的桌面机上，切勿执行 `airmon-ng check kill`（会停掉 NetworkManager）；hcxdumptool 8.x 无法启动（failed to arm），请改用 airodump-ng + aireplay-ng。若先用这张卡连过 Wi-Fi 再切 monitor，请先重新插拔网卡。
 
 ## 第 5 步：把它关回去
 
@@ -128,6 +135,7 @@ sudo systemctl restart NetworkManager
 | `lsusb` 正常，没有 `wlan0` | 驱动未加载（非常罕见） | `sudo modprobe mt76x2u`；检查 `dmesg \| grep mt76` |
 | `airmon-ng` 报告「monitor mode not supported」 | 内核低于 4.19 | 升级内核 / 操作系统 |
 | 监听模式正常但注入失败 | 信道错误 / 无射频信号区域 | `sudo iw wlan0mon set channel 6`；在接入点附近测试 |
+| 监听模式只收到单一信道 | 切换前接口曾连上 Wi-Fi | 拔下再重新插上，然后再切换到监听模式 |
 | 挂起/恢复后 WLAN 消失 | 某些笔记本上已知的 USB 怪癖 | 恢复后重新插拔网卡适配器 |
 
 ## 参考

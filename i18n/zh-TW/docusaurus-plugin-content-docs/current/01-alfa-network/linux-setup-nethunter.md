@@ -17,8 +17,10 @@ keywords: [NetHunter ALFA, Android OTG Wi-Fi 無線網路卡, AWUS036ACM NetHunt
 
 NetHunter 是在 Android 裝置上的 **chroot** 內執行的 Kali Linux。手機的核心仍然做真正的工作——而手機核心*不是* Ubuntu 核心：
 
-1. **內建於核心的驅動程式**：主線 Linux 支援的晶片（MT7612U、MT7610U、MT7921AUN）通常可用，因為 NetHunter 的核心映像包含主線 `mt76` 驅動程式家族。
-2. **DKMS 驅動程式**：在 Android chroot 內編譯 Realtek DKMS 驅動程式很痛苦——手機核心很少附帶建置所需的標頭檔與工具鏈。RTL8812AU *可能*在某些裝置上可用，但請把它當成一個專案，而不是一個設定步驟。
+1. **內建於核心的驅動程式**：主線 Linux 支援的晶片在手機核心夠新時通常可用：MT7612U（ACM）、MT7610U（ACHM）自 4.19，MT7921AU(N)（AXM / AXML）自 5.18，RTL8821CU（EACS）自 6.2，RTL8812AU（ACH）、RTL8811AU（ACS）自 6.13，RTL8832BU（AX / AXER）自 6.17。 特定 NetHunter 核心映像是否包含這些驅動程式因手機而異，我們未實測。
+2. **DKMS 驅動程式**：只有手機核心低於上述 Realtek 版本時才需要，而在 Android chroot 內編譯 Realtek DKMS 驅動程式很痛苦——手機核心很少附帶建置所需的標頭檔與工具鏈。RTL8812AU *可能*在某些裝置上可用，但請把它當成一個專案，而不是一個設定步驟。
+
+> **注意**：Kali/NetHunter 未實機測試，版本判斷依 kernel 版本。
 
 **經驗法則**：對 NetHunter 而言，優先選擇 **AWUS036ACM（MT7612U）**。它是社群預設的 NetHunter 無線網路卡，這是有原因的。
 
@@ -41,7 +43,7 @@ sequenceDiagram
 - [ ] 已 root 的 Android 手機並安裝 **Kali NetHunter**（官方 NetHunter 映像，或已 root 裝置上的 **NetHunter Store** 應用程式）
 - [ ] OTG 傳輸線（依手機而定為 USB-C 或 micro-USB）——高功率無線網路卡最好有外接電源
 - [ ] 使用內建於核心晶片的 ALFA 無線網路卡：**AWUS036ACM / AWUS036ACHM / AWUS036AXM / AWUS036AXML**
-- [ ] 核心夠新的手機（MT7921AUN 機型需要核心 5.18+）
+- [ ] 核心夠新的手機（ACM / ACHM 需 4.19+、MT7921AUN 機型需 5.18+；Realtek 機型 EACS 需 6.2+、ACH / ACS 需 6.13+、AX / AXER 需 6.17+，否則要 DKMS）
 
 ## 步驟 1：檢查你的核心
 
@@ -51,7 +53,7 @@ sequenceDiagram
 uname -r
 ```
 
-**預期輸出**：類似 `4.19.157-perf+`（較舊手機）或 `5.15.xx-gki`（較新）。MT7921AUN 無線網路卡需要 **5.18 或更新**；MT7612U 在 4.19 上運作良好。
+**預期輸出**：類似 `4.19.157-perf+`（較舊手機）或 `5.15.xx-gki`（較新）。MT7921AUN 無線網路卡需要 **5.18 或更新**；MT7612U 的驅動程式自 4.19 起已進入主線。
 
 > **你可能會想問**——*「我需要特定的 NetHunter 核心嗎？」* 是的——NetHunter 團隊會為特定支援裝置清單建置核心。先查[官方裝置清單](https://www.kali.org/docs/nethunter/)：不支援的手機代表沒有支援監聽模式的核心，無論你做什麼，無線網路卡都永遠離不開 managed 模式。
 
@@ -92,10 +94,9 @@ phy#0
 
 ## 步驟 4：監聽模式
 
-在 Kali 終端機內（你需要 root——NetHunter 預設以 root 執行）：
+在 Kali 終端機內（你需要 root——NetHunter 預設以 root 執行）。**請勿執行 `airmon-ng check kill`**，它會終止 NetworkManager 並斷網：
 
 ```bash
-airmon-ng check kill
 airmon-ng start wlan0
 iwconfig
 ```
@@ -108,11 +109,11 @@ iwconfig
 aireplay-ng --test wlan0mon
 ```
 
-**預期輸出**：`30/30: 100%` 與 `Injection is working!`
+**預期輸出**：`30/30: 100%` 與 `Injection is working!`（我們未在 Android 上實測）。MT7921 系列（AWUS036AXM / AXML）在我們的桌面測試中，於 stock kernel 6.17 注入失敗，因此使用這兩款時不要預期此步驟會通過。
 
 ## Realtek 晶片怎麼辦？
 
-**RTL8812AU（AWUS036ACH）**值得一段誠實的說明：它*可以*在核心包含預建 `8812au` 模組的 NetHunter 裝置上運作（某些社群核心有），但**不要把你的課程專案規劃在它上面**。在 Android chroot 內進行 DKMS 編譯在多數手機上會失敗，因為手機核心標頭檔不存在。如果你唯一的無線網路卡是 Realtek，先在筆電上測試——[Kali 指南](/alfa-network/linux-setup-kali/) 在那裡可用——並把手機當成額外紅利。
+**RTL8812AU（AWUS036ACH）**值得一段誠實的說明：它自 kernel 6.13 起已內建（手機上少見），在較舊的手機核心上*可以*在核心包含預建 `8812au` 模組的 NetHunter 裝置上運作（某些社群核心有），但**不要把你的課程專案規劃在它上面**。在 Android chroot 內進行 DKMS 編譯在多數手機上會失敗，因為手機核心標頭檔不存在。如果你唯一的無線網路卡是 Realtek，先在筆電上測試——[Kali 指南](/alfa-network/linux-setup-kali/) 在那裡可用——並把手機當成額外紅利。
 
 ## 常見錯誤（FAQ）
 

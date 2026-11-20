@@ -12,6 +12,8 @@ keywords: [Kali NetHunter, Android OTG, AWUS036ACH, AWUS036NEH, AWUS036NHA, RTL8
 
 > **一句話定位**：手機的 USB 埠供電能力有限，直接接上高功率的 ALFA 網路卡常常會讓手機重開機或網路卡斷線。這篇文章教你怎麼用一條 Y-Cable 解決供電問題，並在 Kali NetHunter 上正確設定你的 ALFA 網路卡。
 
+> ⚠️ **實測範圍**：Yupitek 的 ALFA 相容性測試僅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上進行，**Kali NetHunter 與 Android 手機尚未實測**。本頁關於驅動是否可用的說明，是依平台核心版本與各驅動進入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推論，並非在該硬體上驗證。型號清單出自 Kali NetHunter 官方文件；驅動是否可用須依手機上的 NetHunter 核心版本判斷。請僅在您自己擁有或已獲授權的網路上測試。
+
 ## 這篇文章適合你嗎？
 
 - **難度**：中階（需要熟悉基本的 Linux 終端機指令，並已經在手機上安裝好 Kali NetHunter）
@@ -104,13 +106,11 @@ ip link show
 ### 步驟 3：啟動監聽模式並進行封包稽核
 
 ```bash
-# 1. 終止可能干擾的系統服務
-airmon-ng check kill
-
-# 2. 開啟監聽模式（假設網路卡介面為 wlan1）
+# 1. 開啟監聽模式（假設網路卡介面為 wlan1）
+# 請勿執行 airmon-ng check kill：它會終止 NetworkManager
 airmon-ng start wlan1
 
-# 3. 驗證 monitor 介面（通常會變成 wlan1mon）
+# 2. 驗證 monitor 介面（通常會變成 wlan1mon）
 iwconfig wlan1mon
 ```
 

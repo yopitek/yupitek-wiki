@@ -12,6 +12,8 @@ keywords: [OpenWrt, GL.iNet, AWUS036AXML, AWUS036ACM, kmod-mt7921u, mt76, active
 
 > **一句話定位**：OpenWrt 路由器（包括 GL.iNet 系列、x86 軟路由等）可以透過 USB 外接 ALFA 無線網路卡，多出一組獨立的無線頻段，拿來當第二組無線中繼、廣播熱點，或是無線安全監聽節點。這篇文章教你怎麼裝、也老實告訴你目前有哪些已知的限制。
 
+> ⚠️ **實測範圍**：Yupitek 的 ALFA 相容性測試僅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上進行，**OpenWrt 路由器（含 GL.iNet）尚未實測**。本頁關於驅動是否可用的說明，是依平台核心版本與各驅動進入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推論，並非在該硬體上驗證。在 GX10／kernel 6.17 的實測中，AWUS036AXML／AXM 的監聽表現偏弱，且封包注入失敗（`aireplay-ng` 顯示 `Found 0 APs`／`No Answer`，主因是 kernel 6.16 起 mac80211 chanctx 的退化，並非晶片限制）；因此較適合一般連線、AP 與被動擷取。請僅在您自己擁有或已獲授權的網路上測試。
+
 ## 這篇文章適合你嗎？
 
 - **難度**：中階（需要會用 SSH 操作路由器）
@@ -114,7 +116,7 @@ wifi config
 - **狀態**：該 Issue 在上游已標示為關閉；實際行為可能隨核心版本而異，請至 Issue 頁面確認最新情況。
 - **實務建議**：
   - 如果你只需要**單純擷取封包**（被動監聽，例如用 Kismet 或 tcpdump），請使用一般監聽模式。
-  - Issue 中指出主動監聽在 `mt76x0u` 與 `mt76x2u` 上可運作；需要主動監聽時，建議改用 **AWUS036ACM**（`mt76x2u`）或 **AWUS036ACHM**（`mt76x0u`）。
+  - Issue 中指出主動監聽在 `mt76x0u` 與 `mt76x2u` 上可運作；需要主動監聽時，可以改試 **AWUS036ACM**（`mt76x2u`）或 **AWUS036ACHM**（`mt76x0u`）；在 GX10 的實測中，ACM 的主動監聽可設定但 ACK 未驗證，ACHM 僅部分可用，兩者都尚未在 OpenWrt 上實測。
 
 ### 限制 2：6GHz 頻段的支援情形
 

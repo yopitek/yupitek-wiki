@@ -10,7 +10,7 @@ keywords: [ALFA 疑難排解, 無線網路卡偵測不到, 監聽模式無法運
 
 # ALFA 無線網路卡——疑難排解索引
 
-> **排查鐵律（Diagnosis iron rule）**：**先硬體 → 再驅動程式 → 最後設定。**超過 80% 的「我的 ALFA 壞了」回報其實是電源問題、缺少 DKMS 重建，或核心更新的副作用——而不是無線網路卡壞了。在責怪硬體之前，先依照下方的決策樹。
+> **排查鐵律（Diagnosis iron rule）**：**先硬體 → 再驅動程式 → 最後設定。**多數「我的 ALFA 壞了」的回報其實是電源問題、kernel 版本過舊（Realtek 機型需 EACS ≥ 6.2、ACH / ACS ≥ 6.13、AX / AXER ≥ 6.17 才有內建驅動程式），或舊 kernel 上 DKMS 重建失敗——而不是無線網路卡壞了。在責怪硬體之前，先依照下方的決策樹。
 
 ```mermaid
 flowchart TD
@@ -18,11 +18,11 @@ flowchart TD
     B -->|"No"| C["Hardware / power path:<br/>try another port, powered hub,<br/>another cable, another PC"]
     C -->|"Still invisible"| D["Return / RMA the adapter"]
     B -->|"Yes"| E{"Does iw dev list an interface?"}
-    E -->|"No"| F["Driver problem:<br/>load module (dkms),<br/>check dmesg for firmware errors"]
+    E -->|"No"| F["Driver problem:<br/>check uname -r (Realtek needs EACS 6.2 / ACH, ACS 6.13 / AX, AXER 6.17, else DKMS),<br/>check dmesg for firmware errors"]
     E -->|"Yes"| G{"Works in managed mode?"}
     G -->|"No"| H["Config problem:<br/>NetworkManager, rfkill, reg domain"]
     G -->|"Yes"| I{"Monitor mode is the goal?"}
-    I -->|"Yes, but fails"| J["Driver lacks monitor support:<br/>use aircrack-ng driver repos"]
+    I -->|"Yes, but fails"| J["Check channel and RF environment first;<br/>MT7921 cards: injection not supported on stock 6.17;<br/>on an older kernel Realtek DKMS driver may lack monitor support"]
     I -->|"All fine"| K["You are done — enjoy!"]
 ```
 
@@ -33,7 +33,7 @@ flowchart TD
 | 類別 | 典型問題 |
 |---|---|
 | **偵測** | 無線網路卡不在 `lsusb` 中、沒有介面、重新開機後消失 |
-| **驅動程式** | DKMS 建置失敗、模組未載入、`dmesg` 中的韌體錯誤 |
+| **驅動程式** | kernel 版本過舊、（舊 kernel）DKMS 建置失敗、模組未載入、`dmesg` 中的韌體錯誤 |
 | **連線** | 無法關聯、持續斷線、連結緩慢 |
 | **監聽模式** | `airmon-ng` 失敗、注入測試失敗、沒有擷取到訊框 |
 | **電源** | 高負載下無線網路卡失效、在一臺電腦可用但另一臺不行 |
@@ -45,7 +45,7 @@ flowchart TD
 |---|---|---|
 | MT7612U | AWUS036ACM | [mt7612u](/alfa-network/drivers/mt7612u/) |
 | MT7610U | AWUS036ACHM | [mt7610u](/alfa-network/drivers/mt7610u/) |
-| MT7921AUN | AWUS036AXM / AWUS036AXML | [mt7921aun](/alfa-network/drivers/mt7921aun/) |
+| MT7921AU / MT7921AUN | AWUS036AXM / AWUS036AXML | [mt7921aun](/alfa-network/drivers/mt7921aun/) |
 | RTL8812AU | AWUS036ACH | [rtl8812au](/alfa-network/drivers/rtl8812au/) |
 | RTL8811AU | AWUS036ACS | [rtl8811au](/alfa-network/drivers/rtl8811au/) |
 | RTL8832BU | AWUS036AX / AWUS036AXER | [rtl8832bu](/alfa-network/drivers/rtl8832bu/) |
@@ -89,17 +89,21 @@ lsmod | grep -iE "mt76|8812|8811|88x2|8821"
 ```
 
 ### 根本原因
-兩個常見原因：
-- **Realtek 晶片**：DKMS 模組從未載入（或核心更新後建置失敗）。
-- **MediaTek Wi-Fi 6E**：核心比 5.18 舊（缺少 `mt7921u`）或韌體 blob 不存在。
+幾個常見原因：
+- **Realtek 晶片**：kernel 低於內建版本時沒有內建驅動程式（EACS ≥ 6.2、ACH / ACS ≥ 6.13、AX / AXER ≥ 6.17 才內建 rtw88 / rtw89）；舊 kernel 上則是 DKMS 模組從未載入（或核心更新後建置失敗）。
+- **MediaTek Wi-Fi 6 / 6E**：核心比 5.18 舊（缺少 `mt7921u`）或韌體 blob 不存在。
+- **BT+WiFi 複合裝置（EACS、AXML）重插**：WiFi probe 卡死，`lsusb` 有裝置但沒有 `wlx` 介面。
 
 ### 修復
-- Realtek：`sudo modprobe 8812au`（對應你的晶片），並把它加入 `/etc/modules-load.d/alfa.conf` 讓它開機時自動載入。如果 `modprobe` 顯示 `Module not found`，重建：`sudo dkms autoinstall`。
+- Realtek：先 `uname -r`。**kernel 夠新（EACS ≥ 6.2、ACH / ACS ≥ 6.13、AX / AXER ≥ 6.17）**：驅動程式已內建，確認 `dmesg | grep -iE 'rtw88|rtw89'`，並嘗試拔插網路卡。**僅適用舊 kernel**：`sudo modprobe 8812au`（對應你的晶片），並把它加入 `/etc/modules-load.d/alfa.conf` 讓它開機時自動載入；如果 `modprobe` 顯示 `Module not found`，重建：`sudo dkms autoinstall`；或升級到該機型的內建 kernel 版本以上改用內建驅動程式。
+- EACS / AXML 重插後沒有 `wlx` 介面：**換一個 USB 孔重插**（`modprobe -r` 或手動 `bind` 多半無效）。
 - MediaTek：`sudo apt install linux-firmware` 然後重新開機。核心太舊？升級作業系統——請見[相容性矩陣](/alfa-network/linux-compatibility-matrix/)。
 
 ---
 
-## 問題 3：核心更新後 DKMS 建置失敗
+## 問題 3：核心更新後 DKMS 建置失敗（僅適用舊 kernel 的 DKMS 安裝）
+
+> kernel 夠新（EACS ≥ 6.2、ACH / ACS ≥ 6.13、AX / AXER ≥ 6.17）時使用內建驅動程式，不會有 DKMS 問題。以下僅適用於舊 kernel 上安裝了社群 DKMS 驅動程式的情況。
 
 ### 症狀
 `apt upgrade` 後「無線網路卡不能用了」；`dmesg` 顯示 `8812au: version magic ... should be ...`。
@@ -136,13 +140,29 @@ sudo iw dev wlan0mon info   # confirm it really is type monitor
 ```
 
 ### 根本原因
-驅動程式建置時沒有正確的監聽/注入支援，**或**你在一個沒有 AP 使用的頻道上（注入需要 AP beacon 來回覆），**或** RF 環境是空的（隔離的實驗室）。
+- 你在一個沒有 AP 使用的頻道上（注入需要 AP beacon 來回覆），或 RF 環境是空的（隔離的實驗室）。
+- **AWUS036AXM / AXML（`mt7921u`）**：在 stock kernel 6.17 上封包注入測試未通過（主因是 kernel 6.16 起的 mac80211 chanctx 回歸，並非晶片先天限制；韌體另把注入速率鎖在 1/6 Mbps），這不是設定問題；請改用 ACM / ACHM / ACH / ACS / EACS / AX / AXER 等型號做注入（2.4 GHz 皆通過）。
+- **5 GHz 注入**：需先 `sudo iw reg set US` 解鎖 TX，測完還原（例如 `sudo iw reg set TW`）。
+- 僅適用舊 kernel 的 Realtek DKMS 驅動程式：驅動程式建置時可能沒有正確的監聽/注入支援。
 
 ### 修復
 1. 鎖定有活躍 AP 的頻道：`sudo iw dev wlan0mon set channel 6`
-2. 重測。還是 0/30？用 aircrack-ng 驅動程式 repos 重建，它們預設啟用 monitor + VIF：
-   - [rtl8812au](/alfa-network/drivers/rtl8812au/)、[rtl8811au](/alfa-network/drivers/rtl8811au/)、[rtl8832bu](/alfa-network/drivers/rtl8832bu/)
+2. 重測。還是 0/30？kernel 低於內建版本的 Realtek 機型可改用社群驅動程式 repos 重建（僅適用舊 kernel）：[rtl8812au](/alfa-network/drivers/rtl8812au/)、[rtl8811au](/alfa-network/drivers/rtl8811au/)、[rtl8832bu](/alfa-network/drivers/rtl8832bu/)；或升級到該機型的內建 kernel 版本以上。
 3. 在無 RF 的區域，用手機熱點在同一個頻道上建立你自己的 AP。
+---
+
+## 問題 4b：GX10 / Ubuntu ARM64 平台共通注意事項
+
+以下為 ASUS GX10（Ubuntu 24.04 ARM64、kernel 6.17.0-1014-nvidia）實測得到的平台注意事項：
+
+1. **不要執行 `airmon-ng check kill`**：會關閉 NetworkManager 使主機斷網；改用 `sudo nmcli dev set <介面> managed no` 並只操作 `wlx*` 介面。
+2. **RX stall**：反覆切換 monitor / AP 後掃不到東西 → **拔插網路卡**復原（USB 重新列舉）。
+3. **BT+WiFi 複合裝置（EACS / AXML）**：重插後若 WiFi probe 卡死、沒有 `wlx` 介面 → **換一個 USB 孔**。
+4. **5 GHz 注入 / deauth**：先 `sudo iw reg set US`，測完還原（`sudo iw reg set TW`）。
+5. **hcxdumptool 8.x**：除 EACS 外，其餘卡都 `failed to arm`（需要 active monitor；EACS 在 2.4 GHz 可啟動、5 GHz 失敗）→ 改用 airodump-ng + aireplay-ng。
+6. **ARM64**：aircrack-ng 需自原始碼編譯；wifite 請用 git 版。
+7. 本頁所有監聽 / 注入操作僅限在自有或已授權的網路使用。
+
 ---
 
 ## 問題 5：Wi-Fi 一直斷線或很慢
@@ -192,7 +212,7 @@ sudo ip link set wlan0 down && sudo ip link set wlan0 up
 ```bash
 uname -r
 lsusb
-dkms status
+dkms status   # 僅適用舊 kernel 的 DKMS 安裝
 dmesg | tail -50
 iw dev
 ```

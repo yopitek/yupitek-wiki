@@ -543,6 +543,14 @@ article table {
   font-variant-numeric: tabular-nums;
 }
 
+/* 窄螢幕：寬表格在表格內水平捲動，避免撐破版面 */
+@media (max-width: 996px) {
+  article table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
 article table thead th {
   background: var(--yp-ink-900);
   color: #ffffff;

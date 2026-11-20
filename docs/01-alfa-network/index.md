@@ -20,7 +20,7 @@ This wiki is your step-by-step companion: every adapter and antenna we sell, eve
 ```mermaid
 flowchart TD
     A["You want Wi-Fi gear for Linux / security / robotics"] --> B{"What do you actually need?"}
-    B -->|"Pen-testing, packet sniffing, monitor mode"| C["AC-class adapter with external antenna<br/>(AWUS036ACM / AWUS036ACH / AWUS036ACS)"]
+    B -->|"Pen-testing, packet sniffing, monitor mode"| C["AC-class adapter with external antenna<br/>(AWUS036EACS / AWUS036ACH / AWUS036ACS)"]
     B -->|"Fast everyday client, Wi-Fi 6E"| D["AWUS036AXML / AWUS036AXM / AWUS036AX"]
     B -->|"Streaming / robotics on Jetson or Pi"| E["Hardware integration guides"]
     B -->|"Extend range of an existing adapter"| F["External antennas<br/>(APA / ARS series)"]
@@ -36,9 +36,9 @@ flowchart TD
 | Page | What you get |
 |---|---|
 | [Wi-Fi adapter comparison](/alfa-network/wifi-adapter-comparison/) | Every USB adapter side by side: chipset, speed class, bands, monitor-mode support — plus "which one for you" by use case |
-| [Linux compatibility matrix](/alfa-network/linux-compatibility-matrix/) | Which adapter works out-of-the-box on Kali Linux, Ubuntu and NetHunter/Android |
-| [Ubuntu setup guide](/alfa-network/linux-setup-ubuntu/) | Step-by-step: in-kernel chipsets (plug & play) and DKMS builds for Realtek chips |
-| [Kali Linux setup guide](/alfa-network/linux-setup-kali/) | dkms build, monitor mode, packet injection — the full pen-test workflow |
+| [Linux compatibility matrix](/alfa-network/linux-compatibility-matrix/) | Which kernel version each adapter needs, and what we tested on Ubuntu 24.04 (Kali and NetHunter/Android: not tested on real hardware) |
+| [Ubuntu setup guide](/alfa-network/linux-setup-ubuntu/) | Step-by-step: in-kernel drivers (plug & play on kernel 6.17) and DKMS builds only for older kernels |
+| [Kali Linux setup guide](/alfa-network/linux-setup-kali/) | monitor mode, packet injection — the full pen-test workflow (Kali itself not tested on real hardware) |
 | [NetHunter (Android) setup guide](/alfa-network/linux-setup-nethunter/) | Turn an Android phone + OTG into a mobile auditing rig |
 | [Troubleshooting index](/alfa-network/troubleshooting/) | Symptom → diagnosis → root cause → fix for every common ALFA problem |
 | [Drivers](/alfa-network/drivers/mt7612u/) | Chipset-focused guides: MT7612U, MT7610U, MT7921AUN, RTL8812AU, RTL8811AU, RTL8832BU, RTL8821CU |
@@ -49,7 +49,7 @@ flowchart TD
 
 Choosing an adapter is really choosing a **chipset**, because the chipset decides:
 
-1. **Which driver you need** — and whether it is in the Linux kernel (plug & play) or requires a DKMS build.
+1. **Which driver you need** — and whether it is in the Linux kernel (plug & play) or, on an older kernel, requires a DKMS build.
 2. **Whether monitor mode + packet injection work** — the core requirement for Kali / Wireshark / Aircrack-ng work.
 3. **How fast and how far** the adapter is.
 
@@ -57,15 +57,17 @@ Here is the simplified map — details in the [comparison page](/alfa-network/wi
 
 | Chipset | Adapters | In-kernel driver? | Monitor mode? | Best for |
 |---|---|---|---|---|
-| **MT7612U** | AWUS036ACM | ✅ (since kernel 4.19) | ✅ excellent | The classic all-rounder for Kali |
-| **MT7610U** | AWUS036ACHM | ✅ (since kernel 4.19) | ✅ good | Budget dual-band monitor mode |
-| **MT7921AUN** | AWUS036AXM / AWUS036AXML | ✅ (since kernel 5.18) | ✅ good | Wi-Fi 6 / 6E speed + BT combo |
-| **RTL8812AU** | AWUS036ACH | ❌ DKMS | ✅ excellent | High-power classic, huge community |
-| **RTL8811AU** | AWUS036ACS | ❌ DKMS | ✅ good | Tiny pocket monitor adapter |
-| **RTL8832BU** | AWUS036AX / AWUS036AXER | ❌ DKMS | ✅ good | Wi-Fi 6 with WPA3 |
-| **RTL8821CU** | AWUS036EACS | ❌ unstable | ❌ unreliable | **Windows only** — WiFi + BT combo |
+| **MT7612U** | AWUS036ACM | ✅ `mt76x2u` (mainline since kernel 4.19) | ✅ monitor + injection (63–83 % on 2.4 GHz, 76 % on 5 GHz) | Mesh / IBSS experiments, general monitor mode |
+| **MT7610U** | AWUS036ACHM | ✅ `mt76x0u` (mainline since kernel 4.19) | ✅ monitor; injection 96–100 % on 2.4 GHz, 5 GHz broadcast only | Single-antenna budget adapter, mesh / IBSS experiments |
+| **MT7921AUN** | AWUS036AXM / AWUS036AXML | ✅ `mt7921u` (mainline since kernel 5.18) | 🟡 weak monitor; ❌ injection fails on stock kernel 6.17 | Wi-Fi 6 client / AP hotspot with BT; AXML 6 GHz verified (AXM 6 GHz not tested); not for injection |
+| **RTL8812AU** | AWUS036ACH | ✅ `rtw88_8812au` (mainline since kernel 6.13) | ✅ monitor + injection 100 % on both bands | Injection + handshake capture, long-range monitor |
+| **RTL8811AU** | AWUS036ACS | ✅ `rtw88_8821au` (mainline since kernel 6.13) | ✅ monitor + injection (100 % on 2.4 GHz, 96 % on 5 GHz) | Tiny pocket adapter for injection + handshake capture |
+| **RTL8832BU** | AWUS036AX / AWUS036AXER | ✅ `rtw89_8852bu` (mainline since kernel 6.17) | ✅ strong monitor; injection 96 % (AX) / 73 % (AXER) on 2.4 GHz | Wi-Fi 6 + AP hotspot; AXER for the strongest RX |
+| **RTL8821CU** | AWUS036EACS | ✅ `rtw88_8821cu` (mainline since kernel 6.2) | ✅ monitor + injection 100 % on both bands | Wi-Fi + Bluetooth combo, 100% injection both bands |
 
-> **You might be wondering** — *"What is DKMS?"* It is a system that rebuilds a third-party driver automatically every time your Linux kernel updates. Realtek chips like the RTL8812AU are not in the kernel, so DKMS keeps them alive across updates. We explain it step by step in the [Ubuntu guide](/alfa-network/linux-setup-ubuntu/).
+All seven chipsets use in-kernel drivers on our test platform (ASUS GX10, Ubuntu 24.04 ARM64, kernel 6.17.0-1014-nvidia) — no DKMS.
+
+> **You might be wondering** — *"What is DKMS?"* It is a system that rebuilds a third-party driver automatically every time your Linux kernel updates. You only need it when your kernel is older than the version in the table above (for example, the RTL8812AU driver is in the kernel from 6.13); on an older kernel DKMS keeps a community driver alive across updates. We explain it step by step in the [Ubuntu guide](/alfa-network/linux-setup-ubuntu/).
 
 ## Getting started
 

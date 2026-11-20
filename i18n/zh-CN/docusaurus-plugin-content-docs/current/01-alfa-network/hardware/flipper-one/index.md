@@ -12,6 +12,8 @@ keywords: [Flipper One, Flipper Zero, AWUS036AXML, MT7921AUN, Wi-Fi 6E, USB Host
 
 > **一句话定位**：Flipper One 本身就内置了一颗 Wi-Fi 6E 芯片，很多情况下不用外置网卡就够用。但如果你需要更远的距离、更强的信号，或想同时做「连接」加「监听」两件事，外置一支 ALFA 网卡会是更好的选择。这篇文章帮你搞懂什么时候该加装、该怎么接。
 
+> ⚠️ **实测范围**：Yupitek 的 ALFA 兼容性测试仅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上进行，**Flipper One尚未实测**。本页关于驱动是否可用的说明，是依平台内核版本与各驱动进入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推断，并非在该硬件上验证。在 GX10／kernel 6.17 的实测中，AWUS036AXML／AXM 的监听表现偏弱，且数据包注入失败（`aireplay-ng` 显示 `Found 0 APs`／`No Answer`，主因是 kernel 6.16 起 mac80211 chanctx 的退化，并非芯片限制）；作为一般连接与接入点（AP）则可正常运行。请仅在您自己拥有或已获授权的网络上测试。
+
 ## 这篇文章适合你吗？
 
 - **难度**：中阶（需要熟悉基本的 Linux 终端指令）
@@ -50,7 +52,7 @@ Flipper One 内置的芯片其实跟 **ALFA AWUS036AXML** 用的是同一颗—�
 | 支持频段     | 2.4 / 5 / 6 GHz | 2.4 / 5 / 6 GHz           | 2.4 / 5 GHz                  |
 | 天线     | 机身内部微型天线             | 外置 RP-SMA 天线（可自行更换）               | 外置 RP-SMA 天线（可自行更换）              |
 | 发射功率     | 较低（随身设备的标准限制）     | 较高（有独立功率放大器）               | 较高（有独立功率放大器）              |
-| 适合情境     | 日常随身、轻量扫描                | 需要 6 GHz 全频段、想要更远距离的监听情境 | 想要稳定的 5 GHz 数据包注入，且不需要 6 GHz |
+| 适合情境     | 日常随身、轻量扫描                | 需要 6 GHz 全频段、想要更远距离的连接／AP 情境（被动监听偏弱，数据包注入失败） | 需要 5 GHz 数据包注入，且不需要 6 GHz（GX10 实测 5 GHz 注入成功率 76%） |
 
 **简单判断方式**：如果你只是想随身带着做轻量扫描，内置芯片就够了；如果你需要更远的距离、更强的信号，或想让内置芯片专心负责连接（例如通过 SSH 远程操作），外置的 ALFA 网卡专心负责监听，那就该加装外置网卡。
 
@@ -63,7 +65,7 @@ Flipper One 内置的芯片其实跟 **ALFA AWUS036AXML** 用的是同一颗—�
   - [AWUS036AXML 产品页面](/alfa-network/products/awus036axml/)——要用 6 GHz、要远距离就选这支
   - [AWUS036ACM 产品页面](/alfa-network/products/awus036acm/)——稳定的 5 GHz 方案
 - [ ] **USB Type-C OTG 转接线**：用来连接 Flipper One 跟 ALFA 网卡
-- [ ] **驱动进程参考（GitHub）**：
+- [ ] **驱动程序参考（GitHub）**：
   - MediaTek MT76 系列驱动（适用 MT7921AUN / MT7612U，两款 ALFA 网卡都用这个驱动家族）：https://github.com/morrownr/mt76
 
 ---
@@ -125,9 +127,9 @@ sudo ip link set mon0 up
 - **原因**：Flipper Zero 的 USB-C 端口只支持设备模式（Device Mode），没有 USB Host（主机）能力。
 - **解决方法**：无法通过任何转接线解决，这是硬件本身的限制。如果你需要外置网卡的功能，需要使用 Flipper One。
 
-### Q2：6 GHz 频段可以正常连接，但某些数据包注入工具用不了？
-- **原因**：目前部分开源的数据包注入（Frame Injection）工具，对 6 GHz 这个相对新的规范支持还不够成熟，这是工具本身开发进度的问题，不是你的设置错误。
-- **解决方法**：6 GHz 频段目前建议优先用于一般连接与扫描；如果你的项目一定需要数据包注入，可以先改用 5 GHz 频段测试（AWUS036ACM 或把 AXML 切到 5 GHz）。
+### Q2：6 GHz 频段可以正常连接，但数据包注入用不了？
+- **原因**：AWUS036AXML 的数据包注入失败并非 6 GHz 独有：在 GX10／kernel 6.17 的实测中，2.4／5 GHz 也一样失败（`aireplay-ng` 显示 `Found 0 APs`／`No Answer`），主因是 kernel 6.16 起 mac80211 chanctx 的退化，并非芯片限制；即使改用社区修补版驱动，固件仍会锁定发送速率（1／6 Mbps），无法注入 HT／VHT。Flipper One 上尚未实测。
+- **解决方法**：需要数据包注入时，改用 AWUS036ACM（GX10 实测 5 GHz 注入成功率 76%）；AXML 建议用于一般连接、AP 与被动监听。
 
 ### Q3：内置芯片跟外置网卡可以同时开监听模式吗？
 - **原因**：技术上可以，但因为两者都是 MediaTek 芯片、可能共用部分系统资源，同时对两个信道做监听在部分情境下可能不稳定。
@@ -141,6 +143,6 @@ sudo ip link set mon0 up
 - [AWUS036ACM 产品页面](/alfa-network/products/awus036acm/)
 - [ALFA 无线网卡在 NVIDIA Jetson 上（Orin Nano / NX）](/alfa-network/hardware/jetson/)——同样使用 MT7921AUN 芯片的另一个集成情境
 - [词汇表](/getting-started/glossary)——USB Host 模式、OTG 等名词的完整解释
-- MediaTek MT76 系列驱动（社群维护，含 DKMS）：https://github.com/morrownr/mt76
+- MediaTek MT76 系列驱动（社区维护，含 DKMS）：https://github.com/morrownr/mt76
 
 **标签：** `flipper` `flipper-one` `flipper-zero` `alfa` `awus036axml` `mt7921aun` `wifi-6e` `新手指南`

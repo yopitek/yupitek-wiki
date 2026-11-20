@@ -88,7 +88,7 @@ iw dev wlan0 link
 
 | 搭配 | 結果 |
 |---|---|
-| 所有 ALFA USB 無線網路卡（RP-SMA 天線連線埠） | ✅ 直接鎖上 |
+| 具 RP-SMA 天線連線埠的 ALFA USB 無線網路卡（AXER、EACS 除外） | ✅ 直接鎖上 |
 | 僅 2.4 GHz 的無線網路卡 / AP | ✅ 理想 |
 | 僅 5 GHz 的連結 | ❌ 頻段錯誤——請用 [APA-M25](/alfa-network/products/apa-m25/) |
 | 整合式天線的無線網路卡（AXER、EACS） | ❌ 沒有可連線的 RP-SMA 連線埠 |

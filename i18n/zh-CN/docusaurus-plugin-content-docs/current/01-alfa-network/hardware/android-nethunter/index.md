@@ -12,6 +12,8 @@ keywords: [Kali NetHunter, Android OTG, AWUS036ACH, AWUS036NEH, AWUS036NHA, RTL8
 
 > **一句话定位**：手机的 USB 端口供电能力有限，直接接上高功率的 ALFA 网卡常常会让手机重开机或网卡断线。这篇文章教你怎么用一条 Y-Cable 解决供电问题，并在 Kali NetHunter 上正确设置你的 ALFA 网卡。
 
+> ⚠️ **实测范围**：Yupitek 的 ALFA 兼容性测试仅在 ASUS GX10／Ubuntu 24.04 ARM64／kernel 6.17 上进行，**Kali NetHunter 与 Android 手机尚未实测**。本页关于驱动是否可用的说明，是依平台内核版本与各驱动进入 mainline 的版本（ACM／ACHM 4.19、AXM／AXML 5.18、EACS 6.2、ACH／ACS 6.13、AX／AXER 6.17）推断，并非在该硬件上验证。型号清单出自 Kali NetHunter 官方文档；驱动是否可用须按手机上的 NetHunter 内核版本判断。请仅在您自己拥有或已获授权的网络上测试。
+
 ## 这篇文章适合你吗？
 
 - **难度**：中阶（需要熟悉基本的 Linux 终端指令，并已经在手机上安装好 Kali NetHunter）
@@ -60,7 +62,7 @@ Kali NetHunter 官方文档（[kali.org/docs/nethunter/wireless-cards/](https://
 - [ ] **ALFA 无线网卡**：依上一节选择合适型号
 - [ ] **USB OTG Y-Cable**：如果你选的是高功率型号（AWUS036ACH / ACM），务必准备
 - [ ] **充电宝或外部电源**：搭配 Y-Cable 使用，提供网卡额外供电
-- [ ] **驱动进程参考（GitHub）**：
+- [ ] **驱动程序参考（GitHub）**：
   - Realtek RTL8812AU 驱动（适用 AWUS036ACH）：https://github.com/aircrack-ng/rtl8812au
   - MediaTek MT76 系列驱动（适用 AWUS036ACM）：https://github.com/morrownr/mt76
 - [ ] **Kali NetHunter 官方项目**：目前官方原代码已搬迁到 GitLab（不是 GitHub），如需查阅原代码或回报问题请至：https://gitlab.com/kalilinux/nethunter
@@ -101,28 +103,26 @@ ip link show
 
 ---
 
-### 步骤 3：启动监听模式并进行数据包稽核
+### 步骤 3：启动监听模式并进行数据包审计
 
 ```bash
-# 1. 终止可能干扰的系统服务
-airmon-ng check kill
-
-# 2. 开启监听模式（假设网卡接口为 wlan1）
+# 1. 开启监听模式（假设网卡接口为 wlan1）
+# 请勿执行 airmon-ng check kill：它会终止 NetworkManager
 airmon-ng start wlan1
 
-# 3. 验证 monitor 接口（通常会变成 wlan1mon）
+# 2. 验证 monitor 接口（通常会变成 wlan1mon）
 iwconfig wlan1mon
 ```
 
 **预期结果**：`iwconfig wlan1mon` 应该会显示 `Mode:Monitor`，代表监听模式已经成功激活。
 
-接着可以启动自动化的无线安全稽核工具进行测试：
+接着可以启动自动化的无线安全审计工具进行测试：
 
 ```bash
 wifite -i wlan1mon
 ```
 
-**预期结果**：`wifite` 会开始扫描附近的无线网络，列出侦测到的基地台清单。
+**预期结果**：`wifite` 会开始扫描附近的无线网络，列出检测到的接入点清单。
 
 ---
 
@@ -177,8 +177,8 @@ CONFIG_ATH9K_HTC=m
 - [ALFA 无线网卡在 NetHunter（Android）上——OTG 设置指南](/alfa-network/linux-setup-nethunter)
 - [ALFA 无线网卡在 Kali Linux 上——监听模式与数据包注入](/alfa-network/linux-setup-kali/)
 - [词汇表](/getting-started/glossary)——OTG、监听模式等名词的完整解释
-- Realtek RTL8812AU 驱动（aircrack-ng 社群维护）：https://github.com/aircrack-ng/rtl8812au
-- MediaTek MT76 系列驱动（社群维护，含 DKMS）：https://github.com/morrownr/mt76
+- Realtek RTL8812AU 驱动（aircrack-ng 社区维护）：https://github.com/aircrack-ng/rtl8812au
+- MediaTek MT76 系列驱动（社区维护，含 DKMS）：https://github.com/morrownr/mt76
 - [Kali NetHunter 官方无线网卡兼容清单](https://www.kali.org/docs/nethunter/wireless-cards/)
 - Kali NetHunter 官方项目（已搬迁至 GitLab）：https://gitlab.com/kalilinux/nethunter
 

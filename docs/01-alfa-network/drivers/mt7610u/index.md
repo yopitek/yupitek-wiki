@@ -9,11 +9,13 @@ keywords: [MT7610U driver, AWUS036ACHM, mt76x0u, monitor mode Linux]
 
 # MT7610U Driver Guide (AWUS036ACHM)
 
-> **Quick Summary**: The **MediaTek MT7610U** is the 1T1R (one stream) dual-band chipset inside the **AWUS036ACHM** — a budget-friendly AC433 adapter whose `mt76x0u` driver is **in the Linux kernel since 4.19**. Like its big brother the MT7612U, it is plug-and-play on any modern Linux.
+> **Quick Summary**: The **MediaTek MT7610U** is the 1T1R (one stream) dual-band chipset inside the **AWUS036ACHM** — a budget-friendly AC600 (150 + 433 Mbps) adapter whose `mt76x0u` driver is **in the Linux kernel since 4.19**. Like its big brother the MT7612U, it is plug-and-play on any modern Linux.
+
+> **Tested platform**: ASUS Ascent GX10 (NVIDIA GB10), Ubuntu 24.04 LTS ARM64, kernel `6.17.0-1014-nvidia` (2026-11-16 to 2026-11-19). The in-kernel `mt76x0u` driver bound automatically (USB ID `0e8d:7610`, firmware `mt7610u.bin`); no DKMS was needed. Monitor works on 2.4/5 GHz, injection on 2.4 GHz reached 96–100 % (5 GHz: broadcast only), AP and WPA3-SAE work. For an AP use pure 802.11g (2.4 GHz) / pure 802.11a (5 GHz), and for WPA3 set `sae_pwe=0` (with `sae_pwe=2` an iPhone 7 Plus could not connect).
 
 ## Concept: the "little brother" chipset
 
-Where the MT7612U is a 2×2 radio, the MT7610U is a **1×1** — one spatial stream, so 433 Mbps max on 5 GHz instead of 867. That is exactly the AC433 spec of the AWUS036ACHM. What you lose in speed you gain in simplicity and price: it is the cheapest ALFA adapter that still gives you **in-kernel driver + dual-band + working monitor mode**.
+Where the MT7612U is a 2×2 radio, the MT7610U is a **1×1** — one spatial stream, so 433 Mbps max on 5 GHz instead of 867. That is exactly the AC600 (150 + 433 Mbps) spec of the AWUS036ACHM. What you lose in speed you gain in simplicity and price: it is the cheapest ALFA adapter that still gives you **in-kernel driver + dual-band + working monitor mode**.
 
 The driver lives in the same mainline `mt76` family (`drivers/net/wireless/mediatek/mt76/mt76x0/`), so the experience is identical to the MT7612U:
 
@@ -39,20 +41,19 @@ flowchart LR
 ## Step 1: Verify the driver
 
 ```bash
-lsusb | grep -i mediatek
-lsmod | grep mt76x0
+lsusb | grep 0e8d:7610
+sudo dmesg | grep mt76x0u | tail -3
 ```
 
-**Expected output**:
+**Expected output** (measured on the GX10; bus/device numbers and the `wlx` MAC differ on your machine):
 
 ```text
-Bus 001 Device 005: ID 0e8d:7610 MediaTek Inc. MT7610U
-mt76x0u                20480  0
-mt76x02_common         49152  2 mt76x0u
-mt76                   94208  2 mt76x0u,mt76x02_common
+Bus 003 Device 005: ID 0e8d:7610 MediaTek Inc. WiFi
+mt76x0u 3-1:1.0: ASIC revision: 76100002 MAC revision: 76502000
+mt76x0u 3-1:1.0 wlx00c0cababcd2: renamed from wlan0
 ```
 
-If `lsmod` is empty but `lsusb` sees the device: `sudo modprobe mt76x0u`.
+If `lsusb` sees the device but there is no `mt76x0u` line: `sudo modprobe mt76x0u`.
 
 ## Step 2: Confirm the interface
 
@@ -60,7 +61,7 @@ If `lsmod` is empty but `lsusb` sees the device: `sudo modprobe mt76x0u`.
 iw dev
 ```
 
-**Expected output**:
+**Expected output** (example; on the GX10 the interface is named `wlx` + MAC):
 
 ```text
 phy#0
@@ -89,6 +90,8 @@ sudo ip link set wlan0 up
 iw dev
 ```
 
+> On a GX10 or any desktop where NetworkManager provides your network, **do not run `airmon-ng check kill`**; use `iw` on the adapter's `wlx...` interface only.
+
 **Expected output**: `type monitor`. Or use Aircrack-ng's helper:
 
 ```bash
@@ -101,7 +104,7 @@ Injection check:
 sudo aireplay-ng --test wlan0mon
 ```
 
-**Expected output**: `30/30: 100%` and `Injection is working!`
+**Expected output**: `Injection is working!` (measured on the GX10: 96–100 % on 2.4 GHz; 5 GHz per-client response rate was not measured, broadcast injection works)
 
 ## Step 5: Back to normal
 
@@ -116,7 +119,7 @@ sudo systemctl restart NetworkManager
 |---|---|---|
 | Not in `lsusb` | Power / cable | Different port, powered hub — [troubleshooting index](/alfa-network/troubleshooting/) |
 | No interface | Driver not loaded | `sudo modprobe mt76x0u`; check `dmesg \| grep mt76` |
-| Throughput caps at ~150 Mbps on 5 GHz | That is the 1×1 hardware limit | Not a bug — AC433 class means ~300–400 Mbps link, ~150–250 real-world |
+| Throughput caps at ~150 Mbps on 5 GHz | That is the 1×1 hardware limit | Not a bug — the 5 GHz link rate is at most 433 Mbps; ~150–250 Mbps real-world |
 | Monitor mode refused | Kernel < 4.19 | Upgrade kernel / OS |
 | Injection test fails | Dead channel / RF zone | `sudo iw wlan0mon set channel 6`, test near an AP |
 
