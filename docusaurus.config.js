@@ -17,6 +17,9 @@ const config = {
   // them via localeConfigs[locale].{url, baseUrl}.
   url: 'https://doc.yupitek.com',
   baseUrl: '/',
+  // Cloudflare Pages 308-redirects /page to /page/ when the page is built as page/index.html,
+  // so every URL (sitemap, canonical, links) must carry the trailing slash.
+  trailingSlash: true,
 
   organizationName: 'yupitek',
   projectName: 'yupitek-wiki',
