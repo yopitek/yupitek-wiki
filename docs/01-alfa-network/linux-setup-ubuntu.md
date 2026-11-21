@@ -17,7 +17,7 @@ keywords: [ALFA Ubuntu, install RTL8812AU Ubuntu, MT7612U Ubuntu, DKMS Ubuntu, A
 
 Before touching the terminal, understand *why* the setup can differ. The split is by **kernel version**, not by adapter:
 
-1. **Kernel 6.17 or newer: everything is in-kernel.** All nine ALFA adapters are plug-and-play (each card's own minimum: ACM / ACHM 4.19, AXM / AXML 5.18, EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17). MediaTek: **MT7612U** (AWUS036ACM, `mt76x2u`), **MT7610U** (AWUS036ACHM, `mt76x0u`), **MT7921AU/AUN** (AWUS036AXM / AXML, `mt7921u`). Realtek: **RTL8812AU** (ACH, `rtw88_8812au`), **RTL8811AU** (ACS, `rtw88_8821au`), **RTL8821CU** (EACS, `rtw88_8821cu`), **RTL8832BU** (AX / AXER, `rtw89_8852bu`). No DKMS.
+1. **Kernel 6.17 or newer: everything is in-kernel.** All nine ALFA adapters are plug-and-play (each card's own minimum: ACM / ACHM 4.19, AXM / AXML 5.18, EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17). MediaTek: **MT7612U** (AWUS036ACM, `mt76x2u`), **MT7610U** (AWUS036ACHM, `mt76x0u`), **MT7921AUN/AUN** (AWUS036AXM / AXML, `mt7921u`). Realtek: **RTL8812AU** (ACH, `rtw88_8812au`), **RTL8811AU** (ACS, `rtw88_8821au`), **RTL8821CU** (EACS, `rtw88_8821cu`), **RTL8832BU** (AX / AXER, `rtw89_8852bu`). No DKMS.
 2. **Older kernel: only the Realtek models whose in-kernel version is newer than your kernel need DKMS.** The MediaTek models stay in-kernel (mt76x2u / mt76x0u since 4.19, mt7921u since 5.18), and so does the EACS from 6.2. For the other Realtek models you compile a community driver once, and **DKMS** keeps it rebuilt after every kernel update.
 
 ```mermaid

@@ -45,7 +45,7 @@ flowchart TD
 | AWUS036EACS | RTL8821CU | `rtw88_8821cu` | ✅ kernel ≥ 6.2 | kernel ≥ 6.2：否；舊 kernel（< 6.2）：需社群 DKMS | ✅ 插上即用（含藍芽） | 未實機測試 | 未實機測試 |
 | AWUS036AX | RTL8832BU | `rtw89_8852bu` | ✅ kernel ≥ 6.17 | kernel ≥ 6.17：否；舊 kernel（< 6.17）：需社群 DKMS | ✅ 插上即用 | 未實機測試 | 未實機測試 |
 | AWUS036AXER | RTL8832BU | `rtw89_8852bu` | ✅ kernel ≥ 6.17 | kernel ≥ 6.17：否；舊 kernel（< 6.17）：需社群 DKMS | ✅ 插上即用 | 未實機測試 | 未實機測試 |
-| AWUS036AXM | MT7921AU | `mt7921u` | ✅ 自 5.18 起 | 否 | ✅ 插上即用 | 未實機測試 | 未實機測試 |
+| AWUS036AXM | MT7921AUN | `mt7921u` | ✅ 自 5.18 起 | 否 | ✅ 插上即用 | 未實機測試 | 未實機測試 |
 | AWUS036AXML | MT7921AUN | `mt7921u` | ✅ 自 5.18 起 | 否 | ✅ 插上即用（含藍芽、6 GHz） | 未實機測試 | 未實機測試 |
 
 ### 功能簡表（ASUS GX10 / Ubuntu 24.04 / kernel 6.17.0-1014-nvidia 實測）

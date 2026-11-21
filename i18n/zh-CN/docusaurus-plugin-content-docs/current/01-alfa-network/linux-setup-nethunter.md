@@ -17,7 +17,7 @@ keywords: [NetHunter ALFA, Android OTG 无线网卡, AWUS036ACM NetHunter, Kali 
 
 NetHunter 是运行在 Android 设备 **chroot** 中的 Kali Linux。真正干活的是手机的内核——而手机内核*不是* Ubuntu 内核：
 
-1. **内核内置驱动**：受主线 Linux 支持的芯片组在手机内核够新时通常能用：MT7612U（ACM）与 MT7610U（ACHM）自 4.19，MT7921AU(N)（AXM / AXML）自 5.18，RTL8821CU（EACS）自 6.2，RTL8812AU（ACH）与 RTL8811AU（ACS）自 6.13，RTL8832BU（AX / AXER）自 6.17。特定 NetHunter 内核镜像是否包含这些驱动因手机而异，我们未实测。
+1. **内核内置驱动**：受主线 Linux 支持的芯片组在手机内核够新时通常能用：MT7612U（ACM）与 MT7610U（ACHM）自 4.19，MT7921AUN(N)（AXM / AXML）自 5.18，RTL8821CU（EACS）自 6.2，RTL8812AU（ACH）与 RTL8811AU（ACS）自 6.13，RTL8832BU（AX / AXER）自 6.17。特定 NetHunter 内核镜像是否包含这些驱动因手机而异，我们未实测。
 2. **DKMS 驱动**：仅当手机内核低于上述 Realtek 内置版本时才需要；在 Android chroot 内编译 Realtek DKMS 驱动很痛苦——手机内核很少提供构建所需的头文件和工具链。RTL8812AU 在部分设备上*可以*工作，但请把它当作一个项目，而不是一个设置步骤。
 
 > **注意**：Kali/NetHunter 未实机测试，版本判断依 kernel 版本。

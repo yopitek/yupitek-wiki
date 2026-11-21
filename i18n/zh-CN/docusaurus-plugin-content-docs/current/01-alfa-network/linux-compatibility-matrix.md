@@ -44,7 +44,7 @@ flowchart TD
 | AWUS036EACS | RTL8821CU | `rtw88_8821cu` | 6.2 | 仅 kernel < 6.2 | ✅ 插上即用（含蓝牙） |
 | AWUS036AX | RTL8832BU | `rtw89_8852bu` | 6.17 | 仅 kernel < 6.17 | ✅ 插上即用 |
 | AWUS036AXER | RTL8832BU | `rtw89_8852bu` | 6.17 | 仅 kernel < 6.17 | ✅ 插上即用 |
-| AWUS036AXM | MT7921AU | `mt7921u` | 5.18 | 否 | ✅ 插上即用 |
+| AWUS036AXM | MT7921AUN | `mt7921u` | 5.18 | 否 | ✅ 插上即用 |
 | AWUS036AXML | MT7921AUN | `mt7921u` | 5.18 | 否 | ✅ 插上即用（含蓝牙） |
 
 ### 实测功能简表（Monitor / Injection / AP / WPA3）
