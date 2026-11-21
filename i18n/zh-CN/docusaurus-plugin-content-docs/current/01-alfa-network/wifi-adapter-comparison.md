@@ -27,7 +27,7 @@ keywords: [ALFA 网卡适配器对比, AWUS036ACM vs AWUS036ACH, Wi-Fi 6E 网卡
 | [AWUS036ACS](/alfa-network/products/awus036acs/) | RTL8811AU | AC600 | USB 2.0 | 2.4 + 5 GHz | 150 + 433 Mbps | ✅ 监听 / 注入 100%（`rtw88_8821au` 内置，kernel ≥ 6.13） | 1 × 外置 2 dBi，RP-SMA（55 mm 机身） |
 | [AWUS036AX](/alfa-network/products/awus036ax/) | RTL8832BU | AX1800 | USB 3.2 | 2.4 + 5 GHz | 574 + 1201 Mbps | ✅ 监听强 / 注入 96%（`rtw89_8852bu` 内置，kernel ≥ 6.17） | 2 × 外置 6 dBi，RP-SMA |
 | [AWUS036AXER](/alfa-network/products/awus036axer/) | RTL8832BU | AX1800 | USB 3.2 | 2.4 + 5 GHz | 574 + 1201 Mbps | ✅ 监听强 / 注入 73%（`rtw89_8852bu` 内置，kernel ≥ 6.17） | 内置（10.5 g 纳米机身） |
-| [AWUS036AXM](/alfa-network/products/awus036axm/) | MT7921AU（`mt7921u`） | AX3000 级 | USB 3.2 | 2.4 + 5 + 6 GHz（6 GHz 推测、未测试） | 最高 600 + 1200 + 1200 Mbps | 🟡 监听可用（接收弱）；注入未通过（stock kernel 6.17） | 2 × 外置 5 dBi，RP-SMA + BT 5.2 |
+| [AWUS036AXM](/alfa-network/products/awus036axm/) | MT7921AUN（`mt7921u`） | AX3000 级 | USB 3.2 | 2.4 + 5 + 6 GHz（6 GHz 推测、未测试） | 最高 600 + 1200 + 1200 Mbps | 🟡 监听可用（接收弱）；注入未通过（stock kernel 6.17） | 2 × 外置 5 dBi，RP-SMA + BT 5.2 |
 | [AWUS036AXML](/alfa-network/products/awus036axml/) | MT7921AUN（`mt7921u`） | AXE3000 | USB-C | 2.4 + 5 + 6 GHz（6 GHz 实测可用） | 最高 600 + 1200 + 1200 Mbps | 🟡 监听可用（接收弱）；注入未通过（stock kernel 6.17） | 2 × 外置 5 dBi，RP-SMA + BT 5.2 |
 「+」分隔两个频段：**2.4 GHz + 5 GHz**（AXE 型号再加 + 6 GHz）。「300 + 867」的网卡适配器是 **AC1200** 等级：300 Mbps 是 2.4 GHz 上限（2 个空间流 × 150 Mbps），867 Mbps 是 5 GHz 上限（2 × 433 Mbps）。实际吞吐量通常为链路速率的 50–70%——物理损耗、墙壁和 USB 总线开销吃掉了其余部分。
 

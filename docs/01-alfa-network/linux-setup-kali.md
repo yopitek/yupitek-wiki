@@ -24,7 +24,7 @@ Not every chipset can do both. On our GX10 tests (kernel 6.17) seven of the nine
 
 > **Note**: Kali/NetHunter were not tested on real hardware. The driver advice here is decided by kernel version only.
 
-In-kernel start versions (from the Linux Kernel Driver Database): ACM (MT7612U) and ACHM (MT7610U) 4.19; AXM and AXML (MT7921AU(N)) 5.18; EACS (RTL8821CU) 6.2; ACH (RTL8812AU) and ACS (RTL8811AU) 6.13; AX and AXER (RTL8832BU) 6.17. Check yours with `uname -r`. A current Kali rolling kernel is normally new enough for all nine; the ASUS GX10 (Ubuntu 24.04, kernel 6.17.0-1014-nvidia) had all nine working without DKMS.
+In-kernel start versions (from the Linux Kernel Driver Database): ACM (MT7612U) and ACHM (MT7610U) 4.19; AXM and AXML (MT7921AUN(N)) 5.18; EACS (RTL8821CU) 6.2; ACH (RTL8812AU) and ACS (RTL8811AU) 6.13; AX and AXER (RTL8832BU) 6.17. Check yours with `uname -r`. A current Kali rolling kernel is normally new enough for all nine; the ASUS GX10 (Ubuntu 24.04, kernel 6.17.0-1014-nvidia) had all nine working without DKMS.
 
 ```mermaid
 flowchart TD
@@ -61,7 +61,7 @@ iw dev
 
 ## Step 2: Install the driver (only for Realtek on an older kernel)
 
-If `uname -r` is at or above your card's in-kernel version (ACM / ACHM 4.19, AXM / AXML 5.18, EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17), **skip to Step 3** — the driver is already in your kernel. Only on an older kernel, for the Realtek chipsets (ACH = RTL8812AU, ACS = RTL8811AU, EACS = RTL8821CU, AX / AXER = RTL8832BU), build the community-maintained driver with DKMS (aircrack-ng for RTL8812AU; morrownr for RTL8811AU and RTL8832BU). The MediaTek chipsets (ACM = MT7612U, ACHM = MT7610U, AXM / AXML = MT7921AU(N)) never need DKMS.
+If `uname -r` is at or above your card's in-kernel version (ACM / ACHM 4.19, AXM / AXML 5.18, EACS 6.2, ACH / ACS 6.13, AX / AXER 6.17), **skip to Step 3** — the driver is already in your kernel. Only on an older kernel, for the Realtek chipsets (ACH = RTL8812AU, ACS = RTL8811AU, EACS = RTL8821CU, AX / AXER = RTL8832BU), build the community-maintained driver with DKMS (aircrack-ng for RTL8812AU; morrownr for RTL8811AU and RTL8832BU). The MediaTek chipsets (ACM = MT7612U, ACHM = MT7610U, AXM / AXML = MT7921AUN(N)) never need DKMS.
 
 ### RTL8812AU (AWUS036ACH) — kernel < 6.13 only
 

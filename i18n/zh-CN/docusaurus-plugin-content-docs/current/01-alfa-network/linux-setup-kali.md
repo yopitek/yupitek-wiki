@@ -24,7 +24,7 @@ Ubuntu 把 Wi-Fi 网卡适配器当作*礼貌的客户端*：它们只捕获自�
 
 > **注意**：Kali/NetHunter 未实机测试，版本判断依 kernel 版本。
 
-各网卡的内核内置起始版本（依 Linux Kernel Driver Database）：ACM（MT7612U）与 ACHM（MT7610U）4.19；AXM 与 AXML（MT7921AU(N)）5.18；EACS（RTL8821CU）6.2；ACH（RTL8812AU）与 ACS（RTL8811AU）6.13；AX 与 AXER（RTL8832BU）6.17。用 `uname -r` 检查。目前的 Kali rolling 内核通常足以支持全部九款；ASUS GX10（Ubuntu 24.04、kernel 6.17.0-1014-nvidia）上九款都不需要 DKMS。
+各网卡的内核内置起始版本（依 Linux Kernel Driver Database）：ACM（MT7612U）与 ACHM（MT7610U）4.19；AXM 与 AXML（MT7921AUN(N)）5.18；EACS（RTL8821CU）6.2；ACH（RTL8812AU）与 ACS（RTL8811AU）6.13；AX 与 AXER（RTL8832BU）6.17。用 `uname -r` 检查。目前的 Kali rolling 内核通常足以支持全部九款；ASUS GX10（Ubuntu 24.04、kernel 6.17.0-1014-nvidia）上九款都不需要 DKMS。
 
 ```mermaid
 flowchart TD
@@ -61,7 +61,7 @@ iw dev
 
 ## 第 2 步：安装驱动（仅旧内核上的 Realtek）
 
-如果 `uname -r` 不低于你的网卡的内置版本（ACM / ACHM 4.19、AXM / AXML 5.18、EACS 6.2、ACH / ACS 6.13、AX / AXER 6.17），**跳到第 3 步**——驱动已经在你内核里。仅在旧内核上、对 Realtek 芯片组（ACH = RTL8812AU、ACS = RTL8811AU、EACS = RTL8821CU、AX / AXER = RTL8832BU），才用 DKMS 构建社区维护的驱动（RTL8812AU 使用 aircrack-ng；RTL8811AU 和 RTL8832BU 使用 morrownr）。MediaTek 芯片组（ACM = MT7612U、ACHM = MT7610U、AXM / AXML = MT7921AU(N)）永远不需要 DKMS。
+如果 `uname -r` 不低于你的网卡的内置版本（ACM / ACHM 4.19、AXM / AXML 5.18、EACS 6.2、ACH / ACS 6.13、AX / AXER 6.17），**跳到第 3 步**——驱动已经在你内核里。仅在旧内核上、对 Realtek 芯片组（ACH = RTL8812AU、ACS = RTL8811AU、EACS = RTL8821CU、AX / AXER = RTL8832BU），才用 DKMS 构建社区维护的驱动（RTL8812AU 使用 aircrack-ng；RTL8811AU 和 RTL8832BU 使用 morrownr）。MediaTek 芯片组（ACM = MT7612U、ACHM = MT7610U、AXM / AXML = MT7921AUN(N)）永远不需要 DKMS。
 
 ### RTL8812AU（AWUS036ACH）——仅 kernel < 6.13
 

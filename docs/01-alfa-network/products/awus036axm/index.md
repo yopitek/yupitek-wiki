@@ -2,14 +2,14 @@
 id: alfa-product-awus036axm
 title: ALFA AWUS036AXM — Wi-Fi 6 AX3000 + Bluetooth 5.2
 sidebar_position: 12
-description: ALFA AWUS036AXM — flagship Wi-Fi 6 MT7921AU AX3000 dual-band adapter with Bluetooth 5.2, USB 3.2 and in-kernel mt7921u driver. Tested on ASUS GX10 / Ubuntu 24.04 ARM64; AP and WPA3 work, packet injection did not pass on stock kernel 6.17.
+description: ALFA AWUS036AXM — flagship Wi-Fi 6 MT7921AUN AX3000 dual-band adapter with Bluetooth 5.2, USB 3.2 and in-kernel mt7921u driver. Tested on ASUS GX10 / Ubuntu 24.04 ARM64; AP and WPA3 work, packet injection did not pass on stock kernel 6.17.
 tags: [alfa, adapter, mt7921au, wifi-6, bluetooth, ax3000]
-keywords: [AWUS036AXM, MT7921AU, AX3000, Bluetooth 5.2 adapter, in-kernel WiFi 6]
+keywords: [AWUS036AXM, MT7921AUN, AX3000, Bluetooth 5.2 adapter, in-kernel WiFi 6]
 ---
 
 # ALFA AWUS036AXM — Wi-Fi 6 AX3000 + Bluetooth 5.2
 
-> **Quick Summary**: The **AWUS036AXM** is ALFA's flagship Wi-Fi 6 dongle — an **MT7921AU AX3000** dual-band adapter (same `mt7921u` driver as the AXML) with **Bluetooth 5.2**, USB 3.2, two antennas and an **in-kernel driver** (`mt7921u` since Linux 5.18). Tested on ASUS GX10 / Ubuntu 24.04 ARM64: AP (2.4/5 GHz), a WPA3 AP (AP side, 2.4 GHz) and VIF work and monitor mode receives (weakly). Bluetooth and 6 GHz were not tested on this model. **Packet injection did not pass on the stock 6.17 kernel**, so it is not suitable for deauth or handshake capture there. Use only on your own or authorized networks.
+> **Quick Summary**: The **AWUS036AXM** is ALFA's flagship Wi-Fi 6 dongle — an **MT7921AUN AX3000** dual-band adapter (same `mt7921u` driver as the AXML) with **Bluetooth 5.2**, USB 3.2, two antennas and an **in-kernel driver** (`mt7921u` since Linux 5.18). Tested on ASUS GX10 / Ubuntu 24.04 ARM64: AP (2.4/5 GHz), a WPA3 AP (AP side, 2.4 GHz) and VIF work and monitor mode receives (weakly). Bluetooth and 6 GHz were not tested on this model. **Packet injection did not pass on the stock 6.17 kernel**, so it is not suitable for deauth or handshake capture there. Use only on your own or authorized networks.
 
 ## Specifications Overview (Spec overview)
 
@@ -32,7 +32,7 @@ keywords: [AWUS036AXM, MT7921AU, AX3000, Bluetooth 5.2 adapter, in-kernel WiFi 6
 
 | Item | Result |
 |---|---|
-| Chipset | MediaTek MT7921AU |
+| Chipset | MediaTek MT7921AUN |
 | USB ID | `0e8d:7961` |
 | Kernel driver | `mt7921u` (in-kernel) |
 | Firmware | `WIFI_RAM_CODE_MT7961` (linux-firmware) |

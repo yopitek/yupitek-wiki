@@ -2,14 +2,14 @@
 id: alfa-product-awus036axm
 title: ALFA AWUS036AXM——Wi-Fi 6 AX3000 + 蓝牙 5.2
 sidebar_position: 12
-description: ALFA AWUS036AXM——旗舰 Wi-Fi 6 MT7921AU AX3000 双频网卡适配器，含蓝牙 5.2、USB 3.2 与内置于内核的 mt7921u 驱动。已在 ASUS GX10 / Ubuntu 24.04 ARM64 实测：AP、WPA3 可用；数据包注入在 stock kernel 6.17 未通过。
+description: ALFA AWUS036AXM——旗舰 Wi-Fi 6 MT7921AUN AX3000 双频网卡适配器，含蓝牙 5.2、USB 3.2 与内置于内核的 mt7921u 驱动。已在 ASUS GX10 / Ubuntu 24.04 ARM64 实测：AP、WPA3 可用；数据包注入在 stock kernel 6.17 未通过。
 tags: [alfa, 网卡适配器, mt7921au, wifi-6, 蓝牙, ax3000]
-keywords: [AWUS036AXM, MT7921AU, AX3000, 蓝牙 5.2 网卡适配器, 内置于内核 WiFi 6]
+keywords: [AWUS036AXM, MT7921AUN, AX3000, 蓝牙 5.2 网卡适配器, 内置于内核 WiFi 6]
 ---
 
 # ALFA AWUS036AXM——Wi-Fi 6 AX3000 + 蓝牙 5.2
 
-> **一句话定位（Quick Summary）**：**AWUS036AXM** 是 ALFA 的旗舰 Wi-Fi 6 dongle——一支 **MT7921AU AX3000** 双频网卡适配器（与 AXML 使用相同的 `mt7921u` 驱动），含 **蓝牙 5.2**、USB 3.2、两支天线，而且关键的是**内置于内核的驱动**（自 Linux 5.18 起的 `mt7921u`）。已在 ASUS GX10 / Ubuntu 24.04 ARM64 实测：AP（2.4/5 GHz）、WPA3 AP（AP 端，2.4 GHz）与 VIF 可用，监听模式可接收（但接收较弱）。**数据包注入在 stock 6.17 kernel 上未通过**，因此在该环境下不适合做 deauth 或 handshake 捕获。蓝牙与 6 GHz 在这个型号上未测试。仅限在自有或已授权的网络使用。
+> **一句话定位（Quick Summary）**：**AWUS036AXM** 是 ALFA 的旗舰 Wi-Fi 6 dongle——一支 **MT7921AUN AX3000** 双频网卡适配器（与 AXML 使用相同的 `mt7921u` 驱动），含 **蓝牙 5.2**、USB 3.2、两支天线，而且关键的是**内置于内核的驱动**（自 Linux 5.18 起的 `mt7921u`）。已在 ASUS GX10 / Ubuntu 24.04 ARM64 实测：AP（2.4/5 GHz）、WPA3 AP（AP 端，2.4 GHz）与 VIF 可用，监听模式可接收（但接收较弱）。**数据包注入在 stock 6.17 kernel 上未通过**，因此在该环境下不适合做 deauth 或 handshake 捕获。蓝牙与 6 GHz 在这个型号上未测试。仅限在自有或已授权的网络使用。
 
 ## 规格总览 (Spec overview)
 
@@ -32,7 +32,7 @@ keywords: [AWUS036AXM, MT7921AU, AX3000, 蓝牙 5.2 网卡适配器, 内置于�
 
 | 项目 | 结果 |
 |---|---|
-| 芯片 | MediaTek MT7921AU |
+| 芯片 | MediaTek MT7921AUN |
 | USB ID | `0e8d:7961` |
 | 内核驱动 | `mt7921u`（内置于内核） |
 | 固件 | `WIFI_RAM_CODE_MT7961`（linux-firmware） |

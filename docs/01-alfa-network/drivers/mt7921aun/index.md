@@ -9,7 +9,7 @@ keywords: [MT7921AU driver, MT7921AUN driver, mt7921u, AWUS036AXML, Wi-Fi 6E Lin
 
 # MT7921AUN Driver Guide (AWUS036AXM / AWUS036AXML)
 
-> **Quick Summary**: The **MediaTek MT7921AU** (AWUS036AXM) and **MT7921AUN** (AWUS036AXML) share one in-kernel driver, `mt7921u`, **mainline since kernel 5.18** — no DKMS. Tested on an ASUS GX10 (Ubuntu 24.04 ARM64, kernel 6.17.0-1014-nvidia): AP (2.4/5 GHz), WPA3-SAE and VIF work, monitor mode receives weakly, the AXML's 6 GHz and Bluetooth were verified — but **packet injection did not pass on the stock 6.17 kernel**, so deauth and handshake capture are not available there.
+> **Quick Summary**: The **MediaTek MT7921AUN** — the chip in both the AWUS036AXM and the AWUS036AXML — uses one in-kernel driver, `mt7921u`, **mainline since kernel 5.18** — no DKMS. Tested on an ASUS GX10 (Ubuntu 24.04 ARM64, kernel 6.17.0-1014-nvidia): AP (2.4/5 GHz), WPA3-SAE and VIF work, monitor mode receives weakly, the AXML's 6 GHz and Bluetooth were verified — but **packet injection did not pass on the stock 6.17 kernel**, so deauth and handshake capture are not available there.
 
 ## Tested on ASUS GX10 / Ubuntu 24.04 ARM64
 

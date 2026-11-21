@@ -17,7 +17,7 @@ keywords: [NetHunter ALFA, Android OTG Wi-Fi adapter, AWUS036ACM NetHunter, Kali
 
 NetHunter is Kali Linux running inside a **chroot** on your Android device. The phone's kernel still does the real work — and phone kernels are *not* the Ubuntu kernel:
 
-1. **In-kernel drivers**: a chipset supported by mainline Linux usually works once the phone kernel is new enough: MT7612U (ACM) and MT7610U (ACHM) from 4.19, MT7921AU(N) (AXM / AXML) from 5.18, RTL8821CU (EACS) from 6.2, RTL8812AU (ACH) and RTL8811AU (ACS) from 6.13, RTL8832BU (AX / AXER) from 6.17. Whether a given NetHunter kernel image includes these drivers depends on the phone and was not tested by us.
+1. **In-kernel drivers**: a chipset supported by mainline Linux usually works once the phone kernel is new enough: MT7612U (ACM) and MT7610U (ACHM) from 4.19, MT7921AUN(N) (AXM / AXML) from 5.18, RTL8821CU (EACS) from 6.2, RTL8812AU (ACH) and RTL8811AU (ACS) from 6.13, RTL8832BU (AX / AXER) from 6.17. Whether a given NetHunter kernel image includes these drivers depends on the phone and was not tested by us.
 2. **DKMS drivers**: only needed when the phone kernel is older than the Realtek version above, and compiling them inside an Android chroot is painful — phone kernels rarely ship the headers and toolchain the build needs. The RTL8812AU *can* work on some devices, but treat it as a project, not a setup step.
 
 > **Note**: Kali/NetHunter were not tested on real hardware. The driver advice here is decided by kernel version only.

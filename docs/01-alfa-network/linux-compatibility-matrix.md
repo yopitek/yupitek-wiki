@@ -42,7 +42,7 @@ Legend: ✅ works out of the box · 🔧 needs a community DKMS driver · ⚠️
 | AWUS036EACS | RTL8821CU | `rtw88_8821cu` | 6.2 | Only on kernel < 6.2 | ✅ tested (WiFi + BT) |
 | AWUS036AX | RTL8832BU | `rtw89_8852bu` | 6.17 | Only on kernel < 6.17 | ✅ tested |
 | AWUS036AXER | RTL8832BU | `rtw89_8852bu` | 6.17 | Only on kernel < 6.17 | ✅ tested |
-| AWUS036AXM | MT7921AU | `mt7921u` | 5.18 | No | ✅ AP / WPA3, ❌ injection |
+| AWUS036AXM | MT7921AUN | `mt7921u` | 5.18 | No | ✅ AP / WPA3, ❌ injection |
 | AWUS036AXML | MT7921AUN | `mt7921u` | 5.18 | No | ✅ AP / WPA3 / 6 GHz / BT, ❌ injection |
 
 ### Test results on ASUS GX10 / Ubuntu 24.04 ARM64
